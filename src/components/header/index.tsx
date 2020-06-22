@@ -11,12 +11,12 @@ import LogoImage from 'assets/images/logo.png';
 import './style.scss';
 
 interface IState {
-
-}
+  something: boolean;
+};
 
 class Header extends HelperPureComponent<{}, IState> {
   public state: IState = {
-
+    something: true,
   };
 
   public render() {
