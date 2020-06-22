@@ -1,0 +1,35 @@
+@import 'src/assets/styles/variables';
+
+.P-brands {
+
+  .P-slider-back, .P-slider-next { background: white; }
+  .slick-track > div > div {
+
+    display         : flex;
+    padding         : 5px;
+    margin-bottom   : 10px;
+    justify-content : space-between;
+
+    > .P-brand {
+
+      flex            : 1 !important;
+      color           : black;
+      margin          : 0 7.5px;
+      padding         : 5px;
+      display         : flex;
+      flex-wrap       : wrap;
+      box-shadow      : 0 1px 7px transparentize(#000, .9);
+      border-radius   : $radius;
+      justify-content : center;
+      text-decoration : none;
+      
+      &:first-child { margin-left: 0; }
+      &:last-child { margin-right: 0; }
+      > div {
+  
+        width  : 100%;
+        height : 100px;
+      }
+    }  
+  }
+}

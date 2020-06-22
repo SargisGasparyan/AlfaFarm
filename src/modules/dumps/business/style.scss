@@ -1,0 +1,84 @@
+@import 'src/assets/styles/variables';
+
+.P-business-page {
+  > .business-page-structure {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+  > .left-bar {
+    flex: 1.5;
+  }
+  > .right-bar {
+    flex: 1;
+    margin-left: 35px;
+
+    > .become-partner-form {
+      margin-top: 25px;
+      > .P-G-fields-form {
+        > .read-privacy-policy {
+          letter-spacing: 0;
+          color: #1B1C20;
+          font-size: 12px;
+          font-weight: 700;
+          display: block;
+          margin: 30px 0px 50px 0px;
+          > a {
+            text-decoration: none;
+            color: #1B1C20;
+            font-size: 12px;
+            font-weight: 700;
+          }
+        }
+      }
+    }
+  > .right-bar-text {
+    max-width: 90%;
+    display: block;
+    padding: 0px 15px 0px 0px;
+    margin-top: -20px;
+    word-break : break-word;
+    font-size  : 15px;
+    letter-spacing: 0;
+    }
+  }
+  > .P-content {
+
+    width         : 49%;
+    padding       : 30px;
+    background    : white;
+    box-shadow    : $default-block-shadow;
+    border-radius : $radius;
+
+    > .P-image {
+
+      width           : 100%;
+      color           : white;
+      height          : 200px;
+      display         : flex;
+      font-size       : 24px;
+      text-align      : center;
+      align-items     : center;
+      border-radius   : $small-radius;
+      justify-content : center;
+    }
+
+    > .P-texts {
+
+      margin     : 30px 0;
+      font-size  : 15px;
+      word-break : break-word;
+      letter-spacing: 0;
+
+      > ul {
+        margin-left: 0;
+        margin       : 20px 0;
+        > li {
+          list-style: none;
+        }
+        &:first-child { margin-top: 20px; }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,46 @@
+//? Declarations
+
+$header-size            : 140px;
+$page-vertical-offset   : 40px;
+$download-image-width   : 160px;
+$download-image-height  : 57px;
+$page-horizontal-offset : 110px;
+$page-title-size        : 70px;
+$title-page-height      : calc(100vh - #{$page-title-size + $header-size + $page-vertical-offset * 2});
+
+//? Helpers
+
+$radius               : 8px;
+$normal-fs            : 18px;
+$big-radius           : 12px;
+$small-radius         : 5px;
+$default-block-shadow : 0 0 10px transparentize(#000, .84);
+
+//? Screens
+$max-screen    : 1650px;
+$medium-screen : 1440px;
+$small-screen  : 1220px;
+$tablet-screen : 992px;
+$mobile-screen : 664px;
+
+//? Colors
+
+$orange           : #F26D26;
+$gray             : #EEEEEE;
+$white            : #ffffff;
+$blue             : #6979DB;
+$pink             : #F85061;
+$text-gray        : #334856;
+$dark-gray        : #EFF0F1;
+$light-gray       : #CFCFCF;
+$main-color       : #49B748;
+$broken-black     : #303030;
+$text-gray-light  : transparentize(#334856, .4);
+
+:export {
+  headerSize: $header-size;
+  smallScreen: $small-screen;
+  mediumScreen: $medium-screen;
+  tabletScreen: $tablet-screen;
+  mobileScreen: $mobile-screen;
+}

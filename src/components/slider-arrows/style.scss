@@ -1,0 +1,28 @@
+@import 'src/assets/styles/variables';
+
+.P-slider-back, .P-slider-next {
+    
+  top             : 50%;
+  width           : 35px;
+  height          : 35px;
+  cursor          : pointer;
+  z-index         : 1;
+  display         : flex;
+  position        : absolute;
+  transform       : translateY(-50%);
+  font-size       : 16px;
+  background      : $dark-gray;
+  box-shadow      : $default-block-shadow;
+  align-items     : center;
+  border-radius   : $small-radius;
+  justify-content : center;
+
+  &.P-slider-back { left: 10px; }
+  &.P-slider-next { right: 10px; }
+}
+
+.slick-slider {
+
+  .P-slider-back, .P-slider-next { display: none; }
+  &:hover .P-slider-back, &:hover .P-slider-next { display: flex; }
+}

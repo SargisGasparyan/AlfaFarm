@@ -1,0 +1,16 @@
+@import '../variables';
+
+.alertify-notifier {
+
+  z-index: 10000000 !important;
+
+  .ajs-message.ajs-error.ajs-visible, .ajs-message.ajs-success.ajs-visible {
+
+    color         : #FFF;
+    
+    background    : $main-color;
+    border-radius : 5px;
+    text-align: center;
+    &.ajs-message.ajs-error.ajs-visible { background: $pink; }
+  }
+}

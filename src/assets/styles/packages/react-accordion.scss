@@ -1,0 +1,29 @@
+@import 'src/assets/styles/variables';
+
+.Collapsible {
+
+  box-shadow    : $default-block-shadow;
+  background    : white;
+  margin-bottom : 20px;
+  border-radius : $radius;
+
+  > .Collapsible__trigger {
+
+    cursor      : pointer;
+    padding     : 15px 30px;
+    display     : flex;
+    font-size   : 20px;
+
+    > .P-accordion-icon {
+
+      user-select : none;
+      margin-left : auto;
+    }
+  }
+
+  .Collapsible__contentInner {
+
+    padding   : 0 30px 15px;
+    font-size : $normal-fs;
+  }
+}

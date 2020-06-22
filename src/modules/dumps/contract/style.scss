@@ -1,0 +1,41 @@
+@import 'src/assets/styles/variables';
+
+.P-contract-page {
+
+  > .P-content {
+
+    width         : 100%;
+    padding       : 30px;
+    background    : white;
+    box-shadow    : $default-block-shadow;
+    border-radius : $radius;
+
+    > .P-image {
+
+      width           : 100%;
+      color           : white;
+      height          : 200px;
+      display         : flex;
+      font-size       : 24px;
+      text-align      : center;
+      align-items     : center;
+      border-radius   : $small-radius;
+      justify-content : center;
+    }
+
+    > .P-texts {
+
+      margin     : 30px 0;
+      font-size  : $normal-fs;
+      word-break : break-word;
+
+      > ul {
+
+        margin       : 20px 0;
+        padding-left : 20px;
+
+        &:first-child { margin-top: 20px; }
+      }
+    }
+  }
+}

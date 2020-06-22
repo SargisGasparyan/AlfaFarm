@@ -1,0 +1,1 @@
+export type ChangeLoggedCallback = (value: string) => void;

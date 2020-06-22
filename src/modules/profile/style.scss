@@ -1,0 +1,36 @@
+@import 'src/assets/styles/helper';
+@import 'src/assets/styles/variables';
+
+.P-profile-page {
+
+  > .P-personal-data, > .P-change-password {
+
+    padding       : 30px;
+    box-shadow    : $default-block-shadow;
+    border-radius : $radius;
+
+    > h2 {
+
+      width         : 100%;
+      font-size     : 26px;
+      margin-bottom : 30px;
+      @include normal-font;
+    }
+
+    > label { margin: 20px 0 40px; }
+    > button { margin-top: 40px; }
+
+    &.P-personal-data { margin-bottom: 40px; }
+
+    > .P-submit {
+
+      width : 100%;
+
+      > .P-G-form-button {
+
+        width   : auto;
+        padding : 0 40px;
+      }  
+    }
+  }
+}

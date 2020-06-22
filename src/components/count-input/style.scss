@@ -1,0 +1,32 @@
+@import 'src/assets/styles/variables';
+
+.P-count-input {
+        
+  height    : 46px;
+  border    : 1px solid $light-gray;
+  padding   : 0 25px 0 10px;
+  position  : relative;
+  min-width : 100px;
+  max-width: 150px;
+
+  &.P-count-input-plus {
+    
+    cursor    : pointer;
+    padding   : 0 20px 2px;
+    min-width : 55px;
+    max-width : 55px;
+    font-size : $normal-fs;
+  }
+
+  > input { text-align: center; }
+  > i {
+
+    right     : 5px;
+    cursor    : pointer;
+    position  : absolute;
+    font-size : 12px;
+
+    &.icon-top { top: 8px; }
+    &.icon-down { bottom: 8px; }
+  }
+}

@@ -1,0 +1,69 @@
+@import '../helper';
+@import '../variables';
+
+* {
+
+  margin      : 0;
+  padding     : 0;
+  outline     : none;
+  box-sizing  : border-box;
+  font-family : 'Montserratarm', 'Verdana', 'Regular';
+}
+
+[pointer] { cursor: pointer; }
+
+::-webkit-scrollbar-track { background: #F1F1F1; }
+::-webkit-scrollbar {
+
+  width  : 5px;
+  height : 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  
+  background    : $text-gray-light;
+  border-radius : $radius;
+
+  &:hover { background: $text-gray; }
+}
+
+input:-webkit-autofill,
+select:-webkit-autofill,
+textarea:-webkit-autofill { box-shadow: 0 0 0 1000px #FFF inset; }
+
+input[type=file] { display: none; }
+
+h1, h2, h3, h4, h5, h6, p { word-break: break-word; }
+h1, h2, h3, h4, h5, h6, b, strong { @include bold-font; }
+
+h3 { font-size: $normal-fs; }
+
+body {
+
+  float      : left;
+  width      : 100%;
+  overflow-x : hidden;
+  min-height : 100vh;
+}
+
+button {
+
+  cursor     : pointer;
+  transition : color .4s, opacity .4s, background .4s;
+  // transition : color .4s, opacity .4s;
+
+  
+  &[disabled] {
+    
+    color      : white;
+    opacity    : .5;
+    background : #B6B6B6 !important;
+  }
+}
+
+textarea {
+  
+  resize      : none;
+  height      : 100px;
+  padding-top : 10px;
+}

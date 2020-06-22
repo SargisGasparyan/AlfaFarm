@@ -1,0 +1,143 @@
+@import 'src/assets/styles/helper';
+@import 'src/assets/styles/variables';
+
+.P-order-details .P-modal-content {
+
+  width         : 600px;
+  padding       : 40px;
+  font-size     : $normal-fs;
+  max-width     : 100%;
+  border-radius : $radius;
+
+  > div  > h2 { 
+
+    width           : 100%;
+    display         : flex;
+    margin-bottom   : 20px;
+    justify-content : space-between;
+
+    > span { @include normal-font; }
+  }
+
+  .P-order-wrapper 
+    > h3 
+      > span{
+
+        color        : $text-gray-light;
+      }
+
+  > h3 {
+
+    display       : flex;
+    font-size     : $normal-fs;
+    line-height   : 25px;
+    margin-bottom : 10px;
+    @include normal-font;
+
+    > span {
+    
+      color        : $text-gray-light;
+      margin-right : auto;
+    }
+  }
+
+  > div > hr { margin: 15px 0; }
+
+  > div > .P-border-line {
+
+    width         : 100%;
+    margin        : 30px 0;
+    border-bottom : 8px solid $dark-gray;
+  }
+
+  > div  > .P-item-row {
+    
+    margin-bottom : 20px;
+
+    &:last-child { margin-bottom: 0; }
+  }
+
+  > div > .P-attached {
+
+    color           : black;
+    width           : 100%;
+    height          : 50px;
+    display         : flex;
+    padding         : 0 25px 0 10px;
+    background      : #f4f5f6;
+    align-items     : center;
+    border-radius   : $small-radius;
+    margin-bottom   : 20px;
+    text-decoration : none;
+
+    > img {
+
+      width        : 30px;
+      margin-right : 10px;
+    }
+
+    > h4 {
+
+      width         : 100%;
+      overflow      : hidden;
+      white-space   : nowrap;
+      text-overflow : ellipsis;
+      padding-right : 20px;
+      @include normal-font;
+    }
+
+    > i { cursor: pointer; }
+
+    &:last-child { margin-bottom: 0; }
+  }
+
+  > div > .P-product {
+
+    cursor        : pointer;
+    display       : flex;
+    margin-bottom : 20px;
+
+    &:last-child { margin-bottom: 0; }
+
+    > .P-image {
+
+      height        : 70px;
+      border        : 1px solid $dark-gray;
+      padding       : 10px;
+      min-width     : 70px;
+      margin-right  : 20px;
+      border-radius : $small-radius;
+
+      > div {
+        
+        width  : 100%;
+        height : 100%;
+      }
+    }
+
+    > h3 {
+
+      @include normal-font;
+
+      &.P-texts {
+
+        display     : flex;
+        flex-wrap   : wrap;
+  
+        > span {
+
+          width      : 100%;
+          font-size  : 16px;
+          margin-top : 5px;
+
+          &.P-attributes {
+      
+            width   : 100%;
+            color   : $text-gray-light;
+            display : block;
+          }
+        }
+      }
+    }
+  }
+}

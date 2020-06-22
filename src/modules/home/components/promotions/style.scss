@@ -1,0 +1,38 @@
+@import 'src/assets/styles/variables';
+
+.P-promotions {
+
+  height : 320px; 
+
+  .P-slider-back, .P-slider-next {
+
+    top       : 120px;
+    transform : translateY(-50%);
+  }
+
+  .P-promotion {
+
+    width           : 320px !important;
+    color           : $text-gray;
+    margin-right    : 40px !important;
+    text-decoration : none;
+
+    > div {
+
+      width         : 100%;
+      height        : 240px;
+      box-shadow    : $default-block-shadow;
+      border-radius : $big-radius;
+
+      &.P-loading { background: $dark-gray !important; }
+    }
+
+    > p {
+
+      margin    : 15px 0;
+      height    : 45px;
+      overflow  : hidden;
+      font-size : $normal-fs;
+    }
+  }
+}

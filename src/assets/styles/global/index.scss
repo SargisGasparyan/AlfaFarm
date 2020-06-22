@@ -1,0 +1,324 @@
+@import './helper';
+@import './variables';
+
+.P-G-page {
+
+  padding    : $page-vertical-offset $page-horizontal-offset;
+  min-height : calc(100vh - #{$header-size});
+
+
+  .P-G-page-title {
+
+    width           : 100%;
+    height          : auto;
+    margin          : 0;
+    display         : flex;
+    font-size       : 24px;
+    min-height      : $page-title-size;
+    padding-bottom  : 40px;
+    justify-content : space-between;
+    
+
+    > button, .P-button {
+
+      color           : black;
+      border          : 1px solid black;
+      height          : 50px;
+      padding         : 0 40px;
+      display         : flex;
+      font-size       : 16px;
+      background      : transparent;
+      align-items     : center;
+      border-radius   : $radius;
+      text-decoration : none;
+      @include normal-font;
+    }
+  }
+
+  .P-G-page-min-height { 
+    min-height: 300px;
+   }
+}
+
+.P-G-invalid-text { color: red !important; }
+.P-G-invalid-field { border: 1px solid red !important; }
+.P-G-invalid-select .P-select-header { border: 1px solid red !important; }
+
+.P-G-show-action-button {
+
+  color           : $main-color;
+  height          : 50px;
+  border          : 1px solid $main-color;
+  margin          : 0 auto 120px;
+  display         : table;
+  padding         : 0 40px;
+  font-size       : 16px;
+  background      : transparent;
+  align-items     : center;
+  line-height     : 50px;
+  border-radius   : $small-radius;
+  text-decoration : none;
+  @include normal-font;
+
+  &:hover { 
+
+    color      : white;
+    background : $main-color;
+  }
+}
+
+.P-G-fields-form {
+
+  display         : flex;
+  flex-wrap       : wrap;
+  justify-content : space-between;
+
+  .P-G-field {
+    margin-bottom: 30px;
+  }
+
+  .P-G-field-wrap, .P-G-half-field-wrap {
+
+    width         : 100%;
+    margin-bottom : 25px;
+
+    &:last-of-type { margin-bottom: 15px; }
+    &.P-G-half-field-wrap { width: calc(50% - 10px); }
+
+    > .P-G-field { margin-bottom: 0; }
+    > .P-G-field-description { margin-top: 10px; }
+    > h4 {
+    
+      margin    : 0 0 5px;
+      font-size : $normal-fs;
+      @include normal-font;
+    }
+  }
+
+  .P-G-form-button {
+
+    width         : 100%;
+    color         : white;
+    border        : 0;
+    height        : 46px;
+    font-size     : 16px;
+    margin-top    : 25px;
+    background    : $main-color;
+    border-radius : $small-radius !important;
+
+    &.P-G-form-button-transparent {
+
+      color          : black;
+      margin-top     : 10px;
+      background     : none;
+      padding-right  : 0;
+      text-transform : capitalize;
+    }
+  }
+
+  a.P-G-form-button {
+
+    display         : flex;
+    align-items     : center;
+    justify-content : center;
+    text-decoration : none;
+  }
+  
+  .P-G-form-checkbox {
+  
+    width   : auto;
+    cursor  : pointer;
+    margin  : 10px auto 5px 0;
+    display : flex;
+
+    > .rc-checkbox {
+
+      display     : flex;
+      align-items : center;
+    }
+  
+    > h3 {
+      
+      margin      : 0 0 0 15px;
+      font-size   : $normal-fs;
+      @include normal-font;
+    }
+  }
+}
+
+.P-G-field, .P-G-half-field {
+
+  width         : 100%;
+  height        : 46px;
+  border        : 1px solid $light-gray;
+  padding       : 0 20px;
+  display       : flex;
+  align-items   : center;
+  border-radius : $small-radius;
+
+  &.P-G-half-field { width: calc(50% - 10px); }
+
+  > input {
+
+    width     : 100%;
+    border    : 0;
+    font-size : $normal-fs;
+  }
+
+  > p {
+
+    height        : 20px;
+    font-size     : $normal-fs;
+    white-space   : nowrap;
+    border-right  : 2px solid $light-gray;
+    margin-right  : 10px;
+    padding-right : 10px;
+
+    &.P-G-field-apply {
+
+      color        : $main-color;
+      cursor       : pointer;
+      margin       : 0 0 0 10px;
+      padding      : 0 0 0 10px;
+      border-left  : 2px solid $light-gray;
+      border-right : 0;
+    }
+  }
+
+
+
+  &.P-G-field-textarea {
+
+    height  : 150px;
+    padding : 12px 0;
+
+    > textarea {
+
+      width      : 100%;
+      border     : 0;
+      height     : 100%;
+      padding    : 0 20px;
+      font-size  : $normal-fs;
+    }
+  }
+}
+
+.pac-container { z-index: 20000; }
+
+.P-G-number-list { list-style-type: decimal; }
+.P-G-pink { color: $pink !important; }
+.P-G-main-color { color: $main-color !important; }
+
+.P-G-discount-label {
+
+  top             : 15px;
+  left            : 15px;
+  color           : white;
+  padding         : 5px;
+  z-index         : 1;
+  display         : flex;
+  position        : absolute;
+  font-size       : 14px;
+  text-align      : center;
+  background      : $pink;
+  align-items     : center;
+  border-radius   : 4px;
+  pointer-events  : none;
+  justify-content : center;
+
+  > .icon-back {
+
+    margin    : 2px 3px 0 0;
+    font-size : 8px;
+  }
+}
+
+.P-G-info-span {
+
+  width         : 25px;
+  color         : white;
+  float         : left;
+  height        : 25px;
+  border        : 2px solid #d0be66;
+  text-align    : center;
+  background    : #F6E178;
+  margin-right  : 15px;
+  border-radius : 50%;
+  display       : flex;
+  justify-content: center;
+  align-items: center;
+  padding       : 1px 1px 2px 1px;
+}
+
+.P-G-see-more-label {
+    
+  color           : $main-color;
+  height          : 100%;
+  display         : flex;
+  font-size       : $normal-fs;
+  align-items     : center;
+  white-space     : nowrap;
+  margin-left     : auto;
+  text-decoration : none;
+  @include normal-font;
+}
+
+.P-G-simple-table {
+
+  border  : 1px solid black;
+  padding : 5px;
+  
+  tr, td {
+
+    border  : 1px solid black;
+    padding : 10px;
+  }  
+}
+
+// #region Sizes
+
+.G-full-width { width: 100%; }
+
+// #endregion Sizes
+
+// #region Margins
+
+.G-auto-margin-left { margin-left: auto; }
+.G-auto-margin-right { margin-right: auto; }
+
+// #endregion Margins
+
+// #region Flex
+
+.G-flex { display: flex; }
+.G-flex-justify-center { justify-content: center; }
+.G-flex-align-center { align-items: center; }
+
+// #endregion Flex
+
+// #region Colors
+
+.G-white-color { color: white; }
+.G-main-background-color { background-color: $main-color; }
+
+// #endregion Colors
+
+// #region Forms
+
+.G-main-input {
+  width         : 100%;
+  border        : 1px solid $light-gray;
+  padding       : 15px 35px;
+  border-radius : 30px;
+}
+
+// #endregion Forms
+
+// #region Normalizers
+
+.G-normal-link {
+  color           : initial;
+  text-decoration : none;
+}
+
+// #endregion Normalizers

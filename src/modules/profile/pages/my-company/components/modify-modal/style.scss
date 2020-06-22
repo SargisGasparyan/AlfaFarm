@@ -1,0 +1,36 @@
+@import 'src/assets/styles/helper';
+@import 'src/assets/styles/variables';
+
+.P-company-modify-modal .P-modal-content {
+
+  width         : 600px;
+  padding       : 40px;
+  border-radius : $radius;
+
+  > div > h2 { margin-bottom: 30px; }
+  > div > .P-G-fields-form {
+
+    > h3 {
+
+      width     : 100%;
+      margin    : 25px 0;
+      font-size : 24px;
+      @include normal-font;
+    }
+  
+    > .P-border-line {
+  
+      width      : 100%;
+      border-top : 8px solid $dark-gray;
+    }
+
+    > .P-add-other {
+
+      color       : $text-gray;
+      margin      : 20px 0 45px;
+      cursor      : pointer;
+      font-size   : $normal-fs;
+      margin-left : auto;
+    }
+  }
+}

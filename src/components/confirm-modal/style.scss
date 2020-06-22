@@ -1,0 +1,15 @@
+@import 'src/assets/styles/variables';
+
+.P-confirm-modal .P-modal-content {
+
+  padding       : 30px;
+  max-width     : 380px;
+  border-radius : $radius;
+
+ > div > .P-G-fields-form > p {
+  
+    width      : 100%;
+    font-size  : $normal-fs;
+    margin-top : 5px;
+  }
+}

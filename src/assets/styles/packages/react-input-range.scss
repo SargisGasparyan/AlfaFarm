@@ -1,0 +1,15 @@
+@import './variables';
+
+.input-range {
+
+  margin-top : 10px;
+
+  .input-range__track--active, .input-range__slider {
+
+    background   : $main-color;
+    border-color : $main-color;
+  }
+  
+  .input-range__label-container { left: 0 !important; }
+  .input-range__label--value .input-range__label-container { left: -50% !important; }
+}

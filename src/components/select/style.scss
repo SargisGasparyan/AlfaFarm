@@ -1,0 +1,86 @@
+@import 'src/assets/styles/helper';
+@import 'src/assets/styles/variables';
+
+.P-select {
+
+  height    : 50px;
+  position  : relative;
+  font-size : 16px;
+  @include normal-font;
+
+  > .P-select-header {
+
+    cursor          : pointer;
+    border          : 1px solid $light-gray;
+    height          : 100%;
+    display         : flex;
+    padding         : 0px 20px;
+    font-size       : $normal-fs;
+    background      : #ffffff;
+    user-select     : none;
+    align-items     : center;
+    border-radius   : $small-radius;
+    justify-content : space-between;
+
+    > span {
+
+      width         : 100%;
+      overflow      : hidden;
+      white-space   : nowrap;
+      text-overflow : ellipsis;
+    }
+
+    > i {
+
+      padding   : 4px 0 0 10px;
+      font-size : 12px;
+    }
+
+    > .P-select-placeholder { opacity: .6; }
+  }
+
+  > .P-select-body {
+
+    top             : 55px;
+    right           : 0;
+    min-width       : 100%;
+    border          : 1px solid #D6D6D6;
+    margin          : 0;
+    z-index         : 19999;
+    position        : absolute;
+    max-height      : 250px;
+    box-shadow      : $default-block-shadow;
+    background      : white;
+    overflow-y      : auto;
+    border-radius   : $small-radius;
+    list-style-type : none;
+
+    > li {
+
+      width         : 100%;
+      max-width     : 100%;
+      cursor        : pointer;
+      height        : 40px;
+      display       : inline-block;
+      overflow      : hidden;
+      line-height   : 40px;
+      padding       : 0px 20px;
+      white-space   : nowrap;
+      text-overflow : ellipsis;
+
+      &:hover { background : transparentize(#DEDEDE, 0.78); }
+
+      > img { vertical-align: middle; }
+
+      &.P-select-empty-label {
+        
+        color  : transparentize(#000000, .6);
+        cursor : default;
+
+        &:hover { background: inherit; }
+      }
+
+      &.P-select-new-label { color: $main-color; }
+    }
+  }
+}

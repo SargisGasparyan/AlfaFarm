@@ -1,0 +1,16 @@
+@import 'src/assets/styles/variables';
+
+.P-product-similar {
+
+  width      : 100%;
+  margin-top : 70px;
+
+  > h2 { margin-bottom: 40px; }
+  > .P-list {
+
+    width     : calc(100% + 20px);
+    margin    : 0 -10px;
+    display   : flex;
+    flex-wrap : wrap;
+  }
+}

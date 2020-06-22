@@ -1,0 +1,9 @@
+@import 'src/assets/styles/variables';
+
+.P-proposal {
+
+  width     : calc(100% + 20px);
+  margin    : 0 -10px 50px -10px;
+  display   : flex;
+  flex-wrap : wrap;
+}

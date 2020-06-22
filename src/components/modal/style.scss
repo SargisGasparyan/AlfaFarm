@@ -1,0 +1,72 @@
+@import 'src/assets/styles/variables';
+
+@keyframes modal-content-opening {
+  from { transform: translate(-50%, -50%) scale(.9); }
+  to { transform: translate(-50%, -50%) scale(1); }
+}
+
+@keyframes modal-background-opening {
+  from { background: transparentize(#000, .8); }
+  to { background: transparentize(#000, .7); }
+}
+
+@keyframes modal-content-opening-X {
+  from { transform: translateX(-50%) scale(.9); }
+  to { transform: translateX(-50%) scale(1); }
+}
+
+.P-modal-wrapper {
+
+  top                 : 0;
+  left                : 0;
+  width               : 100%;
+  right               : 0;
+  height              : 100vh;
+  bottom              : 0;
+  z-index             : 20000;
+  position            : fixed;
+  animation           : modal-background-opening .1s;
+  overflow-y          : auto;
+  animation-fill-mode : forwards;
+
+  > div > .icon-close {
+
+    top       : 20px;
+    right     : 20px;
+    cursor    : pointer;
+    z-index   : 1;
+    position  : absolute;
+    font-size : 20px;
+  }
+
+  .P-modal-content {
+
+    top                 : 50%;
+    left                : 50%;
+    position            : absolute;
+    animation           : modal-content-opening .2s;
+    box-shadow          : $default-block-shadow;
+    background          : #fff;
+    animation-fill-mode : forwards;
+
+    .icon-close {
+      position: absolute;
+      right: 20px;
+      top: 20px;
+    }
+
+    .P-loader-wrapper {
+
+      height        : 100%;
+      border-radius : $radius;
+    }
+  }
+}
+
+.P-modal-wrapper.P-modal-static .P-modal-content {
+
+  top                 : $page-vertical-offset;
+  animation           : modal-content-opening-X .1s;
+  margin-bottom       : $page-vertical-offset;
+  animation-fill-mode : forwards;
+}

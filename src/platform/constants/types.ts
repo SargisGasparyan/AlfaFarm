@@ -1,0 +1,2 @@
+export type NoneJSONRequestBody = Blob | FormData | ArrayBuffer | ReadableStream | URLSearchParams | ArrayBufferView;
+export type DropdownNameFunctionType = () => string | number | React.ReactNode | HTMLElement;

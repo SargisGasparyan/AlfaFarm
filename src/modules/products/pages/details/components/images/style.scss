@@ -1,0 +1,93 @@
+@import 'src/assets/styles/variables';
+
+$left-thumbs-width   : 130px;
+$square-block-height : calc(50vw - #{$page-horizontal-offset} - #{$left-thumbs-width + 40px});
+
+.P-product-images {
+  width: calc(50% - 30px);
+  display      : flex;
+  margin-right : 60px;
+
+  > .P-thumbs {
+
+    width        : $left-thumbs-width;
+    height       : $square-block-height;
+    position     : relative;
+    overflow     : hidden;
+    margin-right : 20px;
+
+    > div {
+    
+      width         : 100%;
+      height        : calc(100% / 3 - 13.3333333px); // (20 + 20)/3 = 13.3333333
+      border        : 1px solid $light-gray;
+      cursor        : pointer;
+      transition    : transform .4s;
+      margin-bottom : 20px;
+      border-radius : $small-radius;
+
+      &.P-choosed { border-color: $text-gray-light; }
+      > div {
+
+        width  : 100%;
+        height : 100%;
+      }
+    }
+
+    > .P-thumbs-scroll-down, > .P-thumbs-scroll-up {
+
+      width      : 100%;
+      bottom     : 0;
+      height     : 57px;
+      cursor     : pointer;
+      z-index    : 1;
+      padding    : 15px;
+      position   : absolute;
+      text-align : center;
+      background : linear-gradient(transparentize(white, 1), transparentize(white, .3));
+
+      &.P-thumbs-scroll-up {
+
+        top        : 0;
+        background : linear-gradient(transparentize(white, .3), transparentize(white, 1));
+      }
+
+      > i { font-size: 26px; }
+    }
+  }
+
+  > .P-current-image {
+
+    width           : calc(100% - #{$left-thumbs-width});
+    height          : $square-block-height; /* SQUARE BLOCK */
+    border          : 1px solid $light-gray;
+    display         : flex;
+    position        : relative;
+    overflow        : hidden;
+    align-items     : center;
+    border-radius   : $small-radius;
+    justify-content : center;
+
+    > .P-zoomable-image {
+
+      // width               : 100%;
+      width               : 72%;
+      cursor              : crosshair;
+      position            : relative;
+      overflow            : hidden;
+      background-size     : 200%;
+      background-position : 50% 50%;
+      background-repeat   : no-repeat;
+
+      > img {
+
+        width      : 100%;
+        display    : block;
+        background : white;
+        transition : opacity .5s;
+        
+        &:hover { opacity: 0; }
+      }
+    }
+  }
+}

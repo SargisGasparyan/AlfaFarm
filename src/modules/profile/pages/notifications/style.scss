@@ -1,0 +1,76 @@
+@import 'src/assets/styles/helper';
+@import 'src/assets/styles/variables';
+
+.P-notifications-page > .P-notifications-content {
+
+  width         : 100%;
+  overflow      : hidden;
+  box-shadow    : $default-block-shadow;
+  border-radius : $radius;
+
+  > .P-notification-item {
+
+    cursor        : pointer;
+    display       : flex;
+    padding       : 30px;
+    border-bottom : 8px solid $dark-gray;
+
+    &:last-child { border-bottom: 0; }
+
+    > .P-image {
+
+      height        : 70px;
+      border        : 1px solid $light-gray;
+      padding       : 10px;
+      min-width     : 70px;
+      max-width     : 70px;
+      margin-right  : 20px;
+      border-radius : $small-radius;
+
+      > div {
+
+        width  : 100%;
+        height : 100%;
+      }
+    }
+
+    > h3 {
+
+      width           : 100%;
+      display         : flex;
+      align-items     : center;
+      margin-bottom   : 5px;
+      justify-content : space-between;
+      @include normal-font;
+
+      span {
+
+        cursor       : pointer;
+        font-size    : $normal-fs;
+        margin-right : 30px;
+
+        &:last-child { margin-right: 0; }
+      }
+    }
+
+    > h4 {
+
+      color     : $text-gray-light;
+      font-size : $normal-fs;
+      @include normal-font;
+    }
+
+    > .P-default-address {
+
+      display    : flex;
+      margin-top : 20px;
+
+      > span {
+      
+        display      : block;
+        font-size    : $normal-fs;
+        margin-right : 10px;
+      }
+    }
+  }
+}

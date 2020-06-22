@@ -1,0 +1,109 @@
+@import 'src/assets/styles/helper';
+@import 'src/assets/styles/variables';
+
+.P-requested-products {
+
+  padding : 0 20px;
+
+  .slick-list {
+
+    height : 200px;
+
+    .slick-slide {
+    
+      .P-product {
+  
+        width           : 350px !important;
+        color           : black;
+        height          : 200px;
+        border          : 1px solid $light-gray;
+        margin          : 0 10px;
+        display         : block;
+        display         : flex;
+        padding         : 20px;
+        flex-wrap       : wrap;
+        border-radius   : $radius;
+        text-decoration : none;
+  
+        > h3 {
+  
+          margin-bottom : 20px;
+          @include normal-font;
+        }
+  
+        > .P-content {
+  
+          display : flex;
+          
+          > .P-image {
+  
+            height        : 70px;
+            border        : 1px solid $dark-gray;
+            padding       : 10px;
+            min-width     : 70px;
+            margin-right  : 20px;
+            border-radius : $small-radius;
+      
+            > div {
+              
+              width  : 100%;
+              height : 100%;
+            }
+          }
+  
+          > .P-texts {
+  
+            width      : calc(100% - 90px);
+            word-break : break-word;
+  
+            > h3 {
+  
+              width         : 100%;
+              overflow      : hidden;
+              white-space   : nowrap;
+              text-overflow : ellipsis;
+              @include normal-font;
+  
+              &.P-price {
+  
+                width      : auto;
+                margin-top : 5px;
+      
+                > del {
+                
+                  color       : $text-gray-light;
+                  margin-left : 10px;
+                }
+              }
+      
+              > .P-attributes {
+              
+                width      : 100%;
+                color      : $text-gray-light;
+                display    : block;
+                font-size  : 16px;
+                margin-top : 5px;
+              }
+            }
+          }
+        }
+  
+        > .P-actions { 
+  
+          display         : flex;
+          justify-content : flex-end;
+  
+          > .P-cancel, > .P-confirm {
+  
+            color      : $text-gray-light;
+            border     : 0;
+            font-size  : $normal-fs;
+            background : transparent;
+    
+            &.P-confirm { margin-left: 30px; }
+          }  
+        }
+      }
+    }  
+  }
+} 

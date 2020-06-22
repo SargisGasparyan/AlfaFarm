@@ -1,0 +1,41 @@
+@import 'src/assets/styles/helper';
+@import 'src/assets/styles/variables';
+
+.P-wish-list-modify-modal .P-modal-content {
+
+  width         : 600px;
+  padding       : 40px;
+  border-radius : $radius;
+
+  > div > h2 { margin-bottom: 30px; }
+  > div > .P-invited {
+
+    padding         : 20px 0;
+    display         : flex;
+    align-items     : center;
+    border-bottom   : 1px solid $light-gray;
+    justify-content : space-between;
+
+    &:first-of-type { padding-top: 0; }
+    &:last-child { border-bottom: 0; }
+
+    > h3 {
+
+      width     : 100%;
+      font-size : 20px;
+      @include normal-font;
+    }
+
+    > i {
+
+      cursor      : pointer;
+      margin-left : 10px;
+    }
+    
+    > span {
+      
+      color       : $text-gray-light;
+      margin-left : 10px;
+    }
+  }
+}

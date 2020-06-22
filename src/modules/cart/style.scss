@@ -1,0 +1,18 @@
+@import 'src/assets/styles/variables';
+
+.P-cart-page {
+
+  display       : flex;
+  flex-wrap     : wrap;
+  align-items   : flex-start;
+  align-content : flex-start;
+
+  .P-select-header { border: 0; }
+  .icon-pdf {
+
+    cursor      : pointer;
+    display     : flex;
+    font-size   : 30px;
+    align-items : center;
+  }
+}

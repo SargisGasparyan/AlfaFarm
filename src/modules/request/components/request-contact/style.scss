@@ -1,0 +1,10 @@
+@import 'src/assets/styles/variables';
+
+.P-request-contact-modal .P-modal-content {
+
+  width         : 600px;
+  padding       : 40px;
+  border-radius : $radius;
+
+  > div > h2 { margin-bottom: 50px; }
+}

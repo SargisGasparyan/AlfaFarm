@@ -1,0 +1,104 @@
+@import 'src/assets/styles/variables';
+
+.P-chat {
+
+  border         : 1px solid $light-gray;
+  height         : 500px;
+  display        : flex;
+  border-radius  : $radius;
+  flex-direction : column; 
+
+  > .P-messages {
+
+    width          : 100%;
+    height         : 100%;
+    padding        : 20px;
+    display        : flex;
+    overflow-y     : auto;
+    flex-direction : column;
+
+    > div {
+      
+      color         : white;
+      padding       : 15px 20px;
+      max-width     : 60%;
+      word-break    : break-word;
+      background    : $main-color;
+      align-self    : flex-end;
+      border-radius : 25px 0 25px 25px;
+      margin-bottom : 30px;
+
+      &:last-child { margin-bottom: 0; }
+      &.P-file {
+
+        cursor     : pointer;
+        border     : 2px solid $main-color;
+        padding    : 0;
+        overflow   : hidden;
+        min-height : 150px;
+        max-height : 150px;
+        background : none !important;
+
+        &.P-admin { border-color: $dark-gray; }
+      }
+
+      &.P-admin {
+
+        float         : left;
+        color         : black;
+        background    : $dark-gray;
+        align-self    : flex-start;
+        border-radius : 0 25px 25px 25px;
+      }
+
+      > div {
+
+        width  : 150px;
+        height : 150px;
+      }
+    }
+  }
+
+  > .P-G-fields-form {
+
+    width       : 100%;
+    padding     : 20px;
+    flex-wrap   : initial;
+    margin-top  : 20px;
+    align-items : center;
+
+    > label > i {
+      
+      cursor      : pointer;
+      font-size    : 24px;
+      margin-right : 15px;
+    }
+
+    > .P-G-field {
+      
+      margin-bottom: 0;
+
+      > button {
+
+        border     : 0;
+        background : none;
+
+        > i {
+
+          color     : $main-color;
+          font-size : 22px;
+        }  
+      }
+    }
+  }
+}
+
+.P-chat-details {
+
+  width         : 800px;
+  height        : 700px;
+  overflow      : hidden;
+  max-width     : calc(100vw - 100px);
+  max-height    : calc(100vh - 100px);
+  border-radius : $radius;
+}

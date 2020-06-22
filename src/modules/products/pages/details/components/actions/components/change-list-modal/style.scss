@@ -1,0 +1,58 @@
+@import 'src/assets/styles/helper';
+@import 'src/assets/styles/variables';
+
+.P-change-list-modal .P-modal-content {
+
+  width         : 600px;
+  padding       : 40px;
+  border-radius : $radius;
+
+  > div > form {
+
+    > h2 {
+    
+      width         : 100%;
+      margin-bottom : 30px;
+    }
+
+    label.P-list:first-of-type { padding-top: 0; }
+  
+    > .P-list {
+  
+      width           : 100%;
+      cursor          : pointer;
+      padding         : 20px 0;
+      display         : flex;
+      align-items     : center;
+      border-bottom   : 1px solid $light-gray;
+      justify-content : space-between;
+  
+      &.P-new {
+        
+        border-bottom   : 0;
+        text-decoration : none;
+      }
+      
+      > h3 {
+  
+        width     : 100%;
+        font-size : 20px;
+        @include normal-font;
+      }
+  
+      > i {
+  
+        cursor      : pointer;
+        margin-left : 10px;
+      }
+      
+      > span {
+        
+        color        : $text-gray-light;
+        margin-right : 20px;
+      }
+    }  
+
+   > div  > button { width: 100%; }
+  }
+}
