@@ -137,7 +137,7 @@ class RequestedProducts extends HelperPureComponent<IProps, IState> {
                   {item.attributes.map(sub => <React.Fragment key={sub.attributeId}>{sub.attributeName}: {sub.optionName}&nbsp;</React.Fragment>)}
                 </span>}
               </h3>
-              <h3 className="P-price P-G-pink">
+              <h3 className="P-price G-pink">
                 {item.discountedPrice || item.defaultPrice} {currency}&nbsp;
                 {!!item.discountedPrice && <del>{item.defaultPrice} {currency}</del>}
               </h3>
@@ -145,7 +145,7 @@ class RequestedProducts extends HelperPureComponent<IProps, IState> {
           </div>
           <div className="P-actions">
             <button className="P-cancel" onClick={e => this.cancel(e, item._id)}>{Settings.translations.cancel}</button>
-            {owner && <button className="P-confirm P-G-main-color" onClick={e => this.confirm(e, item._id)}>{Settings.translations.confirm}</button>}
+            {owner && <button className="P-confirm G-main-color" onClick={e => this.confirm(e, item._id)}>{Settings.translations.confirm}</button>}
           </div>
         </Link>)}
       </Slider>

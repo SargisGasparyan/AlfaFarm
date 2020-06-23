@@ -76,7 +76,7 @@ class Brands extends HelperPureComponent<{}, IState> {
     const { data } = this.state;
 
     return data && data.itemList.length ? <>
-      <h2 className="P-G-page-title">{Settings.translations.brands}</h2>
+      <h2 className="G-page-title">{Settings.translations.brands}</h2>
 
       <Screen.Desktop>
         <this.Content itemCount={5} />

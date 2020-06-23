@@ -108,10 +108,10 @@ class PayerInformation extends HelperComponent<IProps, IState> {
     return !verifyOpen ? (
       <Modal onClose={this.onClose} className="P-payer-information-modal">
         <h2>{Settings.translations.add_your_information}</h2>
-        <form className="P-G-fields-form">
-          <div className="P-G-field-wrap">
+        <form className="G-fields-form">
+          <div className="G-field-wrap">
             <h4>{Settings.translations.name}</h4>
-            <div className={`P-G-field ${submited && form.firstName.length < 2 ? 'P-G-invalid-field' : ''}`}>
+            <div className={`G-field ${submited && form.firstName.length < 2 ? 'G-invalid-field' : ''}`}>
               <input
                 name="firstName"
                 value={form.firstName}
@@ -119,9 +119,9 @@ class PayerInformation extends HelperComponent<IProps, IState> {
               />
             </div>
           </div>
-          <div className="P-G-field-wrap">
+          <div className="G-field-wrap">
             <h4>{Settings.translations.email}</h4>
-            <div className={`P-G-field`}>
+            <div className={`G-field`}>
               <input
                 name="email"
                 value={form.email}
@@ -129,9 +129,9 @@ class PayerInformation extends HelperComponent<IProps, IState> {
               />
             </div>
           </div>
-          <div className="P-G-field-wrap">
+          <div className="G-field-wrap">
             <h4>{Settings.translations.phone_number}</h4>
-            <div className={`P-G-field ${submited && !isValidNonCityPhone(`${countryCode}${form.phoneNumber}`) ? 'P-G-invalid-field' : ''}`}>
+            <div className={`G-field ${submited && !isValidNonCityPhone(`${countryCode}${form.phoneNumber}`) ? 'G-invalid-field' : ''}`}>
               <p>+{countryCode}</p>
               <input
                 name="phoneNumber"
@@ -143,7 +143,7 @@ class PayerInformation extends HelperComponent<IProps, IState> {
           </div>
           <LoaderContent
             loading={submitLoading}
-            className="P-G-form-button"
+            className="G-form-button"
             onClick={this.submit}
           >
             {Settings.translations.send}

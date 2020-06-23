@@ -160,7 +160,7 @@ const deliveryText = <>
   <p>We are ready to offer our customers a modern service. We carry out product acceptance and delivery, loading and unloading, packing. We also offer delivery with optimal tariff system, according to which the purchases exceeding the amount set out below will be delivered for free, otherwise there will be calculated according to the price list. Product will be delivered within the time specified by you, quickly and securely, with  special trucks for transportation. We guarantee product safety and safe transportation. If your expectations expectations are not satisfied we guarantee the product return, as well as the return of the amount paid within five working days.</p>
 
   <h3>Free shipping scale</h3><br />
-  <table className="P-G-simple-table-mobile">
+  <table className="G-simple-table-mobile">
     <tr>
       <td><strong>Delivery address</strong></td>
       <td><strong>Cost (dram)</strong></td>
@@ -187,7 +187,7 @@ const deliveryText = <>
     </tr>
   </table><br /> <br />
 
-  <table className="P-G-simple-table">
+  <table className="G-simple-table">
     <tr>
       <td><strong>Delivery address</strong></td>
       <td><strong>Cost (dram)</strong></td>
@@ -216,7 +216,7 @@ const deliveryText = <>
 
   <h3>Established price list of shipping</h3><br />
 
-  <table className="P-G-simple-table-mobile">
+  <table className="G-simple-table-mobile">
     <tr>
       <td><strong>Town/village</strong></td>
       <td><strong>Cost (dram)</strong></td>
@@ -575,7 +575,7 @@ const deliveryText = <>
     </tr>
   </table>
 
-  <table className="P-G-simple-table">
+  <table className="G-simple-table">
     <tr>
       <td><strong>Town/village</strong></td>
       <td><strong>Cost (dram)</strong></td>
@@ -1121,6 +1121,7 @@ export default {
   pharmacies: "Pharmacies",
   clinic: "Clinic",
   blog: "Blog",
+  news: "News",
   good_morning: "Good morning",
   home: "Home page",
   good_afternoon: "Good afternoon",

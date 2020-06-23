@@ -79,15 +79,15 @@ class ContactUs extends HelperComponent<{}, IState> {
     const { submited, submitLoading, form } = this.state;
 
     return (
-      <section className="P-G-page P-contact-page">
-        <h1 className="P-G-page-title">{Settings.translations.contact_us}</h1>
+      <section className="G-page P-contact-page">
+        <h1 className="G-page-title">{Settings.translations.contact_us}</h1>
         <div className="P-contact-texts">
           {Settings.translations.contact_text}
         </div>
-        <form className="P-G-fields-form P-contact-form">
-          <div className="P-G-field-wrap">
+        <form className="G-fields-form P-contact-form">
+          <div className="G-field-wrap">
             <h4>{Settings.translations.full_name}</h4>
-            <div className={`P-G-field ${submited && !form.name ? 'P-G-invalid-field' : ''}`}>
+            <div className={`G-field ${submited && !form.name ? 'G-invalid-field' : ''}`}>
               <input
                 type="text"
                 name="name"
@@ -95,9 +95,9 @@ class ContactUs extends HelperComponent<{}, IState> {
               />
             </div>
           </div>
-          <div className="P-G-field-wrap">
+          <div className="G-field-wrap">
             <h4>{Settings.translations.email}</h4>
-            <div className={`P-G-field ${submited && !isValidEmail(form.email) ? 'P-G-invalid-field' : ''}`}>
+            <div className={`G-field ${submited && !isValidEmail(form.email) ? 'G-invalid-field' : ''}`}>
               <input
                 type="email"
                 name="email"
@@ -106,9 +106,9 @@ class ContactUs extends HelperComponent<{}, IState> {
               />
             </div>
           </div>
-          <div className="P-G-field-wrap">
+          <div className="G-field-wrap">
             <h4>{Settings.translations.phone_number}</h4>
-            <div className={`P-G-field ${submited && !isValidPhoneOnly(form.phone) ? 'P-G-invalid-field' : ''}`}>
+            <div className={`G-field ${submited && !isValidPhoneOnly(form.phone) ? 'G-invalid-field' : ''}`}>
               <input
                 type="text"
                 name="phone"
@@ -116,9 +116,9 @@ class ContactUs extends HelperComponent<{}, IState> {
               />
             </div>
           </div>
-          <div className="P-G-field-wrap">
+          <div className="G-field-wrap">
             <h4>{Settings.translations.message}</h4>
-            <div className={`P-G-field P-G-field-textarea ${submited && !form.message ? 'P-G-invalid-field' : ''}`}>
+            <div className={`G-field G-field-textarea ${submited && !form.message ? 'G-invalid-field' : ''}`}>
               <textarea
                 name="message"
                 value={form.message}
@@ -128,7 +128,7 @@ class ContactUs extends HelperComponent<{}, IState> {
           </div>
           <LoaderContent
             loading={submitLoading}
-            className="P-G-form-button"
+            className="G-form-button"
             onClick={this.send}
           >
             {Settings.translations.send}

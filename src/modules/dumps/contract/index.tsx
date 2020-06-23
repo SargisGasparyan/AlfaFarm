@@ -16,8 +16,8 @@ class Contract extends HelperPureComponent<{}, {}> {
   public render() {
 
     return (
-      <section className="P-G-page P-contract-page">
-        <h1 className="P-G-page-title">{Settings.translations.contract}</h1>
+      <section className="G-page P-contract-page">
+        <h1 className="G-page-title">{Settings.translations.contract}</h1>
         <div className="P-content">
           <div
             className="P-image"

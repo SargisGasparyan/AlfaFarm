@@ -172,7 +172,7 @@ class ProductRequestItem extends HelperComponent<IProps, IState> {
           <input
             value={form.iNeed}
             name="iNeed"
-            className={submited && form.iNeed.length < 2 ? 'P-G-invalid-field' : ''}
+            className={submited && form.iNeed.length < 2 ? 'G-invalid-field' : ''}
             placeholder={Settings.translations.write}
             onChange={this.changeField}
           />
@@ -181,7 +181,7 @@ class ProductRequestItem extends HelperComponent<IProps, IState> {
           <h4>{Settings.translations.m_u}</h4>
           <Select<string>
             value={form.mu}
-            className={submited && !form.mu ? 'P-G-invalid-select' : ''}
+            className={submited && !form.mu ? 'G-invalid-select' : ''}
             onChange={this.changeMU}
             options={mues}
             placeholderOpacity={true}
@@ -194,7 +194,7 @@ class ProductRequestItem extends HelperComponent<IProps, IState> {
           <NumberInput
             value={form.count}
             placeholder={Settings.translations.write}
-            className={submited && !form.count ? 'P-G-invalid-field' : ''}
+            className={submited && !form.count ? 'G-invalid-field' : ''}
             onChange={this.changeQuantity}
             int={true}
           />
@@ -206,7 +206,7 @@ class ProductRequestItem extends HelperComponent<IProps, IState> {
           name="description"
           value={form.description}
           placeholder={Settings.translations.write}
-          className={submited && form.description.length < 2 ? 'P-G-invalid-field' : ''}
+          className={submited && form.description.length < 2 ? 'G-invalid-field' : ''}
           onChange={this.changeField}
         />
       </div>

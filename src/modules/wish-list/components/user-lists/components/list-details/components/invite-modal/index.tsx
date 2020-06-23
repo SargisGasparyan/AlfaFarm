@@ -52,14 +52,14 @@ class InviteModal extends HelperComponent<IProps, IState> {
     return data ? (
       <Modal onClose={onClose} className="P-wish-list-invite-modal">
         <h2>{Settings.translations.invite}</h2>
-        <form className="P-G-fields-form">
-          <div className="P-G-field-wrap">
+        <form className="G-fields-form">
+          <div className="G-field-wrap">
             <h4>{Settings.translations.url}</h4>
-            <div className="P-G-field">
+            <div className="G-field">
               <input defaultValue={data} readOnly={true} />
             </div>
           </div>
-          <button className="P-G-form-button" onClick={this.copyURL}>{Settings.translations.copy}</button>
+          <button className="G-form-button" onClick={this.copyURL}>{Settings.translations.copy}</button>
         </form>
       </Modal>
     ) : <PageLoader />;

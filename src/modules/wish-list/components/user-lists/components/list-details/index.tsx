@@ -331,7 +331,7 @@ class ListDetails extends HelperComponent<IProps, IState> {
         {!!product.discountedPrice && <del>{priceMultipler * product.defaultPrice} {currency}</del>}
         </h3>
         {data.owner && <h3
-          className="P-G-pink P-delete"
+          className="G-pink P-delete"
           onClick={e => this.deleteItem(e, product._id)}
         ><i className="icon-delete" /></h3>}
       </div>
@@ -365,7 +365,7 @@ class ListDetails extends HelperComponent<IProps, IState> {
     } = this.state;
 
     return data ? (
-      <div className="P-wish-list-details P-wish-list-content P-G-page-min-height">
+      <div className="P-wish-list-details P-wish-list-content G-page-min-height">
         <div className="P-list-header">
           <h2>
             <span>

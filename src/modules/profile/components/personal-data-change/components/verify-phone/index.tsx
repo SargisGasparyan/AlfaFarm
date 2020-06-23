@@ -73,8 +73,8 @@ class VerifyPhone extends HelperComponent<IProps, IState> {
       <Modal onClose={onClose} className="P-verify-phone-modal">
         <h2>{Settings.translations.verification}</h2>
         <p>{Settings.translations.verification_text} +{countryCode}{phone}</p>
-        <form className="P-G-fields-form">
-          <div className="P-G-field">
+        <form className="G-fields-form">
+          <div className="G-field">
             <input
               value={form.code}
               pattern="[0-9]{1,4}"
@@ -85,7 +85,7 @@ class VerifyPhone extends HelperComponent<IProps, IState> {
             loading={submitLoading}
             onClick={this.submit}
             disabled={form.code.length < 4}
-            className="P-G-form-button"
+            className="G-form-button"
           >
             {Settings.translations.ok}
           </LoaderContent>
@@ -93,7 +93,7 @@ class VerifyPhone extends HelperComponent<IProps, IState> {
             type="button"
             loading={resendLoading}
             onClick={this.sendAgain}
-            className="P-G-form-button P-G-form-button-transparent"
+            className="G-form-button G-form-button-transparent"
           >
             {!resendLoading && Settings.translations.send_again}
           </LoaderContent>

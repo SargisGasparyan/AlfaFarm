@@ -8,7 +8,7 @@ class PasswordChange extends HelperComponent<{}, {}> {
   public render() {
 
     return (
-      <div className="P-change-password P-G-fields-form">
+      <div className="P-change-password G-fields-form">
         <h2>{Settings.translations.change_password}</h2>
       </div>
     );

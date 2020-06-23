@@ -176,7 +176,7 @@ class Login extends HelperComponent<IProps, IState> {
     return (
       <Modal className="P-login-modal" onClose={onClose}>
         <this.Header />
-        {errorMessage && <p className="P-G-invalid-text">{errorMessage}</p>}
+        {errorMessage && <p className="G-invalid-text">{errorMessage}</p>}
         <this.Content />
         <span className="P-social-login">
           {Settings.translations.social_login}

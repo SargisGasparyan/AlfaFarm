@@ -30,7 +30,7 @@ $square-block-height : calc(50vw - #{$page-horizontal-offset} - #{$left-thumbs-w
     @include normal-font;
   }
 
-  > .P-G-fields-form {
+  > .G-fields-form {
 
     flex-wrap       : nowrap;
     margin-top      : 40px;
@@ -42,7 +42,7 @@ $square-block-height : calc(50vw - #{$page-horizontal-offset} - #{$left-thumbs-w
      }
 
     > .P-count-input { margin-bottom: 20px; }
-    > .P-G-form-button {
+    > .G-form-button {
 
       padding        : 0 10px;
       margin-top     : 0;

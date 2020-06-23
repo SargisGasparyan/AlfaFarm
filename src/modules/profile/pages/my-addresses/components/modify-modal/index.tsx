@@ -170,10 +170,10 @@ class ModifyModal extends HelperComponent<IProps, IState> {
     return (
       <Modal onClose={this.closeModal} className="P-address-modify-modal">
         <h2>{id ? Settings.translations.edit_address : Settings.translations.add_address}</h2>
-        <form className="P-G-fields-form">
-          <div className="P-G-field-wrap">
+        <form className="G-fields-form">
+          <div className="G-field-wrap">
             <h4>{Settings.translations.address}</h4>
-            <div className={`P-G-field ${submited && !(form.lat && form.lat !== 0) ? 'P-G-invalid-field' : ''}`}>
+            <div className={`G-field ${submited && !(form.lat && form.lat !== 0) ? 'G-invalid-field' : ''}`}>
               <Autocomplete
                 id="google-autocomplete"
                 onPlaceSelected={this.changeAddress}
@@ -186,9 +186,9 @@ class ModifyModal extends HelperComponent<IProps, IState> {
               />
             </div>
           </div>
-          <div className="P-G-field-wrap">
+          <div className="G-field-wrap">
             <h4>{Settings.translations.name}</h4>
-            <div className={`P-G-field ${submited && !form.contactName ? 'P-G-invalid-field' : ''}`}>
+            <div className={`G-field ${submited && !form.contactName ? 'G-invalid-field' : ''}`}>
               <input
                 name="contactName"
                 value={form.contactName}
@@ -196,9 +196,9 @@ class ModifyModal extends HelperComponent<IProps, IState> {
               />
             </div>
           </div>
-          <div className="P-G-half-field-wrap">
+          <div className="G-half-field-wrap">
             <h4>{Settings.translations.house}</h4>
-            <div className="P-G-field">
+            <div className="G-field">
               <NumberInput
                 name="house"
                 value={form.house}
@@ -206,9 +206,9 @@ class ModifyModal extends HelperComponent<IProps, IState> {
               />
             </div>
           </div>
-          <div className="P-G-half-field-wrap">
+          <div className="G-half-field-wrap">
             <h4>{Settings.translations.apartment_office}</h4>
-            <div className="P-G-field">
+            <div className="G-field">
               <NumberInput
                 name="apartment"
                 value={form.apartment}
@@ -216,9 +216,9 @@ class ModifyModal extends HelperComponent<IProps, IState> {
               />
             </div>
           </div>
-          <div className="P-G-field-wrap">
+          <div className="G-field-wrap">
             <h4>{Settings.translations.phone_number}</h4>
-            <div className={`P-G-field ${submited && !isValidNonCityPhone(`${countryCode}${form.contactPhoneNumber}`) ? 'P-G-invalid-field' : ''}`}>
+            <div className={`G-field ${submited && !isValidNonCityPhone(`${countryCode}${form.contactPhoneNumber}`) ? 'G-invalid-field' : ''}`}>
               <p>+{countryCode}</p>
               <input
                 name="contactPhoneNumber"
@@ -228,13 +228,13 @@ class ModifyModal extends HelperComponent<IProps, IState> {
               />
             </div>
           </div>
-          {!!Storage.profile && !companyId && <label className="P-G-form-checkbox">
+          {!!Storage.profile && !companyId && <label className="G-form-checkbox">
             <CheckBox checked={form.isDefault} onChange={this.changeDefault} />
             <h3>{Settings.translations.default_address}</h3>
           </label>}
           <LoaderContent
             loading={submitLoading}
-            className="P-G-form-button"
+            className="G-form-button"
             onClick={this.submit}
           >
             {Settings.translations.save}

@@ -91,7 +91,7 @@ class Details extends HelperComponent<IProps & RouteComponentProps<IRouteParams>
   public render() {
     const { details, initialDetails, choosedImage } = this.state;
     return (
-      <section className={`P-product-details-page ${this.props.match.params.id ? "P-G-page" : ""}`}>
+      <section className={`P-product-details-page ${this.props.match.params.id ? "G-page" : ""}`}>
         {details && initialDetails ?
            <>
 

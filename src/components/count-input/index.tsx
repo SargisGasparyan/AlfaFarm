@@ -85,7 +85,7 @@ class CountInput extends HelperComponent<IProps, IState> {
     
     return (
       <div
-        className={`P-G-field P-count-input ${!count && withPlus ? 'P-count-input-plus' : ''} ${this.countInvalid() ? 'P-G-invalid-field' : ''}`}
+        className={`G-field P-count-input ${!count && withPlus ? 'P-count-input-plus' : ''} ${this.countInvalid() ? 'G-invalid-field' : ''}`}
         onClick={this.initCount}
       >
         {!count && withPlus ? <>&#43;</> : <>

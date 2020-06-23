@@ -1,13 +1,13 @@
 @import './helper';
 @import './variables';
 
-.P-G-page {
+.G-page {
 
   padding    : $page-vertical-offset $page-horizontal-offset;
   min-height : calc(100vh - #{$header-size});
 
 
-  .P-G-page-title {
+  .G-page-title {
 
     width           : 100%;
     height          : auto;
@@ -35,16 +35,16 @@
     }
   }
 
-  .P-G-page-min-height { 
+  .G-page-min-height { 
     min-height: 300px;
    }
 }
 
-.P-G-invalid-text { color: red !important; }
-.P-G-invalid-field { border: 1px solid red !important; }
-.P-G-invalid-select .P-select-header { border: 1px solid red !important; }
+.G-invalid-text { color: red !important; }
+.G-invalid-field { border: 1px solid red !important; }
+.G-invalid-select .P-select-header { border: 1px solid red !important; }
 
-.P-G-show-action-button {
+.G-show-action-button {
 
   color           : $main-color;
   height          : 50px;
@@ -67,26 +67,26 @@
   }
 }
 
-.P-G-fields-form {
+.G-fields-form {
 
   display         : flex;
   flex-wrap       : wrap;
   justify-content : space-between;
 
-  .P-G-field {
+  .G-field {
     margin-bottom: 30px;
   }
 
-  .P-G-field-wrap, .P-G-half-field-wrap {
+  .G-field-wrap, .G-half-field-wrap {
 
     width         : 100%;
     margin-bottom : 25px;
 
     &:last-of-type { margin-bottom: 15px; }
-    &.P-G-half-field-wrap { width: calc(50% - 10px); }
+    &.G-half-field-wrap { width: calc(50% - 10px); }
 
-    > .P-G-field { margin-bottom: 0; }
-    > .P-G-field-description { margin-top: 10px; }
+    > .G-field { margin-bottom: 0; }
+    > .G-field-description { margin-top: 10px; }
     > h4 {
     
       margin    : 0 0 5px;
@@ -95,7 +95,7 @@
     }
   }
 
-  .P-G-form-button {
+  .G-form-button {
 
     width         : 100%;
     color         : white;
@@ -106,7 +106,7 @@
     background    : $main-color;
     border-radius : $small-radius !important;
 
-    &.P-G-form-button-transparent {
+    &.G-form-button-transparent {
 
       color          : black;
       margin-top     : 10px;
@@ -116,7 +116,7 @@
     }
   }
 
-  a.P-G-form-button {
+  a.G-form-button {
 
     display         : flex;
     align-items     : center;
@@ -124,7 +124,7 @@
     text-decoration : none;
   }
   
-  .P-G-form-checkbox {
+  .G-form-checkbox {
   
     width   : auto;
     cursor  : pointer;
@@ -146,7 +146,7 @@
   }
 }
 
-.P-G-field, .P-G-half-field {
+.G-field, .G-half-field {
 
   width         : 100%;
   height        : 46px;
@@ -156,7 +156,7 @@
   align-items   : center;
   border-radius : $small-radius;
 
-  &.P-G-half-field { width: calc(50% - 10px); }
+  &.G-half-field { width: calc(50% - 10px); }
 
   > input {
 
@@ -174,7 +174,7 @@
     margin-right  : 10px;
     padding-right : 10px;
 
-    &.P-G-field-apply {
+    &.G-field-apply {
 
       color        : $main-color;
       cursor       : pointer;
@@ -187,7 +187,7 @@
 
 
 
-  &.P-G-field-textarea {
+  &.G-field-textarea {
 
     height  : 150px;
     padding : 12px 0;
@@ -205,11 +205,11 @@
 
 .pac-container { z-index: 20000; }
 
-.P-G-number-list { list-style-type: decimal; }
-.P-G-pink { color: $pink !important; }
-.P-G-main-color { color: $main-color !important; }
+.G-number-list { list-style-type: decimal; }
+.G-pink { color: $pink !important; }
+.G-main-color { color: $main-color !important; }
 
-.P-G-discount-label {
+.G-discount-label {
 
   top             : 15px;
   left            : 15px;
@@ -233,7 +233,7 @@
   }
 }
 
-.P-G-info-span {
+.G-info-span {
 
   width         : 25px;
   color         : white;
@@ -250,7 +250,7 @@
   padding       : 1px 1px 2px 1px;
 }
 
-.P-G-see-more-label {
+.G-see-more-label {
     
   color           : $main-color;
   height          : 100%;
@@ -263,7 +263,7 @@
   @include normal-font;
 }
 
-.P-G-simple-table {
+.G-simple-table {
 
   border  : 1px solid black;
   padding : 5px;
@@ -295,6 +295,12 @@
 .G-flex-align-center { align-items: center; }
 
 // #endregion Flex
+
+// #region Texts
+
+.G-text-center { text-align: center; }
+
+// #endregion Texts
 
 // #region Colors
 

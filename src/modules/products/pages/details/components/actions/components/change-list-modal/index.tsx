@@ -74,16 +74,16 @@ class ChangeListModal extends HelperComponent<IProps, IState> {
 
     return (
       <Modal onClose={this.onCloseModal} className="P-change-list-modal">
-        <form className="P-G-fields-form">
+        <form className="G-fields-form">
           <h2>{Settings.translations.wish_list}</h2>
           {lists && lists.map(item => <label className="P-list" key={item._id}>
             <CheckBox checked={item.added} onChange={() => this.changeFavorite(item)} />
             <h3>{item.name}</h3>
           </label>)}
           <Link to={ROUTES.WISH_LIST.MAIN} className="P-list P-new">
-            <h3 className="P-G-main-color">{Settings.translations.new}</h3>
+            <h3 className="G-main-color">{Settings.translations.new}</h3>
           </Link>
-          <LoaderContent loading={loading} className="P-G-form-button" onClick={this.save}>
+          <LoaderContent loading={loading} className="G-form-button" onClick={this.save}>
             {Settings.translations.save}
           </LoaderContent>
         </form>

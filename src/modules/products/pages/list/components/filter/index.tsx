@@ -241,7 +241,7 @@ class Filter extends HelperComponent<IProps, IState> {
             />
             {data.range && <>
               <h3>{Settings.translations.price}</h3>
-              <div className="P-G-fields-form">
+              <div className="G-fields-form">
                 <InputRange
                   minValue={data.range.minPrice}
                   maxValue={data.range.maxPrice}

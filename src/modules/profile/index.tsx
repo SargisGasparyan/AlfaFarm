@@ -19,8 +19,8 @@ class Profile extends HelperComponent<{}, {}> {
   public render() {
 
     return (
-      <section className="P-G-page P-profile-page">
-        <h1 className="P-G-page-title">{Settings.translations.my_account}</h1>
+      <section className="G-page P-profile-page">
+        <h1 className="G-page-title">{Settings.translations.my_account}</h1>
         <PersonalDataChange />
         {/* <PasswordChange /> */}
       </section>

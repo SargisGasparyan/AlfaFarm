@@ -44,7 +44,7 @@ class Invitation extends HelperPureComponent<RouteComponentProps<IRouteParams>, 
   public render() {
 
     return (
-      <section className="P-G-page">
+      <section className="G-page">
         {Storage.profile ?
           <ConfirmModal onClose={this.home} onConfirm={this.confirm} /> :
           <Login onClose={this.home} />}

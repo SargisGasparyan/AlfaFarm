@@ -87,8 +87,8 @@ class RestoreVerfiy extends HelperComponent<IProps, IState> {
     const { loading, form, submited } = this.state;
 
     return <>
-      <form className="P-G-fields-form">
-        <div className={`P-G-field ${submited && !form.password ? 'P-G-invalid-field' : ''}`}>
+      <form className="G-fields-form">
+        <div className={`G-field ${submited && !form.password ? 'G-invalid-field' : ''}`}>
           <input
             name="password"
             type="password"
@@ -97,7 +97,7 @@ class RestoreVerfiy extends HelperComponent<IProps, IState> {
             onChange={this.change}
           />
         </div>
-        <div className={`P-G-field ${submited && (!form.password || form.password !== form.confirmPassword) ? 'P-G-invalid-field' : ''}`}>
+        <div className={`G-field ${submited && (!form.password || form.password !== form.confirmPassword) ? 'G-invalid-field' : ''}`}>
           <input
             name="confirmPassword"
             type="password"
@@ -109,7 +109,7 @@ class RestoreVerfiy extends HelperComponent<IProps, IState> {
         <LoaderContent
           loading={false}
           onClick={this.submit}
-          className="P-G-form-button"
+          className="G-form-button"
         >
           {Settings.translations.next}
         </LoaderContent>

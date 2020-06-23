@@ -45,16 +45,16 @@ class Proposal extends HelperPureComponent<{}, IState> {
   public render() {
     const { data, loading } = this.state;
 
-    return <section className="P-G-page">
+    return <section className="G-page">
       {data && data.itemList.length ? <>
-        <h2 className="P-G-page-title">{data.name}</h2>
+        <h2 className="G-page-title">{data.name}</h2>
         <div className="P-proposal">
           {data.itemList.map(item => <ProductItem key={item._id} product={item} />)}
         </div>
         {data && data.pagesLeft ? 
         <div
         onClick={this.more}
-        className="P-G-show-action-button"
+        className="G-show-action-button"
       >{Settings.translations.show_all}</div> : null}
       </> : !data ? <PageLoader /> : null}
       {loading ? <PageLoader /> : null}

@@ -103,12 +103,12 @@ class MyAddresses extends HelperComponent<{}, IState> {
         {!!address.apartment && `${address.house ? '/' : ''}${address.apartment}`}
         <div className="P-item-actions">
           <span onClick={() => this.openModifyData(address._id)}><i className="icon-edit" /></span>
-          <span className="P-G-pink" onClick={() => this.delete(address._id)}><i className="icon-delete" /></span>
+          <span className="G-pink" onClick={() => this.delete(address._id)}><i className="icon-delete" /></span>
         </div>
       </h3>
       <h4>
         {address.contactName} &middot; +{address.contactPhoneNumber}
-        {address.isUserDefaultAddress && <> &middot; <span className="P-G-main-color">{Settings.translations.default_address}</span></>}
+        {address.isUserDefaultAddress && <> &middot; <span className="G-main-color">{Settings.translations.default_address}</span></>}
       </h4>
     </div>
   );
@@ -117,12 +117,12 @@ class MyAddresses extends HelperComponent<{}, IState> {
     const { modifyOpen, modifyId, data } = this.state;
 
     return (
-      <section className="P-G-page P-my-addresses-page">
-        <h1 className="P-G-page-title">
+      <section className="G-page P-my-addresses-page">
+        <h1 className="G-page-title">
           {Settings.translations.my_addresses}
           {data && !!data.length && <button onClick={this.openModfiy}>{Settings.translations.add_new_address}</button>}
         </h1>
-        {data ? <div className="P-my-addresses-content P-G-page-min-height">
+        {data ? <div className="P-my-addresses-content G-page-min-height">
           {!!data.length ? data.map(item => <this.AddressItem key={item._id} address={item} />) : <EmptyState
             text={Settings.translations.no_addresses}
             animation={EmptyAddressesJSON}

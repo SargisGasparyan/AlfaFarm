@@ -197,10 +197,10 @@ class ModifyModal extends HelperComponent<IProps, IState> {
     return (
       <Modal onClose={this.closeModal} className="P-company-modify-modal P-modal-static">
         <h2>{id ? Settings.translations.edit_company : Settings.translations.add_company}</h2>
-        <form className="P-G-fields-form">
-          <div className="P-G-field-wrap">
+        <form className="G-fields-form">
+          <div className="G-field-wrap">
             <h4>{Settings.translations.name}</h4>
-            <div className={`P-G-field ${submited && form.name.length < 2 ? 'P-G-invalid-field' : ''}`}>
+            <div className={`G-field ${submited && form.name.length < 2 ? 'G-invalid-field' : ''}`}>
               <input
                 name="name"
                 value={form.name}
@@ -208,9 +208,9 @@ class ModifyModal extends HelperComponent<IProps, IState> {
               />
             </div>
           </div>
-          <div className="P-G-field-wrap">
+          <div className="G-field-wrap">
             <h4>{Settings.translations.tin}</h4>
-            <div className={`P-G-field ${submited && form.tin.length < 8 ? 'P-G-invalid-field' : ''}`}>
+            <div className={`G-field ${submited && form.tin.length < 8 ? 'G-invalid-field' : ''}`}>
               <input
                 name="tin"
                 pattern={phoneFieldPattern}
@@ -221,9 +221,9 @@ class ModifyModal extends HelperComponent<IProps, IState> {
           </div>
           <span className="P-border-line" />
           <h3>{Settings.translations.billing_address}</h3>
-          <div className="P-G-field-wrap">
+          <div className="G-field-wrap">
             <h4>{Settings.translations.address}</h4>
-            <div className={`P-G-field ${submited && !(form.bilLat && form.bilLat !== 0) ? 'P-G-invalid-field' : ''}`}>
+            <div className={`G-field ${submited && !(form.bilLat && form.bilLat !== 0) ? 'G-invalid-field' : ''}`}>
               <Autocomplete
                 id="bil-autocomplete"
                 onPlaceSelected={this.changeBilAddress}
@@ -236,9 +236,9 @@ class ModifyModal extends HelperComponent<IProps, IState> {
               />
             </div>
           </div>
-          <div className="P-G-half-field-wrap">
+          <div className="G-half-field-wrap">
             <h4>{Settings.translations.house}</h4>
-            <div className="P-G-field">
+            <div className="G-field">
               <NumberInput
                 name="bilHouse"
                 value={form.bilHouse}
@@ -246,9 +246,9 @@ class ModifyModal extends HelperComponent<IProps, IState> {
               />
             </div>
           </div>
-          <div className="P-G-half-field-wrap">
+          <div className="G-half-field-wrap">
             <h4>{Settings.translations.apartment_office}</h4>
-            <div className="P-G-field">
+            <div className="G-field">
               <NumberInput
                 name="bilApartment"
                 value={form.bilApartment}
@@ -259,9 +259,9 @@ class ModifyModal extends HelperComponent<IProps, IState> {
           <span className="P-border-line" />
           <h3>{Settings.translations.delivery_address}</h3>
           {form.delAddresses.map((item, index) => <>
-            <div className="P-G-field-wrap">
+            <div className="G-field-wrap">
               <h4>{Settings.translations.address}</h4>
-              <div className={`P-G-field ${submited && !(item.lat && item.lat !== 0) ? 'P-G-invalid-field' : ''}`}>
+              <div className={`G-field ${submited && !(item.lat && item.lat !== 0) ? 'G-invalid-field' : ''}`}>
                 <Autocomplete
                   id={`del-autocomplete${index}`}
                   onPlaceSelected={(place: IGooglePlace) => this.changeDelAddress(place, index)}
@@ -274,9 +274,9 @@ class ModifyModal extends HelperComponent<IProps, IState> {
                 />
               </div>
             </div>
-            <div className="P-G-half-field-wrap">
+            <div className="G-half-field-wrap">
               <h4>{Settings.translations.house}</h4>
-              <div className="P-G-field">
+              <div className="G-field">
                 <NumberInput
                   name="house"
                   value={item.house}
@@ -284,9 +284,9 @@ class ModifyModal extends HelperComponent<IProps, IState> {
                 />
               </div>
             </div>
-            <div className="P-G-half-field-wrap">
+            <div className="G-half-field-wrap">
               <h4>{Settings.translations.apartment_office}</h4>
-              <div className="P-G-field">
+              <div className="G-field">
                 <NumberInput
                   name="apartment"
                   value={item.apartment}
@@ -294,9 +294,9 @@ class ModifyModal extends HelperComponent<IProps, IState> {
                 />
               </div>
             </div>
-            <div className="P-G-field-wrap">
+            <div className="G-field-wrap">
               <h4>{Settings.translations.contact_person}</h4>
-              <div className={`P-G-field ${submited && !item.contactName ? 'P-G-invalid-field' : ''}`}>
+              <div className={`G-field ${submited && !item.contactName ? 'G-invalid-field' : ''}`}>
                 <input
                   name="contactName"
                   value={item.contactName}
@@ -304,9 +304,9 @@ class ModifyModal extends HelperComponent<IProps, IState> {
                 />
               </div>
             </div>
-            <div className="P-G-field-wrap">
+            <div className="G-field-wrap">
               <h4>{Settings.translations.phone_number}</h4>
-              <div className={`P-G-field ${submited && !(item.contactPhoneNumber) ? 'P-G-invalid-field' : ''}`}>
+              <div className={`G-field ${submited && !(item.contactPhoneNumber) ? 'G-invalid-field' : ''}`}>
                 <p>+{countryCode}</p>
                 <input
                   name="contactPhoneNumber"
@@ -321,7 +321,7 @@ class ModifyModal extends HelperComponent<IProps, IState> {
           <h4 className="P-add-other" onClick={this.addDelivery}>{Settings.translations.add_other_address}</h4>
           <LoaderContent
             loading={submitLoading}
-            className="P-G-form-button"
+            className="G-form-button"
             onClick={this.submit}
           >
             {Settings.translations.save}

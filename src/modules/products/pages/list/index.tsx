@@ -167,7 +167,7 @@ class List extends HelperComponent<{}, IState> {
   public render() {
     const { data, filter, categories, tree, loading, promotionMode } = this.state;
     return (
-      <section className="P-G-page P-product-list-page">
+      <section className="G-page P-product-list-page">
         <div className='P-product-page-navigation-wrap'>
           <span className="P-product-page-navigation-item"><Link to='/' className="cascade-link">{Settings.translations.home}<span className="P-product-page-navigation-tool" /></Link></span>
           {tree ? tree.map((item, index) => <div className="P-product-page-navigation-item" key={index}>

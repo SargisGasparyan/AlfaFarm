@@ -95,7 +95,7 @@ class Details extends HelperPureComponent<IProps, IState> {
 
     if (data) {
       return !cancelOpened ? (
-        <Modal onClose={() => onClose()} className="P-order-details P-modal-static P-G-fields-form">
+        <Modal onClose={() => onClose()} className="P-order-details P-modal-static G-fields-form">
           <h2>
             {Settings.translations.order_id} #{data.nid}
             {!active &&
@@ -131,21 +131,21 @@ class Details extends HelperPureComponent<IProps, IState> {
           <h3><span>{Settings.translations.subtotal}</span> {data.subTotal} {currency}</h3>
           {!!data.receivingBonuses && <h3>
             <span>{Settings.translations.receiving_bonus}</span>
-            <p className="P-G-main-color">{data.receivingBonuses}</p>
+            <p className="G-main-color">{data.receivingBonuses}</p>
           </h3>}
           {!!data.points && <h3>
             <span>{Settings.translations.points}</span>
-            <p className="P-G-pink">-{data.points}</p>
+            <p className="G-pink">-{data.points}</p>
           </h3>}
           <h3>
             <span>{Settings.translations.discount}</span>
-            <p className="P-G-pink">{data.discount ? `-${data.discount}` : 0} {currency}</p>
+            <p className="G-pink">{data.discount ? `-${data.discount}` : 0} {currency}</p>
           </h3>
           {!!data.deliveryFee && <h3><span>{Settings.translations.delivery}</span> {data.deliveryFee} {currency}</h3>}
           <hr />
           <h3><span>{Settings.translations.total}</span> <strong>{data.total} {currency}</strong></h3>
-          <Link to={`${ROUTES.CART}?orderId=${data._id}`} className="P-G-form-button" onClick={() => onClose(false)}>{Settings.translations.repeat}</Link>
-          {data.status !== OrderStatusEnum.Finished && data.status !== OrderStatusEnum.Canceled && <button className="P-G-form-button P-G-form-button-transparent" onClick={this.openCancel}>{Settings.translations.canceled}</button>}
+          <Link to={`${ROUTES.CART}?orderId=${data._id}`} className="G-form-button" onClick={() => onClose(false)}>{Settings.translations.repeat}</Link>
+          {data.status !== OrderStatusEnum.Finished && data.status !== OrderStatusEnum.Canceled && <button className="G-form-button G-form-button-transparent" onClick={this.openCancel}>{Settings.translations.canceled}</button>}
         </Modal>
       ) : <Cancel id={data._id} onClose={this.closeCancel} />;
     } else return null;

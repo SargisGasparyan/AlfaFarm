@@ -81,7 +81,7 @@ class RequestModal extends HelperComponent<IProps, IState> {
   private checkForOrder = () => {
     const { type, onlyFilesForm } = this.state;
     if (type === RequestSendTypeEnum.Form) {
-      const invalidFields = document.getElementsByClassName('P-G-invalid-field');
+      const invalidFields = document.getElementsByClassName('G-invalid-field');
       invalidFields.length && scrollIntoView(invalidFields[0]);
   
       const { forms } = this.state;
@@ -127,7 +127,7 @@ class RequestModal extends HelperComponent<IProps, IState> {
           <button onClick={() => this.setType(RequestSendTypeEnum.Form)}>{Settings.translations.form}</button>
           <button onClick={() => this.setType(RequestSendTypeEnum.OnlyFiles)}>{Settings.translations.only_files}</button>
         </div>
-        <form className="P-G-fields-form">
+        <form className="G-fields-form">
           {type === RequestSendTypeEnum.Form ? <>
             {forms.map((item, index) => <RequestItem
               key={index}
@@ -140,7 +140,7 @@ class RequestModal extends HelperComponent<IProps, IState> {
             <button
               onClick={this.addProductRequest}
               disabled={this.disabled}
-              className="P-G-fields-form-add"
+              className="G-fields-form-add"
             >
               <h4>{Settings.translations.add}</h4>
             </button>
@@ -156,7 +156,7 @@ class RequestModal extends HelperComponent<IProps, IState> {
           <LoaderContent
             disabled={type === RequestSendTypeEnum.OnlyFiles && !productRequestFormValid(onlyFilesForm, type)}
             loading={submitLoading}
-            className="P-G-form-button"
+            className="G-form-button"
             onClick={this.submit}
           >
             {Settings.translations.order}

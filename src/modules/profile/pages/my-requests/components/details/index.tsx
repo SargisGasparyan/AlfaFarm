@@ -81,18 +81,18 @@ class RequestDetails extends HelperPureComponent<IProps, IState> {
   private Pricing = ({ product }: { product: IProductListItem }) => {
     if (product.price) {
       if (product.discountedPrice) {
-        return <span className="P-G-pink">
+        return <span className="G-pink">
           {product.discountedPrice} {currency}
           <del>{product.price} {currency}</del>
         </span>;
       }
 
-      return <span className="P-G-pink">
+      return <span className="G-pink">
         {product.price} {currency}
       </span>
     }
 
-    if (product.maxDiscountedPrice && product.minDiscountedPrice) return <span className="P-G-pink">
+    if (product.maxDiscountedPrice && product.minDiscountedPrice) return <span className="G-pink">
       {product.maxDiscountedPrice === product.minDiscountedPrice ?
         <>{product.maxDiscountedPrice} {currency}</> :
         <>{product.minDiscountedPrice}-{product.maxDiscountedPrice} {currency}</>}
@@ -103,7 +103,7 @@ class RequestDetails extends HelperPureComponent<IProps, IState> {
       </del>
     </span>;
 
-    return <span className="P-G-pink">
+    return <span className="G-pink">
       {product.maxPrice === product.minPrice ?
         <>{product.maxPrice} {currency}</> :
         <>{product.minPrice}-{product.maxPrice} {currency}</>}
@@ -150,7 +150,7 @@ class RequestDetails extends HelperPureComponent<IProps, IState> {
     const { data, cancelLoading } = this.state;
 
     return data ? (
-      <Modal onClose={onClose} className="P-request-details P-modal-static P-G-fields-form">
+      <Modal onClose={onClose} className="P-request-details P-modal-static G-fields-form">
         <h2>
           {data.type === RequestSendTypeEnum.Form ?
             Settings.translations.request_forms :
@@ -161,7 +161,7 @@ class RequestDetails extends HelperPureComponent<IProps, IState> {
         <h3><span>{Settings.translations.date}</span> {moment(data.createdDt).fromNow()}</h3>
         <h3><span>{Settings.translations.sender}</span> {getUserName(data)}</h3>
         {data.requestList.map(item => <this.RequestItem key={item._id} request={item} />)}
-        {data.status === RequestPackStatusEnum.Active && <LoaderContent loading={cancelLoading} className="P-G-form-button" onClick={this.cancel}>
+        {data.status === RequestPackStatusEnum.Active && <LoaderContent loading={cancelLoading} className="G-form-button" onClick={this.cancel}>
           Cancel
         </LoaderContent>}
       </Modal>

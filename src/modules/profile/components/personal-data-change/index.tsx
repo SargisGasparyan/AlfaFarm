@@ -112,11 +112,11 @@ class PersonalDataChange extends HelperComponent<{}, IState> {
     const { form, phoneForm, submited, submitLoading, verifyOpen } = this.state;
 
     return (
-      <form className="P-personal-data P-G-fields-form">
+      <form className="P-personal-data G-fields-form">
         <h2>{Settings.translations.personal_data}</h2>
-        <div className="P-G-half-field-wrap">
+        <div className="G-half-field-wrap">
           <h4>{Settings.translations.name}</h4>
-          <div className={`P-G-field ${submited && form.firstName.length < 2 ? 'P-G-invalid-field' : ''}`}>
+          <div className={`G-field ${submited && form.firstName.length < 2 ? 'G-invalid-field' : ''}`}>
             <input
               name="firstName"
               value={form.firstName}
@@ -124,9 +124,9 @@ class PersonalDataChange extends HelperComponent<{}, IState> {
             />
           </div>
         </div>
-        <div className="P-G-half-field-wrap">
+        <div className="G-half-field-wrap">
           <h4>{Settings.translations.surname}</h4>
-          <div className={`P-G-field ${submited && form.lastName.length < 2 ? 'P-G-invalid-field' : ''}`}>
+          <div className={`G-field ${submited && form.lastName.length < 2 ? 'G-invalid-field' : ''}`}>
             <input
               name="lastName"
               value={form.lastName}
@@ -134,9 +134,9 @@ class PersonalDataChange extends HelperComponent<{}, IState> {
             />
           </div>
         </div>
-        <div className="P-G-half-field-wrap">
+        <div className="G-half-field-wrap">
           <h4>{Settings.translations.phone_number}</h4>
-          <div className={`P-G-field ${submited && phoneForm.phoneNumber && !isValidPhone(`${countryCode}${phoneForm.phoneNumber}`) ? 'P-G-invalid-field' : ''}`}>
+          <div className={`G-field ${submited && phoneForm.phoneNumber && !isValidPhone(`${countryCode}${phoneForm.phoneNumber}`) ? 'G-invalid-field' : ''}`}>
            <p>+{countryCode}</p>
             <input
               value={phoneForm.phoneNumber}
@@ -146,9 +146,9 @@ class PersonalDataChange extends HelperComponent<{}, IState> {
           </div>
         </div>
 
-        <div className="P-G-half-field-wrap">
+        <div className="G-half-field-wrap">
           <h4>{Settings.translations.email}</h4>
-          <div className={`P-G-field ${submited && !isValidEmail(form.email)} ? 'P-G-invalid-field' : ''}`}>
+          <div className={`G-field ${submited && !isValidEmail(form.email)} ? 'G-invalid-field' : ''}`}>
             <input
               name="email"
               value={form.email}
@@ -161,7 +161,7 @@ class PersonalDataChange extends HelperComponent<{}, IState> {
           <LoaderContent
             onClick={this.submit}
             loading={submitLoading}
-            className="P-G-form-button"
+            className="G-form-button"
           >
             {Settings.translations.save_changes}
           </LoaderContent>

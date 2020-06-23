@@ -104,14 +104,14 @@ class ModifyListModal extends HelperComponent<IProps, IState> {
     return payerDropdown.length ? (
       <Modal onClose={this.closeModal} className="P-wish-list-modify-modal">
         <h2>{data ? Settings.translations.edit_list : Settings.translations.add_list}</h2>
-        <form className="P-G-fields-form">
-          <div className="P-G-field-wrap">
+        <form className="G-fields-form">
+          <div className="G-field-wrap">
             <h4>{Settings.translations.name}</h4>
-            <div className={`P-G-field ${submited && !form.name ? 'P-G-invalid-field' : ''}`}>
+            <div className={`G-field ${submited && !form.name ? 'G-invalid-field' : ''}`}>
               <input name="name" value={form.name} onChange={this.changeField} />
             </div>
           </div>
-          {!data && <div className="P-G-field-wrap">
+          {!data && <div className="G-field-wrap">
             <h4>{Settings.translations.payer}</h4>
             <Select<string | null>
               options={payerDropdown}
@@ -125,7 +125,7 @@ class ModifyListModal extends HelperComponent<IProps, IState> {
           </div>}
           <LoaderContent
             loading={submitLoading}
-            className="P-G-form-button"
+            className="G-form-button"
             onClick={this.submit}
           >
             {Settings.translations.save}

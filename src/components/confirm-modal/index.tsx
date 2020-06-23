@@ -27,10 +27,10 @@ const ConfirmModal = React.memo(({ onClose, onConfirm }: IProps) => {
 
   return (
     <Modal onClose={close} className="P-confirm-modal">
-      <div className="P-G-fields-form">
+      <div className="G-fields-form">
         <h2>{Settings.translations.are_you_sure}</h2>
         <p>{Settings.translations.confirm_description}</p>
-        <LoaderContent loading={loading} onClick={confirm} className="P-G-form-button">{Settings.translations.confirm}</LoaderContent>
+        <LoaderContent loading={loading} onClick={confirm} className="G-form-button">{Settings.translations.confirm}</LoaderContent>
       </div>
     </Modal>
   );
