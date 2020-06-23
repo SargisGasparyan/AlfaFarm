@@ -81,7 +81,7 @@ class Notifications extends HelperComponent<{}, IState> {
         {notification.title}&nbsp;
         {notification.body}
         <div className="P-item-actions">
-          <span className="P-G-pink" onClick={e => this.delete(e, notification._id)}><i className="icon-delete" /></span>
+          <span className="G-pink" onClick={e => this.delete(e, notification._id)}><i className="icon-delete" /></span>
         </div>
       </h3>
     </div>
@@ -93,9 +93,9 @@ class Notifications extends HelperComponent<{}, IState> {
     const { data, activeDetails } = this.state;
 
     return (
-      <section className="P-G-page P-notifications-page">
-        <h1 className="P-G-page-title">{Settings.translations.notifications}</h1>
-        {data ? <div className="P-notifications-content P-G-page-min-height">
+      <section className="G-page P-notifications-page">
+        <h1 className="G-page-title">{Settings.translations.notifications}</h1>
+        {data ? <div className="P-notifications-content G-page-min-height">
           {!!data.length ? data.map(item => <this.NotificationItem key={item._id} notification={item} />) : <EmptyState
             text={Settings.translations.no_notifications}
             animation={EmptyNotificationsJSON}

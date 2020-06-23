@@ -16,7 +16,7 @@ class WishList extends HelperPureComponent<{}, {}> {
     public render() {
 
     return (
-      <section className="P-G-page P-wish-list-page">
+      <section className="G-page P-wish-list-page">
         {!!Storage.profile ? <UserLists /> : <GuestList />}
       </section>
     );

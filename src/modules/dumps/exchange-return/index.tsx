@@ -15,8 +15,8 @@ class ExchangeReturn extends HelperPureComponent<{}, {}> {
   public render() {
 
     return (
-      <section className="P-G-page P-exchange-return-page">
-        <h1 className="P-G-page-title">{Settings.translations.products_exchange_and_return}</h1>
+      <section className="G-page P-exchange-return-page">
+        <h1 className="G-page-title">{Settings.translations.products_exchange_and_return}</h1>
         <div className="P-content">
           <div
             className="P-image"

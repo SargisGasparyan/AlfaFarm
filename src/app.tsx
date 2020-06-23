@@ -105,7 +105,7 @@ class App extends HelperComponent<{}, IState> {
       <Router history={window.routerHistory}>
         {initialLoading ? <>
           <Header />
-          <section className="P-G-page-content">
+          <section className="G-page-content">
             <Switch>
               {RouteService.subscribeUnauthorized(routes => routes.map(item => <Route
                 exact={true}

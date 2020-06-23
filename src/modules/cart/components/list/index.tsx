@@ -99,7 +99,7 @@ class List extends HelperComponent<IProps, {}> {
           {mainPrice} {currency}&nbsp;
           {!!product.discountedPrice && <del>{cartItem.count / product.step * product.defaultPrice} {currency}</del>} 
         </h3>
-        <h3 className="P-G-pink P-delete" onClick={() => this.removeItem(product.productVersion || product.product)}><i className="icon-delete" /></h3>
+        <h3 className="G-pink P-delete" onClick={() => this.removeItem(product.productVersion || product.product)}><i className="icon-delete" /></h3>
       </div>
     </div>
     </div>
@@ -108,7 +108,7 @@ class List extends HelperComponent<IProps, {}> {
     const { data, chosenItemsList } = this.props;
 
     return (
-      <div className={`P-cart-list P-G-page-min-height ${!data.length ? 'P-empty' : ''} ${chosenItemsList.length ? 'P-has-chosen' : ''}`}>
+      <div className={`P-cart-list G-page-min-height ${!data.length ? 'P-empty' : ''} ${chosenItemsList.length ? 'P-has-chosen' : ''}`}>
         {data.length ? data.filter(product => !!this.findRow(product)).map((item, index) => <this.ProductRow
           key={index}
           product={item}

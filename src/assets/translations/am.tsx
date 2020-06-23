@@ -182,7 +182,7 @@ const deliveryText = <>
   <p>Մենք պատրաստ ենք առաջարկել մեր հաճախորդներին ժամանակակից սպասարկում եւ ծառայություն: Իրականացնում ենք ապրանքի ընդունում եւ առաքում, բեռնում եւ բեռնաթափում,փաթեթավորում: Ինչպես նաեւ առաջարկում ենք առաքման օպտիմալ տարիֆային համակարգ, համաձայն որի ստորեւ նշված գումարից ավել գնումների դեպքում առաքումը կիրականացվի անվճար, հակառակ դեպքում կհաշվարկվի ըստ սահմանված գնացուցակի: Ապրանքի առաքումը կիրականացվի Ձեր կողմից նախօրոք նշված ժամկետներում՝ արագ եւ ապահով, հատուկ բեռնափոխադրման համար նախատեսված մեքենաներով: Մենք երաշխավորում ենք ապրանքի ապահովությունը եւ անվտանգ տեղափոխումը: Ձեր սպասելիքներին չհամապտասխանության դեպքում երաշխավորում ենք ապրանքի, ինչպես նաև վճարված գումարի հետ վերադարձը հինգ աշխատանքային օրվա ընթացքում:</p>
   <h3>Անվճար առաքման համար սահմանված սանդղակ:</h3><br />
 
-  <table className="P-G-simple-table-mobile">
+  <table className="G-simple-table-mobile">
     <tr>
       <td><strong>Առաքման հասցե</strong></td>
       <td><strong>Արժեք (դրամ)</strong></td>
@@ -209,7 +209,7 @@ const deliveryText = <>
     </tr>
   </table><br /> <br />
 
-  <table className="P-G-simple-table">
+  <table className="G-simple-table">
     <tr>
       <td><strong>Առաքման հասցե</strong></td>
       <td><strong>Արժեք (դրամ)</strong></td>
@@ -237,7 +237,7 @@ const deliveryText = <>
   </table><br /> <br />
   <h3>Վճարովի առաքման համար սահմանված սանդղակ:</h3><br />
 
-  <table className="P-G-simple-table-mobile">
+  <table className="G-simple-table-mobile">
     <tr>
       <td><strong>Քաղաք/գյուղ</strong></td>
       <td><strong>Արժեք (դրամ)</strong></td>
@@ -597,7 +597,7 @@ const deliveryText = <>
   </table>
 
 
-  <table className="P-G-simple-table">
+  <table className="G-simple-table">
     <tr>
       <td><strong>Քաղաք/գյուղ</strong></td>
       <td><strong>Արժեք (դրամ)</strong></td>
@@ -1152,6 +1152,7 @@ export default {
   pharmacies: "Դեղատներ",
   clinic: "Կլինիկա",
   blog: "Բլոգ",
+  news: "Նորություններ",
   good_morning: "Բարի լույս",
   good_afternoon: "Ողջույն",
   good_evening: "Բարի երեկո",

@@ -30,7 +30,7 @@ import { promoCodeFieldPattern } from 'platform/services/validator';
 import Connection from 'platform/services/connection';
 import HelperComponent from 'platform/classes/helper-component';
 import CartManager from '../../services/manager';
-import idram from "../../../../assets/images/ic_idram@2x.png"
+import idram from '../../../../assets/images/ic_idram@2x.png';
 import './style.scss';
 
 interface IProps {
@@ -414,7 +414,7 @@ class Checkout extends HelperComponent<IProps, IState> {
     } = this.state;
     return (
       <>
-            <form className="P-G-fields-form P-checkout-form">
+            <form className="G-fields-form P-checkout-form">
         {initialData && <>
           {!submitLoading && <Prompt message={Settings.translations.are_you_sure} />}
           <div className="P-block">
@@ -454,7 +454,7 @@ class Checkout extends HelperComponent<IProps, IState> {
           </div>
           <div className={`P-block ${submited && !form.deliveryDate ? 'P-invalid' : ''}`}>
             <h2>{form.deliveryMethod === OrderDeliveryTypeEnum.PickUp ? Settings.translations.pickup_date : Settings.translations.delivery_date}</h2>
-            <div className="P-G-field P-date-field">
+            <div className="G-field P-date-field">
               <input
                 placeholder={Settings.translations.choose}
                 onClick={this.openDatePicker}
@@ -490,7 +490,7 @@ class Checkout extends HelperComponent<IProps, IState> {
             <h2>{Settings.translations.billing_address}</h2>
             <h3><i className="icon-location" /> {billingAddress}</h3>
           </div>}
-          <div className="P-block P-pricing P-G-fields-form">
+          <div className="P-block P-pricing G-fields-form">
             <h2>{Settings.translations.pricing}</h2>
             <div className="P-payment-methods">
                 <div
@@ -524,9 +524,9 @@ class Checkout extends HelperComponent<IProps, IState> {
             </div>
             
             {Storage.profile && <>
-              <div className={Storage.profile && !!Storage.profile.points ? 'P-G-half-field-wrap' : 'P-G-field-wrap'}>
+              <div className={Storage.profile && !!Storage.profile.points ? 'G-half-field-wrap' : 'G-field-wrap'}>
                 <h4>{Settings.translations.promo_code}</h4>
-                <div className={`P-G-field ${form.promoCode && form.promoCode.length < 8 ? 'P-G-invalid-field' : ''}`}>
+                <div className={`G-field ${form.promoCode && form.promoCode.length < 8 ? 'G-invalid-field' : ''}`}>
                   <input
                     type="text"
                     value={form.promoCode || ''}
@@ -536,9 +536,9 @@ class Checkout extends HelperComponent<IProps, IState> {
                 </div>
               </div>
 
-              {!!Storage.profile.points && <div className="P-G-half-field-wrap">
+              {!!Storage.profile.points && <div className="G-half-field-wrap">
                 <h4>{Settings.translations.i_bonus}</h4>
-                <div className={`P-G-field ${!this.bonusValid ? 'P-G-invalid-field' : ''}`}>
+                <div className={`G-field ${!this.bonusValid ? 'G-invalid-field' : ''}`}>
                   <NumberInput
                     int={true}
                     name="bonus"
@@ -546,13 +546,13 @@ class Checkout extends HelperComponent<IProps, IState> {
                     onChange={this.changeBonus}
                   />
                 </div>
-                <p className="P-G-field-description">{Settings.translations.checkout_i_bonus_can_use(this.maxBonus, Storage.profile.points)}</p>
+                <p className="G-field-description">{Settings.translations.checkout_i_bonus_can_use(this.maxBonus, Storage.profile.points)}</p>
               </div>}
             </>}
           </div>
           <div className="P-block">
             <h2>{Settings.translations.additionally}</h2>
-            <div className="P-G-field P-G-field-textarea">
+            <div className="G-field G-field-textarea">
               <textarea
                 name="additional"
                 onChange={this.changeField}
@@ -564,7 +564,7 @@ class Checkout extends HelperComponent<IProps, IState> {
         {submitLoading ? null : <LoaderContent
           onClick={this.submit}
           loading={submitLoading}
-          className="P-G-form-button"
+          className="G-form-button"
         >{Settings.translations.checkout}</LoaderContent>}
       </form>
 

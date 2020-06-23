@@ -70,7 +70,7 @@ class DatePicker extends HelperComponent<IProps, IState> {
     return (
       <Modal className="P-checkout-date-modal" onClose={this.onClose}>
         <h2>{Settings.translations.delivery_date}</h2>
-        <form className="P-G-fields-form">
+        <form className="G-fields-form">
           <DateTime
             input={false}
             value={value}
@@ -78,7 +78,7 @@ class DatePicker extends HelperComponent<IProps, IState> {
             onChange={this.onDateChange}
           />
           <button
-            className="P-G-form-button"
+            className="G-form-button"
             disabled={this.doneDisabled}
             onClick={this.done}
           >{Settings.translations.done}</button>

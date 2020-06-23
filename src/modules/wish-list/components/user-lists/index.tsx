@@ -81,7 +81,7 @@ class UserLists extends HelperComponent<{}, IState> {
 
     return isFetchData ? (
       <>
-        <h1 className="P-G-page-title">
+        <h1 className="G-page-title">
           {Settings.translations.wish_list}
           {!!data.length && <button onClick={this.openAddList}>{Settings.translations.add_new_list}</button>}
         </h1>
@@ -98,7 +98,7 @@ class UserLists extends HelperComponent<{}, IState> {
             onListUpdate={this.fetchData}
             onEditChoose={this.openEditList}
           />}
-        </> : <div className="P-wish-list-content P-G-page-min-height">
+        </> : <div className="P-wish-list-content G-page-min-height">
           <EmptyState
             animation={WishListAnimationJSON}
             text={Settings.translations.no_lists}

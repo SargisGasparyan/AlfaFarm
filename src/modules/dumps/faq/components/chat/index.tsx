@@ -123,12 +123,12 @@ class Chat extends HelperComponent<{}, IState> {
     return (
       <div className="P-chat">
         <this.Messages />
-        <form className="P-G-fields-form">
+        <form className="G-fields-form">
           <label>
             <input type="file" onChange={this.fileUpload} accept="image/*"/>
             <i className="icon-attach" />
           </label>
-          <div className="P-G-field">
+          <div className="G-field">
             <input
               placeholder={Settings.translations.message}
               value={currentMessage}

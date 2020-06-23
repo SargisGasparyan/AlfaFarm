@@ -114,8 +114,8 @@ class Restore extends HelperComponent<IProps, IState> {
 
     return <>
       {!mobileRestore ? <>
-        <form className="P-G-fields-form">
-          <div className="P-G-field">
+        <form className="G-fields-form">
+          <div className="G-field">
             <input
               name="email"
               type="email"
@@ -128,7 +128,7 @@ class Restore extends HelperComponent<IProps, IState> {
             loading={false}
             disabled={this.disabled()}
             onClick={this.submit}
-            className="P-G-form-button"
+            className="G-form-button"
           >
             {Settings.translations.next}
           </LoaderContent>
@@ -137,8 +137,8 @@ class Restore extends HelperComponent<IProps, IState> {
       </> :
         passwordChangeModal ?
           <>
-            <form className="P-G-fields-form">
-              <div className="P-G-field">
+            <form className="G-fields-form">
+              <div className="G-field">
                 <input
                   name="password"
                   type="password"
@@ -147,7 +147,7 @@ class Restore extends HelperComponent<IProps, IState> {
                   onChange={this.savePassword}
                 />
               </div>
-              <div className="P-G-field">
+              <div className="G-field">
                 <input
                   name="confirm"
                   type="password"
@@ -160,7 +160,7 @@ class Restore extends HelperComponent<IProps, IState> {
                 loading={false}
                 disabled={this.disabled()}
                 onClick={this.confirmPassword}
-                className="P-G-form-button"
+                className="G-form-button"
               >
                 {Settings.translations.next}
               </LoaderContent>
@@ -168,8 +168,8 @@ class Restore extends HelperComponent<IProps, IState> {
           </>
           :
           <>
-            <form className="P-G-fields-form">
-              <div className="P-G-field">
+            <form className="G-fields-form">
+              <div className="G-field">
                 <input
                   name="code"
                   type="text"
@@ -182,7 +182,7 @@ class Restore extends HelperComponent<IProps, IState> {
                 loading={false}
                 disabled={this.disabled()}
                 onClick={this.confirmCode}
-                className="P-G-form-button"
+                className="G-form-button"
               >
                 {Settings.translations.next}
               </LoaderContent>

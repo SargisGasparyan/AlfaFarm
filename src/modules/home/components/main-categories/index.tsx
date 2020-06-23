@@ -56,7 +56,7 @@ class MainCategories extends HelperComponent<{}, IState> {
     const { categories } = this.state;
 
     return categories && categories.length ? <>
-      <h2 className="P-G-page-title">{Settings.translations.categories}</h2>
+      <h2 className="G-page-title">{Settings.translations.categories}</h2>
       <div className="P-home-categories">
         {categories.map((item, index) => <div
           key={item._id}

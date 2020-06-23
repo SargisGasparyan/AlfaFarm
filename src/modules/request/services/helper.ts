@@ -28,8 +28,8 @@ export const productRequestFormValid = (data: IRequestAddModel | null, type: Req
 
 export const requestStatusClass = (status: RequestPackStatusEnum) => {
   switch (status) {
-    case RequestPackStatusEnum.Canceled: return 'P-G-pink';
-    case RequestPackStatusEnum.Finished: return 'P-G-main-color';
+    case RequestPackStatusEnum.Canceled: return 'G-pink';
+    case RequestPackStatusEnum.Finished: return 'G-main-color';
     default: return '';
   }
 }

@@ -30,8 +30,8 @@ class FAQ extends HelperComponent<{}, IState> {
     const { collapsed } = this.state;
 
     return (
-      <section className="P-G-page P-faq-page">
-        <h1 className="P-G-page-title">{Settings.translations.faq}</h1>
+      <section className="G-page P-faq-page">
+        <h1 className="G-page-title">{Settings.translations.faq}</h1>
         <div className="P-content">
           <Chat />
           <div className="P-help-info">

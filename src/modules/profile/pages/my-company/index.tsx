@@ -101,7 +101,7 @@ class MyCompany extends HelperComponent<{}, IState> {
         {company.name}&nbsp;
         <div className="P-item-actions">
           <span onClick={() => this.openModifyData(company._id)}><i className="icon-edit" /></span>
-          <span className="P-G-pink" onClick={() => this.delete(company._id)}><i className="icon-delete" /></span>
+          <span className="G-pink" onClick={() => this.delete(company._id)}><i className="icon-delete" /></span>
         </div>
       </h3>
       <h4>{company.tin} &middot; {company.address}</h4>
@@ -112,12 +112,12 @@ class MyCompany extends HelperComponent<{}, IState> {
     const { modifyOpen, modifyId, data } = this.state;
 
     return (
-      <section className="P-G-page P-my-company-page">
-        <h1 className="P-G-page-title">
+      <section className="G-page P-my-company-page">
+        <h1 className="G-page-title">
           {Settings.translations.my_companies}
           {data && !!data.length && <button onClick={this.openModfiy}>{Settings.translations.add_new_company}</button>}
         </h1>
-        {data ? <div className="P-my-company-content P-G-page-min-height">
+        {data ? <div className="P-my-company-content G-page-min-height">
           {!!data.length ? data.map(item => <this.CompanyItem key={item._id} company={item} />) : <EmptyState
             text={Settings.translations.no_companies}
             animation={CompanyAnimationJSON}

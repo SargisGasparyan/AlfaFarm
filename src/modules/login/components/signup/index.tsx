@@ -164,10 +164,10 @@ class SignUp extends HelperComponent<IProps, IState> {
     const { loading, form, phoneVerification, createPassword, createPasswords } = this.state;
 
     return <>
-      <form className="P-G-fields-form">
+      <form className="G-fields-form">
         {phoneVerification ?
           <>
-            <div className="P-G-field">
+            <div className="G-field">
               <input
                 name="code"
                 type="text"
@@ -180,14 +180,14 @@ class SignUp extends HelperComponent<IProps, IState> {
             </div>
             <button
               onClick={this.submitVerification}
-              className="P-G-form-button"
+              className="G-form-button"
             >
               {Settings.translations.next}
             </button>
           </>
           : createPassword ? 
             <>
-             <div className="P-G-field">
+             <div className="G-field">
                <input
                  name="code"
                  type="password"
@@ -197,7 +197,7 @@ class SignUp extends HelperComponent<IProps, IState> {
  
                />
              </div>
-             <div className="P-G-field">
+             <div className="G-field">
                <input
                  name="email"
                  type="password"
@@ -211,13 +211,13 @@ class SignUp extends HelperComponent<IProps, IState> {
               loading={false}
               disabled={this.disabled()}
               onClick={this.completeSignUp}
-              className="P-G-form-button"
+              className="G-form-button"
             >
               {Settings.translations.next}
             </LoaderContent>
             </>
           :<>
-            <div className="P-G-field">
+            <div className="G-field">
               <input
                 name="email"
                 type="email"
@@ -226,7 +226,7 @@ class SignUp extends HelperComponent<IProps, IState> {
                 onChange={this.change}
               />
             </div>
-            <label className="P-G-form-checkbox">
+            <label className="G-form-checkbox">
               <CheckBox onChange={this.toggleConfirm} />
               <h3>{Settings.translations.sign_up_confirm}</h3>
             </label>
@@ -234,7 +234,7 @@ class SignUp extends HelperComponent<IProps, IState> {
               loading={false}
               disabled={this.disabled()}
               onClick={this.submit}
-              className="P-G-form-button"
+              className="G-form-button"
             >
               {Settings.translations.next}
             </LoaderContent>

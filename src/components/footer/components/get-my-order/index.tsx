@@ -72,10 +72,10 @@ class GetMyOrder extends HelperComponent<IProps, IState> {
       <Modal onClose={onClose} className="P-get-my-order-modal">
         <h2>{Settings.translations.get_my_order}</h2>
         <p>{Settings.translations.get_my_order_text}</p>
-        <form className="P-G-fields-form">
-          <div className="P-G-field-wrap">
+        <form className="G-fields-form">
+          <div className="G-field-wrap">
             <h4>{Settings.translations.email}</h4>
-            <div className={`P-G-field ${submited && !isValidEmail(form.email) ? 'P-G-invalid-field' : ''}`}>
+            <div className={`G-field ${submited && !isValidEmail(form.email) ? 'G-invalid-field' : ''}`}>
               <input
                 name="email"
                 value={form.email}
@@ -83,9 +83,9 @@ class GetMyOrder extends HelperComponent<IProps, IState> {
               />
             </div>
           </div>
-          <div className="P-G-field-wrap">
+          <div className="G-field-wrap">
             <h4>{Settings.translations.code}</h4>
-            <div className={`P-G-field ${submited && !form.code ? 'P-G-invalid-field' : ''}`}>
+            <div className={`G-field ${submited && !form.code ? 'G-invalid-field' : ''}`}>
               <input
                 name="code"
                 value={form.code}
@@ -96,7 +96,7 @@ class GetMyOrder extends HelperComponent<IProps, IState> {
           <LoaderContent
             loading={submitLoading}
             onClick={this.submit}
-            className="P-G-form-button"
+            className="G-form-button"
           >
             {Settings.translations.ok}
           </LoaderContent>

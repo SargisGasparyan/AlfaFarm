@@ -44,13 +44,13 @@ class ProductItem extends HelperPureComponent<IProps, IState> {
 
     return <>
       <div className="P-product-item" onClick={this.onOpen}>
-        {!!product.maxDiscount && <span className="P-G-discount-label">{product.sameDiscount ? '-' : <i className="icon-back" />}{product.maxDiscount}%</span>}
+        {!!product.maxDiscount && <span className="G-discount-label">{product.sameDiscount ? '-' : <i className="icon-back" />}{product.maxDiscount}%</span>}
         <div style={{ background: `url(${product.imagePath}) center/contain no-repeat` }} className="P-image" />
         <h3>{product.name}</h3>
         <Pricing details={product} />
         {(!!product.minBonus || !!product.preparingDayCount) && <h4>
           {!!product.minBonus && <>
-            <span className="P-G-info-span">i</span>
+            <span className="G-info-span">i</span>
             <span className="P-bonus-text">{product.minBonus === product.maxBonus ? `${product.minBonus}%` : `${product.minBonus}-${product.maxBonus} %`}</span>
           </>}
           {!!product.preparingDayCount && <><i className="icon-products P-preparing-days" /> {product.preparingDayCount} {Settings.translations.days}</>}

@@ -173,9 +173,9 @@ class Cart extends HelperComponent<{}, IState> {
   public render() {
     const { data, priceData, companies, loading } = this.state;
     return (
-      <section className="P-G-page P-cart-page">
+      <section className="G-page P-cart-page">
         {data ? <>
-          <h1 className="P-G-page-title">
+          <h1 className="G-page-title">
             {Settings.translations.cart}
             
             {!!this.chosenItemsList.length && (

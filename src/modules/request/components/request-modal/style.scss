@@ -9,7 +9,7 @@
   margin-bottom       : $page-vertical-offset;
 
   > div > h2 { margin-bottom : 50px }
-  > div > .P-G-fields-form > p { width: 100%; }
+  > div > .G-fields-form > p { width: 100%; }
   > div > .P-choose-request-type {
 
     display       : flex;
@@ -70,14 +70,14 @@
 
   > div > p { font-size: $normal-fs; }
 
-  .P-G-form-button {
+  .G-form-button {
   
     width      : auto;
     padding    : 0 40px;
     margin-top : 40px;
   }
 
-  button.P-G-fields-form-add {
+  button.G-fields-form-add {
    
     font-size: 100%;
     font-family: inherit;

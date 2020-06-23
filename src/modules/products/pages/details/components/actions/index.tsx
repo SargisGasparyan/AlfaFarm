@@ -370,13 +370,13 @@ class Actions extends HelperPureComponent<IProps, IState> {
           chosen={chosenAttributes}
           toggleAttribute={this.toggleAttribute}
         />}
-        <form className="P-G-fields-form">
+        <form className="G-fields-form">
           <CountInput step={details.step} min={details.minCount} onChange={this.changeCount} />
           <LoaderContent
             type="button"
             loading={false}
             disabled={!countValid}
-            className="P-G-form-button P-add-to-cart"
+            className="G-form-button P-add-to-cart"
             onClick={this.addToCart}
           >{this.state.added === true ? <span><i className="icon-tick" /> {Settings.translations.added}</span>
             : window.innerWidth < 1600 && window.innerWidth > 1250
@@ -385,10 +385,10 @@ class Actions extends HelperPureComponent<IProps, IState> {
           <i className="icon-cart icon-cart-mobile" onClick={this.addToCart} />
           <button
             type="button"
-            className="P-G-form-button P-add-to-list"
+            className="G-form-button P-add-to-list"
             onClick={Storage.profile ? this.openChangeListModal : this.modifyList}
-          ><i className={isFavorite ? 'icon-wishlist_01 P-G-pink' : 'icon-wishlist'} /> {Settings.translations.lists}</button>
-          <i className={`icon-wishlist-mobile ${isFavorite ? 'icon-wishlist_01 P-G-pink ' : 'icon-wishlist'}`}
+          ><i className={isFavorite ? 'icon-wishlist_01 G-pink' : 'icon-wishlist'} /> {Settings.translations.lists}</button>
+          <i className={`icon-wishlist-mobile ${isFavorite ? 'icon-wishlist_01 G-pink ' : 'icon-wishlist'}`}
             onClick={Storage.profile ? this.openChangeListModal : this.modifyList} />
         </form>
         <AdditionalSales details={details} />

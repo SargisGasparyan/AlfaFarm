@@ -159,7 +159,7 @@ const deliveryText = <>
   <p>Мы предлагаем нашим клиентам современный сервис и обслуживание. Мы осуществляем прием продукции и доставку, погрузку и разгрузку, упаковку. Мы также предлагаем доставку с оптимальной тарифной системой, в рамках которой закупки превышающие сумму, установленную ниже будут доставлены бесплатно, в противном случае будет рассчитываться в соответствии с прайс-листом. Продукт будет поставляться в сроки, указанные Вами заранее, быстро и надежно, специальнымы машинамы. Мы гарантируем безопасность продукта и безопасной транспортировки. Если продукт не соответствует вашим  ожиданиям, мы гарантируем возврат продукта, а также возврат уплаченной суммы в течение пяти рабочих дней.</p>
 
   <h3>Шкала бесплатной доставки</h3><br />
-  <table className="P-G-simple-table">
+  <table className="G-simple-table">
     <tr>
       <td><strong>Адрес  доставки</strong></td>
       <td><strong>Стоимость покупки (драм)</strong></td>
@@ -186,7 +186,7 @@ const deliveryText = <>
     </tr>
   </table><br /> <br />
 
-  <table className="P-G-simple-table-mobile">
+  <table className="G-simple-table-mobile">
     <tr>
       <td><strong>Адрес  доставки</strong></td>
       <td><strong>Стоимость покупки (драм)</strong></td>
@@ -215,7 +215,7 @@ const deliveryText = <>
   
 
   <h3>Установленный прейслист доставок</h3><br />
-  <table className="P-G-simple-table-mobile">
+  <table className="G-simple-table-mobile">
     <tr>
       <td><strong>Город/ село</strong></td>
       <td><strong>Стоимость доставки /драм/</strong></td>
@@ -570,7 +570,7 @@ const deliveryText = <>
     </tr>
   </table>
 
-  <table className="P-G-simple-table">
+  <table className="G-simple-table">
     <tr>
       <td><strong>Город/ село</strong></td>
       <td><strong>Стоимость доставки /драм/</strong></td>
@@ -1122,6 +1122,7 @@ export default {
   pharmacies: "Аптеки",
   clinic: "Клиника",
   blog: "Блог",
+  news: "Новости",
   good_morning: "Доброе утро",
   good_afternoon: "Добрый день",
   home: "Домашняя страница",

@@ -72,8 +72,8 @@ class SignIn extends HelperComponent<IProps, IState> {
     const { form, loading, passwordShown } = this.state;
 
     return <>
-      <form className="P-G-fields-form">
-        <div className="P-G-field">
+      <form className="G-fields-form">
+        <div className="G-field">
           <input
             name="email"
             type="email"
@@ -82,7 +82,7 @@ class SignIn extends HelperComponent<IProps, IState> {
             onChange={this.change}
           />
         </div>
-        <div className="P-G-field">
+        <div className="G-field">
           <input
             name="password"
             type={passwordShown ? 'text' : 'password'}
@@ -97,7 +97,7 @@ class SignIn extends HelperComponent<IProps, IState> {
           loading={false}
           disabled={this.disabled()}
           onClick={this.submit}
-          className="P-G-form-button"
+          className="G-form-button"
         >
           {Settings.translations.log_in}
         </LoaderContent>

@@ -93,7 +93,7 @@ private checkForSend = async () => {
     const { submitted, submitLoading, form } = this.state;
 
     return (
-      <section className="P-G-page P-business-page">
+      <section className="G-page P-business-page">
         <div className="business-page-structure">
         <div className="P-content left-bar">
             <div
@@ -105,16 +105,16 @@ private checkForSend = async () => {
             </div>
           </div>
           <div className="P-content right-bar">
-            <h1 className="P-G-page-title">{Settings.translations.become_partner}</h1>
+            <h1 className="G-page-title">{Settings.translations.become_partner}</h1>
             <span className="right-bar-text">
               {Settings.translations.businnes_description}
             </span>
             <div className="become-partner-form">
-              <form className="P-G-fields-form P-contact-form">
+              <form className="G-fields-form P-contact-form">
 
-                <div className="P-G-field-wrap">
+                <div className="G-field-wrap">
                 <h4>{Settings.translations.company_name}</h4>
-                <div className={`P-G-field ${submitted && !form.name ? 'P-G-invalid-field' : ''}`}>
+                <div className={`G-field ${submitted && !form.name ? 'G-invalid-field' : ''}`}>
                   <input
                     type="text"
                     name="name" 
@@ -122,9 +122,9 @@ private checkForSend = async () => {
                   />
                   </div>
                 </div>
-                <div className="P-G-field-wrap">
+                <div className="G-field-wrap">
                 <h4>{Settings.translations.contact_person}</h4>
-                <div className={`P-G-field ${submitted && !form.contactperson ? 'P-G-invalid-field' : ''}`}>
+                <div className={`G-field ${submitted && !form.contactperson ? 'G-invalid-field' : ''}`}>
                   <input
                     type="text"
                     name="contactperson" 
@@ -132,9 +132,9 @@ private checkForSend = async () => {
                   />
                   </div>
                 </div>
-                <div className="P-G-field-wrap">
+                <div className="G-field-wrap">
                 <h4>{Settings.translations.phone_number}</h4>
-                <div className={`P-G-field ${submitted && !isValidPhoneOnly(form.phoneNumber) ? 'P-G-invalid-field' : ''}`}>
+                <div className={`G-field ${submitted && !isValidPhoneOnly(form.phoneNumber) ? 'G-invalid-field' : ''}`}>
                   <input
                     type="text"
                     name="phoneNumber" 
@@ -142,9 +142,9 @@ private checkForSend = async () => {
                   />
                   </div>
                 </div>
-                <div className="P-G-field-wrap">
+                <div className="G-field-wrap">
                 <h4>{Settings.translations.email}</h4>
-                <div className={`P-G-field ${submitted && !isValidEmail(form.email) ? 'P-G-invalid-field' : ''}`}>
+                <div className={`G-field ${submitted && !isValidEmail(form.email) ? 'G-invalid-field' : ''}`}>
                   <input
                     type="email"
                     name="email" 
@@ -152,9 +152,9 @@ private checkForSend = async () => {
                   />
                   </div>
                 </div>
-                <div className="P-G-field-wrap">
+                <div className="G-field-wrap">
                   <h4>{Settings.translations.message}</h4>
-                  <div className={`P-G-field P-G-field-textarea ${submitted && !form.message ? 'P-G-invalid-field' : ''}`}>
+                  <div className={`G-field G-field-textarea ${submitted && !form.message ? 'G-invalid-field' : ''}`}>
                     <textarea
                       name="message"
                       onChange={this.change}
@@ -166,7 +166,7 @@ private checkForSend = async () => {
                 </span>
                 <LoaderContent
                   loading={submitLoading}
-                  className="P-G-form-button"
+                  className="G-form-button"
                   onClick={this.send}
                 >
                   {Settings.translations.send_request}

@@ -62,7 +62,7 @@ class Promotions extends HelperPureComponent<{}, IState> {
     const { data, loading } = this.state;
 
     return data && data.itemList.length ? <>
-      <h2 className="P-G-page-title">{Settings.translations.promotions}</h2>
+      <h2 className="G-page-title">{Settings.translations.promotions}</h2>
       <Slider
         className="variable-width P-promotions"
         infinite={true}

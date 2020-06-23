@@ -40,7 +40,7 @@ class Proposal extends HelperPureComponent<{}, IState> {
     const { data } = this.state;
 
     return data && data.itemList.length ? <>
-      <h2 className="P-G-page-title">
+      <h2 className="G-page-title">
         {data.name}
       </h2>
       <div className={`P-proposal ${data.pagesLeft ? 'P-proposal-more-one' : ''}`}>
@@ -48,7 +48,7 @@ class Proposal extends HelperPureComponent<{}, IState> {
       </div>
       {data.pagesLeft && <Link
         to={ROUTES.PRODUCTS.PROPOSAL}
-        className="P-G-show-action-button"
+        className="G-show-action-button"
       >{Settings.translations.show_all}</Link>}
     </> : null;
   }

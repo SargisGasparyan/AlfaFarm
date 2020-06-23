@@ -59,8 +59,8 @@ class AboutUs extends HelperPureComponent<{}, IState> {
   public render() {
 
     return (
-      <section className="P-G-page P-about-page">
-        <h1 className="P-G-page-title">{Settings.translations.about_us}</h1>
+      <section className="G-page P-about-page">
+        <h1 className="G-page-title">{Settings.translations.about_us}</h1>
         <div className="P-about-page-content">
           <PageLeftMenu items={this.menuItems} onChange={this.changePage} />
           <div className="P-content">

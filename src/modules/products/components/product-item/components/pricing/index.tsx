@@ -9,7 +9,7 @@ interface IProps { details: IProductListItem; };
 
 const Pricing = React.memo(({ details }: IProps) => (
   <div className="P-pricing P-product-list-pricing">
-    <h3 className={details.discounted ? 'P-G-pink' : ''}>
+    <h3 className={details.discounted ? 'G-pink' : ''}>
       {details.maxPrice === details.minPrice ?
         <>{details.maxPrice} {currency}</> :
         <>{details.minPrice}-{details.maxPrice} {currency}</>}

@@ -78,7 +78,7 @@ class GuestList extends HelperComponent<{}, IState> {
         {product.discountedPrice || product.defaultPrice} {currency}&nbsp;
         {!!product.discountedPrice && <del>{product.defaultPrice} {currency}</del>}
       </h3>
-      <h3 className="P-G-pink P-delete" onClick={e => this.deleteItem(e, product.versionId || product.productId)}><i className="icon-delete" /></h3>
+      <h3 className="G-pink P-delete" onClick={e => this.deleteItem(e, product.versionId || product.productId)}><i className="icon-delete" /></h3>
     </Link>
   );
 
@@ -86,12 +86,12 @@ class GuestList extends HelperComponent<{}, IState> {
     const { data } = this.state;
     
     return data ? <>
-      <h1 className="P-G-page-title">
+      <h1 className="G-page-title">
         {Settings.translations.wish_list}
         {!!data.length && <button onClick={this.addToCart}>{Settings.translations.add_to_cart}</button>}
       </h1>
 
-      <div className="P-wish-list-content P-wish-list-guest P-G-page-min-height">
+      <div className="P-wish-list-content P-wish-list-guest G-page-min-height">
         {data.length ? data.map((item, index) => <this.ProductRow
           key={index}
           product={item}

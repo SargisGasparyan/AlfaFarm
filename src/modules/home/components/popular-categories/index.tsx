@@ -29,7 +29,7 @@ class PopularCategories extends HelperPureComponent<{}, IState> {
     const { data } = this.state;
 
     return (<div className={`${!data ? 'no-item' : ''}`}>
-      <h2 className="P-G-page-title">{Settings.translations.popular_categories}</h2>
+      <h2 className="G-page-title">{Settings.translations.popular_categories}</h2>
       {data && data.length ? <>
         <Slider
           className="variable-width P-popular-categories"

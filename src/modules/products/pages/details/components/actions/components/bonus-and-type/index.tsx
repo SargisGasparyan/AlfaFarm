@@ -13,7 +13,7 @@ const BonusAndType = React.memo(({ details }: IProps) => {
   const bonusPriceRange = <>{details.minBonusAmount}-{details.maxBonusAmount} {Settings.translations.i_bonus}</>;
 
   return details.bonus ? <div className="P-bonus-and-type">
-    <span className="P-G-info-span">i</span>
+    <span className="G-info-span">i</span>
     <h4>{details.bonus}% / {details.minBonusAmount === details.maxBonusAmount || details.bonusAmount ? bonusPrice : bonusPriceRange}</h4>
     
     {!!details.preparingDayCount && <>

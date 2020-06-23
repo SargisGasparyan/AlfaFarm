@@ -54,11 +54,11 @@ class Cancel extends HelperComponent<IProps, IState> {
     return (
       <Modal onClose={() => onClose(false)} className="P-order-cancel-modal">
         <h2>{Settings.translations.reason}</h2>
-        <form className="P-G-fields-form">
-          <div className="P-G-field P-G-field-textarea">
+        <form className="G-fields-form">
+          <div className="G-field G-field-textarea">
             <textarea placeholder={Settings.translations.write} onChange={this.changeReason} />
           </div>
-          <LoaderContent loading={submitLoading} className="P-G-form-button" onClick={this.submit}>
+          <LoaderContent loading={submitLoading} className="G-form-button" onClick={this.submit}>
             {Settings.translations.confirm}
           </LoaderContent>
         </form>

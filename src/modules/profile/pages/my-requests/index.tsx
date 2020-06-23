@@ -158,11 +158,11 @@ class MyRequests extends HelperPureComponent<{}, IState> {
     const data = chosen === RequestTypeEnum.Active ? activeData : completedData;
 
     return (
-      <section className="P-G-page P-my-requests-page">
-        <h1 className="P-G-page-title">{Settings.translations.my_requests}</h1>
+      <section className="G-page P-my-requests-page">
+        <h1 className="G-page-title">{Settings.translations.my_requests}</h1>
         <div className="P-page-content">
           <PageLeftMenu items={this.menuItems} onChange={this.changePage} />
-          {!loading || data ? <div className="P-content P-G-page-min-height">
+          {!loading || data ? <div className="P-content G-page-min-height">
             <this.Content />
           </div> : <PageLoader />}
         </div>

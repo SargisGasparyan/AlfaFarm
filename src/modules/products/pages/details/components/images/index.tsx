@@ -103,7 +103,7 @@ class Images extends HelperComponent<IProps, IState> {
           </span>}
         </div>
         <div className="P-current-image">
-          {!!details.discount && <span className="P-G-discount-label">-{details.discount}%</span>}
+          {!!details.discount && <span className="G-discount-label">-{details.discount}%</span>}
           <div style={{ backgroundImage: `url("${choosedImage.path}")` }} className="P-zoomable-image" onMouseMove={this.zoom}>
             <img src={choosedImage.path} />
           </div>

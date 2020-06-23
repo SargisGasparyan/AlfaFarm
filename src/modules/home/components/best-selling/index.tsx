@@ -38,7 +38,7 @@ class BestSelling extends HelperPureComponent<{}, IState> {
     const { data } = this.state;
 
     return  <>
-      <h2 className="P-G-page-title">
+      <h2 className="G-page-title">
         {/* {Settings.translations.best_selling} */}
         {Settings.translations.new_products}
       </h2>
@@ -51,7 +51,7 @@ class BestSelling extends HelperPureComponent<{}, IState> {
       </div>
       {data && data.pagesLeft && <Link
         to={`${ROUTES.PRODUCTS.LIST}?sort=${ProductSortEnum.DateNewToOld}`}
-        className="P-G-show-action-button"
+        className="G-show-action-button"
       >{Settings.translations.show_all}</Link>}
     </> ;
   }

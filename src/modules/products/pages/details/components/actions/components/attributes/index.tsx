@@ -29,7 +29,7 @@ const Attributes = React.memo(({ submited, details, toggleAttribute, chosen }: I
       const chosenAttribute = chosen.find(elem => elem.attribute === item);
 
       return <div key={item}>
-        <h3 className={submited && !chosenAttribute ? 'P-G-invalid-text' : ''}>{attribute.name}: {chosenAttribute ? chosenAttribute.displayName : ''}</h3>
+        <h3 className={submited && !chosenAttribute ? 'G-invalid-text' : ''}>{attribute.name}: {chosenAttribute ? chosenAttribute.displayName : ''}</h3>
         {attribute.type === ProductAttributeTypeEnum.Usual 
         ? 
         <UsualAttributes
