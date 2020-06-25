@@ -1112,6 +1112,7 @@ export default {
   sign_up_confirm: <>I agree with <a target="_blank" role="noreferrer" href={ROUTES.EXCHANGE_RETURN}>Terms &amp; conditions</a> and <a target="_blank" role="noreferrer" href={ROUTES.CONFIDENTIALITY_CONDITIONS}>Privacy policy</a></>,
   reason: "Reason",
   show_more: "Show more",
+  read_more: "Read more",
   promo_code: "Promo code",
   apply: "Apply",
   additional_sale_label: (fromCount: number) => `Buy ${fromCount} and more,`,

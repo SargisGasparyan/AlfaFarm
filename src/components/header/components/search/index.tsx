@@ -37,7 +37,7 @@ class Search extends HelperComponent<IProps, IState> {
         />
         
         <button>
-          <i className="icon-search" />
+          <i className="icon-Group-5502" />
         </button>
       </form>
     );

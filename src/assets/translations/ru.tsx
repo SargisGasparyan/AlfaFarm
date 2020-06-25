@@ -1113,6 +1113,7 @@ export default {
   sign_up_confirm: <>Я согласен с <a target="_blank" role="noreferrer" href={ROUTES.EXCHANGE_RETURN}>тезоми</a> и <a target="_blank" role="noreferrer" href={ROUTES.CONFIDENTIALITY_CONDITIONS}>условиями</a></>,
   reason: "Причина",
   show_more: "Показать больше",
+  read_more: "Читать далее",
   promo_code: "Промокод",
   apply: "Применять",
   additional_sale_label: (fromCount: number) => `Купите ${fromCount} и больше,`,
