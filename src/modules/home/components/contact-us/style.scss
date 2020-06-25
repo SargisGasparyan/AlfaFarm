@@ -1,0 +1,70 @@
+@import 'src/assets/styles/helper';
+@import 'src/assets/styles/variables';
+
+.P-home-contact-us {
+
+  display        : flex;
+  flex-direction : column;
+
+  > .P-shadow-text {
+
+    margin-bottom : 150px;
+  }
+
+  > .P-maps {
+    width  : calc(100% + #{2 * $page-horizontal-offset});
+    height : 500px;
+    margin : 150px 0 0 (-$page-horizontal-offset);
+    border : 0;
+  }
+ 
+  > .P-bottom {
+    padding-top     : 30px; // 30px = 50px - 20px child vertical offset;
+    display         : flex;
+    justify-content : space-between;
+
+    > div {
+      flex            : 1;
+      color           : $text-gray;
+      margin          : 20px;
+      cursor          : pointer;
+      display         : flex;
+      align-items     : center;
+      flex-direction  : column;
+
+      &:hover { color: $main-color; }
+
+      > i { font-size: 70px; }
+
+      > h3 {
+        font-size      : $normal-fs;
+        margin-top     : 10px;
+        text-transform : uppercase;
+        @include bold-font();
+      }
+    }
+  }
+}
+
+.P-contact-us-about-modal .P-modal-content > div {
+  color          : $main-color;
+  padding        : 30px;
+  display        : flex;
+  align-items    : center;
+  flex-direction : column;
+  
+  > i { font-size: 70px; }
+
+  > h3 {
+    font-size      : $normal-fs;
+    margin-top     : 10px;
+    text-transform : uppercase;
+    @include bold-font();
+  }
+
+  > p {
+    color       : black;
+    margin-top  : 30px;
+    line-height : 40px;
+  }
+}

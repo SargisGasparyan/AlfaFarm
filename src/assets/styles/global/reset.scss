@@ -27,9 +27,10 @@
   &:hover { background: $text-gray; }
 }
 
-input:-webkit-autofill,
-select:-webkit-autofill,
-textarea:-webkit-autofill { box-shadow: 0 0 0 1000px #FFF inset; }
+input, select, textarea {
+  &:-webkit-autofill { box-shadow: 0 0 0 1000px #FFF inset; }
+  &::placeholder { color: $light-gray; }
+}
 
 input[type=file] { display: none; }
 
