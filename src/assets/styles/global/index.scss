@@ -305,6 +305,7 @@
 // #region Colors
 
 .G-white-color { color: white; }
+.G-orange-color { color: $orange; }
 .G-main-background-color { background-color: $main-color; }
 
 // #endregion Colors
@@ -342,6 +343,16 @@
   font-size     : $normal-fs;
   background    : $main-color;
   border-radius : 30px;
+}
+
+.G-main-ghost-button {
+  color         : $main-color;
+  cursor        : pointer;
+  border        : 2px solid $main-color;
+  padding       : 5px 30px;;
+  font-size     : $normal-fs;
+  background    : transparent;
+  border-radius : 20px;
 }
 
 // #endregion Forms

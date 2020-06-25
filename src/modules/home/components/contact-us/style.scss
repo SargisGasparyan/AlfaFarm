@@ -1,26 +1,25 @@
 @import 'src/assets/styles/helper';
 @import 'src/assets/styles/variables';
 
-.P-home-contact-us {
+.G-page.P-home-contact-us {
 
   display        : flex;
+  padding-top    : 100px;
   flex-direction : column;
 
-  > .P-shadow-text {
-
-    margin-bottom : 150px;
-  }
+  > .P-shadow-text { margin-bottom: 130px; }
 
   > .P-maps {
     width  : calc(100% + #{2 * $page-horizontal-offset});
     height : 500px;
-    margin : 150px 0 0 (-$page-horizontal-offset);
+    margin : 130px 0 0 (-$page-horizontal-offset);
     border : 0;
   }
  
   > .P-bottom {
-    padding-top     : 30px; // 30px = 50px - 20px child vertical offset;
     display         : flex;
+    flex-wrap       : wrap;
+    padding-top     : 30px; // 30px = 50px - 20px child vertical offset;
     justify-content : space-between;
 
     > div {
@@ -66,5 +65,16 @@
     color       : black;
     margin-top  : 30px;
     line-height : 40px;
+  }
+
+  > .P-download-images {
+    display         : flex;
+    margin-top      : 30px;
+    justify-content : space-around;
+
+    > img {
+      width  : 150px;
+      margin : 0 20px;
+    }
   }
 }
