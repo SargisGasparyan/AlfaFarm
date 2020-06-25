@@ -1116,6 +1116,7 @@ export default {
   read_more: "Читать далее",
   promo_code: "Промокод",
   apply: "Применять",
+  discounted_products: "Продукты со скидкой",
   additional_sale_label: (fromCount: number) => `Купите ${fromCount} и больше,`,
   checkout_i_bonus_can_use: (bonus: number, points: number): string => `Вы можете использовать ${bonus} ${Settings.translations.i_bonus} из вашей ${points}`,
   receiving_bonus: "Полученный iBonus",

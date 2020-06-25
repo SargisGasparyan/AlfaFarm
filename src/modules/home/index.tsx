@@ -3,8 +3,9 @@ import ROUTES from 'platform/constants/routes';
 import { byRoute } from 'platform/decorators/routes';
 
 import HelperComponent from 'platform/classes/helper-component';
-import ContactUs from './components/contact-us';
+import DiscountedProducts from './components/discounted-products';
 import News from './components/news';
+import ContactUs from './components/contact-us';
 
 import './style.scss';
 
@@ -28,6 +29,7 @@ class Home extends HelperComponent<{}, {}> {
 
     return (
       <section className="P-home-page">
+        <DiscountedProducts />
         <News />
         <ContactUs />
       </section>

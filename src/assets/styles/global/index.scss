@@ -9,15 +9,15 @@
 
   .G-page-title {
 
+    color           : $main-color;
     width           : 100%;
     height          : auto;
     margin          : 0;
-    display         : flex;
-    font-size       : 24px;
+    font-size       : 36px;
     min-height      : $page-title-size;
-    padding-bottom  : 40px;
-    justify-content : space-between;
-    
+    text-align      : center;
+    padding-bottom  : 80px;
+    @include bold-font();
 
     > button, .P-button {
 
@@ -207,7 +207,6 @@
 
 .G-number-list { list-style-type: decimal; }
 .G-pink { color: $pink !important; }
-.G-main-color { color: $main-color !important; }
 
 .G-discount-label {
 
@@ -304,6 +303,7 @@
 
 // #region Colors
 
+.G-main-color { color: $main-color !important; }
 .G-white-color { color: white; }
 .G-orange-color { color: $orange; }
 .G-main-background-color { background-color: $main-color; }
@@ -339,8 +339,9 @@
 }
 
 .G-main-button {
+  color         : white;
+  border        : 0;
   padding       : 15px;
-  font-size     : $normal-fs;
   background    : $main-color;
   border-radius : 30px;
 }

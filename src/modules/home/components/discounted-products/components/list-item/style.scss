@@ -1,0 +1,45 @@
+@import 'src/assets/styles/helper';
+@import 'src/assets/styles/variables';
+
+.P-home-discounted-products-list-item {
+  width          : 300px;
+  margin         : 40px;
+  display        : flex;
+  padding        : 10px 30px 30px;
+  overflow       : hidden;
+  box-shadow     : $default-block-shadow;
+  background     : white;
+  border-radius  : 10px;
+  flex-direction : column;
+
+  > .P-image {
+    width   : 100%;
+    height  : 250px;
+    padding : 20px;
+  }
+
+  > h3 {
+    text-align    : center;
+    margin-bottom : 40px;
+  }
+
+  > .P-price {
+    color      : $orange;
+    font-size  : 20px;
+    text-align : center;
+    @include bold-font();
+  }
+
+  > .P-discounted-price {
+    text-align    : center;
+    margin-bottom : 10px;
+    @include bold-font();
+  }
+
+  > .G-main-button {
+    width         : 100%;
+    padding       : 10px 0;
+    margin-top    : 25px;
+    border-radius : $big-radius;
+  }
+}
