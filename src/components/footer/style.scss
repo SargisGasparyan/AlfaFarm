@@ -6,7 +6,7 @@ footer {
   display    : flex;
   padding    : 40px $page-horizontal-offset;
   flex-wrap  : wrap;
-  border-top : 1px solid $light-gray;
+  box-shadow : 0 0 50px transparentize(#000000, .9);
 
   .P-footer-bottom {
     display: flex;

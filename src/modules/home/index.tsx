@@ -27,9 +27,9 @@ class Home extends HelperComponent<{}, {}> {
   public render() {
 
     return (
-      <section className="G-page P-home-page">
-        <ContactUs />
+      <section className="P-home-page">
         <News />
+        <ContactUs />
       </section>
     );
   }

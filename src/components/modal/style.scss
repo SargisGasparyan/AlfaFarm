@@ -43,16 +43,22 @@
 
     top                 : 50%;
     left                : 50%;
+    width               : 600px;
+    padding             : 15px;
     position            : absolute;
+    max-width           : 100%;
     animation           : modal-content-opening .2s;
     box-shadow          : $default-block-shadow;
     background          : #fff;
+    border-radius       : $big-radius;
     animation-fill-mode : forwards;
 
-    .icon-close {
-      position: absolute;
-      right: 20px;
-      top: 20px;
+    .P-close {
+      top       : 15px;
+      right     : 15px;
+      color     : $text-gray;
+      position  : absolute;
+      font-size : 26px;
     }
 
     .P-loader-wrapper {

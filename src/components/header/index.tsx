@@ -36,11 +36,11 @@ class Header extends HelperPureComponent<{}, IState> {
         <span className="P-link P-login G-auto-margin-left">{Settings.translations.log_in}</span>
 
         <Link to={ROUTES.CART} className="P-link P-icon G-normal-link">
-          <i className="icon-notification" />
+          <i className="icon-Group-5515" />
         </Link>
 
         <Link to={ROUTES.CART} className="P-link P-icon G-normal-link">
-          <i className="icon-cart" />
+          <i className="icon-Group-5503" />
         </Link>
       
         <LanguageSwitcher />

@@ -18,7 +18,7 @@ class RequestButton extends HelperPureComponent<{}, IState> {
     const { open } = this.state;
 
     return <>
-      <i className="P-request-button icon-close" onClick={this.toggleModal} />
+      <i className="P-request-button icon-Group-5549" onClick={this.toggleModal} />
       {open && <RequestModal onClose={this.toggleModal} />}
     </>;
   }

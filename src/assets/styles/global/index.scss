@@ -311,10 +311,36 @@
 
 // #region Forms
 
-.G-main-input {
+.G-main-form {
+  width     : 650px;
+  max-width : 100%;
+
+  > div {
+    margin-bottom : 30px;
+  }
+
+  > .G-main-button {
+
+    width : 100%;
+  }
+}
+
+.G-main-input, .G-main-textarea {
   width         : 100%;
   border        : 1px solid $light-gray;
   padding       : 15px 35px;
+  font-size     : $normal-fs;
+  border-radius : 30px;
+}
+
+.G-main-textarea {
+  height   : 150px;
+}
+
+.G-main-button {
+  padding       : 15px;
+  font-size     : $normal-fs;
+  background    : $main-color;
   border-radius : 30px;
 }
 
