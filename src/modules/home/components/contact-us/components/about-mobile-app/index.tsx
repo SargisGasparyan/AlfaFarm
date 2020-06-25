@@ -3,8 +3,8 @@ import * as React from 'react';
 import Modal from 'components/modal';
 import Settings from 'platform/services/settings';
 
-import AppStoreImage from 'assets/images/app_store.png';
-import GooglePlayImage from 'assets/images/google_play.png';
+// import AppStoreImage from 'assets/images/app_store.png';
+// import GooglePlayImage from 'assets/images/google_play.png';
 
 const AboutDelivery = React.memo(() => {
   const [opened, setOpened] = React.useState<boolean>(false);
