@@ -1,19 +1,18 @@
 import * as React from 'react';
 
+import HelperComponent from 'platform/classes/helper-component';
 import Settings from 'platform/services/settings';
-import HelperPureComponent from 'platform/classes/helper-pure-component';
-import ShadowText from 'components/shadow-text';
 import ListItem from './components/list-item';
 
 import './style.scss';
 
-class News extends HelperPureComponent<{}, {}> {
+class DiscountedProducts extends HelperComponent<{}, {}> {
 
   public render() {
 
     return (
-      <section className="G-page P-home-news">
-        <ShadowText className="G-text-center">{Settings.translations.news}</ShadowText>
+      <section className="G-page P-home-discounted-products">
+        <h2 className="G-page-title">{Settings.translations.discounted_products}</h2>
 
         <div className="P-list-wrapper">
           <ListItem data={{}} />
@@ -28,4 +27,4 @@ class News extends HelperPureComponent<{}, {}> {
   }
 };
 
-export default News;
+export default DiscountedProducts;

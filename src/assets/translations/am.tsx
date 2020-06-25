@@ -1146,6 +1146,7 @@ export default {
   read_more: "Կարդալ ավելին",
   promo_code: "Պրոմոկոդ",
   apply: "Կիրառել",
+  discounted_products: "Զեղչված ապրանքատեսակներ",
   additional_sale_label: (fromCount: number) => `Գնեք ${fromCount} և ավելի,`,
   checkout_i_bonus_can_use: (bonus: number, points: number): string => `Դուք կարող եք օգտագործել ${bonus} ${Settings.translations.i_bonus} Ձեր ${points}-ից`,
   receiving_bonus: "Ստացած iBonus",
