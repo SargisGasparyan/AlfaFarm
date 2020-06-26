@@ -34,6 +34,7 @@
     "moment": "^2.24.0",
     "node-fetch": "^2.6.0",
     "path": "^0.12.7",
+    "pure-react-carousel": "^1.27.1",
     "razzle": "3.0.0",
     "razzle-plugin-typescript": "^3.0.0",
     "rc-checkbox": "^2.1.7",

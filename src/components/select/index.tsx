@@ -122,7 +122,7 @@ class Select<Value extends string | number | null | {}> extends HelperPureCompon
           <div className={`P-select-header${isOpen ? ' P-select-open' : ''}`} onClick={() => this.toggleState(!isOpen)} title={value && changable && typeof value.name === 'string' ? value.name : undefined}>
             <span className={!value && placeholderOpacity ? 'P-select-placeholder' : ''}>{value && changable ? value.name : placeholder}</span>
             {clear && value && <i className="icon-close" onClick={this.clearValue} />}
-            <i className={isOpen ? 'icon-top' : 'icon-down'} />
+            <i className="icon-Group-5504" />
           </div>
           {isOpen &&  <this.Options />}
         </div>
