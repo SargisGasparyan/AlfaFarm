@@ -1,0 +1,20 @@
+@import 'src/assets/styles/helper';
+@import 'src/assets/styles/variables';
+
+button.P-footer-order-a-call-button {
+  padding : 10px 40px;
+}
+
+.P-footer-order-a-call-modal .P-modal-content > div {
+  color          : $main-color;
+  padding        : 60px 30px;
+  display        : flex;
+  align-items    : center;
+  flex-direction : column;
+  
+  > h3 {
+    font-size     : $normal-fs;
+    margin-bottom : 50px;
+    @include bold-font();
+  }
+}
