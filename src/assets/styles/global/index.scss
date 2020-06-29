@@ -355,13 +355,14 @@
 }
 
 .G-main-ghost-button {
-  color         : $main-color;
-  cursor        : pointer;
-  border        : 2px solid $main-color;
-  padding       : 5px 30px;;
-  font-size     : $normal-fs;
-  background    : transparent;
-  border-radius : 20px;
+  color           : $main-color;
+  cursor          : pointer;
+  border          : 2px solid $main-color;
+  padding         : 5px 30px;;
+  font-size       : $normal-fs;
+  background      : transparent;
+  border-radius   : 20px;
+  text-decoration : none;
 }
 
 // #endregion Forms
