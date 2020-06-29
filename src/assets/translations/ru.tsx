@@ -929,7 +929,7 @@ export default {
   already_a_member: "Уже вступил?",
   next: "Следующий",
   order: "Заказать",
-  add: "+ Добавить",
+  add: "Добавить",
   what_do_you_need_today: "Что Вам необходимо сегодня?",
   create_request: "Создать запрос",
   category: "Категория",

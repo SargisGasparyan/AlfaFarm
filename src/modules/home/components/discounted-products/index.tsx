@@ -1,8 +1,10 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 
 import HelperComponent from 'platform/classes/helper-component';
 import Settings from 'platform/services/settings';
 import ListItem from './components/list-item';
+import ROUTES from 'platform/constants/routes';
 
 import './style.scss';
 
@@ -21,7 +23,10 @@ class DiscountedProducts extends HelperComponent<{}, {}> {
           <ListItem data={{}} />
         </div>
 
-        <a className="G-main-ghost-button G-auto-margin-left G-auto-margin-right">{Settings.translations.show_all}</a>
+        <Link
+          to={ROUTES.PRODUCTS.LIST}
+          className="G-main-ghost-button G-auto-margin-left G-auto-margin-right"
+        >{Settings.translations.show_all}</Link>
       </section>
     );
   }

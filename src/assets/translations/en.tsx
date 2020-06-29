@@ -928,7 +928,7 @@ export default {
   already_a_member: "Already a member?",
   next: "Next",
   order: "Order",
-  add: "+ Add",
+  add: "Add",
   what_do_you_need_today: "What do you need today?",
   create_request: "Create request",
   category: "Category",
