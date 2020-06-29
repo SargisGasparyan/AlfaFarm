@@ -29,7 +29,7 @@ class ProductItem extends HelperPureComponent<IProps, IState> {
     })
   }
   public onClose = () => {
-    this.setState({ modal: false, isOpened: false })
+    this.safeSetState({ modal: false, isOpened: false })
     document.body.style.overflow = 'auto';
     window.dispatchEvent(new CustomEvent('popup', { detail: false }));
   }

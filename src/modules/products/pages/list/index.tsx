@@ -52,7 +52,7 @@ class List extends HelperComponent<{}, IState> {
     const promotionMode = !!promotion;
 
     if (promotionMode) {
-      this.setState({promotion, promotionMode});
+      this.safeSetState({promotion, promotionMode});
     }
     if (!promotionMode) {
       window.addEventListener('scroll', this.scroll);
@@ -94,7 +94,7 @@ class List extends HelperComponent<{}, IState> {
 
     const result = await ProductController.MainList({ pageNo: this.pageNo, limit: this.limit, ...filter });
     if (result.success && !this.state.promotionMode) {
-      this.setState({
+      this.safeSetState({
         tree: result.data.categoryParentTree
       });
     }

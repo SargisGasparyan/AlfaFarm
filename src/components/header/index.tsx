@@ -9,14 +9,15 @@ import HelperPureComponent from 'platform/classes/helper-pure-component';
 
 import LogoImage from 'assets/images/logo.png';
 import './style.scss';
+import Auth from 'modules/auth';
 
 interface IState {
-  something: boolean;
+  authOpen: boolean;
 };
 
 class Header extends HelperPureComponent<{}, IState> {
   public state: IState = {
-    something: true,
+    authOpen: false,
   };
 
   private navLinkProps = {
@@ -25,7 +26,13 @@ class Header extends HelperPureComponent<{}, IState> {
     exact: true,
   };
 
+  private toggleAuth = () => {
+    const { authOpen } = this.state;
+    this.safeSetState({ authOpen: !authOpen });
+  }
+
   public render() {
+    const { authOpen } = this.state;
 
     return (
       <header className="G-flex G-flex-align-center G-flex-justify-center">
@@ -39,7 +46,11 @@ class Header extends HelperPureComponent<{}, IState> {
         <a className="P-link">{Settings.translations.pharmacies}</a>
         <a className="P-link">{Settings.translations.clinic}</a>
         <NavLink {...this.navLinkProps} to={ROUTES.BLOG}>{Settings.translations.blog}</NavLink>
-        <span className="P-link P-login G-auto-margin-left">{Settings.translations.log_in}</span>
+
+        <span
+          onClick={this.toggleAuth}
+          className="P-link P-login G-auto-margin-left"
+        >{Settings.translations.log_in}</span>
 
         <Link to={ROUTES.CART} className="P-link P-icon G-normal-link">
           <i className="icon-Group-5515" />
@@ -50,6 +61,7 @@ class Header extends HelperPureComponent<{}, IState> {
         </Link>
       
         <LanguageSwitcher />
+        {authOpen && <Auth onClose={this.toggleAuth} />}
       </header>
     );
   }

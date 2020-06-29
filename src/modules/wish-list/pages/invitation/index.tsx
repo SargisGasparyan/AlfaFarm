@@ -6,7 +6,7 @@ import ConfirmModal from 'components/confirm-modal';
 import { byRoute } from 'platform/decorators/routes';
 import generic from 'platform/decorators/generic';
 import WishController from 'platform/api/wish';
-import Login from 'modules/login';
+import Login from 'modules/auth';
 import Storage from 'platform/services/storage';
 import HelperPureComponent from 'platform/classes/helper-pure-component';
 

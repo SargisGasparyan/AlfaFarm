@@ -3,7 +3,7 @@
 
 import './home';
 import './cart';
-import './login';
+import './auth';
 import './profile';
 import './products';
 import './blog';
