@@ -6,5 +6,7 @@ import './cart';
 import './login';
 import './profile';
 import './products';
+import './blog';
+import './news';
 import './wish-list';
 import './dumps';

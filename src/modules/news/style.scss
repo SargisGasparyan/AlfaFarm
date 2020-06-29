@@ -1,0 +1,15 @@
+@import 'src/assets/styles/variables';
+
+.P-news-page {
+  display         : flex;
+  flex-wrap       : wrap;
+  align-items     : flex-start;
+  justify-content : center;
+
+  > .P-list-wrapper {
+
+    margin    : 0 -30px -30px;
+    display   : flex;
+    flex-wrap : wrap;
+  }
+}

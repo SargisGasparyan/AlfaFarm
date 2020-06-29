@@ -1,12 +1,13 @@
 import * as React from 'react';
-import Settings from 'platform/services/settings';
 
-import './style.scss';
+import Settings from 'platform/services/settings';
 import Modal from 'components/modal';
 import LoaderContent from 'components/loader-content';
 
+import './style.scss';
+
 const OrderACall = React.memo(() => {
-  const [open, setOpen] = React.useState<Boolean>(false);
+  const [open, setOpen] = React.useState<boolean>(false);
 
   return <>
     <button

@@ -6,18 +6,25 @@
   padding    : $page-vertical-offset $page-horizontal-offset;
   min-height : calc(100vh - #{$header-size});
 
-
   .G-page-title {
 
-    color           : $main-color;
-    width           : 100%;
-    height          : auto;
-    margin          : 0;
-    font-size       : 36px;
-    min-height      : $page-title-size;
-    text-align      : center;
-    padding-bottom  : 80px;
+    color         : $main-color;
+    width         : 100%;
+    height        : auto;
+    margin        : 0;
+    font-size     : 36px;
+    min-height    : $page-title-size;
+    text-align    : center;
+    margin-bottom : 60px;
     @include bold-font();
+
+    &.P-shadow-text {
+      width      : auto;
+      font-size  : 100px;
+      margin-top : 40px;
+
+      > span { margin-left: -70%; }
+    }
 
     > button, .P-button {
 
@@ -348,13 +355,14 @@
 }
 
 .G-main-ghost-button {
-  color         : $main-color;
-  cursor        : pointer;
-  border        : 2px solid $main-color;
-  padding       : 5px 30px;;
-  font-size     : $normal-fs;
-  background    : transparent;
-  border-radius : 20px;
+  color           : $main-color;
+  cursor          : pointer;
+  border          : 2px solid $main-color;
+  padding         : 5px 30px;;
+  font-size       : $normal-fs;
+  background      : transparent;
+  border-radius   : 20px;
+  text-decoration : none;
 }
 
 // #endregion Forms

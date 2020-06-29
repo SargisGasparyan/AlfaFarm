@@ -8,7 +8,7 @@ interface IProps {
 };
 
 const ShadowText = React.memo(({ children, className }: IProps) => (
-  <h1 className={`P-shadow-text ${className}`}>
+  <h1 className={`P-shadow-text ${className || ''}`}>
     <span className="P-background P-right">{children}</span>
     {children}
   </h1>

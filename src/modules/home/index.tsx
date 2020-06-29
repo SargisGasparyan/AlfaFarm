@@ -4,6 +4,7 @@ import { byRoute } from 'platform/decorators/routes';
 
 import HelperComponent from 'platform/classes/helper-component';
 import DiscountedProducts from './components/discounted-products';
+import Carousel from './components/carousel';
 import News from './components/news';
 import ContactUs from './components/contact-us';
 
@@ -29,6 +30,7 @@ class Home extends HelperComponent<{}, {}> {
 
     return (
       <section className="P-home-page">
+        <Carousel />
         <DiscountedProducts />
         <News />
         <ContactUs />
