@@ -958,7 +958,7 @@ export default {
   already_a_member: "Գրանցվա՞ծ եք",
   next: "Հաջորդ",
   order: "Պատվիրել",
-  add: "+ Ավելացնել",
+  add: "Ավելացնել",
   what_do_you_need_today: "Ի՞նչ է Ձեզ անհրաժեշտ այսօր",
   create_request: "Ստեղծել հարցում",
   category: "Բաժին",

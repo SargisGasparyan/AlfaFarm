@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import RequestModal from '../request-modal';
 import HelperPureComponent from 'platform/classes/helper-pure-component';
+import ROUTES from 'platform/constants/routes';
 
 import './style.scss';
 
@@ -12,7 +13,7 @@ interface IState {
 class RequestButton extends HelperPureComponent<{}, IState> {
 
   public state: IState = { open: false };
-  public toggleModal = () => this.safeSetState({ open: !this.state.open });
+  public toggleModal = () => window.routerHistory.push(ROUTES.FAQ);
 
   public render() {
     const { open } = this.state;

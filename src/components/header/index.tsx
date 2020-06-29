@@ -49,7 +49,7 @@ class Header extends HelperPureComponent<{}, IState> {
 
         <span
           onClick={this.toggleAuth}
-          className="P-link P-login G-auto-margin-left"
+          className="P-link P-login"
         >{Settings.translations.log_in}</span>
 
         <Link to={ROUTES.CART} className="P-link P-icon G-normal-link">
