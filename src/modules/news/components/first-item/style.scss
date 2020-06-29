@@ -1,0 +1,37 @@
+@import 'src/assets/styles/variables';
+
+.P-news-first-item {
+  width         : 100%;
+  display       : flex;
+  flex-wrap     : wrap;
+  border-bottom : 1px solid $light-gray;
+
+  > div {
+    margin-bottom : 40px;
+    
+    &.P-image {
+      flex      : 1;
+      height    : 450px;
+      min-width : 450px;
+      max-width : 100%;
+    }
+  
+    &.P-content {
+      flex      : 1;
+      padding   : 10px 40px;
+      min-width : 450px;
+      max-width : 100%;
+  
+      > h2 {
+        color         : $text-gray;
+        margin-bottom : 20px;
+      }
+
+      > p {
+        color         : $text-gray;
+        font-size     : 20px;
+        margin-bottom : 30px;
+      }
+    }  
+  }  
+}

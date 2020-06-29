@@ -1,0 +1,23 @@
+@import 'src/assets/styles/variables';
+
+.slick-dots {
+  bottom : 20px;
+
+  > li {
+
+    list-style-type: none;
+
+    &.slick-active > button {
+      background : $main-color;
+    }
+
+    > button {
+      width         : 16px;
+      height        : 16px;
+      border        : 1px solid $main-color;
+      border-radius : 50%;
+
+      &:before { content: none; }
+    }
+  }
+}

@@ -1,5 +1,7 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 
+import ROUTES from 'platform/constants/routes';
 import Settings from 'platform/services/settings';
 import { contactPhoneNumber, contactEmail, contactAddress } from 'platform/constants/contact-info';
 import OrderACall from './components/order_a_call';
@@ -31,14 +33,14 @@ const Footer = React.memo(() => (
         <a>{Settings.translations.what_is_alfa_card}</a>
         <a>{Settings.translations.vacancy}</a>
         <a>{Settings.translations.about_us}</a>
-        <a>{Settings.translations.news}</a>
+        <Link to={ROUTES.NEWS}>{Settings.translations.news}</Link>
       </div>
       <div className="P-column">
         <h3 className="G-main-color">{Settings.translations.useful_links}</h3>
         <a>{Settings.translations.what_is_alfa_card}</a>
         <a>{Settings.translations.vacancy}</a>
         <a>{Settings.translations.about_us}</a>
-        <a>{Settings.translations.news}</a>
+        <Link to={ROUTES.NEWS}>{Settings.translations.news}</Link>
       </div>
       <div className="P-column">
         <h3 className="G-main-color">{Settings.translations.contact}</h3>
@@ -51,7 +53,7 @@ const Footer = React.memo(() => (
       <img src={AppStoreImage} />
       <img src={GooglePlayImage} />
     </div>
-    <h4 className="P-footer-copyright">
+    <h4 className="P-copyright">
       {Settings.translations.copyright} &copy; {currentYear} Alfa Pharm
     </h4>
   </footer>

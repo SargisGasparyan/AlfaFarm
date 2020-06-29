@@ -3,16 +3,17 @@
 @import './global/icons';
 @import './global/fonts';
 
+@import '~alertifyjs/build/css/alertify';
+@import '~rc-checkbox/assets/index';
+@import "~slick-carousel/slick/slick.css"; 
+@import "~slick-carousel/slick/slick-theme.css";
+@import "~react-input-range/lib/css/index.css";
 @import './packages/alertify';
 @import './packages/react-ladda';
 @import './packages/rc-checkbox';
 @import './packages/react-accordion';
 @import './packages/react-datetime';
 @import './packages/react-input-range';
-@import '~alertifyjs/build/css/alertify';
-@import '~rc-checkbox/assets/index';
-@import "~slick-carousel/slick/slick.css"; 
-@import "~slick-carousel/slick/slick-theme.css";
-@import "~react-input-range/lib/css/index.css";
+@import './packages/react-slick';
 
 @import './app';
