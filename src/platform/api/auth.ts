@@ -1,7 +1,6 @@
 import Connection from '../services/connection';
 import { IResponse } from '../constants/interfaces';
 import { OSTypeEnum, LanguageEnum } from '../constants/enums';
-import { SocialProviderEnum } from 'modules/login/constants/enums';
 
 const controller = 'auth';
 
@@ -41,7 +40,7 @@ export interface ILoginResponseModel {
 
 export interface ISocialLoginRequestModel {
   osType: OSTypeEnum;
-  provider: SocialProviderEnum;
+  provider: any;
   token: string;
   language?: LanguageEnum;
 };
