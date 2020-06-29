@@ -44,7 +44,7 @@ class Modal extends HelperPureComponent<IProps, IState> {
       <div className={`P-modal-wrapper ${className || ''}`}>
         <ClickOutside onClickOutside={onClose}>
           <div className="P-modal-content">
-            <i className="P-close icon-Group-5534" onClick={onClose} />
+            <i className="P-close icon-Group-5032" onClick={onClose} />
             <div>{children}</div>
           </div>
         </ClickOutside>

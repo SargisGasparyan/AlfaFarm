@@ -26,7 +26,7 @@ const Footer = React.memo(() => (
         <a>{Settings.translations.what_is_alfa_card}</a>
         <a>{Settings.translations.vacancy}</a>
         <a>{Settings.translations.about_us}</a>
-        <a>{Settings.translations.news}</a>
+        <Link to={ROUTES.NEWS}>{Settings.translations.news}</Link>
       </div>
       <div className="P-column">
         <h3 className="G-main-color">{Settings.translations.wholesale_sale}</h3>
