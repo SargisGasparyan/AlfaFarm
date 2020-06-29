@@ -5,7 +5,7 @@ export enum SocialProviderEnum {
 };
 
 export enum ModalContentEnum {
-  Login = 1,
+  SignIn = 1,
   SignUp,
   Restore,
   SignUpVerify,

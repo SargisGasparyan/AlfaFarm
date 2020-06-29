@@ -13,7 +13,7 @@ button.P-footer-order-a-call-button {
   flex-direction : column;
   
   > h3 {
-    font-size      : $normal-fs;
+    font-size      : 20px;
     margin-bottom  : 50px;
     text-transform : uppercase;
     @include bold-font();

@@ -333,6 +333,24 @@
   }
 }
 
+.G-phone-input-wrapper {
+  position : relative;
+
+  > .G-input-country-code {
+    top           : 17px;
+    left          : 20px;
+    color         : black;
+    position      : absolute;
+    border-right  : 1px solid $light-gray;
+    padding-right : 10px;
+  }
+
+  > .G-main-input {
+
+    padding-left : 80px;
+  }
+}
+
 .G-main-input, .G-main-textarea {
   width         : 100%;
   border        : 1px solid $light-gray;
