@@ -10,11 +10,9 @@ import ContactUs from './components/contact-us';
 
 import './style.scss';
 
-
 // import { ContentProperty } from 'csstype';
 // import { string } from 'prop-types';
 // import { stringify } from 'querystring';
-
 
 @byRoute([ROUTES.HOME.MAIN, ROUTES.HOME.FAIL, ROUTES.HOME.SUCCESS])
 class Home extends HelperComponent<{}, {}> {

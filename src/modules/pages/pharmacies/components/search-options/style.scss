@@ -1,0 +1,24 @@
+@import 'src/assets/styles/variables';
+
+.P-pharmacies-search-options {
+  display         : flex !important;
+  flex-direction  : column;
+  justify-content : center;
+
+  > .P-shadow-text { margin-bottom: 60px; }
+
+  > p {
+    width         : 50%;
+    font-size     : 24px;
+    margin-bottom : 60px;
+  }
+
+  > .G-main-form {
+
+    > .G-main-button {
+      padding      : 10px 30px;
+      font-size    : $normal-fs;
+      margin-right : auto;
+    }
+  }
+}

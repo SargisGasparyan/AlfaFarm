@@ -1101,6 +1101,7 @@ export default {
   sort_by: "Сортировать по",
   show_all: "Показать все",
   search: "Поиск",
+  search_results: "Результаты поиска",
   popular_categories: "Популярные категории",
   cash: "Денежные средства",
   card: "Карта",

@@ -5,6 +5,7 @@ import News from './news';
 import Products from './products';
 import Profile from './profile';
 import WishList from './wish-list';
+import Pharmacies from './pharmacies';
 
 export {
   Cart,
@@ -14,4 +15,5 @@ export {
   Products,
   Profile,
   WishList,
+  Pharmacies,
 };
