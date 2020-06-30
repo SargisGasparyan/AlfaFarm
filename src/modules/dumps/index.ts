@@ -7,6 +7,7 @@ import ConfidentialityConditions from './confidentiality-conditions';
 import ExchangeReturn from './exchange-return';
 import Services from './services';
 import Vacancies from './vacancies';
+import HowToUseApp from './how-to-use-app';
 
 export default {
   AboutUs,
@@ -18,4 +19,5 @@ export default {
   ExchangeReturn,
   Services,
   Vacancies,
+  HowToUseApp,
 };

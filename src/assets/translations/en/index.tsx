@@ -910,6 +910,7 @@ export default {
   business: "Business",
   become_partner: "Become Partner",
   vacancies: "Vacancies",
+  how_to_use_app: "How to use the app",
   what_is_alfa_card: "What is Alfa card",
   contact_us: "Contact us",
   copyright: "All Rights Reserved",

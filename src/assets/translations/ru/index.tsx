@@ -911,6 +911,7 @@ export default {
   business: "Бизнес",
   become_partner: "Стать партнером",
   vacancies: "Вакансия",
+  how_to_use_app: "Как пользоваться приложением",
   what_is_alfa_card: "Что такое Альфа карта",
   contact_us: "Связаться с нами",
   copyright: "Все права защищены",

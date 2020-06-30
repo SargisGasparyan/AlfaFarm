@@ -937,6 +937,7 @@ export default {
   business: "Բիզնես",
   become_partner: "Դարձեք գործընկեր",
   vacancies: "Աշխատատեղեր",
+  how_to_use_app: "Ինչպես օգտագործել հավելվածը",
   what_is_alfa_card: "Ինչ է Ալֆա քարտը",
   contact_us: "Կապվեք մեզ հետ",
   copyright: "Բոլոր իրավունքները պաշտպանված են",

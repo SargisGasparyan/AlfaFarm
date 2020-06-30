@@ -1,0 +1,13 @@
+@import 'src/assets/styles/helper';
+@import 'src/assets/styles/variables';
+
+.G-page.P-how-to-use-page {
+  display        : flex;
+  flex-direction : column;
+
+  > .G-page-title { margin-bottom: 20px; }
+  > .P-big-video {
+    flex  : 1;
+    width : 100%;
+  }
+}

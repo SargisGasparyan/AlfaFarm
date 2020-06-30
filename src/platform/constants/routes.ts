@@ -34,6 +34,7 @@ const ROUTES = {
   NEWS: '/news',
   ABOUT: '/about',
   VACANCIES: '/vacancies',
+  HOW_TO_USE_APP: '/how-to-use-app',
   CONTACT: '/contact',
   BUSINESS: '/business',
   CONTRACT: '/contract',
