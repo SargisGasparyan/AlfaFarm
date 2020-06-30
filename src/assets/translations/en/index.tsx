@@ -1100,6 +1100,7 @@ export default {
   sort_by: "Sort by",
   show_all: "Show all",
   search: "Search",
+  search_results: "Search results",
   popular_categories: "Popular categories",
   cash: "Cash",
   card: "Card",

@@ -39,6 +39,7 @@ const ROUTES = {
   BUSINESS: '/business',
   CONTRACT: '/contract',
   SERVICES: '/services',
+  PHARMACIES: '/pharmacies',
   EXCHANGE_RETURN: '/exchange-return',
   CONFIDENTIALITY_CONDITIONS: '/conditions',
 

@@ -1128,6 +1128,7 @@ export default {
   sort_by: "Դասակարգել ըստ",
   show_all: "Տեսնել բոլորը",
   search: "Փնտրել",
+  search_results: "Որոնման արդյունքներ",
   popular_categories: "Լավագույն բաժիններ",
   cash: "Կանխիկ",
   card: "Քարտ",

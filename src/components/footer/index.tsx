@@ -47,6 +47,12 @@ const Footer = React.memo(() => (
         <a><i className="G-orange-color icon-Group-5522" /> {contactPhoneNumber}</a>
         <a><i className="G-orange-color icon-Group-5524" /> {contactEmail}</a>
         <a><i className="G-orange-color icon-Group-5527" /> {contactAddress}</a>
+        <a><i className="G-orange-color icon-Group-5527" /> {contactAddress}</a>
+
+        <div className="P-social-links">
+          <a><i className="icon-facebook-4" /></a>
+          <a><i className="icon-Group-5749" /></a>
+        </div>
       </div>
     </div>
     <div className="P-mobile-app">
