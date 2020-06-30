@@ -1,13 +1,14 @@
 @import 'src/assets/styles/variables';
 
 .P-count-input {
-        
-  height    : 46px;
-  border    : 1px solid $light-gray;
-  padding   : 0 25px 0 10px;
-  position  : relative;
-  min-width : 100px;
-  max-width: 150px;
+  width         : 100px;
+  height        : 40px;
+  border        : 1px solid $light-gray;
+  display       : flex;
+  position      : relative;
+  overflow      : hidden;
+  align-items   : center;
+  border-radius : 18px;
 
   &.P-count-input-plus {
     
@@ -18,15 +19,33 @@
     font-size : $normal-fs;
   }
 
-  > input { text-align: center; }
-  > i {
+  > input {
+    width      : 100%;
+    height     : 100%;
+    border     : 0;
+    text-align : center;
+  }
 
-    right     : 5px;
-    cursor    : pointer;
-    position  : absolute;
-    font-size : 12px;
+  > span {
+    color           : $orange;
+    cursor          : pointer;
+    height          : calc(100% - 12px);
+    display         : flex;
+    min-width       : 30px;
+    font-size       : 24px;
+    user-select     : none;
+    align-items     : center;
+    padding-bottom  : 6px;
+    justify-content : center;
 
-    &.icon-top { top: 8px; }
-    &.icon-down { bottom: 8px; }
+    &:first-child {
+      border-right : 1px solid $light-gray;
+      margin-right : 5px;
+    }
+
+    &:last-child {
+      border-left : 1px solid $light-gray;
+      margin-left : 5px;  
+    }
   }
 }

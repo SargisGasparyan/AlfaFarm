@@ -9,7 +9,7 @@ import PageLoader from './components/page-loader';
 import ROUTES from './platform/constants/routes';
 import Storage from './platform/services/storage';
 import Settings from './platform/services/settings';
-import RequestButton from './modules/request/components/request-button';
+import RequestButton from 'modules/shared/request/components/request-button';
 import Footer from './components/footer';
 import ConfirmModal from './components/confirm-modal';
 import Socket from './platform/services/socket';

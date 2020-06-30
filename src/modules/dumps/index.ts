@@ -5,6 +5,7 @@ import Contract from './contract';
 import FAQ from './faq';
 import ConfidentialityConditions from './confidentiality-conditions';
 import ExchangeReturn from './exchange-return';
+import Services from './services';
 
 export default {
   AboutUs,
@@ -14,4 +15,5 @@ export default {
   Contract,
   ConfidentialityConditions,
   ExchangeReturn,
+  Services,
 };

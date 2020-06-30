@@ -37,6 +37,7 @@ const ROUTES = {
   CONTACT: '/contact',
   BUSINESS: '/business',
   CONTRACT: '/contract',
+  SERVICES: '/services',
   EXCHANGE_RETURN: '/exchange-return',
   CONFIDENTIALITY_CONDITIONS: '/conditions',
 
