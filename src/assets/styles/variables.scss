@@ -35,6 +35,7 @@ $dark-gray        : #EFF0F1;
 $light-gray       : #CFCFCF;
 $very-light-gray  : #F9F9F9;
 $main-color       : #49B748;
+$main-color-light : transparentize($main-color, .9);
 $broken-black     : #303030;
 $text-gray-light  : transparentize(#334856, .4);
 

@@ -6,6 +6,7 @@ import FAQ from './faq';
 import ConfidentialityConditions from './confidentiality-conditions';
 import ExchangeReturn from './exchange-return';
 import Services from './services';
+import Vacancies from './vacancies';
 
 export default {
   AboutUs,
@@ -16,4 +17,5 @@ export default {
   ConfidentialityConditions,
   ExchangeReturn,
   Services,
+  Vacancies,
 };

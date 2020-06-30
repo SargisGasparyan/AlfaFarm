@@ -1,3 +1,4 @@
+@import 'src/assets/styles/helper';
 @import 'src/assets/styles/variables';
 
 .P-services-list-item {
@@ -9,10 +10,10 @@
   overflow       : hidden;
   position       : relative;
   max-width      : 100%;
-  border-top     : 12px solid transparentize($main-color, .9);
   box-shadow     : $default-block-shadow;
   border-radius  : $big-radius;
   flex-direction : column;
+  @include main-top-border();
 
   &:hover {
     border-top  : 0;

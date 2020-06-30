@@ -909,7 +909,7 @@ export default {
   services_text: "«Ալֆա Ֆարմ» ընկերության մեծածախ վաճառքի բաժնի հիմնական նպատակը ՀՀ բոլոր դեղատներին որակյալ դեղորայքով, հիգիենայի պարագաներով, մանկական սննդով և անհրաժեշտ այլ տեսականիով ապահովելն է: Մենք առաջարկում ենք ծառայություններ հետևյալ առավելություններով`",
   business: "Business",
   become_partner: "Become Partner",
-  vacancy: "Vacancy",
+  vacancies: "Vacancies",
   what_is_alfa_card: "What is Alfa card",
   contact_us: "Contact us",
   copyright: "All Rights Reserved",

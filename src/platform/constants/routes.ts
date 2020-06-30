@@ -33,7 +33,7 @@ const ROUTES = {
   BLOG: '/blog',
   NEWS: '/news',
   ABOUT: '/about',
-  VACANCY: '/vacancy',
+  VACANCIES: '/vacancies',
   CONTACT: '/contact',
   BUSINESS: '/business',
   CONTRACT: '/contract',

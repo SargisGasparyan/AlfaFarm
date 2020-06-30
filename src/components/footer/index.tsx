@@ -24,21 +24,21 @@ const Footer = React.memo(() => (
       <div className="P-column">
         <h3 className="G-main-color">{Settings.translations.retail_sale}</h3>
         <a>{Settings.translations.what_is_alfa_card}</a>
-        <a>{Settings.translations.vacancy}</a>
+        <Link to={ROUTES.VACANCIES}>{Settings.translations.vacancies}</Link>
         <a>{Settings.translations.about_us}</a>
         <Link to={ROUTES.NEWS}>{Settings.translations.news}</Link>
       </div>
       <div className="P-column">
         <h3 className="G-main-color">{Settings.translations.wholesale_sale}</h3>
         <Link to={ROUTES.SERVICES}>{Settings.translations.services}</Link>
-        <a>{Settings.translations.vacancy}</a>
+        <Link to={ROUTES.VACANCIES}>{Settings.translations.vacancies}</Link>
         <a>{Settings.translations.about_us}</a>
         <Link to={ROUTES.NEWS}>{Settings.translations.news}</Link>
       </div>
       <div className="P-column">
         <h3 className="G-main-color">{Settings.translations.useful_links}</h3>
         <a>{Settings.translations.what_is_alfa_card}</a>
-        <a>{Settings.translations.vacancy}</a>
+        <Link to={ROUTES.VACANCIES}>{Settings.translations.vacancies}</Link>
         <a>{Settings.translations.about_us}</a>
         <Link to={ROUTES.NEWS}>{Settings.translations.news}</Link>
       </div>
