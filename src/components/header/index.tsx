@@ -6,10 +6,10 @@ import LanguageSwitcher from './components/language-switcher';
 import ROUTES from 'platform/constants/routes';
 import Settings from 'platform/services/settings';
 import HelperPureComponent from 'platform/classes/helper-pure-component';
+import { Shared } from 'modules';
 
 import LogoImage from 'assets/images/logo.png';
 import './style.scss';
-import Auth from 'modules/auth';
 
 interface IState {
   authOpen: boolean;
@@ -61,7 +61,7 @@ class Header extends HelperPureComponent<{}, IState> {
         </Link>
       
         <LanguageSwitcher />
-        {authOpen && <Auth onClose={this.toggleAuth} />}
+        {authOpen && <Shared.Auth onClose={this.toggleAuth} />}
       </header>
     );
   }
