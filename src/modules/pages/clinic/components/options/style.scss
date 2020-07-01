@@ -1,0 +1,30 @@
+@import 'src/assets/styles/helper';
+@import 'src/assets/styles/variables';
+
+.P-clinic-options {
+  display         : flex !important;
+  flex-direction  : column;
+  justify-content : center;
+
+  > .P-shadow-text {
+    color         : $orange;
+    margin-bottom : 60px;
+
+    > .P-background {
+      background              : -webkit-linear-gradient(45deg, $orange, white);
+      background-clip         : text;
+      -webkit-background-clip : text;
+    }
+  }
+
+  > .G-main-ghost-button {
+    color         : $orange;
+    width         : 320px;
+    padding       : 15px;
+    font-size     : 24px;
+    border-color  : $orange;
+    margin-bottom : 30px;
+    border-radius : 30px;
+    @include bold-font();
+  }
+}

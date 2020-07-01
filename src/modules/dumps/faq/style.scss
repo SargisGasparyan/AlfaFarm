@@ -1,15 +1,34 @@
+@import 'src/assets/styles/helper';
 @import 'src/assets/styles/variables';
 
-.P-faq-page {
+.G-page.P-faq-page {
 
   > .P-content {
+    display        : flex;
+    padding        : 120px $page-horizontal-offset;
+    flex-direction : column;
 
-    display         : flex;
-    justify-content : space-between;
-
-    > div {
-      
-      width : calc(50% - 20px);
+    > p {
+      width         : 100%;
+      color         : $text-gray;
+      font-size     : 20px;
+      line-height   : 36px;
+      margin-bottom : 80px;
+      @include bold-font();
     }
+
+    > .P-list-wrapper {
+      margin          : -25px;
+      display         : flex;
+      flex-wrap       : wrap;
+      justify-content : center;
+    }
+  }
+
+  > .P-maps {
+    width  : calc(100% + #{2 * $page-horizontal-offset});
+    height : 500px;
+    margin : 40px 0 0 (-$page-horizontal-offset);
+    border : 0;
   }
 }
