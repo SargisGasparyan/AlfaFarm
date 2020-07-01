@@ -1,31 +1,26 @@
 import * as React from 'react';
 
-import ProductController, { IProduct, IProductListItem } from 'platform/api/product';
 import Settings from 'platform/services/settings';
-import { paginationPageLimit } from 'platform/constants';
 import { Shared } from 'modules';
 
 import './style.scss';
+import { Link } from 'react-router-dom';
+import ROUTES from 'platform/constants/routes';
 
-const Similar = React.memo(({ details, opacity }: { details: IProduct, opacity: boolean }) => {
-  let mounted = true;
-  const [list, setList] = React.useState<IProductListItem[]>([]);
-
-  React.useEffect(() => {
-    ProductController.Similar(details._id, paginationPageLimit)
-      .then(result => mounted && setList(result.data));
-
-    return () => { mounted = false; }
-  }, [false]);
-
-  return list.length ? (
-    <div className="P-product-similar">
-      <h2>{Settings.translations.similar}</h2>
-      <div className="P-list">
-        {list.map(item => <Shared.Products.ListItem key={item._id} data={item} />)}
-      </div>
+const Similar = React.memo(() => (
+  <div className="P-product-details-similar">
+    <h2 className="P-title">{Settings.translations.similar_products}</h2>
+    <div className="P-list">
+      <Shared.Products.ListItem data={{}} />
+      <Shared.Products.ListItem data={{}} />
+      <Shared.Products.ListItem data={{}} />
+      <Shared.Products.ListItem data={{}} />
     </div>
-  ) : null;
-});
+    <Link
+      to={ROUTES.PRODUCTS.LIST}
+      className="G-main-ghost-button G-auto-margin-left G-auto-margin-right"
+    >{Settings.translations.show_all}</Link>
+  </div>
+));
 
 export default Similar;

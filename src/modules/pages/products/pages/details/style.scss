@@ -2,6 +2,20 @@
 
 .P-product-details-page {
 
-  display   : flex;
-  flex-wrap : wrap;
+  display        : flex;
+  flex-direction : column;
+
+  > .P-back-icon {
+    color         : $text-gray;
+    cursor        : pointer;
+    font-size     : 26px;
+    margin-bottom : 30px;
+  }
+
+  > .P-content {
+    display         : flex;
+    flex-wrap       : wrap;
+    border-bottom   : 2px solid $dark-gray;
+    justify-content : space-between;
+  }
 }

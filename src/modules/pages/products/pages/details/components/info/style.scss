@@ -1,58 +1,40 @@
-@import 'src/assets/styles/helper';
 @import 'src/assets/styles/variables';
 
-.P-product-info {
+.P-product-details-info {
+  width : calc(55% - 50px);
 
-  width      : 100%;
-  margin-top : 70px;
+  > .P-name {
+    display       : flex;
+    margin-bottom : 60px;
+  }
 
-  > .P-info-tabs {
+  > h3 {
+    color         : $text-gray;
+    margin-bottom : 20px;
 
-    display : flex;
-  
-    > h2 {
-  
-      color        : $light-gray;
-      cursor       : pointer;
-      transition   : .2s;
-      margin-right : 50px;
-  
-      &.P-choosed { color: black; }
+    &.P-unit {
+      border-bottom  : 2px solid $dark-gray;
+      padding-bottom : 20px;
     }
   }
-  
-  > .P-info-description {
-  
-    width      : 100%;
-    font-size  : $normal-fs !important;
-    margin-top : 40px;
-    font-family: 'Montserratarm', 'Verdana', 'Regular' !important;
-  }
-  
-  > .P-info-features {
-  
-    display         : flex;
-    flex-wrap       : wrap;
-    margin-top      : 25px;
-    justify-content : space-between;
-  
-    > div {
-  
-      width           : calc(50% - 20px);
-      display         : flex;
-      padding         : 15px 0;
-      align-items     : center;
-      border-bottom   : 1px solid $dark-gray;
-      justify-content : space-between;
-  
-      > h3 {
-  
-        width     : calc(50% - 10px);
-        font-size : $normal-fs;
-        @include normal-font;
 
-        &.P-feature-title { color: #999; }
-      }
+  > p {
+    line-height   : 28px;
+    margin-bottom : 30px;
+  }
+
+  > .P-cart-actions {
+    display         : flex;
+    justify-content : flex-start;
+
+    > .P-count-input {
+      height       : 50px;
+      margin-right : 60px;
+    }
+
+    > .G-main-button {
+
+      padding : 15px 50px;
     }
   }
 }

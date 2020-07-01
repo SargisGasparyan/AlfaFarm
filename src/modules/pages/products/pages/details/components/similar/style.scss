@@ -1,16 +1,23 @@
 @import 'src/assets/styles/variables';
 
-.P-product-similar {
+.P-product-details-similar {
+  width          : 100%;
+  display        : flex;
+  margin-top     : 70px;
+  flex-direction : column;
 
-  width      : 100%;
-  margin-top : 70px;
+  > .P-title {
+    color         : $main-color;
+    font-size     : 34px;
+    text-align    : center;
+    margin-bottom : 60px;
+  }
 
-  > h2 { margin-bottom: 40px; }
   > .P-list {
-
-    width     : calc(100% + 20px);
-    margin    : 0 -10px;
-    display   : flex;
-    flex-wrap : wrap;
+    width           : calc(100% + 20px);
+    margin          : -20px -20px 40px;
+    display         : flex;
+    flex-wrap       : wrap;
+    justify-content : center;
   }
 }
