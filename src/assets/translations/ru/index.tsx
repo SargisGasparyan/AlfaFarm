@@ -1102,6 +1102,7 @@ export default {
   show_all: "Показать все",
   search: "Поиск",
   search_results: "Результаты поиска",
+  stuff: "Группа работников",
   popular_categories: "Популярные категории",
   cash: "Денежные средства",
   card: "Карта",

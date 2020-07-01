@@ -7,7 +7,7 @@ import {
   ProductColorTypeEnum,
 } from 'platform/api/product';
 
-import MultiColorImage from 'assets/images/about_us.jpg';
+import MultiColorImage from 'assets/images/about_1.png';
 
 import './style.scss';
 

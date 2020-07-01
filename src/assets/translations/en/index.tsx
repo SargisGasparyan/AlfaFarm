@@ -1101,6 +1101,7 @@ export default {
   show_all: "Show all",
   search: "Search",
   search_results: "Search results",
+  stuff: "Stuff",
   popular_categories: "Popular categories",
   cash: "Cash",
   card: "Card",
