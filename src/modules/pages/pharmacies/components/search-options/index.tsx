@@ -1,15 +1,13 @@
 import * as React from 'react';
-import Slider from 'react-slick';
 
 import HelperPureComponent from 'platform/classes/helper-pure-component';
 import ShadowText from 'components/shadow-text';
 import Settings from 'platform/services/settings';
+import Select from 'components/select';
 
 import HomeImage from 'assets/images/home_background.png';
-import TestImage from 'assets/images/download_background.png';
 
 import './style.scss';
-import Select from 'components/select';
 
 class SearchOptions extends HelperPureComponent<{}, {}> {
 

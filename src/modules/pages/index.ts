@@ -6,6 +6,7 @@ import Products from './products';
 import Profile from './profile';
 import WishList from './wish-list';
 import Pharmacies from './pharmacies';
+import Clinic from './clinic';
 
 export {
   Cart,
@@ -16,4 +17,5 @@ export {
   Profile,
   WishList,
   Pharmacies,
+  Clinic,
 };
