@@ -1,37 +1,31 @@
 import * as React from 'react';
 
-import { IProduct } from 'platform/api/product';
-import { ProducInfoEnum } from '../../constants/enums';
+import HelperPureComponent from 'platform/classes/helper-pure-component';
+import CountInput from 'components/count-input';
 import Settings from 'platform/services/settings';
 
 import './style.scss';
 
-const Info = React.memo(({ details }: { details: IProduct }) => {
-  const [activeTab, setActiveTab] = React.useState(ProducInfoEnum.Description);
+class Info extends HelperPureComponent<{}, {}> {
 
-  const Features = () => <div className="P-info-features">
-    {details.features.map(item => <div key={item._id}>
-      <h3 className="P-feature-title">{item.title}</h3>
-      <h3>{item.description}</h3>
-    </div>)}
-  </div>
-  
-  return <div className="P-product-info">
-    <div className="P-info-tabs">
-      <h2
-        onClick={() => setActiveTab(ProducInfoEnum.Description)}
-        className={activeTab === ProducInfoEnum.Description ? 'P-choosed' : ''}
-      >{Settings.translations.description}</h2>
-      {!!details.features.length && <h2
-        onClick={() => setActiveTab(ProducInfoEnum.Features)}
-        className={activeTab === ProducInfoEnum.Features ? 'P-choosed' : ''}
-      >{Settings.translations.features}</h2>}
-    </div>
-    {activeTab === ProducInfoEnum.Description ? <div
-      className="P-info-description"
-      dangerouslySetInnerHTML={{ __html: details.description }}
-    /> : <Features />}
-  </div>;
-});
+  public render() {
+
+    return (
+      <div className="P-product-details-info">
+        <h2 className="P-name">
+          Ավեն արևապաշտպան կրեմ
+          <span className="G-orange-color G-auto-margin-left">29,400 AMD</span>
+        </h2>
+        <h3 className="P-unit">10 մլ</h3>
+        <h3>{Settings.translations.description}</h3>
+        <p className="P-description">Գնելուց առաջ կարդացեք նախազգուշացումները: Հետևեք օգտագործման հրահանգներին: Տե՛ս նախազգուշացումները։ Արևապաշտպան միջոցները արևի պաշտպանության միայն մեկ մասն են: Խուսափեք արևի երկարատև ազդեցությունից: Արևից արդյունավետ պաշտպանության համար անհրաժեշտ է կրեմի հաճախակի օգտագործումը։ Արեւի տակ աշխատելիս անհրաժեշտ է կրել պաշտպանիչ հագուստ, գլխարկ և ակնոց։</p>
+        <div className="P-cart-actions">
+          <CountInput step={1} min={1} onChange={() => { /* */ }} />
+          <button className="G-main-button">{Settings.translations.add_to_cart}</button>
+        </div>
+      </div>
+    );
+  };
+};
 
 export default Info;

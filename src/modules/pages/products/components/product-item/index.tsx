@@ -72,7 +72,7 @@ class ProductItem extends HelperPureComponent<IProps, IState> {
           }
         }}
       >
-        <Details opacity={this.state.isOpened} productId={product._id}/>
+        {/* */}
       </Modal>
     </>
   }

@@ -2,16 +2,18 @@
 @import 'src/assets/styles/variables';
 
 .P-products-list-item {
-  width          : 280px;
-  margin         : 20px;
-  border         : 1px solid $light-gray;
-  display        : flex;
-  padding        : 10px 30px 30px;
-  position       : relative;
-  overflow       : hidden;
-  background     : white;
-  border-radius  : $big-radius;
-  flex-direction : column;
+  color           : black;
+  width           : 280px;
+  margin          : 20px;
+  border          : 1px solid $light-gray;
+  display         : flex;
+  padding         : 10px 30px 30px;
+  position        : relative;
+  overflow        : hidden;
+  background      : white;
+  border-radius   : $big-radius;
+  flex-direction  : column;
+  text-decoration : none;
 
   > .P-image {
     width   : 100%;

@@ -1,10 +1,12 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 
 import Settings from 'platform/services/settings';
-
+import ROUTES from 'platform/constants/routes';
 import CountInput from 'components/count-input';
 
 import PhotoImage from 'assets/images/photo.png';
+
 import './style.scss';
 
 interface IProps {
@@ -12,7 +14,7 @@ interface IProps {
 };
 
 const ListItem = React.memo(({ data }: IProps) => (
-  <a className="P-products-list-item">
+  <Link className="P-products-list-item" to={ROUTES.PRODUCTS.DETAILS.replace(':id', 'something')}>
     <div className="P-image" style={{ background: `url('${PhotoImage}') center/contain no-repeat` }} />
     <i className={`P-favorite ${Math.random() > 0.5 ? 'icon-Group-5518' : 'P-active icon-Group-5520'}`} />
     <h3>Վիլակտ Մաշկի քսոււք</h3>
@@ -23,7 +25,7 @@ const ListItem = React.memo(({ data }: IProps) => (
     </div>
     <button className="G-main-button">{Settings.translations.add}</button>
     {data?'':''}
-  </a>
+  </Link>
 ));
 
 export default ListItem;

@@ -1122,6 +1122,7 @@ export default {
   confirm_password: "Confirm password",
   choose_password: "Choose password",
   similar: "Similar",
+  similar_products: "Similar products",
   sign_up_confirm: <>I agree with <a target="_blank" role="noreferrer" href={ROUTES.EXCHANGE_RETURN}>Terms &amp; conditions</a> and <a target="_blank" role="noreferrer" href={ROUTES.CONFIDENTIALITY_CONDITIONS}>Privacy policy</a></>,
   reason: "Reason",
   show_more: "Show more",

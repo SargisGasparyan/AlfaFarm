@@ -1123,6 +1123,7 @@ export default {
   confirm_password: "Подтвердите пароль",
   choose_password: "Выберите пароль",
   similar: "Единообразный",
+  similar_products: "Похожие продукты",
   sign_up_confirm: <>Я согласен с <a target="_blank" role="noreferrer" href={ROUTES.EXCHANGE_RETURN}>тезоми</a> и <a target="_blank" role="noreferrer" href={ROUTES.CONFIDENTIALITY_CONDITIONS}>условиями</a></>,
   reason: "Причина",
   show_more: "Показать больше",

@@ -1150,6 +1150,7 @@ export default {
   confirm_password: "Հաստատել գաղտնաբառը",
   choose_password: "Ընտրեք գաղտնաբառը",
   similar: "Միանման",
+  similar_products: "Նմանատիպ ապրանքատեսակներ",
   sign_up_confirm: <>Ես համաձայն եմ <a target="_blank" role="noreferrer" href={ROUTES.EXCHANGE_RETURN}>դրույթների</a> և <a target="_blank" role="noreferrer" href={ROUTES.CONFIDENTIALITY_CONDITIONS}>պայմանների</a> հետ</>,
   reason: "Պատճառ",
   show_more: "Ցույց տալ ավելին",
