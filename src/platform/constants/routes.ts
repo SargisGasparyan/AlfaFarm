@@ -32,7 +32,7 @@ const ROUTES = {
   CART: '/cart',
   BLOG: '/blog',
   NEWS: '/news',
-  ABOUT: '/about',
+  ABOUT_US: '/about-us',
   VACANCIES: '/vacancies',
   HOW_TO_USE_APP: '/how-to-use-app',
   CONTACT: '/contact',

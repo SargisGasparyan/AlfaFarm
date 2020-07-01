@@ -1129,6 +1129,7 @@ export default {
   show_all: "Տեսնել բոլորը",
   search: "Փնտրել",
   search_results: "Որոնման արդյունքներ",
+  stuff: "Աշխատակազմ",
   popular_categories: "Լավագույն բաժիններ",
   cash: "Կանխիկ",
   card: "Քարտ",
