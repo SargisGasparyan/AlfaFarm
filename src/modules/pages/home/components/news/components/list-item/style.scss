@@ -1,9 +1,11 @@
 @import 'src/assets/styles/variables';
 
 .P-home-news-list-item {
+  flex          : 1;
   margin        : 15px;
   border        : 1px solid $light-gray;
   overflow      : hidden;
+  min-width     : 280px;
   max-width     : 350px;
   background    : white;
   border-radius : 10px;
