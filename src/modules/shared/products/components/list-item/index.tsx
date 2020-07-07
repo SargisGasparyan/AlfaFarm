@@ -5,7 +5,12 @@ import Settings from 'platform/services/settings';
 import ROUTES from 'platform/constants/routes';
 import CountInput from 'components/count-input';
 
-import PhotoImage from 'assets/images/photo.png';
+import MedicineImage from 'assets/images/medicine.png';
+import MedicineImage1 from 'assets/images/medicine_1.jpg';
+import MedicineImage2 from 'assets/images/medicine_2.jpg';
+import MedicineImage3 from 'assets/images/medicine_3.jpg';
+
+const arr = [MedicineImage, MedicineImage1, MedicineImage2, MedicineImage3];
 
 import './style.scss';
 
@@ -15,7 +20,7 @@ interface IProps {
 
 const ListItem = React.memo(({ data }: IProps) => (
   <Link className="P-products-list-item" to={ROUTES.PRODUCTS.DETAILS.replace(':id', 'something')}>
-    <div className="P-image" style={{ background: `url('${PhotoImage}') center/contain no-repeat` }} />
+    <div className="P-image" style={{ background: `url('${arr[Math.round(Math.random() * 3)]}') center/contain no-repeat` }} />
     <i className={`P-favorite ${Math.random() > 0.5 ? 'icon-Group-5518' : 'P-active icon-Group-5520'}`} />
     <h3>Վիլակտ Մաշկի քսոււք</h3>
     

@@ -1141,6 +1141,7 @@ export default {
   no_notifications: "Нет Уведомлений",
   categories: "Категории",
   pharmacies: "Аптеки",
+  online_pharmacy: "Онлайн аптека",
   clinic: "Клиника",
   doctors: "Врачи",
   laboratory: "Лаборатория",

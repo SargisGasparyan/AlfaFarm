@@ -2,9 +2,14 @@ import * as React from 'react';
 
 import HelperPureComponent from 'platform/classes/helper-pure-component';
 
-import HomeImage from 'assets/images/home_background.png';
+import MedicineImage from 'assets/images/medicine.png';
+import MedicineImage1 from 'assets/images/medicine_1.jpg';
+import MedicineImage2 from 'assets/images/medicine_2.jpg';
+import MedicineImage3 from 'assets/images/medicine_3.jpg';
 
 import './style.scss';
+
+const arr = [MedicineImage, MedicineImage1, MedicineImage2, MedicineImage3];
 
 interface IState {
   photosPackIndex: number;
@@ -34,11 +39,13 @@ class Images extends HelperPureComponent<{}, IState> {
 
   public render() {
 
+    const random = arr[Math.round(Math.random() * 3)];
+
     return (
       <div className="P-product-details-images">
         <div className="P-current-image">
-          <div style={{ backgroundImage: `url("${HomeImage}")` }} className="P-zoomable-image" onMouseMove={this.zoom}>
-            <img src={HomeImage} />
+          <div style={{ backgroundImage: `url("${random}")` }} className="P-zoomable-image" onMouseMove={this.zoom}>
+            <img src={random} />
           </div>
         </div>
         <div className="P-thumbs">
@@ -46,7 +53,7 @@ class Images extends HelperPureComponent<{}, IState> {
             key={item}
             style={{ transform: this.currentTransform() }}
           >
-            <div style={{ background: `url("${HomeImage}") center/contain no-repeat` }} />
+            <div style={{ background: `url("${arr[Math.round(Math.random() * 3)]}") center/contain no-repeat` }} />
           </div>)}
         </div>
       </div>

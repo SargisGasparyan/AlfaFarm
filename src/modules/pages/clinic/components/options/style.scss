@@ -11,9 +11,7 @@
     margin-bottom : 60px;
 
     > .P-background {
-      background              : -webkit-linear-gradient(45deg, $orange, white);
-      background-clip         : text;
-      -webkit-background-clip : text;
+      background-image : -webkit-linear-gradient(45deg, $orange, transparent);
     }
   }
 

@@ -1140,6 +1140,7 @@ export default {
   no_notifications: "No notifications",
   categories: "Categories",
   pharmacies: "Pharmacies",
+  online_pharmacy: "Online pharmacy",
   clinic: "Clinic",
   doctors: "Doctors",
   laboratory: "Laboratory",
