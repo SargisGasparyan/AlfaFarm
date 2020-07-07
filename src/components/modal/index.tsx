@@ -37,14 +37,20 @@ class Modal extends HelperPureComponent<IProps, IState> {
     // document.body.style.overflowY = 'initial';
   }
 
+  private close = (e: MouseEvent | React.SyntheticEvent<HTMLElement>) => {
+    e.stopPropagation();
+    const { onClose } = this.props;
+    onClose && onClose();
+  }
+
   private Content = () => {
-    const { children, className, onClose } = this.props;
+    const { children, className } = this.props;
 
     return (
       <div className={`P-modal-wrapper ${className || ''}`}>
-        <ClickOutside onClickOutside={onClose}>
+        <ClickOutside onClickOutside={this.close}>
           <div className="P-modal-content">
-            <i className="P-close icon-Group-5032" onClick={onClose} />
+            <i className="P-close icon-Group-5032" onClick={this.close} />
             <div>{children}</div>
           </div>
         </ClickOutside>

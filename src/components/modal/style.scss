@@ -1,8 +1,8 @@
 @import 'src/assets/styles/variables';
 
 @keyframes modal-content-opening {
-  from { transform: translate(-50%, -50%) scale(.9); }
-  to { transform: translate(-50%, -50%) scale(1); }
+  from { transform: scale(.9); }
+  to { transform: scale(1); }
 }
 
 @keyframes modal-background-opening {
@@ -10,13 +10,7 @@
   to { background: transparentize(#000, .7); }
 }
 
-@keyframes modal-content-opening-X {
-  from { transform: translateX(-50%) scale(.9); }
-  to { transform: translateX(-50%) scale(1); }
-}
-
 .P-modal-wrapper {
-
   top                 : 0;
   left                : 0;
   width               : 100%;
@@ -24,13 +18,15 @@
   height              : 100vh;
   bottom              : 0;
   z-index             : 20000;
+  display             : flex;
   position            : fixed;
   animation           : modal-background-opening .1s;
   overflow-y          : auto;
+  align-items         : center;
+  justify-content     : center;
   animation-fill-mode : forwards;
 
   > div > .icon-close {
-
     top       : 20px;
     right     : 20px;
     cursor    : pointer;
@@ -40,12 +36,9 @@
   }
 
   .P-modal-content {
-
-    top                 : 50%;
-    left                : 50%;
     width               : 550px;
     padding             : 15px;
-    position            : absolute;
+    position            : relative;
     max-width           : 100%;
     animation           : modal-content-opening .2s;
     box-shadow          : $default-block-shadow;
@@ -63,7 +56,6 @@
     }
 
     .P-loader-wrapper {
-
       height        : 100%;
       border-radius : $radius;
     }
@@ -73,7 +65,7 @@
 .P-modal-wrapper.P-modal-static .P-modal-content {
 
   top                 : $page-vertical-offset;
-  animation           : modal-content-opening-X .1s;
+  animation           : modal-content-opening .1s;
   margin-bottom       : $page-vertical-offset;
   animation-fill-mode : forwards;
 }
