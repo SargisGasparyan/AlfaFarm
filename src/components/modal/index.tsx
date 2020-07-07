@@ -29,12 +29,12 @@ class Modal extends HelperPureComponent<IProps, IState> {
   }
 
   public componentDidMount() {
-    document.body.style.overflowY = 'hidden';
+    // document.body.style.overflowY = 'hidden';
   }
 
   public componentWillUnmount() {
     super.componentWillUnmount();
-    document.body.style.overflowY = 'initial';
+    // document.body.style.overflowY = 'initial';
   }
 
   private Content = () => {

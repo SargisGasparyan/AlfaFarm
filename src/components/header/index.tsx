@@ -42,7 +42,7 @@ class Header extends HelperPureComponent<{}, IState> {
         
         <Search />
 
-        <a className="P-link">{Settings.translations.categories}</a>
+        <NavLink {...this.navLinkProps} to={ROUTES.PRODUCTS.LIST}>{Settings.translations.online_pharmacy}</NavLink>
         <NavLink {...this.navLinkProps} to={ROUTES.PHARMACIES}>{Settings.translations.pharmacies}</NavLink>
         <NavLink {...this.navLinkProps} to={ROUTES.CLINIC}>{Settings.translations.clinic}</NavLink>
         <NavLink {...this.navLinkProps} to={ROUTES.BLOG}>{Settings.translations.blog}</NavLink>

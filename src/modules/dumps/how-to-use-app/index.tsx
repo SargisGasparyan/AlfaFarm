@@ -4,7 +4,6 @@ import ROUTES from 'platform/constants/routes';
 import { byRoute } from 'platform/decorators/routes';
 import Settings from 'platform/services/settings';
 import HelperPureComponent from 'platform/classes/helper-pure-component';
-import ListItem from './components/list-item';
 
 import './style.scss';
 
@@ -22,6 +21,44 @@ class HowToUseApp extends HelperPureComponent<{}, {}> {
           className="P-big-video"
           frameBorder={0}
         />
+
+        <div className="P-list">
+          <iframe
+            src="https://www.youtube.com/embed/a-EVxNQwp4g"
+            className="P-item"
+            frameBorder={0}
+          />
+          <iframe
+            src="https://www.youtube.com/embed/VymiLo2jLqM"
+            className="P-item"
+            frameBorder={0}
+          />
+          <iframe
+            src="https://www.youtube.com/embed/a-EVxNQwp4g"
+            className="P-item"
+            frameBorder={0}
+          />
+          <iframe
+            src="https://www.youtube.com/embed/VymiLo2jLqM"
+            className="P-item"
+            frameBorder={0}
+          />
+          <iframe
+            src="https://www.youtube.com/embed/a-EVxNQwp4g"
+            className="P-item"
+            frameBorder={0}
+          />
+          <iframe
+            src="https://www.youtube.com/embed/VymiLo2jLqM"
+            className="P-item"
+            frameBorder={0}
+          />
+          <iframe
+            src="https://www.youtube.com/embed/a-EVxNQwp4g"
+            className="P-item"
+            frameBorder={0}
+          />
+        </div>
       </section>
     );
   }

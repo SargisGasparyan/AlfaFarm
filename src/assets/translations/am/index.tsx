@@ -1168,6 +1168,7 @@ export default {
   no_notifications: "Ծանուցումներ չկան",
   categories: "Բաժիններ",
   pharmacies: "Դեղատներ",
+  online_pharmacy: "Օնլայն դեղատուն",
   clinic: "Կլինիկա",
   doctors: "Բժիշկներ",
   laboratory: "Լաբորատորիա",

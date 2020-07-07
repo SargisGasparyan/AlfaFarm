@@ -2,8 +2,14 @@ import * as React from 'react';
 
 import Settings from 'platform/services/settings';
 
-import PhotoImage from 'assets/images/photo.png';
+import MedicineImage from 'assets/images/medicine.png';
+import MedicineImage1 from 'assets/images/medicine_1.jpg';
+import MedicineImage2 from 'assets/images/medicine_2.jpg';
+import MedicineImage3 from 'assets/images/medicine_3.jpg';
+
 import './style.scss';
+
+const arr = [MedicineImage, MedicineImage1, MedicineImage2, MedicineImage3];
 
 interface IProps {
   data: any;
@@ -11,7 +17,7 @@ interface IProps {
 
 const ListItem = React.memo(({ data }: IProps) => (
   <a className="P-home-discounted-products-list-item">
-    <div className="P-image" style={{ background: `url('${PhotoImage}') center/contain no-repeat` }} />
+    <div className="P-image" style={{ background: `url('${arr[Math.round(Math.random() * 3)]}') center/contain no-repeat` }} />
     <h3>Վիլակտ Մաշկի քսոււք</h3>
     <del className="P-discounted-price">5,500 AMD</del>
     <span className="P-price">2,500 AMD</span>

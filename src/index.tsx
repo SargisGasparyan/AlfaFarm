@@ -1,5 +1,5 @@
 //* Continue writting the code as expected
-  //! Please write a clean code
+  //! Please write your code as clean as possible
   //! Documentize your code with comments
   //! Use React Components as far as you can
   //! Use React new features to improve performance
