@@ -7,6 +7,7 @@ import Settings from 'platform/services/settings';
 
 import HomeImage from 'assets/images/home_background.png';
 import HomeImage1 from 'assets/images/home_background_1.png';
+import HomeImage2 from 'assets/images/home_background_2.png';
 import HerbionImage from 'assets/images/herbion.jpg';
 
 import './style.scss';
@@ -33,6 +34,13 @@ class Carousel extends HelperPureComponent<{}, {}> {
         <div>
           <div className="G-page P-home-carousel-slide" style={{ background: `url('${HomeImage1}') right/contain no-repeat` }}>
             <img src={HerbionImage} alt="herbion" />
+            <button className="G-main-button">{Settings.translations.read_more}</button>
+          </div>
+        </div>
+        <div>
+          <div className="G-page P-home-carousel-slide" style={{ background: `url('${HomeImage2}') center/cover` }}>
+            <ShadowText>Ապրենք առողջ</ShadowText>
+            <p>{Settings.translations.footer_text}</p>
             <button className="G-main-button">{Settings.translations.read_more}</button>
           </div>
         </div>

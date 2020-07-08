@@ -9,6 +9,8 @@ import OrderACall from './components/order_a_call';
 import LogoImage from 'assets/images/logo.png';
 import AppStoreImage from 'assets/images/app_store.png';
 import GooglePlayImage from 'assets/images/google_play.png';
+import FacebookImage from 'assets/images/facebook.svg';
+import InstagramImage from 'assets/images/instagram.svg';
 import './style.scss';
 
 const currentYear = new Date().getFullYear();
@@ -20,8 +22,12 @@ const Footer = React.memo(() => (
       <div className="P-column">
         <p>{Settings.translations.footer_text}</p>
         <div className="P-social-links">
-          <a><i className="icon-facebook-4" /></a>
-          <a><i className="icon-Group-5749" /></a>
+          <a href="https://www.facebook.com/AlfaPharm" target="_blank">
+            <img src={FacebookImage} alt="facebook" />
+          </a>
+          <a href="https://www.instagram.com/AlfaPharm/" target="_blank">
+            <img src={InstagramImage} alt="instagram" />
+          </a>
         </div>
       </div>
       <div className="P-column">
