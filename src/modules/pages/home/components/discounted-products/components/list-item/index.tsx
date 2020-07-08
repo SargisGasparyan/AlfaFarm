@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import { Shared } from 'modules';
 import Settings from 'platform/services/settings';
 
 import MedicineImage from 'assets/images/medicine.png';
@@ -17,6 +18,7 @@ interface IProps {
 
 const ListItem = React.memo(({ data }: IProps) => (
   <a className="P-home-discounted-products-list-item">
+    <Shared.Products.DiscountLabel percent={Math.round(Math.random() * 50) + 1} />
     <div className="P-image" style={{ background: `url('${arr[Math.round(Math.random() * 3)]}') center/contain no-repeat` }} />
     <h3>Վիլակտ Մաշկի քսոււք</h3>
     <del className="P-discounted-price">5,500 AMD</del>

@@ -11,11 +11,11 @@ const AboutDelivery = React.memo(() => {
 
   return (
     <div onClick={() => setOpened(true)}>
-      <i className="icon-Group-5511" />
+      <i className="icon-Union-18" />
       <h3>{Settings.translations.mobile_app}</h3>
 
       {opened && <Modal className="P-contact-us-about-modal" onClose={() => setOpened(false)}>
-        <i className="icon-Group-5507" />
+        <i className="icon-Union-18" />
         <h3>{Settings.translations.mobile_app}</h3>
         <p>{Settings.translations.about_mobile_app_text}</p>      
         <div className="P-download-images">
