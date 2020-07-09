@@ -7,7 +7,6 @@ import { renderToString } from 'react-dom/server';
 import App from './app';
 import InitialHeaders from './platform/constants/initial-headers';
 import ProductController from './platform/api/product';
-import Settings from './platform/services/settings';
 
 const assets = require(process.env.RAZZLE_ASSETS_MANIFEST || '');
 const server = express();
@@ -59,20 +58,6 @@ function buildHTML(markup: string, title: string, description: string, keywords:
       ? `<script src="${assets.client.js}" defer></script>`
       : `<script src="${assets.client.js}" defer crossorigin></script>`
     }   
-       
-    <script>
-      var y = window.localStorage.getItem('language');
-      var x = +y === 2 ? 'RU' : +y === 3 ? 'EN' : 'HY';
-      var script = document.createElement('script');
-      script.async = true;
-      script.defer = true;
-      script.src = "https://maps.googleapis.com/maps/api/js?key=${Settings.googleAPIKey}&libraries=places&language=" + x;
-      document.head.appendChild(script);
-    </script>
-
-    <!-- Yandex.Metrika counter --> 
-    <script type="text/javascript" > (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)}; m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)}) (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym"); ym(62710276, "init", { clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true, trackHash:true, ecommerce:"dataLayer" });
-    </script> <!-- /Yandex.Metrika counter -->
 
         
       <script>
