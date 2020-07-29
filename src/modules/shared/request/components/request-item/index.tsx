@@ -163,7 +163,6 @@ class ProductRequestItem extends HelperComponent<IProps, IState> {
             options={categories}
             placeholderOpacity={true}
             placeholder={Settings.translations.choose}
-            useValue={true}
             clear={true}
           />
         </div>
@@ -186,7 +185,6 @@ class ProductRequestItem extends HelperComponent<IProps, IState> {
             options={mues}
             placeholderOpacity={true}
             placeholder={Settings.translations.choose}
-            useValue={true}
           />
         </div>
         <div className="P-request-field P-half">

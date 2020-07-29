@@ -1,14 +1,15 @@
 import * as React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 
-import Search from './components/search';
 import LanguageSwitcher from './components/language-switcher';
 import ROUTES from 'platform/constants/routes';
 import Settings from 'platform/services/settings';
 import HelperPureComponent from 'platform/classes/helper-pure-component';
+import SearchInput from 'components/search-input';
 import { Shared } from 'modules';
 
 import LogoImage from 'assets/images/logo.png';
+
 import './style.scss';
 
 interface IState {
@@ -40,7 +41,7 @@ class Header extends HelperPureComponent<{}, IState> {
           <img src={LogoImage} className="G-full-width" />
         </Link>
         
-        <Search />
+        <SearchInput withSubmit={true} />
 
         <NavLink {...this.navLinkProps} to={ROUTES.PRODUCTS.LIST}>{Settings.translations.online_pharmacy}</NavLink>
         <NavLink {...this.navLinkProps} to={ROUTES.PHARMACIES}>{Settings.translations.pharmacies}</NavLink>

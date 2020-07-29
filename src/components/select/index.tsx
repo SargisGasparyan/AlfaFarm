@@ -23,9 +23,8 @@ interface IProps<Value> {
   onChange?(value: IDropdownOption<Value> | null): void;
   withNew?: boolean;
   defaultValue?: Value;
-  useValue?: boolean;
   value?: Value | null;
-  options: Array<IDropdownOption<Value>>;
+  options: IDropdownOption<Value>[];
   clear?: boolean;
 };
 
@@ -43,7 +42,7 @@ class Select<Value extends string | number | null | {}> extends HelperPureCompon
     onNewClick: null,
     withNew: false,
     changable: true,
-    useValue: false,
+    placeholderOpacity: true,
     value: null,
     options: [],
   }
@@ -59,6 +58,18 @@ class Select<Value extends string | number | null | {}> extends HelperPureCompon
     });
 
     if (value) this.safeSetState({ value });
+  }
+
+  private get htmlTitle() {
+    const { changable } = this.props;
+    const value = this.getCurrentValue();
+    return value && changable && typeof value.name === 'string' ? value.name : undefined
+  }
+  
+  private get title() {
+    const { changable, placeholder } = this.props;
+    const value = this.getCurrentValue();
+    return value && changable ? value.name : placeholder;
   }
 
   private toggleState = (isOpen: boolean) => this.safeSetState({ isOpen });
@@ -81,37 +92,34 @@ class Select<Value extends string | number | null | {}> extends HelperPureCompon
     const option = this.getCurrentValue();
     const showingOptions = options.filter(item => option ? item.value !== option.value : item.value !== '//cr');
 
-    // const elem = options.find(item => item.value === 6);
-    // const elemIndex = options.findIndex(item => item.value === 6);
-
-    // if (elem) {
-    //   options[elemIndex] = options[0];
-    //   options[0] = elem;
-    // }
-
     return <ul className="P-select-body">
       {showingOptions.length ? showingOptions.map((item, index) => <li
         key={typeof item.value === 'number' ? item.value : index}
         onClick={() => this.chooseItem(item)}
         title={typeof item.name === 'string' ? item.name : undefined}
-      >{typeof item.name === 'function' ? (item.name as DropdownNameFunctionType)() : item.name}</li>) : <li className="P-select-empty-label">{emptyText || Settings.translations.no_options}</li>}
-      {withNew && <li className="P-select-new-label" onClick={onNewClick && onNewClick}>{Settings.translations.new}</li>}      
-    </ul>
+      >
+        {typeof item.name === 'function' ? (item.name as DropdownNameFunctionType)() : item.name}
+      </li>) : <li className="P-select-empty-label">{emptyText || Settings.translations.no_options}</li>}
+      
+      {withNew && <li
+        className="P-select-new-label"
+        onClick={onNewClick && onNewClick}
+      >{Settings.translations.new}</li>}      
+    </ul>;
   }
 
   private getCurrentValue = () => {
-    const { useValue, options } = this.props;
-    return useValue ? options.find(item => item.value === this.props.value) : this.state.value;
+    const { options } = this.props;
+    return this.props.value ? options.find(item => item.value === this.props.value) : this.state.value;
   }
 
   public render() {
     const {
       placeholderOpacity,
-      changable,
-      placeholder,
       className,
       clear,
     } = this.props;
+    
     const { isOpen } = this.state;
     const value = this.getCurrentValue();
     
@@ -119,9 +127,9 @@ class Select<Value extends string | number | null | {}> extends HelperPureCompon
     return (
       <ClickOutside className={className} onClickOutside={() => this.toggleState(false)}>
         <div className="P-select">
-          <div className={`P-select-header${isOpen ? ' P-select-open' : ''}`} onClick={() => this.toggleState(!isOpen)} title={value && changable && typeof value.name === 'string' ? value.name : undefined}>
-            <span className={!value && placeholderOpacity ? 'P-select-placeholder' : ''}>{value && changable ? value.name : placeholder}</span>
-            {clear && value && <i className="icon-close" onClick={this.clearValue} />}
+          <div className={`P-select-header ${isOpen ? 'P-select-open' : ''}`} onClick={() => this.toggleState(!isOpen)} title={this.htmlTitle}>
+            <span className={!value && placeholderOpacity ? 'P-select-placeholder' : ''}>{this.title}</span>
+            {clear && value && <span className="P-select-remove" onClick={this.clearValue}>&times;</span>}
             <i className="icon-Group-5504" />
           </div>
           {isOpen &&  <this.Options />}

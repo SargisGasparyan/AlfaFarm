@@ -169,6 +169,7 @@ class Connection {
       !data.unabortable && window.abortableRequests.splice(window.abortableRequests.indexOf(abort), 1);
       return Connection.responseRestructure(response);
     } catch (e) {
+      console.log(e);
       !data.unabortable && window.abortableRequests.splice(window.abortableRequests.indexOf(abort), 1);    
       return { aborted: true };
     }

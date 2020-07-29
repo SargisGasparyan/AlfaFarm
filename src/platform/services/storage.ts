@@ -5,17 +5,21 @@ import UserController from '../api/user';
 import { IMU } from '../api/mu';
 import { IProfile } from '../api/user';
 import { ICategory } from '../api/category';
+import LanguageController from 'platform/api/language';
+import { ILanguageListResponseModel } from 'platform/api/language/models/response';
 
 class Storage {
 
   public static fetchDefault = async () => {
     try {
       const categories = await CategoryController.List();
+      const languages = await LanguageController.GetList();
       const mues = await MUController.List();
       const alertify = await import('alertifyjs');
       
       Storage.categories = categories.data;
       Storage.mues = mues.data;
+      Storage.languages = languages.data;
   
       if (Settings.token) {
         
@@ -42,6 +46,7 @@ class Storage {
   public static profile: IProfile;
   public static categories: ICategory[];
   public static mues: IMU[];
+  public static languages: ILanguageListResponseModel[];
 }
 
 export default Storage;

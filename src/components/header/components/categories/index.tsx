@@ -44,7 +44,6 @@ class Categories extends HelperComponent<IProps, {}> {
 
     //* Max 4 length (index 3)
     if (index < 3  && item.subCategoryCount && categoryLists[index].choosedId !== item._id) {
-      
       Connection.AbortAll();
       const nextIndex = index + 1;
       if (categoryLists[nextIndex]) {
@@ -81,7 +80,7 @@ class Categories extends HelperComponent<IProps, {}> {
           this.props.onCachedChange(cachedCategories);
           this.props.onChange(categoryLists);
         }
-      };
+      }
     }
   }
 

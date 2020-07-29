@@ -379,7 +379,6 @@ class ListDetails extends HelperComponent<IProps, IState> {
               onChange={this.chooseAction}
               className="P-actions"
               value={null}
-              useValue={true}
             />
           </h2>
           <h3 className="P-payer">{Settings.translations.payer}: {data.company || Settings.translations.i}</h3>

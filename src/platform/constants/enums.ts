@@ -1,8 +1,9 @@
 export enum LanguageEnum {
-  Armenian = 1,
-  Russian,
-  English,
+  Armenian = "am",
+  Russian = "ru",
+  English = "en",
 }
+
 export enum OSTypeEnum {
   Android = 1,
   iOS,
@@ -27,4 +28,14 @@ export enum NotificationTypeEnum {
   WishListProductRequest,
   WishListKick,
   WishListNewMember,
+};
+
+export enum WeekDaysEnum {
+  Monday = 1,
+  Tuesday,
+  Wednesday,
+  Thursday,
+  Friday,
+  Saturday,
+  Sunday,
 };

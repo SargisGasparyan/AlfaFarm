@@ -61,6 +61,14 @@ export const formatDate = (date?: string | number, withHours: boolean = true) =>
   return momentDate.format(withHours ? 'YYYY MMM DD | HH:mm' : 'YYYY MMM DD');
 }
 
+export const formatTime = (time?: string) => {
+  if (!time) return '';
+
+  const splited = time.split(':');
+  splited.pop();
+  return splited.join(':');
+}
+
 export const getHoverDirection = (e: React.MouseEvent, element?: HTMLElement) => {
   const node = element || e.target as HTMLElement;
 

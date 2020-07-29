@@ -8,13 +8,14 @@ import English from 'assets/translations/en';
 
 class Settings {
   
-  public static defaultLangauge = LanguageEnum.Armenian;
+  public static defaultLanguage = LanguageEnum.Armenian;
 
   public static facebookId = 392096548151413;
   public static googleId = '68962021705-tu6bdgffqj3orrlu34t6a9c4lfuupc6q.apps.googleusercontent.com';
   public static linkedinId = '77ji7ohk6dxaxv';
 
   public static googleAPIKey = 'AIzaSyDT8V0w75M0dzAqC61m3s-K7S0qRpTjQcU';
+  // AIzaSyDqd5WM8hmgmjB-7DozGaJ38M1fjIWrStY
 
   public static googlePlayURL = 'https://play.google.com/store/apps/details?id=am.armboldmind.ineed';
   public static appStoreURL = 'https://apps.apple.com/am/app/id1465885901';
@@ -24,14 +25,13 @@ class Settings {
   public static linkedinURL = 'https://www.linkedin.com/company/ineed.am/about/';
 
   public static get language(): LanguageEnum {
-    const storageLanguage = window.localStorage.getItem('language') || Settings.defaultLangauge;
-    const language = +storageLanguage;
-    if (!language || !LanguageEnum[language]) return Settings.defaultLangauge;
-    else return language;
+    const language = window.localStorage.getItem('language') as LanguageEnum || Settings.defaultLanguage;
+    if (!language || !Object.values(LanguageEnum).includes(language)) return Settings.defaultLanguage;
+    return language;
   }
 
   public static set language(value: LanguageEnum) {
-    window.localStorage.setItem('language', value.toString());
+    window.localStorage.setItem('language', value);
   }
 
   public static get shortCode() {
