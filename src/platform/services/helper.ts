@@ -4,6 +4,7 @@ import * as moment from 'moment';
 import Settings from './settings';
 import { IDropdownOption } from '../constants/interfaces';
 import { IProfile } from '../api/user';
+import enviroment from './enviroment';
 
 export const scrolledToBottom = () => (window.innerHeight + window.scrollY) >= document.body.scrollHeight - 1500;
 export const configedMoment = (date: string | number | Date) => moment.utc(date);
@@ -84,3 +85,5 @@ export const getHoverDirection = (e: React.MouseEvent, element?: HTMLElement) =>
 
   return null
 };
+
+export const getMediaPath = (path?: string | null) => path ? enviroment.BASE_URL + path : '';

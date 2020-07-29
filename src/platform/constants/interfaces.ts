@@ -52,9 +52,17 @@ export interface IGooglePlace {
 
 export interface IPagination<Data> {
   itemList: Data[];
+  list: Data[];
   categoryParentTree : ITreeList[];
   itemCount?: number;
+  totalCount: number;
   pagesLeft: boolean;
+  pageCount: number;
+};
+
+export interface IFile {
+  id: number;
+  path: string;
 };
 
 export interface IContactInfoModel {
@@ -83,3 +91,8 @@ export interface IBecomePartner {
   contactperson: string,
   
 }
+
+export interface IPagingRequest {
+  pageSize: number;
+  pageNumber: number;
+};

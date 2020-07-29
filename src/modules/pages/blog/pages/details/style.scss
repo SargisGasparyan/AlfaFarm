@@ -1,0 +1,22 @@
+@import 'src/assets/styles/variables';
+
+.P-blog-details-page {
+
+  display        : flex;
+  flex-direction : column;
+
+  > .P-back-icon {
+    color         : $text-gray;
+    cursor        : pointer;
+    font-size     : 26px;
+    margin-bottom : 30px;
+  }
+
+  > .P-content {
+    display         : flex;
+    flex-wrap       : wrap;
+    justify-content : space-between;
+
+    > .P-description { width: 100%; }
+  }
+}

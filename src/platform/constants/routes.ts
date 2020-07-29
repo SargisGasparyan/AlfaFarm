@@ -15,11 +15,20 @@ const PROFILE_ROUTES = RouteService.buildRouteContext('/profile', {
   NOTIFICATIONS: "/notifications",
 });
 
+const BLOG_ROUTES = RouteService.buildRouteContext('/blog', {
+  LIST: '',
+  DETAILS: '/:id',
+});
+
+const NEWS_ROUTES = RouteService.buildRouteContext('/news', {
+  LIST: '',
+  DETAILS: '/:id',
+});
+
 const PRODUCTS_ROUTES = RouteService.buildRouteContext('/products', {
   LIST: '',
   DETAILS: '/details/:id',
   PROPOSAL: '/proposal',
-  
 });
 
 const WISH_LIST_ROUTES = RouteService.buildRouteContext('/wish-list', {
@@ -30,8 +39,6 @@ const WISH_LIST_ROUTES = RouteService.buildRouteContext('/wish-list', {
 const ROUTES = {
   FAQ: '/faq',
   CART: '/cart',
-  BLOG: '/blog',
-  NEWS: '/news',
   ABOUT_US: '/about-us',
   VACANCIES: '/vacancies',
   HOW_TO_USE_APP: '/how-to-use-app',
@@ -45,6 +52,8 @@ const ROUTES = {
   CONFIDENTIALITY_CONDITIONS: '/conditions',
 
   HOME: HOME_ROUTES,
+  BLOG: BLOG_ROUTES,
+  NEWS: NEWS_ROUTES,
   PROFILE: PROFILE_ROUTES,
   PRODUCTS: PRODUCTS_ROUTES,
   WISH_LIST: WISH_LIST_ROUTES,

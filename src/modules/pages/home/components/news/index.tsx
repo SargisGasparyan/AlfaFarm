@@ -25,7 +25,7 @@ class News extends HelperPureComponent<{}, {}> {
         </div>
 
         <Link
-          to={ROUTES.NEWS}
+          to={ROUTES.NEWS.LIST}
           className="G-main-ghost-button G-auto-margin-left G-auto-margin-right"
         >{Settings.translations.show_all}</Link>
       </section>

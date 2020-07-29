@@ -46,7 +46,7 @@ class Header extends HelperPureComponent<{}, IState> {
         <NavLink {...this.navLinkProps} to={ROUTES.PRODUCTS.LIST}>{Settings.translations.online_pharmacy}</NavLink>
         <NavLink {...this.navLinkProps} to={ROUTES.PHARMACIES}>{Settings.translations.pharmacies}</NavLink>
         <NavLink {...this.navLinkProps} to={ROUTES.CLINIC}>{Settings.translations.clinic}</NavLink>
-        <NavLink {...this.navLinkProps} to={ROUTES.BLOG}>{Settings.translations.blog}</NavLink>
+        <NavLink {...this.navLinkProps} to={ROUTES.BLOG.LIST}>{Settings.translations.blog}</NavLink>
 
         <span
           onClick={this.toggleAuth}
