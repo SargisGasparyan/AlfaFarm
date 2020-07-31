@@ -38,19 +38,15 @@ export const isValidPhone = (value?: string | null): boolean => {
   const beeline = '91|99|96|43|33';
   const ucom = '55|95|41|44|45';
   const mts = '93|94|77|49|98';
-  if (!value && value !== '') {
-    return false
-  } else {
-    const regex = new RegExp(`^(374)?((?:${mts}|${beeline}|${ucom})([0-9]{6}))$`);
-    return regex.test(value);
-  }
+
+  if (!value && value !== '') return false
+  const regex = new RegExp(`^(374)?((?:${mts}|${beeline}|${ucom})([0-9]{6}))$`);
+  return regex.test(value);
 };
 
 export const isValidPhoneOnly = (value?: any | null) => {
-  if (value.length > 12 || value.length < 9) {
-    return false;
-  } return value;
-
+  if (value.length > 12 || value.length < 9) return false;
+  return value;
 };
 
 export const phoneFieldPattern = "[0-9]{1,8}";

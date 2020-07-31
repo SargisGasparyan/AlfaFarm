@@ -2,14 +2,14 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 
 import Settings from 'platform/services/settings';
-import { INewListResponseModel } from 'platform/api/news/models/response';
+import { INewsListResponseModel } from 'platform/api/news/models/response';
 import { getMediaPath } from 'platform/services/helper';
 import ROUTES from 'platform/constants/routes';
 
 import './style.scss';
 
 interface IProps {
-  data: INewListResponseModel;
+  data: INewsListResponseModel;
 };
 
 const FirstItem = React.memo(({ data }: IProps) => (

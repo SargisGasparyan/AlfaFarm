@@ -1,6 +1,8 @@
-import Connection from '../services/connection';
-import { IResponse } from '../constants/interfaces';
-import { OSTypeEnum, LanguageEnum } from '../constants/enums';
+import Connection from '../../services/connection';
+import { IResponse } from '../../constants/interfaces';
+import { OSTypeEnum, LanguageEnum } from '../../constants/enums';
+import { ILoginResponseModel } from './models/response';
+import { ILoginRequestModel } from './models/request';
 
 const controller = 'auth';
 
@@ -18,24 +20,11 @@ export interface IRegisterRequestModel {
   code: string,
   password: string,
   language: LanguageEnum,
-  // "deviceId": "string",
-  // "deviceToken": "string"
 };
 
 export interface ISendEmailRequestModel {
   osType: OSTypeEnum;
   email: string;
-};
-
-export interface ILoginRequestModel {
-  osType: OSTypeEnum;
-  email: string;
-  password: string;
-};
-
-export interface ILoginResponseModel {
-  bonusCount: number,
-  token: string;
 };
 
 export interface ISocialLoginRequestModel {
@@ -67,9 +56,8 @@ class AuthController {
   public static Login = (form: ILoginRequestModel): Promise<IResponse<ILoginResponseModel>> => {
     const result = Connection.POST<ILoginRequestModel>({
       body: form,
-      action: 'loginUser',
+      action: 'login',
       controller,
-      withoutError: true,
     });
 
     return result;

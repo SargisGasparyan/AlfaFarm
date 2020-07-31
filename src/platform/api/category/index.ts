@@ -1,6 +1,6 @@
-import Settings from '../services/settings';
-import Connection from '../services/connection';
-import { IResponse } from '../constants/interfaces';
+import Connection from '../../services/connection';
+import { IResponse } from '../../constants/interfaces';
+import { ICategoryListResponseModel } from './models/response';
 
 const controller = 'category';
 
@@ -43,10 +43,10 @@ export interface IMainHomeCategory {
 
 class CategoryController {
 
-  public static List = (id?: string): Promise<IResponse<ICategory[]>> => {
+  public static GetList = (parentId?: number): Promise<IResponse<ICategoryListResponseModel[]>> => {
     const result = Connection.GET({
-      action: 'device',
-      query: { language: Settings.language, id },
+      action: '',
+      query: { parentId },
       controller,
     });
 

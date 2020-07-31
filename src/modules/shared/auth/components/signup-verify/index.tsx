@@ -73,13 +73,11 @@ class SignUpVerify extends HelperComponent<IProps, IState> {
         const result = await AuthController.Register(form);
 
         if (result.success) {
-          Settings.token = result.data.token;
-          if (result.data.bonusCount) sessionStorage.setItem('giftBonusCount', result.data.bonusCount.toString());
-          else sessionStorage.removeItem('giftBonusCount');
+          Settings.token = result.data.accessToken;
           window.routerHistory.push(ROUTES.HOME.MAIN);
           window.location.reload();
         } else {
-          this.props.onError(result.message);
+          this.props.onError(result.messages[0].value);
           this.safeSetState({ loading: false });
         }
       })

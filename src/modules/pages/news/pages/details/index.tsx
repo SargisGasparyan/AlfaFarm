@@ -32,7 +32,7 @@ class Details extends HelperComponent<RouteComponentProps<IRouteParams>, IState>
   private fetchData = async () => {
     const { id } = this.props.match.params;
     const result = await NewsController.GetDetails(+id);
-    this.setState({ data: result.data });
+    this.safeSetState({ data: result.data });
   }
 
   public render() {

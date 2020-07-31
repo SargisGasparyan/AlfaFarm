@@ -1,7 +1,8 @@
 import * as React from 'react';
 
 export const currency = <>&#1423;</>;
-export const paginationPageLimit = 4;
+export const paginationPageLimit = 30;
+export const infinityScrollMax = 200;
 export const googlePlacesTypes = ['geocode', 'establishment'];
 export const geolocation = { lat: 40.1792, lng: 44.4991 };
 export const googlePlacesRestrictions = { country: ['am', 'az'] };

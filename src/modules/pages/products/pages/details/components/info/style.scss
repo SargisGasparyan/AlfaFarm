@@ -16,6 +16,16 @@
       border-bottom  : 2px solid $dark-gray;
       padding-bottom : 20px;
     }
+
+    &.P-row {
+      width           : 60%;
+      display         : flex;
+      min-width       : 350px;
+      margin-bottom   : 40px;
+      justify-content : space-between;
+
+      > .P-value { color: black; }
+    }
   }
 
   > p {

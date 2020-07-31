@@ -46,7 +46,6 @@
 }
 
 .G-invalid-text { color: red !important; }
-.G-invalid-field { border: 1px solid red !important; }
 .G-invalid-select .P-select-header { border: 1px solid red !important; }
 
 .G-show-action-button {
@@ -285,12 +284,13 @@
 
 // #endregion Sizes
 
-// #region Margins
+// #region Positioning
 
+.G-position-relative { position: relative; }
 .G-auto-margin-left { margin-left: auto; }
 .G-auto-margin-right { margin-right: auto; }
 
-// #endregion Margins
+// #endregion Positioning
 
 // #region Flex
 
@@ -338,6 +338,8 @@
     width : 100%;
   }
 }
+
+.G-invalid-field { border: 1px solid red !important; }
 
 .G-phone-input-wrapper {
   position : relative;

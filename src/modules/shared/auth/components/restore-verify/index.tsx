@@ -70,13 +70,11 @@ class RestoreVerfiy extends HelperComponent<IProps, IState> {
         form.code = data.code;
         const result = await AuthController.ForgotRestore(form);
         if (result.success) {
-          Settings.token = result.data.token;
-          if (result.data.bonusCount) sessionStorage.setItem('giftBonusCount', result.data.bonusCount.toString());
-          else sessionStorage.removeItem('giftBonusCount');
+          Settings.token = result.data.accessToken;
           window.routerHistory.push(ROUTES.HOME.MAIN);
           window.location.reload();
         } else {
-          onError(result.message);
+          onError(result.messages[0].value);
           this.safeSetState({ loading: false });
         }
       })

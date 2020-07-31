@@ -47,9 +47,9 @@ class Connection {
       if (contentType && contentType.indexOf("application/json") !== -1) {
         response.json().then((result: IResponse<any>) => {
           const success = dataAsSuccess ? result.data : result.success;
-          if (!success && !withoutError && result.message) {
+          if (!success && !withoutError && result.messages && result.messages[0]) {
             alertify.dismissAll();
-            alertify.error(result.message);
+            alertify.error(result.messages[0].value);
           }
           
           resolve(result);

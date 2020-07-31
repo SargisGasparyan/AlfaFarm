@@ -47,27 +47,6 @@ class ProductRequestItem extends HelperComponent<IProps, IState> {
     }
   };
 
-  public componentDidMount() {
-    const categories = Storage.categories.map(item => ({ name: item.name, value: item._id }));
-    const mues = Storage.mues.map(item => ({ name: item.name, value: item._id }));
-
-    const newState: {
-      categories: Array<IDropdownOption<string>>;
-      mues: Array<IDropdownOption<string>>;
-      form?: IRequestAddModel,
-    } = {
-      categories,
-      mues,
-    };
-
-    if (this.props.form) newState.form = this.props.form;
-    else this.props.onChange(this.state.form);
-    this.safeSetState(prev => ({
-      ...prev,
-      ...newState,
-    }));
-  };
-
   private changeCategory = (option: IDropdownOption<string> | null) => {
     const { form } = this.state;
     if (option) form.category = option.value;

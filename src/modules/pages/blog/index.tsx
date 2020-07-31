@@ -67,20 +67,22 @@ class Blog extends HelperComponent<{}, IState> {
   }
 
   public render() {
-    const { data, loading } = this.state;
+    const { data } = this.state;
     const firstItem = data && data.length ? data[0] : null;
-    const filteredData = data ? data.slice(1) : null;
+    const sortedData = data ? data.slice(1) : null;
 
-    return filteredData && !loading ? (
+    return (
       <section className="G-page P-blog-page">
-        <ShadowText className="G-page-title">{Settings.translations.blog}</ShadowText>
-        {firstItem && <FirstItem data={firstItem} />}
-        
-        {!!filteredData.length && <div className="P-list-wrapper">
-          {filteredData.map(item => <ListItem key={item.id} data={item} />)}
-        </div>}
+        {sortedData ? <>
+          <ShadowText className="G-page-title">{Settings.translations.blog}</ShadowText>
+          {firstItem && <FirstItem data={firstItem} />}
+          
+          {!!sortedData.length && <div className="P-list-wrapper">
+            {sortedData.map(item => <ListItem key={item.id} data={item} />)}
+          </div>}
+        </> : <PageLoader />}
       </section>
-    ) : <PageLoader />;
+    );
   }
 }
 

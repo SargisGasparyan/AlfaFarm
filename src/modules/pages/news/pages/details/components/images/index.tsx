@@ -26,7 +26,7 @@ class Images extends HelperPureComponent<IProps, IState> {
 
   public componentDidMount() {
     const { data } = this.props;
-    this.setState({ activeId: data.images[0].id });
+    this.safeSetState({ activeId: data.images[0].id });
   }
 
   private get activeImage() {

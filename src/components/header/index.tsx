@@ -11,15 +11,23 @@ import { Shared } from 'modules';
 import LogoImage from 'assets/images/logo.png';
 
 import './style.scss';
+import Categories from './components/categories';
+import DispatcherChannels from 'platform/constants/dispatcher-channels';
 
 interface IState {
   authOpen: boolean;
+  categoryOpenPosition: number;
+  categoryOpen: boolean;
 };
 
 class Header extends HelperPureComponent<{}, IState> {
   public state: IState = {
     authOpen: false,
+    categoryOpenPosition: 0,
+    categoryOpen: false,
   };
+
+  private categoryOpenLink = React.createRef<HTMLAnchorElement>();
 
   private navLinkProps = {
     className: 'P-link',
@@ -27,13 +35,42 @@ class Header extends HelperPureComponent<{}, IState> {
     exact: true,
   };
 
+  public componentDidMount() {
+    setTimeout(this.checkWindow, 500); // Wait for assets load to get the right position
+    window.addEventListener('resize', this.checkWindow);
+  }
+
+  public componentWillUnmount() {
+    super.componentWillUnmount();
+    window.removeEventListener('resize', this.checkWindow);
+  }
+
+  private checkWindow = () => {
+    const { categoryOpenPosition } = this.state;
+    if (this.categoryOpenLink.current) {
+      const openPosition = this.categoryOpenLink.current.getBoundingClientRect().left;
+      openPosition !== categoryOpenPosition && this.safeSetState({ categoryOpenPosition: openPosition })
+    }
+  }
+
   private toggleAuth = () => {
     const { authOpen } = this.state;
     this.safeSetState({ authOpen: !authOpen });
   }
 
+  private toggleCategories = (e?: React.SyntheticEvent) => {
+    e && e.stopPropagation();
+    const { categoryOpen } = this.state;
+    this.safeSetState({ categoryOpen: !categoryOpen });
+  }
+
+  private searchSubmit = (value: string) => {
+    window.routerHistory.push(`${ROUTES.PRODUCTS.LIST}?text=${value}`);
+    window.dispatchEvent(new Event(DispatcherChannels.ProductFilterChange));
+  }
+
   public render() {
-    const { authOpen } = this.state;
+    const { authOpen, categoryOpenPosition, categoryOpen } = this.state;
 
     return (
       <header className="G-flex G-flex-align-center G-flex-justify-center">
@@ -41,9 +78,14 @@ class Header extends HelperPureComponent<{}, IState> {
           <img src={LogoImage} className="G-full-width" />
         </Link>
         
-        <SearchInput withSubmit={true} />
+        <SearchInput withSubmit={true} onSubmit={this.searchSubmit} />
 
-        <NavLink {...this.navLinkProps} to={ROUTES.PRODUCTS.LIST}>{Settings.translations.online_pharmacy}</NavLink>
+        <a
+          ref={this.categoryOpenLink}
+          onClick={this.toggleCategories}
+          className={`P-link ${categoryOpen ? 'P-active' : ''}`}
+        >{Settings.translations.online_pharmacy}</a>
+
         <NavLink {...this.navLinkProps} to={ROUTES.PHARMACIES}>{Settings.translations.pharmacies}</NavLink>
         <NavLink {...this.navLinkProps} to={ROUTES.CLINIC}>{Settings.translations.clinic}</NavLink>
         <NavLink {...this.navLinkProps} to={ROUTES.BLOG.LIST}>{Settings.translations.blog}</NavLink>
@@ -51,7 +93,7 @@ class Header extends HelperPureComponent<{}, IState> {
         <span
           onClick={this.toggleAuth}
           className="P-link P-login"
-        >{Settings.translations.log_in}</span>
+        >{Settings.translations.log_in} {Settings.token ? 'LLL' : ''}</span>
 
         <Link to={ROUTES.CART} className="P-link P-icon G-normal-link">
           <i className="icon-Group-5515" />
@@ -63,6 +105,8 @@ class Header extends HelperPureComponent<{}, IState> {
       
         <LanguageSwitcher />
         {authOpen && <Shared.Auth onClose={this.toggleAuth} />}
+
+        {!!categoryOpenPosition && categoryOpen && <Categories openPosition={categoryOpenPosition} onClose={this.toggleCategories} />}
       </header>
     );
   }

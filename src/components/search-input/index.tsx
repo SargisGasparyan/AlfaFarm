@@ -14,7 +14,7 @@ interface IState {
 interface IProps {
   withSubmit?: boolean;
   onChange?(value: string): void;
-  onSearch?(value: string): void;
+  onSubmit?(value: string): void;
 };
 
 class SearchInput extends HelperPureComponent<IProps, IState> {
@@ -32,10 +32,10 @@ class SearchInput extends HelperPureComponent<IProps, IState> {
 
   private submit = (e: React.SyntheticEvent) => {
     const { search } = this.state;
-    const { onSearch } = this.props;
+    const { onSubmit } = this.props;
 
     e.preventDefault();
-    onSearch && onSearch(search);
+    onSubmit && onSubmit(search);
   }
 
   public render() {

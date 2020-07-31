@@ -4,32 +4,29 @@ import { Link } from 'react-router-dom';
 import Settings from 'platform/services/settings';
 import ROUTES from 'platform/constants/routes';
 import CountInput from 'components/count-input';
-
-import MedicineImage from 'assets/images/medicine.png';
-import MedicineImage1 from 'assets/images/medicine_1.jpg';
-import MedicineImage2 from 'assets/images/medicine_2.jpg';
-import MedicineImage3 from 'assets/images/medicine_3.jpg';
-
-const arr = [MedicineImage, MedicineImage1, MedicineImage2, MedicineImage3];
+import { IProductListResponseModel } from 'platform/api/product/models/response';
+import { getMediaPath } from 'platform/services/helper';
+import DiscountLabel from '../discount-label';
 
 import './style.scss';
 
+
 interface IProps {
-  data: any;
+  data: IProductListResponseModel;
 };
 
 const ListItem = React.memo(({ data }: IProps) => (
-  <Link className="P-products-list-item" to={ROUTES.PRODUCTS.DETAILS.replace(':id', 'something')}>
-    <div className="P-image" style={{ background: `url('${arr[Math.round(Math.random() * 3)]}') center/contain no-repeat` }} />
+  <Link className="P-products-list-item" to={ROUTES.PRODUCTS.DETAILS.replace(':id', data.id)}>
+    {data.discount && <DiscountLabel percent={data.discount} />}
+    <div className="P-image" style={{ background: `url('${getMediaPath(data.imagePath)}') center/contain no-repeat` }} />
     <i className={`P-favorite ${Math.random() > 0.5 ? 'icon-Group-5518' : 'P-active icon-Group-5520'}`} />
-    <h3>Վիլակտ Մաշկի քսոււք</h3>
+    <h3>{data.title}</h3>
     
     <div className="P-price">
-      <span>2,500 AMD</span>
+      <span>{data.price} AMD</span>
       <CountInput step={1} min={1} onChange={() => { /**/ }} />
     </div>
     <button className="G-main-button">{Settings.translations.add}</button>
-    {data?'':''}
   </Link>
 ));
 

@@ -5,7 +5,7 @@ import { RequestSendTypeEnum } from '../api/request';
 
 export interface IResponse<Data> {
   data: Data;
-  message: string;
+  messages: { key: number, value: string }[];
   success: boolean;
   abort(): void;
   aborted?: boolean;

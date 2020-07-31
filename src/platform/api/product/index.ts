@@ -1,5 +1,7 @@
-import Connection from '../services/connection';
-import { IResponse, IPagination } from '../constants/interfaces';
+import Connection from '../../services/connection';
+import { IResponse, IPagination } from '../../constants/interfaces';
+import { IProductListRequestModel } from './models/request';
+import { IProductListResponseModel, IProductDetailsResponseModel } from './models/response';
 
 export enum ProductColorTypeEnum {
   MultiColor = 1,
@@ -134,37 +136,12 @@ export interface IProductVersionResponseModel {
   };
 };
 
-export enum ProductSortEnum {
-  DateNewToOld = 6,
-  BestSelling = 1,
-  PriceLowToHigh = 2,
-  PriceHighToLow = 3,
-  DiscountLowToHigh = 4,
-  DiscountHighToLow = 5
-};
-
-export interface IProductListFilter {
-  brandIdList?: string[];
-  category?: string;
-  promotion?: string;
-  mu?: string;
-  search?: string;
-  priceFrom?: number;
-  priceTo?: number;
-  sort?: ProductSortEnum;
-  withSale?: boolean;
-  withBonus?: boolean;
-};
-
 export interface IProductSearchItem {
   name: string;
   _id: string;
 };
 
-export interface IProductListRequestModel extends IProductListFilter {
-  pageNo: number;
-  limit: number;
-};
+
 
 export interface IProductCartListRequestModel { idList: ICartItem[]; }
 
@@ -220,10 +197,28 @@ const controller = 'product';
 
 class ProductController {
 
-  public static Details = (id: string): Promise<IResponse<IProduct>> => {
+  public static GetList = (body: IProductListRequestModel): Promise<IResponse<IPagination<IProductListResponseModel>>> => {
+    const result = Connection.POST<IProductListRequestModel>({
+      body,
+      action: 'list',
+      controller,
+    });
+
+    return result;
+  };
+
+  public static GetRelated = (id: number): Promise<IResponse<IProductListResponseModel[]>> => {
     const result = Connection.GET({
-      action: 'details',
-      query: { id },
+      action: `related/${id}`,
+      controller,
+    });
+
+    return result;
+  };
+
+  public static GetDetails = (id: number): Promise<IResponse<IProductDetailsResponseModel>> => {
+    const result = Connection.GET({
+      action: `${id}`,
       controller,
     });
 

@@ -1,0 +1,29 @@
+@import 'src/assets/styles/variables';
+
+.P-products-filter {
+  min-width    : 300px;
+  max-width    : 300px;
+  margin-right : 120px;
+
+  > h2 {  
+    margin      : 40px 0 20px;
+    font-weight : 300;
+
+    &:first-child { margin-top: 0; }
+  }
+
+  > .P-checkbox-row {
+    display     : flex;
+    align-items : center;
+
+    > .rc-checkbox {
+      display     : flex;
+      align-items : center;
+    }
+
+    > .P-name {
+      font-size   : $normal-fs;
+      margin-left : 10px;
+    }
+  }
+}
