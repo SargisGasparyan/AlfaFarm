@@ -17,6 +17,8 @@ interface IProps {
 };
 
 interface IState {
+  brandsOpen: boolean;
+  activeIngredientsOpen: boolean;
   body: IProductFilterRequestModel;
 };
 
@@ -26,6 +28,8 @@ const priceMax = 10000;
 class Filter extends HelperComponent<IProps, IState> {
 
   public state: IState = {
+    brandsOpen: false,
+    activeIngredientsOpen: false,
     body: {
       minPrice: 0,
       maxPrice: 10000,
@@ -48,7 +52,7 @@ class Filter extends HelperComponent<IProps, IState> {
     this.safeSetState({ body }, onChange);
   }
 
-  private toggleBrand = (id: number) => {
+  private toggleBrandItem = (id: number) => {
     const { body } = this.state;
     const { onChange } = this.props;
 
@@ -65,7 +69,7 @@ class Filter extends HelperComponent<IProps, IState> {
     }
   }
 
-  private toggleActiveIngredient = (id: number) => {
+  private toggleActiveIngredientItem = (id: number) => {
     const { body } = this.state;
     const { onChange } = this.props;
 
@@ -82,8 +86,18 @@ class Filter extends HelperComponent<IProps, IState> {
     }
   }
 
+  private toggleBrands = () => {
+    const { brandsOpen }  = this.state;
+    this.safeSetState({ brandsOpen: !brandsOpen });
+  }
+
+  private toggleActiveIngredients = () => {
+    const { activeIngredientsOpen }  = this.state;
+    this.safeSetState({ activeIngredientsOpen: !activeIngredientsOpen });
+  }
+
   public render() {
-    const { body } = this.state;
+    const { body, brandsOpen, activeIngredientsOpen } = this.state;
     const priceValues = [body.minPrice || 0, body.maxPrice || 0]
 
     return (
@@ -117,15 +131,23 @@ class Filter extends HelperComponent<IProps, IState> {
           )}
         />
 
-        <h2>{Settings.translations.brand}</h2>
-        {Storage.brands.map(item => <div className="P-checkbox-row" key={item.id}>
-          <CheckBox checked={body.brandIds?.includes(item.id)} onChange={() => this.toggleBrand(item.id)} />
+        <h2 className="P-row-title" onClick={this.toggleBrands}>
+          {Settings.translations.brand}
+          <span className="G-orange-color">{brandsOpen ? '-' : '+'}</span>
+        </h2>
+        
+        {brandsOpen && Storage.brands.map(item => <div className="P-checkbox-row" key={item.id}>
+          <CheckBox checked={body.brandIds?.includes(item.id)} onChange={() => this.toggleBrandItem(item.id)} />
           <span className="P-name">{item.name}</span>
         </div>)}
 
-        <h2>{Settings.translations.active_ingredient}</h2>
-        {Storage.activeIngredients.map(item => <div className="P-checkbox-row" key={item.id}>
-          <CheckBox checked={body.activeIngredientIds?.includes(item.id)} onChange={() => this.toggleActiveIngredient(item.id)} />
+        <h2 className="P-row-title" onClick={this.toggleActiveIngredients}>
+          {Settings.translations.active_ingredient}
+          <span className="G-orange-color">{activeIngredientsOpen ? '-' : '+'}</span>
+        </h2>
+
+        {activeIngredientsOpen && Storage.activeIngredients.map(item => <div className="P-checkbox-row" key={item.id}>
+          <CheckBox checked={body.activeIngredientIds?.includes(item.id)} onChange={() => this.toggleActiveIngredientItem(item.id)} />
           <span className="P-name">{item.name}</span>
         </div>)}
       </div>

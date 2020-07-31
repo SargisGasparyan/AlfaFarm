@@ -12,6 +12,16 @@
     &:first-child { margin-top: 0; }
   }
 
+  > .P-row-title {
+    cursor          : pointer;
+    display         : flex;
+    user-select     : none;
+    align-items     : center;
+    justify-content : space-between;
+
+    > span { font-size: 34px; }
+  }
+
   > .P-checkbox-row {
     display     : flex;
     align-items : center;
