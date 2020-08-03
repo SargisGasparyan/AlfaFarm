@@ -58,20 +58,20 @@ class Settings {
   public static set token(value: string | null) {
     if (value) {
       window.localStorage.setItem('token', value);
-      window.localStorage.removeItem('guestId');
+      window.localStorage.removeItem('guest');
     } else window.localStorage.removeItem('token');
   }
 
-  public static get guestId(): string | null {
-    const id = window.localStorage.getItem('guestId') || null;
-    return id;
+  public static get guest(): string | null {
+    const guest = window.localStorage.getItem('guest') || null;
+    return guest ? Settings.token : null;
   }
 
-  public static set guestId(value: string | null) {
+  public static set guest(value: string | null) {
     if (value) {
-      window.localStorage.setItem('guestId', value);
-      window.localStorage.removeItem('token');
-    } else window.localStorage.removeItem('guestId');
+      window.localStorage.setItem('token', value);
+      window.localStorage.setItem('guest', 'true');
+    } else window.localStorage.removeItem('guest');
   }
 
   public static logout = () => {

@@ -1055,7 +1055,7 @@ export default {
   personal_data: "Անձնական տվյալներ",
   save_changes: "Պահպանել փոփոխությունները",
   verification: "Ստուգում",
-  verification_text: "Խնդրում ենք մուտքագրել հաստատման կոդը, ուղարված",
+  verification_text: "Խնդրում ենք մուտքագրել հաստատման կոդը",
   ok: "Լավ",
   or: "կամ",
   home: "Գլխավոր էջ",

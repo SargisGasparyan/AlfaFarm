@@ -3,30 +3,32 @@ import * as React from 'react';
 import LoaderContent from 'components/loader-content';
 import Settings from 'platform/services/settings';
 import HelperComponent from 'platform/classes/helper-component';
-import { IRegisterRequestModel } from 'platform/api/user/models/request';
+import { IVerifyRequestModel, ISendCodeRequestModel } from 'platform/api/auth/models/request';
 import { validateForm } from './services/helper';
+import AuthController from 'platform/api/auth';
 import { ModalContentEnum } from '../../constants/enums';
-import UserController from 'platform/api/user';
+import NumberInput from 'components/number-input';
 
 
 interface IProps {
   onTypeChange(type: ModalContentEnum): void;
+  activeData: object;
 };
 
 interface IState {
   submited: boolean;
   submitLoading: boolean;
-  form: IRegisterRequestModel;
+  form: IVerifyRequestModel;
 };
 
-class SignUp extends HelperComponent<IProps, IState> {
+class RestoreVerify extends HelperComponent<IProps, IState> {
 
   public state: IState = {
     submited: false,
     submitLoading: false,
     form: {
-      fullName: '',
-      password: '',
+      phoneNumber: '',
+      code: 0,
     },
   };
 
@@ -37,7 +39,7 @@ class SignUp extends HelperComponent<IProps, IState> {
 
   private changeField = (e: React.SyntheticEvent<HTMLInputElement>) => {
     const { form } = this.state;
-    form[e.currentTarget.name] = e.currentTarget.value;
+    form[e.currentTarget.name] = +e.currentTarget.value;
     this.safeSetState({ form })
   }
 
@@ -45,11 +47,16 @@ class SignUp extends HelperComponent<IProps, IState> {
     e.preventDefault();
     this.safeSetState({ submited: true }, async () => {
       this.formValidation.valid && this.safeSetState({ submitLoading: true }, async () => {
+        const { onTypeChange } = this.props;
         const { form } = this.state;
+        const activeData = this.props.activeData as { form: ISendCodeRequestModel, signUp: boolean };
+        form.phoneNumber = activeData.form.phoneNumber;
 
-        const result = await UserController.Register(form);
-        if (result.data) window.location.reload();
-        else this.safeSetState({ submitLoading: false });
+        const result = await AuthController.Verify(form);
+        if (result.data) {
+          Settings.token = result.data.accessToken;
+          onTypeChange(activeData.signUp ? ModalContentEnum.SignUp : ModalContentEnum.NewPassword);
+        } else this.safeSetState({ submitLoading: false });
       });
     });
   }
@@ -58,35 +65,26 @@ class SignUp extends HelperComponent<IProps, IState> {
     const { form, submitLoading } = this.state;
 
     return <>
-      <h3 className="G-main-color G-text-center">{Settings.translations.choose_password}</h3>
+      <h3 className="G-main-color G-text-center">{Settings.translations.verification_text}</h3>
       <form className="G-main-form">
         <div>
-          <input
-            name="fullName"
-            value={form.fullName}
-            placeholder={Settings.translations.full_name}
+          <NumberInput
+            int={true}
+            name="code"
+            value={form.code}
+            placeholder={Settings.translations.code}
             onChange={this.changeField}
-            className={`G-main-input ${this.formValidation.errors.fullName ? 'G-invalid-field' : ''}`}
-          />
-        </div>
-        <div>
-          <input
-            type="password"
-            name="password"
-            value={form.password}
-            placeholder={Settings.translations.password}
-            onChange={this.changeField}
-            className={`G-main-input ${this.formValidation.errors.password ? 'G-invalid-field' : ''}`}
+            className={`G-main-input ${this.formValidation.errors.code ? 'G-invalid-field' : ''}`}
           />
         </div>
         <LoaderContent
           className="G-main-button"
           loading={submitLoading}
           onClick={this.submit}
-        >{Settings.translations.confirm}</LoaderContent>
+        >{Settings.translations.next}</LoaderContent>
       </form>
     </>;
   }
 }
 
-export default SignUp;
+export default RestoreVerify;

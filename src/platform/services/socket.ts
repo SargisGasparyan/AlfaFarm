@@ -7,7 +7,7 @@ class Socket {
   public static connection: SocketIOClient.Socket;
 
   private static guestListener = () => {
-    Socket.connection.on('yourId', (id: string) => Settings.guestId = id);
+    // Socket.connection.on('yourId', (id: string) => Settings.guestId = id);
   }
 
   public static connect = () => {

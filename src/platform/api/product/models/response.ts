@@ -4,6 +4,7 @@ export interface IProductListResponseModel {
   id: number;
   title: string;
   price: number;
+  isFavorite: boolean;
   discount?: number;
   imagePath?: string;
 };

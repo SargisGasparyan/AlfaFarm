@@ -2,7 +2,7 @@ import Connection from '../../services/connection';
 import { IResponse } from '../../constants/interfaces';
 import { OSTypeEnum, LanguageEnum } from '../../constants/enums';
 import { ILoginResponseModel } from './models/response';
-import { ILoginRequestModel } from './models/request';
+import { ILoginRequestModel, ISendCodeRequestModel, IVerifyRequestModel, IRecoveryRequestModel } from './models/request';
 
 const controller = 'auth';
 
@@ -13,13 +13,6 @@ export interface IChoosePasswordRequestModel {
   code: string;
   password: string;
   confirmPassword?: string;
-};
-export interface IRegisterRequestModel {
-  osType: OSTypeEnum,
-  email: string,
-  code: string,
-  password: string,
-  language: LanguageEnum,
 };
 
 export interface ISendEmailRequestModel {
@@ -34,22 +27,10 @@ export interface ISocialLoginRequestModel {
   language?: LanguageEnum;
 };
 
-export interface IVerifyRequestModel {
-  email: string,
-  code: string,
-};
-
 export interface IVerifyPhoneModel {
   email: string,
   code: string,
 }
-
-
-export interface IVerifyRequestModel {
-  email: string,
-  code: string,
-};
-
 
 class AuthController {
 
@@ -63,7 +44,44 @@ class AuthController {
     return result;
   };
 
+  public static SendCode = (form: ISendCodeRequestModel): Promise<IResponse<number>> => {
+    const result = Connection.POST<ISendCodeRequestModel>({
+      body: form,
+      action: 'code',
+      controller,
+    });
 
+    return result;
+  };
+
+  public static Guest = (): Promise<IResponse<ILoginResponseModel>> => {
+    const result = Connection.GET({
+      action: 'guest',
+      controller,
+    });
+
+    return result;
+  };
+
+  public static Verify = (form: IVerifyRequestModel): Promise<IResponse<ILoginResponseModel>> => {
+    const result = Connection.POST<IVerifyRequestModel>({
+      body: form,
+      action: 'verify',
+      controller,
+    });
+
+    return result;
+  };
+
+  public static Recovery = (form: IRecoveryRequestModel): Promise<IResponse<boolean>> => {
+    const result = Connection.POST<IRecoveryRequestModel>({
+      body: form,
+      action: 'recovery',
+      controller,
+    });
+
+    return result;
+  };
 
   public static Social = (form: ISocialLoginRequestModel): Promise<IResponse<ILoginResponseModel>> => {
     const result = Connection.POST<ISocialLoginRequestModel>({
@@ -94,16 +112,6 @@ class AuthController {
       action: 'forgot/sendEmail',
       controller,
       withoutError: true,
-    });
-
-    return result;
-  };
-
-  public static Verify = (form: IVerifyRequestModel): Promise<IResponse<null>> => {
-    const result = Connection.POST<IVerifyRequestModel>({
-      body: form,
-      action: 'verify',
-      controller,
     });
 
     return result;

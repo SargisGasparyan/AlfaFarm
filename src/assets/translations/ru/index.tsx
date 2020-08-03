@@ -1029,7 +1029,7 @@ export default {
   personal_data: "Личные данные",
   save_changes: "Сохранить изменения",
   verification: "Подтверждения",
-  verification_text: "Пожалуйста, напишите проверочный код отправленный на",
+  verification_text: "Пожалуйста, напишите проверочный код",
   ok: "Хорошо",
   send_again: "Отправить еще раз",
   features: "Характеристики",

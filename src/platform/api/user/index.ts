@@ -1,18 +1,9 @@
-import Connection from '../services/connection';
-import { IResponse } from '../constants/interfaces';
+import Connection from '../../services/connection';
+import { IResponse } from '../../constants/interfaces';
+import { IRegisterRequestModel } from './models/request';
+import { IUserResponseModel } from './models/response';
 
 const controller = 'user';
-
-export interface IProfile {
-  _id: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  points: number;
-  phoneNumber: string | null;
-  tariffPlan: ProfileTariffPlanEnum;
-};
-
 export enum ProfileTariffPlanEnum {
   Usual = 1,
   Silver,
@@ -38,10 +29,22 @@ export interface IUserVerifyPhoneRequestModal {
 
 class UserController {
 
-  public static Details = (): Promise<IResponse<IProfile>> => {
+  private static controller = 'user';
+
+  public static Get = (): Promise<IResponse<IUserResponseModel>> => {
     const result = Connection.GET({
       action: '',
       controller,
+    });
+
+    return result;
+  };
+
+  public static Register = (body: IRegisterRequestModel): Promise<IResponse<boolean>> => {
+    const result = Connection.POST({
+      body,
+      action: 'register',
+      controller: UserController.controller,
     });
 
     return result;

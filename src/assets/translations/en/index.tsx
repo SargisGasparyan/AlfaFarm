@@ -1028,7 +1028,7 @@ export default {
   personal_data: "Personal data",
   save_changes: "Save changes",
   verification: "Verification",
-  verification_text: "Please type verification code sent to",
+  verification_text: "Please type the verification code",
   ok: "OK",
   or: "or",
   send_again: "Send again",

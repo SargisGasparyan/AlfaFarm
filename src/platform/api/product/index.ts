@@ -193,15 +193,16 @@ export interface IProductFilterRange {
 
 export interface IProductPagination<Data> extends IPagination<Data> { range?: IProductFilterRange; };
 
-const controller = 'product';
 
 class ProductController {
+
+  private static controller = 'product';
 
   public static GetList = (body: IProductListRequestModel): Promise<IResponse<IPagination<IProductListResponseModel>>> => {
     const result = Connection.POST<IProductListRequestModel>({
       body,
       action: 'list',
-      controller,
+      controller: ProductController.controller,
     });
 
     return result;
@@ -210,7 +211,7 @@ class ProductController {
   public static GetRelated = (id: number): Promise<IResponse<IProductListResponseModel[]>> => {
     const result = Connection.GET({
       action: `related/${id}`,
-      controller,
+      controller: ProductController.controller,
     });
 
     return result;
@@ -219,7 +220,7 @@ class ProductController {
   public static GetDetails = (id: number): Promise<IResponse<IProductDetailsResponseModel>> => {
     const result = Connection.GET({
       action: `${id}`,
-      controller,
+      controller: ProductController.controller,
     });
 
     return result;
@@ -230,7 +231,7 @@ class ProductController {
       method: 'GET',
       action: 'details',
       query: { id },
-      controller,
+      controller: ProductController.controller,
     });
 
     return result;
@@ -240,7 +241,7 @@ class ProductController {
     const result = Connection.GET({
       action: 'similar',
       query: { id, count },
-      controller,
+      controller: ProductController.controller,
     });
 
     return result;
@@ -250,7 +251,7 @@ class ProductController {
     const result = Connection.POST<IProductCartListRequestModel>({
       body,
       action: 'cart',
-      controller,
+      controller: ProductController.controller,
     });
 
     return result;
@@ -260,7 +261,7 @@ class ProductController {
     const result = Connection.POST<IProductListRequestModel>({
       body,
       action: 'mainList',
-      controller,
+      controller: ProductController.controller,
     });
 
     return result;
@@ -270,7 +271,7 @@ class ProductController {
     const result = Connection.GET({
       action: 'search',
       query: { key },
-      controller,
+      controller: ProductController.controller,
     });
 
     return result;
@@ -290,7 +291,7 @@ class ProductController {
     const result = Connection.POST<IProductVersionRequestModel>({
       body,
       action: 'version',
-      controller,
+      controller: ProductController.controller,
     });
 
     return result;
@@ -300,7 +301,7 @@ class ProductController {
     const result = Connection.POST<IProductVersionRequestModel>({
       body,
       action: 'range',
-      controller,
+      controller: ProductController.controller,
     });
 
     return result;

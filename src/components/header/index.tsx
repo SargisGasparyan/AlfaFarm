@@ -7,12 +7,16 @@ import Settings from 'platform/services/settings';
 import HelperPureComponent from 'platform/classes/helper-pure-component';
 import SearchInput from 'components/search-input';
 import { Shared } from 'modules';
-
-import LogoImage from 'assets/images/logo.png';
-
-import './style.scss';
 import Categories from './components/categories';
 import DispatcherChannels from 'platform/constants/dispatcher-channels';
+import Storage from 'platform/services/storage';
+import enviroment from 'platform/services/enviroment';
+
+import LogoImage from 'assets/images/logo.png';
+import PersonImage from 'assets/images/person.png';
+
+import './style.scss';
+
 
 interface IState {
   authOpen: boolean;
@@ -90,10 +94,16 @@ class Header extends HelperPureComponent<{}, IState> {
         <NavLink {...this.navLinkProps} to={ROUTES.CLINIC}>{Settings.translations.clinic}</NavLink>
         <NavLink {...this.navLinkProps} to={ROUTES.BLOG.LIST}>{Settings.translations.blog}</NavLink>
 
-        <span
+        {Storage.profile ? <a className="P-profile">
+          <div
+            style={{ background: Storage.profile.photoPath ? `url('${enviroment.BASE_URL + Storage.profile.photoPath}') center/cover` : `url('${PersonImage}') center/cover`}}
+            className="P-image"
+          />
+          <h4>{Storage.profile.fullName}</h4>
+        </a> : <span
           onClick={this.toggleAuth}
           className="P-link P-login"
-        >{Settings.translations.log_in} {Settings.token ? 'LLL' : ''}</span>
+        >{Settings.translations.log_in}</span>}
 
         <Link to={ROUTES.CART} className="P-link P-icon G-normal-link">
           <i className="icon-Group-5515" />

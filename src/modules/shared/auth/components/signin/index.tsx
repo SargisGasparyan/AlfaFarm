@@ -10,7 +10,7 @@ import { validateForm } from './services/helper';
 import AuthController from 'platform/api/auth';
 
 interface IProps {
-  onTypeChange(type: ModalContentEnum): void;
+  onTypeChange<ActiveData extends object>(type: ModalContentEnum, activeData?: ActiveData): void;
 };
 
 interface IState {
@@ -37,12 +37,12 @@ class SignIn extends HelperComponent<IProps, IState> {
 
   private restorePassword = () => {
     const { onTypeChange } = this.props;
-    onTypeChange(ModalContentEnum.Restore);
+    onTypeChange(ModalContentEnum.SendCode);
   }
 
   private signUp = () => {
     const { onTypeChange } = this.props;
-    onTypeChange(ModalContentEnum.SignUp);
+    onTypeChange(ModalContentEnum.SendCode, { signUp: true });
   }
 
   private changeField = (e: React.SyntheticEvent<HTMLInputElement>) => {

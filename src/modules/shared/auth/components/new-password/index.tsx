@@ -3,11 +3,10 @@ import * as React from 'react';
 import LoaderContent from 'components/loader-content';
 import Settings from 'platform/services/settings';
 import HelperComponent from 'platform/classes/helper-component';
-import { IRegisterRequestModel } from 'platform/api/user/models/request';
+import { IRecoveryRequestModel } from 'platform/api/auth/models/request';
 import { validateForm } from './services/helper';
+import AuthController from 'platform/api/auth';
 import { ModalContentEnum } from '../../constants/enums';
-import UserController from 'platform/api/user';
-
 
 interface IProps {
   onTypeChange(type: ModalContentEnum): void;
@@ -16,17 +15,16 @@ interface IProps {
 interface IState {
   submited: boolean;
   submitLoading: boolean;
-  form: IRegisterRequestModel;
+  form: IRecoveryRequestModel;
 };
 
-class SignUp extends HelperComponent<IProps, IState> {
+class NewPassword extends HelperComponent<IProps, IState> {
 
   public state: IState = {
     submited: false,
     submitLoading: false,
     form: {
-      fullName: '',
-      password: '',
+      newPassword: '',
     },
   };
 
@@ -47,7 +45,7 @@ class SignUp extends HelperComponent<IProps, IState> {
       this.formValidation.valid && this.safeSetState({ submitLoading: true }, async () => {
         const { form } = this.state;
 
-        const result = await UserController.Register(form);
+        const result = await AuthController.Recovery(form);
         if (result.data) window.location.reload();
         else this.safeSetState({ submitLoading: false });
       });
@@ -62,21 +60,12 @@ class SignUp extends HelperComponent<IProps, IState> {
       <form className="G-main-form">
         <div>
           <input
-            name="fullName"
-            value={form.fullName}
-            placeholder={Settings.translations.full_name}
-            onChange={this.changeField}
-            className={`G-main-input ${this.formValidation.errors.fullName ? 'G-invalid-field' : ''}`}
-          />
-        </div>
-        <div>
-          <input
             type="password"
-            name="password"
-            value={form.password}
+            name="newPassword"
+            value={form.newPassword}
             placeholder={Settings.translations.password}
             onChange={this.changeField}
-            className={`G-main-input ${this.formValidation.errors.password ? 'G-invalid-field' : ''}`}
+            className={`G-main-input ${this.formValidation.errors.newPassword ? 'G-invalid-field' : ''}`}
           />
         </div>
         <LoaderContent
@@ -89,4 +78,4 @@ class SignUp extends HelperComponent<IProps, IState> {
   }
 }
 
-export default SignUp;
+export default NewPassword;

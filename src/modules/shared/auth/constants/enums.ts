@@ -7,9 +7,9 @@ export enum SocialProviderEnum {
 export enum ModalContentEnum {
   SignIn = 1,
   SignUp,
-  Restore,
-  SignUpVerify,
-  RestoreVerify,
+  SendCode,
+  Verify,
+  NewPassword,
 };
 
 export enum VerifyTypeEnum {
