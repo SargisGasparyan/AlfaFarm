@@ -17,7 +17,7 @@ class Socket {
       query.append('authorization', token);
     } else {
       query.append('webGuest', 'true');
-      Settings.guestId && query.append('guestId', Settings.guestId);
+      Settings.guest && query.append('guest', Settings.guest);
     }
 
     Socket.connection = io.connect(Enviroment.BASE_URL, { query: query.toString(), transports: ['polling'] });

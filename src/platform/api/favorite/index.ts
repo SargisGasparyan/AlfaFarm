@@ -1,14 +1,14 @@
 import Connection from '../../services/connection';
 import { IResponse } from '../../constants/interfaces';
-import { IProductListResponseModel } from '../product/models/response';
+import { IFavoriteListResponseModel } from './models/response';
 
 class FavoriteController {
 
   private static controller = 'favorite';
 
-  public static GetList = (): Promise<IResponse<IProductListResponseModel[]>> => {
+  public static GetList = (): Promise<IResponse<IFavoriteListResponseModel[]>> => {
     const result = Connection.GET({
-      action: 'list',
+      action: '',
       controller: FavoriteController.controller,
     });
 

@@ -11,7 +11,7 @@ import ModifyInvitedModal from './components/modify-invited-modal';
 import ROUTES from 'platform/constants/routes';
 import { currency } from 'platform/constants';
 import CountInput from 'components/count-input';
-import { IProfile } from 'platform/api/user';
+import { IUserResponseModel } from 'platform/api/user/models/response';
 import InviteModal from './components/invite-modal';
 import RequestedProducts from './components/requested-products';
 import { IWishListCartProductItem, ICartItem } from 'platform/api/product';
@@ -120,12 +120,12 @@ class ListDetails extends HelperComponent<IProps, IState> {
     }
   });
 
-  private UsersFilterItem = ({ profile, owner }: { profile: IProfile, owner?: boolean }) => {
+  private UsersFilterItem = ({ profile, owner }: { profile: IUserResponseModel, owner?: boolean }) => {
     const { memberIdList } = this.state;
 
     return (
-      <label onClick={e => this.changeUsersFilter(e, profile._id)}>
-        <CheckBox checked={memberIdList.indexOf(profile._id) !== -1} />
+      <label onClick={e => this.changeUsersFilter(e, profile.id)}>
+        <CheckBox checked={memberIdList.indexOf(profile.id) !== -1} />
         {owner ? Settings.translations.my : getUserName(profile)}
       </label>
     );
@@ -151,10 +151,10 @@ class ListDetails extends HelperComponent<IProps, IState> {
       const membersDropdown: Array<IDropdownOption<string>> = data.owner && data.members.length ? [
         {
           name: () => <this.UsersFilterItem profile={data.creator} owner={true} />,
-          value: data.creator._id
+          value: data.creator.id
         }, ...data.members.map(item => ({
           name: () => <this.UsersFilterItem profile={item} />,
-          value: item._id,
+          value: item.id,
         })),
       ] : [];
 

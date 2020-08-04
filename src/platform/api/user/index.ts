@@ -1,6 +1,6 @@
 import Connection from '../../services/connection';
 import { IResponse } from '../../constants/interfaces';
-import { IRegisterRequestModel } from './models/request';
+import { IRegisterRequestModel, IUserModifyRequestModel } from './models/request';
 import { IUserResponseModel } from './models/response';
 
 const controller = 'user';
@@ -33,6 +33,16 @@ class UserController {
 
   public static Get = (): Promise<IResponse<IUserResponseModel>> => {
     const result = Connection.GET({
+      action: '',
+      controller,
+    });
+
+    return result;
+  };
+
+  public static Update = (body: IUserModifyRequestModel): Promise<IResponse<boolean>> => {
+    const result = Connection.PUT<IUserModifyRequestModel>({
+      body,
       action: '',
       controller,
     });

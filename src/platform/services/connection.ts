@@ -27,7 +27,6 @@ class Connection {
   private static createHeaders = (isUpload: boolean): Headers => {
     const HEADERS = new Headers();
     Settings.token && HEADERS.append('Authorization', `Bearer ${Settings.token}`);
-    Settings.guestId && HEADERS.append('GuestId', Settings.guestId);
     HEADERS.append('Language', Settings.language.toString());
     HEADERS.append('OsType', OSTypeEnum.Web.toString());
     !isUpload && HEADERS.append('Content-Type', 'application/json');

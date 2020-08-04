@@ -16,6 +16,7 @@ import LogoImage from 'assets/images/logo.png';
 import PersonImage from 'assets/images/person.png';
 
 import './style.scss';
+import { getMediaPath } from 'platform/services/helper';
 
 
 interface IState {
@@ -94,20 +95,20 @@ class Header extends HelperPureComponent<{}, IState> {
         <NavLink {...this.navLinkProps} to={ROUTES.CLINIC}>{Settings.translations.clinic}</NavLink>
         <NavLink {...this.navLinkProps} to={ROUTES.BLOG.LIST}>{Settings.translations.blog}</NavLink>
 
-        {Storage.profile ? <a className="P-profile">
+        {Storage.profile ? <Link to={ROUTES.PROFILE.MAIN} className="P-profile">
           <div
-            style={{ background: Storage.profile.photoPath ? `url('${enviroment.BASE_URL + Storage.profile.photoPath}') center/cover` : `url('${PersonImage}') center/cover`}}
+            style={{ background: `url('${Storage.profile.photoPath ? getMediaPath(Storage.profile.photoPath) : PersonImage}') center/cover` }}
             className="P-image"
           />
           <h4>{Storage.profile.fullName}</h4>
-        </a> : <span
+        </Link> : <span
           onClick={this.toggleAuth}
           className="P-link P-login"
         >{Settings.translations.log_in}</span>}
 
-        <Link to={ROUTES.CART} className="P-link P-icon G-normal-link">
+        {/* <Link to={ROUTES.CART} className="P-link P-icon G-normal-link">
           <i className="icon-Group-5515" />
-        </Link>
+        </Link> */}
 
         <Link to={ROUTES.CART} className="P-link P-icon G-normal-link">
           <i className="icon-Group-5503" />

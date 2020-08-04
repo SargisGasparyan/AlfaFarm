@@ -2,7 +2,7 @@ import Connection from '../services/connection';
 import { IResponse, IPagination } from '../constants/interfaces';
 import Settings from '../services/settings';
 import { IProductListItem } from './product';
-import { IProfile } from './user';
+import { IUserResponseModel } from './user/models/response';
 import { IContactInfoModel } from '../constants/interfaces';
 
 const controller = 'request';
@@ -43,7 +43,7 @@ export interface IRequestAddModel {
   video: File[],
 };
 
-export interface IRequest extends IProfile {
+export interface IRequest extends IUserResponseModel {
   _id: string;
   nid: number;
   createdDt: string;

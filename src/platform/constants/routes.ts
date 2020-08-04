@@ -8,6 +8,8 @@ const HOME_ROUTES = RouteService.buildRouteContext('/', {
 
 const PROFILE_ROUTES = RouteService.buildRouteContext('/profile', {
   MAIN: '',
+  ORDERS: '/orders',
+  FAVORITES: '/favorites',
   MY_ORDERS: '/my-orders',
   MY_COMPANY: '/my-company',
   MY_REQUESTS: '/my-requests',

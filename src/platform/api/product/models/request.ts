@@ -1,4 +1,5 @@
 import { IPagingRequest } from 'platform/constants/interfaces';
+import { ProductSortEnum } from '../constants/enums';
 
 export interface IProductListRequestModel extends IPagingRequest, IProductFilterRequestModel { };
 
@@ -12,10 +13,3 @@ export interface IProductFilterRequestModel {
   categoryIds?: number[];
 };
 
-export enum ProductSortEnum {
-  Alphabetical = 1,
-  PriceLowToHigh,
-  PriceHighToLow,
-  DiscountLowToHigh,
-  DiscountHighToLow,
-};

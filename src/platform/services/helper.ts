@@ -3,7 +3,7 @@ import * as moment from 'moment';
 
 import Settings from './settings';
 import { IDropdownOption } from '../constants/interfaces';
-import { IProfile } from '../api/user';
+import { IUserResponseModel } from '../api/user/models/response';
 import enviroment from './enviroment';
 
 export const scrolledToBottom = () => (window.innerHeight + window.scrollY) >= document.body.scrollHeight - 1500;
@@ -51,12 +51,9 @@ export const enumToSelectOptions = <Value extends number>(obj: object, withTrans
   return options;
 };
 
-export const getUserName = (profile: IProfile) => {
-  if (profile.firstName && profile.lastName) return `${profile.firstName} ${profile.lastName}`;
-  return profile.email;
-}
+export const getUserName = (profile: IUserResponseModel) => profile.fullName || profile.username;
 
-export const formatDate = (date?: string | number, withHours: boolean = true) => {
+export const formatDate = (date?: string | number, withHours = true) => {
   if (!date) return '';
   const momentDate = moment(date);
   return momentDate.format(withHours ? 'YYYY MMM DD | HH:mm' : 'YYYY MMM DD');

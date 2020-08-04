@@ -86,7 +86,7 @@ class App extends HelperComponent<{}, IState> {
                 component={item.component}
               />))}
 
-              {!!Settings.token && RouteService.subscribeAuthorized(routes => routes.map(item => <Route
+              {!!Settings.token && !Settings.guest && RouteService.subscribeAuthorized(routes => routes.map(item => <Route
                 exact={true}
                 key={item.path}
                 path={item.path}

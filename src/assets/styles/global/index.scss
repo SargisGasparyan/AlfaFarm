@@ -290,6 +290,9 @@
 .G-auto-margin-left { margin-left: auto; }
 .G-auto-margin-right { margin-right: auto; }
 
+.G-mr-20 { margin-right: 20px; }
+.G-mb-30 { margin-bottom: 30px; }
+
 // #endregion Positioning
 
 // #region Flex
@@ -297,7 +300,8 @@
 .G-flex { display: flex; }
 .G-flex-justify-center { justify-content: center; }
 .G-flex-align-center { align-items: center; }
-
+.G-flex-column { flex-direction: column; }
+ 
 // #endregion Flex
 
 // #region Texts
@@ -341,6 +345,13 @@
 
 .G-invalid-field { border: 1px solid red !important; }
 
+.G-input-top-label {
+  color         : $light-gray;
+  font-size     : $normal-fs;
+  padding-left  : 30px;
+  margin-bottom : 15px;
+}
+
 .G-phone-input-wrapper {
   position : relative;
 
@@ -353,10 +364,9 @@
     padding-right : 10px;
   }
 
-  > .G-main-input {
+  > .G-input-top-label ~ .G-input-country-code { top: 55px }
 
-    padding-left : 80px;
-  }
+  > .G-main-input { padding-left: 80px; }
 }
 
 .G-main-input, .G-main-textarea {

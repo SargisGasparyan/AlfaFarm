@@ -7,7 +7,7 @@ import LoaderContent from 'components/loader-content';
 import NumberInput from 'components/number-input';
 import Settings from 'platform/services/settings';
 import Storage from 'platform/services/storage';
-import ModifyAddressModal from '../../../profile/pages/my-addresses/components/modify-modal';
+// import ModifyAddressModal from '../../../profile/pages/my-addresses/components/modify-modal';
 import AddressController, { IAddress, IAddressRequestModel } from 'platform/api/address';
 import PayerInformation from './components/payer-information';
 import DatePicker from './components/date-picker';
@@ -404,7 +404,7 @@ class Checkout extends HelperComponent<IProps, IState> {
       form,
       addresses,
       payerAddOpen,
-      addressAddOpen,
+      // addressAddOpen,
       datePickerOpen,
       billingAddress,
       initialData,
@@ -484,7 +484,7 @@ class Checkout extends HelperComponent<IProps, IState> {
                 `${Settings.translations.written} (${guestAddressForm.contactName})` :
                 Settings.translations.write}
             </h3>}
-            {addressAddOpen && <ModifyAddressModal onClose={this.closeAddressAdd} form={Storage.profile ? null : guestAddressForm} companyId={form.companyId} />}
+            {/* {addressAddOpen && <ModifyAddressModal onClose={this.closeAddressAdd} form={Storage.profile ? null : guestAddressForm} companyId={form.companyId} />} */}
           </div>}
           {billingAddress && <div className="P-block P-billing-address">
             <h2>{Settings.translations.billing_address}</h2>
@@ -524,7 +524,7 @@ class Checkout extends HelperComponent<IProps, IState> {
             </div>
             
             {Storage.profile && <>
-              <div className={Storage.profile && !!Storage.profile.points ? 'G-half-field-wrap' : 'G-field-wrap'}>
+              <div className={Storage.profile ? 'G-half-field-wrap' : 'G-field-wrap'}>
                 <h4>{Settings.translations.promo_code}</h4>
                 <div className={`G-field ${form.promoCode && form.promoCode.length < 8 ? 'G-invalid-field' : ''}`}>
                   <input
@@ -536,7 +536,7 @@ class Checkout extends HelperComponent<IProps, IState> {
                 </div>
               </div>
 
-              {!!Storage.profile.points && <div className="G-half-field-wrap">
+              {/* {!!Storage.profile.points && <div className="G-half-field-wrap">
                 <h4>{Settings.translations.i_bonus}</h4>
                 <div className={`G-field ${!this.bonusValid ? 'G-invalid-field' : ''}`}>
                   <NumberInput
@@ -547,7 +547,7 @@ class Checkout extends HelperComponent<IProps, IState> {
                   />
                 </div>
                 <p className="G-field-description">{Settings.translations.checkout_i_bonus_can_use(this.maxBonus, Storage.profile.points)}</p>
-              </div>}
+              </div>} */}
             </>}
           </div>
           <div className="P-block">

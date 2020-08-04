@@ -28,7 +28,8 @@ class Categories extends HelperComponent<IProps, {}> {
 
   private fetchData = async (index: number, parentId?: number) => {
     const { lists } = this.state;
-
+    lists.length = index;
+    
     if (parentId) {
       const existingItem = DataCache.alreadyFetched.find(item => item.id === parentId);
 

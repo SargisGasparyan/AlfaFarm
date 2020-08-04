@@ -10,9 +10,10 @@
   justify-content : flex-end;
 
   .P-content {
-    display    : flex;
-    position   : fixed;
-    max-height : calc(100vh - #{$header-size});
+    display       : flex;
+    position      : fixed;
+    max-height    : calc(100vh - #{$header-size});
+    padding-right : 15px;
   
     > .P-list {
       padding       : 15px 0;

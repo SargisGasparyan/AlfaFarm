@@ -76,7 +76,7 @@ class Settings {
 
   public static logout = () => {
     window.localStorage.removeItem('token');
-    window.localStorage.removeItem('cartItems');
+    window.localStorage.removeItem('guest');
     window.location.reload();
   }
 }
