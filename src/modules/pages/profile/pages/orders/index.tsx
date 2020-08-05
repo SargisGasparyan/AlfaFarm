@@ -11,6 +11,7 @@ import OrderController from 'platform/api/order';
 import { IOrderListResponseModel } from 'platform/api/order/models/response';
 import { OrderStatusEnum } from 'platform/api/order/constants/enums';
 import { getViewEnum, formatDate } from 'platform/services/helper';
+import Details from './pages/details';
 
 import './style.scss';
 
@@ -18,7 +19,7 @@ interface IState {
   data: IOrderListResponseModel[];
 };
 
-@byPrivateRoute(ROUTES.PROFILE.ORDERS)
+@byPrivateRoute(ROUTES.PROFILE.ORDERS.MAIN)
 class Orders extends HelperComponent<IState, {}> {
 
   public state: IState = {
@@ -65,6 +66,7 @@ class Orders extends HelperComponent<IState, {}> {
         <h2 className="G-main-color G-mb-30">{Settings.translations.order_history}</h2>
         <div className="G-flex P-profile-orders">
           <Table<IOrderListResponseModel>
+            redirectUrl={row => ROUTES.PROFILE.ORDERS.DETAILS.replace(':id', row.id)}
             columnConfig={this.columnConfig}
             data={data}
           />
@@ -74,4 +76,4 @@ class Orders extends HelperComponent<IState, {}> {
   }
 }
 
-export default Orders;
+export default { Orders, Details };

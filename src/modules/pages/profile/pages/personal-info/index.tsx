@@ -94,12 +94,11 @@ class PersonalInfo extends HelperComponent<IState, {}> {
                 onChange={this.changeField}
               />
             </div>
-            <LoaderContent
-              disabled={!edited}
+            {edited && <LoaderContent
               className="G-main-button"
               loading={submitLoading}
               onClick={this.submit}
-            >{Settings.translations.save_changes}</LoaderContent>
+            >{Settings.translations.save}</LoaderContent>}
           </form>
         </div>
       </Layout>

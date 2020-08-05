@@ -1,28 +1,29 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 
 import Settings from 'platform/services/settings';
-
-import TestImage from 'assets/images/test_background.jpg';
-import TestImage1 from 'assets/images/test_background_1.jpg';
-import TestImage2 from 'assets/images/test_background_2.jpg';
-
-const arr = [TestImage, TestImage1, TestImage2];
+import { INewsListResponseModel } from 'platform/api/news/models/response';
+import { getMediaPath } from 'platform/services/helper';
+import ROUTES from 'platform/constants/routes';
 
 import './style.scss';
 
+
 interface IProps {
-  data: any;
+  data: INewsListResponseModel;
 };
 
 const ListItem = React.memo(({ data }: IProps) => (
-  <a className="P-home-news-list-item">
-    <div className="P-image" style={{ background: `url('${arr[Math.floor(Math.random() * 3)]}') center/cover` }} />
+  <div className="P-home-news-list-item">
+    <div className="P-image" style={{ background: `url('${getMediaPath(data.imagePath)}') center/cover` }} />
     <div className="P-content">
-      <h3>Կանանց միամսյակին ընդառաջ «Ալֆա-Ֆարմ»-ը կազմակերպում է ԽԱՂԱՐԿՈՒԹՅՈՒՆ</h3>
-      <a className="G-orange-color">{Settings.translations.read_more} <i className="icon-Group-5513" /></a>
+      <h3>{data.title}</h3>
+      <Link to={ROUTES.NEWS.DETAILS.replace(':id', data.id)} className="G-orange-color G-normal-link">
+        {Settings.translations.read_more} <i className="icon-Group-5513" />
+      </Link>
     </div>
     {data?'':''}
-  </a>
+  </div>
 ));
 
 export default ListItem;

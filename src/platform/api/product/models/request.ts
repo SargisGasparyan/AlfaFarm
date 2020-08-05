@@ -6,6 +6,7 @@ export interface IProductListRequestModel extends IPagingRequest, IProductFilter
 export interface IProductFilterRequestModel {
   text?: string;
   sortBy?: ProductSortEnum;
+  hasDiscount?: boolean;
   brandIds?: number[];
   activeIngredientIds?: number[];
   minPrice?: number;

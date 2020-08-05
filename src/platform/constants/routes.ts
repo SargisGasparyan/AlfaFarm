@@ -6,29 +6,45 @@ const HOME_ROUTES = RouteService.buildRouteContext('/', {
   SUCCESS: 'success',
 });
 
-const PROFILE_ROUTES = RouteService.buildRouteContext('/profile', {
-  MAIN: '',
-  ORDERS: '/orders',
-  FAVORITES: '/favorites',
-  MY_ORDERS: '/my-orders',
-  MY_COMPANY: '/my-company',
-  MY_REQUESTS: '/my-requests',
-  MY_ADDRESSES: '/my-addresses',
-  NOTIFICATIONS: "/notifications",
-});
+const PROFILE_ROUTES = (() => {
+  const ADDRESSES_ROUTES = RouteService.buildRouteContext('/profile/addresses', {
+    MAIN: '',
+    CREATE: '/create',
+    UPDATE: '/update/:id',
+  });
+
+  const ORDERS_ROUTES = RouteService.buildRouteContext('/profile/orders', {
+    MAIN: '',
+    DETAILS: '/details/:id',
+  });
+
+  return RouteService.buildRouteContext('/profile', {
+    MAIN: '',
+    ORDERS: ORDERS_ROUTES,
+    ADDRESSES: ADDRESSES_ROUTES,
+    MY_REGISTRATIONS: '/my-registrations',
+
+    FAVORITES: '/favorites',
+    MY_ORDERS: '/my-orders',
+    MY_COMPANY: '/my-company',
+    MY_REQUESTS: '/my-requests',
+    MY_ADDRESSES: '/my-addresses',
+    NOTIFICATIONS: "/notifications",
+  });
+})();
 
 const BLOG_ROUTES = RouteService.buildRouteContext('/blog', {
-  LIST: '',
+  MAIN: '',
   DETAILS: '/:id',
 });
 
 const NEWS_ROUTES = RouteService.buildRouteContext('/news', {
-  LIST: '',
+  MAIN: '',
   DETAILS: '/:id',
 });
 
 const PRODUCTS_ROUTES = RouteService.buildRouteContext('/products', {
-  LIST: '',
+  MAIN: '',
   DETAILS: '/details/:id',
   PROPOSAL: '/proposal',
 });

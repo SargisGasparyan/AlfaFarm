@@ -169,6 +169,15 @@ class OrderController {
     return result;
   };
 
+  public static GetDetails = (id: number): Promise<IResponse<IOrderDetailsResponseModel>> => {
+    const result = Connection.GET({
+      action: `${id}`,
+      controller: OrderController.controller,
+    });
+
+    return result;
+  };
+
   public static List = (pageNo: number, limit: number, active: boolean): Promise<IResponse<IPagination<IOrder>>> => {
     const result = Connection.GET({
       action: 'list',

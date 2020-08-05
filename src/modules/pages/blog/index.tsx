@@ -22,7 +22,7 @@ interface IState {
   loading: boolean;
 };
 
-@byRoute([ROUTES.BLOG.LIST])
+@byRoute([ROUTES.BLOG.MAIN])
 class Blog extends HelperComponent<{}, IState> {
 
   public state: IState = {

@@ -1,0 +1,18 @@
+@import 'src/assets/styles/helper';
+@import 'src/assets/styles/variables';
+
+.P-profile-order-details {
+  display         : flex;
+  flex-wrap       : wrap;
+  justify-content : space-between;
+
+  > .P-main-info-block, > .P-address-block {
+    flex          : 1;
+    padding       : 20px 40px;
+    min-width     : 400px;
+    background    : white;
+    box-shadow    : $default-block-shadow;
+    border-radius : $big-radius;
+    @include main-top-border;
+  }
+}

@@ -70,7 +70,7 @@ class Header extends HelperPureComponent<{}, IState> {
   }
 
   private searchSubmit = (value: string) => {
-    window.routerHistory.push(`${ROUTES.PRODUCTS.LIST}?text=${value}`);
+    window.routerHistory.push(`${ROUTES.PRODUCTS.MAIN}?text=${value}`);
     window.dispatchEvent(new Event(DispatcherChannels.ProductFilterChange));
   }
 
@@ -93,7 +93,7 @@ class Header extends HelperPureComponent<{}, IState> {
 
         <NavLink {...this.navLinkProps} to={ROUTES.PHARMACIES}>{Settings.translations.pharmacies}</NavLink>
         <NavLink {...this.navLinkProps} to={ROUTES.CLINIC}>{Settings.translations.clinic}</NavLink>
-        <NavLink {...this.navLinkProps} to={ROUTES.BLOG.LIST}>{Settings.translations.blog}</NavLink>
+        <NavLink {...this.navLinkProps} to={ROUTES.BLOG.MAIN}>{Settings.translations.blog}</NavLink>
 
         {Storage.profile ? <Link to={ROUTES.PROFILE.MAIN} className="P-profile">
           <div

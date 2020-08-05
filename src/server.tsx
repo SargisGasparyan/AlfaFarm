@@ -100,7 +100,7 @@ function buildHTML(markup: string, title: string, description: string, keywords:
         };
       </script>
       <script async defer src="https://connect.facebook.net/en_US/sdk.js"></script>
-      <script src="https://maps.googleapis.com/maps/api/js?key=${Settings.googleAPIKey}&callback=myMap"></script>
+      <script src="https://maps.googleapis.com/maps/api/js?key=${Settings.googleAPIKey}&libraries=places"></script>
 
       </body>
     </html>

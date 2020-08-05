@@ -21,7 +21,7 @@ interface IState {
   data?: IProductListResponseModel[];
 };
 
-@byRoute([ROUTES.PRODUCTS.LIST])
+@byRoute([ROUTES.PRODUCTS.MAIN])
 class List extends HelperComponent<{}, IState> {
 
   public state: IState = {

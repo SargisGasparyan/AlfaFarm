@@ -45,7 +45,7 @@ class Filter extends HelperComponent<IProps, IState> {
     const query = new URLSearchParams(window.location.search);
     query.set('minPrice', `${minPrice}`);
     query.set('maxPrice', `${maxPrice}`);
-    window.routerHistory.replace(`${ROUTES.PRODUCTS.LIST}?${query.toString()}`);
+    window.routerHistory.replace(`${ROUTES.PRODUCTS.MAIN}?${query.toString()}`);
 
     body.minPrice = minPrice;
     body.maxPrice = maxPrice;
@@ -64,7 +64,7 @@ class Filter extends HelperComponent<IProps, IState> {
       else body.brandIds.splice(existingIndex, 1);
       
       query.set('brandIds', body.brandIds.join(','));
-      window.routerHistory.replace(`${ROUTES.PRODUCTS.LIST}?${query.toString()}`);
+      window.routerHistory.replace(`${ROUTES.PRODUCTS.MAIN}?${query.toString()}`);
       this.safeSetState({ body }, onChange)
     }
   }
@@ -81,7 +81,7 @@ class Filter extends HelperComponent<IProps, IState> {
       else body.activeIngredientIds.splice(existingIndex, 1);
       
       query.set('activeIngredientIds', body.activeIngredientIds.join(','));
-      window.routerHistory.replace(`${ROUTES.PRODUCTS.LIST}?${query.toString()}`);
+      window.routerHistory.replace(`${ROUTES.PRODUCTS.MAIN}?${query.toString()}`);
       this.safeSetState({ body }, onChange)
     }
   }

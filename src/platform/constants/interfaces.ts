@@ -42,6 +42,7 @@ export interface IDropdownOption<Value> {
 };
 
 export interface IGooglePlace {
+  formatted_address: string;
   geometry: {
     location: {
       lat(): number;

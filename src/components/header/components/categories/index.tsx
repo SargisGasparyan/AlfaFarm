@@ -62,7 +62,7 @@ class Categories extends HelperComponent<IProps, {}> {
 
   private clickItem = (category: ICategoryListResponseModel) => {
     const { onClose } = this.props;
-    window.routerHistory.push(`${ROUTES.PRODUCTS.LIST}?categoryIds=${category.id}`);
+    window.routerHistory.push(`${ROUTES.PRODUCTS.MAIN}?categoryIds=${category.id}`);
     window.dispatchEvent(new Event(DispatcherChannels.ProductFilterChange));
     onClose();
   }

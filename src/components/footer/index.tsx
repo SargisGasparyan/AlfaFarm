@@ -34,7 +34,7 @@ const Footer = React.memo(() => (
         <h3 className="G-main-color">{Settings.translations.retail_sale}</h3>
         <a>{Settings.translations.what_is_alfa_card}</a>
         <Link to={ROUTES.ABOUT_US}>{Settings.translations.about_us}</Link>
-        <Link to={ROUTES.NEWS.LIST}>{Settings.translations.news}</Link>
+        <Link to={ROUTES.NEWS.MAIN}>{Settings.translations.news}</Link>
       </div>
       <div className="P-column">
         <h3 className="G-main-color">{Settings.translations.wholesale_sale}</h3>

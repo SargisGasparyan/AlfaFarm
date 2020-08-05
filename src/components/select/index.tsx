@@ -36,7 +36,7 @@ class Select<Value extends string | number | null | {}> extends HelperPureCompon
   }
 
   public static defaultProps = {
-    placeholder: 'Select...',
+    placeholder: '',
     className: '',
     onChange: null,
     onNewClick: null,
@@ -48,8 +48,8 @@ class Select<Value extends string | number | null | {}> extends HelperPureCompon
   }
 
   public componentDidMount() {
-    
     let value: IDropdownOption<string | number | null | {}> | null = null;
+    
     this.props.options.map(item => {
       if (!value && item.value === this.props.defaultValue) {
         value = item;
@@ -69,7 +69,7 @@ class Select<Value extends string | number | null | {}> extends HelperPureCompon
   private get title() {
     const { changable, placeholder } = this.props;
     const value = this.getCurrentValue();
-    return value && changable ? value.name : placeholder;
+    return value && changable ? value.name : (placeholder || '');
   }
 
   private toggleState = (isOpen: boolean) => this.safeSetState({ isOpen });
@@ -122,7 +122,6 @@ class Select<Value extends string | number | null | {}> extends HelperPureCompon
     
     const { isOpen } = this.state;
     const value = this.getCurrentValue();
-    
 
     return (
       <ClickOutside className={className} onClickOutside={() => this.toggleState(false)}>
