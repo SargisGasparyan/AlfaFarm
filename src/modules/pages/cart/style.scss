@@ -1,3 +1,4 @@
+@import 'src/assets/styles/helper';
 @import 'src/assets/styles/variables';
 
 .P-cart-page {
@@ -7,12 +8,57 @@
   align-items   : flex-start;
   align-content : flex-start;
 
-  .P-select-header { border: 0; }
-  .icon-pdf {
+  .P-table {
+    width : 100%;
 
-    cursor      : pointer;
-    display     : flex;
-    font-size   : 30px;
-    align-items : center;
+    .P-data-table-header {
+      background    : none;
+      border-top    : 1px solid $light-gray;
+      border-bottom : 1px solid $light-gray;
+    }
+  
+    .P-data-table-body {
+      min-height : initial;
+
+      > ul {
+        height        : auto;
+        display       : flex;
+        padding       : 40px;
+        align-items   : center;
+        border-bottom : 1px solid $light-gray;
+      
+        > li > div {
+          position  : static;
+          transform : initial;
+
+          > a {
+            color   : black;
+            display : flex;
+            @include bold-font;
+
+            > .P-main-info {
+              display         : flex;
+              padding         : 0 30px;
+              flex-direction  : column;
+              justify-content : center;
+      
+              > span {
+                margin-top : 20px;
+                @include normal-font;
+              }
+            }
+          }
+        }
+      }
+    }
   }
+
+  > .P-data-block {
+    width           : 100%;
+    margin          : 20px 0 50px;
+    display         : flex;
+    justify-content : flex-end;
+  }
+
+  > .P-pay-button { width: 300px; }
 }

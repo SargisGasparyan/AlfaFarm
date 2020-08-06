@@ -60,7 +60,7 @@ class SignUp extends HelperComponent<IProps, IState> {
     return <>
       <h3 className="G-main-color G-text-center">{Settings.translations.choose_password}</h3>
       <form className="G-main-form">
-        <div>
+        <div className="G-main-form-field">
           <input
             name="fullName"
             value={form.fullName}
@@ -69,7 +69,7 @@ class SignUp extends HelperComponent<IProps, IState> {
             className={`G-main-input ${this.formValidation.errors.fullName ? 'G-invalid-field' : ''}`}
           />
         </div>
-        <div>
+        <div className="G-main-form-field">
           <input
             type="password"
             name="password"

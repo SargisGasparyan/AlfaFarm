@@ -10,6 +10,8 @@ import DiscountLabel from '../discount-label';
 
 import './style.scss';
 import FavoriteController from 'platform/api/favorite';
+import BasketController from 'platform/api/basket';
+import LoaderContent from 'components/loader-content';
 
 
 interface IProps {
@@ -18,11 +20,23 @@ interface IProps {
 
 const ListItem = React.memo((props: IProps) => {
   const [data, setData] = React.useState(props.data);
+  const [cartLoading, setCartLoading] = React.useState<boolean>(false);
+  const [count, setCount] = React.useState<number>(1);
 
   const toggleFavorite = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     const result = await FavoriteController.AddOrRemove(data.id);
     result.success && setData({ ...data, isFavorite: !data.isFavorite });
+  }
+
+  const addToCart = async (e: React.SyntheticEvent) => {
+    e.preventDefault();
+    setCartLoading(true);
+    await BasketController.Change({
+      productId: data.id,
+      productQuantity: count,
+    });
+    setCartLoading(false);
   }
 
   return (
@@ -37,9 +51,19 @@ const ListItem = React.memo((props: IProps) => {
       
       <div className="P-price">
         <span>{data.price} AMD</span>
-        <CountInput step={1} min={1} onChange={() => { /**/ }} />
+        <CountInput
+          step={1}
+          min={1}
+          value={count}
+          onChange={setCount}
+        />
       </div>
-      <button className="G-main-button">{Settings.translations.add}</button>
+
+      <LoaderContent
+        loading={cartLoading}
+        className="G-main-button"
+        onClick={addToCart}
+      >{Settings.translations.add}</LoaderContent>
     </Link>
   );
 });

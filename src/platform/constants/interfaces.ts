@@ -30,6 +30,7 @@ export interface IRequest {
   dataAsSuccess?: boolean;
   withoutError?: boolean;
   unabortable?: boolean;
+  withoutConfirmModal?: boolean;
 };
 
 export interface IBodyRequest<Body extends object> extends IRequest { body: Body; };

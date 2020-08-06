@@ -1,0 +1,23 @@
+@import 'src/assets/styles/variables';
+
+.P-checkout-date-modal .P-modal-content {
+
+  width         : 450px;
+  padding       : 40px;
+  border-radius : $radius;
+
+  > div > h2 { margin-bottom: 30px; }
+  > div > .G-fields-form {
+
+    > .rdt {
+
+      width : 100%;
+  
+      > .rdtPicker {
+  
+        width  : 100%;
+        border : 0;
+      }
+    }  
+  }
+}

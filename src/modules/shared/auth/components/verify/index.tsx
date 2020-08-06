@@ -67,7 +67,7 @@ class RestoreVerify extends HelperComponent<IProps, IState> {
     return <>
       <h3 className="G-main-color G-text-center">{Settings.translations.verification_text}</h3>
       <form className="G-main-form">
-        <div>
+        <div className="G-main-form-field">
           <NumberInput
             int={true}
             name="code"

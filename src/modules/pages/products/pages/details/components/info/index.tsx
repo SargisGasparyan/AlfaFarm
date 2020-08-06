@@ -1,9 +1,11 @@
 import * as React from 'react';
 
-import HelperPureComponent from 'platform/classes/helper-pure-component';
 import CountInput from 'components/count-input';
 import Settings from 'platform/services/settings';
 import { IProductDetailsResponseModel } from 'platform/api/product/models/response';
+import HelperComponent from 'platform/classes/helper-component';
+import LoaderContent from 'components/loader-content';
+import BasketController from 'platform/api/basket';
 
 import './style.scss';
 
@@ -11,10 +13,38 @@ interface IProps {
   data: IProductDetailsResponseModel;
 }
 
-class Info extends HelperPureComponent<IProps, {}> {
+interface IState {
+  count: number;
+  cartLoading: boolean;
+};
+
+class Info extends HelperComponent<IProps, IState> {
+
+  public state: IState = {
+    count: 1,
+    cartLoading: false,
+  };
+
+  private onCountChange = (count: number) => {
+    console.log('mtav', count);
+    this.safeSetState({ count });
+  }
+
+  private changeCart = () => this.safeSetState({ cartLoading: true }, async () => {
+    const { data } = this.props;
+    const { count } = this.state;
+
+    await BasketController.Change({
+      productId: data.id,
+      productQuantity: count,
+    });
+
+    this.safeSetState({ cartLoading: false });
+  });
 
   public render() {
     const { data } = this.props;
+    const { count, cartLoading } = this.state;
 
     return (
       <div className="P-product-details-info">
@@ -38,8 +68,18 @@ class Info extends HelperPureComponent<IProps, {}> {
         <h3>{Settings.translations.description}</h3>
         <p className="P-description">{data.description}</p>
         <div className="P-cart-actions">
-          <CountInput step={1} min={1} onChange={() => { /* */ }} />
-          <button className="G-main-button">{Settings.translations.add_to_cart}</button>
+          <CountInput
+            min={1}
+            step={1}
+            value={count}
+            onChange={this.onCountChange}
+          />
+
+          <LoaderContent
+            loading={cartLoading}
+            className="G-main-button"
+            onClick={this.changeCart}
+          >{Settings.translations.add_to_cart}</LoaderContent>
         </div>
       </div>
     );

@@ -66,7 +66,7 @@ class PersonalInfo extends HelperComponent<IState, {}> {
       <Layout>
         <div className="G-flex G-flex-wrap">
           <form className="G-main-form P-form-block G-mr-20">
-            <div>
+            <div className="G-main-form-field">
               <p className="G-input-top-label">{Settings.translations.full_name}</p>
               <input
                 name="fullName"
@@ -75,7 +75,7 @@ class PersonalInfo extends HelperComponent<IState, {}> {
                 onChange={this.changeField}
               />
             </div>
-            <div>
+            <div className="G-main-form-field">
               <p className="G-input-top-label">{Settings.translations.email}</p>
               <input
                 name="email"
@@ -84,7 +84,7 @@ class PersonalInfo extends HelperComponent<IState, {}> {
                 onChange={this.changeField}
               />
             </div>
-            <div className="G-phone-input-wrapper">
+            <div className="G-main-form-field G-phone-input-wrapper">
               <p className="G-input-top-label">{Settings.translations.phone_number}</p>
               <p className="G-input-country-code">+{countryCode}</p>
               <input

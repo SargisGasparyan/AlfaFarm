@@ -139,7 +139,7 @@ class Modify extends HelperComponent<RouteComponentProps<IRouteParams>, IState> 
         <div className="G-flex G-flex-wrap">
           {window.routerHistory.length > 2 && <i className="G-back-icon icon-Group-5529" onClick={this.goBack} />}
           <form className="G-main-form P-form-block G-mr-20">
-            <div>
+            <div className="G-main-form-field">
               <p className="G-input-top-label">{Settings.translations.name}</p>
               <input
                 name="name"
@@ -148,7 +148,7 @@ class Modify extends HelperComponent<RouteComponentProps<IRouteParams>, IState> 
                 onChange={this.changeField}
               />
             </div>
-            <div>
+            <div className="G-main-form-field">
               <p className="G-input-top-label">{Settings.translations.city}</p>
               <Select<number>
                 value={cityId}
@@ -157,7 +157,7 @@ class Modify extends HelperComponent<RouteComponentProps<IRouteParams>, IState> 
                 onChange={this.changeCity}
               />
             </div>
-            {!!cityId && <div>
+            {!!cityId && <div className="G-main-form-field">
               <p className="G-input-top-label">{Settings.translations.region}</p>
               <Select<number>
                 value={form.regionId}
@@ -166,7 +166,7 @@ class Modify extends HelperComponent<RouteComponentProps<IRouteParams>, IState> 
                 onChange={this.changeRegion}
               />
             </div>}
-            <div>
+            <div className="G-main-form-field">
               <p className="G-input-top-label">{Settings.translations.address}</p>
               <Autocomplete
                 placeholder=""

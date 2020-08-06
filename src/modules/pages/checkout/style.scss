@@ -1,0 +1,47 @@
+@import 'src/assets/styles/helper';
+@import 'src/assets/styles/variables';
+
+.G-page.P-checkout-page {
+
+  > .G-page-title {
+    color         : black;
+    margin-bottom : 20px;
+  }
+
+  > .G-main-form {
+    width         : 1200px;
+    margin        : 0 auto;
+    padding       : 40px 80px;
+    max-width     : 100%;
+    box-shadow    : $default-block-shadow;
+    border-radius : $big-radius;
+
+    > .P-delivery-date {
+      align-items   : center;
+      margin-bottom : 20px;
+
+      > h4 {
+        color          : $text-gray;
+        white-space    : nowrap;
+        margin-right   : 40px;
+        @include normal-font;
+      }
+
+      > span {
+        color : $text-gray;
+        margin-right : 20px;
+      }
+
+      > .G-main-form-half-field {
+        margin-bottom : 0;
+
+        &:first-of-type { margin-right: 20px; }
+      }
+    }
+
+    > .G-main-button {
+      width  : 300px;
+      margin : 0 auto;
+    }
+  }
+}

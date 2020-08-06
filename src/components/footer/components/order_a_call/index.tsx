@@ -21,7 +21,7 @@ const OrderACall = React.memo(() => {
     {open ? success ? <SuccessModal text="Շնորհակալություն, զանգի հայտն ընդունված է։ մեր օպերատորը շուտով կապ կհաստատի Ձեզ հետ։" onClose={() => setOpen(false)} /> : <Modal className="P-footer-order-a-call-modal" onClose={() => setOpen(false)}>
       <h3 className="G-main-color G-text-center">{Settings.translations.enter_your_phone_number}</h3>
       <form className="G-main-form">
-        <div className="G-phone-input-wrapper">
+        <div className="G-phone-input-wrapper G-main-form-field">
           <p className="G-input-country-code">+{countryCode}</p>
           <input
             className="G-main-input"

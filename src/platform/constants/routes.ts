@@ -57,6 +57,7 @@ const WISH_LIST_ROUTES = RouteService.buildRouteContext('/wish-list', {
 const ROUTES = {
   FAQ: '/faq',
   CART: '/cart',
+  CHECKOUT: '/checkout',
   ABOUT_US: '/about-us',
   VACANCIES: '/vacancies',
   HOW_TO_USE_APP: '/how-to-use-app',
