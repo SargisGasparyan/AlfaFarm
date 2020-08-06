@@ -13,6 +13,7 @@ export interface IOrderDetailsResponseModel {
   id: number;
   status: OrderStatusEnum;
   createdDate: string;
+  deliveryDate: string;
   productQuantity: number;
   address: string;
   totalPrice: number;

@@ -11,6 +11,7 @@ interface IProps<Data extends object> {
   rowClassname?(row: Data, index?: number): string;
   hoverButtons?(row: Data, index?: number): HTMLElement | React.ReactNode;
   columnConfig: ITableColumnConfig<Data>[];
+  className?: string;
   useCheckbox?(row: Data, index?: number): boolean;
   checkBoxState?(row: Data, index?: number): boolean;
   data: Data[];
@@ -33,11 +34,11 @@ class Table<Data extends { id: number }> extends React.Component<IProps<Data>, {
   }
 
   public render() {
-    const { columnConfig, data, onRowClick, redirectUrl, hoverButtons, rowClassname, useCheckbox, checkBoxState } = this.props;
+    const { columnConfig, data, onRowClick, redirectUrl, className, hoverButtons, rowClassname, useCheckbox, checkBoxState } = this.props;
     const Row = redirectUrl ? Link : 'ul';
 
     return (
-      <div className="P-data-table">
+      <div className={`P-data-table ${className || ''}`}>
         <this.Header />
         {!!data && <div className="P-data-table-body">
           {data.map((item, rowIndex) => 

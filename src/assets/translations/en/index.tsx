@@ -1116,6 +1116,7 @@ export default {
   useful_links: "Useful links",
   contact: "Contact",
   products: "Products",
+  product: "Product",
   see_more: "See more",
   pickup: "Pickup",
   sale: "Sale",

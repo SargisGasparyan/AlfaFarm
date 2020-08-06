@@ -53,7 +53,7 @@ class Favorites extends HelperComponent<IState, {}> {
             className="P-list-item"
           >
             <div
-              className="P-image"
+              className="P-image G-square-image-block"
               style={{ background: `url('${getMediaPath(item.imagePath)}') center/cover` }}
             >
               <i

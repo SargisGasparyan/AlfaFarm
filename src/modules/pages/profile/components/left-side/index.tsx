@@ -32,7 +32,6 @@ class LeftSide extends HelperPureComponent<{}, {}> {
         </div>
 
         {leftSideOptions().map(item => <NavLink
-          exact={true}
           to={item.path}
           key={item.path}
           className="P-link"

@@ -5,7 +5,7 @@ import { IProductListItem, ICartItem, IProductCartListResponseModel } from '../p
 import { IUserResponseModel } from '../user/models/response';
 import { IAddress } from '../address';
 import { OrderStatusEnum } from './constants/enums';
-import { IOrderListResponseModel } from './models/response';
+import { IOrderListResponseModel, IOrderDetailsResponseModel } from './models/response';
 
 export enum OrderPaymentMethodEnum {
   Cash = 1,
