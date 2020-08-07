@@ -83,6 +83,12 @@ class Checkout extends HelperComponent<{}, IState> {
     }
   }
 
+  private changeField = (e: React.SyntheticEvent<HTMLInputElement>) => {
+    const { form } = this.state;
+    form[e.currentTarget.name] = e.currentTarget.value;
+    this.safeSetState({ form });
+  }
+
   private changeCity = (chosen: IDropdownOption<number>) => {
     const { form } = this.state;
     delete form.userAddressId;
@@ -171,24 +177,30 @@ class Checkout extends HelperComponent<{}, IState> {
           <div className="P-main-info G-half-width">
             <div className="G-main-form-field">
               <input
+                name="fullName"
                 value={form.fullName}
                 className={`G-main-input ${this.formValidation.errors.fullName ? 'G-invalid-field' : ''}`}
                 placeholder={Settings.translations.full_name}
+                onChange={this.changeField}
               />
             </div>
             <div className="G-main-form-field G-phone-input-wrapper">
               <p className="G-input-country-code">+{countryCode}</p>
               <input
+                name="phoneNumber"
                 value={form.phoneNumber}
                 className={`G-main-input ${this.formValidation.errors.phoneNumber ? 'G-invalid-field' : ''}`}
                 placeholder={Settings.translations.phone_number}
+                onChange={this.changeField}
               />
             </div>
             <div className="G-main-form-field">
               <input
+                name="email"
                 value={form.email || ''}
                 className={`G-main-input ${this.formValidation.errors.email ? 'G-invalid-field' : ''}`}
                 placeholder={Settings.translations.email}
+                onChange={this.changeField}
               />
             </div>
             <div className="G-main-form-field">
