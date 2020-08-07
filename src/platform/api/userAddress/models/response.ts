@@ -1,7 +1,9 @@
 export interface IUserAddressListResponseModel {
   id: number;
   name: string;
+  cityId: number;
   cityName: string;
+  regionId: number;
   regionName: string;
   addressText: string;
   addressLat: number;

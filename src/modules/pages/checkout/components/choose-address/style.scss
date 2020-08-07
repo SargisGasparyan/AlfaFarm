@@ -1,0 +1,28 @@
+@import 'src/assets/styles/variables';
+
+.P-checkout-choose-address-modal {
+
+  .P-modal-content {
+    width      : 800px;
+    padding    : 60px 0 20px;
+    overflow-y : auto;
+    max-height : 600px;
+
+    .P-data-table {
+      > .P-data-table-body > ul {
+        border-bottom : 1px solid $dark-gray;
+
+        &:last-child { border-bottom: 0; }
+        &:hover {
+          background : $dark-gray;
+        }
+      }
+    }
+
+    .G-main-button {
+      margin    : 40px 20px 0 auto;
+      display   : block;
+      font-size : $normal-fs;
+    }
+  }
+}

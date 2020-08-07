@@ -25,6 +25,22 @@ export const isValidEmail = (value?: string | null): boolean => {
   return regex.test(value) || Mobregex.test(value);
 }
 
+export const isValidDateRange = (from?: string | Date, to?: string | Date, optional = true) => {
+  const onlyTo = !from && to;
+  const onlyFrom = !to && from;
+
+  if (optional && (onlyTo || onlyFrom)) return true;
+
+  if (from && to) {
+    const fromDate = new Date(from);
+    const toDate = new Date(to);
+  
+    return fromDate <= toDate;
+  }
+
+  return false;
+}
+
 export const isValidNonCityPhone = (value?: string | null): boolean => {
   if (!value && value !== '') return false;
   const beeline = '91|99|96|43|33';

@@ -6,6 +6,7 @@ import { IUserResponseModel } from '../user/models/response';
 import { IAddress } from '../address';
 import { OrderStatusEnum } from './constants/enums';
 import { IOrderListResponseModel, IOrderDetailsResponseModel } from './models/response';
+import { IOrderCreateRequestModel } from './models/request';
 
 export enum OrderPaymentMethodEnum {
   Cash = 1,
@@ -178,6 +179,16 @@ class OrderController {
     return result;
   };
 
+  public static Create = (body: IOrderCreateRequestModel): Promise<IResponse<boolean>> => {
+    const result = Connection.POST<IOrderCreateRequestModel>({
+      body,
+      action: '',
+      controller: OrderController.controller,
+    });
+
+    return result;
+  };
+
   public static List = (pageNo: number, limit: number, active: boolean): Promise<IResponse<IPagination<IOrder>>> => {
     const result = Connection.GET({
       action: 'list',
@@ -201,16 +212,6 @@ class OrderController {
     const result = Connection.POST<IOrderInvoiceRequestModel>({
       body,
       action: 'invoice',
-      controller: OrderController.controller,
-    });
-
-    return result;
-  };
-
-  public static Create = (body: IOrderRequestModel): Promise<IResponse<any>> => {
-    const result = Connection.POST<IOrderRequestModel>({
-      body,
-      action: '',
       controller: OrderController.controller,
     });
 

@@ -20,7 +20,7 @@ export function validateForm(this: IUserModifyRequestModel, submited?: boolean) 
     valid = false;
   }
 
-  if (submited && this.email.length && !isValidEmail(this.email)) {
+  if (submited && this.email && !isValidEmail(this.email)) {
     errors.email = true;
     valid = false;
   }

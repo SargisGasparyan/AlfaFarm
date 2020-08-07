@@ -3,3 +3,8 @@ export enum OrderStatusEnum {
   Success,
   Canceled,
 };
+
+export enum OrderDeliveryTypeEnum {
+  Pickup = 1,
+  Delivery,
+};

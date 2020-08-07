@@ -9,7 +9,6 @@ import PageLoader from 'components/page-loader';
 import { currency } from 'platform/constants';
 import ROUTES from 'platform/constants/routes';
 import Settings from 'platform/services/settings';
-import CartManager from '../../../cart/services/manager';
 import HelperComponent from 'platform/classes/helper-component';
 
 import * as WishListAnimationJSON from 'assets/animations/empty_wish_list.json';
@@ -52,7 +51,6 @@ class GuestList extends HelperComponent<{}, IState> {
         count: item.minCount,
       }));
 
-      CartManager.AddList(cartItems);
       window.routerHistory.push(ROUTES.CART);
     }
   }

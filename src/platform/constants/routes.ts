@@ -23,12 +23,14 @@ const PROFILE_ROUTES = (() => {
     ORDERS: ORDERS_ROUTES,
     ADDRESSES: ADDRESSES_ROUTES,
     MY_REGISTRATIONS: '/my-registrations',
-
+    SPECIAL_PRODUCTS: '/special-products',
+    BONUS_CARD: '/bonus-card',
     FAVORITES: '/favorites',
     MY_ORDERS: '/my-orders',
     MY_COMPANY: '/my-company',
     MY_REQUESTS: '/my-requests',
     MY_ADDRESSES: '/my-addresses',
+    MY_WALLET: '/my-wallet',
     NOTIFICATIONS: "/notifications",
   });
 })();

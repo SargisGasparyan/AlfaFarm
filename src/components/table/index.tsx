@@ -48,7 +48,7 @@ class Table<Data extends { id: number }> extends React.Component<IProps<Data>, {
               key={item.id + '' + rowIndex}
               className={`
                 ${rowClassname ? rowClassname(item, rowIndex) : ''}
-                ${(useCheckbox && useCheckbox(item)) || (!useCheckbox && onRowClick) ? 'P-pointer' : ''}
+                ${(useCheckbox && useCheckbox(item)) || (!useCheckbox && onRowClick) ? 'G-cursor-pointer' : ''}
               `}>
 
               {(useCheckbox && useCheckbox(item, rowIndex)) && <span className="P-table-checkbox">

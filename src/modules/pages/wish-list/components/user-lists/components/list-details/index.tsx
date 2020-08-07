@@ -20,7 +20,6 @@ import { getAmountByCount } from 'modules/pages/products/services/helper';
 import OrderController from 'platform/api/order';
 import PageLoader from 'components/page-loader';
 import HelperComponent from 'platform/classes/helper-component';
-import CartManager from '../../../../../cart/services/manager';
 import './style.scss';
 
 export enum ListActionsOwnerEnum {
@@ -171,7 +170,6 @@ class ListDetails extends HelperComponent<IProps, IState> {
   private goToCheckout = async () => {
     const { chosenProducts } = this.state;
     window.routerHistory.push(`${ROUTES.CART}`)
-    CartManager.AddList(chosenProducts);
     window.dispatchEvent(new CustomEvent('cartmodify'));
   }
 

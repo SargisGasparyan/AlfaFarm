@@ -296,6 +296,7 @@
 // #region Sizes
 
 .G-full-width { width: 100%; }
+.G-half-width { width: 50%; }
 
 .G-fs-16 { font-size: 16px !important; }
 .G-fs-normal { font-size: $normal-fs !important; }
@@ -359,11 +360,7 @@
   max-width       : 100%;
   justify-content : space-between;
 
-  > div {
-    width           : 100%;
-    display         : flex;
-    justify-content : space-between;
-  }
+  > div { width: 100%; }
 
   .G-main-form-field, .G-main-form-half-field {
     width         : 100%;
