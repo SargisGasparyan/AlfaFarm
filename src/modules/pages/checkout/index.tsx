@@ -92,7 +92,11 @@ class Checkout extends HelperComponent<{}, IState> {
   private changeCity = (chosen: IDropdownOption<number>) => {
     const { form } = this.state;
     delete form.userAddressId;
-    this.safeSetState({ form, cityId: chosen.value, regions: [] }, this.fetchRegions);
+    this.safeSetState({
+      form,
+      cityId: chosen.value,
+      regions: [],
+    }, this.fetchRegions);
   }
 
   private changeRegion = (chosen: IDropdownOption<number>) => {
