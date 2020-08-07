@@ -12,6 +12,8 @@
   background     : white;
   flex-direction : column;
 
+  &::-webkit-scrollbar { display: none; }
+
   > .P-main-info {
     display        : flex;
     padding        : 40px 30px;
