@@ -3,7 +3,8 @@ import * as moment from 'moment';
 
 import Settings from './settings';
 import { IDropdownOption } from '../constants/interfaces';
-import { IProfile } from '../api/user';
+import { IUserResponseModel } from '../api/user/models/response';
+import enviroment from './enviroment';
 
 export const scrolledToBottom = () => (window.innerHeight + window.scrollY) >= document.body.scrollHeight - 1500;
 export const configedMoment = (date: string | number | Date) => moment.utc(date);
@@ -50,15 +51,20 @@ export const enumToSelectOptions = <Value extends number>(obj: object, withTrans
   return options;
 };
 
-export const getUserName = (profile: IProfile) => {
-  if (profile.firstName && profile.lastName) return `${profile.firstName} ${profile.lastName}`;
-  return profile.email;
-}
+export const getUserName = (profile: IUserResponseModel) => profile.fullName || profile.username;
 
-export const formatDate = (date?: string | number, withHours: boolean = true) => {
+export const formatDate = (date?: string | number, withHours = true) => {
   if (!date) return '';
   const momentDate = moment(date);
   return momentDate.format(withHours ? 'YYYY MMM DD | HH:mm' : 'YYYY MMM DD');
+}
+
+export const formatTime = (time?: string) => {
+  if (!time) return '';
+
+  const splited = time.split(':');
+  splited.pop();
+  return splited.join(':');
 }
 
 export const getHoverDirection = (e: React.MouseEvent, element?: HTMLElement) => {
@@ -76,3 +82,5 @@ export const getHoverDirection = (e: React.MouseEvent, element?: HTMLElement) =>
 
   return null
 };
+
+export const getMediaPath = (path?: string | null) => path ? enviroment.BASE_URL + path : '';

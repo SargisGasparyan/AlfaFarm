@@ -38,14 +38,7 @@ class ProductRequestContact extends HelperComponent<IProps, IState> {
   public componentDidMount() {
     
     if (Storage.profile) {
-      const { firstName, lastName, phoneNumber, email } = Storage.profile;
-      this.safeSetState({ form: {
-        type: RequestSendTypeEnum.Form,
-        firstName,
-        lastName,
-        phoneNumber: phoneNumber ? phoneNumber.replace(countryCode, '') : '',
-        email,
-      }});
+      // const { firstName, lastName, phoneNumber, email } = Storage.profile;
     }
   }
 

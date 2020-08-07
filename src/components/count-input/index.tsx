@@ -1,8 +1,7 @@
 import * as React from 'react';
 
 import NumberInput from '../number-input';
-
-import HelperComponent from 'platform/classes/helper-component';
+import HelperPureComponent from 'platform/classes/helper-pure-component';
 
 import './style.scss';
 
@@ -21,7 +20,7 @@ interface IState {
   count: string | number;
 };
 
-class CountInput extends HelperComponent<IProps, IState> {
+class CountInput extends HelperPureComponent<IProps, IState> {
 
   public state: IState = { count: '0' };
 
@@ -29,14 +28,6 @@ class CountInput extends HelperComponent<IProps, IState> {
     const { value, defaultValue, min } = this.props;
     const intDefaultValue = Number(defaultValue || defaultValue === 0 ? defaultValue : value);
     this.safeSetState({ count: intDefaultValue || intDefaultValue === 0 ? intDefaultValue : min });
-  }
-
-  public componentWillReceiveProps() {
-    const { value } = this.props;
-    if (value || value === 0) {
-      const intValue = Number(value);
-      this.safeSetState({ count: intValue });
-    }
   }
 
   private countInvalid = () => {
@@ -48,25 +39,24 @@ class CountInput extends HelperComponent<IProps, IState> {
     return +count < +min || (+count * 100) % (+step * 100);
   }
 
-  private stepUp = () => {
+  private stepUp = (e: React.SyntheticEvent) => {
+    e.preventDefault();
     const { count } = this.state;
     const { step, onChange } = this.props;
     this.safeSetState({ count: +count + step }, () => onChange(+this.state.count, !this.countInvalid()));
   }
 
-  private stepDown = () => {
+  private stepDown = (e: React.SyntheticEvent) => {
+    e.preventDefault();
     const { count } = this.state;
-    const { step, onChange } = this.props;
+    const { step, onChange, min } = this.props;
     const stepDowned = +count - step;
-    if(stepDowned !== 0){
-      this.safeSetState({ count: stepDowned > 0 ? stepDowned : 0 }, () => onChange(+this.state.count, !this.countInvalid()));
-    }
+    this.safeSetState({ count: stepDowned >= min ? stepDowned : min }, () => onChange(+this.state.count, !this.countInvalid()));
   }
 
   private changeCount = (e: React.SyntheticEvent<HTMLInputElement>) => {
     const { onChange } = this.props;
-    // +e.currentTarget.value
-      this.safeSetState({ count: +e.currentTarget.value}, () => onChange(+this.state.count, !this.countInvalid()));
+    this.safeSetState({ count: +e.currentTarget.value }, () => onChange(+this.state.count, !this.countInvalid()));
   }
 
   private initCount = () => {
@@ -76,13 +66,9 @@ class CountInput extends HelperComponent<IProps, IState> {
   }
 
   public render() {
-    const { count } = this.state;
-    const { withPlus } = this.props;
-    // const { deleteItem } = this.props;
-    // if(count === 0) {
-    //   window.dispatchEvent(new CustomEvent('deleteCard', { detail:  deleteItem }));
-    // }
-    
+    const { withPlus, value } = this.props;
+    const count = value || this.state.count;
+
     return (
       <div
         className={`P-count-input ${!count && withPlus ? 'P-count-input-plus' : ''} ${this.countInvalid() ? 'G-invalid-field' : ''}`}

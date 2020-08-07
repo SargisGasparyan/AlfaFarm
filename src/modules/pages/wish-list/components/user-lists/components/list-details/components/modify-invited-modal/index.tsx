@@ -31,7 +31,7 @@ class ModifyInvitedModal extends HelperComponent<IProps, IState> {
     this.safeSetState({ loading: true }, async () => {
       const result = await WishController.DeleteMember(body);
       if (result.success) {
-        const member = data.members.find(item => item._id === id);
+        const member = data.members.find(item => item.id === id);
         if (member) {
           const memberIndex = data.members.indexOf(member);
           data.members.splice(memberIndex, 1);
@@ -49,13 +49,13 @@ class ModifyInvitedModal extends HelperComponent<IProps, IState> {
     return (
       <Modal onClose={this.closeModal} className="P-wish-list-modify-modal">
         <h2>{Settings.translations.edit_invited_list}</h2>
-        <div className="P-invited" key={data.creator._id}>
+        <div className="P-invited" key={data.creator.id}>
           <h3>{getUserName(data.creator)}</h3>
           <span>{Settings.translations.owner}</span>
         </div>
-        {data.members.map(item => <div className="P-invited" key={item._id}>
+        {data.members.map(item => <div className="P-invited" key={item.id}>
           <h3>{getUserName(item)}</h3>
-          <i className="icon-close" onClick={() => this.deleteMember(item._id)} />
+          <i className="icon-close" onClick={() => this.deleteMember(item.id)} />
         </div>)}
         {loading && <PageLoader />}
       </Modal>

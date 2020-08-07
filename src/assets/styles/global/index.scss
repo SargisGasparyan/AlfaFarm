@@ -46,7 +46,6 @@
 }
 
 .G-invalid-text { color: red !important; }
-.G-invalid-field { border: 1px solid red !important; }
 .G-invalid-select .P-select-header { border: 1px solid red !important; }
 
 .G-show-action-button {
@@ -213,6 +212,14 @@
 .G-number-list { list-style-type: decimal; }
 .G-pink { color: $pink !important; }
 
+.G-back-icon {
+  width         : 100%;
+  color         : $text-gray;
+  cursor        : pointer;
+  font-size     : 26px;
+  margin-bottom : 30px;
+}
+
 .G-discount-label {
 
   top             : 15px;
@@ -279,25 +286,54 @@
   }  
 }
 
+.G-square-image-block {
+  width   : 120px;
+  height  : 120px;
+  border  : 1px solid $light-gray;
+  padding : 5px;
+}
+
 // #region Sizes
 
 .G-full-width { width: 100%; }
+.G-half-width { width: 50%; }
+
+.G-fs-16 { font-size: 16px !important; }
+.G-fs-normal { font-size: $normal-fs !important; }
+.G-fs-24 { font-size: 24px !important; }
+.G-fs-26 { font-size: 26px !important; }
 
 // #endregion Sizes
 
-// #region Margins
+// #region Positioning
 
+.G-position-relative { position: relative; }
 .G-auto-margin-left { margin-left: auto; }
 .G-auto-margin-right { margin-right: auto; }
 
-// #endregion Margins
+.G-mt-5 { margin-top: 5px; }
+.G-mt-10 { margin-top: 10px; }
+.G-mt-20 { margin-top: 20px; }
+
+.G-mr-20 { margin-right: 20px; }
+.G-mr-40 { margin-right: 40px; }
+
+.G-mb-20 { margin-bottom: 20px; }
+.G-mb-30 { margin-bottom: 30px; }
+.G-mb-40 { margin-bottom: 40px; }
+
+// #endregion Positioning
 
 // #region Flex
 
 .G-flex { display: flex; }
+.G-flex-wrap { flex-wrap: wrap; }
 .G-flex-justify-center { justify-content: center; }
+.G-flex-justify-between { justify-content: space-between; }
+.G-flex-justify-end { justify-content: flex-end; }
 .G-flex-align-center { align-items: center; }
-
+.G-flex-column { flex-direction: column; }
+ 
 // #endregion Flex
 
 // #region Texts
@@ -324,19 +360,30 @@
   max-width       : 100%;
   justify-content : space-between;
 
-  > div {
-    width         : 100%;
-    margin-bottom : 30px;
+  > div { width: 100%; }
 
-    &.G-main-form-half-field {
-      width : calc(50% - 15px);
-    }
+  .G-main-form-field, .G-main-form-half-field {
+    width         : 100%;
+    margin-bottom : 20px;
+  }
+
+  .G-main-form-half-field {
+    width : calc(50% - 15px);
   }
 
   > .G-main-button {
 
     width : 100%;
   }
+}
+
+.G-invalid-field { border: 1px solid red !important; }
+
+.G-input-top-label {
+  color         : $light-gray;
+  font-size     : 16px;
+  padding-left  : 35px;
+  margin-bottom : 15px;
 }
 
 .G-phone-input-wrapper {
@@ -351,10 +398,9 @@
     padding-right : 10px;
   }
 
-  > .G-main-input {
+  > .G-input-top-label ~ .G-input-country-code { top: 55px }
 
-    padding-left : 80px;
-  }
+  > .G-main-input { padding-left: 80px; }
 }
 
 .G-main-input, .G-main-textarea {
@@ -365,8 +411,13 @@
   border-radius : 30px;
 }
 
+.G-main-select .P-select-header {
+  height  : 56px;
+  padding : 15px 35px;
+}
+
 .G-main-textarea {
-  height   : 150px;
+  height : 150px;
 }
 
 .G-main-button {
@@ -393,9 +444,12 @@
 
 // #region Normalizers
 
-.G-normal-link {
-  color           : initial;
-  text-decoration : none;
-}
+.G-normal-link { text-decoration: none; }
 
 // #endregion Normalizers
+
+// #region Other
+
+.G-cursor-pointer { cursor: pointer; }
+
+// #region Other

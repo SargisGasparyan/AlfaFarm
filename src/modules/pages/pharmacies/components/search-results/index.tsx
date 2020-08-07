@@ -1,51 +1,113 @@
 import * as React from 'react';
+import { InfoWindow, Marker } from 'react-google-maps';
 
 import Settings from 'platform/services/settings';
-import HelperPureComponent from 'platform/classes/helper-pure-component';
+import HelperComponent from 'platform/classes/helper-component';
 import ShadowText from 'components/shadow-text';
+import { IPharmacyBranchListResponseModel } from 'platform/api/pharmacyBranch/models/response';
+import Maps from 'components/maps';
 
 import './style.scss';
+import { getViewEnum, formatTime } from 'platform/services/helper';
+import { WeekDaysEnum } from 'platform/constants/enums';
+import SearchInput from 'components/search-input';
 
-class SearchResults extends HelperPureComponent<{}, {}> {
+
+interface IProps {
+  data: IPharmacyBranchListResponseModel[];
+};
+
+interface IState {
+  searchValue: string;
+  hoveredMarkerIndex?: number;
+};
+
+class SearchResults extends HelperComponent<IProps, IState> {
+
+  public state: IState = {
+    searchValue: '',
+  };
+  
+  private weeksViewEnum = getViewEnum(WeekDaysEnum);
+
+  private get data() {
+    const { data} = this.props;
+    const { searchValue } = this.state;
+
+    if (!searchValue) return data;
+    return data.filter(item => item.name.includes(searchValue));
+  }
+
+  private get markers() {
+    return this.data.map((item, index) => ({
+      position: { lat: item.addressLat, lng: item.addressLng },
+      onMouseOver: () => this.toggleMarker(index),
+      onMouseOut: () => this.toggleMarker(),
+    }));
+  }
+
+  private get hoveredMarkerData() {
+    const { hoveredMarkerIndex } = this.state;
+    return hoveredMarkerIndex || hoveredMarkerIndex === 0 ? this.data[hoveredMarkerIndex] : undefined;
+  }
+
+  private toggleMarker = (index?: number) => this.safeSetState({ hoveredMarkerIndex: index });
+
+  private onSearchChange = (searchValue: string) => this.safeSetState({ searchValue });
 
   public render() {
+    const { hoveredMarkerIndex } = this.state;
 
     return (
-      <section className="G-page P-pharmacies-search-results">
+      <section id="pharmacy-search-results" className="G-page P-pharmacies-search-results">
         <ShadowText className="G-text-center">{Settings.translations.search_results}</ShadowText>
 
         <div className="P-content">
           <div className="P-list">
-            <h3>Մաշտոց {Math.round(Math.random() * 100)}</h3>
-            <h3>Մաշտոց {Math.round(Math.random() * 100)}</h3>
-            <h3>Մաշտոց {Math.round(Math.random() * 100)}</h3>
-            <h3>Մաշտոց {Math.round(Math.random() * 100)}</h3>
-            <h3>Մաշտոց {Math.round(Math.random() * 100)}</h3>
-            <h3>Մաշտոց {Math.round(Math.random() * 100)}</h3>
-            <h3>Մաշտոց {Math.round(Math.random() * 100)}</h3>
-            <h3>Մաշտոց {Math.round(Math.random() * 100)}</h3>
-            <h3>Մաշտոց {Math.round(Math.random() * 100)}</h3>
-            <h3>Մաշտոց {Math.round(Math.random() * 100)}</h3>
-            <h3>Մաշտոց {Math.round(Math.random() * 100)}</h3>
-            <h3>Մաշտոց {Math.round(Math.random() * 100)}</h3>
-            <h3>Մաշտոց {Math.round(Math.random() * 100)}</h3>
-            <h3>Մաշտոց {Math.round(Math.random() * 100)}</h3>
-            <h3>Մաշտոց {Math.round(Math.random() * 100)}</h3>
-            <h3>Մաշտոց {Math.round(Math.random() * 100)}</h3>
-            <h3>Մաշտոց {Math.round(Math.random() * 100)}</h3>
+            {this.data.map((item, index) => <h3
+              key={item.id}
+              onMouseOver={() => this.toggleMarker(index)}
+              onMouseOut={() => this.toggleMarker()}
+            >{item.name}</h3>)}
           </div>
+          
 
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d97583.88432369805!2d44.418527387344774!3d40.15350050870056!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x406aa2dab8fc8b5b%3A0x3d1479ae87da526a!2sYerevan%2C%20Armenia!5e0!3m2!1sen!2s!4v1593078450542!5m2!1sen!2s"
-            tabIndex={0}
-            frameBorder={0}
-            className="P-maps"
-            allowFullScreen={true}
-            aria-hidden={false}
-          />
+          <div className="P-maps-wrapper">
+            <SearchInput onChange={this.onSearchChange} />
+            <Maps>
+              {this.markers.map((item, index) => <Marker key={index} {...item}>
+                {hoveredMarkerIndex === index && this.hoveredMarkerData && <InfoWindow>
+                  <div className="P-info-window">
+                    <h3 className="G-orange-color G-text-center P-name">{this.hoveredMarkerData.name}</h3>
+                    <h4 className="P-info-row G-flex-center">
+                      <i className="icon-Group-5522 G-orange-color" /> <span>{this.hoveredMarkerData.contactPhoneNumber}</span>
+                    </h4>
+                    <h4 className="P-info-row">
+                      <i className="icon-Group-5554 G-orange-color" />
+                      <this.WorkingPlan />
+                    </h4>
+                  </div>
+                </InfoWindow>}
+              </Marker>)}
+            </Maps>
+          </div>
         </div>
       </section>
     );
+  }
+
+  private WorkingPlan = () => {
+    if (!this.hoveredMarkerData) return null;
+    console.log(this.weeksViewEnum);
+
+    return <div>
+      {this.hoveredMarkerData.workingPlan.map((item, index, arr) => <span key={index}>
+        {Settings.translations[this.weeksViewEnum[item.startDay]]}
+        {item.endDay ? '-' + Settings.translations[this.weeksViewEnum[item.endDay]] : ''}
+        &nbsp;&nbsp;
+        {item.isDayOff ? Settings.translations.day_off : `${formatTime(item.startTime)}-${formatTime(item.endTime)}`}
+      </span>)}
+    </div>
   }
 };
 

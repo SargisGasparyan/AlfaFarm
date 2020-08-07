@@ -1,4 +1,5 @@
 import Cart from './cart';
+import Checkout from './checkout';
 import Blog from './blog';
 import Home from './home';
 import News from './news';
@@ -10,6 +11,7 @@ import Clinic from './clinic';
 
 export {
   Cart,
+  Checkout,
   Blog,
   Home,
   News,

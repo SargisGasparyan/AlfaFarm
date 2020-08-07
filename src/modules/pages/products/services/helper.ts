@@ -3,8 +3,8 @@ import { IProductPricingAmount } from 'platform/api/product';
 import { ProfileTariffPlanEnum } from 'platform/api/user';
 
 export const getAmountByCount = (count: number, priceAmounts: IProductPricingAmount[], checkTariff?: boolean) => {
-  let tariffPlan = null;
-  if (checkTariff && Storage.profile) tariffPlan = Storage.profile.tariffPlan;
+  const tariffPlan = null;
+  // if (checkTariff && Storage.profile) tariffPlan = Storage.profile.tariffPlan;
 
   if (priceAmounts.length) {
     const sorted = priceAmounts.sort((first, second) => second.fromCount - first.fromCount);

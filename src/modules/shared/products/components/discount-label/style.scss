@@ -8,6 +8,7 @@
   height     : 60px;
   padding    : 4px 20px;
   display    : flex;
+  z-index    : 1;
   position   : absolute;
   font-size  : 24px;
   background : url('src/assets/images/discount_label.png') left/contain no-repeat;

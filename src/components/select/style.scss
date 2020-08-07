@@ -28,15 +28,20 @@
       overflow      : hidden;
       white-space   : nowrap;
       text-overflow : ellipsis;
+
+      &.P-select-remove { 
+        width : 14px;
+      }
     }
 
     > i {
 
       padding   : 4px 0 0 10px;
       font-size : 12px;
+      @include bold-font;
     }
 
-    > .P-select-placeholder { opacity: .6; }
+    > .P-select-placeholder { opacity: .4; }
   }
 
   > .P-select-body {

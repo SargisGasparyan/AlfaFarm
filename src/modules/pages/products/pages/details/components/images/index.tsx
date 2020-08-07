@@ -2,24 +2,43 @@ import * as React from 'react';
 
 import HelperPureComponent from 'platform/classes/helper-pure-component';
 
-import MedicineImage from 'assets/images/medicine.png';
-import MedicineImage1 from 'assets/images/medicine_1.jpg';
-import MedicineImage2 from 'assets/images/medicine_2.jpg';
-import MedicineImage3 from 'assets/images/medicine_3.jpg';
+import { IProductDetailsResponseModel } from 'platform/api/product/models/response';
+import { getMediaPath } from 'platform/services/helper';
 
 import './style.scss';
+import { Shared } from 'modules';
 
-const arr = [MedicineImage, MedicineImage1, MedicineImage2, MedicineImage3];
+
+interface IProps {
+  data: IProductDetailsResponseModel;
+}
 
 interface IState {
+  activeId: number;
   photosPackIndex: number;
 }
 
-class Images extends HelperPureComponent<{}, IState> {
+class Images extends HelperPureComponent<IProps, IState> {
 
   public state: IState = {
+    activeId: 0,
     photosPackIndex: 0,
   };
+
+  public componentDidMount() {
+    const { data } = this.props;
+    this.safeSetState({ activeId: data.images[0].id });
+  }
+
+  private get activeImage() {
+    const { data } = this.props;
+    const { activeId } = this.state;
+
+    const finded = data.images.find(item => item.id === activeId);
+    return finded ? finded.path : null;
+  }
+
+  private setActiveImage = (id: number) => this.safeSetState({ activeId: id });
 
   private currentTransform = () => {
     const { photosPackIndex } = this.state;
@@ -38,24 +57,28 @@ class Images extends HelperPureComponent<{}, IState> {
   }
 
   public render() {
+    const { data } = this.props;
+    const { activeId } = this.state;
 
-    const random = arr[Math.round(Math.random() * 3)];
+    const thumbImages = data.images.filter(item => item.id !== activeId);
 
     return (
       <div className="P-product-details-images">
+        {data.discount && <Shared.Products.DiscountLabel percent={data.discount}/>}
         <div className="P-current-image">
-          <div style={{ backgroundImage: `url("${random}")` }} className="P-zoomable-image" onMouseMove={this.zoom}>
-            <img src={random} />
+          <div style={{ backgroundImage: `url("${getMediaPath(this.activeImage)}")` }} className="P-zoomable-image" onMouseMove={this.zoom}>
+            <img src={getMediaPath(this.activeImage)} />
           </div>
         </div>
-        <div className="P-thumbs">
-          {[1,2,3].map(item => <div
-            key={item}
+        {!!thumbImages.length && <div className="P-thumbs">
+          {thumbImages.map(item => <div
+            key={item.id}
             style={{ transform: this.currentTransform() }}
+            onClick={() => this.setActiveImage(item.id)}
           >
-            <div style={{ background: `url("${arr[Math.round(Math.random() * 3)]}") center/contain no-repeat` }} />
+            <div style={{ background: `url("${getMediaPath(item.path)}") center/contain no-repeat` }} />
           </div>)}
-        </div>
+        </div>}
       </div>
     );
   }

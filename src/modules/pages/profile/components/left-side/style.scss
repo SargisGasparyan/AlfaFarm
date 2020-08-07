@@ -1,0 +1,59 @@
+@import 'src/assets/styles/helper';
+@import 'src/assets/styles/variables';
+
+.P-profile-left-side {
+  top            : $header-size;
+  height         : calc(100vh - #{$header-size});
+  display        : flex;
+  position       : sticky;
+  overflow-y     : auto;
+  min-width      : 350px;
+  max-width      : 350px;
+  background     : white;
+  flex-direction : column;
+
+  &::-webkit-scrollbar { display: none; }
+
+  > .P-main-info {
+    display        : flex;
+    padding        : 40px 30px;
+    align-items    : center;
+    flex-direction : column;
+
+    > .P-image {
+      width         : 80px;
+      height        : 80px;
+      border-radius : 50%;
+      margin-bottom : 20px;
+    }
+
+    > h2 {
+      color : $main-color;
+
+      > a {
+        color           : black;
+        font-size       : 20px;
+        margin-left     : 10px;
+        text-decoration : none;
+      }
+    }
+  }
+
+  > .P-link {
+    width                      : calc(100% - 30px);
+    color                      : black;
+    cursor                     : pointer;
+    padding                    : 20px 20px 20px 80px;
+    font-size                  : 20px;
+    transition                 : .4s;
+    margin-bottom              : 20px;
+    text-decoration            : none;
+    border-top-right-radius    : $big-radius;
+    border-bottom-right-radius : $big-radius;
+    @include bold-font;
+
+    &:hover, &.P-active {
+      background : $main-color-light;
+    }
+  }
+}

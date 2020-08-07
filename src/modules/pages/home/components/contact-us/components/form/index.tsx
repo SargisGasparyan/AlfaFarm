@@ -10,19 +10,19 @@ class Form extends HelperComponent<{}, {}> {
 
     return (
       <form className="G-main-form G-auto-margin-left G-auto-margin-right">
-        <div>
+        <div className="G-main-form-field">
           <input
             placeholder={Settings.translations.name}
             className="G-main-input"
           />
         </div>
-        <div>
+        <div className="G-main-form-field">
           <input
             placeholder={Settings.translations.email}
             className="G-main-input"
           />
         </div>
-        <div>
+        <div className="G-main-form-field">
           <textarea
             placeholder={Settings.translations.message}
             className="G-main-textarea"

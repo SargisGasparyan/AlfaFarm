@@ -1,3 +1,5 @@
+@import 'src/assets/styles/variables';
+
 .P-google-maps {
 
   width  : 100%;
@@ -7,5 +9,17 @@
 
     width  : 100%;
     height : 100%;
+
+    // Map type switchers
+
+    .gm-style-mtc { display: none !important; }
+
+    // Info window
+
+    .gm-style-iw-c {
+      box-shadow : $default-block-shadow;
+
+      > .gm-ui-hover-effect[aria-label=Close] { display: none !important; } // Close icon
+    }
   }
 }

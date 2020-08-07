@@ -31,3 +31,4 @@ declare module 'object-to-formdata';
 declare module '@ungap/url-search-params';
 declare module 'react-material-datetime-picker';
 declare module 'react-modal';
+declare module 'scroll-to-element';

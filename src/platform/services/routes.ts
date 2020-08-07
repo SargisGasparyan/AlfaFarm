@@ -19,7 +19,7 @@ class RouteService {
   //? Create Routing Tree
   public static buildRouteContext(prefix: string, routes: { [key:string]: string }) {
     const nativeActions: ProxyHandler<any> = {
-      get(target, key) { return prefix + target[key]; }
+      get(target, key) { return typeof target[key] === 'string' ? prefix + target[key] : target[key]; }
     };
     
     return new Proxy(routes, nativeActions);

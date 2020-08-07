@@ -116,7 +116,6 @@ class ModifyListModal extends HelperComponent<IProps, IState> {
             <Select<string | null>
               options={payerDropdown}
               value={form.companyId || null}
-              useValue={true}
               withNew={true}
               onNewClick={this.companyNewClick}
               emptyText={Settings.translations.no_companies}

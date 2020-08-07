@@ -1,6 +1,6 @@
 import Connection from '../services/connection';
 import { IResponse, IPagination } from '../constants/interfaces';
-import { IProfile } from './user';
+import { IUserResponseModel } from './user/models/response';
 import { IWishListCartProductItem } from './product';
 
 const controller = 'wish';
@@ -20,7 +20,7 @@ export interface IWishListItem {
 };
 
 export interface IWishListRequestedProduct extends IWishListCartProductItem {
-  members: IProfile[];
+  members: IUserResponseModel[];
 };
 
 export interface IModifyWishListRequestModel {
@@ -38,8 +38,8 @@ export interface IWishListDetails {
   _id: string;
   company?: string;
   companyId?: string;
-  creator: IProfile;
-  members: IProfile[];
+  creator: IUserResponseModel;
+  members: IUserResponseModel[];
   name: string;
   owner: boolean;
 };

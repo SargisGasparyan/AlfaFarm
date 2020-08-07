@@ -5,7 +5,7 @@ import { RequestSendTypeEnum } from '../api/request';
 
 export interface IResponse<Data> {
   data: Data;
-  message: string;
+  messages: { key: number, value: string }[];
   success: boolean;
   abort(): void;
   aborted?: boolean;
@@ -30,6 +30,7 @@ export interface IRequest {
   dataAsSuccess?: boolean;
   withoutError?: boolean;
   unabortable?: boolean;
+  withoutConfirmModal?: boolean;
 };
 
 export interface IBodyRequest<Body extends object> extends IRequest { body: Body; };
@@ -42,6 +43,7 @@ export interface IDropdownOption<Value> {
 };
 
 export interface IGooglePlace {
+  formatted_address: string;
   geometry: {
     location: {
       lat(): number;
@@ -52,9 +54,17 @@ export interface IGooglePlace {
 
 export interface IPagination<Data> {
   itemList: Data[];
+  list: Data[];
   categoryParentTree : ITreeList[];
   itemCount?: number;
+  totalCount: number;
   pagesLeft: boolean;
+  pageCount: number;
+};
+
+export interface IFile {
+  id: number;
+  path: string;
 };
 
 export interface IContactInfoModel {
@@ -83,3 +93,8 @@ export interface IBecomePartner {
   contactperson: string,
   
 }
+
+export interface IPagingRequest {
+  pageSize: number;
+  pageNumber: number;
+};

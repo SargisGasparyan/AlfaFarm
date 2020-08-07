@@ -27,7 +27,6 @@ class Connection {
   private static createHeaders = (isUpload: boolean): Headers => {
     const HEADERS = new Headers();
     Settings.token && HEADERS.append('Authorization', `Bearer ${Settings.token}`);
-    Settings.guestId && HEADERS.append('GuestId', Settings.guestId);
     HEADERS.append('Language', Settings.language.toString());
     HEADERS.append('OsType', OSTypeEnum.Web.toString());
     !isUpload && HEADERS.append('Content-Type', 'application/json');
@@ -47,9 +46,9 @@ class Connection {
       if (contentType && contentType.indexOf("application/json") !== -1) {
         response.json().then((result: IResponse<any>) => {
           const success = dataAsSuccess ? result.data : result.success;
-          if (!success && !withoutError && result.message) {
+          if (!success && !withoutError && result.messages && result.messages[0]) {
             alertify.dismissAll();
-            alertify.error(result.message);
+            alertify.error(result.messages[0].value);
           }
           
           resolve(result);
@@ -108,11 +107,9 @@ class Connection {
   //? DELETE request
   public static DELETE = async <Body extends object>(data: IBodyRequest<Body>): Promise<any> => {
     const abort = new AbortController();
-    const { controller, action, body, query, noneJSONBody } = data;
+    const { controller, action, body, query, noneJSONBody, withoutConfirmModal } = data;
 
     return new Promise(resolve => {
-      window.dispatchEvent(new CustomEvent('toggleconfirm'));
-      
       const userCanceled = async () => {
         resolve(false);
         window.removeEventListener('usercanceled', userCanceled);
@@ -140,14 +137,18 @@ class Connection {
           resolve({ aborted: true });
         }
 
-        window.removeEventListener('usercanceled', userCanceled);
-        window.removeEventListener('userconfirmed', userConfirmed);
-        window.dispatchEvent(new CustomEvent('toggleconfirm'));
+        if (!withoutConfirmModal) {
+          window.removeEventListener('usercanceled', userCanceled);
+          window.removeEventListener('userconfirmed', userConfirmed);
+          window.dispatchEvent(new CustomEvent('toggleconfirm'));
+        }
       }
 
-
-      window.addEventListener('usercanceled', userCanceled);
-      window.addEventListener('userconfirmed', userConfirmed);
+      if (!withoutConfirmModal) {
+        window.dispatchEvent(new CustomEvent('toggleconfirm'));
+        window.addEventListener('usercanceled', userCanceled);
+        window.addEventListener('userconfirmed', userConfirmed);
+      } else userConfirmed();
     });
     
   }
@@ -169,6 +170,7 @@ class Connection {
       !data.unabortable && window.abortableRequests.splice(window.abortableRequests.indexOf(abort), 1);
       return Connection.responseRestructure(response);
     } catch (e) {
+      console.log(e);
       !data.unabortable && window.abortableRequests.splice(window.abortableRequests.indexOf(abort), 1);    
       return { aborted: true };
     }

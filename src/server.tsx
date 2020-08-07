@@ -7,6 +7,7 @@ import { renderToString } from 'react-dom/server';
 import App from './app';
 import InitialHeaders from './platform/constants/initial-headers';
 import ProductController from './platform/api/product';
+import Settings from 'platform/services/settings';
 
 const assets = require(process.env.RAZZLE_ASSETS_MANIFEST || '');
 const server = express();
@@ -99,6 +100,7 @@ function buildHTML(markup: string, title: string, description: string, keywords:
         };
       </script>
       <script async defer src="https://connect.facebook.net/en_US/sdk.js"></script>
+      <script src="https://maps.googleapis.com/maps/api/js?key=${Settings.googleAPIKey}&libraries=places"></script>
 
       </body>
     </html>
