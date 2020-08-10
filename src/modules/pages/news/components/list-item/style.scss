@@ -1,12 +1,11 @@
 @import 'src/assets/styles/variables';
 
 .P-news-list-item {
-  flex          : 1;
+  width         : calc(100% / 3 - 40px);
   border        : 1px solid $light-gray;
-  margin        : 30px;
+  margin        : 20px;
   display       : flex;
   overflow      : hidden;   
-  min-width     : 500px;
   border-radius : $big-radius;
 
   > .P-image {

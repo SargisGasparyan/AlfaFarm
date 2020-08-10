@@ -43,21 +43,6 @@ class HowToUseApp extends HelperPureComponent<{}, {}> {
             className="P-item"
             frameBorder={0}
           />
-          <iframe
-            src="https://www.youtube.com/embed/a-EVxNQwp4g"
-            className="P-item"
-            frameBorder={0}
-          />
-          <iframe
-            src="https://www.youtube.com/embed/VymiLo2jLqM"
-            className="P-item"
-            frameBorder={0}
-          />
-          <iframe
-            src="https://www.youtube.com/embed/a-EVxNQwp4g"
-            className="P-item"
-            frameBorder={0}
-          />
         </div>
       </section>
     );

@@ -1175,6 +1175,7 @@ export default {
   price_list: "Price list",
   blog: "Blog",
   news: "News",
+  order_success: "Thanks, your order has been confirmed. You can see the details of the order in the order history section.",
   good_morning: "Good morning",
   home: "Home page",
   good_afternoon: "Good afternoon",

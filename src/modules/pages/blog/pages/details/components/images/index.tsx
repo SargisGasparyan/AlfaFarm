@@ -39,12 +39,6 @@ class Images extends HelperPureComponent<IProps, IState> {
 
   private setActiveImage = (id: number) => this.safeSetState({ activeId: id });
 
-  private currentTransform = () => {
-    const { photosPackIndex } = this.state;
-    const calculation = `calc(${photosPackIndex * -300}% - ${photosPackIndex * 60}px)`;
-    return `translateY(${calculation})`;
-  }
-
   public render() {
     const { data } = this.props;
     const { activeId } = this.state;
@@ -53,16 +47,14 @@ class Images extends HelperPureComponent<IProps, IState> {
 
     return (
       <div className="P-blog-details-images">
-        <div style={{ background: `url("${getMediaPath(this.activeImage)}") center/cover` }} className="P-current-image" />
         {!!thumbImages.length && <div className="P-thumbs">
           {thumbImages.map(item => <div
             key={item.id}
-            style={{ transform: this.currentTransform() }}
+            style={{ background: `url("${getMediaPath(item.path)}") center/cover` }}
             onClick={() => this.setActiveImage(item.id)}
-          >
-            <div style={{ background: `url("${getMediaPath(item.path)}") center/contain no-repeat` }} />
-          </div>)}
+          />)}
         </div>}
+        <div style={{ background: `url("${getMediaPath(this.activeImage)}") center/cover` }} className="P-current-image" />
       </div>
     );
   }

@@ -30,9 +30,9 @@ class Storage {
       const brands = await BrandController.GetList({ pageNumber: 1, pageSize: infinityScrollMax });
       const activeIngredients = await ActiveIngredientController.GetList({ pageNumber: 1, pageSize: infinityScrollMax });
       const languages = await LanguageController.GetList();
-      const mues = await MUController.List();
+      // const mues = await MUController.List();
       
-      Storage.mues = mues.data;
+      Storage.mues = [];
       Storage.brands = brands.data.list;
       Storage.activeIngredients = activeIngredients.data.list;
       Storage.categories = categories.data;

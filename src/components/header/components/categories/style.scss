@@ -2,11 +2,12 @@
 @import 'src/assets/styles/variables';
 
 .P-header-categories-wrapper {
-  top             : $header-size + 15px;
+  top             : $header-size;
   left            : 0;
   width           : 100%;
   display         : flex;
   position        : absolute;
+  padding-top     : 15px;
   justify-content : flex-end;
 
   .P-content {

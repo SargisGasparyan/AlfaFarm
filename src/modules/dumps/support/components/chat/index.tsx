@@ -30,10 +30,11 @@ class Chat extends HelperComponent<{}, IState> {
   private messagesBox = React.createRef<HTMLDivElement>();
 
   public async componentDidMount() {
-    Socket.connection.on('newMessage', () => {
-      this.pageNo = 1;
-      this.fetchMessages(true);
-    });
+    // Socket.connection.on('newMessage', () => {
+    //   this.pageNo = 1;
+    //   this.fetchMessages(true);
+    // });
+    
     this.fetchMessages();
   }
 
