@@ -14,6 +14,7 @@ import CountInput from 'components/count-input';
 import Connection from 'platform/services/connection';
 
 import './style.scss';
+import DispatcherChannels from 'platform/constants/dispatcher-channels';
 
 interface IState {
   data: IBasketListResponseModel[];
@@ -65,7 +66,10 @@ class Cart extends HelperComponent<{}, IState> {
     return total;
   }
 
-  public componentDidMount() { this.fetchData(); }
+  public componentDidMount() {
+    window.dispatchEvent(new CustomEvent(DispatcherChannels.CartItemsUpdate, { detail: false }));
+    this.fetchData();
+  }
 
   private fetchData = async () => {
     const result = await BasketController.GetList();

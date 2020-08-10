@@ -40,7 +40,7 @@ class Info extends HelperComponent<IProps, IState> {
       productQuantity: count,
     });
 
-    window.dispatchEvent(new Event(DispatcherChannels.CartItemsUpdate));
+    window.dispatchEvent(new CustomEvent(DispatcherChannels.CartItemsUpdate, { detail: true }));
     this.safeSetState({ cartLoading: false });
   });
 

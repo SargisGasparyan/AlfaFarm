@@ -54,10 +54,7 @@ class Header extends HelperPureComponent<{}, IState> {
     window.removeEventListener(DispatcherChannels.CartItemsUpdate, this.toggleCartIcon);
   }
 
-  private toggleCartIcon = () => {
-    const { cartIconShown } = this.state;
-    this.safeSetState({ cartIconShown: !cartIconShown });
-  }
+  private toggleCartIcon = (e: CustomEvent) => this.safeSetState({ cartIconShown: e.detail });
 
   private checkWindow = () => {
     const { categoryOpenPosition } = this.state;
