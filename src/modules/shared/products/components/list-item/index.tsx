@@ -38,7 +38,7 @@ const ListItem = React.memo((props: IProps) => {
       productQuantity: count,
     });
 
-    window.dispatchEvent(new Event(DispatcherChannels.CartItemsUpdate));
+    window.dispatchEvent(new CustomEvent(DispatcherChannels.CartItemsUpdate, { detail: true }));
     setCartLoading(false);
   }
 

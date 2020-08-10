@@ -18,14 +18,15 @@ interface IProps {
 
 const ListItem = React.memo(({ data }: IProps) => {
   const [cartLoading, setCartLoading] = React.useState<boolean>(false);
-  const addToCart = async () => {
+  const addToCart = async (e: React.SyntheticEvent) => {
+    e.preventDefault();
     setCartLoading(true);
     await BasketController.Change({
       productId: data.id,
       productQuantity: 1,
     });
 
-    window.dispatchEvent(new Event(DispatcherChannels.CartItemsUpdate));
+    window.dispatchEvent(new CustomEvent(DispatcherChannels.CartItemsUpdate, { detail: true }));
     setCartLoading(false);
   }
 
