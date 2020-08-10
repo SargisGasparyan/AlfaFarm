@@ -250,9 +250,9 @@ class Checkout extends HelperComponent<{}, IState> {
               <h4 className="G-fs-normal">{Settings.translations.delivery_date}</h4>
               <div className="G-main-form-half-field">
                 <DateTime
-                  value={form.deliveryDateFrom ? formatDate(form.deliveryDateFrom, true) : ''}
                   onChange={this.dateFromChange}
                   inputProps={{
+                    value: form.deliveryDateFrom ? formatDate(form.deliveryDateFrom, true) : '',
                     readOnly: true,
                     className: `G-main-input ${this.formValidation.errors.deliveryDateFrom ? 'G-invalid-field' : ''}`,
                     placeholder: '00:00',
@@ -262,9 +262,9 @@ class Checkout extends HelperComponent<{}, IState> {
               <span>&#8213;</span>
               <div className="G-main-form-half-field">
                 <DateTime
-                  value={form.deliveryDateTo ? formatDate(form.deliveryDateTo, true) : ''}
                   onChange={this.dateToChange}
                   inputProps={{
+                    value: form.deliveryDateTo ? formatDate(form.deliveryDateTo, true) : '',
                     readOnly: true,
                     className: `G-main-input ${this.formValidation.errors.deliveryDateTo ? 'G-invalid-field' : ''}`,
                     placeholder: '00:00',
