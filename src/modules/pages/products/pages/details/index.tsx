@@ -48,7 +48,7 @@ class Details extends HelperComponent<IProps, {}> {
     return (
       <section className="G-page P-product-details-page">
         {data ? <>
-          {window.routerHistory.length > 2 && <i className="P-back-icon icon-Group-5529" onClick={this.goBack} />}
+          {window.routerHistory.length > 2 && <i className="G-back-icon icon-Group-5529" onClick={this.goBack} />}
           <div className="P-content">
             {!!data.images.length && <Images data={data} />}
             <Info data={data} />

@@ -45,16 +45,6 @@ class Images extends HelperPureComponent<IProps, IState> {
     return `translateY(${calculation})`;
   }
 
-  private zoom = (e: React.MouseEvent) => {
-    const zoomer = e.currentTarget as HTMLElement;
-    const offsetX = e.nativeEvent.offsetX;
-    const offsetY = e.nativeEvent.offsetY;
-
-    const x = offsetX / zoomer.offsetWidth * 100;
-    const y = offsetY / zoomer.offsetHeight * 100;
-    zoomer.style.backgroundPosition = x + '% ' + y + '%';
-  }
-
   public render() {
     const { data } = this.props;
     const { activeId } = this.state;
@@ -63,11 +53,7 @@ class Images extends HelperPureComponent<IProps, IState> {
 
     return (
       <div className="P-news-details-images">
-        <div className="P-current-image">
-          <div style={{ backgroundImage: `url("${getMediaPath(this.activeImage)}")` }} className="P-zoomable-image" onMouseMove={this.zoom}>
-            <img src={getMediaPath(this.activeImage)} />
-          </div>
-        </div>
+        <div className="P-current-image" style={{ background: `url("${getMediaPath(this.activeImage)}") center/cover` }} />
         {!!thumbImages.length && <div className="P-thumbs">
           {thumbImages.map(item => <div
             key={item.id}
