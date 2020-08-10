@@ -8,6 +8,7 @@ import LoaderContent from 'components/loader-content';
 import BasketController from 'platform/api/basket';
 
 import './style.scss';
+import DispatcherChannels from 'platform/constants/dispatcher-channels';
 
 interface IProps {
   data: IProductDetailsResponseModel;
@@ -39,6 +40,7 @@ class Info extends HelperComponent<IProps, IState> {
       productQuantity: count,
     });
 
+    window.dispatchEvent(new Event(DispatcherChannels.CartItemsUpdate));
     this.safeSetState({ cartLoading: false });
   });
 

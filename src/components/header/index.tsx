@@ -23,6 +23,7 @@ interface IState {
   authOpen: boolean;
   categoryOpenPosition: number;
   categoryOpen: boolean;
+  cartIconShown: boolean;
 };
 
 class Header extends HelperPureComponent<{}, IState> {
@@ -30,6 +31,7 @@ class Header extends HelperPureComponent<{}, IState> {
     authOpen: false,
     categoryOpenPosition: 0,
     categoryOpen: false,
+    cartIconShown: false,
   };
 
   private categoryOpenLink = React.createRef<HTMLAnchorElement>();
@@ -43,11 +45,18 @@ class Header extends HelperPureComponent<{}, IState> {
   public componentDidMount() {
     setTimeout(this.checkWindow, 500); // Wait for assets load to get the right position
     window.addEventListener('resize', this.checkWindow);
+    window.addEventListener(DispatcherChannels.CartItemsUpdate, this.toggleCartIcon);
   }
 
   public componentWillUnmount() {
     super.componentWillUnmount();
     window.removeEventListener('resize', this.checkWindow);
+    window.removeEventListener(DispatcherChannels.CartItemsUpdate, this.toggleCartIcon);
+  }
+
+  private toggleCartIcon = () => {
+    const { cartIconShown } = this.state;
+    this.safeSetState({ cartIconShown: !cartIconShown });
   }
 
   private checkWindow = () => {
@@ -75,7 +84,7 @@ class Header extends HelperPureComponent<{}, IState> {
   }
 
   public render() {
-    const { authOpen, categoryOpenPosition, categoryOpen } = this.state;
+    const { authOpen, categoryOpenPosition, categoryOpen, cartIconShown } = this.state;
 
     return (
       <header className="G-flex G-flex-align-center G-flex-justify-center">
@@ -110,8 +119,9 @@ class Header extends HelperPureComponent<{}, IState> {
           <i className="icon-Group-5515" />
         </Link> */}
 
-        <Link to={ROUTES.CART} className="P-link P-icon G-normal-link">
+        <Link to={ROUTES.CART} className="P-link P-icon G-normal-link P-cart">
           <i className="icon-Group-5503" />
+          {cartIconShown && <span />}
         </Link>
       
         <LanguageSwitcher />
