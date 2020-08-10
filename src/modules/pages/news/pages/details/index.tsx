@@ -40,7 +40,7 @@ class Details extends HelperComponent<RouteComponentProps<IRouteParams>, IState>
 
     return data ? (
       <section className="G-page P-news-details-page">
-        {window.routerHistory.length > 2 && <i className="P-back-icon icon-Group-5529" onClick={this.goBack} />}
+        {window.routerHistory.length > 2 && <i className="G-back-icon icon-Group-5529" onClick={this.goBack} />}
         <div className="P-content">
           {data.images.length && <Images data={data} />}
           <Info data={data} />
