@@ -1,6 +1,16 @@
 @import "src/assets/styles/helper";
 @import "src/assets/styles/variables";
 
+@keyframes cart-icon-animation {
+  from {
+    transform: scale(1.5);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
 header {
   top        : 0;
   left       : 0;
@@ -47,6 +57,21 @@ header {
 
     &.P-active {
       color: $orange;
+    }
+
+    &.P-cart {
+      position : relative;
+
+      > span {
+        top           : 0;
+        right         : -5px;
+        width         : 12px;
+        height        : 12px;
+        position      : absolute;
+        animation     : cart-icon-animation .2s;
+        background    : red;
+        border-radius : 50%;
+      }
     }
 
     &.P-login {

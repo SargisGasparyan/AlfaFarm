@@ -3,11 +3,12 @@ import * as React from 'react';
 import { Shared } from 'modules';
 import Settings from 'platform/services/settings';
 import { IProductListResponseModel } from 'platform/api/product/models/response';
-
-import './style.scss';
 import { getMediaPath } from 'platform/services/helper';
 import BasketController from 'platform/api/basket';
 import LoaderContent from 'components/loader-content';
+import DispatcherChannels from 'platform/constants/dispatcher-channels';
+
+import './style.scss';
 
 interface IProps {
   data: IProductListResponseModel;
@@ -21,6 +22,8 @@ const ListItem = React.memo(({ data }: IProps) => {
       productId: data.id,
       productQuantity: 1,
     });
+
+    window.dispatchEvent(new Event(DispatcherChannels.CartItemsUpdate));
     setCartLoading(false);
   }
 

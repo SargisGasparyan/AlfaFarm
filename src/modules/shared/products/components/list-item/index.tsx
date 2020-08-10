@@ -12,6 +12,7 @@ import './style.scss';
 import FavoriteController from 'platform/api/favorite';
 import BasketController from 'platform/api/basket';
 import LoaderContent from 'components/loader-content';
+import DispatcherChannels from 'platform/constants/dispatcher-channels';
 
 
 interface IProps {
@@ -36,6 +37,8 @@ const ListItem = React.memo((props: IProps) => {
       productId: data.id,
       productQuantity: count,
     });
+
+    window.dispatchEvent(new Event(DispatcherChannels.CartItemsUpdate));
     setCartLoading(false);
   }
 
