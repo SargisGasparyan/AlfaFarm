@@ -1,15 +1,14 @@
 import * as React from 'react';
 
 import HelperPureComponent from 'platform/classes/helper-pure-component';
-
-import { IBlogDetailsResponseModel } from 'platform/api/blog/models/response';
+import { IProductDetailsResponseModel } from 'platform/api/product/models/response';
 import { getMediaPath } from 'platform/services/helper';
 
 import './style.scss';
 
 
 interface IProps {
-  data: IBlogDetailsResponseModel;
+  data: IProductDetailsResponseModel;
 }
 
 interface IState {
@@ -62,7 +61,7 @@ class Images extends HelperPureComponent<IProps, IState> {
     const thumbImages = data.images.filter(item => item.id !== activeId);
 
     return (
-      <div className="P-blog-details-images">
+      <div className="P-product-details-images">
         <div className="P-current-image">
           <div style={{ backgroundImage: `url("${getMediaPath(this.activeImage)}")` }} className="P-zoomable-image" onMouseMove={this.zoom}>
             <img src={getMediaPath(this.activeImage)} />

@@ -8,8 +8,10 @@
   font-size : 100px;
   @include bold-font();
 
+  &.P-shadow-text-without-offset > .P-background { left: 0; }
+
   > .P-background {
-    left                    : 0;
+    left                    : 8vw;
     color                   : inherit;
     bottom                  : 0;
     opacity                 : .2;

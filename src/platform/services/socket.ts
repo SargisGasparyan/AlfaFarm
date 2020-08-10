@@ -1,7 +1,7 @@
-import * as io from 'socket.io-client';
+// import * as io from 'socket.io-client';
 
-import Settings from './settings';
-import Enviroment from './enviroment';
+// import Settings from './settings';
+// import Enviroment from './enviroment';
 
 class Socket {
   public static connection: SocketIOClient.Socket;
@@ -11,17 +11,17 @@ class Socket {
   }
 
   public static connect = () => {
-    const query = new URLSearchParams();
-    if (Settings.token) {
-      const token = encodeURIComponent(`Bearer ${Settings.token}`);
-      query.append('authorization', token);
-    } else {
-      query.append('webGuest', 'true');
-      Settings.guest && query.append('guest', Settings.guest);
-    }
+    // const query = new URLSearchParams();
+    // if (Settings.token) {
+    //   const token = encodeURIComponent(`Bearer ${Settings.token}`);
+    //   query.append('authorization', token);
+    // } else {
+    //   query.append('webGuest', 'true');
+    //   Settings.guest && query.append('guest', Settings.guest);
+    // }
 
-    Socket.connection = io.connect(Enviroment.BASE_URL, { query: query.toString(), transports: ['polling'] });
-    !Settings.token && Socket.guestListener();
+    // Socket.connection = io.connect(Enviroment.BASE_URL, { query: query.toString(), transports: ['polling'] });
+    // !Settings.token && Socket.guestListener();
   }
  
   public static disconnect = () => Socket.connection && Socket.connection.disconnect();

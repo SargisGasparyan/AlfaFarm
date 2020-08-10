@@ -289,7 +289,7 @@ class Checkout extends HelperComponent<{}, IState> {
             {chooseAddressOpen && <ChooseAddress onClose={this.closeAddressChoose} />}
           </div>
         </form>
-        {successModalOpen && <SuccessModal text={"Thanks for your order"} onClose={() => window.routerHistory.push(ROUTES.HOME.MAIN)} />}
+        {successModalOpen && <SuccessModal text={Settings.translations.order_success} onClose={() => window.routerHistory.push(ROUTES.HOME.MAIN)} />}
       </section>
     );
   }

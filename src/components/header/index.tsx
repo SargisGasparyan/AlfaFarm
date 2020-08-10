@@ -34,6 +34,7 @@ class Header extends HelperPureComponent<{}, IState> {
     cartIconShown: false,
   };
 
+  private header = React.createRef<HTMLDivElement>();
   private categoryOpenLink = React.createRef<HTMLAnchorElement>();
 
   private navLinkProps = {
@@ -69,10 +70,23 @@ class Header extends HelperPureComponent<{}, IState> {
     this.safeSetState({ authOpen: !authOpen });
   }
 
-  private toggleCategories = (e?: React.SyntheticEvent) => {
-    e && e.stopPropagation();
+  private openCategories = () => {
+    this.safeSetState({ categoryOpen: true });
+    document.addEventListener('mousemove', this.closeCategories);
+  }
+
+  private closeCategories = (e?: MouseEvent) => {
     const { categoryOpen } = this.state;
-    this.safeSetState({ categoryOpen: !categoryOpen });
+    console.log(this.header);
+    const canBeClosed = !e || (
+      this.header.current &&
+      !this.header.current.contains(e.target as Node)
+    )
+
+    if (categoryOpen && canBeClosed) {
+      this.safeSetState({ categoryOpen: false });
+      document.removeEventListener('mousemove', this.closeCategories);
+    }
   }
 
   private searchSubmit = (value: string) => {
@@ -84,18 +98,19 @@ class Header extends HelperPureComponent<{}, IState> {
     const { authOpen, categoryOpenPosition, categoryOpen, cartIconShown } = this.state;
 
     return (
-      <header className="G-flex G-flex-align-center G-flex-justify-center">
+      <header ref={this.header} className="G-flex G-flex-align-center G-flex-justify-center">
         <Link to={ROUTES.HOME.MAIN} className="P-logo G-auto-margin-right">
           <img src={LogoImage} className="G-full-width" />
         </Link>
         
         <SearchInput withSubmit={true} onSubmit={this.searchSubmit} />
 
-        <a
-          ref={this.categoryOpenLink}
-          onClick={this.toggleCategories}
+        <Link
+          to={ROUTES.PRODUCTS.MAIN}
+          innerRef={this.categoryOpenLink}
+          onMouseOver={this.openCategories}
           className={`P-link ${categoryOpen ? 'P-active' : ''}`}
-        >{Settings.translations.online_pharmacy}</a>
+        >{Settings.translations.online_pharmacy}</Link>
 
         <NavLink {...this.navLinkProps} to={ROUTES.PHARMACIES}>{Settings.translations.pharmacies}</NavLink>
         <NavLink {...this.navLinkProps} to={ROUTES.CLINIC}>{Settings.translations.clinic}</NavLink>
@@ -112,9 +127,9 @@ class Header extends HelperPureComponent<{}, IState> {
           className="P-link P-login"
         >{Settings.translations.log_in}</span>}
 
-        {/* <Link to={ROUTES.CART} className="P-link P-icon G-normal-link">
+        {Storage.profile && <Link to={ROUTES.CART} className="P-link P-icon G-normal-link">
           <i className="icon-Group-5515" />
-        </Link> */}
+        </Link>}
 
         <Link to={ROUTES.CART} className="P-link P-icon G-normal-link P-cart">
           <i className="icon-Group-5503" />
@@ -124,7 +139,7 @@ class Header extends HelperPureComponent<{}, IState> {
         <LanguageSwitcher />
         {authOpen && <Shared.Auth onClose={this.toggleAuth} />}
 
-        {!!categoryOpenPosition && categoryOpen && <Categories openPosition={categoryOpenPosition} onClose={this.toggleCategories} />}
+        {!!categoryOpenPosition && categoryOpen && <Categories openPosition={categoryOpenPosition} onClose={this.closeCategories} />}
       </header>
     );
   }

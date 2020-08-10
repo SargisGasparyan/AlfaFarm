@@ -26,7 +26,7 @@ class Carousel extends HelperPureComponent<{}, {}> {
       >
         <div>
           <div className="G-page P-home-carousel-slide" style={{ background: `url('${HomeImage}') center/cover` }}>
-            <ShadowText>Ապրենք առողջ</ShadowText>
+            <ShadowText className="P-shadow-text-without-offset">Ապրենք առողջ</ShadowText>
             <p>{Settings.translations.footer_text}</p>
             <button className="G-main-button">{Settings.translations.read_more}</button>
           </div>
@@ -39,7 +39,7 @@ class Carousel extends HelperPureComponent<{}, {}> {
         </div>
         <div>
           <div className="G-page P-home-carousel-slide" style={{ background: `url('${HomeImage2}') center/cover` }}>
-            <ShadowText>Ապրենք առողջ</ShadowText>
+            <ShadowText className="P-shadow-text-without-offset">Ապրենք առողջ</ShadowText>
             <p>{Settings.translations.footer_text}</p>
             <button className="G-main-button">{Settings.translations.read_more}</button>
           </div>
