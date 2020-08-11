@@ -27,6 +27,7 @@ class Info extends HelperComponent<IProps, IState> {
   public state: IState = {
     count: 1,
     cartLoading: false,
+    pharmaciesAvailablityOpen: false,
   };
 
   private onCountChange = (count: number) => {
