@@ -1,13 +1,10 @@
 @import 'src/assets/styles/variables';
 
-.G-page.P-products-list-page {
+.G-page.P-products-similar-list-page {
   display        : flex;
   padding-top    : 100px;
   padding-bottom : 100px;
-
-  > .P-shadow-text { margin-bottom: 130px; }
-
-  > .G-main-ghost-button { margin-top: 75px; }
+  flex-direction : column;
 
   > .P-list-wrapper {
     margin      : -20px;

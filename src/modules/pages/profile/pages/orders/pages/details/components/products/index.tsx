@@ -43,7 +43,7 @@ const Products = React.memo(({ list }: IProps) => {
   return <Table<IOrderDetailsBasketItemResponseModel>
     className="P-order-details-products"
     columnConfig={columnConfig} data={[...list, ...list, ...list]}
-    redirectUrl={row => ROUTES.PRODUCTS.DETAILS.replace(':id', `${row.productId}`)}
+    redirectUrl={row => ROUTES.PRODUCTS.DETAILS.replace(':id', row.productId)}
   />;
 });
 

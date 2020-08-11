@@ -66,7 +66,7 @@ class Images extends HelperPureComponent<IProps, IState> {
       <div className="P-product-details-images">
         {data.discount && <Shared.Products.DiscountLabel percent={data.discount}/>}
         <div className="P-current-image">
-          <div style={{ backgroundImage: `url("${getMediaPath(this.activeImage)}")` }} className="P-zoomable-image" onMouseMove={this.zoom}>
+          <div>
             <img src={getMediaPath(this.activeImage)} />
           </div>
         </div>

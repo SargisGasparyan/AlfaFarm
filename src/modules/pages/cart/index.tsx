@@ -30,7 +30,7 @@ class Cart extends HelperComponent<{}, IState> {
   private columnConfig = [
     {
       name: Settings.translations.product,
-      cell: (row: IBasketListResponseModel) => <Link to={ROUTES.PRODUCTS.DETAILS.replace(':id', `${row.productId}`)}>
+      cell: (row: IBasketListResponseModel) => <Link to={ROUTES.PRODUCTS.DETAILS.replace(':id', row.productId)}>
         <div
           className="P-image G-square-image-block"
           style={{ background: `url('${getMediaPath(row.productPhoto)}') center/cover` }}

@@ -3,6 +3,8 @@ import { ProductSortEnum } from '../constants/enums';
 
 export interface IProductListRequestModel extends IPagingRequest, IProductFilterRequestModel { };
 
+export interface IProductRelatedListRequestModel extends IPagingRequest { };
+
 export interface IProductFilterRequestModel {
   text?: string;
   sortBy?: ProductSortEnum;

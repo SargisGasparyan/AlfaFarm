@@ -47,6 +47,7 @@ const NEWS_ROUTES = RouteService.buildRouteContext('/news', {
 
 const PRODUCTS_ROUTES = RouteService.buildRouteContext('/products', {
   MAIN: '',
+  SIMILAR: '/similar/:id',
   DETAILS: '/details/:id',
   PROPOSAL: '/proposal',
 });
