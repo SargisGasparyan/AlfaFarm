@@ -7,10 +7,11 @@ import HelperComponent from 'platform/classes/helper-component';
 import LoaderContent from 'components/loader-content';
 import BasketController from 'platform/api/basket';
 import DispatcherChannels from 'platform/constants/dispatcher-channels';
+import PharmaciesAvailablity from './components/pharmacies-availablity';
+
 import PinImage from 'assets/images/pin.png';
 
 import './style.scss';
-import PharmaciesAvailablity from './components/pharmacies-availablity';
 
 interface IProps {
   data: IProductDetailsResponseModel;
@@ -98,15 +99,13 @@ class Info extends HelperComponent<IProps, IState> {
           >{Settings.translations.add_to_cart}</LoaderContent>
 
           {pharmaciesAvailablityOpen && <PharmaciesAvailablity onClose={this.togglePharmaciesAvailablity} data={[
-            { id: 1, name: 'Erebuni', contactPhoneNumber: '+37400000000', addressText: 'Erebuni', addressLat: 4.55, addressLng: 5.55, isOpen: true, workingPlan: [] },
-            { id: 1, name: 'Nor norq', contactPhoneNumber: '+37400000000', addressText: 'Erebuni', addressLat: 4.6, addressLng: 5.4, isOpen: true, workingPlan: [] },
-            { id: 1, name: 'Norq marash', contactPhoneNumber: '+37400000000', addressText: 'Erebuni', addressLat: 4.66, addressLng: 5.44, isOpen: true, workingPlan: [] },
-            { id: 1, name: 'Kentron', contactPhoneNumber: '+37400000000', addressText: 'Erebuni', addressLat: 4.7, addressLng: 5.3, isOpen: true, workingPlan: [] },
-            { id: 1, name: 'Komitas', contactPhoneNumber: '+37400000000', addressText: 'Erebuni', addressLat: 4.77, addressLng: 5.3, isOpen: true, workingPlan: [] },
-            { id: 1, name: 'Hrazdan', contactPhoneNumber: '+37400000000', addressText: 'Erebuni', addressLat: 4.8, addressLng: 5.2, isOpen: true, workingPlan: [] },
-            { id: 1, name: 'Dilijan', contactPhoneNumber: '+37400000000', addressText: 'Erebuni', addressLat: 4.88, addressLng: 5.22, isOpen: true, workingPlan: [] },
-            { id: 1, name: 'Sevan', contactPhoneNumber: '+37400000000', addressText: 'Erebuni', addressLat: 4.9, addressLng: 5.1, isOpen: true, workingPlan: [] },
-            { id: 1, name: 'Kapan', contactPhoneNumber: '+37400000000', addressText: 'Erebuni', addressLat: 4.99, addressLng: 5.11, isOpen: true, workingPlan: [] },
+            { id: 1, name: 'Erebuni', contactPhoneNumber: '+37400000000', addressText: 'Erebuni', addressLat: 40.1872, addressLng: 44.5152, isOpen: true, workingPlan: [] },
+            { id: 2, name: 'Nor norq', contactPhoneNumber: '+37400000000', addressText: 'Nor norq', addressLat: 40.1872, addressLng: 44.5152, isOpen: true, workingPlan: [] },
+            { id: 3, name: 'Norq marash', contactPhoneNumber: '+37400000000', addressText: 'Norq marash', addressLat: 40.1872, addressLng: 44.5152, isOpen: true, workingPlan: [] },
+            { id: 4, name: 'Kentron', contactPhoneNumber: '+37400000000', addressText: 'Kentron', addressLat: 40.1872, addressLng: 44.5152, isOpen: true, workingPlan: [] },
+            { id: 5, name: 'Komitas', contactPhoneNumber: '+37400000000', addressText: 'Komitas', addressLat: 40.1872, addressLng: 44.5152, isOpen: true, workingPlan: [] },
+            { id: 6, name: 'Sevan', contactPhoneNumber: '+37400000000', addressText: 'Sevan', addressLat: 40.1872, addressLng: 44.5152, isOpen: true, workingPlan: [] },
+            { id: 7, name: 'Kapan', contactPhoneNumber: '+37400000000', addressText: 'Kapan', addressLat: 40.1872, addressLng: 44.5152, isOpen: true, workingPlan: [] },
           ]} />}
         </div>
       </div>

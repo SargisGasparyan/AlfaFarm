@@ -10,6 +10,10 @@
     width  : 100%;
     height : 100%;
 
+    // Full screen controller
+
+    .gm-fullscreen-control { display: none !important; }
+
     // Map type switchers
 
     .gm-style-mtc { display: none !important; }

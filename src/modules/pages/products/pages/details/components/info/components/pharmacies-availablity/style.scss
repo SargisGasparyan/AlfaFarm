@@ -3,9 +3,11 @@
 
 .P-product-pharmacies-availablity-modal .P-modal-content {
   width     : 1200px;
-  padding   : 60px 0 0;
+  padding   : 0;
   overflow  : hidden;
   max-width : 100%;
+
+  > .P-close { color: black; }
 
   > div {
     display        : flex;
@@ -24,11 +26,19 @@
         flex           : 1;
         display        : flex;
         height         : 100%;
-        padding        : 0 20px;
+        padding        : 20px;
         min-width      : 350px;
         overflow-y     : auto;
         align-items    : flex-start;
         flex-direction : column;
+
+        > h2 {
+          color          : $main-color;
+          font-size      : 28px;
+          border-bottom  : 1px solid $light-gray;
+          margin-bottom  : 20px;
+          padding-bottom : 20px;
+        }
 
         > h3 {
           cursor        : pointer;
