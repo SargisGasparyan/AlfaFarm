@@ -18,13 +18,17 @@
     }
 
     &.P-row {
-      width           : 60%;
-      display         : flex;
-      min-width       : 350px;
-      margin-bottom   : 40px;
-      justify-content : space-between;
+      width         : 100%;
+      display       : flex;
+      min-width     : 350px;
+      align-items   : center;
+      margin-bottom : 40px;
 
-      > .P-value { color: black; }
+      > .P-value {
+        color       : black;
+        width       : 50%;
+        margin-left : auto;
+      }
     }
   }
 
@@ -35,6 +39,7 @@
 
   > .P-cart-actions {
     display         : flex;
+    margin-bottom   : 40px;
     justify-content : flex-start;
 
     > .P-count-input {

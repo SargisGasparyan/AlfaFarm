@@ -1,0 +1,89 @@
+@import 'src/assets/styles/helper';
+@import 'src/assets/styles/variables';
+
+.P-product-pharmacies-availablity-modal .P-modal-content {
+  width     : 1200px;
+  padding   : 60px 0 0;
+  overflow  : hidden;
+  max-width : 100%;
+
+  > div {
+    display        : flex;
+    flex-direction : column;
+
+    > .P-shadow-text { margin-bottom: 90px; }
+
+    > .P-content {
+      width      : 100%;
+      height     : 60vh;
+      display    : flex;
+      min-height : 500px;
+      flex-wrap  : wrap;
+
+      > .P-list {
+        flex           : 1;
+        display        : flex;
+        height         : 100%;
+        padding        : 0 20px;
+        min-width      : 350px;
+        overflow-y     : auto;
+        align-items    : flex-start;
+        flex-direction : column;
+
+        > h3 {
+          cursor        : pointer;
+          margin-bottom : 30px;
+        }
+      }
+
+      > .P-maps-wrapper {
+        width     : calc(100% - 350px);
+        height    : 100%;
+        position  : relative;
+        min-width : 500px;
+
+        > .P-search-input {
+          top      : 20px;
+          left     : 20px;
+          z-index  : 1;
+          position : absolute;
+        }
+
+        > .P-google-maps {
+          width  : 100%;
+          height : 100%;
+    
+          .P-info-window {
+            width   : 300px;
+            padding : 10px 20px;
+    
+            > h3 {
+              font-size : 22px;
+              @include normal-font;
+            }
+    
+            > .P-info-row {
+              display     : flex;
+              font-size   : 18px;
+              margin-top  : 20px;
+              @include normal-font;
+    
+              > i {
+                font-size    : 26px;
+                margin-right : 20px;
+              }
+    
+              span {
+    
+                display    : block;
+                margin-top : 10px;
+    
+                &:first-of-type { margin-top: 0; }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

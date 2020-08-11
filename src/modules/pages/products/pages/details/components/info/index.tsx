@@ -6,9 +6,11 @@ import { IProductDetailsResponseModel } from 'platform/api/product/models/respon
 import HelperComponent from 'platform/classes/helper-component';
 import LoaderContent from 'components/loader-content';
 import BasketController from 'platform/api/basket';
+import DispatcherChannels from 'platform/constants/dispatcher-channels';
+import PinImage from 'assets/images/pin.png';
 
 import './style.scss';
-import DispatcherChannels from 'platform/constants/dispatcher-channels';
+import PharmaciesAvailablity from './components/pharmacies-availablity';
 
 interface IProps {
   data: IProductDetailsResponseModel;
@@ -17,6 +19,7 @@ interface IProps {
 interface IState {
   count: number;
   cartLoading: boolean;
+  pharmaciesAvailablityOpen: boolean;
 };
 
 class Info extends HelperComponent<IProps, IState> {
@@ -27,7 +30,6 @@ class Info extends HelperComponent<IProps, IState> {
   };
 
   private onCountChange = (count: number) => {
-    console.log('mtav', count);
     this.safeSetState({ count });
   }
 
@@ -44,9 +46,14 @@ class Info extends HelperComponent<IProps, IState> {
     this.safeSetState({ cartLoading: false });
   });
 
+  private togglePharmaciesAvailablity = () => {
+    const { pharmaciesAvailablityOpen } = this.state;
+    this.safeSetState({ pharmaciesAvailablityOpen: !pharmaciesAvailablityOpen });
+  }
+
   public render() {
     const { data } = this.props;
-    const { count, cartLoading } = this.state;
+    const { count, cartLoading, pharmaciesAvailablityOpen } = this.state;
 
     return (
       <div className="P-product-details-info">
@@ -63,6 +70,12 @@ class Info extends HelperComponent<IProps, IState> {
           {Settings.translations.brand}
           <span className="P-value">{data.brand.name}</span>
         </h3>}
+        <h3 className="P-row">
+          {Settings.translations.availability_at_the_nearest_pharmacy}
+          <span className="P-value G-cursor-pointer" onClick={this.togglePharmaciesAvailablity}>
+            <img src={PinImage} alt="pin" />
+          </span>
+        </h3>
         {data.activeIngredients && <h3 className="P-row">
           {Settings.translations.active_ingredients}
           <span className="P-value">{data.activeIngredients.map(item => item.name).join(', ')}</span>
@@ -82,6 +95,18 @@ class Info extends HelperComponent<IProps, IState> {
             className="G-main-button"
             onClick={this.changeCart}
           >{Settings.translations.add_to_cart}</LoaderContent>
+
+          {pharmaciesAvailablityOpen && <PharmaciesAvailablity onClose={this.togglePharmaciesAvailablity} data={[
+            { id: 1, name: 'Erebuni', contactPhoneNumber: '+37400000000', addressText: 'Erebuni', addressLat: 4.55, addressLng: 5.55, isOpen: true, workingPlan: [] },
+            { id: 1, name: 'Nor norq', contactPhoneNumber: '+37400000000', addressText: 'Erebuni', addressLat: 4.6, addressLng: 5.4, isOpen: true, workingPlan: [] },
+            { id: 1, name: 'Norq marash', contactPhoneNumber: '+37400000000', addressText: 'Erebuni', addressLat: 4.66, addressLng: 5.44, isOpen: true, workingPlan: [] },
+            { id: 1, name: 'Kentron', contactPhoneNumber: '+37400000000', addressText: 'Erebuni', addressLat: 4.7, addressLng: 5.3, isOpen: true, workingPlan: [] },
+            { id: 1, name: 'Komitas', contactPhoneNumber: '+37400000000', addressText: 'Erebuni', addressLat: 4.77, addressLng: 5.3, isOpen: true, workingPlan: [] },
+            { id: 1, name: 'Hrazdan', contactPhoneNumber: '+37400000000', addressText: 'Erebuni', addressLat: 4.8, addressLng: 5.2, isOpen: true, workingPlan: [] },
+            { id: 1, name: 'Dilijan', contactPhoneNumber: '+37400000000', addressText: 'Erebuni', addressLat: 4.88, addressLng: 5.22, isOpen: true, workingPlan: [] },
+            { id: 1, name: 'Sevan', contactPhoneNumber: '+37400000000', addressText: 'Erebuni', addressLat: 4.9, addressLng: 5.1, isOpen: true, workingPlan: [] },
+            { id: 1, name: 'Kapan', contactPhoneNumber: '+37400000000', addressText: 'Erebuni', addressLat: 4.99, addressLng: 5.11, isOpen: true, workingPlan: [] },
+          ]} />}
         </div>
       </div>
     );

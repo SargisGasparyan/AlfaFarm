@@ -1177,6 +1177,7 @@ export default {
   blog: "Блог",
   news: "Новости",
   order_success: "Спасибо, ваш заказ подтвержден. Ознакомиться с деталями заказа можно в разделе истории заказов.",
+  availability_at_the_nearest_pharmacy: "Наличие в ближайшей аптеке",
   good_morning: "Доброе утро",
   good_afternoon: "Добрый день",
   home: "Домашняя страница",

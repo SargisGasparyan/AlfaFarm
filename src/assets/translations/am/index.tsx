@@ -1204,6 +1204,7 @@ export default {
   blog: "Բլոգ",
   news: "Նորություններ",
   order_success: "Շնորհակալություն ձեր պատվերը հաստատված է։ Պատվերի մանրամասներին կարող եք ծանոթանալ պատվերների պատմություն բաժնում։",
+  availability_at_the_nearest_pharmacy: "Առկայություն մոտակա դեղատանը",
   good_morning: "Բարի լույս",
   good_afternoon: "Ողջույն",
   good_evening: "Բարի երեկո",
