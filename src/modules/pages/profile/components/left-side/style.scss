@@ -3,12 +3,12 @@
 
 .P-profile-left-side {
   top            : $header-size;
-  height         : calc(100vh - #{$header-size});
   display        : flex;
   position       : sticky;
-  overflow-y     : auto;
   min-width      : 350px;
   max-width      : 350px;
+  overflow-y     : auto;
+  min-height     : calc(100vh - #{$header-size});
   background     : white;
   flex-direction : column;
 

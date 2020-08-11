@@ -23,8 +23,9 @@
   }
 
   > .P-checkbox-row {
-    display     : flex;
-    align-items : center;
+    display       : flex;
+    align-items   : center;
+    margin-bottom : 15px;
 
     > .rc-checkbox {
       display     : flex;
