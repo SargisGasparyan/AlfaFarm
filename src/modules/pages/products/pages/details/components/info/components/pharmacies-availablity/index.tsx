@@ -63,6 +63,7 @@ class PharmaciesAvailablity extends HelperComponent<IProps, IState> {
       <Modal className="P-product-pharmacies-availablity-modal" onClose={onClose}>
         <div className="P-content">
           <div className="P-list">
+            <h2>{Settings.translations.availability_at_the_nearest_pharmacy}</h2>
             {this.data.map((item, index) => <h3
               key={item.id}
               onMouseOver={() => this.toggleMarker(index)}
