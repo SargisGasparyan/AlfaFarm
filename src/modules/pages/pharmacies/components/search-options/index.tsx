@@ -7,8 +7,6 @@ import Select from 'components/select';
 import PlaceController from 'platform/api/place';
 import { IDropdownOption } from 'platform/constants/interfaces';
 
-import HomeImage from 'assets/images/home_background.png';
-
 import './style.scss';
 
 interface IProps {
@@ -81,7 +79,7 @@ class SearchOptions extends HelperPureComponent<IProps, IState> {
     const { cityId, regionId, cities, regions } = this.state;
 
     return (
-      <div className="G-page P-pharmacies-search-options" style={{ background: `url('${HomeImage}') center/cover` }}>
+      <div className="G-page P-pharmacies-search-options">
         <ShadowText>{Settings.translations.pharmacies}</ShadowText>
         <form className="G-main-form">
           <div className="G-main-form-half-field">
