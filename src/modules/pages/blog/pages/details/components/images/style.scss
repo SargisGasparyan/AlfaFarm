@@ -12,6 +12,7 @@
     display         : flex;
     position        : relative;
     overflow        : hidden;
+    min-height      : 100%;
     align-items     : center;
     border-radius   : $big-radius;
     justify-content : center;
