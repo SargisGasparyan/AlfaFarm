@@ -9,7 +9,6 @@ import SearchResults from './components/search-results';
 import { IPharmacyBranchListResponseModel } from 'platform/api/pharmacyBranch/models/response';
 import PharmacyBranchController from 'platform/api/pharmacyBranch';
 
-import { headerSize } from 'assets/styles/variables.scss';
 import './style.scss';
 
 interface IState {
