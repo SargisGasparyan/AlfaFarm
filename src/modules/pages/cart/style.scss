@@ -12,18 +12,26 @@
     width : 100%;
 
     .P-data-table-header {
+      height        : 80px;
+      padding       : 0 14vh;
       background    : none;
       border-top    : 1px solid $light-gray;
       border-bottom : 1px solid $light-gray;
+
+      > li {
+        color     : $text-gray;
+        font-size : 22px;
+        @include normal-font();
+      }
     }
   
     .P-data-table-body {
-      min-height : initial;
-
+      
       > ul {
+        margin        : 40px 14vh 0;
         height        : auto;
+        padding       : 0 0 40px;
         display       : flex;
-        padding       : 40px;
         align-items   : center;
         border-bottom : 1px solid $light-gray;
       
@@ -56,9 +64,13 @@
   > .P-data-block {
     width           : 100%;
     margin          : 20px 0 50px;
+    padding         : 0 14vh;
     display         : flex;
     justify-content : flex-end;
   }
 
-  > .P-pay-button { width: 300px; }
+  > .P-pay-button {
+    width        : 300px;
+    margin-right : 14vh;
+  }
 }

@@ -28,7 +28,7 @@ const priceMax = 10000;
 class Filter extends HelperComponent<IProps, IState> {
 
   public state: IState = {
-    brandsOpen: false,
+    brandsOpen: true,
     activeIngredientsOpen: false,
     body: {
       minPrice: 0,
@@ -102,7 +102,7 @@ class Filter extends HelperComponent<IProps, IState> {
 
     return (
       <div className="P-products-filter">
-        <h2>{Settings.translations.price} ({body.minPrice}-{body.maxPrice})</h2>
+        <h2>{Settings.translations.price} ({body.minPrice}-{body.maxPrice}) AMD</h2>
 
         <Range
           min={priceMin}

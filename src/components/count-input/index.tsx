@@ -71,13 +71,14 @@ class CountInput extends HelperPureComponent<IProps, IState> {
 
     return (
       <div
-        className={`P-count-input ${!count && withPlus ? 'P-count-input-plus' : ''} ${this.countInvalid() ? 'G-invalid-field' : ''}`}
+        className={`P-count-input ${!count && withPlus ? 'P-count-input-plus' : ''}`}
         onClick={this.initCount}
       >
         {!count && withPlus ? <>&#43;</> : <>
           <span onClick={this.stepDown}>-</span>
           <NumberInput
             value={count.toString()}
+            className={this.countInvalid() ? 'P-invalid' : ''}
             onChange={this.changeCount}
           />
           <span onClick={this.stepUp}>+</span>

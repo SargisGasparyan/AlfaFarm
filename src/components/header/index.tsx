@@ -23,7 +23,7 @@ interface IState {
   authOpen: boolean;
   categoryOpenPosition: number;
   categoryOpen: boolean;
-  cartIconShown: boolean;
+  cartIconNumber: number;
 };
 
 class Header extends HelperPureComponent<{}, IState> {
@@ -31,7 +31,7 @@ class Header extends HelperPureComponent<{}, IState> {
     authOpen: false,
     categoryOpenPosition: 0,
     categoryOpen: false,
-    cartIconShown: false,
+    cartIconNumber: 0,
   };
 
   private header = React.createRef<HTMLDivElement>();
@@ -55,7 +55,11 @@ class Header extends HelperPureComponent<{}, IState> {
     window.removeEventListener(DispatcherChannels.CartItemsUpdate, this.toggleCartIcon);
   }
 
-  private toggleCartIcon = (e: CustomEvent) => this.safeSetState({ cartIconShown: e.detail });
+  private toggleCartIcon = (e: CustomEvent) => {
+    const { cartIconNumber } = this.state;
+    if (e.detail) this.safeSetState({ cartIconNumber: cartIconNumber + 1 });
+    else this.safeSetState({ cartIconNumber: 0 });
+  }
 
   private checkWindow = () => {
     const { categoryOpenPosition } = this.state;
@@ -95,7 +99,7 @@ class Header extends HelperPureComponent<{}, IState> {
   }
 
   public render() {
-    const { authOpen, categoryOpenPosition, categoryOpen, cartIconShown } = this.state;
+    const { authOpen, categoryOpenPosition, categoryOpen, cartIconNumber } = this.state;
 
     return (
       <header ref={this.header} className="G-flex G-flex-align-center G-flex-justify-center">
@@ -133,7 +137,7 @@ class Header extends HelperPureComponent<{}, IState> {
 
         <Link to={ROUTES.CART} className="P-link P-icon G-normal-link P-cart">
           <i className="icon-Group-5503" />
-          {cartIconShown && <span />}
+          {!!cartIconNumber && <span>{cartIconNumber > 9 ? '9+' : cartIconNumber}</span>}
         </Link>
       
         <LanguageSwitcher />

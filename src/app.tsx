@@ -24,6 +24,7 @@ import 'moment/locale/ru';
 import 'moment/locale/en-gb';
 
 import './assets/styles/index.scss';
+import ProductController from 'platform/api/product';
 
 interface IState {
   confirmOpen: boolean;
