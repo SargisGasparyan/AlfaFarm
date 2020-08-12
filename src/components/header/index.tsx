@@ -117,7 +117,7 @@ class Header extends HelperPureComponent<{}, IState> {
         >{Settings.translations.online_pharmacy}</Link>
 
         <NavLink {...this.navLinkProps} to={ROUTES.PHARMACIES}>{Settings.translations.pharmacies}</NavLink>
-        <NavLink {...this.navLinkProps} to={ROUTES.CLINIC}>{Settings.translations.clinic}</NavLink>
+        <NavLink {...this.navLinkProps} to={ROUTES.CLINIC.MAIN}>{Settings.translations.clinic}</NavLink>
         <NavLink {...this.navLinkProps} to={ROUTES.BLOG.MAIN}>{Settings.translations.blog}</NavLink>
 
         {Storage.profile ? <Link to={ROUTES.PROFILE.MAIN} className="P-profile">

@@ -1,11 +1,9 @@
 import { IFile } from 'platform/constants/interfaces';
 
-export interface IBlogListResponseModel {
+export interface IFAQListResponseModel {
   id: number;
-  imagePath: string;
   title: string;
-  shortDescription: string;
-  createdDate: string;
+  description: string;  
 };
 
 export interface IBlogDetailsResponseModel {

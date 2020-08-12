@@ -45,6 +45,14 @@ const NEWS_ROUTES = RouteService.buildRouteContext('/news', {
   DETAILS: '/:id',
 });
 
+const CLINIC_ROUTES = RouteService.buildRouteContext('/clinic', {
+  MAIN: '',
+  DOCTORS: '/doctors',
+  LABORATORY: '/laboratory',
+  PRICE_LIST: '/price-list',
+  ABOUT_US: '/about-us',
+});
+
 const PRODUCTS_ROUTES = RouteService.buildRouteContext('/products', {
   MAIN: '',
   SIMILAR: '/similar/:id',
@@ -68,7 +76,7 @@ const ROUTES = {
   BUSINESS: '/business',
   CONTRACT: '/contract',
   SERVICES: '/services',
-  CLINIC: '/clinic',
+  CLINIC: CLINIC_ROUTES,
   PHARMACIES: '/pharmacies',
   EXCHANGE_RETURN: '/exchange-return',
   CONFIDENTIALITY_CONDITIONS: '/conditions',

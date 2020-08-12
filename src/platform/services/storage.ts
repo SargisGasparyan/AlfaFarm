@@ -9,8 +9,8 @@ import { ILanguageListResponseModel } from '..//api/language/models/response';
 import BrandController from 'platform/api/brand';
 import { IBrandListResponseModel } from 'platform/api/brand/models/response';
 import { infinityScrollMax } from 'platform/constants';
-import ActiveIngredientController from 'platform/api/activeIngredients';
-import { IActiveIngredientListResponseModel } from 'platform/api/activeIngredients/models/response';
+import ActiveIngredientController from 'platform/api/activeIngredient';
+import { IActiveIngredientListResponseModel } from 'platform/api/activeIngredient/models/response';
 import AuthController from 'platform/api/auth';
 import { IUserResponseModel } from 'platform/api/user/models/response';
 
