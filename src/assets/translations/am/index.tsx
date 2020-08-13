@@ -966,6 +966,8 @@ export default {
   fill_your_information: "Լրացրեք Ձեր տվյալները",
   add: "Ավելացնել",
   what_do_you_need_today: "Ի՞նչ է Ձեզ անհրաժեշտ այսօր",
+  today: "Այսօր",
+  available_days: "Հասանելի օրեր",
   create_request: "Ստեղծել հարցում",
   category: "Կատեգորիա",
   choose: "Ընտրել",

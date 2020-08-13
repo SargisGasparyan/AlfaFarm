@@ -4,17 +4,17 @@ import { byRoute } from 'platform/decorators/routes';
 
 import HelperComponent from 'platform/classes/helper-component';
 import Options from '../../components/options';
-
-import './style.scss';
 import Settings from 'platform/services/settings';
 import SearchInput from 'components/search-input';
 import Table from 'components/table';
-import { IMedicalServiceListResponseModel } from 'platform/api/medicalService/models/response';
+import { IMedicalServiceListResponseModel, IMedicalServicePriceListResponseModel } from 'platform/api/medicalService/models/response';
 import PageLoader from 'components/page-loader';
 import MedicalServiceController from 'platform/api/medicalService';
 
+import './style.scss';
+
 interface IState {
-  data?: IMedicalServiceListResponseModel[];
+  data?: IMedicalServicePriceListResponseModel[];
   searchValue: string;
 };
 
@@ -27,27 +27,17 @@ class PriceList extends HelperComponent<{}, {}> {
 
   public componentDidMount() { this.fetchData(); }
 
-  private get data() {
-    const { data } = this.state;
-    const { searchValue } = this.state;
-
-    if (!searchValue) return data || [];
-    return data ? data.filter(item => item.name
-      .toLowerCase()
-      .includes(searchValue.toLowerCase())
-    ) : [];
-  }
-
   private fetchData = async () => {
-    const result = await MedicalServiceController.GetList();
+    const { searchValue } = this.state;
+    const result = await MedicalServiceController.GetPriceList(searchValue);
     this.safeSetState({ data: result.data });
   }
 
   private onSearchChange = (searchValue: string) => this.safeSetState({ searchValue });
 
-  private columnConfig = [
+  private columnConfig = (name: string) => [
     {
-      name: Settings.translations.service,
+      name,
       cell: (row: IMedicalServiceListResponseModel) => row.name,
     },
     {
@@ -58,19 +48,22 @@ class PriceList extends HelperComponent<{}, {}> {
   ];
 
   public render() {
+    const { data } = this.state;
+
     return (
       <section className="G-page P-clinic-price-list-page">
         <Options />
-        {this.data ? <div id="clinic-content" className="P-content">
+        <div id="clinic-page-start" className="P-content">
           <h1 className="G-main-color P-title">
             {Settings.translations.price_list}
-            <SearchInput withSubmit={false} onChange={this.onSearchChange} />
+            <SearchInput withSubmit={true} onChange={this.onSearchChange} onSubmit={this.fetchData} />
           </h1>
-          <Table<IMedicalServiceListResponseModel>
-            columnConfig={this.columnConfig}
-            data={this.data}
-          />
-        </div> : <PageLoader />}
+          {data ? data.map(item => <Table<IMedicalServiceListResponseModel>
+            key={item.id}
+            columnConfig={this.columnConfig(item.name)}
+            data={item.services}
+          />) : <PageLoader />}
+        </div>
       </section>
     );
   }

@@ -16,7 +16,7 @@ import RouteService from 'platform/services/routes';
 class Options extends HelperPureComponent<{}, {}> {
 
   private linkClicked = () => {
-    setTimeout(() => scrollToElement('#clinic-content', {
+    setTimeout(() => scrollToElement('#clinic-page-start', {
       duration: 400,
       align: 'top',
       offset: -160,

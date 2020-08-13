@@ -4,6 +4,7 @@ import { byRoute } from 'platform/decorators/routes';
 
 import HelperComponent from 'platform/classes/helper-component';
 import Options from './components/options';
+import Laboratory from './pages/laboratory';
 import PriceList from './pages/price-list';
 import AboutUs from './pages/about-us';
 
@@ -22,4 +23,9 @@ class Clinic extends HelperComponent<{}, {}> {
   }
 }
 
-export default { Clinic, PriceList, AboutUs };
+export default {
+  Clinic,
+  Laboratory,
+  PriceList,
+  AboutUs,
+};

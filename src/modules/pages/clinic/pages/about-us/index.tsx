@@ -18,7 +18,7 @@ class AboutUs extends HelperPureComponent<{}, {}> {
       <section className="G-page P-clinic-about-us-page">
         <Options />
 
-        <div id="clinic-content" className="G-page P-content">
+        <div id="clinic-page-start" className="G-page P-content">
           <FirstPart />
           <SecondPart />
         </div>

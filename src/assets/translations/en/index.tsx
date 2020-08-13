@@ -939,6 +939,8 @@ export default {
   fill_your_information: "Fill your information",
   add: "Add",
   what_do_you_need_today: "What do you need today?",
+  today: "Today",
+  available_days: "Available days",
   create_request: "Create request",
   category: "Category",
   choose: "Choose",

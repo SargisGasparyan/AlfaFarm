@@ -940,6 +940,8 @@ export default {
   fill_your_information: "Заполните вашу информацию",
   add: "Добавить",
   what_do_you_need_today: "Что Вам необходимо сегодня?",
+  today: "Сегодня",
+  available_days: "Свободные дни",
   create_request: "Создать запрос",
   category: "Категория",
   choose: "Выбрать",

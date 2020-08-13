@@ -1,0 +1,86 @@
+@import 'src/assets/styles/helper';
+@import 'src/assets/styles/variables';
+
+.G-page.P-clinic-laboratory-page {
+  padding : 0 0 160px 0;
+
+  > .G-page-title {
+    display         : flex;
+    padding         : 160px $page-horizontal-offset 0;
+    font-size       : 44px;
+    text-align      : left;
+    justify-content : space-between;
+
+    > .G-main-button {
+      color           : white;
+      width           : 260px;
+      border          : 0;
+      height          : auto;
+      padding         : 15px;
+      font-size       : 20px;
+      background      : $main-color;
+      border-radius   : 30px;
+      justify-content : center;
+    }
+  }
+
+  > .P-content {
+    margin        : 0 $page-horizontal-offset;
+    padding       : 10px 40px;
+    max-width     : 100%;
+    display       : flex;
+    box-shadow    : $default-block-shadow;
+    background    : white;
+    border-radius : $radius;
+
+    > .P-title {
+      color           : $main-color;
+      padding         : 40px 20px;
+      display         : flex;
+      font-size       : 46px;
+      flex-wrap       : wrap;
+      align-items     : center;
+      justify-content : space-between;
+    }
+
+    > .P-list {
+      width           : 50%;
+      display         : flex;
+      flex-wrap       : wrap;
+      align-items     : flex-start;
+      border-right    : 1px solid $light-gray;
+      padding-right   : 10vh;
+      justify-content : space-between;
+
+      .P-data-table {
+        width         : 100%;
+        margin-bottom : 20px;
+
+        > .P-data-table-header {
+          height        : 70px;
+          padding       : 0 10px;
+          background    : none;
+          border-bottom : 1px solid $light-gray; 
+        }
+  
+        > .P-data-table-body > ul {
+          padding-right : 0;
+
+          > li, > li > div { padding-right: 0; }
+        }
+      }
+
+      .G-main-button {
+        width     : 240px;
+        padding   : 15px 0;
+        font-size : 20px;
+      }
+
+      .P-total {
+        font-size : 24px;
+
+        > span { margin-left: 15px; }
+      }
+    }
+  }
+}

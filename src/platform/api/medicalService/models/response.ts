@@ -3,3 +3,9 @@ export interface IMedicalServiceListResponseModel {
   name: string;
   price: number;
 }
+
+export interface IMedicalServicePriceListResponseModel {
+  id: number;
+  name: string;
+  services: IMedicalServiceListResponseModel[];
+}
