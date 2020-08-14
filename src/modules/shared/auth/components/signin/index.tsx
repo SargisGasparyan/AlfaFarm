@@ -8,6 +8,8 @@ import { ModalContentEnum } from '../../constants/enums';
 import { ILoginRequestModel } from 'platform/api/auth/models/request';
 import { validateForm } from './services/helper';
 import AuthController from 'platform/api/auth';
+import SocialButton from '../social-button';
+import { SocialProvider } from 'platform/api/auth/constants/enums';
 
 interface IProps {
   onTypeChange<ActiveData extends object>(type: ModalContentEnum, activeData?: ActiveData): void;
@@ -49,6 +51,26 @@ class SignIn extends HelperComponent<IProps, IState> {
     const { form } = this.state;
     form[e.currentTarget.name] = e.currentTarget.value;
     this.safeSetState({ form })
+  }
+
+  private socialSuccess = async (data: { [key: string]: any }, type: SocialProvider) => {
+    const tokens = {
+      [SocialProvider.Facebook]: data._token.accessToken,
+      [SocialProvider.Google]: data._token.accessToken,
+    };
+
+    const body = {
+      type,
+      token: tokens[type],
+    };
+
+    console.log(body);
+
+    const result = await AuthController.Social(body);
+    if (result.success) {
+      Settings.token = result.data.accessToken;
+      window.location.reload();  
+    }
   }
 
   private submit = (e: React.SyntheticEvent) => {
@@ -101,6 +123,22 @@ class SignIn extends HelperComponent<IProps, IState> {
       </form>
       
       <span className="P-sign-in-restore-password" onClick={this.restorePassword}>{Settings.translations.restore_password}</span>
+
+      <SocialButton
+        type={SocialProvider.Facebook}
+        appId={Settings.facebookId}
+        provider="facebook"
+        onLoginSuccess={data => this.socialSuccess(data, SocialProvider.Facebook)}
+        onLoginFailure={() => { /* */ }}
+      />
+
+      <SocialButton
+        type={SocialProvider.Google}
+        appId={Settings.googleId}
+        provider="google"
+        onLoginSuccess={() => { /* */ }}
+        onLoginFailure={() => { /* */ }}
+      />
 
       <span className="P-sign-in-register-text">{Settings.translations.not_a_member}</span>
       <button className="G-main-ghost-button P-sign-in-register" onClick={this.signUp}>{Settings.translations.sign_up}</button>

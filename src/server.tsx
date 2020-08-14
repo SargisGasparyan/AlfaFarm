@@ -64,10 +64,10 @@ function buildHTML(markup: string, title: string, description: string, keywords:
       <script>
       window.fbAsyncInit = function() {
         FB.init({
-          appId      : '392096548151413',
-          cookie     : true,
-          xfbml      : true,
-          version    : '{api-version}'
+          appId   : '${Settings.facebookId}',
+          cookie  : true,
+          xfbml   : true,
+          version : '{api-version}'
         });
           
         FB.AppEvents.logPageView();   
@@ -92,7 +92,7 @@ function buildHTML(markup: string, title: string, description: string, keywords:
         <script>
         window.fbAsyncInit = function() {
           FB.init({
-            appId            : '${392096548151413}',
+            appId            : '${Settings.facebookId}',
             autoLogAppEvents : true,
             xfbml            : true,
             version          : 'v5.0'

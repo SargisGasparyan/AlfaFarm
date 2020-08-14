@@ -10,7 +10,7 @@ class Settings {
   
   public static defaultLanguage = LanguageEnum.Armenian;
 
-  public static facebookId = 392096548151413;
+  public static facebookId = 4185689951504366;
   public static googleId = '68962021705-tu6bdgffqj3orrlu34t6a9c4lfuupc6q.apps.googleusercontent.com';
   public static linkedinId = '77ji7ohk6dxaxv';
 

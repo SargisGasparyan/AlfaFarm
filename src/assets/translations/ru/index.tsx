@@ -941,6 +941,7 @@ export default {
   add: "Добавить",
   what_do_you_need_today: "Что Вам необходимо сегодня?",
   today: "Сегодня",
+  continue_with: (content: string) => `Продолжить с ${content}`,
   available_days: "Свободные дни",
   create_request: "Создать запрос",
   category: "Категория",

@@ -940,6 +940,7 @@ export default {
   add: "Add",
   what_do_you_need_today: "What do you need today?",
   today: "Today",
+  continue_with: (content: string) => `Continue with ${content}`,
   available_days: "Available days",
   create_request: "Create request",
   category: "Category",

@@ -10,6 +10,7 @@
     font-weight : 300;
 
     &:first-child { margin-top: 0; }
+    &.P-main-category { cursor: pointer; }
   }
 
   > .P-row-title {
