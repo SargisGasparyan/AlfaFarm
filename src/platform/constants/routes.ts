@@ -16,6 +16,7 @@ const PROFILE_ROUTES = (() => {
   const ORDERS_ROUTES = RouteService.buildRouteContext('/profile/orders', {
     MAIN: '',
     DETAILS: '/details/:id',
+    SAVED_BASKET_ITEMS: '/saved-basket-items/:id',
   });
 
   return RouteService.buildRouteContext('/profile', {

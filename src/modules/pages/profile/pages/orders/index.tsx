@@ -11,6 +11,8 @@ import OrderController from 'platform/api/order';
 import { IOrderListResponseModel } from 'platform/api/order/models/response';
 import { OrderStatusEnum } from 'platform/api/order/constants/enums';
 import { getViewEnum, formatDate } from 'platform/services/helper';
+import SavedBaskets from './components/saved-baskets';
+import SavedBasketItems from './pages/saved-basket-items';
 import Details from './pages/details';
 
 import './style.scss';
@@ -63,6 +65,7 @@ class Orders extends HelperComponent<IState, {}> {
 
     return (
       <Layout>
+        <SavedBaskets />
         <h2 className="G-main-color G-mb-30">{Settings.translations.order_history}</h2>
         <div className="G-flex P-profile-orders">
           <Table<IOrderListResponseModel>
@@ -76,4 +79,4 @@ class Orders extends HelperComponent<IState, {}> {
   }
 }
 
-export default { Orders, Details };
+export default { Orders, Details, SavedBasketItems };

@@ -12,7 +12,7 @@ import PageLoader from 'components/page-loader';
 import Settings from 'platform/services/settings';
 import { formatDate, getViewEnum } from 'platform/services/helper';
 import { OrderStatusEnum } from 'platform/api/order/constants/enums';
-import Products from './components/products';
+import Products from '../../components/products';
 
 import './style.scss';
 
