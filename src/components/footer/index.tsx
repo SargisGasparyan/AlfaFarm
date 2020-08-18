@@ -5,14 +5,15 @@ import ROUTES from 'platform/constants/routes';
 import Settings from 'platform/services/settings';
 import { contactPhoneNumber, contactEmail, contactAddress } from 'platform/constants/contact-info';
 import OrderACall from './components/order_a_call';
+import enviroment from 'platform/services/enviroment';
 
 import LogoImage from 'assets/images/logo.png';
 import AppStoreImage from 'assets/images/app_store.png';
 import GooglePlayImage from 'assets/images/google_play.png';
 import FacebookImage from 'assets/images/facebook.png';
 import InstagramImage from 'assets/images/instagram.png';
+
 import './style.scss';
-import enviroment from 'platform/services/enviroment';
 
 const currentYear = new Date().getFullYear();
 
