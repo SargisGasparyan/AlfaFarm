@@ -50,6 +50,17 @@ class UserController {
     return result;
   };
 
+  public static UploadCover = (body: FormData): Promise<IResponse<boolean>> => {
+    const result = Connection.POST<FormData>({
+      body,
+      action: 'cover',
+      controller,
+      noneJSONBody: true,
+    });
+
+    return result;
+  };
+
   public static Register = (body: IRegisterRequestModel): Promise<IResponse<boolean>> => {
     const result = Connection.POST({
       body,

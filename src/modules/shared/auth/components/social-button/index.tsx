@@ -16,7 +16,7 @@ interface IProps {
   type: SocialProvider;
   triggerLogin?(): void; // From @SocialLogin
   onLoginSuccess(data: object, type: SocialProvider): void;
-  onLoginFailure(): void;
+  onLoginFailure(error?: object): void;
 };
 
 @SocialLogin

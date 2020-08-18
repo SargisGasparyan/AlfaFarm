@@ -1,0 +1,29 @@
+@import 'src/assets/styles/helper';
+@import 'src/assets/styles/variables';
+
+.G-page.P-home-for-partners {
+  display         : flex;
+  flex-direction  : column;
+
+  > .P-shadow-text { margin-bottom: 130px; }
+
+  > .P-content {
+    margin          : -45px;
+    display         : flex;
+    flex-wrap       : wrap;
+    justify-content : center;
+
+    > .P-image, > p {
+      width     : calc(45% - 90px);
+      margin    : 45px;
+      min-width : 400px;
+    }
+
+    > .P-image {
+      height    : 50vh;
+      background : url('src/assets/images/become_a_partner.png') center/cover;
+    }
+
+    > p { font-size: $normal-fs; }
+  }
+}

@@ -56,7 +56,7 @@ class SignIn extends HelperComponent<IProps, IState> {
   private socialSuccess = async (data: { [key: string]: any }, type: SocialProvider) => {
     const tokens = {
       [SocialProvider.Facebook]: data._token.accessToken,
-      [SocialProvider.Google]: data._token.accessToken,
+      [SocialProvider.Google]: data._token.idToken,
     };
 
     const body = {
@@ -136,8 +136,8 @@ class SignIn extends HelperComponent<IProps, IState> {
         type={SocialProvider.Google}
         appId={Settings.googleId}
         provider="google"
-        onLoginSuccess={() => { /* */ }}
-        onLoginFailure={() => { /* */ }}
+        onLoginSuccess={data => this.socialSuccess(data, SocialProvider.Google)}
+        onLoginFailure={e => console.log(e)}
       />
 
       <span className="P-sign-in-register-text">{Settings.translations.not_a_member}</span>

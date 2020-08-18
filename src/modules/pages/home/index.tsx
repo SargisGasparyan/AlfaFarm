@@ -1,18 +1,16 @@
 import * as React from 'react';
-import ROUTES from 'platform/constants/routes';
-import { byRoute } from 'platform/decorators/routes';
 
+import ROUTES from 'platform/constants/routes';
+import enviroment from 'platform/services/enviroment';
+import { byRoute } from 'platform/decorators/routes';
 import HelperComponent from 'platform/classes/helper-component';
 import DiscountedProducts from './components/discounted-products';
 import Carousel from './components/carousel';
 import News from './components/news';
 import ContactUs from './components/contact-us';
+import ForPartners from './components/for-partners';
 
 import './style.scss';
-
-// import { ContentProperty } from 'csstype';
-// import { string } from 'prop-types';
-// import { stringify } from 'querystring';
 
 @byRoute([ROUTES.HOME.MAIN, ROUTES.HOME.FAIL, ROUTES.HOME.SUCCESS])
 class Home extends HelperComponent<{}, {}> {
@@ -30,7 +28,7 @@ class Home extends HelperComponent<{}, {}> {
       <section className="P-home-page">
         <Carousel />
         <DiscountedProducts />
-        <News />
+        {enviroment.WHOLESALE ? <ForPartners /> : <News />}
         <ContactUs />
       </section>
     );
