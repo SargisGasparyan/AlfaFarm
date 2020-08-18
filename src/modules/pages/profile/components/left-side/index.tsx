@@ -9,10 +9,30 @@ import { getMediaPath } from 'platform/services/helper';
 import Settings from 'platform/services/settings';
 
 import PersonImage from 'assets/images/person.png';
+import CameraImage from 'assets/images/camera.png';
 
 import './style.scss';
+import UserController from 'platform/api/user';
 
 class LeftSide extends HelperPureComponent<{}, {}> {
+
+  private uploadInput = React.createRef<HTMLInputElement>();
+
+  private openUpload = () => {
+    const { current } = this.uploadInput;
+    current && current.click();
+  }
+
+  private uploadEnd = async (e: React.SyntheticEvent<HTMLInputElement>) => {
+    const { files } = e.currentTarget;
+    if (files && files[0]) {
+      const formData = new FormData();
+      formData.append('file', files[0]);
+
+      const result = await UserController.UploadCover(formData);
+      if (result.success) window.location.reload();
+    }
+  }
 
   public render() {
     return (
@@ -21,7 +41,12 @@ class LeftSide extends HelperPureComponent<{}, {}> {
           <div
             className="P-image"
             style={{ background: `url('${Storage.profile.photoPath ? getMediaPath(Storage.profile.photoPath) : PersonImage}') center/cover` }}
-          />
+          >
+            <div className="P-upload-camera" onClick={this.openUpload}>
+              <img src={CameraImage} alt="camera" />
+              <input ref={this.uploadInput} type="file" accept="image/*" onChange={this.uploadEnd} />
+            </div>
+          </div>
 
           <h2>
             {Storage.profile.fullName}

@@ -24,11 +24,4 @@
       justify-content : center;
     }
   }
-
-  > .P-maps {
-    width  : calc(100% + #{2 * $page-horizontal-offset});
-    height : 500px;
-    margin : 40px 0 0 (-$page-horizontal-offset);
-    border : 0;
-  }
 }

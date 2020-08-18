@@ -2,7 +2,7 @@ import Connection from '../../services/connection';
 import { IResponse } from '../../constants/interfaces';
 import { OSTypeEnum, LanguageEnum } from '../../constants/enums';
 import { ILoginResponseModel } from './models/response';
-import { ILoginRequestModel, ISendCodeRequestModel, IVerifyRequestModel, IRecoveryRequestModel } from './models/request';
+import { ILoginRequestModel, ISendCodeRequestModel, IVerifyRequestModel, IRecoveryRequestModel, ISocialLoginRequestModel } from './models/request';
 
 const controller = 'auth';
 
@@ -20,13 +20,6 @@ export interface ISendEmailRequestModel {
   email: string;
 };
 
-export interface ISocialLoginRequestModel {
-  osType: OSTypeEnum;
-  provider: any;
-  token: string;
-  language?: LanguageEnum;
-};
-
 export interface IVerifyPhoneModel {
   email: string,
   code: string,
@@ -38,6 +31,16 @@ class AuthController {
     const result = Connection.POST<ILoginRequestModel>({
       body: form,
       action: 'login',
+      controller,
+    });
+
+    return result;
+  };
+
+  public static Social = (body: ISocialLoginRequestModel): Promise<IResponse<ILoginResponseModel>> => {
+    const result = Connection.POST<ISocialLoginRequestModel>({
+      body,
+      action: 'social',
       controller,
     });
 
@@ -78,17 +81,6 @@ class AuthController {
       body: form,
       action: 'recovery',
       controller,
-    });
-
-    return result;
-  };
-
-  public static Social = (form: ISocialLoginRequestModel): Promise<IResponse<ILoginResponseModel>> => {
-    const result = Connection.POST<ISocialLoginRequestModel>({
-      body: form,
-      action: 'socialLogin',
-      controller,
-      withoutError: true,
     });
 
     return result;

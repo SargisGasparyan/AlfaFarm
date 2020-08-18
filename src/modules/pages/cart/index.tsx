@@ -15,9 +15,12 @@ import Connection from 'platform/services/connection';
 
 import './style.scss';
 import DispatcherChannels from 'platform/constants/dispatcher-channels';
+import CheckBox from 'rc-checkbox';
+import Storage from 'platform/services/storage';
 
 interface IState {
   data: IBasketListResponseModel[];
+  cartSaved: boolean;
 };
 
 @byRoute(ROUTES.CART)
@@ -25,12 +28,13 @@ class Cart extends HelperComponent<{}, IState> {
 
   public state: IState = {
     data: [],
+    cartSaved: false,
   };
 
   private columnConfig = [
     {
       name: Settings.translations.product,
-      cell: (row: IBasketListResponseModel) => <Link to={ROUTES.PRODUCTS.DETAILS.replace(':id', `${row.productId}`)}>
+      cell: (row: IBasketListResponseModel) => <Link to={ROUTES.PRODUCTS.DETAILS.replace(':id', row.productId)}>
         <div
           className="P-image G-square-image-block"
           style={{ background: `url('${getMediaPath(row.productPhoto)}') center/cover` }}
@@ -94,10 +98,23 @@ class Cart extends HelperComponent<{}, IState> {
     }
   }
 
-  private goToCheckout = () => window.routerHistory.push(ROUTES.CHECKOUT);
+  private toggleCartSave = () => {
+    const { cartSaved } = this.state;
+    this.safeSetState({ cartSaved: !cartSaved });
+  }
+
+  private goToCheckout = async () => {
+    const { data, cartSaved } = this.state;
+    if (cartSaved) {
+      const basketIds = data.map(item => item.id);
+      await BasketController.Save(basketIds);
+    }
+
+    window.routerHistory.push(ROUTES.CHECKOUT);
+  }
 
   public render() {
-    const { data } = this.state;
+    const { data, cartSaved } = this.state;
 
     return (
       <section className="G-page P-cart-page">
@@ -116,6 +133,13 @@ class Cart extends HelperComponent<{}, IState> {
             <h1 className="G-orange-color G-fs-24 G-mt-5">{this.totalPrice} AMD</h1>
           </div>
         </div>
+
+        {Storage.profile && <div className="P-data-block">
+          <div className="P-checkbox-row" onClick={this.toggleCartSave}>
+            <CheckBox checked={cartSaved} />  
+            {Settings.translations.save_cart}
+          </div>
+        </div>}
 
         <button
           className="G-main-button G-auto-margin-left G-fs-normal P-pay-button"

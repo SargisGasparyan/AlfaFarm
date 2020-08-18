@@ -18,9 +18,8 @@
     border-radius   : $big-radius;
     justify-content : center;
 
-    > .P-zoomable-image {
+    > div {
       width               : 90%;
-      cursor              : crosshair;
       position            : relative;
       overflow            : hidden;
       background-size     : 200%;
@@ -32,8 +31,6 @@
         display    : block;
         background : white;
         transition : opacity .5s;
-        
-        &:hover { opacity: 0; }
       }
     }
   }

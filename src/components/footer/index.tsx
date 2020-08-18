@@ -12,6 +12,7 @@ import GooglePlayImage from 'assets/images/google_play.png';
 import FacebookImage from 'assets/images/facebook.png';
 import InstagramImage from 'assets/images/instagram.png';
 import './style.scss';
+import enviroment from 'platform/services/enviroment';
 
 const currentYear = new Date().getFullYear();
 
@@ -30,20 +31,22 @@ const Footer = React.memo(() => (
           </a>
         </div>
       </div>
-      <div className="P-column">
-        <h3 className="G-main-color">{Settings.translations.retail_sale}</h3>
-        <a>{Settings.translations.what_is_alfa_card}</a>
-        <Link to={ROUTES.VACANCIES}>{Settings.translations.vacancies}</Link>
-        <Link to={ROUTES.ABOUT_US}>{Settings.translations.about_us}</Link>
-        <Link to={ROUTES.NEWS.MAIN}>{Settings.translations.news}</Link>
-      </div>
-      <div className="P-column">
-        <h3 className="G-main-color">{Settings.translations.wholesale_sale}</h3>
-        <Link to={ROUTES.SERVICES}>{Settings.translations.services}</Link>
-      </div>
+      {!enviroment.WHOLESALE && <>
+        <div className="P-column">
+          <h3 className="G-main-color">{Settings.translations.wholesale_sale}</h3>
+          <Link to={ROUTES.SERVICES}>{Settings.translations.services}</Link>
+        </div>
+        <div className="P-column">
+          <h3 className="G-main-color">{Settings.translations.retail_sale}</h3>
+          <a>{Settings.translations.what_is_alfa_card}</a>
+          <Link to={ROUTES.VACANCIES}>{Settings.translations.vacancies}</Link>
+          <Link to={ROUTES.ABOUT_US}>{Settings.translations.about_us}</Link>
+          <Link to={ROUTES.NEWS.MAIN}>{Settings.translations.news}</Link>
+        </div>
+      </>}
       <div className="P-column">
         <h3 className="G-main-color">{Settings.translations.useful_links}</h3>
-        <Link to={ROUTES.HOW_TO_USE_APP}>{Settings.translations.how_to_use_app}</Link>
+        {!enviroment.WHOLESALE && <Link to={ROUTES.HOW_TO_USE_APP}>{Settings.translations.how_to_use_app}</Link>}
         <Link to={ROUTES.FAQ}>{Settings.translations.faq}</Link>
       </div>
       <div className="P-column">

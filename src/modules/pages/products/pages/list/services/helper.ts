@@ -13,8 +13,8 @@ export const buildFilters = () => {
     categoryIds: categoryIds ? categoryIds.split(',').map(item => +item) : [],
     brandIds: brandIds ? brandIds.split(',').map(item => +item) : [],
     activeIngredientIds: activeIngredientIds ? activeIngredientIds.split(',').map(item => +item) : [],
-    minPrice: minPrice ? +minPrice : undefined,
-    maxPrice: maxPrice ? +maxPrice : undefined,
+    minPrice: minPrice ? +minPrice : 0,
+    maxPrice: maxPrice ? +maxPrice : 10000,
   };
 
   return body;

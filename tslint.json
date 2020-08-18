@@ -18,6 +18,7 @@
     "no-var-requires" : false,
     "no-require-imports": false,
     "no-unused-expression": false,
+    "no-empty-interface": false,
     "max-classes-per-file": [false],
     "object-literal-sort-keys": false,
     "array-type": [false]

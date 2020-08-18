@@ -63,10 +63,22 @@
 
   > .P-data-block {
     width           : 100%;
-    margin          : 20px 0 50px;
+    margin          : 20px 0;
     padding         : 0 14vh;
     display         : flex;
     justify-content : flex-end;
+
+    > .P-checkbox-row {
+      width           : 300px;
+      color           : $text-gray;
+      cursor          : pointer;
+      display         : flex;
+      font-size       : $normal-fs;
+      align-items     : center;
+      justify-content : center;
+
+      > span { margin-right: 10px; }
+    }
   }
 
   > .P-pay-button {

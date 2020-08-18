@@ -1,6 +1,6 @@
 import Connection from '../../services/connection';
-import { IResponse, IPagination } from '../../constants/interfaces';
-import { IProductListRequestModel } from './models/request';
+import { IResponse, IPagination, IPaging } from '../../constants/interfaces';
+import { IProductListRequestModel, IProductRelatedListRequestModel } from './models/request';
 import { IProductListResponseModel, IProductDetailsResponseModel } from './models/response';
 
 export enum ProductColorTypeEnum {
@@ -208,8 +208,9 @@ class ProductController {
     return result;
   };
 
-  public static GetRelated = (id: number): Promise<IResponse<IProductListResponseModel[]>> => {
-    const result = Connection.GET({
+  public static GetRelated = (id: number, body: IProductRelatedListRequestModel): Promise<IResponse<IPagination<IProductListResponseModel>>> => {
+    const result = Connection.POST<IProductRelatedListRequestModel>({
+      body,
       action: `related/${id}`,
       controller: ProductController.controller,
     });

@@ -2,13 +2,14 @@
 @import 'src/assets/styles/variables';
 
 .P-products-list-item {
+  width           : calc(100% / 5 - 40px);
   color           : black;
-  width           : 280px;
   margin          : 20px;
   border          : 1px solid $light-gray;
   display         : flex;
   padding         : 10px 30px 30px;
   position        : relative;
+  min-width       : 280px;
   background      : white;
   border-radius   : $big-radius;
   flex-direction  : column;

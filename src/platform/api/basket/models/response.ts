@@ -8,3 +8,8 @@ export interface IBasketListResponseModel {
   productTitle: string;
   productQuantity: number;
 };
+
+export interface ISavedBasketListResponseModel {
+  id: number;
+  itemsCount: number;
+};

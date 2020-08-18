@@ -10,11 +10,11 @@ class Settings {
   
   public static defaultLanguage = LanguageEnum.Armenian;
 
-  public static facebookId = 392096548151413;
-  public static googleId = '68962021705-tu6bdgffqj3orrlu34t6a9c4lfuupc6q.apps.googleusercontent.com';
+  public static facebookId = 4185689951504366;
+  public static googleId = '868926872899-3h51jp9caaq17a9eohc61juahmahk01q.apps.googleusercontent.com';
   public static linkedinId = '77ji7ohk6dxaxv';
 
-  public static googleAPIKey = 'AIzaSyDT8V0w75M0dzAqC61m3s-K7S0qRpTjQcU';
+  public static googleAPIKey = 'AIzaSyDVSjKMr1sGNq7dlzGm3YBskX9GYeZJ5Uk';
   // AIzaSyDqd5WM8hmgmjB-7DozGaJ38M1fjIWrStY
 
   public static googlePlayURL = 'https://play.google.com/store/apps/details?id=am.armboldmind.ineed';

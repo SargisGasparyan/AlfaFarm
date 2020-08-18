@@ -35,7 +35,10 @@ class SearchResults extends HelperComponent<IProps, IState> {
     const { searchValue } = this.state;
 
     if (!searchValue) return data;
-    return data.filter(item => item.name.includes(searchValue));
+    return data.filter(item => item.name
+      .toLowerCase()
+      .includes(searchValue.toLowerCase())
+    );
   }
 
   private get markers() {

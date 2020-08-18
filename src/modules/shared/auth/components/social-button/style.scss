@@ -1,0 +1,19 @@
+@import 'src/assets/styles/variables';
+
+.P-auth-social-button {
+  width           : 100%;
+  border          : 2px solid $blue;
+  height          : 58px;
+  display         : flex;
+  font-size       : 18px;
+  margin-top      : 20px;
+  background      : none;
+  align-items     : center;
+  border-radius   : 30px;
+  justify-content : center;
+
+  > img {
+    width        : 35px;
+    margin-right : 20px;
+  }
+}

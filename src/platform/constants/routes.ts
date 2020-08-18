@@ -16,6 +16,7 @@ const PROFILE_ROUTES = (() => {
   const ORDERS_ROUTES = RouteService.buildRouteContext('/profile/orders', {
     MAIN: '',
     DETAILS: '/details/:id',
+    SAVED_BASKET_ITEMS: '/saved-basket-items/:id',
   });
 
   return RouteService.buildRouteContext('/profile', {
@@ -45,8 +46,17 @@ const NEWS_ROUTES = RouteService.buildRouteContext('/news', {
   DETAILS: '/:id',
 });
 
+const CLINIC_ROUTES = RouteService.buildRouteContext('/clinic', {
+  MAIN: '',
+  DOCTORS: '/doctors',
+  LABORATORY: '/laboratory',
+  PRICE_LIST: '/price-list',
+  ABOUT_US: '/about-us',
+});
+
 const PRODUCTS_ROUTES = RouteService.buildRouteContext('/products', {
   MAIN: '',
+  SIMILAR: '/similar/:id',
   DETAILS: '/details/:id',
   PROPOSAL: '/proposal',
 });
@@ -67,7 +77,7 @@ const ROUTES = {
   BUSINESS: '/business',
   CONTRACT: '/contract',
   SERVICES: '/services',
-  CLINIC: '/clinic',
+  CLINIC: CLINIC_ROUTES,
   PHARMACIES: '/pharmacies',
   EXCHANGE_RETURN: '/exchange-return',
   CONFIDENTIALITY_CONDITIONS: '/conditions',

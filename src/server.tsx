@@ -62,25 +62,22 @@ function buildHTML(markup: string, title: string, description: string, keywords:
 
         
       <script>
-      window.fbAsyncInit = function() {
-        FB.init({
-          appId      : '392096548151413',
-          cookie     : true,
-          xfbml      : true,
-          version    : '{api-version}'
-        });
-          
-        FB.AppEvents.logPageView();   
-          
-      };
+        (function(d, s, id){
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) {return;}
+          js = d.createElement(s); js.id = id;
+          js.src = "https://connect.facebook.net/en_US/sdk.js";
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
 
-      (function(d, s, id){
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) {return;}
-        js = d.createElement(s); js.id = id;
-        js.src = "https://connect.facebook.net/en_US/sdk.js";
-        fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'facebook-jssdk'));
+        window.fbAsyncInit = function() {
+          FB.init({
+            appId            : '${Settings.facebookId}',
+            autoLogAppEvents : true,
+            xfbml            : true,
+            version          : 'v5.0'
+          });
+        };
       </script>
 
         <title>${title}</title>
@@ -88,20 +85,7 @@ function buildHTML(markup: string, title: string, description: string, keywords:
       <body>
         <main id="P-content">${markup}</main>
         <div id="P-modals"></div>
-        
-        <script>
-        window.fbAsyncInit = function() {
-          FB.init({
-            appId            : '${392096548151413}',
-            autoLogAppEvents : true,
-            xfbml            : true,
-            version          : 'v5.0'
-          });
-        };
-      </script>
-      <script async defer src="https://connect.facebook.net/en_US/sdk.js"></script>
-      <script src="https://maps.googleapis.com/maps/api/js?key=${Settings.googleAPIKey}&libraries=places"></script>
-
+        <script src="https://maps.googleapis.com/maps/api/js?key=${Settings.googleAPIKey}&libraries=places"></script>
       </body>
     </html>
   `;

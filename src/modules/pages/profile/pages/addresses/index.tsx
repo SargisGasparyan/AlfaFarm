@@ -45,7 +45,7 @@ class Addresses extends HelperComponent<IState, {}> {
       name: '',
       style: { minWidth: 120, maxWidth: 120 },
       cell: (row: IUserAddressListResponseModel) => <>
-        <Link to={ROUTES.PROFILE.ADDRESSES.UPDATE.replace(':id', `${row.id}`)}>
+        <Link to={ROUTES.PROFILE.ADDRESSES.UPDATE.replace(':id', row.id)}>
           <i
             className="icon-Group-5545 G-back-icon G-main-color G-mr-40 G-fs-26"
           />

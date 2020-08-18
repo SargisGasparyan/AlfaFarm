@@ -15,7 +15,6 @@ import ConfirmModal from './components/confirm-modal';
 import Socket from './platform/services/socket';
 import Notifications from './platform/services/notifications';
 import HelperComponent from './platform/classes/helper-component';
-import Modal from 'react-modal';
 
 import './modules';
 
@@ -24,7 +23,6 @@ import 'moment/locale/ru';
 import 'moment/locale/en-gb';
 
 import './assets/styles/index.scss';
-import ProductController from 'platform/api/product';
 
 interface IState {
   confirmOpen: boolean;

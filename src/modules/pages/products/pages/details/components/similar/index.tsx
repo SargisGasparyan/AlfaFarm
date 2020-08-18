@@ -6,6 +6,8 @@ import { IProductListResponseModel, IProductDetailsResponseModel } from 'platfor
 import ProductController from 'platform/api/product';
 
 import './style.scss';
+import { Link } from 'react-router-dom';
+import ROUTES from 'platform/constants/routes';
 
 interface IProps {
   data: IProductDetailsResponseModel;
@@ -15,8 +17,8 @@ const Similar = React.memo(({ data }: IProps) => {
   const [list, setList] = React.useState<IProductListResponseModel[]>([]);
 
   React.useEffect(() => {
-    ProductController.GetRelated(data.id).then(result => {
-      setList(result.data);
+    ProductController.GetRelated(data.id, { pageNumber: 1, pageSize: 4 }).then(result => {
+      setList(result.data.list);
     })
   }, []);
 
@@ -26,6 +28,10 @@ const Similar = React.memo(({ data }: IProps) => {
       <div className="P-list">
         {list.map(item => <Shared.Products.ListItem key={item.id} data={item} />)}
       </div>
+      {list.length > 4 && <Link
+        to={ROUTES.PRODUCTS.SIMILAR.replace(':id', data.id)}
+        className="G-main-ghost-button G-auto-margin-left G-auto-margin-right"
+      >{Settings.translations.show_all}</Link>}
     </div>
   ) : null;
 });

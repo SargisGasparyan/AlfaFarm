@@ -1,11 +1,13 @@
 import * as React from 'react';
+
 import { IOrderDetailsBasketItemResponseModel } from 'platform/api/order/models/response';
 import Table from 'components/table';
-
-import './style.scss';
 import Settings from 'platform/services/settings';
 import { getMediaPath } from 'platform/services/helper';
 import ROUTES from 'platform/constants/routes';
+
+import './style.scss';
+
 
 interface IProps {
   list: IOrderDetailsBasketItemResponseModel[];
@@ -41,9 +43,10 @@ const Products = React.memo(({ list }: IProps) => {
   ];
 
   return <Table<IOrderDetailsBasketItemResponseModel>
-    className="P-order-details-products"
-    columnConfig={columnConfig} data={[...list, ...list, ...list]}
-    redirectUrl={row => ROUTES.PRODUCTS.DETAILS.replace(':id', `${row.productId}`)}
+    className="P-order-products"
+    columnConfig={columnConfig}
+    data={list}
+    redirectUrl={row => ROUTES.PRODUCTS.DETAILS.replace(':id', row.productId)}
   />;
 });
 

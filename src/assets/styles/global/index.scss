@@ -10,6 +10,7 @@
     width         : 100%;
     height        : auto;
     margin        : 0;
+    position      : relative;
     font-size     : 36px;
     min-height    : $page-title-size;
     text-align    : center;
@@ -310,6 +311,8 @@
 .G-mt-10 { margin-top: 10px; }
 .G-mt-20 { margin-top: 20px; }
 
+.G-ml-20 { margin-left: 20px; }
+
 .G-mr-20 { margin-right: 20px; }
 .G-mr-40 { margin-right: 40px; }
 
@@ -327,6 +330,7 @@
 .G-flex-justify-between { justify-content: space-between; }
 .G-flex-justify-end { justify-content: flex-end; }
 .G-flex-align-center { align-items: center; }
+.G-flex-align-start { align-items: flex-start; }
 .G-flex-column { flex-direction: column; }
  
 // #endregion Flex
@@ -342,6 +346,8 @@
 .G-main-color { color: $main-color !important; }
 .G-white-color { color: white; }
 .G-orange-color { color: $orange; }
+.G-light-gray-color { color: $light-gray; }
+.G-text-gray-color { color: $text-gray; }
 .G-main-background-color { background-color: $main-color; }
 
 // #endregion Colors

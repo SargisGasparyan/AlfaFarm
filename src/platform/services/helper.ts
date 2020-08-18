@@ -59,6 +59,55 @@ export const formatDate = (date?: string | number, withHours = true) => {
   return momentDate.format(withHours ? 'YYYY MMM DD | HH:mm' : 'YYYY MMM DD');
 }
 
+export const getUpcomingMonths = (() => {
+  const getMonth = (date: moment.Moment) => {
+    const splitedName = date.format("MMMM").split('');
+    splitedName[0] = splitedName[0].toUpperCase();
+
+    return {
+      date: date.toDate(),
+      name: splitedName.join(''),
+    };
+  };
+
+  return (count: number) => {
+    const date = moment();
+    const months = [getMonth(date)];
+  
+    for (let i = 1; i <= count - 1; i++) {
+      date.add(1, 'months');
+      date.set("date", 1);
+      months.push(getMonth(date));
+    }
+  
+    return months;
+  };
+})();
+
+export const getMonthDays = (() => {
+  const getDay = (date: moment.Moment) => {
+    const currentDate = new Date();
+    const isToday = date.date() === currentDate.getDate() && date.month() === currentDate.getMonth() && date.year() === currentDate.getFullYear();
+
+    return {
+      date: date.toDate(),
+      name: isToday ? Settings.translations.today : date.date(),
+    };
+  };
+  
+  return (date: Date) => {
+    const startDate = moment(date);
+    const endDate = moment(startDate).endOf('month');
+    const days = [getDay(startDate)];
+
+    while(startDate.add(1, 'days').diff(endDate) < 0)
+      days.push(getDay(startDate));
+      
+    return days;
+  };
+})();
+
+
 export const formatTime = (time?: string) => {
   if (!time) return '';
 
