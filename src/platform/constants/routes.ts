@@ -80,6 +80,7 @@ const ROUTES = {
   CLINIC: CLINIC_ROUTES,
   PHARMACIES: '/pharmacies',
   EXCHANGE_RETURN: '/exchange-return',
+  WHOLESALE_PROMOTIONS: '/wholesale-promotions',
   CONFIDENTIALITY_CONDITIONS: '/conditions',
 
   HOME: HOME_ROUTES,

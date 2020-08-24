@@ -7,13 +7,12 @@ import CountInput from 'components/count-input';
 import { IProductListResponseModel } from 'platform/api/product/models/response';
 import { getMediaPath } from 'platform/services/helper';
 import DiscountLabel from '../discount-label';
-
-import './style.scss';
 import FavoriteController from 'platform/api/favorite';
 import BasketController from 'platform/api/basket';
 import LoaderContent from 'components/loader-content';
 import DispatcherChannels from 'platform/constants/dispatcher-channels';
 
+import './style.scss';
 
 interface IProps {
   data: IProductListResponseModel;
@@ -53,7 +52,7 @@ const ListItem = React.memo((props: IProps) => {
       <h3>{data.title}</h3>
       
       <div className="P-price">
-        <span>{data.price} AMD</span>
+        <span>{data.discountedPrice || data.price} AMD</span>
         <CountInput
           step={1}
           min={1}

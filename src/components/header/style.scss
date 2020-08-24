@@ -47,7 +47,7 @@ header {
     > h4 { @include normal-font(); }
   }
 
-  .P-link {
+  .P-link, .P-wholesale-link {
     color           : black;
     cursor          : pointer;
     padding         : 10px 15px;
@@ -55,9 +55,9 @@ header {
     white-space     : nowrap;
     text-decoration : none;
 
-    &.P-active {
-      color: $orange;
-    }
+    &.P-wholesale-link { padding: 10px 30px; }
+
+    &.P-active { color: $orange; }
 
     &.P-cart {
       position : relative;

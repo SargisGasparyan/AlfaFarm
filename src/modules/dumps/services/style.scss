@@ -10,8 +10,19 @@
     padding         : 20px $page-horizontal-offset;
     display         : flex;
     background      : url('src/assets/images/services.png') center/cover;
-    align-items     : flex-end;
+    align-items     : center;
     justify-content : flex-start;
+
+    > .P-shadow-text {
+      font-size    : 80px;
+      padding-left : 100px;
+
+      > .P-background {
+        left      : initial;
+        right     : -15vw;
+        font-size : 120px;
+      }
+    }
   }
 
   > .P-content {

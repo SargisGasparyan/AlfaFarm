@@ -1,7 +1,8 @@
 import ROUTES from 'platform/constants/routes';
 import Settings from 'platform/services/settings';
+import enviroment from 'platform/services/enviroment';
 
-export const leftSideOptions = () => [
+export const leftSideOptions = () => !enviroment.WHOLESALE ? [
   {
     name: Settings.translations.bonus_card,
     path: ROUTES.PROFILE.BONUS_CARD,
@@ -29,5 +30,14 @@ export const leftSideOptions = () => [
   {
     name: Settings.translations.my_wallet,
     path: ROUTES.PROFILE.MY_WALLET,
+  },
+] : [
+  {
+    name: Settings.translations.orders,
+    path: ROUTES.PROFILE.ORDERS.MAIN,
+  },
+  {
+    name: Settings.translations.favorites,
+    path: ROUTES.PROFILE.FAVORITES,
   },
 ];

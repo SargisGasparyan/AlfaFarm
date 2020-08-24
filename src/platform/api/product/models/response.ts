@@ -4,6 +4,7 @@ export interface IProductListResponseModel {
   id: number;
   title: string;
   price: number;
+  discountedPrice?: number;
   isFavorite: boolean;
   discount?: number;
   imagePath?: string;
@@ -14,6 +15,7 @@ export interface IProductDetailsResponseModel {
   title: string;
   description: string;
   price: number;
+  discountedPrice?: number;
   discount?: number;
   unitName: string;
   unitQuantity: number;

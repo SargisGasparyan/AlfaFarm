@@ -55,8 +55,21 @@ export const getUserName = (profile: IUserResponseModel) => profile.fullName || 
 
 export const formatDate = (date?: string | number, withHours = true) => {
   if (!date) return '';
-  const momentDate = moment(date);
+  const momentDate = moment(formatISOString(date));
   return momentDate.format(withHours ? 'YYYY MMM DD | HH:mm' : 'YYYY MMM DD');
+}
+
+export const formatTime = (time?: string) => {
+  if (!time) return '';
+
+  const splited = time.split(':');
+  splited.pop();
+  return splited.join(':');
+}
+
+export const formatISOString = (date: string | number | Date) => {
+  if (typeof date !== 'string') return date;
+  return date + (date[date.length - 1].toLowerCase() === 'z' ? '' : 'Z');
 }
 
 export const getUpcomingMonths = (() => {
@@ -106,15 +119,6 @@ export const getMonthDays = (() => {
     return days;
   };
 })();
-
-
-export const formatTime = (time?: string) => {
-  if (!time) return '';
-
-  const splited = time.split(':');
-  splited.pop();
-  return splited.join(':');
-}
 
 export const getHoverDirection = (e: React.MouseEvent, element?: HTMLElement) => {
   const node = element || e.target as HTMLElement;

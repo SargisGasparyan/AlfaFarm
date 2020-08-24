@@ -7,6 +7,11 @@
 .rc-checkbox-input:focus + .rc-checkbox-inner{
   border-color: #d9d9d9 !important;
 }
+
+.G-radio.rc-checkbox > .rc-checkbox-inner {
+  border-radius: 50%;
+}
+
 .rc-checkbox {
 
   > .rc-checkbox-input {

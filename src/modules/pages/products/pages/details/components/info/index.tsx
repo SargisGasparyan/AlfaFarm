@@ -61,7 +61,7 @@ class Info extends HelperComponent<IProps, IState> {
       <div className="P-product-details-info">
         <h2 className="P-name">
           {data.title}
-          <span className="G-orange-color G-auto-margin-left">{data.price} AMD</span>
+          <span className="G-orange-color G-auto-margin-left">{data.discountedPrice || data.price} AMD</span>
         </h2>
         <h3 className="P-unit">{data.unitQuantity} {data.unitName}</h3>
         {data.category && <h3 className="P-row">

@@ -17,6 +17,7 @@ import PersonImage from 'assets/images/person.png';
 
 import './style.scss';
 import { getMediaPath } from 'platform/services/helper';
+import WholesaleContent from './components/wholesale-content';
 
 
 interface IState {
@@ -107,18 +108,20 @@ class Header extends HelperPureComponent<{}, IState> {
           <img src={LogoImage} className="G-full-width" />
         </Link>
         
-        <SearchInput withSubmit={true} onSubmit={this.searchSubmit} />
+        {enviroment.WHOLESALE ? <WholesaleContent /> : <>
+          <SearchInput withSubmit={true} onSubmit={this.searchSubmit} />
 
-        <Link
-          to={ROUTES.PRODUCTS.MAIN}
-          innerRef={this.categoryOpenLink}
-          onMouseOver={this.openCategories}
-          className={`P-link ${categoryOpen ? 'P-active' : ''}`}
-        >{Settings.translations.online_pharmacy}</Link>
+          <Link
+            to={ROUTES.PRODUCTS.MAIN}
+            innerRef={this.categoryOpenLink}
+            onMouseOver={this.openCategories}
+            className={`P-link ${categoryOpen ? 'P-active' : ''}`}
+          >{Settings.translations.online_pharmacy}</Link>
 
-        <NavLink {...this.navLinkProps} to={ROUTES.PHARMACIES}>{Settings.translations.pharmacies}</NavLink>
-        <NavLink {...this.navLinkProps} to={ROUTES.CLINIC.MAIN}>{Settings.translations.clinic}</NavLink>
-        <NavLink {...this.navLinkProps} to={ROUTES.BLOG.MAIN}>{Settings.translations.blog}</NavLink>
+          <NavLink {...this.navLinkProps} to={ROUTES.PHARMACIES}>{Settings.translations.pharmacies}</NavLink>
+          <NavLink {...this.navLinkProps} to={ROUTES.CLINIC.MAIN}>{Settings.translations.clinic}</NavLink>
+          <NavLink {...this.navLinkProps} to={ROUTES.BLOG.MAIN}>{Settings.translations.blog}</NavLink>
+        </>}
 
         {Storage.profile ? <Link to={ROUTES.PROFILE.MAIN} className="P-profile">
           <div

@@ -32,7 +32,7 @@
     @include bold-font();
   }
 
-  > .P-discounted-price {
+  > .P-without-discount-price {
     text-align    : center;
     margin-bottom : 10px;
     @include bold-font();

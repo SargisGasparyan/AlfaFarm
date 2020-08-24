@@ -12,9 +12,9 @@ import PageLoader from 'components/page-loader';
 import { buildFilters } from './services/helper';
 import DispatcherChannels from 'platform/constants/dispatcher-channels';
 import Filter from './components/filter';
+import Connection from 'platform/services/connection';
 
 import './style.scss';
-import Connection from 'platform/services/connection';
 
 interface IState {
   loading: boolean;

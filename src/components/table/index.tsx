@@ -12,6 +12,7 @@ interface IProps<Data extends object> {
   hoverButtons?(row: Data, index?: number): HTMLElement | React.ReactNode;
   columnConfig: ITableColumnConfig<Data>[];
   className?: string;
+  checkBoxClass?: string;
   useCheckbox?(row: Data, index?: number): boolean;
   checkBoxState?(row: Data, index?: number): boolean;
   data: Data[];
@@ -34,7 +35,7 @@ class Table<Data extends { id: number }> extends React.Component<IProps<Data>, {
   }
 
   public render() {
-    const { columnConfig, data, onRowClick, redirectUrl, className, hoverButtons, rowClassname, useCheckbox, checkBoxState } = this.props;
+    const { columnConfig, data, onRowClick, redirectUrl, className, hoverButtons, rowClassname, useCheckbox, checkBoxState, checkBoxClass } = this.props;
     const Row = redirectUrl ? Link : 'ul';
 
     return (
@@ -52,7 +53,7 @@ class Table<Data extends { id: number }> extends React.Component<IProps<Data>, {
               `}>
 
               {(useCheckbox && useCheckbox(item, rowIndex)) && <span className="P-table-checkbox">
-                <CheckBox checked={checkBoxState ? checkBoxState(item, rowIndex) : false} />
+                <CheckBox className={checkBoxClass || ''} checked={checkBoxState ? checkBoxState(item, rowIndex) : false} />
               </span>}
 
               {columnConfig.map((childItem, index) => <li

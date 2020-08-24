@@ -33,7 +33,47 @@
     background    : #F8F5F5;
     border-radius : 20px;
     
-    &:hover {
+    &:hover, &.P-active {
+      color      : white;
+      background : $main-color;
+    }
+  }
+}
+
+.P-clinic-days-tooltip {
+  width           : 270px;
+  display         : flex;
+  padding         : 15px 10px; // 10px = 15px - 5px
+  flex-wrap       : wrap;
+  max-height      : 230px;
+  overflow-y      : auto;
+  background      : white;
+  box-shadow      : $default-block-shadow;
+  justify-content : center;
+
+  > h3 {
+    width         : 100%;
+    text-align    : center;
+    margin-bottom : 10px;
+    @include normal-font;
+  }
+
+  > .P-time {
+    cursor        : pointer;
+    width         : calc(25% - 10px);
+    margin        : 5px;
+    padding       : 5px;
+    font-size     : 14px;
+    text-align    : center;
+    background    : #F8F5F5;
+    border-radius : 20px;
+
+    &.P-disabled {
+      cursor  : not-allowed;
+      opacity : .5;
+    }
+
+    &:hover:not(.P-disabled), &.P-active {
       color      : white;
       background : $main-color;
     }

@@ -7,9 +7,9 @@ import ROUTES from 'platform/constants/routes';
 import Layout from '../../components/layout';
 import Settings from 'platform/services/settings';
 import Table from 'components/table';
-import { OrderStatusEnum } from 'platform/api/order/constants/enums';
-import { getViewEnum, formatDate } from 'platform/services/helper';
+import { formatDate } from 'platform/services/helper';
 import { IClinicRegistrationListResponseModel } from 'platform/api/clinicRegistration/models/response';
+import { onlyForUsers } from 'platform/guards/routes';
 import ClinicRegistrationController from 'platform/api/clinicRegistration';
 
 import './style.scss';
@@ -18,7 +18,7 @@ interface IState {
   data: IClinicRegistrationListResponseModel[];
 };
 
-@byPrivateRoute(ROUTES.PROFILE.MY_REGISTRATIONS)
+@byPrivateRoute(ROUTES.PROFILE.MY_REGISTRATIONS, [onlyForUsers])
 class MyRegistrations extends HelperComponent<IState, {}> {
 
   public state: IState = {
@@ -26,11 +26,6 @@ class MyRegistrations extends HelperComponent<IState, {}> {
   };
 
   private columnConfig = [
-
-    {
-      name: Settings.translations.doctor,
-      cell: (row: IClinicRegistrationListResponseModel) => row.doctorName,
-    },
     {
       name: Settings.translations.service,
       cell: (row: IClinicRegistrationListResponseModel) => row.serviceName,
