@@ -24,6 +24,9 @@ class Settings {
   public static instagramURL = 'https://www.instagram.com/ineed.market/';
   public static linkedinURL = 'https://www.linkedin.com/company/ineed.am/about/';
 
+  public static webURL = 'https://alfapharm.abmdemo.me';
+  public static wholesaleURL = 'https://wholesalealfa.abmdemo.me';
+
   public static get language(): LanguageEnum {
     const language = window.localStorage.getItem('language') as LanguageEnum || Settings.defaultLanguage;
     if (!language || !Object.values(LanguageEnum).includes(language)) return Settings.defaultLanguage;

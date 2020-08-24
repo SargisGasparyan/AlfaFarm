@@ -8,6 +8,7 @@ import ExchangeReturn from './exchange-return';
 import Services from './services';
 import Vacancies from './vacancies';
 import HowToUseApp from './how-to-use-app';
+import WholesalePromotions from './wholesale-promotions';
 
 export default {
   AboutUs,
@@ -20,4 +21,5 @@ export default {
   Services,
   Vacancies,
   HowToUseApp,
+  WholesalePromotions,
 };

@@ -9,15 +9,21 @@ import Table from 'components/table';
 import { IMedicalServiceListResponseModel } from 'platform/api/medicalService/models/response';
 import PageLoader from 'components/page-loader';
 import MedicalServiceController from 'platform/api/medicalService';
+import Dates from './components/dates';
+import LoaderContent from 'components/loader-content';
+import DispatcherChannels from '../../constants/dispatcher-channels';
 
 import './style.scss';
-import CheckBox from 'rc-checkbox';
-import Dates from './components/dates';
+import ClinicRegistrationController from 'platform/api/clinicRegistration';
+import SuccessModal from 'components/success-modal';
 
 interface IState {
   data?: IMedicalServiceListResponseModel[];
   searchValue: string;
-  chosenServices: number[];
+  submitLoading: boolean;
+  chosenService?: number;
+  chosenDate?: Date;
+  showSuccess: boolean;
 };
 
 @byRoute([ROUTES.CLINIC.LABORATORY])
@@ -25,14 +31,17 @@ class Laboratory extends HelperComponent<{}, {}> {
 
   public state: IState = {
     searchValue: '',
-    chosenServices: [],
+    submitLoading: false,
+    showSuccess: false,
   };
 
-  public componentDidMount() { this.fetchData(); }
+  public componentDidMount() {
+    this.fetchData();
+    window.addEventListener(DispatcherChannels.ClinicTimeChoose, this.timeChoose);
+  }
 
-  private fetchData = async () => {
-    const result = await MedicalServiceController.GetLaboratoryList();
-    this.safeSetState({ data: result.data });
+  public componentWillUnmount() {
+    window.removeEventListener(DispatcherChannels.ClinicTimeChoose, this.timeChoose);
   }
 
   private columnConfig = [
@@ -45,56 +54,81 @@ class Laboratory extends HelperComponent<{}, {}> {
     },
   ];
 
-  private get totalPrice() { 
-    const { chosenServices, data } = this.state;
-    let price = 0;
+  private timeChoose = ({ detail }: CustomEvent) => this.safeSetState({ chosenDate: detail });
 
-    chosenServices.map(item => {
-      const elem = data?.find(row => row.id === item)
-      if (elem) price += elem.price;
-    });
-
-    return price;
+  private fetchData = async () => {
+    const result = await MedicalServiceController.GetLaboratoryList();
+    this.safeSetState({ data: result.data });
   }
 
   private toggleService = (row: IMedicalServiceListResponseModel) => {
-    const { chosenServices } = this.state;
-    const existingIndex = chosenServices.indexOf(row.id);
-    if (existingIndex === -1) chosenServices.push(row.id);
-    else chosenServices.splice(existingIndex, 1);
-    this.safeSetState({ chosenServices });
+    const { chosenService, chosenDate } = this.state;
+
+    this.safeSetState({
+      chosenService: chosenService !== row.id ? row.id : undefined,
+      chosenDate: chosenService !== row.id ? chosenDate : undefined
+    });
   }
 
+  private toggleSuccessModal = () => {
+    const { showSuccess } = this.state;
+    
+    if (showSuccess) this.safeSetState({
+      chosenService: undefined,
+      chosenDate: undefined,
+      showSuccess: false,
+    }); else this.safeSetState({ showSuccess: true });
+  }
+
+  private submit = () => this.safeSetState({ submitLoading: true }, async () => {
+    const { chosenService, chosenDate } = this.state;
+
+    if (chosenService && chosenDate) {
+      const result = await ClinicRegistrationController.Create([{
+        medicalServiceId: chosenService,
+        start: chosenDate,
+      }]);
+
+      result.success && this.toggleSuccessModal();
+      this.safeSetState({ submitLoading: false });
+    }
+  });
+
   public render() {
-    const { data, chosenServices } = this.state;
+    const { data, chosenDate, chosenService, submitLoading, showSuccess } = this.state;
 
     return (
       <section className="G-page P-clinic-laboratory-page">
         <Options />
         <h1 id="clinic-page-start" className="G-main-color G-page-title">
           {Settings.translations.laboratory}
-          <button className="G-main-button">{Settings.translations.sign_up}</button>
         </h1>
         <div className="P-content">
           {data ? <>
             <div className="P-list">
-              <div className="G-flex G-flex-wrap G-flex-align-center G-flex-justify-between">
+              <div className="G-flex G-flex-1 G-flex-wrap G-flex-align-center G-flex-justify-between">
                 <Table<IMedicalServiceListResponseModel>
                   useCheckbox={() => true}
-                  checkBoxState={row => chosenServices.includes(row.id)}
+                  checkBoxClass="G-radio"
+                  checkBoxState={row => chosenService === row.id}
                   onRowClick={this.toggleService}
                   columnConfig={this.columnConfig}
                   data={data}
                 />
 
-                <button className="G-main-button">{Settings.translations.sign_up}</button>
-                <h1 className="P-total">
-                  {Settings.translations.total}
-                  <span className="G-orange-color">{this.totalPrice} AMD</span>
-                </h1>
+                <LoaderContent
+                  loading={submitLoading}
+                  className="G-main-button"
+                  onClick={this.submit}
+                  disabled={!chosenDate}
+                >
+                  {Settings.translations.sign_up}
+                </LoaderContent>
               </div>
             </div>
-            <Dates />
+
+            <Dates chosen={chosenService ? data.find(item => item.id === chosenService) : undefined} />
+            {showSuccess && <SuccessModal text={Settings.translations.success} onClose={this.toggleSuccessModal} />}
           </> : <PageLoader />}
         </div>
       </section>

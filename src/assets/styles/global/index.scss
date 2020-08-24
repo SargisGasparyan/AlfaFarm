@@ -325,6 +325,7 @@
 // #region Flex
 
 .G-flex { display: flex; }
+.G-flex-1 { flex: 1; }
 .G-flex-wrap { flex-wrap: wrap; }
 .G-flex-justify-center { justify-content: center; }
 .G-flex-justify-between { justify-content: space-between; }
@@ -344,6 +345,7 @@
 // #region Colors
 
 .G-main-color { color: $main-color !important; }
+.G-black-color { color: black; }
 .G-white-color { color: white; }
 .G-orange-color { color: $orange; }
 .G-light-gray-color { color: $light-gray; }

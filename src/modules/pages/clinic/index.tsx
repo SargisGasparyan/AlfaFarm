@@ -1,7 +1,8 @@
 import * as React from 'react';
+
 import ROUTES from 'platform/constants/routes';
 import { byRoute } from 'platform/decorators/routes';
-
+import { onlyForUsers } from 'platform/guards/routes';
 import HelperComponent from 'platform/classes/helper-component';
 import Options from './components/options';
 import Laboratory from './pages/laboratory';
@@ -10,7 +11,7 @@ import AboutUs from './pages/about-us';
 
 import './style.scss';
 
-@byRoute([ROUTES.CLINIC.MAIN])
+@byRoute([ROUTES.CLINIC.MAIN], [onlyForUsers])
 class Clinic extends HelperComponent<{}, {}> {
 
   public render() {

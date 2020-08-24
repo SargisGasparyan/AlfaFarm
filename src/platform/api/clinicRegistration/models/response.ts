@@ -6,3 +6,8 @@ export interface IClinicRegistrationListResponseModel {
   startDate: string;
   endDate: number;
 };
+
+export interface IClinicRegistrationBusyHourResponseModel {
+  start: string;
+  end: string;
+};

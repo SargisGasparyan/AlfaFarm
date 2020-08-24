@@ -10,6 +10,7 @@ import Table from 'components/table';
 import { IUserAddressListResponseModel } from 'platform/api/userAddress/models/response';
 import UserAddressController from 'platform/api/userAddress';
 import Modify from './pages/modify';
+import { onlyForUsers } from 'platform/guards/routes';
 
 import './style.scss';
 
@@ -17,7 +18,7 @@ interface IState {
   data: IUserAddressListResponseModel[];
 };
 
-@byPrivateRoute(ROUTES.PROFILE.ADDRESSES.MAIN)
+@byPrivateRoute(ROUTES.PROFILE.ADDRESSES.MAIN, [onlyForUsers])
 class Addresses extends HelperComponent<IState, {}> {
 
   public state: IState = {

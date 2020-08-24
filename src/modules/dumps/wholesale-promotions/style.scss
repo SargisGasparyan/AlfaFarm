@@ -1,8 +1,8 @@
 @import 'src/assets/styles/helper';
 @import 'src/assets/styles/variables';
 
-.G-page.P-vacancies-page {
-  padding-bottom : 0;
+.G-page.P-wholesale-promotions-page {
+  padding : 0;
 
   > .P-header {
     width           : 100%;
@@ -47,10 +47,46 @@
     }
   }
 
-  > .P-maps {
-    width  : calc(100% + #{2 * $page-horizontal-offset});
-    height : 500px;
-    margin : 40px 0 0 (-$page-horizontal-offset);
-    border : 0;
+
+  > .P-search-block {
+    width           : 1200px;
+    margin          : 60px auto 0;
+    padding         : 30px;
+    max-width       : 100%;
+    display         : flex;
+    box-shadow      : $default-block-shadow;
+    background      : white;
+    border-radius   : $radius;
+    justify-content : flex-end;
+  }
+
+  > .P-brand-item {
+    width         : 1200px;
+    margin        : 60px auto;
+    max-width     : 100%;
+    box-shadow    : $default-block-shadow;
+    background    : white;
+    border-radius : $radius;
+
+    > .P-title {
+      display         : flex;
+      padding         : 30px;
+      align-items     : center;
+      justify-content : space-between;
+
+      > div {
+        width  : 200px;
+        height : 100px;
+      }
+    }
+
+    .P-add-to-cart { padding: 10px 40px; }
+
+    > .P-data-table > .P-data-table-body > ul {
+      height        : 80px;
+      border-bottom : 1px solid $light-gray;
+
+      &:last-child { border-bottom: 0; }
+    }
   }
 }

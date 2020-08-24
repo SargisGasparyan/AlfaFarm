@@ -35,8 +35,8 @@ const ListItem = React.memo(({ data }: IProps) => {
       {!!data.discount && <Shared.Products.DiscountLabel percent={data.discount} />}
       <div className="P-image" style={{ background: `url('${getMediaPath(data.imagePath)}') center/contain no-repeat` }} />
       <h3>{data.title}</h3>
-      {!!data.discount && <del className="P-discounted-price">{data.price} AMD</del>}
-      <span className="P-price">{data.discount ? data.price / 100 * data.discount : data.price} AMD</span>
+      {!!data.discount && <del className="P-without-discount-price">{data.price} AMD</del>}
+      <span className="P-price">{data.discountedPrice || data.price} AMD</span>
       <LoaderContent
         loading={cartLoading}
         className="G-main-button"

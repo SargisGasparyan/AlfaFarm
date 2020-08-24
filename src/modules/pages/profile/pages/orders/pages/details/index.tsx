@@ -15,6 +15,7 @@ import { OrderStatusEnum } from 'platform/api/order/constants/enums';
 import Products from '../../components/products';
 
 import './style.scss';
+import enviroment from 'platform/services/enviroment';
 
 interface IState {
   data?: IOrderDetailsResponseModel;
@@ -79,7 +80,7 @@ class Details extends HelperComponent<RouteComponentProps<IRouteParams>, IState>
               <span>{Settings.translations[this.statusViewEnum[data.status]]}</span>
             </h3>
           </div>
-          <div className="P-address-block">
+          {!enviroment.WHOLESALE && <div className="P-address-block">
             <h2 className="G-mb-40 G-orange-color">{Settings.translations.address}</h2>
 
             <h3 className="G-flex G-mb-30 G-flex-justify-between">
@@ -106,7 +107,7 @@ class Details extends HelperComponent<RouteComponentProps<IRouteParams>, IState>
               {Settings.translations.address}
               <span>{data.address}</span>
             </h3>
-          </div>
+          </div>}
 
           <Products list={data.baskets} />
         </div> : <PageLoader />}
