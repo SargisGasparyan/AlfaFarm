@@ -99,22 +99,23 @@ export const getUpcomingMonths = (() => {
 
 export const getMonthDays = (() => {
   const getDay = (date: moment.Moment) => {
-    const currentDate = new Date();
-    const isToday = date.date() === currentDate.getDate() && date.month() === currentDate.getMonth() && date.year() === currentDate.getFullYear();
-
+    const isToday = moment(date).isSame(new Date(), 'day');
     return {
       date: date.toDate(),
       name: isToday ? Settings.translations.today : date.date(),
-    };
+    }
   };
   
-  return (date: Date) => {
-    const startDate = moment(date);
-    const endDate = moment(startDate).endOf('month');
-    const days = [getDay(startDate)];
+  return (startDate: Date, pushToday = true) => {
+    const date = moment(startDate);
+    const endDate = moment(date).endOf('month');
+    const days = [];
 
-    while(startDate.add(1, 'days').diff(endDate) < 0)
-      days.push(getDay(startDate));
+    while(date.diff(endDate, 'days') < 0) {
+      const isToday = moment(date).isSame(new Date(), 'day');
+      (!isToday || pushToday) && days.push(getDay(date));
+      date.add(1, 'days');
+    }
       
     return days;
   };

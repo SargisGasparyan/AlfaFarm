@@ -101,7 +101,6 @@ class SearchResults extends HelperComponent<IProps, IState> {
 
   private WorkingPlan = () => {
     if (!this.hoveredMarkerData) return null;
-    console.log(this.weeksViewEnum);
 
     return <div>
       {this.hoveredMarkerData.workingPlan.map((item, index, arr) => <span key={index}>

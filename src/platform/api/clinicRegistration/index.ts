@@ -1,6 +1,6 @@
 import Connection from '../../services/connection';
 import { IResponse } from '../../constants/interfaces';
-import { IClinicRegistrationListResponseModel, IClinicRegistrationBusyHourResponseModel } from './models/response';
+import { IClinicRegistrationListResponseModel, IClinicRegistrationBusyHourResponseModel, IClinicRegistrationDoctorBusyHourResponseModel } from './models/response';
 import { IClinicRegistrationCreateRequestModel } from './models/request';
 
 class ClinicRegistrationController {
@@ -20,6 +20,15 @@ class ClinicRegistrationController {
     const result = Connection.GET({
       action: 'LaboratoryBusyHours',
       query: { serviceIds },
+      controller: ClinicRegistrationController.controller,
+    });
+
+    return result;
+  };
+
+  public static GetDoctorBusyHours = (id: number): Promise<IResponse<IClinicRegistrationDoctorBusyHourResponseModel>> => {
+    const result = Connection.GET({
+      action: `DoctorBusyHours/${id}`,
       controller: ClinicRegistrationController.controller,
     });
 

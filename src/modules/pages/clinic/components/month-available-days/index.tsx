@@ -8,13 +8,15 @@ import { getMonthDays, formatISOString } from 'platform/services/helper';
 import Settings from 'platform/services/settings';
 import { IClinicRegistrationBusyHourResponseModel } from 'platform/api/clinicRegistration/models/response';
 import { getRegistrationTimeRanges } from '../../services/helper';
+import { IMedicalServiceListResponseModel } from 'platform/api/medicalService/models/response';
 import DispatcherChannels from '../../constants/dispatcher-channels';
 
 import './style.scss';
+import { clinicCloseTime } from '../../constants';
 
 interface IProps {
   busyHours: IClinicRegistrationBusyHourResponseModel[];
-  duration?: number;
+  service?: IMedicalServiceListResponseModel;
   month: {
     date: Date;
     name: string;
@@ -30,21 +32,24 @@ class MonthAvailableDays extends HelperPureComponent<IProps, {}> {
 
   public state: IState = {};
 
-  private availableDays = getMonthDays(this.props.month.date);
+  private availableDays = getMonthDays(this.props.month.date, new Date().getHours() < clinicCloseTime);
 
   private get availableTimes() {
-    const { duration } = this.props;
+    const { service } = this.props;
     const { activeDay } = this.state;
 
-    if (activeDay && duration) {
+    if (activeDay && service) {
       const today = moment(activeDay).isSame(moment(), 'day');
-      return getRegistrationTimeRanges(duration, today);
+      return getRegistrationTimeRanges(service.duration, today);
     } else return [];
   }
 
-  public static getDerivedStateFromProps(nextProps: IProps) {
-    if (!nextProps.duration) return { activeDay: undefined, chosenDate: undefined };
-    return null;
+  public componentDidUpdate(prevProps: IProps) {
+    const { service } = this.props;
+    service !== prevProps.service && this.safeSetState({
+      activeDay: undefined,
+      chosenDate: undefined,
+    });
   }
 
   public componentDidMount() {
@@ -135,12 +140,12 @@ class MonthAvailableDays extends HelperPureComponent<IProps, {}> {
   }
 
   public render() {
-    const { month, duration } = this.props;
+    const { month, service } = this.props;
 
     return (
       <div className="P-clinic-month-available-days">
         <h3>{month.name} &gt; <span className="G-text-gray-color">{Settings.translations.available_days}</span></h3>
-        {this.availableDays.map((item, index) => duration ? <TooltipTrigger
+        {this.availableDays.map((item, index) => service ? <TooltipTrigger
           key={index}
           placement="bottom-start"
           tooltip={this.Tooltip}

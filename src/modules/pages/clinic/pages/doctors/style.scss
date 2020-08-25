@@ -1,0 +1,95 @@
+@import 'src/assets/styles/helper';
+@import 'src/assets/styles/variables';
+
+.G-page.P-clinic-doctors-page {
+  padding : 0 0 160px 0;
+
+  > .G-page-title {
+    display         : flex;
+    padding         : 160px $page-horizontal-offset 0;
+    font-size       : 44px;
+    text-align      : left;
+    justify-content : space-between;
+
+    > .G-main-button {
+      color           : white;
+      width           : 260px;
+      border          : 0;
+      height          : auto;
+      padding         : 15px;
+      font-size       : 20px;
+      background      : $main-color;
+      border-radius   : 30px;
+      justify-content : center;
+    }
+  }
+
+  > .P-content {
+    margin        : 0 $page-horizontal-offset;
+    max-width     : 100%;
+    border-radius : $radius;
+
+    > .P-item {
+      width         : 100%;
+      padding       : 10px;
+      display       : flex;
+      background    : white;
+      box-shadow    : $default-block-shadow;
+      min-height    : 350px;
+      margin-bottom : 50px;
+      border-radius : $big-radius;
+
+      > .P-main-info {
+        width         : 250px;
+        border-right  : 1px solid $light-gray;
+        padding-right : 10px;
+
+        > .P-image {
+          height : 250px;
+        }
+
+        > h3 {
+          font-size  : 22px;
+          text-align : center;
+          margin-top : 15px;
+        }
+      }
+
+      > .P-services {
+        flex         : 1;
+        padding      : 0 20px;
+        min-width    : 350px;
+        border-right : 1px solid $light-gray;
+
+        > .P-data-table {
+          width : 100%;
+  
+          > .P-data-table-header {
+            height        : 50px;
+            padding       : 0 10px;
+            background    : none;
+            border-bottom : 1px solid $light-gray; 
+          }
+    
+          > .P-data-table-body > ul {
+            padding-right : 0;
+  
+            > li, > li > div { padding-right: 0; }
+          }
+        }
+      }
+
+      .G-main-button {
+        width     : 240px;
+        padding   : 15px 0;
+        font-size : 20px;
+      }
+
+      .P-total {
+        font-size : 24px;
+
+        > span { margin-left: 15px; }
+      }
+    }
+  }
+}

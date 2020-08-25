@@ -49,7 +49,6 @@ class SavedBasketItems extends HelperComponent<RouteComponentProps<IRouteParams>
   private buy = async () => {
     const { id } = this.props.match.params;
     const result = await BasketController.ProceedSaved(+id);
-    console.log(result);
   }
 
   public render() {

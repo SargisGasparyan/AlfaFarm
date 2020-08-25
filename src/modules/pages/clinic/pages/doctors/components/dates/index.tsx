@@ -11,6 +11,7 @@ import './style.scss';
 
 interface IProps {
   chosen?: IMedicalServiceListResponseModel;
+  doctorId?: number;
 };
 
 interface IState {
@@ -23,14 +24,14 @@ class Dates extends HelperComponent<IProps, IState> {
     busyHours: [],
   };
 
-  private months = getUpcomingMonths(3);
+  private months = getUpcomingMonths(2);
 
   public async componentDidUpdate(prevProps: IProps) {
-    const { chosen } = this.props;
+    const { chosen, doctorId } = this.props;
 
-    if (!prevProps.chosen && chosen) {
-      const result = await ClinicRegistrationController.GetLaboratoryBusyHours([chosen.id]);
-      this.safeSetState({ busyHours: result.data });
+    if (!prevProps.chosen && chosen && doctorId) {
+      const result = await ClinicRegistrationController.GetDoctorBusyHours(doctorId);
+      this.safeSetState({ busyHours: result.data.registrations });
     }
   }
 
@@ -39,7 +40,7 @@ class Dates extends HelperComponent<IProps, IState> {
     const { busyHours } = this.state;
 
     return (
-      <div className="P-clinic-laboratory-dates">
+      <div className="P-clinic-doctors-dates">
         {this.months.map((item, index) => <MonthAvailableDays
           key={index}
           month={item}

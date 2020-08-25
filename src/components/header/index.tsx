@@ -82,11 +82,10 @@ class Header extends HelperPureComponent<{}, IState> {
 
   private closeCategories = (e?: MouseEvent) => {
     const { categoryOpen } = this.state;
-    console.log(this.header);
     const canBeClosed = !e || (
       this.header.current &&
       !this.header.current.contains(e.target as Node)
-    )
+    );
 
     if (categoryOpen && canBeClosed) {
       this.safeSetState({ categoryOpen: false });

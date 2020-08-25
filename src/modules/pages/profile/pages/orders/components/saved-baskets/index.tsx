@@ -12,10 +12,7 @@ const SavedBaskets = React.memo(() => {
   const [data, setData] = React.useState<ISavedBasketListResponseModel[] | null>(null);
 
   React.useEffect(() => {
-    BasketController.GetSavedList().then(result => {
-      setData(result.data);
-      console.log(data);
-    })
+    BasketController.GetSavedList().then(result => setData(result.data))
   }, []);
 
   return data && data.length ? <>

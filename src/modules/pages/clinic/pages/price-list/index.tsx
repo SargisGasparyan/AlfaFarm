@@ -10,6 +10,7 @@ import Table from 'components/table';
 import { IMedicalServiceListResponseModel, IMedicalServicePriceListResponseModel } from 'platform/api/medicalService/models/response';
 import PageLoader from 'components/page-loader';
 import MedicalServiceController from 'platform/api/medicalService';
+import { onlyForUsers } from 'platform/guards/routes';
 
 import './style.scss';
 
@@ -18,7 +19,7 @@ interface IState {
   searchValue: string;
 };
 
-@byRoute([ROUTES.CLINIC.PRICE_LIST])
+@byRoute([ROUTES.CLINIC.PRICE_LIST], [onlyForUsers])
 class PriceList extends HelperComponent<{}, {}> {
 
   public state: IState = {

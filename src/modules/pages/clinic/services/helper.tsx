@@ -1,14 +1,17 @@
+import { clinicOpeningTime, clinicCloseTime } from '../constants';
+
+// today mean is user's chosen day today
 export const getRegistrationTimeRanges = (duration: number, today = false) => {
   const result: string[] = [];
   const date = new Date();
 
-  date.setHours(9);
+  date.setHours(clinicOpeningTime);
   date.setMinutes(0);
   date.setSeconds(0);
   date.setMilliseconds(0);
 
-  // 18:00 - 1 For starting minutes
-  while (date.getHours() <= 17) {
+  // - 1 Hour To validate minutes
+  while (date.getHours() <= clinicCloseTime - 1) {
     const hours = date.getHours();
     const minutes = date.getMinutes();
 

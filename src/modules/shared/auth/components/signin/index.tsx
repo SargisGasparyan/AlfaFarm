@@ -64,8 +64,6 @@ class SignIn extends HelperComponent<IProps, IState> {
       token: tokens[type],
     };
 
-    console.log(body);
-
     const result = await AuthController.Social(body);
     if (result.success) {
       Settings.token = result.data.accessToken;
@@ -129,7 +127,7 @@ class SignIn extends HelperComponent<IProps, IState> {
         appId={Settings.facebookId}
         provider="facebook"
         onLoginSuccess={data => this.socialSuccess(data, SocialProvider.Facebook)}
-        onLoginFailure={() => { /* */ }}
+        onLoginFailure={e => alert(e)}
       />
 
       <SocialButton
@@ -137,7 +135,7 @@ class SignIn extends HelperComponent<IProps, IState> {
         appId={Settings.googleId}
         provider="google"
         onLoginSuccess={data => this.socialSuccess(data, SocialProvider.Google)}
-        onLoginFailure={e => console.log(e)}
+        onLoginFailure={e => alert(e)}
       />
 
       <span className="P-sign-in-register-text">{Settings.translations.not_a_member}</span>

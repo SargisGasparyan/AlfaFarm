@@ -12,10 +12,12 @@ import MedicalServiceController from 'platform/api/medicalService';
 import Dates from './components/dates';
 import LoaderContent from 'components/loader-content';
 import DispatcherChannels from '../../constants/dispatcher-channels';
-
-import './style.scss';
 import ClinicRegistrationController from 'platform/api/clinicRegistration';
 import SuccessModal from 'components/success-modal';
+import { onlyForUsers } from 'platform/guards/routes';
+
+import './style.scss';
+
 
 interface IState {
   data?: IMedicalServiceListResponseModel[];
@@ -26,7 +28,7 @@ interface IState {
   showSuccess: boolean;
 };
 
-@byRoute([ROUTES.CLINIC.LABORATORY])
+@byRoute([ROUTES.CLINIC.LABORATORY], [onlyForUsers])
 class Laboratory extends HelperComponent<{}, {}> {
 
   public state: IState = {
