@@ -9,11 +9,12 @@ import FirstItem from './components/first-item';
 import ListItem from './components/list-item';
 
 import NewsController from 'platform/api/news';
-import { paginationPageLimit } from 'platform/constants';
+import { infinityScrollPageLimit } from 'platform/constants';
 import { INewsListResponseModel } from 'platform/api/news/models/response';
 import { scrolledToBottom } from 'platform/services/helper';
 import PageLoader from 'components/page-loader';
 import Details from './pages/details';
+import { onlyForUsers } from 'platform/guards/routes';
 
 import './style.scss';
 
@@ -22,7 +23,7 @@ interface IState {
   loading: boolean;
 };
 
-@byRoute([ROUTES.NEWS.MAIN])
+@byRoute([ROUTES.NEWS.MAIN], [onlyForUsers])
 class News extends HelperComponent<{}, IState> {
 
   public state: IState = {
@@ -46,7 +47,7 @@ class News extends HelperComponent<{}, IState> {
     if (!this.lastPage) {
       const body = {
         pageNumber: this.pageNo,
-        pageSize: paginationPageLimit,
+        pageSize: infinityScrollPageLimit,
       };
 
       const result = await NewsController.GetList(body);

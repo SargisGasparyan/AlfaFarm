@@ -1,0 +1,78 @@
+@import 'src/assets/styles/helper';
+@import 'src/assets/styles/variables';
+
+.P-profile-prescriptions-create {
+
+  > h3 {
+    width           : 100%;
+    color           : $main-color;
+    padding         : 0 40px;
+    position        : relative;
+    display         : flex;
+    font-size       : 38px;
+    margin-bottom   : 60px;
+    justify-content : center;
+
+    > i {
+      top       : 50%;
+      left      : 0;
+      position  : absolute;
+      transform : translateY(-50%);
+    }
+  }
+
+  > .P-form {
+    width         : 100%;
+    padding       : 40px;
+    display       : flex;
+    flex-wrap     : wrap;
+    background    : white;
+    box-shadow    : $default-block-shadow;
+    border-radius : $big-radius;
+    @include main-top-border;
+
+    > div {
+      &.P-upload-part {
+        > .G-main-button {
+          width     : 260px;
+          max-width : 100%;
+        }
+
+        > .P-uploaded {
+          display         : flex;
+          padding         : 0 20px 15px;
+          overflow        : hidden;
+          white-space     : nowrap;
+          border-bottom   : 1px solid $light-gray;
+          margin-bottom   : 20px;
+          text-overflow   : ellipsis;
+          justify-content : space-between;
+
+          > i {
+            cursor      : pointer;
+            margin-left : 10px;
+          }
+        }
+
+        > .G-main-button {
+          cursor          : pointer;
+          display         : flex;
+          align-items     : center;
+          justify-content : center;
+  
+          > i {
+            font-size    : 28px;
+            margin-right : 10px;
+          }
+        }
+      }
+
+      > .P-submit {
+        width        : 425px;
+        max-width    : 100%;
+        margin-left  : auto;
+        margin-right : auto;
+      }
+    }
+  }
+}

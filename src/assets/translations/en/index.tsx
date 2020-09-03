@@ -19,28 +19,6 @@ const contactText = <>
   </address>
 </>;
 
-const businessText = <>
-  <ul>
-    <li>We fully do the supply organization and purchases of your company.</li>
-    <li>Our workers not only receive your order, but watch each order from purchase till delivery.</li>
-    <li>Our team fully collects all documents of your purchases.</li>
-  </ul>
-  Our company has agreements and contracts  with many producers and sellers, which you can use , being the member of our team. Including the offered  by us wholesale trade network, you will have a chance of presenting your goods in all wholesale and retail points, as under your own name  and under the trade name, offered by our company.
-  We provide the promotion of trade marks, advertising and productive calculating. We are ready to offer our customers modern services, such as receiving the goods, delivery, loading and unloading, packaging.
-  Do you want to avoid unnecessary costs with the state of employee and conducting the trainings.
-  Signing a contract with us you get:
-  <ul>
-    <li>Organization of process of complete getting of the necessary goods, beginning from the order till the delivery</li>
-    <li>Document turnover</li>
-    <li>Possibility of using our discounts</li>
-    <li>Possibility of getting the goods by wholesale prices</li>
-    <li>Free analysis of market prices</li>
-    <li>Options for lower prices</li>
-    <li>We provide catalogs and samples of goods.</li>
-  </ul>
-  If you are interested in our services, call the number 011200900 or write by e-mail <a href="mailto:business@ineed.am">business@ineed.am</a>, and our workers will answer you politely.
-</>;
-
 const contractText = <>
   1. This agreement (in future ”contract”) defines and regulates the order of services rendering by “Croma Group” (in future also company) on the site Ineed.am(in future also site)<br /><br />
   2. Entering the site, using any service or introducing any content fully or partially, you, as a user (in future also USER, YOU, YOUR, CUSTOMER) confirm, that you have read and fully understood the contract and all the conditions of service provision (in future conditions or agreement) by the company on the site and accept them, regardless you are a customer, user of the site or just a visitor.<br /><br />
@@ -997,7 +975,6 @@ export default {
   house: "House",
   apartment_office: "Apartment/Office",
   contact_text: contactText,
-  business_text: businessText,
   contract_text: contractText,
   exchange_return_text: exchangeReturnText,
   confidentiality_conditions_text: confidentialityConditionsText,
@@ -1114,6 +1091,11 @@ export default {
   choose_address: "Choose address",
   choose_time: "Choose time",
   user_request_ask: "ask(s) to add the following item to this list",
+  prescription: "Prescription",
+  prescriptions: "Prescriptions",
+  add_prescription: "Add prescription",
+  medical_institution: "Medical institution",
+  upload_image: "Upload an image",
   cancel: "Cancel",
   total: "Total",
   subtotal: "Subtotal",
@@ -1158,6 +1140,8 @@ export default {
   are_you_sure: "Are you sure?",
   written: "Written",
   confirm_password: "Confirm password",
+  current_password: "Current password",
+  new_password: "New password",
   choose_password: "Choose password",
   similar: "Similar",
   similar_products: "Similar products",

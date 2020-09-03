@@ -1,8 +1,6 @@
 import CategoryController from '../api/category';
-import MUController from '../api/mu';
 import Settings from './settings';
 import UserController from '../api/user';
-import { IMU } from '../api/mu';
 import LanguageController from '../api/language';
 import { ICategoryListResponseModel } from '../api/category/models/response';
 import { ILanguageListResponseModel } from '..//api/language/models/response';
@@ -30,9 +28,7 @@ class Storage {
       const brands = await BrandController.GetList({ pageNumber: 1, pageSize: infinityScrollMax });
       const activeIngredients = await ActiveIngredientController.GetList({ pageNumber: 1, pageSize: infinityScrollMax });
       const languages = await LanguageController.GetList();
-      // const mues = await MUController.List();
       
-      Storage.mues = [];
       Storage.brands = brands.data.list;
       Storage.activeIngredients = activeIngredients.data.list;
       Storage.categories = categories.data;
@@ -46,7 +42,6 @@ class Storage {
   public static categories: ICategoryListResponseModel[];
   public static brands: IBrandListResponseModel[];
   public static activeIngredients: IActiveIngredientListResponseModel[];
-  public static mues: IMU[];
   public static languages: ILanguageListResponseModel[];
 }
 

@@ -76,7 +76,7 @@ class Addresses extends HelperComponent<IState, {}> {
 
     return (
       <Layout>
-        <div className="G-flex G-justify-end G-mb-30">
+        <div className="G-flex G-flex-justify-end G-mb-30">
           <Link
             to={ROUTES.PROFILE.ADDRESSES.CREATE}
             className="G-normal-link G-main-button G-auto-margin-left G-fs-16"

@@ -10,6 +10,7 @@ import { validateForm } from './services/helper';
 import AuthController from 'platform/api/auth';
 import SocialButton from '../social-button';
 import { SocialProvider } from 'platform/api/auth/constants/enums';
+import enviroment from 'platform/services/enviroment';
 
 interface IProps {
   onTypeChange<ActiveData extends object>(type: ModalContentEnum, activeData?: ActiveData): void;
@@ -67,7 +68,7 @@ class SignIn extends HelperComponent<IProps, IState> {
     const result = await AuthController.Social(body);
     if (result.success) {
       Settings.token = result.data.accessToken;
-      window.location.reload();  
+      result.data.isVerified ? window.location.reload() : this.props.onTypeChange(ModalContentEnum.SendCode, { fromSocial: true });
     }
   }
 
@@ -120,26 +121,28 @@ class SignIn extends HelperComponent<IProps, IState> {
         >{Settings.translations.log_in}</LoaderContent>
       </form>
       
-      <span className="P-sign-in-restore-password" onClick={this.restorePassword}>{Settings.translations.restore_password}</span>
+      {!enviroment.WHOLESALE && <>
+        <span className="P-sign-in-restore-password" onClick={this.restorePassword}>{Settings.translations.restore_password}</span>
 
-      <SocialButton
-        type={SocialProvider.Facebook}
-        appId={Settings.facebookId}
-        provider="facebook"
-        onLoginSuccess={data => this.socialSuccess(data, SocialProvider.Facebook)}
-        onLoginFailure={e => alert(e)}
-      />
+        <SocialButton
+          type={SocialProvider.Facebook}
+          appId={Settings.facebookId}
+          provider="facebook"
+          onLoginSuccess={data => this.socialSuccess(data, SocialProvider.Facebook)}
+          onLoginFailure={e => alert(e)}
+        />
 
-      <SocialButton
-        type={SocialProvider.Google}
-        appId={Settings.googleId}
-        provider="google"
-        onLoginSuccess={data => this.socialSuccess(data, SocialProvider.Google)}
-        onLoginFailure={e => alert(e)}
-      />
+        <SocialButton
+          type={SocialProvider.Google}
+          appId={Settings.googleId}
+          provider="google"
+          onLoginSuccess={data => this.socialSuccess(data, SocialProvider.Google)}
+          onLoginFailure={e => alert(e)}
+        />
 
-      <span className="P-sign-in-register-text">{Settings.translations.not_a_member}</span>
-      <button className="G-main-ghost-button P-sign-in-register" onClick={this.signUp}>{Settings.translations.sign_up}</button>
+        <span className="P-sign-in-register-text">{Settings.translations.not_a_member}</span>
+        <button className="G-main-ghost-button P-sign-in-register" onClick={this.signUp}>{Settings.translations.sign_up}</button>
+      </>}
     </>;
   }
 }

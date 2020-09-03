@@ -32,10 +32,11 @@ const ListItem = React.memo((props: IProps) => {
   const addToCart = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     setCartLoading(true);
-    await BasketController.Change({
+    
+    await BasketController.Change([{
       productId: data.id,
       productQuantity: count,
-    });
+    }]);
 
     window.dispatchEvent(new CustomEvent(DispatcherChannels.CartItemsUpdate, { detail: true }));
     setCartLoading(false);

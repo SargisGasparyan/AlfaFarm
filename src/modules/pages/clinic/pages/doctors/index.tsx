@@ -14,7 +14,7 @@ import DispatcherChannels from '../../constants/dispatcher-channels';
 import ClinicRegistrationController from 'platform/api/clinicRegistration';
 import SuccessModal from 'components/success-modal';
 import { onlyForUsers } from 'platform/guards/routes';
-import { paginationPageLimit } from 'platform/constants';
+import { infinityScrollPageLimit } from 'platform/constants';
 import DoctorController from 'platform/api/doctor';
 import { scrolledToBottom, getMediaPath } from 'platform/services/helper';
 import { IDoctorListResponseModel } from 'platform/api/doctor/models/response';
@@ -79,7 +79,7 @@ class Doctors extends HelperComponent<{}, {}> {
       const body = {
         text: searchValue,
         pageNumber: this.pageNo,
-        pageSize: paginationPageLimit,
+        pageSize: infinityScrollPageLimit,
       };
 
       const result = await DoctorController.GetList(body);

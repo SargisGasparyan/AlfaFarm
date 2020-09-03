@@ -48,7 +48,10 @@
       display         : flex;
       font-size       : 18px;
       align-items     : center;
+      border-bottom   : 1px solid $dark-gray;
       list-style-type : none;
+
+      &:last-child { border-bottom: 0; }
 
       &:hover > .P-data-table-actions { display: initial !important; }
 

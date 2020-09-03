@@ -11,14 +11,13 @@ import Categories from './components/categories';
 import DispatcherChannels from 'platform/constants/dispatcher-channels';
 import Storage from 'platform/services/storage';
 import enviroment from 'platform/services/enviroment';
+import { getMediaPath } from 'platform/services/helper';
+import WholesaleContent from './components/wholesale-content';
 
 import LogoImage from 'assets/images/logo.png';
 import PersonImage from 'assets/images/person.png';
 
 import './style.scss';
-import { getMediaPath } from 'platform/services/helper';
-import WholesaleContent from './components/wholesale-content';
-
 
 interface IState {
   authOpen: boolean;

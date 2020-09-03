@@ -17,7 +17,7 @@ const WholesaleContent = React.memo(() => <>
   >{Settings.translations.online_sales}</a>
 
   <NavLink {...navLinkProps} to={ROUTES.SERVICES}>{Settings.translations.services}</NavLink>
-  <NavLink {...navLinkProps} to={ROUTES.NEWS.MAIN}>{Settings.translations.news}</NavLink>
+  <NavLink {...navLinkProps} to={ROUTES.WHOLESALE_NEWS}>{Settings.translations.news}</NavLink>
   <NavLink {...navLinkProps} to={ROUTES.WHOLESALE_PROMOTIONS}>{Settings.translations.wholesale_promotions}</NavLink>
 </>);
 

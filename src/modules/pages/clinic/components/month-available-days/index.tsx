@@ -142,7 +142,7 @@ class MonthAvailableDays extends HelperPureComponent<IProps, {}> {
   public render() {
     const { month, service } = this.props;
 
-    return (
+    return this.availableDays.length ? (
       <div className="P-clinic-month-available-days">
         <h3>{month.name} &gt; <span className="G-text-gray-color">{Settings.translations.available_days}</span></h3>
         {this.availableDays.map((item, index) => service ? <TooltipTrigger
@@ -163,7 +163,7 @@ class MonthAvailableDays extends HelperPureComponent<IProps, {}> {
           )}
         </TooltipTrigger> : <span key={index} className="P-day">{item.name}</span>)}
       </div>
-    );
+    ) : null;
   }
 
   private Tooltip = ({ tooltipRef, getTooltipProps }: TooltipArg) => {

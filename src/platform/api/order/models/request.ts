@@ -1,6 +1,9 @@
 import { OrderDeliveryTypeEnum } from '../constants/enums';
+import { IPagingRequest } from 'platform/constants/interfaces';
 
-export interface IOrderCreateRequestModel {
+export interface IOrderListRequestModel extends IPagingRequest {};
+
+export interface IOrderModifyRequestModel {
   userAddressId?: number;
   regionId?: number;
   addressText?: string;

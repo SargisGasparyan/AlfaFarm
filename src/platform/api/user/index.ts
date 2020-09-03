@@ -1,6 +1,6 @@
 import Connection from '../../services/connection';
 import { IResponse } from '../../constants/interfaces';
-import { IRegisterRequestModel, IUserModifyRequestModel } from './models/request';
+import { IRegisterRequestModel, IUserModifyRequestModel, IUserPasswordModifyRequestModel } from './models/request';
 import { IUserResponseModel } from './models/response';
 
 const controller = 'user';
@@ -62,7 +62,7 @@ class UserController {
   };
 
   public static Register = (body: IRegisterRequestModel): Promise<IResponse<boolean>> => {
-    const result = Connection.POST({
+    const result = Connection.POST<IRegisterRequestModel>({
       body,
       action: 'register',
       controller: UserController.controller,
@@ -84,7 +84,7 @@ class UserController {
   public static EditPhone = (body: IUserEditPhoneRequestModal): Promise<IResponse<null>> => {
     const result = Connection.PUT<IUserEditPhoneRequestModal>({
       body,
-      action: '/phone',
+      action: 'phone',
       controller,
     });
 
@@ -94,7 +94,17 @@ class UserController {
   public static VerifyPhone = (body: IUserVerifyPhoneRequestModal): Promise<IResponse<number>> => {
     const result = Connection.POST<IUserVerifyPhoneRequestModal>({
       body,
-      action: '/verifyPhone',
+      action: 'verifyPhone',
+      controller,
+    });
+
+    return result;
+  };
+
+  public static ChangePassword = (body: IUserPasswordModifyRequestModel): Promise<IResponse<boolean>> => {
+    const result = Connection.PUT<IUserPasswordModifyRequestModel>({
+      body,
+      action: 'password',
       controller,
     });
 

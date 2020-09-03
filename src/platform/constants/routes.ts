@@ -19,14 +19,20 @@ const PROFILE_ROUTES = (() => {
     SAVED_BASKET_ITEMS: '/saved-basket-items/:id',
   });
 
+  const PRESCRIPTIONS_ROUTES = RouteService.buildRouteContext('/profile/prescriptions', {
+    MAIN: '',
+    CREATE: '/create'
+  });
+
   return RouteService.buildRouteContext('/profile', {
     MAIN: '',
     ORDERS: ORDERS_ROUTES,
     ADDRESSES: ADDRESSES_ROUTES,
-    MY_REGISTRATIONS: '/my-registrations',
     SPECIAL_PRODUCTS: '/special-products',
     BONUS_CARD: '/bonus-card',
     FAVORITES: '/favorites',
+    PRESCRIPTIONS: PRESCRIPTIONS_ROUTES,
+    MY_REGISTRATIONS: '/my-registrations',
     MY_ORDERS: '/my-orders',
     MY_COMPANY: '/my-company',
     MY_REQUESTS: '/my-requests',
@@ -58,7 +64,6 @@ const PRODUCTS_ROUTES = RouteService.buildRouteContext('/products', {
   MAIN: '',
   SIMILAR: '/similar/:id',
   DETAILS: '/details/:id',
-  PROPOSAL: '/proposal',
 });
 
 const WISH_LIST_ROUTES = RouteService.buildRouteContext('/wish-list', {
@@ -80,6 +85,7 @@ const ROUTES = {
   CLINIC: CLINIC_ROUTES,
   PHARMACIES: '/pharmacies',
   EXCHANGE_RETURN: '/exchange-return',
+  WHOLESALE_NEWS: '/wholesale-news',
   WHOLESALE_PROMOTIONS: '/wholesale-promotions',
   CONFIDENTIALITY_CONDITIONS: '/conditions',
 

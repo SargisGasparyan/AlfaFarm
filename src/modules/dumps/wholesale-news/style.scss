@@ -1,0 +1,36 @@
+@import 'src/assets/styles/variables';
+
+.G-page.P-wholesale-news-page {
+  padding         : 0;
+  flex-wrap       : wrap;
+  align-items     : flex-start;
+  justify-content : center;
+
+  > .P-header {
+    width           : 100%;
+    height          : 300px;
+    padding         : 20px $page-horizontal-offset;
+    display         : flex;
+    background      : url('src/assets/images/services.png') center/cover;
+    align-items     : center;
+    justify-content : flex-start;
+
+    > .P-shadow-text {
+      font-size    : 80px;
+      padding-left : 100px;
+
+      > .P-background {
+        left      : initial;
+        right     : -15vw;
+        font-size : 120px;
+      }
+    }
+  }
+
+  > .P-content {
+    width     : calc(100% + 60px);
+    padding   : 20px $page-horizontal-offset + 100px 100px;
+    display   : flex;
+    flex-wrap : wrap;
+  }
+}

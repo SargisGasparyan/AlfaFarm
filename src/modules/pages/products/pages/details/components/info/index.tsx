@@ -39,10 +39,10 @@ class Info extends HelperComponent<IProps, IState> {
     const { data } = this.props;
     const { count } = this.state;
 
-    await BasketController.Change({
+    await BasketController.Change([{
       productId: data.id,
       productQuantity: count,
-    });
+    }]);
 
     window.dispatchEvent(new CustomEvent(DispatcherChannels.CartItemsUpdate, { detail: true }));
     this.safeSetState({ cartLoading: false });

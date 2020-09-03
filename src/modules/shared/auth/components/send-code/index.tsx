@@ -51,12 +51,12 @@ class SendCode extends HelperComponent<IProps, IState> {
         const form = {...this.state.form};
         form.phoneNumber = `+${countryCode}${form.phoneNumber}`;
 
-        const activeData = this.props.activeData as { signUp: boolean } || null;
+        const activeData = this.props.activeData as { signUp: boolean, fromSocial: boolean } || null;
         const result = await AuthController.SendCode(form);
         
         if (result.data) {
           alertify.success(`${result.data}`);
-          onTypeChange(ModalContentEnum.Verify, { form, signUp: activeData ? activeData.signUp : false });
+          onTypeChange(ModalContentEnum.Verify, { form, fromSocial: activeData.fromSocial, signUp: activeData ? activeData.signUp : false });
         } else this.safeSetState({ submitLoading: false });
       });
     });

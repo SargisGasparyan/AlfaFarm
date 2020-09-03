@@ -6,11 +6,11 @@ class NewsController {
  
   private static controller = 'news';
 
-  public static GetList = (paging: IPagingRequest): Promise<IResponse<IPagination<INewsListResponseModel>>> => {
-    const result = Connection.POST({
+  public static GetList = (body: IPagingRequest): Promise<IResponse<IPagination<INewsListResponseModel>>> => {
+    const result = Connection.POST<IPagingRequest>({
+      body,
       action: 'list',
       controller: NewsController.controller,
-      body: paging
     });
 
     return result;

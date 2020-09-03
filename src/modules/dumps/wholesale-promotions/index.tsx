@@ -9,12 +9,12 @@ import SearchInput from 'components/search-input';
 import WholesalePromotionController from 'platform/api/wholesalePromotion';
 import { IWholesalePromotionBrandListResponseModel, IWholesalePromotionListResponseModel  } from 'platform/api/wholesalePromotion/models/response';
 import { getMediaPath } from 'platform/services/helper';
-
-import './style.scss';
 import Table from 'components/table';
 import { Link } from 'react-router-dom';
 import BasketController from 'platform/api/basket';
 import DispatcherChannels from 'platform/constants/dispatcher-channels';
+
+import './style.scss';
 
 interface IState {
   data: IWholesalePromotionBrandListResponseModel[];
@@ -62,7 +62,7 @@ class WholesalePromotions extends HelperPureComponent<{}, IState> {
       productQuantity: row.fromCount,
     };
 
-    const result = await BasketController.Change(body);
+    const result = await BasketController.Change([body]);
     result.success && window.dispatchEvent(new CustomEvent(DispatcherChannels.CartItemsUpdate, { detail: true }));
   }
 

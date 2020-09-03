@@ -5,7 +5,7 @@ import { Shared } from 'modules';
 import ROUTES from 'platform/constants/routes';
 import { byRoute } from 'platform/decorators/routes';
 import { IProductListResponseModel } from 'platform/api/product/models/response';
-import { paginationPageLimit } from 'platform/constants';
+import { infinityScrollPageLimit } from 'platform/constants';
 import { scrolledToBottom } from 'platform/services/helper';
 import ProductController from 'platform/api/product';
 import PageLoader from 'components/page-loader';
@@ -50,7 +50,7 @@ class SimilarList extends HelperComponent<RouteComponentProps<IRouteParams>, ISt
       const { id } = this.props.match.params;
       const body = {
         pageNumber: this.pageNo,
-        pageSize: paginationPageLimit,
+        pageSize: infinityScrollPageLimit,
       };
 
       const result = await ProductController.GetRelated(+id, body);

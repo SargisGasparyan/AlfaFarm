@@ -6,12 +6,11 @@ import HelperComponent from 'platform/classes/helper-component';
 import ShadowText from 'components/shadow-text';
 import { IPharmacyBranchListResponseModel } from 'platform/api/pharmacyBranch/models/response';
 import Maps from 'components/maps';
-
-import './style.scss';
 import { getViewEnum, formatTime } from 'platform/services/helper';
 import { WeekDaysEnum } from 'platform/constants/enums';
 import SearchInput from 'components/search-input';
 
+import './style.scss';
 
 interface IProps {
   data: IPharmacyBranchListResponseModel[];

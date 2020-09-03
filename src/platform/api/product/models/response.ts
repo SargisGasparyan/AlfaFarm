@@ -8,6 +8,8 @@ export interface IProductListResponseModel {
   isFavorite: boolean;
   discount?: number;
   imagePath?: string;
+  unitName: string;
+  unitQuantity: number;
 };
 
 export interface IProductDetailsResponseModel {

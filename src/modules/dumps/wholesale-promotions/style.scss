@@ -81,12 +81,6 @@
     }
 
     .P-add-to-cart { padding: 10px 40px; }
-
-    > .P-data-table > .P-data-table-body > ul {
-      height        : 80px;
-      border-bottom : 1px solid $light-gray;
-
-      &:last-child { border-bottom: 0; }
-    }
+    > .P-data-table > .P-data-table-body > ul { height: 80px; }
   }
 }
