@@ -30,7 +30,7 @@ const Similar = React.memo(({ data }: IProps) => {
       </div>
       {list.length > 4 && <Link
         to={ROUTES.PRODUCTS.SIMILAR.replace(':id', data.id)}
-        className="G-main-ghost-button G-auto-margin-left G-auto-margin-right"
+        className="G-main-ghost-button G-ml-auto G-mr-auto"
       >{Settings.translations.show_all}</Link>}
     </div>
   ) : null;

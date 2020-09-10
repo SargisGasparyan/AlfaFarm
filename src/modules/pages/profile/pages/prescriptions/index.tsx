@@ -10,6 +10,7 @@ import Table from 'components/table';
 import { formatDate, getViewEnum } from 'platform/services/helper';
 import { onlyForUsers } from 'platform/guards/routes';
 import Create from './pages/create';
+import Deciphered from './pages/deciphered';
 import PrescriptionController from 'platform/api/prescription';
 import { paginationPageLimit } from 'platform/constants';
 import { IPagination } from 'platform/constants/interfaces';
@@ -33,7 +34,7 @@ class Prescriptions extends HelperComponent<IState, {}> {
   private columnConfig = [
     {
       name: Settings.translations.date,
-      cell: (row: IPrescriptionListResponseModel) => formatDate(row.createdDate, true),
+      cell: (row: IPrescriptionListResponseModel) => formatDate(row.createdDate),
     },
     {
       name: Settings.translations.medical_institution,
@@ -50,6 +51,15 @@ class Prescriptions extends HelperComponent<IState, {}> {
     {
       name: Settings.translations.status,
       cell: (row: IPrescriptionListResponseModel) => Settings.translations[this.statusViewEnum[row.status]],
+    },
+    {
+      name: Settings.translations.deciphered,
+      cell: (row: IPrescriptionListResponseModel) => row.status === PrescriptionStatusEnum.Success ? <Link
+        to={ROUTES.PROFILE.PRESCRIPTIONS.DECIPHERED.replace(':id', row.id)}
+        className="P-see-more-label"
+      >
+        {Settings.translations.see_more}
+      </Link> : '-',
     },
   ];
 
@@ -73,7 +83,7 @@ class Prescriptions extends HelperComponent<IState, {}> {
         <div className="P-profile-prescriptions">
           <div className="P-content">
             <h3>
-              <span className="G-auto-margin-right">{Settings.translations.prescriptions}</span>
+              <span className="G-mr-auto">{Settings.translations.prescriptions}</span>
               <Link to={ROUTES.PROFILE.PRESCRIPTIONS.CREATE} className="G-normal-link G-main-color G-fs-48">
                 <i className="icon-Group-5532" />
               </Link>
@@ -92,4 +102,4 @@ class Prescriptions extends HelperComponent<IState, {}> {
   }
 }
 
-export default { Prescriptions, Create };
+export default { Prescriptions, Create, Deciphered };

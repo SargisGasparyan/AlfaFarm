@@ -12,10 +12,11 @@ import PageLoader from 'components/page-loader';
 import Settings from 'platform/services/settings';
 import { formatDate, getViewEnum } from 'platform/services/helper';
 import { OrderStatusEnum } from 'platform/api/order/constants/enums';
-import Products from '../../components/products';
+import enviroment from 'platform/services/enviroment';
+import { Shared } from 'modules';
 
 import './style.scss';
-import enviroment from 'platform/services/enviroment';
+
 
 interface IState {
   data?: IOrderDetailsResponseModel;
@@ -109,7 +110,7 @@ class Details extends HelperComponent<RouteComponentProps<IRouteParams>, IState>
             </h3>
           </div>}
 
-          <Products list={data.baskets} />
+          <Shared.Products.TableList list={data.baskets} />
         </div> : <PageLoader />}
       </Layout>
     );

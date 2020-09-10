@@ -79,7 +79,7 @@ class Addresses extends HelperComponent<IState, {}> {
         <div className="G-flex G-flex-justify-end G-mb-30">
           <Link
             to={ROUTES.PROFILE.ADDRESSES.CREATE}
-            className="G-normal-link G-main-button G-auto-margin-left G-fs-16"
+            className="G-normal-link G-main-button G-ml-auto G-fs-16"
           >{Settings.translations.add_address}</Link>
         </div>
         <div className="G-flex P-profile-orders">

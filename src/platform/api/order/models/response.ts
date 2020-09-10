@@ -1,4 +1,5 @@
 import { OrderStatusEnum } from '../constants/enums';
+import { IBasketListResponseModel } from 'platform/api/basket/models/response';
 
 export interface IOrderListResponseModel {
   id: number;
@@ -21,16 +22,5 @@ export interface IOrderDetailsResponseModel {
   phone: string;
   regionName: string;
   cityName: string;
-  baskets: IOrderDetailsBasketItemResponseModel[];
-};
-
-export interface IOrderDetailsBasketItemResponseModel {
-  id: number;
-  productId: number;
-  productPhoto: string;
-  price: number;
-  unitName: string;
-  unitQuantity: number;
-  productTitle: string;
-  productQuantity: number;
+  baskets: IBasketListResponseModel[];
 };

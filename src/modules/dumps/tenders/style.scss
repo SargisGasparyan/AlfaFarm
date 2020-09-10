@@ -1,0 +1,14 @@
+@import 'src/assets/styles/variables';
+
+.G-page.P-tenders-page {
+  flex-wrap       : wrap;
+  align-items     : flex-start;
+  justify-content : center;
+
+  > .P-content {
+    width     : calc(100% + 60px);
+    padding   : 0 100px 50px;
+    display   : flex;
+    flex-wrap : wrap;
+  }
+}

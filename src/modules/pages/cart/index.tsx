@@ -142,7 +142,7 @@ class Cart extends HelperComponent<{}, IState> {
         </div>}
 
         <button
-          className="G-main-button G-auto-margin-left G-fs-normal P-pay-button"
+          className="G-main-button G-ml-auto G-fs-normal P-pay-button"
           onClick={this.goToCheckout}
         >{Settings.translations.pay}</button>
       </section>

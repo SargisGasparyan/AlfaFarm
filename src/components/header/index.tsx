@@ -102,7 +102,7 @@ class Header extends HelperPureComponent<{}, IState> {
 
     return (
       <header ref={this.header} className="G-flex G-flex-align-center G-flex-justify-center">
-        <Link to={ROUTES.HOME.MAIN} className="P-logo G-auto-margin-right">
+        <Link to={ROUTES.HOME.MAIN} className="P-logo G-mr-auto">
           <img src={LogoImage} className="G-full-width" />
         </Link>
         

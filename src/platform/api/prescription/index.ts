@@ -2,6 +2,7 @@ import Connection from '../../services/connection';
 import { IResponse, IPagination } from '../../constants/interfaces';
 import { IPrescriptionListResponseModel } from './models/response';
 import { IPrescriptionListRequestModel, IPrescriptionModifyRequestModel } from './models/request';
+import { IBasketListResponseModel } from '../basket/models/response';
 
 class PrescriptionController {
 
@@ -11,6 +12,15 @@ class PrescriptionController {
     const result = Connection.POST<IPrescriptionListRequestModel>({
       body,
       action: 'list',
+      controller: PrescriptionController.controller,
+    });
+
+    return result;
+  };
+
+  public static GetAttachedProducts = (id: number): Promise<IResponse<IBasketListResponseModel[]>> => {
+    const result = Connection.GET({
+      action: `attachedProducts/${id}`,
       controller: PrescriptionController.controller,
     });
 

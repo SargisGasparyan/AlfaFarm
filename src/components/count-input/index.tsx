@@ -56,7 +56,7 @@ class CountInput extends HelperPureComponent<IProps, IState> {
 
   private changeCount = (e: React.SyntheticEvent<HTMLInputElement>) => {
     const { onChange } = this.props;
-    this.safeSetState({ count: +e.currentTarget.value }, () => onChange(+this.state.count, !this.countInvalid()));
+    this.safeSetState({ count: !isNaN(+e.currentTarget.value) ? +e.currentTarget.value : 0 }, () => onChange(+this.state.count, !this.countInvalid()));
   }
 
   private initCount = () => {

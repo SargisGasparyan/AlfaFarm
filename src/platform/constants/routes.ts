@@ -21,7 +21,8 @@ const PROFILE_ROUTES = (() => {
 
   const PRESCRIPTIONS_ROUTES = RouteService.buildRouteContext('/profile/prescriptions', {
     MAIN: '',
-    CREATE: '/create'
+    CREATE: '/create',
+    DECIPHERED: '/deciphered/:id',
   });
 
   return RouteService.buildRouteContext('/profile', {
@@ -48,6 +49,11 @@ const BLOG_ROUTES = RouteService.buildRouteContext('/blog', {
 });
 
 const NEWS_ROUTES = RouteService.buildRouteContext('/news', {
+  MAIN: '',
+  DETAILS: '/:id',
+});
+
+const TENDERS_ROUTES = RouteService.buildRouteContext('/tenders', {
   MAIN: '',
   DETAILS: '/:id',
 });
@@ -92,6 +98,7 @@ const ROUTES = {
   HOME: HOME_ROUTES,
   BLOG: BLOG_ROUTES,
   NEWS: NEWS_ROUTES,
+  TENDERS: TENDERS_ROUTES,
   PROFILE: PROFILE_ROUTES,
   PRODUCTS: PRODUCTS_ROUTES,
   WISH_LIST: WISH_LIST_ROUTES,

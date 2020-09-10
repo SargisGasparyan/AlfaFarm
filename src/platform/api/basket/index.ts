@@ -36,16 +36,6 @@ class BasketController {
     return result;
   };
 
-  public static ProceedSaved = (id: number): Promise<IResponse<boolean>> => {
-    const result = Connection.POST<{}>({
-      body: {},
-      action: `proceedSaved/${id}`,
-      controller: BasketController.controller,
-    });
-
-    return result;
-  };
-
   public static GetSavedList = (): Promise<IResponse<ISavedBasketListResponseModel[]>> => {
     const result = Connection.GET({
       action: 'savedList',

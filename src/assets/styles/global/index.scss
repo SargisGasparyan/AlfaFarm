@@ -296,6 +296,7 @@
 
 .G-fs-normal { font-size: $normal-fs !important; }
 .G-fs-16 { font-size: 16px !important; }
+.G-fs-20 { font-size: 20px !important; }
 .G-fs-24 { font-size: 24px !important; }
 .G-fs-26 { font-size: 26px !important; }
 .G-fs-48 { font-size: 48px !important; }
@@ -305,8 +306,8 @@
 // #region Positioning
 
 .G-position-relative { position: relative; }
-.G-auto-margin-left { margin-left: auto; }
-.G-auto-margin-right { margin-right: auto; }
+.G-ml-auto { margin-left: auto; }
+.G-mr-auto { margin-right: auto; }
 
 .G-mt-5 { margin-top: 5px; }
 .G-mt-10 { margin-top: 10px; }

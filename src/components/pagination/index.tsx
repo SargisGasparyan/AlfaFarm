@@ -52,10 +52,10 @@ class Pagination<Data> extends HelperComponent<IProps<Data>, IState> {
   }
 
   public getList = async () => {
-    const { selectedPage } = this.state;
+    const { selectedPage, pageCount } = this.state;
     const { fetchData } = this.props;
 
-    Connection.AbortAll();
+    pageCount > 1 && Connection.AbortAll();
     const result = await fetchData(selectedPage);
     result && this.setState({ pageCount: result.pageCount });
   }

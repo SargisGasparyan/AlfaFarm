@@ -41,7 +41,7 @@ class News extends HelperComponent<{}, IState> {
 
         <Link
           to={ROUTES.NEWS.MAIN}
-          className="G-main-ghost-button G-auto-margin-left G-auto-margin-right"
+          className="G-main-ghost-button G-ml-auto G-mr-auto"
         >{Settings.translations.show_all}</Link>
       </section>
     ) : null;
