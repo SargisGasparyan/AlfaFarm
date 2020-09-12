@@ -1,5 +1,5 @@
 import Connection from '../../services/connection';
-import { IResponse, IPagination } from '../../constants/interfaces';
+import { IResponse, IPagingResponse } from '../../constants/interfaces';
 import { IPrescriptionListResponseModel } from './models/response';
 import { IPrescriptionListRequestModel, IPrescriptionModifyRequestModel } from './models/request';
 import { IBasketListResponseModel } from '../basket/models/response';
@@ -8,7 +8,7 @@ class PrescriptionController {
 
   private static controller = 'prescription';
 
-  public static GetList = (body: IPrescriptionListRequestModel): Promise<IResponse<IPagination<IPrescriptionListResponseModel>>> => {
+  public static GetList = (body: IPrescriptionListRequestModel): Promise<IResponse<IPagingResponse<IPrescriptionListResponseModel>>> => {
     const result = Connection.POST<IPrescriptionListRequestModel>({
       body,
       action: 'list',

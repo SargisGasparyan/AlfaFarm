@@ -49,7 +49,7 @@ export interface IGooglePlace {
   };
 };
 
-export interface IPagination<Data> {
+export interface IPagingResponse<Data> {
   list: Data[];
   totalCount: number;
   pageCount: number;

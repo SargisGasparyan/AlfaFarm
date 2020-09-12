@@ -1,12 +1,12 @@
 import Connection from '../../services/connection';
-import { IResponse, IPagination, IPagingRequest } from '../../constants/interfaces';
+import { IResponse, IPagingResponse, IPagingRequest } from '../../constants/interfaces';
 import { ITenderListResponseModel, ITenderDetailsResponseModel } from './models/response';
 
 class TenderController {
 
   private static controller = 'tender';
 
-  public static GetList = (body: IPagingRequest): Promise<IResponse<IPagination<ITenderListResponseModel>>> => {
+  public static GetList = (body: IPagingRequest): Promise<IResponse<IPagingResponse<ITenderListResponseModel>>> => {
     const result = Connection.POST<IPagingRequest>({
       action: 'list',
       controller: TenderController.controller,

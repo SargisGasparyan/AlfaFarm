@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import HelperComponent from 'platform/classes/helper-component';
 import Connection from 'platform/services/connection';
-import { IPagination } from 'platform/constants/interfaces';
+import { IPagingResponse } from 'platform/constants/interfaces';
 
 import './style.scss';
 
@@ -15,7 +15,7 @@ interface IState {
 interface IProps<Data> {
   count?: boolean;
   interval: number;
-  fetchData: (page: number) => Promise<IPagination<Data>>;
+  fetchData: (page: number) => Promise<IPagingResponse<Data>>;
 };
 
 class Pagination<Data> extends HelperComponent<IProps<Data>, IState> {

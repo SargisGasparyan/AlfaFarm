@@ -1,5 +1,5 @@
 import Connection from '../../services/connection';
-import { IResponse, IPagination } from '../../constants/interfaces';
+import { IResponse, IPagingResponse } from '../../constants/interfaces';
 import { IClinicRegistrationModifyRequestModel, IClinicRegistrationListRequestModel } from './models/request';
 import {
   IClinicRegistrationListResponseModel,
@@ -11,7 +11,7 @@ class ClinicRegistrationController {
 
   private static controller = 'clinicRegistration';
 
-  public static GetList = (body: IClinicRegistrationListRequestModel): Promise<IResponse<IPagination<IClinicRegistrationListResponseModel>>> => {
+  public static GetList = (body: IClinicRegistrationListRequestModel): Promise<IResponse<IPagingResponse<IClinicRegistrationListResponseModel>>> => {
     const result = Connection.POST<IClinicRegistrationListRequestModel>({
       body,
       action: 'list',

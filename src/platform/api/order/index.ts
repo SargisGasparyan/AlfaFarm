@@ -1,5 +1,5 @@
 import Connection from '../../services/connection';
-import { IResponse, IPagination } from '../../constants/interfaces';
+import { IResponse, IPagingResponse } from '../../constants/interfaces';
 import { IOrderListResponseModel, IOrderDetailsResponseModel } from './models/response';
 import { IOrderModifyRequestModel, IOrderListRequestModel } from './models/request';
 
@@ -7,7 +7,7 @@ class OrderController {
 
   private static controller = 'order';
 
-  public static GetHistory = (body: IOrderListRequestModel): Promise<IResponse<IPagination<IOrderListResponseModel>>> => {
+  public static GetHistory = (body: IOrderListRequestModel): Promise<IResponse<IPagingResponse<IOrderListResponseModel>>> => {
     const result = Connection.POST<IOrderListRequestModel>({
       body,
       action: 'history',

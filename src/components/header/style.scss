@@ -59,23 +59,6 @@ header {
 
     &.P-active { color: $orange; }
 
-    &.P-cart {
-      position : relative;
-
-      > span {
-        top           : -5px;
-        right         : -10px;
-        width         : 18px;
-        height        : 18px;
-        color         : white;
-        position      : absolute;
-        font-size     : 12px;
-        animation     : cart-icon-animation .2s;
-        background    : red;
-        border-radius : 50%;
-      }
-    }
-
     &.P-login {
       color         : white;
       margin        : 0 25px;
@@ -87,8 +70,27 @@ header {
     &.P-icon {
       color        : $orange;
       padding      : 0;
-      font-size    : 20px;
+      position     : relative;
+      font-size    : 24px;
       margin-right : 25px;
+
+      &.P-notification > span {
+        top   : 0;
+        right : -5px
+      }
+
+      > span {
+        top           : -5px;
+        right         : -10px;
+        width         : 16px;
+        height        : 16px;
+        color         : white;
+        position      : absolute;
+        font-size     : 12px;
+        animation     : cart-icon-animation .2s;
+        background    : red;
+        border-radius : 50%;
+      }
     }
   }
 }

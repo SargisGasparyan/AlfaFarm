@@ -13,7 +13,7 @@ import Create from './pages/create';
 import Deciphered from './pages/deciphered';
 import PrescriptionController from 'platform/api/prescription';
 import { paginationPageLimit } from 'platform/constants';
-import { IPagination } from 'platform/constants/interfaces';
+import { IPagingResponse } from 'platform/constants/interfaces';
 import { IPrescriptionListResponseModel } from 'platform/api/prescription/models/response';
 import { PrescriptionStatusEnum } from 'platform/api/prescription/constants/enums';
 import Pagination from 'components/pagination';
@@ -21,7 +21,7 @@ import Pagination from 'components/pagination';
 import './style.scss';
 
 interface IState {
-  data?: IPagination<IPrescriptionListResponseModel>;
+  data?: IPagingResponse<IPrescriptionListResponseModel>;
 };
 
 @byPrivateRoute(ROUTES.PROFILE.PRESCRIPTIONS.MAIN, [onlyForUsers])

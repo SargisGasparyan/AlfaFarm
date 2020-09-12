@@ -18,19 +18,27 @@ import LogoImage from 'assets/images/logo.png';
 import PersonImage from 'assets/images/person.png';
 
 import './style.scss';
+import Socket from 'platform/services/socket';
+import NotificationController from 'platform/api/notification';
+import Notifications from './components/notifications';
+import ClickOutside from 'components/click-outside';
 
 interface IState {
   authOpen: boolean;
-  categoryOpenPosition: number;
   categoryOpen: boolean;
+  categoryOpenPosition: number;
+  notificationOpen: boolean;
+  notificationIconNumber: number;
   cartIconNumber: number;
 };
 
 class Header extends HelperPureComponent<{}, IState> {
   public state: IState = {
     authOpen: false,
-    categoryOpenPosition: 0,
     categoryOpen: false,
+    categoryOpenPosition: 0,
+    notificationOpen: false,
+    notificationIconNumber: 0,
     cartIconNumber: 0,
   };
 
@@ -44,15 +52,29 @@ class Header extends HelperPureComponent<{}, IState> {
   };
 
   public componentDidMount() {
-    setTimeout(this.checkWindow, 500); // Wait for assets load to get the right position
+    setTimeout(this.checkWindow, 500); // Wait for assets load to get the right position of category wrapper link
     window.addEventListener('resize', this.checkWindow);
     window.addEventListener(DispatcherChannels.CartItemsUpdate, this.toggleCartIcon);
+
+    Storage.profile && this.configureNotifications();
   }
 
   public componentWillUnmount() {
     super.componentWillUnmount();
     window.removeEventListener('resize', this.checkWindow);
     window.removeEventListener(DispatcherChannels.CartItemsUpdate, this.toggleCartIcon);
+  }
+
+  public async configureNotifications() {
+    const result = await NotificationController.GetUnseenCount();
+
+    if (result && result.success) {
+      this.safeSetState({ notificationIconNumber: result.data });
+      Socket.connection && Socket.connection.on('newMessage', () => {
+        const { notificationIconNumber } = this.state;
+        this.safeSetState({ notificationIconNumber: notificationIconNumber + 1 });
+      });
+    }
   }
 
   private toggleCartIcon = (e: CustomEvent) => {
@@ -97,8 +119,16 @@ class Header extends HelperPureComponent<{}, IState> {
     window.dispatchEvent(new Event(DispatcherChannels.ProductFilterChange));
   }
 
+  private toggleNotifications = (e: Event | React.SyntheticEvent) => {
+    e.stopPropagation();
+    const { notificationOpen } = this.state;
+
+    if (!notificationOpen) this.safeSetState({ notificationOpen: true, notificationIconNumber: 0 });
+    else this.safeSetState({ notificationOpen: false });
+  }
+
   public render() {
-    const { authOpen, categoryOpenPosition, categoryOpen, cartIconNumber } = this.state;
+    const { authOpen, categoryOpenPosition, categoryOpen, cartIconNumber, notificationIconNumber, notificationOpen } = this.state;
 
     return (
       <header ref={this.header} className="G-flex G-flex-align-center G-flex-justify-center">
@@ -132,9 +162,10 @@ class Header extends HelperPureComponent<{}, IState> {
           className="P-link P-login"
         >{Settings.translations.log_in}</span>}
 
-        {Storage.profile && <Link to={ROUTES.CART} className="P-link P-icon G-normal-link">
+        {Storage.profile && <a onClick={this.toggleNotifications} className="P-link P-icon G-normal-link P-notification">
           <i className="icon-Group-5515" />
-        </Link>}
+          {!!notificationIconNumber && <span>{notificationIconNumber > 9 ? '9+' : notificationIconNumber}</span>}
+        </a>}
 
         <Link to={ROUTES.CART} className="P-link P-icon G-normal-link P-cart">
           <i className="icon-Group-5503" />
@@ -142,8 +173,9 @@ class Header extends HelperPureComponent<{}, IState> {
         </Link>
       
         <LanguageSwitcher />
+        
         {authOpen && <Shared.Auth onClose={this.toggleAuth} />}
-
+        {notificationOpen && <Notifications onClose={this.toggleNotifications} />}
         {!!categoryOpenPosition && categoryOpen && <Categories openPosition={categoryOpenPosition} onClose={this.closeCategories} />}
       </header>
     );

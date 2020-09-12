@@ -13,12 +13,12 @@ import { onlyForUsers } from 'platform/guards/routes';
 import ClinicRegistrationController from 'platform/api/clinicRegistration';
 
 import './style.scss';
-import { IPagination } from 'platform/constants/interfaces';
+import { IPagingResponse } from 'platform/constants/interfaces';
 import { paginationPageLimit } from 'platform/constants';
 import Pagination from 'components/pagination';
 
 interface IState {
-  data?: IPagination<IClinicRegistrationListResponseModel>;
+  data?: IPagingResponse<IClinicRegistrationListResponseModel>;
 };
 
 @byPrivateRoute(ROUTES.PROFILE.MY_REGISTRATIONS, [onlyForUsers])

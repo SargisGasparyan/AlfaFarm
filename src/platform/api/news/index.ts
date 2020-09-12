@@ -1,12 +1,12 @@
 import Connection    from '../../services/connection';
-import { IResponse, IPagingRequest, IPagination } from '../../constants/interfaces';
+import { IResponse, IPagingRequest, IPagingResponse } from '../../constants/interfaces';
 import { INewsListResponseModel, INewsDetailsResponseModel } from './models/response';
 
 class NewsController {
  
   private static controller = 'news';
 
-  public static GetList = (body: IPagingRequest): Promise<IResponse<IPagination<INewsListResponseModel>>> => {
+  public static GetList = (body: IPagingRequest): Promise<IResponse<IPagingResponse<INewsListResponseModel>>> => {
     const result = Connection.POST<IPagingRequest>({
       body,
       action: 'list',

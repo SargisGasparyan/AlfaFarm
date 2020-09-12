@@ -1,5 +1,5 @@
 import Connection from '../../services/connection';
-import { IResponse, IPagination, IPaging } from '../../constants/interfaces';
+import { IResponse, IPagingResponse, IPaging } from '../../constants/interfaces';
 import { IProductListRequestModel, IProductRelatedListRequestModel } from './models/request';
 import { IProductListResponseModel, IProductDetailsResponseModel } from './models/response';
 
@@ -7,7 +7,7 @@ class ProductController {
 
   private static controller = 'product';
 
-  public static GetList = (body: IProductListRequestModel): Promise<IResponse<IPagination<IProductListResponseModel>>> => {
+  public static GetList = (body: IProductListRequestModel): Promise<IResponse<IPagingResponse<IProductListResponseModel>>> => {
     const result = Connection.POST<IProductListRequestModel>({
       body,
       action: 'list',
@@ -17,7 +17,7 @@ class ProductController {
     return result;
   };
 
-  public static GetRelated = (id: number, body: IProductRelatedListRequestModel): Promise<IResponse<IPagination<IProductListResponseModel>>> => {
+  public static GetRelated = (id: number, body: IProductRelatedListRequestModel): Promise<IResponse<IPagingResponse<IProductListResponseModel>>> => {
     const result = Connection.POST<IProductRelatedListRequestModel>({
       body,
       action: `related/${id}`,

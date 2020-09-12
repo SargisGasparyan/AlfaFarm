@@ -16,12 +16,12 @@ import SavedBasketItems from './pages/saved-basket-items';
 import Details from './pages/details';
 import Pagination from 'components/pagination';
 import { paginationPageLimit } from 'platform/constants';
-import { IPagination } from 'platform/constants/interfaces';
+import { IPagingResponse } from 'platform/constants/interfaces';
 
 import './style.scss';
 
 interface IState {
-  data?: IPagination<IOrderListResponseModel>;
+  data?: IPagingResponse<IOrderListResponseModel>;
 };
 
 @byPrivateRoute(ROUTES.PROFILE.ORDERS.MAIN)
