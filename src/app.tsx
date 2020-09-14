@@ -96,9 +96,7 @@ class App extends HelperComponent<{}, IState> {
             </Switch>
           </section>
           {confirmOpen && <ConfirmModal />}
-          <div className="responsive-footer">
-            <Footer /> 
-          </div>
+          <Footer /> 
         </> : <PageLoader />}
       </Router>
     ) : null;
