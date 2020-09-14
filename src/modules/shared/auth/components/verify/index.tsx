@@ -49,13 +49,13 @@ class RestoreVerify extends HelperComponent<IProps, IState> {
       this.formValidation.valid && this.safeSetState({ submitLoading: true }, async () => {
         const { onTypeChange } = this.props;
         const { form } = this.state;
-        const activeData = this.props.activeData as { form: ISendCodeRequestModel, signUp: boolean };
+        const activeData = this.props.activeData as { form: ISendCodeRequestModel, signUp: boolean, fromSocial: boolean };
         form.phoneNumber = activeData.form.phoneNumber;
 
         const result = await AuthController.Verify(form);
         if (result.data) {
           Settings.token = result.data.accessToken;
-          onTypeChange(activeData.signUp ? ModalContentEnum.SignUp : ModalContentEnum.NewPassword);
+          activeData.fromSocial ? window.location.reload() : onTypeChange(activeData.signUp ? ModalContentEnum.SignUp : ModalContentEnum.NewPassword);
         } else this.safeSetState({ submitLoading: false });
       });
     });

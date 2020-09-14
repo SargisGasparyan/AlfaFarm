@@ -16,8 +16,8 @@ class BasketController {
     return result;
   };
 
-  public static Change = (body: IBasketChangeRequestModel): Promise<IResponse<boolean>> => {
-    const result = Connection.PUT<IBasketChangeRequestModel>({
+  public static Change = (body: IBasketChangeRequestModel[]): Promise<IResponse<boolean>> => {
+    const result = Connection.PUT<IBasketChangeRequestModel[]>({
       body,
       action: '',
       controller: BasketController.controller,
@@ -30,16 +30,6 @@ class BasketController {
     const result = Connection.POST<number[]>({
       body,
       action: 'save',
-      controller: BasketController.controller,
-    });
-
-    return result;
-  };
-
-  public static ProceedSaved = (id: number): Promise<IResponse<boolean>> => {
-    const result = Connection.POST<{}>({
-      body: {},
-      action: `proceedSaved/${id}`,
       controller: BasketController.controller,
     });
 

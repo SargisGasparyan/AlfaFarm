@@ -19,7 +19,7 @@ const currentYear = new Date().getFullYear();
 
 const Footer = React.memo(() => (
   <footer>
-    <img src={LogoImage} className="P-logo G-auto-margin-right" />
+    <img src={LogoImage} className="P-logo G-mr-auto" />
     <div className="P-content">
       <div className="P-column">
         <p>{Settings.translations.footer_text}</p>
@@ -49,6 +49,7 @@ const Footer = React.memo(() => (
         <h3 className="G-main-color">{Settings.translations.useful_links}</h3>
         {!enviroment.WHOLESALE && <Link to={ROUTES.HOW_TO_USE_APP}>{Settings.translations.how_to_use_app}</Link>}
         <Link to={ROUTES.FAQ}>{Settings.translations.faq}</Link>
+        {!enviroment.WHOLESALE && <Link to={ROUTES.TENDERS.MAIN}>{Settings.translations.tenders}</Link>}
       </div>
       <div className="P-column">
         <h3 className="G-main-color">{Settings.translations.contact}</h3>

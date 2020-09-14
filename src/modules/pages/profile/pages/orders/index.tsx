@@ -14,19 +14,20 @@ import { getViewEnum, formatDate } from 'platform/services/helper';
 import SavedBaskets from './components/saved-baskets';
 import SavedBasketItems from './pages/saved-basket-items';
 import Details from './pages/details';
+import Pagination from 'components/pagination';
+import { paginationPageLimit } from 'platform/constants';
+import { IPagingResponse } from 'platform/constants/interfaces';
 
 import './style.scss';
 
 interface IState {
-  data: IOrderListResponseModel[];
+  data?: IPagingResponse<IOrderListResponseModel>;
 };
 
 @byPrivateRoute(ROUTES.PROFILE.ORDERS.MAIN)
 class Orders extends HelperComponent<IState, {}> {
 
-  public state: IState = {
-    data: [],
-  };
+  public state: IState = {};
 
   private statusViewEnum = getViewEnum(OrderStatusEnum);
 
@@ -53,11 +54,16 @@ class Orders extends HelperComponent<IState, {}> {
     },
   ];
 
-  public componentDidMount() { this.fetchData(); }
+  private fetchData = async (pageNumber: number) => {
+    const body = {
+      pageNumber,
+      pageSize: paginationPageLimit,
+    };
 
-  private fetchData = async () => {
-    const result = await OrderController.GetHistory();
+    const result = await OrderController.GetHistory(body);
+
     this.safeSetState({ data: result.data });
+    return result.data;
   }
 
   public render() {
@@ -68,12 +74,13 @@ class Orders extends HelperComponent<IState, {}> {
         <SavedBaskets />
         <h2 className="G-main-color G-mb-30">{Settings.translations.order_history}</h2>
         <div className="G-flex P-profile-orders">
-          <Table<IOrderListResponseModel>
+          {data && <Table<IOrderListResponseModel>
             redirectUrl={row => ROUTES.PROFILE.ORDERS.DETAILS.replace(':id', row.id)}
             columnConfig={this.columnConfig}
-            data={data}
-          />
+            data={data.list}
+          />}
         </div>
+        <Pagination<IOrderListResponseModel> fetchData={this.fetchData} />
       </Layout>
     );
   }

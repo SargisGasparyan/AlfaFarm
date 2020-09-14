@@ -108,9 +108,9 @@ server
 
         const html = buildHTML(
           markup,
-          `ineed: ${result.data.metaKeywords.keywords}`,
-          `${result.data.metaKeywords.title}`,
-          `${result.data.metaKeywords.description}`,
+          `AlfaPharm: ${result.data.title}`,
+          `${result.data.title}`,
+          `Product Medicine Pharmacy ${result.data.title}`,
           result.data.images ? result.data.images[0].path : '',
         );
 

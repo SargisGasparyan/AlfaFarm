@@ -26,10 +26,7 @@
       > .P-data-table-header { height: 70px; }
 
       > .P-data-table-body > ul {
-        height        : 70px;
-        border-bottom : 1px solid $light-gray;
-
-        &:last-child { border-bottom: 0; }
+        height : 70px;
       }
     }
   }

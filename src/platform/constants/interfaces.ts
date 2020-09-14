@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import { DropdownNameFunctionType } from './types';
-import { RequestSendTypeEnum } from '../api/request';
 
 export interface IResponse<Data> {
   data: Data;
@@ -35,8 +34,6 @@ export interface IRequest {
 
 export interface IBodyRequest<Body extends object> extends IRequest { body: Body; };
 
-export interface IPaginationChange { selected: number };
-
 export interface IDropdownOption<Value> {
   name: string | number | React.ReactNode | HTMLElement | DropdownNameFunctionType;
   value: Value;
@@ -52,13 +49,9 @@ export interface IGooglePlace {
   };
 };
 
-export interface IPagination<Data> {
-  itemList: Data[];
+export interface IPagingResponse<Data> {
   list: Data[];
-  categoryParentTree : ITreeList[];
-  itemCount?: number;
   totalCount: number;
-  pagesLeft: boolean;
   pageCount: number;
 };
 
@@ -67,19 +60,9 @@ export interface IFile {
   path: string;
 };
 
-export interface IContactInfoModel {
-  firstName: string;
-  lastName: string;
-  email: string;
-  phoneNumber: string;
-  idList?: string[];
-  code?: string;
-  type?: RequestSendTypeEnum;
-};
-
 export interface ITreeList {
-  name:string,
-  _id:string,
+  name: string,
+  _id: string,
 }
 
 

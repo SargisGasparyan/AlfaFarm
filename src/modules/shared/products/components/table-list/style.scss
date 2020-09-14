@@ -1,0 +1,41 @@
+@import 'src/assets/styles/helper';
+@import 'src/assets/styles/variables';
+
+.P-products-table-list {
+  width : 100%;
+
+  .P-data-table-body > ul {
+    height        : auto;
+    display       : flex;
+    padding       : 40px;
+    align-items   : center;
+
+    > li > div {
+      transform : initial;
+
+      > a {
+        color           : black;
+        display         : flex;
+        text-decoration : none;
+        @include bold-font;
+
+        > .G-square-image-block {
+          width  : 150px;
+          height : 150px;
+        }
+  
+        > .P-main-info {
+          display         : flex;
+          padding         : 0 30px;
+          flex-direction  : column;
+          justify-content : center;
+  
+          > span {
+            margin-top : 20px;
+            @include normal-font;
+          }
+        }
+      }
+    }
+  }
+}

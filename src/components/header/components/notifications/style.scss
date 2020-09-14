@@ -1,0 +1,25 @@
+@import 'src/assets/styles/variables';
+
+.P-header-notifications {
+  top        : $header-size;
+  width      : 350px;
+  right      : 50px;
+  padding    : 0 15px;
+  position   : absolute;
+  box-shadow : $default-block-shadow;
+  background : white;
+  overflow-y : auto;
+  max-height : 250px;
+
+  > .P-list-item {
+    color           : black;
+    display         : flex;
+    padding         : 15px 0;
+    font-size       : 16px;
+    border-top      : 1px solid $light-gray;
+    text-decoration : none;
+    justify-content : space-between;
+
+    &:first-child { border-top: 0; }
+  }
+}

@@ -51,4 +51,4 @@ class Details extends HelperComponent<RouteComponentProps<IRouteParams>, IState>
   }
 };
 
-export default withRouter(Details);
+export default Details;

@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+import Screen from 'components/screen';
+
 import './style.scss';
 
 interface IProps {
@@ -9,7 +11,9 @@ interface IProps {
 
 const ShadowText = React.memo(({ children, className }: IProps) => (
   <h1 className={`P-shadow-text ${className || ''}`}>
-    <span className="P-background P-right">{children}</span>
+    <Screen.Min_Tablet>
+      <span className="P-background P-right">{children}</span>
+    </Screen.Min_Tablet>
     {children}
   </h1>
 ));

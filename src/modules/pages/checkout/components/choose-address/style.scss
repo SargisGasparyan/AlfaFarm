@@ -8,16 +8,7 @@
     overflow-y : auto;
     max-height : 600px;
 
-    .P-data-table {
-      > .P-data-table-body > ul {
-        border-bottom : 1px solid $dark-gray;
-
-        &:last-child { border-bottom: 0; }
-        &:hover {
-          background : $dark-gray;
-        }
-      }
-    }
+    .P-data-table > .P-data-table-body > ul:hover { background: $dark-gray; }
 
     .G-main-button {
       margin    : 40px 20px 0 auto;

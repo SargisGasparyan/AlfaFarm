@@ -38,14 +38,12 @@ class Dates extends HelperComponent<IProps, IState> {
     const { chosen } = this.props;
     const { busyHours } = this.state;
 
-    console.log(busyHours);
-
     return (
       <div className="P-clinic-laboratory-dates">
         {this.months.map((item, index) => <MonthAvailableDays
           key={index}
           month={item}
-          duration={chosen?.duration}
+          service={chosen}
           busyHours={busyHours}
         />)}
       </div>

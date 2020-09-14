@@ -8,3 +8,8 @@ export interface IUserModifyRequestModel {
   email: string;
   phoneNumber: string;
 }
+
+export interface IUserPasswordModifyRequestModel {
+  newPassword: string;
+  currentPassword: string;
+}

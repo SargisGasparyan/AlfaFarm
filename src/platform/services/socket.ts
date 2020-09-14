@@ -1,30 +1,22 @@
-// import * as io from 'socket.io-client';
+import { HubConnectionBuilder, HubConnection } from '@aspnet/signalr';
 
-// import Settings from './settings';
-// import Enviroment from './enviroment';
+import Settings from './settings';
+import Enviroment from './enviroment';
 
 class Socket {
-  public static connection: SocketIOClient.Socket;
-
-  private static guestListener = () => {
-    // Socket.connection.on('yourId', (id: string) => Settings.guestId = id);
-  }
+  public static connection: HubConnection;
 
   public static connect = () => {
-    // const query = new URLSearchParams();
-    // if (Settings.token) {
-    //   const token = encodeURIComponent(`Bearer ${Settings.token}`);
-    //   query.append('authorization', token);
-    // } else {
-    //   query.append('webGuest', 'true');
-    //   Settings.guest && query.append('guest', Settings.guest);
-    // }
+    Socket.connection = new HubConnectionBuilder()
+      .withUrl(`${Enviroment.BASE_URL}notificationHub`, {
+        accessTokenFactory: () => Settings.token || '',
+      })
+      .build();
 
-    // Socket.connection = io.connect(Enviroment.BASE_URL, { query: query.toString(), transports: ['polling'] });
-    // !Settings.token && Socket.guestListener();
+    return Socket.connection.start();
   }
  
-  public static disconnect = () => Socket.connection && Socket.connection.disconnect();
+  public static disconnect = () => Socket.connection && Socket.connection.stop();
 }
 
 

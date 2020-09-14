@@ -11,7 +11,7 @@ import { countryCode } from 'platform/constants';
 import { OrderDeliveryTypeEnum } from 'platform/api/order/constants/enums';
 import Select from 'components/select';
 import { OrderDeliveryTypeDropdown } from 'platform/constants/dropdowns';
-import { IOrderCreateRequestModel } from 'platform/api/order/models/request';
+import { IOrderModifyRequestModel } from 'platform/api/order/models/request';
 import Storage from 'platform/services/storage';
 import PlaceController from 'platform/api/place';
 import { IDropdownOption, IGooglePlace } from 'platform/constants/interfaces';
@@ -26,7 +26,7 @@ import OrderController from 'platform/api/order';
 import SuccessModal from 'components/success-modal';
 
 interface IState {
-  form: IOrderCreateRequestModel;
+  form: IOrderModifyRequestModel;
   cityId?: number;
   cities: IDropdownOption<number>[];
   regions: IDropdownOption<number>[];
@@ -57,6 +57,7 @@ class Checkout extends HelperComponent<{}, IState> {
     const { submited, form } = this.state;
     return validateForm.call(form, submited);
   }
+  
   public componentDidMount() {
     this.fetchCities();
 

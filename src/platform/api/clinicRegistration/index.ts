@@ -1,15 +1,20 @@
 import Connection from '../../services/connection';
-import { IResponse } from '../../constants/interfaces';
-import { IClinicRegistrationListResponseModel, IClinicRegistrationBusyHourResponseModel } from './models/response';
-import { IClinicRegistrationCreateRequestModel } from './models/request';
+import { IResponse, IPagingResponse } from '../../constants/interfaces';
+import { IClinicRegistrationModifyRequestModel, IClinicRegistrationListRequestModel } from './models/request';
+import {
+  IClinicRegistrationListResponseModel,
+  IClinicRegistrationBusyHourResponseModel,
+  IClinicRegistrationDoctorBusyHourResponseModel,
+} from './models/response';
 
 class ClinicRegistrationController {
 
   private static controller = 'clinicRegistration';
 
-  public static GetList = (): Promise<IResponse<IClinicRegistrationListResponseModel[]>> => {
-    const result = Connection.GET({
-      action: '',
+  public static GetList = (body: IClinicRegistrationListRequestModel): Promise<IResponse<IPagingResponse<IClinicRegistrationListResponseModel>>> => {
+    const result = Connection.POST<IClinicRegistrationListRequestModel>({
+      body,
+      action: 'list',
       controller: ClinicRegistrationController.controller,
     });
 
@@ -18,7 +23,7 @@ class ClinicRegistrationController {
 
   public static GetLaboratoryBusyHours = (serviceIds: number[]): Promise<IResponse<IClinicRegistrationBusyHourResponseModel[]>> => {
     const result = Connection.GET({
-      action: 'LaboratoryBusyHours',
+      action: 'laboratoryBusyHours',
       query: { serviceIds },
       controller: ClinicRegistrationController.controller,
     });
@@ -26,8 +31,17 @@ class ClinicRegistrationController {
     return result;
   };
 
-  public static Create = (body: IClinicRegistrationCreateRequestModel[]): Promise<IResponse<boolean>> => {
-    const result = Connection.POST<IClinicRegistrationCreateRequestModel[]>({
+  public static GetDoctorBusyHours = (id: number): Promise<IResponse<IClinicRegistrationDoctorBusyHourResponseModel>> => {
+    const result = Connection.GET({
+      action: `doctorBusyHours/${id}`,
+      controller: ClinicRegistrationController.controller,
+    });
+
+    return result;
+  };
+
+  public static Create = (body: IClinicRegistrationModifyRequestModel[]): Promise<IResponse<boolean>> => {
+    const result = Connection.POST<IClinicRegistrationModifyRequestModel[]>({
       body,
       action: '',
       controller: ClinicRegistrationController.controller,

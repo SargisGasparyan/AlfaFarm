@@ -2,6 +2,8 @@
 @import 'src/assets/styles/helper';
 @import 'src/assets/styles/variables';
 
+@import './responsive';
+
 .P-shadow-text {
   color     : $main-color;
   position  : relative;

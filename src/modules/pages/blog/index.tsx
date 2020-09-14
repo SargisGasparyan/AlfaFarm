@@ -9,7 +9,7 @@ import FirstItem from './components/first-item';
 import ListItem from './components/list-item';
 
 import BlogController from 'platform/api/blog';
-import { paginationPageLimit } from 'platform/constants';
+import { infinityScrollPageLimit } from 'platform/constants';
 import { IBlogListResponseModel } from 'platform/api/blog/models/response';
 import { scrolledToBottom } from 'platform/services/helper';
 import PageLoader from 'components/page-loader';
@@ -46,7 +46,7 @@ class Blog extends HelperComponent<{}, IState> {
     if (!this.lastPage) {
       const body = {
         pageNumber: this.pageNo,
-        pageSize: paginationPageLimit,
+        pageSize: infinityScrollPageLimit,
       };
 
       const result = await BlogController.GetList(body);

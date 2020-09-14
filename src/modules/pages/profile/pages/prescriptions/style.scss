@@ -1,0 +1,25 @@
+@import 'src/assets/styles/variables';
+
+.P-profile-prescriptions {
+
+  > .P-content {
+    display        : flex;
+    overflow       : hidden;
+    background     : white;
+    box-shadow     : $default-block-shadow;
+    border-radius  : $big-radius;
+    flex-direction : column;
+
+    > h3 {
+      display     : flex;
+      padding     : 30px 40px;
+      font-size   : 20px;
+      align-items : center;
+    }
+
+    .P-see-more-label {
+      color           : black;
+      text-decoration : underline;
+    }
+  }
+}

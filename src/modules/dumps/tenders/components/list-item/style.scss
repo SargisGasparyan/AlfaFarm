@@ -1,0 +1,52 @@
+@import 'src/assets/styles/helper';
+@import 'src/assets/styles/variables';
+
+.P-tenders-list-item {
+  width           : 100%;
+  border          : 1px solid $light-gray;
+  display         : flex;
+  min-height      : 280px;
+  background      : white;
+  align-items     : center;
+  margin-bottom   : 50px;
+  border-radius   : $big-radius;
+  justify-content : space-between;
+
+  > .P-image {
+    width      : 450px;
+    height     : 100%;
+  }
+
+  > .P-main-info {
+    flex            : 1;
+    color           : black;
+    height          : 100%;
+    padding         : 30px 50px;
+    display         : flex;
+    flex-direction  : column;
+    text-decoration : none;
+  
+    > h2 {
+      font-size     : 24px;
+      margin-bottom : 20px;
+    }
+
+    > .P-description {
+      font-size     : $normal-fs;
+      margin-bottom : 20px;
+    }
+
+    > div {
+      display         : flex;
+      margin-top      : auto;
+      justify-content : space-between;
+
+      > h3 { @include normal-font; }
+
+      > .G-main-button {
+        padding         : 7px 30px;
+        text-decoration : none;
+      }
+    }
+  }
+}

@@ -68,8 +68,6 @@ class Favorites extends HelperComponent<IState, {}> {
             </div>
 
             <h2 className="P-price">{item.price} AMD</h2>
-
-            <button className="G-main-button">{Settings.translations.add_to_cart}</button>
           </Link>)}
         </div>
       </Layout>

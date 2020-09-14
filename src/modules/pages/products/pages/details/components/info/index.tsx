@@ -39,10 +39,10 @@ class Info extends HelperComponent<IProps, IState> {
     const { data } = this.props;
     const { count } = this.state;
 
-    await BasketController.Change({
+    await BasketController.Change([{
       productId: data.id,
       productQuantity: count,
-    });
+    }]);
 
     window.dispatchEvent(new CustomEvent(DispatcherChannels.CartItemsUpdate, { detail: true }));
     this.safeSetState({ cartLoading: false });
@@ -61,7 +61,7 @@ class Info extends HelperComponent<IProps, IState> {
       <div className="P-product-details-info">
         <h2 className="P-name">
           {data.title}
-          <span className="G-orange-color G-auto-margin-left">{data.discountedPrice || data.price} AMD</span>
+          <span className="G-orange-color G-ml-auto">{data.discountedPrice || data.price} AMD</span>
         </h2>
         <h3 className="P-unit">{data.unitQuantity} {data.unitName}</h3>
         {data.category && <h3 className="P-row">

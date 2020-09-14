@@ -1,0 +1,31 @@
+@import 'src/assets/styles/helper';
+@import 'src/assets/styles/variables';
+
+.P-profile-prescriptions-deciphered {
+  display   : flex;
+  flex-wrap : wrap;
+
+  > h3 {
+    width           : 100%;
+    color           : $main-color;
+    padding         : 0 40px;
+    position        : relative;
+    display         : flex;
+    font-size       : 38px;
+    margin-bottom   : 60px;
+    justify-content : center;
+
+    > i {
+      top       : 50%;
+      left      : 0;
+      width     : 26px;
+      position  : absolute;
+      transform : translateY(-50%);
+    }
+  }
+
+  > .G-main-button {
+    width  : 200px;
+    margin : 40px 0 0 auto;
+  }
+}

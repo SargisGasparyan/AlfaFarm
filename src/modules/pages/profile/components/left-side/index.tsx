@@ -7,12 +7,12 @@ import ROUTES from 'platform/constants/routes';
 import { leftSideOptions } from './constants/routes';
 import { getMediaPath } from 'platform/services/helper';
 import Settings from 'platform/services/settings';
+import UserController from 'platform/api/user';
 
 import PersonImage from 'assets/images/person.png';
 import CameraImage from 'assets/images/camera.png';
 
 import './style.scss';
-import UserController from 'platform/api/user';
 
 class LeftSide extends HelperPureComponent<{}, {}> {
 
@@ -54,6 +54,8 @@ class LeftSide extends HelperPureComponent<{}, {}> {
               to={ROUTES.PROFILE.MAIN}
             ><i className="icon-Group-5545" /></Link>
           </h2>
+
+          <Link to={ROUTES.PROFILE.PRESCRIPTIONS.MAIN} className="P-prescription-button G-main-ghost-button">{Settings.translations.prescription}</Link>
         </div>
 
         {leftSideOptions().map(item => <NavLink

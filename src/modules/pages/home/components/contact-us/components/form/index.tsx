@@ -9,7 +9,7 @@ class Form extends HelperComponent<{}, {}> {
   public render() {
 
     return (
-      <form className="G-main-form G-auto-margin-left G-auto-margin-right">
+      <form className="G-main-form G-ml-auto G-mr-auto">
         <div className="G-main-form-field">
           <input
             placeholder={Settings.translations.name}

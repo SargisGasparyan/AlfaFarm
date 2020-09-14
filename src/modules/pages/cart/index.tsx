@@ -85,10 +85,10 @@ class Cart extends HelperComponent<{}, IState> {
 
     if (count) {
       Connection.AbortAll();
-      await BasketController.Change({
+      await BasketController.Change([{
         productId: row.productId,
         productQuantity: count,
-      });
+      }]);
 
       row.productQuantity = count;
       this.safeSetState({ data });
@@ -142,7 +142,7 @@ class Cart extends HelperComponent<{}, IState> {
         </div>}
 
         <button
-          className="G-main-button G-auto-margin-left G-fs-normal P-pay-button"
+          className="G-main-button G-ml-auto G-fs-normal P-pay-button"
           onClick={this.goToCheckout}
         >{Settings.translations.pay}</button>
       </section>

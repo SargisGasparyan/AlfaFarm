@@ -9,11 +9,9 @@ import PageLoader from './components/page-loader';
 import ROUTES from './platform/constants/routes';
 import Storage from './platform/services/storage';
 import Settings from './platform/services/settings';
-// import RequestButton from 'modules/shared/request/components/request-button';
 import Footer from './components/footer';
 import ConfirmModal from './components/confirm-modal';
 import Socket from './platform/services/socket';
-import Notifications from './platform/services/notifications';
 import HelperComponent from './platform/classes/helper-component';
 
 import './modules';
@@ -39,10 +37,6 @@ class App extends HelperComponent<{}, IState> {
   };
 
   public async componentDidMount() {    
-    //? Seed
-    Socket.connect();
-    Notifications.init();
-
     //? Library config
     const alertify = await import('alertifyjs');
     moment.locale(Settings.shortCode);
@@ -55,11 +49,17 @@ class App extends HelperComponent<{}, IState> {
     window.routerHistory.listen(() => window.scrollTo(0, 0));
     this.safeSetState({ generalAPILoaded: true });
 
+    //? Seed
+    try {
+      await Socket.connect(); 
+    } catch (e) { /* */ }
+
     //? Backend initial data fetch
     const success = await Storage.fetchDefault();
     if (success) this.safeSetState({ initialLoading: true });
     else window.location.reload();
-
+    
+    //? 
     window.addEventListener('toggleconfirm', this.toggleConfirm);
   }
 
@@ -96,10 +96,7 @@ class App extends HelperComponent<{}, IState> {
             </Switch>
           </section>
           {confirmOpen && <ConfirmModal />}
-          <div className="responsive-footer">
-            <Footer /> 
-          </div>
-          {/* <RequestButton /> */}
+          <Footer /> 
         </> : <PageLoader />}
       </Router>
     ) : null;

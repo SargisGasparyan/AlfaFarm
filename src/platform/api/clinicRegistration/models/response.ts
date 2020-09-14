@@ -11,3 +11,8 @@ export interface IClinicRegistrationBusyHourResponseModel {
   start: string;
   end: string;
 };
+
+export interface IClinicRegistrationDoctorBusyHourResponseModel {
+  workingHours: [];
+  registrations: IClinicRegistrationBusyHourResponseModel[];
+};

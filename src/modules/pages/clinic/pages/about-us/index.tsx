@@ -6,10 +6,11 @@ import HelperPureComponent from 'platform/classes/helper-pure-component';
 import FirstPart from './components/first-part';
 import SecondPart from './components/second-part';
 import Options from '../../components/options';
+import { onlyForUsers } from 'platform/guards/routes';
 
 import './style.scss';
 
-@byRoute(ROUTES.CLINIC.ABOUT_US)
+@byRoute(ROUTES.CLINIC.ABOUT_US, [onlyForUsers])
 class AboutUs extends HelperPureComponent<{}, {}> {
 
   public render() {

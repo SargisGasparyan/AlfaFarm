@@ -11,23 +11,7 @@ export enum OSTypeEnum {
 };
 
 export enum NotificationTypeEnum {
-  NewRequest = 1,
-  RequestCanceled,
-  RequestFailed,
-  RequestSucceeded,
-  NewOrder,
-  OrderCanceled,
-  OrderSetToReview,
-  OrderFinished,
-  WishListNewProduct,
-  WishListRemoveProduct,
-  WishListApprove,
-  WishListUnapprove,
-  WishListLeave,
-  WishListDelete,
-  WishListProductRequest,
-  WishListKick,
-  WishListNewMember,
+  PrescriptionDeciphered = 3,
 };
 
 export enum WeekDaysEnum {

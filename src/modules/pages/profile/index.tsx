@@ -6,6 +6,7 @@ import BonusCard from './pages/bonus-card';
 import SpecialProducts from './pages/special-products';
 import MyRegistrations from './pages/my-registrations';
 import MyWallet from './pages/my-wallet';
+import Prescriptions from './pages/prescriptions';
 
 export default {
   PersonalInfo,
@@ -16,4 +17,5 @@ export default {
   SpecialProducts,
   MyRegistrations,
   MyWallet,
+  Prescriptions,
 };
