@@ -1,7 +1,7 @@
 import Connection from '../../services/connection';
 import { IResponse, IPagingResponse } from '../../constants/interfaces';
 import { INotificationListRequestModel } from './models/request';
-import { INotificationListResponseModel } from './models/response';
+import { INotificationListResponseModel, INotificationUnseenListResponseModel } from './models/response';
 
 class NotificationController {
 
@@ -17,7 +17,7 @@ class NotificationController {
     return result;
   };
 
-  public static GetUnseenCount = (): Promise<IResponse<number>> => {
+  public static GetUnseenList = (): Promise<IResponse<number>> => {
     const result = Connection.GET({
       action: 'unseen',
       controller: NotificationController.controller,

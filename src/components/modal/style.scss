@@ -26,20 +26,26 @@
   justify-content     : center;
   animation-fill-mode : forwards;
 
-  > div > .icon-close {
-    top       : 20px;
-    right     : 20px;
-    cursor    : pointer;
-    z-index   : 1;
-    position  : absolute;
-    font-size : 20px;
+  > div {
+    display         : flex;
+    max-width       : 100%;
+    justify-content : center;
+
+    > .icon-close {
+      top       : 20px;
+      right     : 20px;
+      cursor    : pointer;
+      z-index   : 1;
+      position  : absolute;
+      font-size : 20px;
+    }
   }
 
   .P-modal-content {
     width               : 550px;
     padding             : 15px;
     position            : relative;
-    max-width           : 100%;
+    max-width           : calc(100% - 20px);
     animation           : modal-content-opening .2s;
     box-shadow          : $default-block-shadow;
     background          : #fff;

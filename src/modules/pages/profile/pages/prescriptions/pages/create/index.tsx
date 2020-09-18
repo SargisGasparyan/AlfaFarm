@@ -109,19 +109,19 @@ class Create extends HelperComponent<{}, IState> {
 
           <form className="G-main-form P-form">
             <div className="G-main-form-half-field">
-              <p className="G-input-top-label">{Settings.translations.medical_institution}</p>
+              <p className="G-input-top-label">{Settings.translations.prescription}</p>
               <input
-                name="medicalInstitution"
-                className={`G-main-input ${this.formValidation.errors.medicalInstitution ? 'G-invalid-field' : ''}`}
+                name="name"
+                className={`G-main-input ${this.formValidation.errors.name ? 'G-invalid-field' : ''}`}
                 onChange={this.changeField}
               />
             </div>
 
             <div className="G-main-form-half-field">
-              <p className="G-input-top-label">{Settings.translations.description}</p>
+              <p className="G-input-top-label">{Settings.translations.medical_institution}</p>
               <input
-                name="description"
-                className={`G-main-input ${this.formValidation.errors.description ? 'G-invalid-field' : ''}`}
+                name="medicalInstitution"
+                className={`G-main-input ${this.formValidation.errors.medicalInstitution ? 'G-invalid-field' : ''}`}
                 onChange={this.changeField}
               />
             </div>
@@ -153,10 +153,10 @@ class Create extends HelperComponent<{}, IState> {
             </div>
 
             <div className="G-main-form-half-field">
-              <p className="G-input-top-label">{Settings.translations.prescription}</p>
+              <p className="G-input-top-label">{Settings.translations.description}</p>
               <input
-                name="name"
-                className={`G-main-input ${this.formValidation.errors.name ? 'G-invalid-field' : ''}`}
+                name="description"
+                className={`G-main-input ${this.formValidation.errors.description ? 'G-invalid-field' : ''}`}
                 onChange={this.changeField}
               />
             </div>

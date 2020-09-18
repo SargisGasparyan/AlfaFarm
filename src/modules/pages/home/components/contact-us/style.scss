@@ -1,6 +1,8 @@
 @import 'src/assets/styles/helper';
 @import 'src/assets/styles/variables';
 
+@import './responsive.scss';
+
 .G-page.P-home-contact-us {
 
   display        : flex;
@@ -38,8 +40,9 @@
 
       > h3 {
         font-size      : $normal-fs;
-        margin-top     : 10px;
         text-align     : center;
+        margin-top     : 10px;
+        white-space    : nowrap;
         text-transform : uppercase;
         @include bold-font();
       }
