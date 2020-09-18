@@ -1,6 +1,8 @@
 @import 'src/assets/styles/helper';
 @import 'src/assets/styles/variables';
 
+@import './responsive';
+
 footer {
   display        : flex;
   padding        : 25px $page-horizontal-offset;

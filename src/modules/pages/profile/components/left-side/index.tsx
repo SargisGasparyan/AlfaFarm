@@ -18,6 +18,8 @@ class LeftSide extends HelperPureComponent<{}, {}> {
 
   private uploadInput = React.createRef<HTMLInputElement>();
 
+  private options = leftSideOptions();
+
   private openUpload = () => {
     const { current } = this.uploadInput;
     current && current.click();
@@ -58,7 +60,7 @@ class LeftSide extends HelperPureComponent<{}, {}> {
           <Link to={ROUTES.PROFILE.PRESCRIPTIONS.MAIN} className="P-prescription-button G-main-ghost-button">{Settings.translations.prescription}</Link>
         </div>
 
-        {leftSideOptions().map(item => <NavLink
+        {this.options.map(item => <NavLink
           to={item.path}
           key={item.path}
           className="P-link"

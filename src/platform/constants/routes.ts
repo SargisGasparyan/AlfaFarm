@@ -25,6 +25,11 @@ const PROFILE_ROUTES = (() => {
     DECIPHERED: '/deciphered/:id',
   });
 
+  const MY_REGISTRATIONS_ROUTES = RouteService.buildRouteContext('/my-registrations', {
+    MAIN: '',
+    MEDICAL_HISTORY: '/medical-history',
+  });
+
   return RouteService.buildRouteContext('/profile', {
     MAIN: '',
     ORDERS: ORDERS_ROUTES,
@@ -33,7 +38,7 @@ const PROFILE_ROUTES = (() => {
     BONUS_CARD: '/bonus-card',
     FAVORITES: '/favorites',
     PRESCRIPTIONS: PRESCRIPTIONS_ROUTES,
-    MY_REGISTRATIONS: '/my-registrations',
+    MY_REGISTRATIONS: MY_REGISTRATIONS_ROUTES,
     MY_ORDERS: '/my-orders',
     MY_COMPANY: '/my-company',
     MY_REQUESTS: '/my-requests',

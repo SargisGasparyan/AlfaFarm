@@ -1,0 +1,15 @@
+@media (max-width: $tablet-screen) {
+  footer {
+    > div.P-mobile-app {
+      margin-top : 20px;
+
+      > img { margin-bottom: 20px; }
+    }
+
+    > .P-content > div.P-column {
+      width         : 100%;
+      max-width     : initial;
+      margin-bottom : 30px;
+    }
+  }
+}

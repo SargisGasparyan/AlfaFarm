@@ -66,7 +66,7 @@ class Header extends HelperPureComponent<{}, IState> {
   }
 
   public async configureNotifications() {
-    const result = await NotificationController.GetUnseenCount();
+    const result = await NotificationController.GetUnseenList();
 
     if (result && result.success) {
       this.safeSetState({ notificationIconNumber: result.data });

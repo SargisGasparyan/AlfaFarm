@@ -11,17 +11,18 @@ import { formatDate } from 'platform/services/helper';
 import { IClinicRegistrationListResponseModel } from 'platform/api/clinicRegistration/models/response';
 import { onlyForUsers } from 'platform/guards/routes';
 import ClinicRegistrationController from 'platform/api/clinicRegistration';
-
-import './style.scss';
 import { IPagingResponse } from 'platform/constants/interfaces';
 import { paginationPageLimit } from 'platform/constants';
 import Pagination from 'components/pagination';
+import MedicalHistory from './pages/medical-history';
+
+import './style.scss';
 
 interface IState {
   data?: IPagingResponse<IClinicRegistrationListResponseModel>;
 };
 
-@byPrivateRoute(ROUTES.PROFILE.MY_REGISTRATIONS, [onlyForUsers])
+@byPrivateRoute(ROUTES.PROFILE.MY_REGISTRATIONS.MAIN, [onlyForUsers])
 class MyRegistrations extends HelperComponent<IState, {}> {
 
   public state: IState = {};
@@ -58,18 +59,23 @@ class MyRegistrations extends HelperComponent<IState, {}> {
 
     return (
       <Layout>
-        <h2 className="G-main-color G-mb-30">{Settings.translations.my_registrations}</h2>
-        <div className="G-flex P-profile-orders">
-          {data && <Table<IClinicRegistrationListResponseModel>
-            columnConfig={this.columnConfig}
-            data={data.list}
-          />}
-        </div>
-        
-        <Pagination<IClinicRegistrationListResponseModel> fetchData={this.fetchData} />
+        <section className="P-profile-my-registrations-page">
+          <h2 className="P-title G-mb-30">
+            <span>{Settings.translations.my_registrations}</span>
+            <Link to={ROUTES.PROFILE.MY_REGISTRATIONS.MEDICAL_HISTORY}>{Settings.translations.medical_history}</Link>
+          </h2>
+          <div className="G-flex P-list">
+            {data && <Table<IClinicRegistrationListResponseModel>
+              columnConfig={this.columnConfig}
+              data={data.list}
+            />}
+          </div>
+          
+          <Pagination<IClinicRegistrationListResponseModel> fetchData={this.fetchData} />
+        </section>
       </Layout>
     );
   }
 }
 
-export default MyRegistrations;
+export default { MyRegistrations, MedicalHistory };
