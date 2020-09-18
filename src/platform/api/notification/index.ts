@@ -1,7 +1,7 @@
 import Connection from '../../services/connection';
 import { IResponse, IPagingResponse } from '../../constants/interfaces';
 import { INotificationListRequestModel } from './models/request';
-import { INotificationListResponseModel, INotificationUnseenListResponseModel } from './models/response';
+import { INotificationListResponseModel } from './models/response';
 
 class NotificationController {
 
