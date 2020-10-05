@@ -1,3 +1,5 @@
+import { GenderEnum } from '../constants/enums/gender';
+
 export interface IUserResponseModel {
   id: string;
   fullName: string;
@@ -5,4 +7,6 @@ export interface IUserResponseModel {
   phoneNumber: string;
   username: string;
   photoPath: string;
+  dateOfBirth: string;
+  gender: GenderEnum;
 };

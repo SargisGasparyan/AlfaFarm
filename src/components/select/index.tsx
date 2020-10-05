@@ -109,8 +109,8 @@ class Select<Value extends string | number | null | {}> extends HelperPureCompon
   }
 
   private getCurrentValue = () => {
-    const { options } = this.props;
-    return this.props.value ? options.find(item => item.value === this.props.value) : this.state.value;
+    const { options, value } = this.props;
+    return (value || value === 0) ? options.find(item => item.value === value) : this.state.value;
   }
 
   public render() {

@@ -1201,7 +1201,11 @@ export default {
   passwords_do_not_match: 'Passwords do not match',
   draft: 'Draft',
   please_check_correctness_of_email_or_phone_number: 'Please check correctness of email or phone number',
-  
+  gender: 'Gender',
+  dateOfBirth: 'Date of birth',
+  male: 'Male',
+  female: 'Female',
+  not_filled: 'Not filled',
 
   notification_texts: {
     request_failed: {

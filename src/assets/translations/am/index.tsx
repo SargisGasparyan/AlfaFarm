@@ -1223,6 +1223,11 @@ export default {
   passwords_do_not_match: 'Գաղտնաբառերը չեն համընկնում',
   draft: 'Նախնական օրինակ',
   please_check_correctness_of_email_or_phone_number: 'Խնդրում ենք ստուգել էլ. փոստի կամ հեռախոսի համարը',
+  gender: 'Սեռ',
+  dateOfBirth: 'Ծննդյան ամսաթիվ',
+  male: 'Արական',
+  female: 'Իգական',
+  not_filled: 'Լրացված չէ',
 
   notification_texts: {
     request_failed: {

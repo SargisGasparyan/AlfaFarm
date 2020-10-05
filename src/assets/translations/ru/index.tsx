@@ -1199,6 +1199,11 @@ export default {
   passwords_do_not_match: 'Пароли не совпадают',
   draft: 'Черновик',
   please_check_correctness_of_email_or_phone_number: 'Пожалуйста, проверьте правильность адреса электронной почты или номера телефона',
+  gender: 'Пол',
+  dateOfBirth: 'Дата рождения',
+  male: 'Мужской',
+  female: 'Женский',
+  not_filled: 'Не заполненный',
 
   notification_texts: {
     request_failed: {

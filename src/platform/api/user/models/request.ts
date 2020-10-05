@@ -1,3 +1,5 @@
+import { GenderEnum } from '../constants/enums/gender';
+
 export interface IRegisterRequestModel {
   fullName: string;
   password: string;
@@ -6,7 +8,8 @@ export interface IRegisterRequestModel {
 export interface IUserModifyRequestModel {
   fullName: string;
   email: string;
-  phoneNumber: string;
+  dateOfBirth?: string;
+  gender: GenderEnum;
 }
 
 export interface IUserPasswordModifyRequestModel {

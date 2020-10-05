@@ -11,6 +11,7 @@ import { WeekDaysEnum } from 'platform/constants/enums';
 import SearchInput from 'components/search-input';
 
 import './style.scss';
+import ClickOutside from 'components/click-outside';
 
 interface IProps {
   data: IPharmacyBranchListResponseModel[];
@@ -43,8 +44,7 @@ class SearchResults extends HelperComponent<IProps, IState> {
   private get markers() {
     return this.data.map((item, index) => ({
       position: { lat: item.addressLat, lng: item.addressLng },
-      onMouseOver: () => this.toggleMarker(index),
-      onMouseOut: () => this.toggleMarker(),
+      onClick: () => this.toggleMarker(index),
     }));
   }
 
@@ -53,9 +53,17 @@ class SearchResults extends HelperComponent<IProps, IState> {
     return hoveredMarkerIndex || hoveredMarkerIndex === 0 ? this.data[hoveredMarkerIndex] : undefined;
   }
 
-  private toggleMarker = (index?: number) => this.safeSetState({ hoveredMarkerIndex: index });
+  private toggleMarker = (index?: number) => {
+    const { hoveredMarkerIndex } = this.state;
+    this.safeSetState({ hoveredMarkerIndex: hoveredMarkerIndex === index ? undefined : index });
+  }
 
   private onSearchChange = (searchValue: string) => this.safeSetState({ searchValue });
+
+  private infoWindowClickOutside = (e: MouseEvent) => {
+    e.stopPropagation();
+    this.toggleMarker();
+  }
 
   public render() {
     const { hoveredMarkerIndex } = this.state;
@@ -79,16 +87,18 @@ class SearchResults extends HelperComponent<IProps, IState> {
             <Maps>
               {this.markers.map((item, index) => <Marker key={index} {...item}>
                 {hoveredMarkerIndex === index && this.hoveredMarkerData && <InfoWindow>
-                  <div className="P-info-window">
-                    <h3 className="G-orange-color G-text-center P-name">{this.hoveredMarkerData.name}</h3>
-                    <h4 className="P-info-row G-flex-center">
-                      <i className="icon-Group-5522 G-orange-color" /> <span>{this.hoveredMarkerData.contactPhoneNumber}</span>
-                    </h4>
-                    <h4 className="P-info-row">
-                      <i className="icon-Group-5554 G-orange-color" />
-                      <this.WorkingPlan />
-                    </h4>
-                  </div>
+                  <ClickOutside onClickOutside={this.infoWindowClickOutside}>
+                    <div className="P-info-window">
+                      <h3 className="G-orange-color G-text-center P-name">{this.hoveredMarkerData.name}</h3>
+                      <h4 className="P-info-row G-flex-center">
+                        <i className="icon-Group-5522 G-orange-color" /> <span>{this.hoveredMarkerData.contactPhoneNumber}</span>
+                      </h4>
+                      <h4 className="P-info-row">
+                        <i className="icon-Group-5554 G-orange-color" />
+                        <this.WorkingPlan />
+                      </h4>
+                    </div>
+                  </ClickOutside>
                 </InfoWindow>}
               </Marker>)}
             </Maps>
