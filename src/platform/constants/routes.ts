@@ -83,6 +83,7 @@ const WISH_LIST_ROUTES = RouteService.buildRouteContext('/wish-list', {
 });
 
 const ROUTES = {
+  HOME: '/',
   FAQ: '/faq',
   CART: '/cart',
   CHECKOUT: '/checkout',
@@ -100,7 +101,6 @@ const ROUTES = {
   WHOLESALE_PROMOTIONS: '/wholesale-promotions',
   CONFIDENTIALITY_CONDITIONS: '/conditions',
 
-  HOME: HOME_ROUTES,
   BLOG: BLOG_ROUTES,
   NEWS: NEWS_ROUTES,
   TENDERS: TENDERS_ROUTES,

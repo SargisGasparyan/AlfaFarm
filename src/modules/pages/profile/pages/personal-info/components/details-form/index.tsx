@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as DateTime from 'react-datetime';
 
 import HelperComponent from 'platform/classes/helper-component';
 import LoaderContent from 'components/loader-content';
@@ -8,6 +9,12 @@ import { IUserModifyRequestModel } from 'platform/api/user/models/request';
 import Storage from 'platform/services/storage';
 import { validateForm } from './services/helper';
 import UserController from 'platform/api/user';
+import { GenderEnum } from 'platform/api/user/constants/enums/gender';
+import Select from 'components/select';
+import { GenderDropdown } from 'platform/constants/dropdowns';
+import { IDropdownOption } from 'platform/constants/interfaces';
+import { formatDate } from 'platform/services/helper';
+import { Moment } from 'moment';
 
 interface IState {
   form: IUserModifyRequestModel;
@@ -25,7 +32,8 @@ class DetailsForm extends HelperComponent<{}, IState> {
     form: {
       fullName: Storage.profile.fullName,
       email: Storage.profile.email,
-      phoneNumber: Storage.profile.phoneNumber.substring(`+${countryCode}`.length),
+      gender: Storage.profile.gender,
+      dateOfBirth: Storage.profile.dateOfBirth,
     },
   };
 
@@ -40,15 +48,25 @@ class DetailsForm extends HelperComponent<{}, IState> {
     this.safeSetState({ form, edited: true });
   }
 
+  private changeGender = (chosen: IDropdownOption<GenderEnum>) => {
+    const { form } = this.state;
+    form.gender = chosen.value;
+    this.safeSetState({ form, edited: true });
+  }
+
+  private changeDateOfBirth = (chosen: Moment) => {
+    const { form } = this.state;
+    form.dateOfBirth = chosen.toISOString();
+    this.safeSetState({ form, edited: true });
+  }
+
   private submit = (e: React.SyntheticEvent) => {
     e.preventDefault();
     this.safeSetState({ submited: true }, async () => {
       this.formValidation.valid && this.safeSetState({ submitLoading: true }, async () => {
-        const form = {...this.state.form};
-        form.phoneNumber = `+${countryCode}${form.phoneNumber}`;
-
+        const { form } = this.state;
         const result = await UserController.Update(form);
-        
+
         if (result.data) window.location.reload();
         else this.safeSetState({ submitLoading: false });
       });
@@ -78,14 +96,25 @@ class DetailsForm extends HelperComponent<{}, IState> {
             onChange={this.changeField}
           />
         </div>
-        <div className="G-main-form-field G-phone-input-wrapper">
-          <p className="G-input-top-label">{Settings.translations.phone_number}</p>
-          <p className="G-input-country-code">+{countryCode}</p>
-          <input
-            name="phoneNumber"
-            value={form.phoneNumber}
-            className={`G-main-input ${this.formValidation.errors.phoneNumber ? 'G-invalid-field' : ''}`}
-            onChange={this.changeField}
+        <div className="G-main-form-field">
+          <p className="G-input-top-label">{Settings.translations.gender}</p>
+          <Select<GenderEnum>
+            options={GenderDropdown()}
+            value={form.gender}
+            className={`G-main-select`}
+            onChange={this.changeGender}
+          />
+        </div>
+        <div className="G-main-form-field">
+          <p className="G-input-top-label">{Settings.translations.dateOfBirth}</p>
+          <DateTime
+            onChange={this.changeDateOfBirth}
+            closeOnSelect={true}
+            inputProps={{
+              value: form.dateOfBirth ? formatDate(form.dateOfBirth, false) : '',
+              readOnly: true,
+              className: 'G-main-input',
+            }}
           />
         </div>
         {edited && <LoaderContent

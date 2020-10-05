@@ -92,7 +92,7 @@ class App extends HelperComponent<{}, IState> {
                 component={item.component}
               />))}
               
-              <Redirect to={ROUTES.HOME.MAIN} />
+              <Redirect to={ROUTES.HOME} />
             </Switch>
           </section>
           {confirmOpen && <ConfirmModal />}

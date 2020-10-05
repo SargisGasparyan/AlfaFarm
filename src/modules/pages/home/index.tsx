@@ -12,7 +12,7 @@ import ForPartners from './components/for-partners';
 
 import './style.scss';
 
-@byRoute([ROUTES.HOME.MAIN, ROUTES.HOME.FAIL, ROUTES.HOME.SUCCESS])
+@byRoute(ROUTES.HOME)
 class Home extends HelperComponent<{}, {}> {
 
   // shat romantik grdon
