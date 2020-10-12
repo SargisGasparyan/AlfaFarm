@@ -137,4 +137,8 @@ export const getHoverDirection = (e: React.MouseEvent, element?: HTMLElement) =>
   return null
 };
 
-export const getMediaPath = (path?: string | null) => path ? enviroment.BASE_URL + path : '';
+export const getMediaPath = (path?: string | null) => {  
+  // This function is for making some changes on image path before render...
+  
+  return path || '';
+}
