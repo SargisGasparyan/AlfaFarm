@@ -9,6 +9,11 @@ export interface IOrderModifyRequestModel {
   addressText?: string;
   addressLat?: number;
   addressLng?: number;
+  addressBuilding?: string;
+  addressEntrance?: string;
+  addressFloor?: string;
+  addressApartment?: string;
+  addressComment?: string;
   fullName: string;
   phoneNumber: string;
   email?: string;

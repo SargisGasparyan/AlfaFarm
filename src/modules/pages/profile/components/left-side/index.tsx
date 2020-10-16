@@ -51,7 +51,7 @@ class LeftSide extends HelperPureComponent<{}, {}> {
           </div>
 
           <h2>
-            {Storage.profile.fullName}
+            {Storage.profile.firstName} {Storage.profile.lastName}
             <Link
               to={ROUTES.PROFILE.MAIN}
             ><i className="icon-Group-5545" /></Link>

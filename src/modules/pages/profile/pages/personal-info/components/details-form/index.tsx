@@ -30,7 +30,8 @@ class DetailsForm extends HelperComponent<{}, IState> {
     submited: false,
     submitLoading: false,
     form: {
-      fullName: Storage.profile.fullName,
+      firstName: Storage.profile.firstName,
+      lastName: Storage.profile.lastName,
       email: Storage.profile.email,
       gender: Storage.profile.gender,
       dateOfBirth: Storage.profile.dateOfBirth,
@@ -79,11 +80,20 @@ class DetailsForm extends HelperComponent<{}, IState> {
     return (
       <form className="G-main-form P-form-block G-mr-20">
         <div className="G-main-form-field">
-          <p className="G-input-top-label">{Settings.translations.full_name}</p>
+          <p className="G-input-top-label">{Settings.translations.first_name}</p>
           <input
-            name="fullName"
-            value={form.fullName}
-            className={`G-main-input ${this.formValidation.errors.fullName ? 'G-invalid-field' : ''}`}
+            name="firstName"
+            value={form.firstName}
+            className={`G-main-input ${this.formValidation.errors.firstName ? 'G-invalid-field' : ''}`}
+            onChange={this.changeField}
+          />
+        </div>
+        <div className="G-main-form-field">
+          <p className="G-input-top-label">{Settings.translations.last_name}</p>
+          <input
+            name="lastName"
+            value={form.lastName}
+            className={`G-main-input ${this.formValidation.errors.lastName ? 'G-invalid-field' : ''}`}
             onChange={this.changeField}
           />
         </div>
@@ -106,7 +116,7 @@ class DetailsForm extends HelperComponent<{}, IState> {
           />
         </div>
         <div className="G-main-form-field">
-          <p className="G-input-top-label">{Settings.translations.dateOfBirth}</p>
+          <p className="G-input-top-label">{Settings.translations.date_of_birth}</p>
           <DateTime
             onChange={this.changeDateOfBirth}
             closeOnSelect={true}

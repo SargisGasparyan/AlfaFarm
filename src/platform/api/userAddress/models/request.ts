@@ -1,7 +1,11 @@
 export interface IUserAddressModifyRequestModel {
   name: string;
-  regionId: number;
   addressText: string;
   addressLat: number;
   addressLng: number;
+  building?: string;
+  entrance?: string;
+  floor?: string;
+  apartment?: string;
+  comment?: string;
 }
