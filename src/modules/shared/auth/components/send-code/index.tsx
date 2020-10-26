@@ -27,6 +27,7 @@ class SendCode extends HelperComponent<IProps, IState> {
     submited: false,
     submitLoading: false,
     form: {
+      fromForgot: false,
       phoneNumber: '',
     },
   };
@@ -49,9 +50,11 @@ class SendCode extends HelperComponent<IProps, IState> {
         const alertify = await import('alertifyjs');
         const { onTypeChange } = this.props;
         const form = {...this.state.form};
-        form.phoneNumber = `+${countryCode}${form.phoneNumber}`;
-
         const activeData = this.props.activeData as { signUp: boolean, fromSocial: boolean } || null;
+        const isSignUp = activeData ? activeData.signUp : false;
+        form.phoneNumber = `+${countryCode}${form.phoneNumber}`;
+        form.fromForgot = !isSignUp;
+
         const result = await AuthController.SendCode(form);
         
         if (result.data) {

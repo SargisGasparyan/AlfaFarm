@@ -1062,6 +1062,8 @@ export default {
   price: "Price",
   brands: "Brands",
   brand: "Brand",
+  producers: "Producers",
+  producer: "Producer",
   active_ingredients: "Active ingredients",
   active_ingredient: "Active ingredient",
   min: "Min",

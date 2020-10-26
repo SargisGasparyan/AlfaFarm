@@ -1,13 +1,14 @@
 import Connection from '../../services/connection';
-import { IResponse, IPagingResponse, IPagingRequest } from '../../constants/interfaces';
+import { IResponse, IPagingResponse } from '../../constants/interfaces';
 import { IActiveIngredientListResponseModel } from './models/response';
+import { IActiveIngredientListRequestModel } from './models/request';
 
 class ActiveIngredientController {
 
   private static controller = 'activeIngredient';
 
-  public static GetList = (body: IPagingRequest): Promise<IResponse<IPagingResponse<IActiveIngredientListResponseModel>>> => {
-    const result = Connection.POST<IPagingRequest>({
+  public static GetList = (body: IActiveIngredientListRequestModel): Promise<IResponse<IPagingResponse<IActiveIngredientListResponseModel>>> => {
+    const result = Connection.POST<IActiveIngredientListRequestModel>({
       action: 'list',
       controller: ActiveIngredientController.controller,
       body,

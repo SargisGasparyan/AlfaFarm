@@ -21,7 +21,7 @@ const ListItem = React.memo(({ data }: IProps) => (
       <Link
         to={ROUTES.NEWS.DETAILS.replace(':id', data.id)}
         className="G-orange-color G-normal-link"
-      >{Settings.translations.read_more} <i className="icon-Group-5513" /></Link>
+      >{Settings.translations.see_more} <i className="icon-Group-5513" /></Link>
     </div>
   </div>
 ));

@@ -1085,6 +1085,8 @@ export default {
   price: "Արժեք",
   brands: "Ապրանքանիշեր",
   brand: "Ապրանքանիշ",
+  producers: "Արտադրողներ",
+  producer: "Արտադրող",
   active_ingredients: "Ակտիվ բաղադրիչներ",
   active_ingredient: "Ազդող նյութ",
   min: "Նվազագույն",

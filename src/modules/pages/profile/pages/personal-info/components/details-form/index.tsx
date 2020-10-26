@@ -120,6 +120,7 @@ class DetailsForm extends HelperComponent<{}, IState> {
           <DateTime
             onChange={this.changeDateOfBirth}
             closeOnSelect={true}
+            timeFormat={false}
             inputProps={{
               value: form.dateOfBirth ? formatDate(form.dateOfBirth, false) : '',
               readOnly: true,

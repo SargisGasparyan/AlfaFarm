@@ -14,7 +14,8 @@ export interface IOrderModifyRequestModel {
   addressFloor?: string;
   addressApartment?: string;
   addressComment?: string;
-  fullName: string;
+  firstName: string;
+  lastName: string;
   phoneNumber: string;
   email?: string;
   deliveryType: OrderDeliveryTypeEnum;

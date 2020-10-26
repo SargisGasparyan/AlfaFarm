@@ -1,5 +1,6 @@
 export interface IUserAddressListResponseModel {
   id: number;
+  isDefault: boolean;
   name: string;
   addressText: string;
   addressLat: number;

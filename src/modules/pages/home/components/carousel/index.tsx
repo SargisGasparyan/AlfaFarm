@@ -28,20 +28,20 @@ class Carousel extends HelperPureComponent<{}, {}> {
           <div className="G-page P-home-carousel-slide" style={{ background: `url('${HomeImage}') center/cover` }}>
             <ShadowText className="P-shadow-text-without-offset">Ապրենք առողջ</ShadowText>
             <p>{Settings.translations.footer_text}</p>
-            <button className="G-main-button">{Settings.translations.read_more}</button>
+            <button className="G-main-button">{Settings.translations.see_more}</button>
           </div>
         </div>
         <div>
           <div className="G-page P-home-carousel-slide" style={{ background: `url('${HomeImage1}') right/contain no-repeat` }}>
             <img src={HerbionImage} alt="herbion" />
-            <button className="G-main-button">{Settings.translations.read_more}</button>
+            <button className="G-main-button">{Settings.translations.see_more}</button>
           </div>
         </div>
         <div>
           <div className="G-page P-home-carousel-slide" style={{ background: `url('${HomeImage2}') center/cover` }}>
             <ShadowText className="P-shadow-text-without-offset">Ապրենք առողջ</ShadowText>
             <p>{Settings.translations.footer_text}</p>
-            <button className="G-main-button">{Settings.translations.read_more}</button>
+            <button className="G-main-button">{Settings.translations.see_more}</button>
           </div>
         </div>
       </Slider>

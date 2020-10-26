@@ -1,3 +1,9 @@
+export interface IBasketResponseModel {
+  totalPrice: number;
+  bonus: number;
+  items: IBasketListResponseModel[];
+};
+
 export interface IBasketListResponseModel {
   id: number;
   productId: number;

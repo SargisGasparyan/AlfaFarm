@@ -1059,6 +1059,8 @@ export default {
   price: "Цена",
   brands: "Бренды",
   brand: "Бренд",
+  producers: "Производители",
+  producer: "Производитель",
   active_ingredients: "Активные ингредиенты",
   active_ingredient: "Активный ингредиент",
   min: "Минимум",

@@ -1,12 +1,13 @@
 @import 'src/assets/styles/variables';
 
 .P-count-input {
-  width       : 100px;
-  height      : 40px;
-  display     : flex;
-  position    : relative;
-  overflow    : hidden;
-  align-items : center;
+  width           : 100px;
+  height          : 40px;
+  display         : flex;
+  position        : relative;
+  overflow        : hidden;
+  align-items     : center;
+  justify-content : flex-end;
 
   &.P-count-input-plus {
     

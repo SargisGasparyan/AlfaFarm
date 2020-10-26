@@ -34,13 +34,11 @@ class List extends HelperComponent<{}, IState> {
   public componentDidMount() {
     this.fetchData();
     window.addEventListener('scroll', this.scroll);
-    window.addEventListener(DispatcherChannels.ProductFilterChange, this.filterChange);
   }
 
   public componentWillUnmount() {
     super.componentWillUnmount();
     window.removeEventListener('scroll', this.scroll);
-    window.removeEventListener(DispatcherChannels.ProductFilterChange, this.filterChange);
   }
 
   private filterChange = () => {

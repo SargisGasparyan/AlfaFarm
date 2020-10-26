@@ -4,7 +4,6 @@ import * as moment from 'moment';
 import Settings from './settings';
 import { IDropdownOption } from '../constants/interfaces';
 import { IUserResponseModel } from '../api/user/models/response';
-import enviroment from './enviroment';
 
 export const scrolledToBottom = () => (window.innerHeight + window.scrollY) >= document.body.scrollHeight - 1500;
 export const configedMoment = (date: string | number | Date) => moment.utc(date);
@@ -51,7 +50,7 @@ export const enumToSelectOptions = <Value extends number>(obj: object, withTrans
   return options;
 };
 
-export const getUserName = (profile: IUserResponseModel) => profile.fullName || profile.username;
+export const getUserName = (profile: IUserResponseModel) => `${profile.firstName} ${profile.lastName}` || profile.username;
 
 export const formatDate = (date?: string | number, withHours = true) => {
   if (!date) return '';

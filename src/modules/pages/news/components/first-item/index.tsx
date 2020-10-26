@@ -23,7 +23,7 @@ const FirstItem = React.memo(({ data }: IProps) => (
       <Link
         to={ROUTES.NEWS.DETAILS.replace(':id', data.id)}
         className="G-normal-link G-orange-color"
-      >{Settings.translations.read_more} <i className="icon-Group-5513" /></Link>
+      >{Settings.translations.see_more} <i className="icon-Group-5513" /></Link>
     </div>
   </div>
 ));

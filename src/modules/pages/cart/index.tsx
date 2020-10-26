@@ -1,25 +1,26 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
+import CheckBox from 'rc-checkbox';
 
 import ROUTES from 'platform/constants/routes';
 import Settings from 'platform/services/settings';
 import { byRoute } from 'platform/decorators/routes';
 import HelperComponent from 'platform/classes/helper-component';
 import BasketController from 'platform/api/basket';
-import { IBasketListResponseModel } from 'platform/api/basket/models/response';
+import { IBasketListResponseModel, IBasketResponseModel } from 'platform/api/basket/models/response';
 import Table from 'components/table';
 import EmptyState from 'components/empty-state';
 import { getMediaPath } from 'platform/services/helper';
 import CountInput from 'components/count-input';
 import Connection from 'platform/services/connection';
+import DispatcherChannels from 'platform/constants/dispatcher-channels';
+import Storage from 'platform/services/storage';
+import PageLoader from 'components/page-loader';
 
 import './style.scss';
-import DispatcherChannels from 'platform/constants/dispatcher-channels';
-import CheckBox from 'rc-checkbox';
-import Storage from 'platform/services/storage';
 
 interface IState {
-  data: IBasketListResponseModel[];
+  data?: IBasketResponseModel;
   cartSaved: boolean;
 };
 
@@ -27,7 +28,6 @@ interface IState {
 class Cart extends HelperComponent<{}, IState> {
 
   public state: IState = {
-    data: [],
     cartSaved: false,
   };
 
@@ -62,14 +62,6 @@ class Cart extends HelperComponent<{}, IState> {
     },
   ];
 
-  private get totalPrice() {
-    const { data } = this.state;
-    let total = 0;
-    data.forEach(item => total += item.price * item.productQuantity);
-
-    return total;
-  }
-
   public componentDidMount() {
     window.dispatchEvent(new CustomEvent(DispatcherChannels.CartItemsUpdate, { detail: false }));
     this.fetchData();
@@ -90,8 +82,7 @@ class Cart extends HelperComponent<{}, IState> {
         productQuantity: count,
       }]);
 
-      row.productQuantity = count;
-      this.safeSetState({ data });
+      this.fetchData();
     } else {
       await BasketController.Delete([row.id]);
       this.fetchData();
@@ -105,8 +96,8 @@ class Cart extends HelperComponent<{}, IState> {
 
   private goToCheckout = async () => {
     const { data, cartSaved } = this.state;
-    if (cartSaved) {
-      const basketIds = data.map(item => item.id);
+    if (cartSaved && data) {
+      const basketIds = data.items.map(item => item.id);
       await BasketController.Save(basketIds);
     }
 
@@ -118,33 +109,37 @@ class Cart extends HelperComponent<{}, IState> {
 
     return (
       <section className="G-page P-cart-page">
-        <h1 className="G-fs-26 G-mb-40 G-full-width">{Settings.translations.cart}</h1>
-        {data.length ? <Table<IBasketListResponseModel>
-          className="P-table G-full-width"
-          columnConfig={this.columnConfig}
-          data={data}
-        /> : <EmptyState
-          text={Settings.translations.no_products}
-        />}
+        {data ? <>
+          <h1 className="G-fs-26 G-mb-40 G-full-width">{Settings.translations.cart}</h1>
+          {data.items.length ? <>
+            <Table<IBasketListResponseModel>
+              className="P-table G-full-width"
+              columnConfig={this.columnConfig}
+              data={data.items}
+            />
 
-        <div className="P-data-block">
-          <div>
-            <span className="G-fs-normal">{Settings.translations.total}</span>
-            <h1 className="G-orange-color G-fs-24 G-mt-5">{this.totalPrice} AMD</h1>
-          </div>
-        </div>
+            <div className="P-data-block">
+              <div>
+                <span className="G-fs-normal">{Settings.translations.total}</span>
+                <h1 className="G-orange-color G-fs-24 G-mt-5">{data.totalPrice} AMD</h1>
+              </div>
+            </div>
 
-        {Storage.profile && <div className="P-data-block">
-          <div className="P-checkbox-row" onClick={this.toggleCartSave}>
-            <CheckBox checked={cartSaved} />  
-            {Settings.translations.save_cart}
-          </div>
-        </div>}
+            {Storage.profile && <div className="P-data-block">
+              <div className="P-checkbox-row" onClick={this.toggleCartSave}>
+                <CheckBox checked={cartSaved} />
+                {Settings.translations.save_cart}
+              </div>
+            </div>}
 
-        <button
-          className="G-main-button G-ml-auto G-fs-normal P-pay-button"
-          onClick={this.goToCheckout}
-        >{Settings.translations.pay}</button>
+            <button
+              className="G-main-button G-ml-auto G-fs-normal P-pay-button"
+              onClick={this.goToCheckout}
+            >{Settings.translations.pay}</button>
+          </> : <EmptyState
+              text={Settings.translations.no_products}
+            />}
+        </> : <PageLoader />}
       </section>
     );
   }

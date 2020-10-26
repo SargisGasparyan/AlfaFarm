@@ -5,17 +5,11 @@ export function validateForm(this: IUserAddressModifyRequestModel, submited?: bo
 
   const errors = {
     name: false,
-    regionId: false,
     address: false,
   };
 
   if (submited && !this.name) {
     errors.name = true;
-    valid = false;
-  }
-
-  if (submited && !this.regionId) {
-    errors.regionId = true;
     valid = false;
   }
 

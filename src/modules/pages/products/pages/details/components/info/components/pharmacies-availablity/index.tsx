@@ -3,21 +3,23 @@ import { InfoWindow, Marker } from 'react-google-maps';
 
 import Settings from 'platform/services/settings';
 import HelperComponent from 'platform/classes/helper-component';
-import { IPharmacyBranchListResponseModel } from 'platform/api/pharmacyBranch/models/response';
 import Maps from 'components/maps';
 import { getViewEnum, formatTime } from 'platform/services/helper';
 import { WeekDaysEnum } from 'platform/constants/enums';
 import SearchInput from 'components/search-input';
 import Modal from 'components/modal';
+import { IProductDetailsResponseModel, IProductAvailablityResponseModel } from 'platform/api/product/models/response';
 
 import './style.scss';
+import PageLoader from 'components/page-loader';
+import ProductController from 'platform/api/product';
 
 interface IProps {
-  data: IPharmacyBranchListResponseModel[];
+  data: IProductDetailsResponseModel;
   onClose(): void;
 };
-
 interface IState {
+  data?: IProductAvailablityResponseModel;
   searchValue: string;
   hoveredMarkerIndex?: number;
 };
@@ -30,16 +32,18 @@ class PharmaciesAvailablity extends HelperComponent<IProps, IState> {
   
   private weeksViewEnum = getViewEnum(WeekDaysEnum);
 
-  private get data() {
-    const { data} = this.props;
+  private get filteredData() {
+    const { data } = this.state;
     const { searchValue } = this.state;
 
-    if (!searchValue) return data;
-    return data.filter(item => item.name.includes(searchValue));
+    if (!data) return [];
+
+    if (!searchValue) return data.branches;
+    return data.branches.filter(item => item.name.includes(searchValue));
   }
 
   private get markers() {
-    return this.data.map((item, index) => ({
+    return this.filteredData.map((item, index) => ({
       position: { lat: item.addressLat, lng: item.addressLng },
       onMouseOver: () => this.toggleMarker(index),
       onMouseOut: () => this.toggleMarker(),
@@ -48,23 +52,32 @@ class PharmaciesAvailablity extends HelperComponent<IProps, IState> {
 
   private get hoveredMarkerData() {
     const { hoveredMarkerIndex } = this.state;
-    return hoveredMarkerIndex || hoveredMarkerIndex === 0 ? this.data[hoveredMarkerIndex] : undefined;
+    return hoveredMarkerIndex || hoveredMarkerIndex === 0 ? this.filteredData[hoveredMarkerIndex] : undefined;
   }
+
+  public componentDidMount() { this.fetchData(); }
 
   private toggleMarker = (index?: number) => this.safeSetState({ hoveredMarkerIndex: index });
 
   private onSearchChange = (searchValue: string) => this.safeSetState({ searchValue });
 
+  private fetchData = async () => { 
+    const { data } = this.props;
+    const result = await ProductController.GetAvailablity(data.id);
+    this.safeSetState({ data: result.data });
+  }
+
   public render() {
+    const { data } = this.state;
     const { onClose } = this.props;
     const { hoveredMarkerIndex } = this.state;
 
-    return (
+    return data ? (
       <Modal className="P-product-pharmacies-availablity-modal" onClose={onClose}>
         <div className="P-content">
           <div className="P-list">
             <h2>{Settings.translations.availability_at_the_nearest_pharmacy}</h2>
-            {this.data.map((item, index) => <h3
+            {this.filteredData.map((item, index) => <h3
               key={item.id}
               onMouseOver={() => this.toggleMarker(index)}
               onMouseOut={() => this.toggleMarker()}
@@ -93,7 +106,7 @@ class PharmaciesAvailablity extends HelperComponent<IProps, IState> {
           </div>
         </div>
       </Modal>
-    );
+    ) : <PageLoader />;
   }
 
   private WorkingPlan = () => {
