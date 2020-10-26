@@ -11,6 +11,8 @@ import ActiveIngredientController from 'platform/api/activeIngredient';
 import { IActiveIngredientListResponseModel } from 'platform/api/activeIngredient/models/response';
 import AuthController from 'platform/api/auth';
 import { IUserResponseModel } from 'platform/api/user/models/response';
+import { IProducerListResponseModel } from 'platform/api/producer/models/response';
+import ProducerController from 'platform/api/producer';
 
 class Storage {
 
@@ -25,12 +27,8 @@ class Storage {
       }
 
       const categories = await CategoryController.GetList();
-      const brands = await BrandController.GetList({ pageNumber: 1, pageSize: infinityScrollMax });
-      const activeIngredients = await ActiveIngredientController.GetList({ pageNumber: 1, pageSize: infinityScrollMax });
       const languages = await LanguageController.GetList();
-      
-      Storage.brands = brands.data.list;
-      Storage.activeIngredients = activeIngredients.data.list;
+
       Storage.categories = categories.data;
       Storage.languages = languages.data;
 
@@ -40,8 +38,6 @@ class Storage {
 
   public static profile: IUserResponseModel;
   public static categories: ICategoryListResponseModel[];
-  public static brands: IBrandListResponseModel[];
-  public static activeIngredients: IActiveIngredientListResponseModel[];
   public static languages: ILanguageListResponseModel[];
 }
 

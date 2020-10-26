@@ -98,15 +98,7 @@ class Info extends HelperComponent<IProps, IState> {
             onClick={this.changeCart}
           >{Settings.translations.add_to_cart}</LoaderContent>
 
-          {pharmaciesAvailablityOpen && <PharmaciesAvailablity onClose={this.togglePharmaciesAvailablity} data={[
-            { id: 1, name: 'Erebuni', contactPhoneNumber: '+37400000000', addressText: 'Erebuni', addressLat: 40.1872, addressLng: 44.5152, isOpen: true, workingPlan: [] },
-            { id: 2, name: 'Nor norq', contactPhoneNumber: '+37400000000', addressText: 'Nor norq', addressLat: 40.1872, addressLng: 44.5152, isOpen: true, workingPlan: [] },
-            { id: 3, name: 'Norq marash', contactPhoneNumber: '+37400000000', addressText: 'Norq marash', addressLat: 40.1872, addressLng: 44.5152, isOpen: true, workingPlan: [] },
-            { id: 4, name: 'Kentron', contactPhoneNumber: '+37400000000', addressText: 'Kentron', addressLat: 40.1872, addressLng: 44.5152, isOpen: true, workingPlan: [] },
-            { id: 5, name: 'Komitas', contactPhoneNumber: '+37400000000', addressText: 'Komitas', addressLat: 40.1872, addressLng: 44.5152, isOpen: true, workingPlan: [] },
-            { id: 6, name: 'Sevan', contactPhoneNumber: '+37400000000', addressText: 'Sevan', addressLat: 40.1872, addressLng: 44.5152, isOpen: true, workingPlan: [] },
-            { id: 7, name: 'Kapan', contactPhoneNumber: '+37400000000', addressText: 'Kapan', addressLat: 40.1872, addressLng: 44.5152, isOpen: true, workingPlan: [] },
-          ]} />}
+          {pharmaciesAvailablityOpen && <PharmaciesAvailablity onClose={this.togglePharmaciesAvailablity} data={data} />}
         </div>
       </div>
     );

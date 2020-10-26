@@ -115,7 +115,9 @@ class Header extends HelperPureComponent<{}, IState> {
   }
 
   private searchSubmit = (value: string) => {
-    window.routerHistory.push(`${ROUTES.PRODUCTS.MAIN}?text=${value}`);
+    const query = new URLSearchParams(window.location.search);
+    query.set('text', value);
+    window.routerHistory.push(`${ROUTES.PRODUCTS.MAIN}?${query.toString()}`);
     window.dispatchEvent(new Event(DispatcherChannels.ProductFilterChange));
   }
 
@@ -126,6 +128,8 @@ class Header extends HelperPureComponent<{}, IState> {
     if (!notificationOpen) this.safeSetState({ notificationOpen: true, notificationIconNumber: 0 });
     else this.safeSetState({ notificationOpen: false });
   }
+
+  private openProducts = () => window.dispatchEvent(new Event(DispatcherChannels.ProductFilterChange));
 
   public render() {
     const { authOpen, categoryOpenPosition, categoryOpen, cartIconNumber, notificationIconNumber, notificationOpen } = this.state;
@@ -143,6 +147,7 @@ class Header extends HelperPureComponent<{}, IState> {
             to={ROUTES.PRODUCTS.MAIN}
             innerRef={this.categoryOpenLink}
             onMouseOver={this.openCategories}
+            onClick={this.openProducts}
             className={`P-link ${categoryOpen ? 'P-active' : ''}`}
           >{Settings.translations.online_pharmacy}</Link>
 
@@ -156,7 +161,7 @@ class Header extends HelperPureComponent<{}, IState> {
             style={{ background: `url('${Storage.profile.photoPath ? getMediaPath(Storage.profile.photoPath) : PersonImage}') center/cover` }}
             className="P-image"
           />
-          <h4>{Storage.profile.fullName}</h4>
+          <h4>{Storage.profile.firstName} {Storage.profile.lastName}</h4>
         </Link> : <span
           onClick={this.toggleAuth}
           className="P-link P-login"

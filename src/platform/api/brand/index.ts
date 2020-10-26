@@ -1,13 +1,14 @@
 import Connection from '../../services/connection';
-import { IResponse, IPagingResponse, IPagingRequest } from '../../constants/interfaces';
+import { IResponse, IPagingResponse } from '../../constants/interfaces';
 import { IBrandListResponseModel } from './models/response';
+import { IBrandListRequestModel } from './models/request';
 
 class BrandController {
 
   private static controller = 'brand';
 
-  public static GetList = (body: IPagingRequest): Promise<IResponse<IPagingResponse<IBrandListResponseModel>>> => {
-    const result = Connection.POST<IPagingRequest>({
+  public static GetList = (body: IBrandListRequestModel): Promise<IResponse<IPagingResponse<IBrandListResponseModel>>> => {
+    const result = Connection.POST<IBrandListRequestModel>({
       body,
       action: 'list',
       controller: BrandController.controller,

@@ -19,10 +19,9 @@ const ListItem = React.memo(({ data }: IProps) => (
     <div className="P-content">
       <h3>{data.title}</h3>
       <Link to={ROUTES.NEWS.DETAILS.replace(':id', data.id)} className="G-orange-color G-normal-link">
-        {Settings.translations.read_more} <i className="icon-Group-5513" />
+        {Settings.translations.see_more} <i className="icon-Group-5513" />
       </Link>
     </div>
-    {data?'':''}
   </div>
 ));
 

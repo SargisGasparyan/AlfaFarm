@@ -34,8 +34,12 @@
     }
 
     > .P-name {
-      font-size   : $normal-fs;
-      margin-left : 10px;
+      width         : 100%;
+      overflow      : hidden;
+      font-size     : $normal-fs;
+      margin-left   : 10px;
+      white-space   : nowrap;
+      text-overflow : ellipsis;
     }
   }
 }

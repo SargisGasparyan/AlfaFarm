@@ -59,6 +59,7 @@ const ListItem = React.memo((props: IProps) => {
           min={1}
           value={count}
           onChange={setCount}
+          onlyPlusIfOne={true}
         />
       </div>
 

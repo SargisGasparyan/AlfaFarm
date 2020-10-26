@@ -10,6 +10,7 @@ interface IProps {
   step: number;
   min: number | string;
   withPlus?: boolean;
+  onlyPlusIfOne?: boolean;
   defaultValue?: number | string;
   value?: number | string;
   onChange(value: number, valid: boolean): void;
@@ -18,11 +19,15 @@ interface IProps {
 
 interface IState {
   count: string | number;
+  plused: boolean;
 };
 
 class CountInput extends HelperPureComponent<IProps, IState> {
 
-  public state: IState = { count: '0' };
+  public state: IState = {
+    count: '0',
+    plused: false,
+  };
 
   public componentDidMount() {
     const { value, defaultValue, min } = this.props;
@@ -41,9 +46,11 @@ class CountInput extends HelperPureComponent<IProps, IState> {
 
   private stepUp = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    const { count } = this.state;
-    const { step, onChange } = this.props;
-    this.safeSetState({ count: +count + step }, () => onChange(+this.state.count, !this.countInvalid()));
+    const { count, plused } = this.state;
+    const { step, onChange, onlyPlusIfOne } = this.props;
+
+    if (onlyPlusIfOne && !plused) this.safeSetState({ plused: true });
+    else this.safeSetState({ count: +count + step }, () => onChange(+this.state.count, !this.countInvalid()));
   }
 
   private stepDown = (e: React.SyntheticEvent) => {
@@ -66,7 +73,8 @@ class CountInput extends HelperPureComponent<IProps, IState> {
   }
 
   public render() {
-    const { withPlus, value } = this.props;
+    const { withPlus, onlyPlusIfOne, value } = this.props;
+    const { plused } = this.state;
     const count = value || this.state.count;
 
     return (
@@ -75,12 +83,14 @@ class CountInput extends HelperPureComponent<IProps, IState> {
         onClick={this.initCount}
       >
         {!count && withPlus ? <>&#43;</> : <>
-          <span onClick={this.stepDown}>-</span>
-          <NumberInput
-            value={count.toString()}
-            className={this.countInvalid() ? 'P-invalid' : ''}
-            onChange={this.changeCount}
-          />
+          {(!onlyPlusIfOne || plused) && <>
+            <span onClick={this.stepDown}>-</span>
+            <NumberInput
+              value={count.toString()}
+              className={this.countInvalid() ? 'P-invalid' : ''}
+              onChange={this.changeCount}
+            />
+          </>}
           <span onClick={this.stepUp}>+</span>
         </>}
       </div>

@@ -1,4 +1,5 @@
 import { IFile } from 'platform/constants/interfaces';
+import { IPharmacyBranchListResponseModel } from 'platform/api/pharmacyBranch/models/response';
 
 export interface IProductListResponseModel {
   id: number;
@@ -40,4 +41,13 @@ export interface IProductDetailsBrandResponseModel {
 export interface IProductDetailsActiveIngredientResponseModel {
   id: number;
   name: string;
+};
+
+export interface IProductPriceRangeResponseModel {
+  min: number;
+  max: number;
+};
+
+export interface IProductAvailablityResponseModel {
+  branches: IPharmacyBranchListResponseModel[];
 };

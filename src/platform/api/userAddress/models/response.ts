@@ -1,10 +1,7 @@
 export interface IUserAddressListResponseModel {
   id: number;
+  isDefault: boolean;
   name: string;
-  cityId: number;
-  cityName: string;
-  regionId: number;
-  regionName: string;
   addressText: string;
   addressLat: number;
   addressLng: number;
@@ -13,11 +10,12 @@ export interface IUserAddressListResponseModel {
 export interface IUserAddressDetailsResponseModel {
   id: number;
   name: string;
-  cityId: number;
-  cityName: string;
-  regionId: number;
-  regionName: string;
   addressText: string;
   addressLat: number;
   addressLng: number;
+  building?: string;
+  entrance?: string;
+  floor?: string;
+  apartment?: string;
+  comment?: string;
 };

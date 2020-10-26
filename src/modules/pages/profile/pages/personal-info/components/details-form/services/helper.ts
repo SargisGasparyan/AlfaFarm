@@ -5,12 +5,18 @@ export function validateForm(this: IUserModifyRequestModel, submited?: boolean) 
   let valid = true;
 
   const errors = {
-    fullName: false,
+    firstName: false,
+    lastName: false,
     email: false,
   };
 
-  if (submited && !this.fullName) {
-    errors.fullName = true;
+  if (submited && !this.firstName) {
+    errors.firstName = true;
+    valid = false;
+  }
+
+  if (submited && !this.lastName) {
+    errors.lastName = true;
     valid = false;
   }
 

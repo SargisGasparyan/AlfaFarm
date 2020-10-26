@@ -31,14 +31,6 @@ class ChooseAddress extends HelperPureComponent<IProps, IState> {
       cell: (row: IUserAddressListResponseModel) => row.name,
     },
     {
-      name: Settings.translations.city,
-      cell: (row: IUserAddressListResponseModel) => row.cityName,
-    },
-    {
-      name: Settings.translations.region,
-      cell: (row: IUserAddressListResponseModel) => row.regionName,
-    },
-    {
       name: Settings.translations.address,
       cell: (row: IUserAddressListResponseModel) => row.addressText,
     },

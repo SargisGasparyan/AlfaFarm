@@ -9,7 +9,13 @@ export interface IOrderModifyRequestModel {
   addressText?: string;
   addressLat?: number;
   addressLng?: number;
-  fullName: string;
+  addressBuilding?: string;
+  addressEntrance?: string;
+  addressFloor?: string;
+  addressApartment?: string;
+  addressComment?: string;
+  firstName: string;
+  lastName: string;
   phoneNumber: string;
   email?: string;
   deliveryType: OrderDeliveryTypeEnum;

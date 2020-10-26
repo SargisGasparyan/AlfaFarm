@@ -1,7 +1,7 @@
 import Connection from '../../services/connection';
-import { IResponse, IPagingResponse, IPaging } from '../../constants/interfaces';
-import { IProductListRequestModel, IProductRelatedListRequestModel } from './models/request';
-import { IProductListResponseModel, IProductDetailsResponseModel } from './models/response';
+import { IResponse, IPagingResponse } from '../../constants/interfaces';
+import { IProductListRequestModel, IProductRelatedListRequestModel, IProductFilterRequestModel } from './models/request';
+import { IProductListResponseModel, IProductDetailsResponseModel, IProductPriceRangeResponseModel, IProductAvailablityResponseModel } from './models/response';
 
 class ProductController {
 
@@ -11,6 +11,25 @@ class ProductController {
     const result = Connection.POST<IProductListRequestModel>({
       body,
       action: 'list',
+      controller: ProductController.controller,
+    });
+
+    return result;
+  };
+
+  public static GetPriceRange = (body: IProductFilterRequestModel): Promise<IResponse<IProductPriceRangeResponseModel>> => {
+    const result = Connection.POST<IProductFilterRequestModel>({
+      body,
+      action: 'priceRange',
+      controller: ProductController.controller,
+    });
+
+    return result;
+  };
+
+  public static GetAvailablity = (id: number): Promise<IResponse<IProductAvailablityResponseModel>> => {
+    const result = Connection.GET({
+      action: `availablity/${id}`,
       controller: ProductController.controller,
     });
 

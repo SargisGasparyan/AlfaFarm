@@ -1,13 +1,13 @@
 import Connection from '../../services/connection';
 import { IResponse } from '../../constants/interfaces';
 import { IBasketChangeRequestModel } from './models/request';
-import { IBasketListResponseModel, ISavedBasketListResponseModel } from './models/response';
+import { IBasketListResponseModel, ISavedBasketListResponseModel, IBasketResponseModel } from './models/response';
 
 class BasketController {
 
   private static controller = 'basket';
 
-  public static GetList = (): Promise<IResponse<IBasketListResponseModel[]>> => {
+  public static GetList = (): Promise<IResponse<IBasketResponseModel>> => {
     const result = Connection.GET({
       action: '',
       controller: BasketController.controller,

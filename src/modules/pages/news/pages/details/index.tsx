@@ -10,7 +10,7 @@ import HelperComponent from 'platform/classes/helper-component';
 import PageLoader from 'components/page-loader';
 import { INewsDetailsResponseModel } from 'platform/api/news/models/response';
 import NewsController from 'platform/api/news';
-import { onlyForWholesaleUsers } from 'platform/guards/routes';
+import { onlyForWholesaleUsers, onlyForUsers } from 'platform/guards/routes';
 
 import './style.scss';
 
@@ -21,7 +21,7 @@ interface IState {
 };
 
 @generic<RouteComponentProps<IRouteParams>>(withRouter)
-@byRoute(ROUTES.NEWS.DETAILS, [onlyForWholesaleUsers])
+@byRoute(ROUTES.NEWS.DETAILS, [onlyForUsers])
 class Details extends HelperComponent<RouteComponentProps<IRouteParams>, IState> {
 
   public state: IState = {};

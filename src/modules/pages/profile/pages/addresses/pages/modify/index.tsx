@@ -43,7 +43,6 @@ class Modify extends HelperComponent<RouteComponentProps<IRouteParams>, IState> 
     regions: [],
     form: {
       name: '',
-      regionId: 0,
       addressText: '',
       addressLat: 0,
       addressLng: 0,
@@ -62,11 +61,10 @@ class Modify extends HelperComponent<RouteComponentProps<IRouteParams>, IState> 
       const result = await UserAddressController.GetDetails(+id);
       const { form } = this.state;
       form.name = result.data.name;
-      form.regionId = result.data.regionId;
       form.addressText = result.data.addressText;
       form.addressLat = result.data.addressLat;
       form.addressLng = result.data.addressLng;
-      this.safeSetState({ cityId: result.data.cityId, form }, this.fetchRegions);
+      this.safeSetState({ form }, this.fetchRegions);
     }
   }
 
@@ -86,13 +84,6 @@ class Modify extends HelperComponent<RouteComponentProps<IRouteParams>, IState> 
     const { cityId } = this.state;
     const result = await PlaceController.GetRegions(cityId);
     this.safeSetState({ regions: result.data.map(item => ({ name: item.name, value: item.id })) })
-  }
-
-  private changeCity = (chosen: IDropdownOption<number>) => this.safeSetState({ cityId: chosen.value, regions: [] }, this.fetchRegions);
-  private changeRegion = (chosen: IDropdownOption<number>) => {
-    const { form } = this.state;
-    form.regionId = chosen.value;
-    this.safeSetState({ form });
   }
 
   private changeField = (e: React.SyntheticEvent<HTMLInputElement>) => {
@@ -148,24 +139,6 @@ class Modify extends HelperComponent<RouteComponentProps<IRouteParams>, IState> 
                 onChange={this.changeField}
               />
             </div>
-            <div className="G-main-form-field">
-              <p className="G-input-top-label">{Settings.translations.city}</p>
-              <Select<number>
-                value={cityId}
-                options={cities}
-                className={`G-main-select ${this.formValidation.errors.regionId ? 'G-invalid-select' : ''}`}
-                onChange={this.changeCity}
-              />
-            </div>
-            {!!cityId && <div className="G-main-form-field">
-              <p className="G-input-top-label">{Settings.translations.region}</p>
-              <Select<number>
-                value={form.regionId}
-                options={regions}
-                className={`G-main-select ${this.formValidation.errors.regionId ? 'G-invalid-select' : ''}`}
-                onChange={this.changeRegion}
-              />
-            </div>}
             <div className="G-main-form-field">
               <p className="G-input-top-label">{Settings.translations.address}</p>
               <Autocomplete

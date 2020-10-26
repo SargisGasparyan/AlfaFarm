@@ -12,6 +12,7 @@ export interface ISocialLoginRequestModel {
 
 export interface ISendCodeRequestModel {
   phoneNumber: string;
+  fromForgot: boolean;
 };
 
 export interface IVerifyRequestModel {

@@ -10,6 +10,7 @@ export interface IProductFilterRequestModel {
   sortBy?: ProductSortEnum;
   hasDiscount?: boolean;
   brandIds?: number[];
+  producerIds?: number[];
   activeIngredientIds?: number[];
   minPrice?: number;
   maxPrice?: number;
