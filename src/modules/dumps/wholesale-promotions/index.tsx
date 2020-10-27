@@ -63,7 +63,7 @@ class WholesalePromotions extends HelperPureComponent<{}, IState> {
     };
 
     const result = await BasketController.Change([body]);
-    result.success && window.dispatchEvent(new CustomEvent(DispatcherChannels.CartItemsUpdate, { detail: true }));
+    result.success && window.dispatchEvent(new CustomEvent(DispatcherChannels.CartItemsUpdate));
   }
 
   public render() {

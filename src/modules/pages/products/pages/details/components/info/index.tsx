@@ -31,6 +31,11 @@ class Info extends HelperComponent<IProps, IState> {
     pharmaciesAvailablityOpen: false,
   };
 
+  public componentDidMount() {
+    const { data } = this.props;
+    data.basketCount && this.safeSetState({ count: data.basketCount });
+  }
+
   private onCountChange = (count: number) => {
     this.safeSetState({ count });
   }
@@ -44,7 +49,7 @@ class Info extends HelperComponent<IProps, IState> {
       productQuantity: count,
     }]);
 
-    window.dispatchEvent(new CustomEvent(DispatcherChannels.CartItemsUpdate, { detail: true }));
+    window.dispatchEvent(new CustomEvent(DispatcherChannels.CartItemsUpdate));
     this.safeSetState({ cartLoading: false });
   });
 

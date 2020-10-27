@@ -22,6 +22,7 @@ import Socket from 'platform/services/socket';
 import NotificationController from 'platform/api/notification';
 import Notifications from './components/notifications';
 import ClickOutside from 'components/click-outside';
+import BasketController from 'platform/api/basket';
 
 interface IState {
   authOpen: boolean;
@@ -52,9 +53,11 @@ class Header extends HelperPureComponent<{}, IState> {
   };
 
   public componentDidMount() {
+    this.fetchCart();
     setTimeout(this.checkWindow, 500); // Wait for assets load to get the right position of category wrapper link
+
     window.addEventListener('resize', this.checkWindow);
-    window.addEventListener(DispatcherChannels.CartItemsUpdate, this.toggleCartIcon);
+    window.addEventListener(DispatcherChannels.CartItemsUpdate, this.fetchCart);
 
     Storage.profile && this.configureNotifications();
   }
@@ -62,7 +65,7 @@ class Header extends HelperPureComponent<{}, IState> {
   public componentWillUnmount() {
     super.componentWillUnmount();
     window.removeEventListener('resize', this.checkWindow);
-    window.removeEventListener(DispatcherChannels.CartItemsUpdate, this.toggleCartIcon);
+    window.removeEventListener(DispatcherChannels.CartItemsUpdate, this.fetchCart);
   }
 
   public async configureNotifications() {
@@ -77,10 +80,9 @@ class Header extends HelperPureComponent<{}, IState> {
     }
   }
 
-  private toggleCartIcon = (e: CustomEvent) => {
-    const { cartIconNumber } = this.state;
-    if (e.detail) this.safeSetState({ cartIconNumber: cartIconNumber + 1 });
-    else this.safeSetState({ cartIconNumber: 0 });
+  private fetchCart = async () => {
+    const result = await BasketController.GetCount();
+    this.safeSetState({ cartIconNumber: result.data });
   }
 
   private checkWindow = () => {

@@ -42,6 +42,8 @@ class Details extends HelperComponent<IProps, {}> {
     this.safeSetState({ data: result.data });
   }
 
+  private changeDetails = (data: IProductDetailsResponseModel) => this.safeSetState({ data });
+
   public render() {
     const { data } = this.state;
 
@@ -50,7 +52,7 @@ class Details extends HelperComponent<IProps, {}> {
         {data ? <>
           {window.routerHistory.length > 2 && <i className="G-back-icon icon-Group-5529" onClick={this.goBack} />}
           <div className="P-content">
-            {!!data.images.length && <Images data={data} />}
+            {!!data.images.length && <Images data={data} onChange={this.changeDetails} />}
             <Info data={data} />
           </div>
           <Similar data={data} />

@@ -16,6 +16,15 @@ class BasketController {
     return result;
   };
 
+  public static GetCount = (): Promise<IResponse<number>> => {
+    const result = Connection.GET({
+      action: 'count',
+      controller: BasketController.controller,
+    });
+
+    return result;
+  };
+
   public static Change = (body: IBasketChangeRequestModel[]): Promise<IResponse<boolean>> => {
     const result = Connection.PUT<IBasketChangeRequestModel[]>({
       body,

@@ -47,17 +47,20 @@ class CountInput extends HelperPureComponent<IProps, IState> {
   private stepUp = (e: React.SyntheticEvent) => {
     e.preventDefault();
     const { count, plused } = this.state;
-    const { step, onChange, onlyPlusIfOne } = this.props;
+    const { step, value, onChange, onlyPlusIfOne } = this.props;
 
     if (onlyPlusIfOne && !plused) this.safeSetState({ plused: true });
-    else this.safeSetState({ count: +count + step }, () => onChange(+this.state.count, !this.countInvalid()));
+    else {
+      const stepUped = value ? +value + step : +count + step;
+      this.safeSetState({ count: stepUped }, () => onChange(+this.state.count, !this.countInvalid()));
+    }
   }
 
   private stepDown = (e: React.SyntheticEvent) => {
     e.preventDefault();
     const { count } = this.state;
-    const { step, onChange, min } = this.props;
-    const stepDowned = +count - step;
+    const { step, onChange, min, value } = this.props;
+    const stepDowned = value ? +value - step : +count - step;
     this.safeSetState({ count: stepDowned >= min ? stepDowned : min }, () => onChange(+this.state.count, !this.countInvalid()));
   }
 
