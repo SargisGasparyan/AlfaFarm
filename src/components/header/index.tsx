@@ -118,9 +118,13 @@ class Header extends HelperPureComponent<{}, IState> {
 
   private searchSubmit = (value: string) => {
     const query = new URLSearchParams(window.location.search);
-    query.set('text', value);
-    window.routerHistory.push(`${ROUTES.PRODUCTS.MAIN}?${query.toString()}`);
-    window.dispatchEvent(new Event(DispatcherChannels.ProductFilterChange));
+    const oldValue = query.get('text');
+
+    if (oldValue !== value) {
+      query.set('text', value);
+      window.routerHistory.push(`${ROUTES.PRODUCTS.MAIN}?${query.toString()}`);
+      window.dispatchEvent(new Event(DispatcherChannels.ProductFilterChange));
+    }
   }
 
   private toggleNotifications = (e: Event | React.SyntheticEvent) => {

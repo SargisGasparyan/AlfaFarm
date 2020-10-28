@@ -956,6 +956,7 @@ export default {
   my_registrations: "Мои регистрации",
   medical_history: "История болезни",
   special_products: "Специальные продукты",
+  special_products_replace_fail: (date: string) => `Заменить товар можно только после ${date}`,
   my_wallet: "Мой бумажник",
   my_addresses: "Мои адреса",
   addresses: "Адреса",

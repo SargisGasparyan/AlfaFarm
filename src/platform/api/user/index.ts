@@ -1,7 +1,7 @@
 import Connection from '../../services/connection';
 import { IResponse } from '../../constants/interfaces';
-import { IRegisterRequestModel, IUserModifyRequestModel, IUserPasswordModifyRequestModel } from './models/request';
-import { IUserResponseModel } from './models/response';
+import { IRegisterRequestModel, IUserModifyRequestModel, IUserPasswordModifyRequestModel, IPreferredProductUpdateRequestModel } from './models/request';
+import { IUserResponseModel, IPreferredProductListResponseModel } from './models/response';
 
 class UserController {
 
@@ -10,6 +10,25 @@ class UserController {
   public static Get = (): Promise<IResponse<IUserResponseModel>> => {
     const result = Connection.GET({
       action: '',
+      controller: UserController.controller,
+    });
+
+    return result;
+  };
+
+  public static GetPreferredProductList = (): Promise<IResponse<IPreferredProductListResponseModel[]>> => {
+    const result = Connection.GET({
+      action: 'preferredProductList',
+      controller: UserController.controller,
+    });
+
+    return result;
+  };
+
+  public static UpdatePreferredProductList = (body: IPreferredProductUpdateRequestModel): Promise<IResponse<boolean>> => {
+    const result = Connection.PUT<IPreferredProductUpdateRequestModel>({
+      body,
+      action: 'preferredProductList',
       controller: UserController.controller,
     });
 

@@ -41,7 +41,7 @@ class Cart extends HelperComponent<{}, IState> {
         />
 
         <div className="P-main-info">
-          <h2>{row.productTitle}</h2>
+          <h2 title={row.productTitle}>{row.productTitle}</h2>
           <span>{row.unitQuantity} {row.unitName}</span>
         </div>
       </Link>,
