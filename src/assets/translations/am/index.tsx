@@ -980,6 +980,7 @@ export default {
   my_registrations: "Իմ գրանցումները",
   medical_history: "Բժշկական պատմություն",
   special_products: "Հատուկ ապրանքներ",
+  special_products_replace_fail: (date: string) => `Ապրանքը կարող եք փոխարինել ոչ շուտ քան ${date}`,
   my_wallet: "Իմ դրամապանակը",
   my_addresses: "Իմ հասցեները",
   addresses: "Հասցեներ",

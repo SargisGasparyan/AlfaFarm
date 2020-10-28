@@ -46,10 +46,18 @@
             @include bold-font;
 
             > .P-main-info {
+              width           : calc(100% - 120px);
               display         : flex;
               padding         : 0 30px;
               flex-direction  : column;
               justify-content : center;
+
+              > h2 {
+                overflow      : hidden;
+                max-width     : 100%;
+                white-space   : nowrap;
+                text-overflow : ellipsis;
+              }
       
               > span {
                 margin-top : 20px;

@@ -41,7 +41,7 @@ class Cart extends HelperComponent<{}, IState> {
         />
 
         <div className="P-main-info">
-          <h2>{row.productTitle}</h2>
+          <h2 title={row.productTitle}>{row.productTitle}</h2>
           <span>{row.unitQuantity} {row.unitName}</span>
         </div>
       </Link>,
@@ -62,10 +62,7 @@ class Cart extends HelperComponent<{}, IState> {
     },
   ];
 
-  public componentDidMount() {
-    window.dispatchEvent(new CustomEvent(DispatcherChannels.CartItemsUpdate, { detail: false }));
-    this.fetchData();
-  }
+  public componentDidMount() { this.fetchData(); }
 
   private fetchData = async () => {
     const result = await BasketController.GetList();
@@ -73,20 +70,16 @@ class Cart extends HelperComponent<{}, IState> {
   }
 
   private changeCount = async (row: IBasketListResponseModel, count: number) => {
-    const { data } = this.state;
-
     if (count) {
       Connection.AbortAll();
       await BasketController.Change([{
         productId: row.productId,
         productQuantity: count,
       }]);
+    } else await BasketController.Delete([row.id]);
 
-      this.fetchData();
-    } else {
-      await BasketController.Delete([row.id]);
-      this.fetchData();
-    }
+    this.fetchData();
+    window.dispatchEvent(new CustomEvent(DispatcherChannels.CartItemsUpdate));
   }
 
   private toggleCartSave = () => {

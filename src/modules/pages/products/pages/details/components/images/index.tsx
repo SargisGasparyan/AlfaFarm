@@ -1,16 +1,19 @@
 import * as React from 'react';
 
+import { Shared } from 'modules';
 import HelperPureComponent from 'platform/classes/helper-pure-component';
 
 import { IProductDetailsResponseModel } from 'platform/api/product/models/response';
 import { getMediaPath } from 'platform/services/helper';
 
-import './style.scss';
-import { Shared } from 'modules';
+import { IFavoriteListResponseModel } from 'platform/api/favorite/models/response';
+import FavoriteController from 'platform/api/favorite';
 
+import './style.scss';
 
 interface IProps {
   data: IProductDetailsResponseModel;
+  onChange(data: IProductDetailsResponseModel): void;
 }
 
 interface IState {
@@ -46,14 +49,15 @@ class Images extends HelperPureComponent<IProps, IState> {
     return `translateY(${calculation})`;
   }
 
-  private zoom = (e: React.MouseEvent) => {
-    const zoomer = e.currentTarget as HTMLElement;
-    const offsetX = e.nativeEvent.offsetX;
-    const offsetY = e.nativeEvent.offsetY;
+  private toggleFavorite = async (e: React.SyntheticEvent, item: IFavoriteListResponseModel) => {
+    e.preventDefault();
+    const { data, onChange } = this.props;
+    const result = await FavoriteController.AddOrRemove(item.id);
 
-    const x = offsetX / zoomer.offsetWidth * 100;
-    const y = offsetY / zoomer.offsetHeight * 100;
-    zoomer.style.backgroundPosition = x + '% ' + y + '%';
+    result && result.success && onChange({
+      ...data,
+      isFavorite: !data.isFavorite,
+    });
   }
 
   public render() {
@@ -69,6 +73,11 @@ class Images extends HelperPureComponent<IProps, IState> {
           <div>
             <img src={getMediaPath(this.activeImage)} />
           </div>
+
+          <i
+            onClick={e => this.toggleFavorite(e, data)}
+            className={`P-favorite ${data.isFavorite ? 'P-active icon-Group-5520' : 'icon-Group-5518'}`}
+          />
         </div>
         {!!thumbImages.length && <div className="P-thumbs">
           {thumbImages.map(item => <div

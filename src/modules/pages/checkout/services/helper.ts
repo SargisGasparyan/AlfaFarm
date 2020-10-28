@@ -6,7 +6,8 @@ export function validateForm(this: IOrderModifyRequestModel, submited?: boolean)
   let valid = true;
 
   const errors = {
-    fullName: false,
+    firstName: false,
+    lastName: false,
     email: false,
     phoneNumber: false,
     regionId: false,
@@ -15,8 +16,13 @@ export function validateForm(this: IOrderModifyRequestModel, submited?: boolean)
     deliveryDateTo: false,
   };
 
-  if (submited && !this.fullName) {
-    errors.fullName = true;
+  if (submited && !this.firstName) {
+    errors.firstName = true;
+    valid = false;
+  }
+
+  if (submited && !this.lastName) {
+    errors.lastName = true;
     valid = false;
   }
 

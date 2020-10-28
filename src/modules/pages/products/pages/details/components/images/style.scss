@@ -18,6 +18,19 @@
     border-radius   : $big-radius;
     justify-content : center;
 
+    > .P-favorite {
+      top       : 70px;
+      left      : 20px;
+      color     : $text-gray;
+      cursor    : pointer;
+      position  : absolute;
+      font-size : 28px;
+  
+      &.P-active {
+        color: $pink;
+      }
+    }
+
     > div {
       width               : 90%;
       position            : relative;

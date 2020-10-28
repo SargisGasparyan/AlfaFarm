@@ -16,6 +16,8 @@ export interface IProductListResponseModel {
 export interface IProductDetailsResponseModel {
   id: number;
   title: string;
+  isFavorite: boolean;
+  basketCount: number;
   description: string;
   price: number;
   discountedPrice?: number;

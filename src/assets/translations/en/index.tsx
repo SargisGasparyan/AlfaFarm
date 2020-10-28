@@ -958,6 +958,7 @@ export default {
   my_registrations: "My registrations",
   medical_history: "Medical history",
   special_products: "Special products",
+  special_products_replace_fail: (date: string) => `You can replace the product only after ${date}`,
   my_wallet: "My wallet",
   my_addresses: "My addresses",
   addresses: "Addresses",
