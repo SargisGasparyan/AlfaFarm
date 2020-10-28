@@ -8,13 +8,14 @@ import English from 'assets/translations/en';
 
 class Settings {
   
-  public static defaultLangauge = LanguageEnum.Armenian;
+  public static defaultLanguage = LanguageEnum.Armenian;
 
-  public static facebookId = 392096548151413;
-  public static googleId = '68962021705-tu6bdgffqj3orrlu34t6a9c4lfuupc6q.apps.googleusercontent.com';
+  public static facebookId = 4185689951504366;
+  public static googleId = '868926872899-3h51jp9caaq17a9eohc61juahmahk01q.apps.googleusercontent.com';
   public static linkedinId = '77ji7ohk6dxaxv';
 
-  public static googleAPIKey = 'AIzaSyDT8V0w75M0dzAqC61m3s-K7S0qRpTjQcU';
+  public static googleAPIKey = 'AIzaSyDVSjKMr1sGNq7dlzGm3YBskX9GYeZJ5Uk';
+  // AIzaSyDqd5WM8hmgmjB-7DozGaJ38M1fjIWrStY
 
   public static googlePlayURL = 'https://play.google.com/store/apps/details?id=am.armboldmind.ineed';
   public static appStoreURL = 'https://apps.apple.com/am/app/id1465885901';
@@ -23,15 +24,17 @@ class Settings {
   public static instagramURL = 'https://www.instagram.com/ineed.market/';
   public static linkedinURL = 'https://www.linkedin.com/company/ineed.am/about/';
 
+  public static webURL = 'https://alfapharm.abmdemo.me';
+  public static wholesaleURL = 'https://wholesalealfa.abmdemo.me';
+
   public static get language(): LanguageEnum {
-    const storageLanguage = window.localStorage.getItem('language') || Settings.defaultLangauge;
-    const language = +storageLanguage;
-    if (!language || !LanguageEnum[language]) return Settings.defaultLangauge;
-    else return language;
+    const language = window.localStorage.getItem('language') as LanguageEnum || Settings.defaultLanguage;
+    if (!language || !Object.values(LanguageEnum).includes(language)) return Settings.defaultLanguage;
+    return language;
   }
 
   public static set language(value: LanguageEnum) {
-    window.localStorage.setItem('language', value.toString());
+    window.localStorage.setItem('language', value);
   }
 
   public static get shortCode() {
@@ -58,25 +61,25 @@ class Settings {
   public static set token(value: string | null) {
     if (value) {
       window.localStorage.setItem('token', value);
-      window.localStorage.removeItem('guestId');
+      window.localStorage.removeItem('guest');
     } else window.localStorage.removeItem('token');
   }
 
-  public static get guestId(): string | null {
-    const id = window.localStorage.getItem('guestId') || null;
-    return id;
+  public static get guest(): string | null {
+    const guest = window.localStorage.getItem('guest') || null;
+    return guest ? Settings.token : null;
   }
 
-  public static set guestId(value: string | null) {
+  public static set guest(value: string | null) {
     if (value) {
-      window.localStorage.setItem('guestId', value);
-      window.localStorage.removeItem('token');
-    } else window.localStorage.removeItem('guestId');
+      window.localStorage.setItem('token', value);
+      window.localStorage.setItem('guest', 'true');
+    } else window.localStorage.removeItem('guest');
   }
 
   public static logout = () => {
     window.localStorage.removeItem('token');
-    window.localStorage.removeItem('cartItems');
+    window.localStorage.removeItem('guest');
     window.location.reload();
   }
 }

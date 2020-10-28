@@ -1,0 +1,53 @@
+@import 'src/assets/styles/helper';
+@import 'src/assets/styles/variables';
+
+.ABM-pagination-wrap {
+  width           : 100%;
+  display         : flex;
+  margin-top      : 60px;
+  box-sizing      : border-box;
+  align-items     : center;
+  justify-content : center;
+
+  .ABM-button {
+    width  : 12px;
+    height : 12px;
+    cursor : pointer;
+    margin : 0 5px;
+  }
+  
+  .ABM-pages-wrap {
+    height      : 20px;
+    cursor      : pointer;
+    display     : flex;
+    user-select : none !important;
+    align-items : center;
+
+    .ABM-page {
+      width           : 30px;
+      height          : 30px;
+      margin          : 0 15px;
+      display         : flex;
+      padding         : 8px;
+      font-size       : $normal-fs;
+      transition      : transform .4s;
+      align-items     : center;
+      justify-content : center;
+    
+      &.ABM-selected {
+        width         : 45px;
+        color         : $main-color;
+        height        : 45px;
+        border        : 2px solid $main-color;
+        background    : white;
+        border-radius : 50%;
+        @include bold-font;
+      }
+    }
+  }
+  
+  .ABM-count-input {
+    width   : 50px;
+    display : block;
+  }
+}

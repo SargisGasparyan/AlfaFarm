@@ -1,69 +1,67 @@
 @import 'src/assets/styles/helper';
 @import 'src/assets/styles/variables';
 
-.P-header-categories {
+.P-header-categories-wrapper {
+  top             : $header-size;
+  left            : 0;
+  width           : 100%;
+  display         : flex;
+  position        : absolute;
+  padding-top     : 15px;
+  justify-content : flex-end;
 
-  margin     : 0 $page-horizontal-offset;
-  padding    : 15px 5px;
-  display    : flex;
-  position   : fixed;
-  background : white;
-  box-shadow : $default-block-shadow;
-  max-height : calc(100vh - #{$header-size});
+  .P-content {
+    display       : flex;
+    position      : fixed;
+    max-height    : calc(100vh - #{$header-size});
+    padding-right : 15px;
+  
+    > .P-list {
+      padding       : 15px 0;
+      min-width     : 300px;
+      max-width     : 300px;
+      transition    : .4s;
+      overflow-y    : auto;
+      background    : white;
+      box-shadow    : $default-block-shadow;
+      margin-left   : 15px;
+      border-radius : $radius;
 
-  > .P-list {
-
-    padding      : 0 10px;
-    min-width    : 300px;
-    max-width    : 300px;
-    transition   : .4s;
-    overflow-y   : auto;
-    border-right : 1px solid $light-gray;
-
-    &:first-child { border-right-width: 1px; }
-    &:last-child { border-right-width: 0 };
-
-    > div {
-
-      cursor        : pointer;
-      height        : 35px;
-      display       : flex;
-      padding       : 0 5px;
-      align-items   : center;
-      margin-bottom : 10px;
-      border-radius : $small-radius;
-
-      &:last-child { margin-bottom: 0; }
-      &:hover, &.P-category-choosed {
-      
-        background : transparentize($light-gray, .8);
-
-        > h3 { color: $main-color; }
-      }
-
-      > img {
-
-        width        : 22px;
-        height       : 20px;
-        object-fit   : contain;
-        margin-right : 10px;
-      }
-
-      > h3 {
-
-        width         : 100%;
-        overflow      : hidden;
-        font-size     : 14px;
-        white-space   : nowrap;
-        text-overflow : ellipsis;
-        @include normal-font;
-      }
-
-      > i {
-
-        color       : $text-gray-light;
-        font-size   : 14px;
-        margin-left : 15px;
+      > div {  
+        cursor        : pointer;
+        display       : flex;
+        padding       : 15px 10px 15px 40px;
+        align-items   : center;
+        margin-bottom : 10px;
+        border-radius : $small-radius;
+  
+        &:last-child { margin-bottom: 0; }
+        &:hover, &.P-category-choosed {
+        
+          background : #F1FFF1;
+        }
+  
+        > img {
+  
+          width        : 22px;
+          height       : 20px;
+          object-fit   : contain;
+          margin-right : 10px;
+        }
+  
+        > h3 {
+          width         : 100%;
+          overflow      : hidden;
+          font-size     : 16px;
+          white-space   : nowrap;
+          text-overflow : ellipsis;
+        }
+  
+        > i {
+          font-size   : 10px;
+          margin-left : 15px;
+          @include bold-font;
+        }
       }
     }
   }

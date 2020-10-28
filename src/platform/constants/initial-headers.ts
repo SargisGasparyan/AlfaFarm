@@ -1,5 +1,5 @@
 export default {
-  Title: 'AlphaPharm: Global Market',
+  Title: 'AlfaPharm',
   Description: '',
-  Keywoards: 'market product order pharmacy medicine alpha',
+  Keywoards: 'market product order pharmacy medicine alpha alfa',
 };

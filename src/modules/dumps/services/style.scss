@@ -1,0 +1,49 @@
+@import 'src/assets/styles/helper';
+@import 'src/assets/styles/variables';
+
+.G-page.P-services-page {
+  padding : 0;
+
+  > .P-header {
+    width           : 100%;
+    height          : 300px;
+    padding         : 20px $page-horizontal-offset;
+    display         : flex;
+    background      : url('src/assets/images/services.png') center/cover;
+    align-items     : center;
+    justify-content : flex-start;
+
+    > .P-shadow-text {
+      font-size    : 80px;
+      padding-left : 100px;
+
+      > .P-background {
+        left      : initial;
+        right     : -15vw;
+        font-size : 120px;
+      }
+    }
+  }
+
+  > .P-content {
+    display        : flex;
+    padding        : 120px $page-horizontal-offset;
+    flex-direction : column;
+
+    > p {
+      width         : 100%;
+      color         : $text-gray;
+      font-size     : 20px;
+      line-height   : 36px;
+      margin-bottom : 80px;
+      @include bold-font();
+    }
+
+    > .P-list-wrapper {
+      margin          : -25px;
+      display         : flex;
+      flex-wrap       : wrap;
+      justify-content : center;
+    }
+  }
+}

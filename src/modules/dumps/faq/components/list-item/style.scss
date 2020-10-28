@@ -1,0 +1,42 @@
+@import 'src/assets/styles/helper';
+@import 'src/assets/styles/variables';
+
+.P-faq-list-item, .P-faq-list-item-content {
+  margin    : 0 auto 15px;
+  max-width : 100%;
+}
+
+.P-faq-list-item {
+  cursor           : pointer;
+  display          : flex;
+  padding          : 20px 30px;
+  align-items      : center;
+  justify-content  : space-between;
+  background-color : $main-color-light;
+
+  &.P-open {
+
+    > .P-description {
+      opacity   : 1;
+      transform : none;
+    }
+
+    > i {
+      transform: rotate(180deg);
+    }
+  }
+
+  > .P-title, > i {
+    font-size  : 20px;
+    transition : transform .4s;
+  }
+}
+
+.P-vacancies-list-item-content {
+  padding : 40px 35px 80px;
+  
+  > .P-description {
+    font-size   : $normal-fs;
+    line-height : 42px;
+  }
+}

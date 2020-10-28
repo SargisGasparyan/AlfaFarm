@@ -1,0 +1,45 @@
+@import 'src/assets/styles/variables';
+
+.P-blog-details-images {
+  width         : calc(45% - 15px);
+  display       : flex;
+  margin-bottom : 60px;
+
+  > .P-current-image {
+    width           : 100%;
+    height          : 55vh;
+    border          : 1px solid $light-gray;
+    display         : flex;
+    position        : relative;
+    overflow        : hidden;
+    min-height      : 100%;
+    align-items     : center;
+    border-radius   : $big-radius;
+    justify-content : center;
+  }
+
+  > .P-thumbs {
+    margin         : -10px 20px -10px 0;
+    display        : flex;
+    position       : relative;
+    overflow       : hidden;
+    min-width      : 200px;
+    max-width      : 200px;
+    flex-direction : column;
+    
+    > div {
+      width         : 100%; // (20 + 20)/3 = 13.3333333
+      height        : 180px; 
+      border        : 1px solid $light-gray;
+      margin        : 10px 0;
+      cursor        : pointer;
+      transition    : transform .4s;
+      border-radius : $big-radius;
+
+      > div {
+        width  : 100%;
+        height : 100%;
+      }
+    }
+  }
+}

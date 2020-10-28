@@ -1,45 +1,14 @@
 @import 'src/assets/styles/variables';
 
-.P-about-page {
+.G-page.P-about-us-page {
+  padding-top    : 0;
+  padding-bottom : 0;
 
-  > .P-about-page-content {
-
+  > .P-cardiogram {
     display     : flex;
-    align-items : flex-start;
-  
-    > .P-content {
-  
-      width         : 100%;
-      padding       : 30px;
-      background    : white;
-      box-shadow    : $default-block-shadow;
-      margin-left   : 20px;
-      border-radius : $radius;
-  
-      > .P-about-image {
-  
-        width           : 100%;
-        color           : white;
-        height          : 200px;
-        display         : flex;
-        font-size       : 24px;
-        align-items     : center;
-        border-radius   : $small-radius;
-        justify-content : center;
-      }
-  
-      > .P-about-texts {
+    margin-top  : 30px;
+    align-items : center;
 
-        margin-top : 30px;
-        word-break : break-word;
-
-        > h3 { font-size: 20px; }
-        > p {
-          
-          margin     : 15px 0 30px;
-          font-size  : $normal-fs;
-        }
-      }
-    }  
+    > img { width: 100%; }
   }
 }

@@ -1,0 +1,86 @@
+@import 'src/assets/styles/helper';
+@import 'src/assets/styles/variables';
+
+.G-page.P-wholesale-promotions-page {
+  padding : 0;
+
+  > .P-header {
+    width           : 100%;
+    height          : 300px;
+    padding         : 20px $page-horizontal-offset;
+    display         : flex;
+    background      : url('src/assets/images/services.png') center/cover;
+    align-items     : center;
+    justify-content : flex-start;
+
+    > .P-shadow-text {
+      font-size    : 80px;
+      padding-left : 100px;
+
+      > .P-background {
+        left      : initial;
+        right     : -15vw;
+        font-size : 120px;
+      }
+    }
+  }
+
+  > .P-content {
+    display        : flex;
+    padding        : 120px $page-horizontal-offset;
+    flex-direction : column;
+
+    > p {
+      width         : 100%;
+      color         : $text-gray;
+      font-size     : 20px;
+      line-height   : 36px;
+      margin-bottom : 80px;
+      @include bold-font();
+    }
+
+    > .P-list-wrapper {
+      margin          : -25px;
+      display         : flex;
+      flex-wrap       : wrap;
+      justify-content : center;
+    }
+  }
+
+
+  > .P-search-block {
+    width           : 1200px;
+    margin          : 60px auto 0;
+    padding         : 30px;
+    max-width       : 100%;
+    display         : flex;
+    box-shadow      : $default-block-shadow;
+    background      : white;
+    border-radius   : $radius;
+    justify-content : flex-end;
+  }
+
+  > .P-brand-item {
+    width         : 1200px;
+    margin        : 60px auto;
+    max-width     : 100%;
+    box-shadow    : $default-block-shadow;
+    background    : white;
+    border-radius : $radius;
+
+    > .P-title {
+      display         : flex;
+      padding         : 30px;
+      align-items     : center;
+      justify-content : space-between;
+
+      > div {
+        width  : 200px;
+        height : 100px;
+      }
+    }
+
+    .P-add-to-cart { padding: 10px 40px; }
+    > .P-data-table > .P-data-table-body > ul { height: 80px; }
+  }
+}

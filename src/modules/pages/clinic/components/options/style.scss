@@ -1,0 +1,37 @@
+@import 'src/assets/styles/helper';
+@import 'src/assets/styles/variables';
+
+.G-page.P-clinic-options {
+  display         : flex !important;
+  padding-bottom  : 140px;
+  position        : relative;
+  flex-direction  : column;
+  justify-content : center;
+
+  > .P-shadow-text {
+    color         : $orange;
+    margin-bottom : 60px;
+
+    > .P-background {
+      background-image : -webkit-linear-gradient(45deg, $orange, transparent);
+    }
+  }
+
+  > .P-cardiogram {
+    bottom    : -6px;
+    position  : absolute;
+    transform : translateY(50%);
+  }
+
+  > .G-main-ghost-button {
+    color         : $orange;
+    width         : 320px;
+    padding       : 15px;
+    font-size     : 24px;
+    text-align    : center;
+    border-color  : $orange;
+    margin-bottom : 30px;
+    border-radius : 30px;
+    @include bold-font();
+  }
+}

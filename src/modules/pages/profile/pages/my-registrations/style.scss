@@ -1,0 +1,74 @@
+@import 'src/assets/styles/helper';
+@import 'src/assets/styles/variables';
+
+.P-profile-my-registrations-page {
+  
+  > .P-title {
+    cursor        : pointer;
+    margin-bottom : 60px;
+    @include normal-font;
+  
+    > a {
+      color           : black;
+      text-decoration : none;
+    }
+
+    > span {
+      color          : $orange;
+      margin-right   : 80px;
+      border-bottom  : 1px solid $orange;
+      padding-bottom : 10px;
+    }
+  }
+
+  > .P-list {
+    display        : flex;
+    overflow       : hidden;
+    background     : white;
+    box-shadow     : $default-block-shadow;
+    border-radius  : $big-radius;
+    flex-direction : column;
+
+    > .P-list-item {
+      color           : black;
+      padding         : 20px 0;
+      display         : flex;
+      align-items     : center;
+      border-bottom   : 1px solid $light-gray;
+      justify-content : space-between;
+      text-decoration : none;
+
+      > .P-image {
+        width           : 120px;
+        height          : 120px;
+        border          : 1px solid $light-gray;
+        padding         : 5px;
+        display         : flex;
+        align-items     : flex-start;
+        justify-content : flex-end;
+
+        > .P-favorite {
+          color     : $text-gray;
+          cursor    : pointer;
+          font-size : 20px;
+      
+          &.P-active {
+            color: $pink;
+          }
+        }
+      }
+
+      > .P-main-info {
+        margin : 0 auto 0 40px;
+
+        > h2 { margin-bottom: 20px; }
+      }
+
+      .P-price {
+        margin-right : 40px;
+      }    
+
+      &:last-child { border-bottom: 0; }
+    }
+  }
+}

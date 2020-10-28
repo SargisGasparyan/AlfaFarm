@@ -1,0 +1,87 @@
+@import 'src/assets/styles/helper';
+@import 'src/assets/styles/variables';
+
+@import './responsive.scss';
+
+.G-page.P-home-contact-us {
+
+  display        : flex;
+  padding-top    : 100px;
+  flex-direction : column;
+
+  > .P-shadow-text { margin-bottom: 130px; }
+
+  > .P-maps {
+    width  : calc(100% + #{2 * $page-horizontal-offset});
+    height : 500px;
+    margin : 130px 0 0 (-$page-horizontal-offset);
+    border : 0;
+  }
+ 
+  > .P-bottom {
+    margin          : 0 10vw;
+    display         : flex;
+    flex-wrap       : wrap;
+    padding-top     : 30px; // 30px = 50px - 20px child vertical offset;
+    justify-content : space-between;
+
+    > div {
+      flex            : 1;
+      color           : $text-gray;
+      margin          : 20px;
+      cursor          : pointer;
+      display         : flex;
+      align-items     : center;
+      flex-direction  : column;
+
+      &:hover { color: $main-color; }
+
+      > i { font-size: 70px; }
+
+      > h3 {
+        font-size      : $normal-fs;
+        text-align     : center;
+        margin-top     : 10px;
+        white-space    : nowrap;
+        text-transform : uppercase;
+        @include bold-font();
+      }
+    }
+  }
+}
+
+.P-contact-us-about-modal .P-modal-content > div {
+  color          : $main-color;
+  padding        : 30px;
+  display        : flex;
+  align-items    : center;
+  flex-direction : column;
+  
+  > i { font-size: 70px; }
+
+  > h3 {
+    font-size      : 20px;
+    margin-top     : 10px;
+    text-transform : uppercase;
+    @include bold-font();
+  }
+
+  > p {
+    color       : black;
+    text-align  : center;
+    margin-top  : 30px;
+    line-height : 40px;
+  }
+
+  > .P-download-images {
+    display         : flex;
+    margin-top      : 30px;
+    justify-content : space-around;
+
+    > img {
+      width  : 150px;
+      height : 54px;
+      margin : 0 20px;
+    }
+  }
+}

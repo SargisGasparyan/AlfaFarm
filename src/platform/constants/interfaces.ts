@@ -1,11 +1,10 @@
 import * as React from 'react';
 
 import { DropdownNameFunctionType } from './types';
-import { RequestSendTypeEnum } from '../api/request';
 
 export interface IResponse<Data> {
   data: Data;
-  message: string;
+  messages: { key: number, value: string }[];
   success: boolean;
   abort(): void;
   aborted?: boolean;
@@ -30,11 +29,10 @@ export interface IRequest {
   dataAsSuccess?: boolean;
   withoutError?: boolean;
   unabortable?: boolean;
+  withoutConfirmModal?: boolean;
 };
 
 export interface IBodyRequest<Body extends object> extends IRequest { body: Body; };
-
-export interface IPaginationChange { selected: number };
 
 export interface IDropdownOption<Value> {
   name: string | number | React.ReactNode | HTMLElement | DropdownNameFunctionType;
@@ -42,6 +40,7 @@ export interface IDropdownOption<Value> {
 };
 
 export interface IGooglePlace {
+  formatted_address: string;
   geometry: {
     location: {
       lat(): number;
@@ -50,26 +49,20 @@ export interface IGooglePlace {
   };
 };
 
-export interface IPagination<Data> {
-  itemList: Data[];
-  categoryParentTree : ITreeList[];
-  itemCount?: number;
-  pagesLeft: boolean;
+export interface IPagingResponse<Data> {
+  list: Data[];
+  totalCount: number;
+  pageCount: number;
 };
 
-export interface IContactInfoModel {
-  firstName: string;
-  lastName: string;
-  email: string;
-  phoneNumber: string;
-  idList?: string[];
-  code?: string;
-  type?: RequestSendTypeEnum;
+export interface IFile {
+  id: number;
+  path: string;
 };
 
 export interface ITreeList {
-  name:string,
-  _id:string,
+  name: string,
+  _id: string,
 }
 
 
@@ -83,3 +76,8 @@ export interface IBecomePartner {
   contactperson: string,
   
 }
+
+export interface IPagingRequest {
+  pageSize: number;
+  pageNumber: number;
+};

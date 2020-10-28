@@ -1,0 +1,23 @@
+@import 'src/assets/styles/variables';
+
+.P-product-details-similar {
+  width          : 100%;
+  display        : flex;
+  margin-top     : 70px;
+  flex-direction : column;
+
+  > .P-title {
+    color         : $main-color;
+    font-size     : 34px;
+    text-align    : center;
+    margin-bottom : 60px;
+  }
+
+  > .P-list {
+    width           : calc(100% + 20px);
+    margin          : -20px -20px 40px;
+    display         : flex;
+    flex-wrap       : wrap;
+    justify-content : center;
+  }
+}

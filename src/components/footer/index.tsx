@@ -1,111 +1,72 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 
-import { IDropdownOption } from 'platform/constants/interfaces';
-import { LanguageEnum } from 'platform/constants/enums';
 import ROUTES from 'platform/constants/routes';
-import Select from '../select';
 import Settings from 'platform/services/settings';
-import Storage from 'platform/services/storage';
-import GetMyOrder from './components/get-my-order';
-import { IOrderGuestRequestModel } from 'platform/api/order';
-import HelperComponent from 'platform/classes/helper-component';
+import { contactPhoneNumber, contactEmail, contactAddress } from 'platform/constants/contact-info';
+import OrderACall from './components/order_a_call';
+import enviroment from 'platform/services/enviroment';
 
-import facebookIcon from 'assets/images/ic_facebook.png';
-import linkedinIcon from 'assets/images/ic_linkedin.png';
-import instagramIcon from 'assets/images/ic_instagram.png';
-
-import AppStore from 'assets/images/app_store.png';
-import GooglePlay from 'assets/images/google_play.png';
+import LogoImage from 'assets/images/logo.png';
+import AppStoreImage from 'assets/images/app_store.png';
+import GooglePlayImage from 'assets/images/google_play.png';
+import FacebookImage from 'assets/images/facebook.png';
+import InstagramImage from 'assets/images/instagram.png';
 
 import './style.scss';
 
-interface IState {
-  orderQueryData: IOrderGuestRequestModel | null;
-  isGetMyOrderOpen: boolean;
-};
+const currentYear = new Date().getFullYear();
 
-class Footer extends HelperComponent<{}, IState> {
-
-  public state: IState = {
-    orderQueryData: null,
-    isGetMyOrderOpen: false,
-  };
-
-  public componentDidMount() {
-    !Storage.profile && this.checkOrderQuery();
-  }
-
-  private currentYear = new Date().getFullYear();
-
-  private checkOrderQuery = () => {
-    const query = new URLSearchParams(window.location.search);
-    const email = query.get('orderEmail');
-    const code = query.get('orderCode');
-
-    if (email && code) {
-      const orderQueryData = { email, code };
-      this.safeSetState({ isGetMyOrderOpen: true, orderQueryData });
-    }
-  }
-
-  private changeLanguage = (option: IDropdownOption<LanguageEnum>) => {
-    Settings.language = option.value;
-    window.location.reload();
-  }
-
-  private toggleGetMyOrder = () => {
-    const { isGetMyOrderOpen } = this.state;
-    this.safeSetState({ isGetMyOrderOpen: !isGetMyOrderOpen, orderQueryData: null });
-  }
-
-  public render() {
-    const { isGetMyOrderOpen, orderQueryData } = this.state;
-
-    return (
-      <footer>
-        <div className="P-footer-column">
-          <h3>{Settings.translations.about_us}</h3>
-          <Link to={ROUTES.CONTRACT}>{Settings.translations.contract}</Link>
-          <Link to={ROUTES.FAQ}>{Settings.translations.faq}</Link>
-          <Link to={ROUTES.CONFIDENTIALITY_CONDITIONS}>{Settings.translations.confidentiality_conditions}</Link>
-          <Link to={ROUTES.EXCHANGE_RETURN}>{Settings.translations.products_exchange_and_return}</Link>
-          {!Storage.profile && <a onClick={this.toggleGetMyOrder}>{Settings.translations.get_my_order}</a>}
-        </div>
-        <div className="P-footer-column">
-          {/* <h3>{Settings.translations.for_partners}</h3>
-          <Link to={ROUTES.CONTRACT}>{Settings.translations.help_for_partners}</Link>
-          <Link to={ROUTES.FAQ}>{Settings.translations.faq}</Link>
-          <Link to={ROUTES.CONFIDENTIALITY_CONDITIONS}>{Settings.translations.invitation_to_cooperate}</Link>
-          <Link to={ROUTES.EXCHANGE_RETURN}>{Settings.translations.partners_account_login}</Link> */}
-        </div>
-        <div className="P-footer-column column-app-download">
-        <h3>{Settings.translations.ineed_app}</h3>
-        
-          <a href={Settings.appStoreURL} target="_blank" className="P-app-store"><img src={AppStore} alt="app store" /></a>
-          <a href={Settings.googlePlayURL} target="_blank" className="P-google-play"><img src={GooglePlay} alt="google play" /></a>
-
-        </div>
-
-        <div className="P-footer-bottom">
-        <h3 className="P-footer-copyright">&#9400; {Settings.translations.copyright}, {this.currentYear}</h3>
-        {isGetMyOrderOpen && <GetMyOrder onClose={this.toggleGetMyOrder} queryData={orderQueryData} />}
-        <div className="social-medias">
-          <a href = "https://www.linkedin.com/company/ineed-market/" className="social-media" target="_blank">
-            <img src={linkedinIcon} alt="linkedin"/>
+const Footer = React.memo(() => (
+  <footer>
+    <img src={LogoImage} className="P-logo G-mr-auto" />
+    <div className="P-content">
+      <div className="P-column">
+        <p>{Settings.translations.footer_text}</p>
+        <div className="P-social-links">
+          <a href="https://www.facebook.com/AlfaPharm" target="_blank">
+            <img src={FacebookImage} alt="facebook" />
           </a>
-          <a href = "https://www.facebook.com/ineedmarket/" className="social-media" target="_blank">
-            <img src={facebookIcon} alt="facebook"/>
+          <a href="https://www.instagram.com/AlfaPharm/" target="_blank">
+            <img src={InstagramImage} alt="instagram" />
           </a>
-          <a href = "https://www.instagram.com/ineed.market/" className="social-media" target="_blank">
-            <img src={instagramIcon} alt="instagram"/>
-          </a>
-
         </div>
+      </div>
+      {!enviroment.WHOLESALE && <>
+        <div className="P-column">
+          <h3 className="G-main-color">{Settings.translations.wholesale_sale}</h3>
+          <a href={Settings.wholesaleURL + ROUTES.SERVICES}>{Settings.translations.services}</a>
         </div>
-      </footer>
-    );
-  }
-}
+        <div className="P-column">
+          <h3 className="G-main-color">{Settings.translations.retail_sale}</h3>
+          <a>{Settings.translations.what_is_alfa_card}</a>
+          <Link to={ROUTES.VACANCIES}>{Settings.translations.vacancies}</Link>
+          <Link to={ROUTES.ABOUT_US}>{Settings.translations.about_us}</Link>
+          <Link to={ROUTES.NEWS.MAIN}>{Settings.translations.news}</Link>
+        </div>
+      </>}
+      <div className="P-column">
+        <h3 className="G-main-color">{Settings.translations.useful_links}</h3>
+        {!enviroment.WHOLESALE && <Link to={ROUTES.HOW_TO_USE_APP}>{Settings.translations.how_to_use_app}</Link>}
+        <Link to={ROUTES.FAQ}>{Settings.translations.faq}</Link>
+        {!enviroment.WHOLESALE && <Link to={ROUTES.TENDERS.MAIN}>{Settings.translations.tenders}</Link>}
+      </div>
+      <div className="P-column">
+        <h3 className="G-main-color">{Settings.translations.contact}</h3>
+        <a><i className="G-orange-color icon-Group-5522" /> {contactPhoneNumber}</a>
+        <a><i className="G-orange-color icon-Group-5524" /> {contactEmail}</a>
+        <a><i className="G-orange-color icon-Group-5527" /> {contactAddress}</a>
+        <OrderACall />
+      </div>
+    </div>
+    <div className="P-mobile-app">
+      <img src={AppStoreImage} />
+      <img src={GooglePlayImage} />
+    </div>
+    <h4 className="P-copyright">
+      {Settings.translations.copyright} &copy; {currentYear} Alfa Pharm
+    </h4>
+  </footer>
+));
 
 export default Footer;

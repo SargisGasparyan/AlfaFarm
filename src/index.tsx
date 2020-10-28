@@ -1,9 +1,9 @@
 //* Continue writting the code as expected
-  //! Please write a clean code
+  //! Please write your code as clean as possible
   //! Documentize your code with comments
   //! Use React Components as far as you can
   //! Use React new features to improve performance
-  //! Use Promise.then only with `React.useEffects` or functions who can't return promise. In other cases use async/await
+  //! Use Promise.then only with `React.useEffect` or functions who can't return promise. In other cases use async/await
 
 //* Please define the types
   //! Application uses typescript, so don't forget to define the types

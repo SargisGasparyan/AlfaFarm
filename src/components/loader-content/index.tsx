@@ -7,7 +7,7 @@ interface IProps {
   type?: string;
   className: string;
   disabled: boolean;
-  loading: boolean;
+  loading?: boolean;
   children?: React.ReactNode;
   imageContent: boolean;
   style?: object;
@@ -25,8 +25,10 @@ class LoaderContent extends HelperPureComponent<IProps, IState> {
     className: '',
     disabled: false,
     children: null,
+    loading: false,
     imageContent: false,
   };
+  
   public state: IState = {
     loading: false,
   }

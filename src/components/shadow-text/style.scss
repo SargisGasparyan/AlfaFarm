@@ -1,0 +1,28 @@
+
+@import 'src/assets/styles/helper';
+@import 'src/assets/styles/variables';
+
+@import './responsive';
+
+.P-shadow-text {
+  color     : $main-color;
+  position  : relative;
+  font-size : 100px;
+  @include bold-font();
+
+  &.P-shadow-text-without-offset > .P-background { left: 0; }
+
+  > .P-background {
+    left                    : 8vw;
+    color                   : inherit;
+    bottom                  : 0;
+    opacity                 : .2;
+    position                : absolute;
+    font-size               : 150px;
+    background              : -webkit-linear-gradient(45deg, #49B748, transparent);
+    white-space             : nowrap;
+    background-clip         : text;
+    -webkit-text-fill-color : transparent;
+    -webkit-background-clip : text;
+  }
+}

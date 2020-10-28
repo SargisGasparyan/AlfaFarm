@@ -1,0 +1,14 @@
+@import 'src/assets/styles/variables';
+
+.P-product-details-page {
+
+  display        : flex;
+  flex-direction : column;
+
+  > .P-content {
+    display         : flex;
+    flex-wrap       : wrap;
+    border-bottom   : 2px solid $dark-gray;
+    justify-content : space-between;
+  }
+}

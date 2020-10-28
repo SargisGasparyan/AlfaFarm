@@ -1,0 +1,1 @@
+export type TableCellType = string | number | HTMLElement | React.ReactNode | null;

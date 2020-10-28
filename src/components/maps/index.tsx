@@ -3,20 +3,22 @@ import { withGoogleMap, GoogleMap, Marker, MarkerProps, GoogleMapProps } from 'r
 
 import './style.scss';
 
-interface IMarkerProps extends MarkerProps { key?: string | number; }
+export interface IMarkerProps extends MarkerProps { key?: string | number; }
 
 const InitMaps = withGoogleMap((props: IMapsProps) => (
   <GoogleMap
-    defaultOptions={{ zoom: 16, }}
+    defaultOptions={{ zoom: 12, }}
     defaultCenter={{ lat: 40.1792, lng: 44.4991 }}
   >
     {props.markers && props.markers.map((item, index) => <Marker key={index} {...item} />)}
+    {props.children}
   </GoogleMap>
 ));
 
 interface IMapsProps extends GoogleMapProps {
   className?: string;
   markers?: IMarkerProps[];
+  children?:  React.ReactNode;
 };
 
 const Maps = (props: IMapsProps) => (

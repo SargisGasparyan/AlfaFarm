@@ -1,0 +1,33 @@
+@import 'src/assets/styles/variables';
+
+.G-page.P-clinic-price-list-page {
+  padding : 0 0 160px 0;
+
+  > .P-content {
+    width         : 1200px;
+    margin        : 160px auto 0;
+    max-width     : 100%;
+    box-shadow    : $default-block-shadow;
+    background    : white;
+    border-radius : $radius;
+
+    > .P-title {
+      color           : $main-color;
+      padding         : 40px 20px;
+      display         : flex;
+      font-size       : 46px;
+      flex-wrap       : wrap;
+      align-items     : center;
+      justify-content : space-between;
+    }
+
+    > .P-data-table {
+
+      > .P-data-table-header { height: 70px; }
+
+      > .P-data-table-body > ul {
+        height : 70px;
+      }
+    }
+  }
+}

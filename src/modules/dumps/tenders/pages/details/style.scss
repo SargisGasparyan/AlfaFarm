@@ -1,0 +1,15 @@
+@import 'src/assets/styles/variables';
+
+.P-tender-details-page {
+
+  display        : flex;
+  flex-direction : column;
+
+  > .P-content {
+    display         : flex;
+    flex-wrap       : wrap;
+    justify-content : space-between;
+
+    > .P-description { width: 100%; }
+  }
+}

@@ -3,7 +3,7 @@ import * as moment from 'moment';
 
 import Settings from './settings';
 import { IDropdownOption } from '../constants/interfaces';
-import { IProfile } from '../api/user';
+import { IUserResponseModel } from '../api/user/models/response';
 
 export const scrolledToBottom = () => (window.innerHeight + window.scrollY) >= document.body.scrollHeight - 1500;
 export const configedMoment = (date: string | number | Date) => moment.utc(date);
@@ -50,16 +50,75 @@ export const enumToSelectOptions = <Value extends number>(obj: object, withTrans
   return options;
 };
 
-export const getUserName = (profile: IProfile) => {
-  if (profile.firstName && profile.lastName) return `${profile.firstName} ${profile.lastName}`;
-  return profile.email;
-}
+export const getUserName = (profile: IUserResponseModel) => `${profile.firstName} ${profile.lastName}` || profile.username;
 
-export const formatDate = (date?: string | number, withHours: boolean = true) => {
+export const formatDate = (date?: string | number, withHours = true) => {
   if (!date) return '';
-  const momentDate = moment(date);
+  const momentDate = moment(formatISOString(date));
   return momentDate.format(withHours ? 'YYYY MMM DD | HH:mm' : 'YYYY MMM DD');
 }
+
+export const formatTime = (time?: string) => {
+  if (!time) return '';
+
+  const splited = time.split(':');
+  splited.pop();
+  return splited.join(':');
+}
+
+export const formatISOString = (date: string | number | Date) => {
+  if (typeof date !== 'string') return date;
+  return date + (date[date.length - 1].toLowerCase() === 'z' ? '' : 'Z');
+}
+
+export const getUpcomingMonths = (() => {
+  const getMonth = (date: moment.Moment) => {
+    const splitedName = date.format("MMMM").split('');
+    splitedName[0] = splitedName[0].toUpperCase();
+
+    return {
+      date: date.toDate(),
+      name: splitedName.join(''),
+    };
+  };
+
+  return (count: number) => {
+    const date = moment();
+    const months = [getMonth(date)];
+  
+    for (let i = 1; i <= count - 1; i++) {
+      date.add(1, 'months');
+      date.set("date", 1);
+      months.push(getMonth(date));
+    }
+  
+    return months;
+  };
+})();
+
+export const getMonthDays = (() => {
+  const getDay = (date: moment.Moment) => {
+    const isToday = moment(date).isSame(new Date(), 'day');
+    return {
+      date: date.toDate(),
+      name: isToday ? Settings.translations.today : date.date(),
+    }
+  };
+  
+  return (startDate: Date, pushToday = true) => {
+    const date = moment(startDate);
+    const endDate = moment(date).endOf('month');
+    const days = [];
+
+    while(date.diff(endDate, 'days') < 0) {
+      const isToday = moment(date).isSame(new Date(), 'day');
+      (!isToday || pushToday) && days.push(getDay(date));
+      date.add(1, 'days');
+    }
+      
+    return days;
+  };
+})();
 
 export const getHoverDirection = (e: React.MouseEvent, element?: HTMLElement) => {
   const node = element || e.target as HTMLElement;
@@ -76,3 +135,9 @@ export const getHoverDirection = (e: React.MouseEvent, element?: HTMLElement) =>
 
   return null
 };
+
+export const getMediaPath = (path?: string | null) => {  
+  // This function is for making some changes on image path before render...
+  
+  return path || '';
+}

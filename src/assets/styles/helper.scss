@@ -1,2 +1,4 @@
 @mixin bold-font() { font-weight: bold; };
 @mixin normal-font() { font-weight: normal; };
+
+@mixin main-top-border { border-top: 12px solid $main-color-light; }
