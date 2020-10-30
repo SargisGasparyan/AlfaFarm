@@ -1,0 +1,13 @@
+.P-products-sort-box {
+  width           : 100%;
+  padding         : 0 20px; // Cause Wrapper has margin -20px to save the grid view
+  display         : flex;
+  align-items     : center;
+  margin-bottom   : 20px;
+  justify-content : flex-end;
+  
+  > h3 {
+    font-weight  : 300;
+    margin-right : 20px;
+  }
+}

@@ -26,7 +26,7 @@ interface IState {
 class Info extends HelperComponent<IProps, IState> {
 
   public state: IState = {
-    count: 1,
+    count: 0,
     cartLoading: false,
     pharmaciesAvailablityOpen: false,
   };
@@ -36,7 +36,15 @@ class Info extends HelperComponent<IProps, IState> {
     data.basketCount && this.safeSetState({ count: data.basketCount });
   }
 
-  private onCountChange = (count: number) => {
+  private onCountChange = async (count: number) => {
+    const { data } = this.props;
+    console.log(count);
+
+    if (!count && data) {
+      await BasketController.Delete(data.id);
+      window.dispatchEvent(new CustomEvent(DispatcherChannels.CartItemsUpdate));
+    }
+    
     this.safeSetState({ count });
   }
 
@@ -46,11 +54,11 @@ class Info extends HelperComponent<IProps, IState> {
 
     await BasketController.Change([{
       productId: data.id,
-      productQuantity: count,
+      productQuantity: count || 1,
     }]);
 
     window.dispatchEvent(new CustomEvent(DispatcherChannels.CartItemsUpdate));
-    this.safeSetState({ cartLoading: false });
+    this.safeSetState({ cartLoading: false, count: count || 1 });
   });
 
   private togglePharmaciesAvailablity = () => {
@@ -90,12 +98,12 @@ class Info extends HelperComponent<IProps, IState> {
         <h3>{Settings.translations.description}</h3>
         <p className="P-description">{data.description}</p>
         <div className="P-cart-actions">
-          <CountInput
-            min={1}
+          {!!count && <CountInput
+            min={0}
             step={1}
             value={count}
             onChange={this.onCountChange}
-          />
+          />}
 
           <LoaderContent
             loading={cartLoading}

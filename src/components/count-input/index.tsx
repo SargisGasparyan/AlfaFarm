@@ -25,14 +25,14 @@ interface IState {
 class CountInput extends HelperPureComponent<IProps, IState> {
 
   public state: IState = {
-    count: '0',
-    plused: false,
+    count: '0', // string cause it used inside input
+    plused: false, // using inside case when will be displayed only plus
   };
 
   public componentDidMount() {
     const { value, defaultValue, min } = this.props;
     const intDefaultValue = Number(defaultValue || defaultValue === 0 ? defaultValue : value);
-    this.safeSetState({ count: intDefaultValue || intDefaultValue === 0 ? intDefaultValue : min });
+    this.safeSetState({ count: intDefaultValue || intDefaultValue === 0 ? intDefaultValue : min, plused: intDefaultValue > 0 });
   }
 
   private countInvalid = () => {
@@ -49,7 +49,7 @@ class CountInput extends HelperPureComponent<IProps, IState> {
     const { count, plused } = this.state;
     const { step, value, onChange, onlyPlusIfOne } = this.props;
 
-    if (onlyPlusIfOne && !plused) this.safeSetState({ plused: true });
+    if (onlyPlusIfOne && !plused) this.safeSetState({ plused: true, count: 1 });
     else {
       const stepUped = value ? +value + step : +count + step;
       this.safeSetState({ count: stepUped }, () => onChange(+this.state.count, !this.countInvalid()));

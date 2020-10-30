@@ -138,6 +138,8 @@ export const getHoverDirection = (e: React.MouseEvent, element?: HTMLElement) =>
 
 export const getMediaPath = (path?: string | null) => {  
   // This function is for making some changes on image path before render...
-  
   return path || '';
 }
+
+export const truncateText = (value: string, limit: number = 38) =>
+  value.length > limit ? value.substring(0, limit) + '...' : value;

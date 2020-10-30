@@ -20,4 +20,15 @@
       @include normal-font;
     }
   }
+
+  > .P-actions-block {
+    width           : 100%;
+    display         : flex;
+    margin-top      : 40px;
+    justify-content : flex-end;
+
+    > button {
+      padding : 15px 60px;
+    }
+  }
 }
