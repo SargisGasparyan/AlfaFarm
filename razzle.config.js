@@ -1,7 +1,6 @@
 'use strict';
 
 const path = require('path');
-const scss = require('./plugins/scss');
 
 module.exports = {
   plugins: ['scss', 'typescript'],
