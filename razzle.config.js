@@ -7,7 +7,6 @@ module.exports = {
   modify(config, { target, dev }) {
     const appConfig = config;
     if (target === 'node' && !dev) appConfig.externals = [];
-
     const srcPath = path.resolve("./src");
     appConfig.resolve.modules.push(srcPath);
     return appConfig;
