@@ -33,10 +33,10 @@ const ListItem = React.memo((props: IProps) => {
     e.preventDefault();
     setCartLoading(true);
     
-    await BasketController.Change([{
+    await BasketController.Change({
       productId: data.id,
       productQuantity: count,
-    }]);
+    });
 
     window.dispatchEvent(new CustomEvent(DispatcherChannels.CartItemsUpdate));
     setCartLoading(false);

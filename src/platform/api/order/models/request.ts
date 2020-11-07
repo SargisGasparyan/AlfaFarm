@@ -5,7 +5,6 @@ export interface IOrderListRequestModel extends IPagingRequest {};
 
 export interface IOrderModifyRequestModel {
   userAddressId?: number;
-  regionId?: number;
   addressText?: string;
   addressLat?: number;
   addressLng?: number;
@@ -17,6 +16,7 @@ export interface IOrderModifyRequestModel {
   firstName: string;
   lastName: string;
   phoneNumber: string;
+  comment?: string;
   email?: string;
   deliveryType: OrderDeliveryTypeEnum;
   deliveryDateFrom?: string;

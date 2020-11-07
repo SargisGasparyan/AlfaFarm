@@ -76,10 +76,10 @@ class Cart extends HelperComponent<{}, IState> {
 
     if (count) {
       Connection.AbortAll();
-      modifyResult = await BasketController.Change([{
+      modifyResult = await BasketController.Change({
         productId: row.productId,
         productQuantity: count,
-      }]);
+      });
 
       row.productQuantity = count;
     } else {

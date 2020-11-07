@@ -25,8 +25,8 @@ class BasketController {
     return result;
   };
 
-  public static Change = (body: IBasketChangeRequestModel[]): Promise<IResponse<IBasketChangeResponseModel>> => {
-    const result = Connection.PUT<IBasketChangeRequestModel[]>({
+  public static Change = (body: IBasketChangeRequestModel): Promise<IResponse<IBasketChangeResponseModel>> => {
+    const result = Connection.PUT<IBasketChangeRequestModel>({
       body,
       action: '',
       controller: BasketController.controller,

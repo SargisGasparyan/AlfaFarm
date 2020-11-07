@@ -52,10 +52,10 @@ class Info extends HelperComponent<IProps, IState> {
     const { data } = this.props;
     const { count } = this.state;
 
-    await BasketController.Change([{
+    await BasketController.Change({
       productId: data.id,
       productQuantity: count || 1,
-    }]);
+    });
 
     window.dispatchEvent(new CustomEvent(DispatcherChannels.CartItemsUpdate));
     this.safeSetState({ cartLoading: false, count: count || 1 });
