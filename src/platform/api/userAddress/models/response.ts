@@ -5,6 +5,11 @@ export interface IUserAddressListResponseModel {
   addressText: string;
   addressLat: number;
   addressLng: number;
+  building?: string;
+  apartment?: string;
+  entrance?: string;
+  floor?: string;
+  comment?: string;
 };
 
 export interface IUserAddressDetailsResponseModel {

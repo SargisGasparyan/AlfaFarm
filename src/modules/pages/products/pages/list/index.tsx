@@ -10,9 +10,9 @@ import { scrolledToBottom } from 'platform/services/helper';
 import ProductController from 'platform/api/product';
 import PageLoader from 'components/page-loader';
 import { buildFilters } from './services/helper';
-import DispatcherChannels from 'platform/constants/dispatcher-channels';
 import Filter from './components/filter';
 import Connection from 'platform/services/connection';
+import SortBox from './components/sort-box';
 
 import './style.scss';
 
@@ -81,9 +81,10 @@ class List extends HelperComponent<{}, IState> {
     return data ? (
       <section className="G-page P-products-list-page">
         <Filter onChange={this.filterChange} />
-        <div className="P-list-wrapper">
+        {!!data.length && <div className="P-list-wrapper">
+          <SortBox onChange={this.filterChange} />
           {data.map(item => <Shared.Products.ListItem key={item.id} data={item} />)}
-        </div>
+        </div>}
       </section>
     ) : <PageLoader />;
   }

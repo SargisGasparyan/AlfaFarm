@@ -1,5 +1,6 @@
 export enum ProductSortEnum {
-  Alphabetical = 1,
+  AlphabeticalAZ = 1,
+  AlphabeticalZA,
   PriceLowToHigh,
   PriceHighToLow,
   DiscountLowToHigh,

@@ -5,7 +5,7 @@ import Settings from 'platform/services/settings';
 import ROUTES from 'platform/constants/routes';
 import CountInput from 'components/count-input';
 import { IProductListResponseModel } from 'platform/api/product/models/response';
-import { getMediaPath } from 'platform/services/helper';
+import { getMediaPath, truncateText } from 'platform/services/helper';
 import DiscountLabel from '../discount-label';
 import FavoriteController from 'platform/api/favorite';
 import BasketController from 'platform/api/basket';
@@ -33,10 +33,10 @@ const ListItem = React.memo((props: IProps) => {
     e.preventDefault();
     setCartLoading(true);
     
-    await BasketController.Change([{
+    await BasketController.Change({
       productId: data.id,
       productQuantity: count,
-    }]);
+    });
 
     window.dispatchEvent(new CustomEvent(DispatcherChannels.CartItemsUpdate));
     setCartLoading(false);
@@ -46,11 +46,13 @@ const ListItem = React.memo((props: IProps) => {
     <Link className="P-products-list-item" to={ROUTES.PRODUCTS.DETAILS.replace(':id', data.id)}>
       {!!data.discount && <DiscountLabel percent={data.discount} />}
       <div className="P-image" style={{ background: `url('${getMediaPath(data.imagePath)}') center/contain no-repeat` }} />
+      
       <i
         onClick={toggleFavorite}
         className={`P-favorite ${data.isFavorite ? 'P-active icon-Group-5520' : 'icon-Group-5518'}`}
       />
-      <h3>{data.title}</h3>
+
+      <h3>{truncateText(data.title)}</h3>
       
       <div className="P-price">
         <span>{data.discountedPrice || data.price} AMD</span>

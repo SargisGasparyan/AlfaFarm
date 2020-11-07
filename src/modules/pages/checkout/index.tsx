@@ -28,9 +28,6 @@ import './style.scss';
 
 interface IState {
   form: IOrderModifyRequestModel;
-  cityId?: number;
-  cities: IDropdownOption<number>[];
-  regions: IDropdownOption<number>[];
   submited: boolean;
   submitLoading: boolean;
   chooseAddressOpen: boolean;
@@ -41,8 +38,6 @@ interface IState {
 class Checkout extends HelperComponent<{}, IState> {
 
   public state: IState = {
-    cities: [],
-    regions: [],
     submited: false,
     submitLoading: false,
     chooseAddressOpen: false,
@@ -59,10 +54,8 @@ class Checkout extends HelperComponent<{}, IState> {
     const { submited, form } = this.state;
     return validateForm.call(form, submited);
   }
-  
-  public componentDidMount() {
-    this.fetchCities();
 
+  public componentDidMount() {
     if (Storage.profile) {
       const { form } = this.state;
       form.firstName = Storage.profile.firstName;
@@ -73,40 +66,9 @@ class Checkout extends HelperComponent<{}, IState> {
     }
   }
 
-  private fetchCities = async () => {
-    const result = await PlaceController.GetCities();
-    this.safeSetState({ cities: result.data.map(item => ({ name: item.name, value: item.id })) })
-  }
-
-  private fetchRegions = async () => {
-    const { cityId } = this.state;
-
-    if (cityId) {
-      const result = await PlaceController.GetRegions(cityId);
-      this.safeSetState({ regions: result.data.map(item => ({ name: item.name, value: item.id })) })
-    }
-  }
-
   private changeField = (e: React.SyntheticEvent<HTMLInputElement>) => {
     const { form } = this.state;
     form[e.currentTarget.name] = e.currentTarget.value;
-    this.safeSetState({ form });
-  }
-
-  private changeCity = (chosen: IDropdownOption<number>) => {
-    const { form } = this.state;
-    delete form.userAddressId;
-    this.safeSetState({
-      form,
-      cityId: chosen.value,
-      regions: [],
-    }, this.fetchRegions);
-  }
-
-  private changeRegion = (chosen: IDropdownOption<number>) => {
-    const { form } = this.state;
-    delete form.userAddressId;
-    form.regionId = chosen.value;
     this.safeSetState({ form });
   }
 
@@ -142,7 +104,7 @@ class Checkout extends HelperComponent<{}, IState> {
   private submit = (e: React.SyntheticEvent) => {
     e.preventDefault();
     this.safeSetState({ submited: true }, () => {
-      this.formValidation.valid && this.safeSetState({ submitLoading: true  }, async () => {
+      this.formValidation.valid && this.safeSetState({ submitLoading: true }, async () => {
         const { form } = this.state;
         const result = await OrderController.Create(form);
         if (result.success) this.safeSetState({ successModalOpen: true });
@@ -161,10 +123,15 @@ class Checkout extends HelperComponent<{}, IState> {
 
     if (chosen) {
       form.userAddressId = chosen.id;
+      form.addressApartment = chosen.apartment;
+      form.addressBuilding = chosen.building;
+      form.addressEntrance = chosen.entrance;
+      form.addressFloor = chosen.floor;
+      form.addressComment = chosen.comment;
       form.addressText = chosen.addressText;
       form.addressLat = chosen.addressLat;
       form.addressLng = chosen.addressLng;
-      this.safeSetState({ form, chooseAddressOpen: false }, this.fetchRegions);      
+      this.safeSetState({ form, chooseAddressOpen: false });
     } else this.safeSetState({ chooseAddressOpen: false });
   }
 
@@ -175,7 +142,7 @@ class Checkout extends HelperComponent<{}, IState> {
   }
 
   public render() {
-    const { form, cityId, cities, regions, submitLoading, chooseAddressOpen, successModalOpen } = this.state;
+    const { form, submitLoading, chooseAddressOpen, successModalOpen } = this.state;
 
     return (
       <section className="G-page P-checkout-page">
@@ -185,7 +152,7 @@ class Checkout extends HelperComponent<{}, IState> {
             <div className="G-main-form-field">
               <input
                 name="firstName"
-                value={form.firstName}
+                value={form.firstName || ''}
                 className={`G-main-input ${this.formValidation.errors.firstName ? 'G-invalid-field' : ''}`}
                 placeholder={Settings.translations.first_name}
                 onChange={this.changeField}
@@ -194,7 +161,7 @@ class Checkout extends HelperComponent<{}, IState> {
             <div className="G-main-form-field">
               <input
                 name="lastName"
-                value={form.lastName}
+                value={form.lastName || ''}
                 className={`G-main-input ${this.formValidation.errors.lastName ? 'G-invalid-field' : ''}`}
                 placeholder={Settings.translations.last_name}
                 onChange={this.changeField}
@@ -204,7 +171,7 @@ class Checkout extends HelperComponent<{}, IState> {
               <p className="G-input-country-code">+{countryCode}</p>
               <input
                 name="phoneNumber"
-                value={form.phoneNumber}
+                value={form.phoneNumber || ''}
                 className={`G-main-input ${this.formValidation.errors.phoneNumber ? 'G-invalid-field' : ''}`}
                 placeholder={Settings.translations.phone_number}
                 onChange={this.changeField}
@@ -213,42 +180,78 @@ class Checkout extends HelperComponent<{}, IState> {
             <div className="G-main-form-field">
               <input
                 name="email"
-                value={form.email || ''}
+                value={form.email || '' || ''}
                 className={`G-main-input ${this.formValidation.errors.email ? 'G-invalid-field' : ''}`}
                 placeholder={Settings.translations.email}
                 onChange={this.changeField}
               />
             </div>
             <div className="G-main-form-field">
-              <Select<number>
-                placeholder={Settings.translations.city}
-                options={cities}
-                className={`G-main-select ${this.formValidation.errors.regionId ? 'G-invalid-select' : ''}`}
-                value={cityId}
-                onChange={this.changeCity}
-              />
-            </div>
-            {!!regions.length && <div className="G-main-form-field">
-              <Select<number>
-                placeholder={Settings.translations.region}
-                options={regions}
-                className={`G-main-select ${this.formValidation.errors.regionId ? 'G-invalid-select' : ''}`}
-                value={form.regionId}
-                onChange={this.changeRegion}
-              />
-            </div>}
-            <div className="G-main-form-field">
               <Autocomplete
                 placeholder={Settings.translations.address}
-                value={form.addressText || ''}
+                value={form.addressText || '' || ''}
                 className={`G-main-input ${this.formValidation.errors.address ? 'G-invalid-field' : ''}`}
                 onChange={this.addressChange}
                 onPlaceSelected={this.addressSelect}
-                componentRestrictions={{country: 'am'}}
+                componentRestrictions={{ country: 'am' }}
+              />
+            </div>
+            <div className="G-main-form-field">
+              <input
+                name="addressBuilding"
+                value={form.addressBuilding || ''}
+                className="G-main-input"
+                placeholder={Settings.translations.building}
+                onChange={this.changeField}
+              />
+            </div>
+            <div className="G-main-form-field">
+              <input
+                name="addressEntrance"
+                value={form.addressEntrance || ''}
+                className="G-main-input"
+                placeholder={Settings.translations.entrance}
+                onChange={this.changeField}
+              />
+            </div>
+            <div className="G-main-form-field">
+              <input
+                name="addressApartment"
+                value={form.addressApartment || ''}
+                className="G-main-input"
+                placeholder={Settings.translations.apartment}
+                onChange={this.changeField}
+              />
+            </div>
+            <div className="G-main-form-field">
+              <input
+                name="addressFloor"
+                value={form.addressFloor || ''}
+                className="G-main-input"
+                placeholder={Settings.translations.floor}
+                onChange={this.changeField}
+              />
+            </div>
+            <div className="G-main-form-field">
+              <input
+                name="addressComment"
+                value={form.addressComment || ''}
+                className="G-main-input"
+                placeholder={Settings.translations.address_comment}
+                onChange={this.changeField}
               />
             </div>
           </div>
           <div className="P-delivery-form G-half-width">
+            <div className="G-main-form-field">
+              <input
+                name="comment"
+                value={form.comment || ''}
+                className="G-main-input"
+                placeholder={Settings.translations.comment}
+                onChange={this.changeField}
+              />
+            </div>
             <div className="G-main-form-field G-phone-input-wrapper">
               <Select<OrderDeliveryTypeEnum>
                 options={OrderDeliveryTypeDropdown()}

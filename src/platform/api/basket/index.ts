@@ -1,7 +1,7 @@
 import Connection from '../../services/connection';
 import { IResponse } from '../../constants/interfaces';
 import { IBasketChangeRequestModel } from './models/request';
-import { IBasketListResponseModel, ISavedBasketListResponseModel, IBasketResponseModel } from './models/response';
+import { IBasketListResponseModel, ISavedBasketListResponseModel, IBasketResponseModel, IBasketChangeResponseModel } from './models/response';
 
 class BasketController {
 
@@ -25,8 +25,8 @@ class BasketController {
     return result;
   };
 
-  public static Change = (body: IBasketChangeRequestModel[]): Promise<IResponse<boolean>> => {
-    const result = Connection.PUT<IBasketChangeRequestModel[]>({
+  public static Change = (body: IBasketChangeRequestModel): Promise<IResponse<IBasketChangeResponseModel>> => {
+    const result = Connection.PUT<IBasketChangeRequestModel>({
       body,
       action: '',
       controller: BasketController.controller,
@@ -73,11 +73,10 @@ class BasketController {
     return result;
   };
 
-  public static Delete = (basketIds: number[]): Promise<IResponse<boolean>> => {
+  public static Delete = (productId: number): Promise<IResponse<IBasketChangeResponseModel>> => {
     const result = Connection.DELETE<{}>({
       body: {},
-      action: '',
-      query: { basketIds },
+      action: `${productId}`,
       controller: BasketController.controller,
       withoutConfirmModal: true,
     });

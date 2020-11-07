@@ -10,7 +10,6 @@ export function validateForm(this: IOrderModifyRequestModel, submited?: boolean)
     lastName: false,
     email: false,
     phoneNumber: false,
-    regionId: false,
     address: false,
     deliveryDateFrom: false,
     deliveryDateTo: false,
@@ -33,11 +32,6 @@ export function validateForm(this: IOrderModifyRequestModel, submited?: boolean)
 
   if (submited && this.email && !isValidEmail(this.email)) {
     errors.email = true;
-    valid = false;
-  }
-
-  if (submited && !this.userAddressId && !this.regionId) {
-    errors.regionId = true;
     valid = false;
   }
 

@@ -15,8 +15,9 @@ header {
   top        : 0;
   left       : 0;
   width      : 100%;
+  height     : $header-size;
   z-index    : 100;
-  padding    : 25px $page-horizontal-offset;
+  padding    : 0 $page-horizontal-offset;
   position   : fixed;
   background : white;
   box-shadow : $default-block-shadow;
@@ -50,8 +51,11 @@ header {
   .P-link, .P-wholesale-link {
     color           : black;
     cursor          : pointer;
+    height          : 100%;
+    display         : flex;
     padding         : 10px 15px;
     text-align      : center;
+    align-items     : center;
     white-space     : nowrap;
     text-decoration : none;
 
@@ -61,6 +65,7 @@ header {
 
     &.P-login {
       color         : white;
+      height        : auto;
       margin        : 0 25px;
       padding       : 10px 40px;
       background    : $main-color;
@@ -69,6 +74,7 @@ header {
   
     &.P-icon {
       color        : $orange;
+      height       : auto;
       padding      : 0;
       position     : relative;
       font-size    : 24px;
@@ -82,14 +88,15 @@ header {
       > span {
         top           : -5px;
         right         : -10px;
-        width         : 16px;
-        height        : 16px;
         color         : white;
+        height        : 16px;
+        padding       : 0 4px 0 2px;
         position      : absolute;
         font-size     : 12px;
+        min-width     : 16px;
         animation     : cart-icon-animation .2s;
         background    : red;
-        border-radius : 50%;
+        border-radius : 8px; 
       }
     }
   }

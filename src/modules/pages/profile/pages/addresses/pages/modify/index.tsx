@@ -1,5 +1,6 @@
 import * as React from 'react';
 import Autocomplete from 'react-google-autocomplete';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 
 import HelperComponent from 'platform/classes/helper-component';
 import { byPrivateRoute } from 'platform/decorators/routes';
@@ -11,17 +12,11 @@ import { validateForm } from './services/helper';
 import { IUserAddressModifyRequestModel } from 'platform/api/userAddress/models/request';
 import UserAddressController from 'platform/api/userAddress';
 import generic from 'platform/decorators/generic';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { IDropdownOption, IGooglePlace } from 'platform/constants/interfaces';
-import PlaceController from 'platform/api/place';
-import Select from 'components/select';
+import { IGooglePlace } from 'platform/constants/interfaces';
 
 interface IState {
   form: IUserAddressModifyRequestModel;
-  cities: IDropdownOption<number>[];
-  regions: IDropdownOption<number>[];
-  cityId: number;
-  edited: boolean;
+
   submited: boolean;
   submitLoading: boolean;
 };
@@ -35,12 +30,8 @@ interface IRouteParams {
 class Modify extends HelperComponent<RouteComponentProps<IRouteParams>, IState> {
 
   public state: IState = {
-    edited: false,
     submited: false,
     submitLoading: false,
-    cityId: 0,
-    cities: [],
-    regions: [],
     form: {
       name: '',
       addressText: '',
@@ -51,7 +42,6 @@ class Modify extends HelperComponent<RouteComponentProps<IRouteParams>, IState> 
 
   public componentDidMount() {
     this.fetchData();
-    this.fetchCities();
   }
 
   private fetchData = async () => {
@@ -61,10 +51,15 @@ class Modify extends HelperComponent<RouteComponentProps<IRouteParams>, IState> 
       const result = await UserAddressController.GetDetails(+id);
       const { form } = this.state;
       form.name = result.data.name;
+      form.building = result.data.building;
+      form.apartment = result.data.apartment;
+      form.entrance = result.data.entrance;
+      form.floor = result.data.floor;
+      form.comment = result.data.comment;
       form.addressText = result.data.addressText;
       form.addressLat = result.data.addressLat;
       form.addressLng = result.data.addressLng;
-      this.safeSetState({ form }, this.fetchRegions);
+      this.safeSetState({ form });
     }
   }
 
@@ -75,21 +70,10 @@ class Modify extends HelperComponent<RouteComponentProps<IRouteParams>, IState> 
 
   private goBack = () => window.routerHistory.goBack();
 
-  private fetchCities = async () => {
-    const result = await PlaceController.GetCities();
-    this.safeSetState({ cities: result.data.map(item => ({ name: item.name, value: item.id })) })
-  }
-
-  private fetchRegions = async () => {
-    const { cityId } = this.state;
-    const result = await PlaceController.GetRegions(cityId);
-    this.safeSetState({ regions: result.data.map(item => ({ name: item.name, value: item.id })) })
-  }
-
   private changeField = (e: React.SyntheticEvent<HTMLInputElement>) => {
     const { form } = this.state;
     form[e.currentTarget.name] = e.currentTarget.value;
-    this.safeSetState({ form, edited: true });
+    this.safeSetState({ form });
   }
 
   private submit = (e: React.SyntheticEvent) => {
@@ -123,7 +107,7 @@ class Modify extends HelperComponent<RouteComponentProps<IRouteParams>, IState> 
   }
 
   public render() {
-    const { form, cityId, cities, regions, edited, submitLoading } = this.state;
+    const { form, submitLoading } = this.state;
 
     return (
       <Layout>
@@ -148,6 +132,51 @@ class Modify extends HelperComponent<RouteComponentProps<IRouteParams>, IState> 
                 onChange={this.onAddressChange}
                 onPlaceSelected={this.onAddressSelect}
                 componentRestrictions={{country: 'am'}}
+              />
+            </div>
+            <div className="G-main-form-field">
+              <p className="G-input-top-label">{Settings.translations.building}</p>
+              <input
+                name="building"
+                value={form.building}
+                className="G-main-input"
+                onChange={this.changeField}
+              />
+            </div>
+            <div className="G-main-form-field">
+              <p className="G-input-top-label">{Settings.translations.entrance}</p>
+              <input
+                name="entrance"
+                value={form.entrance}
+                className="G-main-input"
+                onChange={this.changeField}
+              />
+            </div>
+            <div className="G-main-form-field">
+              <p className="G-input-top-label">{Settings.translations.floor}</p>
+              <input
+                name="floor"
+                value={form.floor}
+                className="G-main-input"
+                onChange={this.changeField}
+              />
+            </div>
+            <div className="G-main-form-field">
+              <p className="G-input-top-label">{Settings.translations.apartment}</p>
+              <input
+                name="apartment"
+                value={form.apartment}
+                className="G-main-input"
+                onChange={this.changeField}
+              />
+            </div>
+            <div className="G-main-form-field">
+              <p className="G-input-top-label">{Settings.translations.comment}</p>
+              <input
+                name="comment"
+                value={form.comment}
+                className="G-main-input"
+                onChange={this.changeField}
               />
             </div>
             <LoaderContent

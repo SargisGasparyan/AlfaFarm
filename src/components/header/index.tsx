@@ -106,8 +106,8 @@ class Header extends HelperPureComponent<{}, IState> {
   private closeCategories = (e?: MouseEvent) => {
     const { categoryOpen } = this.state;
     const canBeClosed = !e || (
-      this.header.current &&
-      !this.header.current.contains(e.target as Node)
+      this.categoryOpenLink.current &&
+      !this.categoryOpenLink.current.contains(e.target as Node)
     );
 
     if (categoryOpen && canBeClosed) {
@@ -155,7 +155,10 @@ class Header extends HelperPureComponent<{}, IState> {
             onMouseOver={this.openCategories}
             onClick={this.openProducts}
             className={`P-link ${categoryOpen ? 'P-active' : ''}`}
-          >{Settings.translations.online_pharmacy}</Link>
+          >
+            {Settings.translations.online_pharmacy}
+            {!!categoryOpenPosition && categoryOpen && <Categories openPosition={categoryOpenPosition} onClose={this.closeCategories} />}
+          </Link>
 
           <NavLink {...this.navLinkProps} to={ROUTES.PHARMACIES}>{Settings.translations.pharmacies}</NavLink>
           <NavLink {...this.navLinkProps} to={ROUTES.CLINIC.MAIN}>{Settings.translations.clinic}</NavLink>
@@ -175,19 +178,18 @@ class Header extends HelperPureComponent<{}, IState> {
 
         {Storage.profile && <a onClick={this.toggleNotifications} className="P-link P-icon G-normal-link P-notification">
           <i className="icon-Group-5515" />
-          {!!notificationIconNumber && <span>{notificationIconNumber > 9 ? '9+' : notificationIconNumber}</span>}
+          {!!notificationIconNumber && <span>{notificationIconNumber > 99 ? '99+' : notificationIconNumber}</span>}
         </a>}
 
         <Link to={ROUTES.CART} className="P-link P-icon G-normal-link P-cart">
           <i className="icon-Group-5503" />
-          {!!cartIconNumber && <span>{cartIconNumber > 9 ? '9+' : cartIconNumber}</span>}
+          {!!cartIconNumber && <span>{cartIconNumber > 99 ? '99+' : cartIconNumber}</span>}
         </Link>
       
         <LanguageSwitcher />
         
         {authOpen && <Shared.Auth onClose={this.toggleAuth} />}
         {notificationOpen && <Notifications onClose={this.toggleNotifications} />}
-        {!!categoryOpenPosition && categoryOpen && <Categories openPosition={categoryOpenPosition} onClose={this.closeCategories} />}
       </header>
     );
   }
