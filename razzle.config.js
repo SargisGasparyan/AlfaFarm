@@ -1,11 +1,15 @@
 'use strict';
 
 const path = require('path');
+const scss = require('./plugins/scss');
 
 module.exports = {
   plugins: ['scss', 'typescript'],
-  modify(config, { target, dev }) {
-    const appConfig = config;
+  modifyWebpackConfig({
+    webpackConfig,
+    env: { target, dev },
+  }) {
+    const appConfig = webpackConfig;
     if (target === 'node' && !dev) appConfig.externals = [];
     const srcPath = path.resolve("./src");
     appConfig.resolve.modules.push(srcPath);
