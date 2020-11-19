@@ -56,7 +56,7 @@ class App extends HelperComponent<{}, IState> {
     //? Seed
 
     try { await Socket.connect(); }
-    catch { }
+    catch { /* */ }
 
     //? Backend initial data fetch
 
