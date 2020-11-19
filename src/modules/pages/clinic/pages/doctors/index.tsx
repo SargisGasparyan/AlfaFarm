@@ -66,7 +66,7 @@ class Doctors extends HelperComponent<{}, {}> {
       name: professionName,
       cell: (row: IMedicalServiceListResponseModel) => <div className="G-flex G-flex-justify-between">
         {row.name}
-        <span>{row.price} AMD</span>
+        <span>{row.price} &#1423;</span>
       </div>,
     },
   ];

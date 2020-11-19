@@ -77,6 +77,15 @@ class Settings {
     } else window.localStorage.removeItem('guest');
   }
 
+  public static get referralCode(): string {
+    const referralCode = window.sessionStorage.getItem('referralCode');
+    return referralCode || '';
+  }
+
+  public static set referralCode(value: string) {
+    window.sessionStorage.setItem('referralCode', value);
+  }
+
   public static logout = () => {
     window.localStorage.removeItem('token');
     window.localStorage.removeItem('guest');

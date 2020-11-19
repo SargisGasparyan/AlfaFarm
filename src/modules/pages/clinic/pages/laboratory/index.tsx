@@ -51,7 +51,7 @@ class Laboratory extends HelperComponent<{}, {}> {
       name: Settings.translations.laboratory,
       cell: (row: IMedicalServiceListResponseModel) => <div className="G-flex G-flex-justify-between">
         {row.name}
-        <span>{row.price} AMD</span>
+        <span>{row.price} &#1423;</span>
       </div>,
     },
   ];

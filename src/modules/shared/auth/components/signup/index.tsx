@@ -66,10 +66,13 @@ class SignUp extends HelperComponent<IProps, IState> {
     this.safeSetState({ submited: true }, async () => {
       this.formValidation.valid && this.safeSetState({ submitLoading: true }, async () => {
         const { form } = this.state;
+        if (Settings.referralCode) form.referralCode = Settings.referralCode;
 
         const result = await UserController.Register(form);
-        if (result.data) window.location.reload();
-        else this.safeSetState({ submitLoading: false });
+        if (result.data) {
+          Settings.referralCode = '';
+          window.location.reload();
+        } else this.safeSetState({ submitLoading: false });
       });
     });
   }

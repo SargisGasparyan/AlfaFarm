@@ -44,7 +44,7 @@ class PriceList extends HelperComponent<{}, {}> {
     {
       name: Settings.translations.price,
       style: { minWidth: 200, maxWidth: 200 },
-      cell: (row: IMedicalServiceListResponseModel) => <b className="G-orange-color">{row.price} AMD</b>,
+      cell: (row: IMedicalServiceListResponseModel) => <b className="G-orange-color">{row.price} &#1423;</b>,
     },
   ];
 

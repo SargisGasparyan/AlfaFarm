@@ -64,7 +64,7 @@ class SpecialProducts extends HelperComponent<IState, {}> {
               <span>{item.unitQuantity} {item.unitName}</span>
             </div>
 
-            <h2 className="P-price">{item.price} AMD</h2>
+            <h2 className="P-price">{item.price} &#1423;</h2>
             <span
               className={`G-main-color P-edit-icon ${Date.now() < +item.expiredDate ? 'P-disabled' : ''}`}
               onClick={e => this.changeProduct(e, item)}

@@ -20,7 +20,9 @@ footer {
     justify-content : space-between;
 
     > .P-column {
-      max-width : 350px;
+      display        : flex;
+      max-width      : 350px;
+      flex-direction : column;
 
       > p {
         line-height   : 42px;

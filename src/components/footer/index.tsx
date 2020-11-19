@@ -14,6 +14,7 @@ import FacebookImage from 'assets/images/facebook.png';
 import InstagramImage from 'assets/images/instagram.png';
 
 import './style.scss';
+import Invite from './components/invite';
 
 const currentYear = new Date().getFullYear();
 
@@ -56,7 +57,9 @@ const Footer = React.memo(() => (
         <a><i className="G-orange-color icon-Group-5522" /> {contactPhoneNumber}</a>
         <a><i className="G-orange-color icon-Group-5524" /> {contactEmail}</a>
         <a><i className="G-orange-color icon-Group-5527" /> {contactAddress}</a>
+
         <OrderACall />
+        {!!Settings.token && !Settings.guest && <Invite />}
       </div>
     </div>
     <div className="P-mobile-app">
