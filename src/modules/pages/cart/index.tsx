@@ -59,7 +59,7 @@ class Cart extends HelperComponent<{}, IState> {
     {
       name: Settings.translations.price,
       style: { minWidth: 150, maxWidth: 150 },
-      cell: (row: IBasketListResponseModel) => <h3 className="G-fs-24">{row.price * row.productQuantity} AMD</h3>,
+      cell: (row: IBasketListResponseModel) => <h3 className="G-fs-24">{row.price * row.productQuantity} &#1423;</h3>,
     },
   ];
 
@@ -128,7 +128,7 @@ class Cart extends HelperComponent<{}, IState> {
             <div className="P-data-block">
               <div>
                 <span className="G-fs-normal">{Settings.translations.total}</span>
-                <h1 className="G-orange-color G-fs-24 G-mt-5">{data.totalPrice} AMD</h1>
+                <h1 className="G-orange-color G-fs-24 G-mt-5">{data.totalPrice} &#1423;</h1>
               </div>
             </div>
 

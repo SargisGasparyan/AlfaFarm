@@ -46,7 +46,7 @@ const TableList = ({ list, onQuantityChange }: IProps) => {
     {
       name: Settings.translations.price,
       style: { minWidth: 150, maxWidth: 150 },
-      cell: (row: IBasketListResponseModel) => <h3 className="G-fs-24">{row.price} AMD</h3>,
+      cell: (row: IBasketListResponseModel) => <h3 className="G-fs-24">{row.price} &#1423;</h3>,
     },
   ];
 

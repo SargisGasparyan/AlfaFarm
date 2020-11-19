@@ -49,7 +49,7 @@ const PriceRange = ({ body, onChange }: IProps) => {
 
 
   return priceRange && value ? <>
-    <h2>{Settings.translations.price} ({value[0]}-{value[1]}) AMD</h2>
+    <h2>{Settings.translations.price} ({value[0]}-{value[1]}) &#1423;</h2>
 
     <Range
       min={priceRange.min}

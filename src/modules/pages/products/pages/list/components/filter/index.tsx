@@ -14,6 +14,7 @@ import DispatcherChannels from 'platform/constants/dispatcher-channels';
 import PriceRange from './components/price-range';
 
 import './style.scss';
+import Settings from 'platform/services/settings';
 
 interface IProps {
   onChange(): void;
@@ -49,6 +50,28 @@ class Filter extends HelperComponent<IProps, IState> {
     this.bodyChange(body);
   }
 
+  private cancel = () => {
+    const query = new URLSearchParams(window.location.search);
+    const { body } = this.state;
+    
+    body.brandIds = [];
+    body.activeIngredientIds = [];
+    body.producerIds = [];
+    delete body.minPrice;
+    delete body.maxPrice;
+
+    query.delete('brandIds');
+    query.delete('activeIngredientIds');
+    query.delete('producerIds');
+    query.delete('minPrice');
+    query.delete('maxPrice');
+
+    window.routerHistory.replace(`${ROUTES.PRODUCTS.MAIN}?${query.toString()}`);
+    window.scrollTo(0, 0);
+    
+    this.bodyChange(body);
+  }
+
   private chooseMainCategory = (id: number) => {
     const { body } = this.state;
     const { onChange } = this.props;
@@ -80,6 +103,11 @@ class Filter extends HelperComponent<IProps, IState> {
           <Brands body={body} onChange={this.bodyChange} />
           <Producers body={body} onChange={this.bodyChange} />
           <ActiveIngredients body={body} onChange={this.bodyChange} />
+          
+          <button
+            className="G-main-ghost-button P-cancel-button"
+            onClick={this.cancel}
+          >{Settings.translations.cancel}</button>
         </>}
       </div>
     );

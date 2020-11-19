@@ -38,7 +38,7 @@ class MyRegistrations extends HelperComponent<IState, {}> {
     },
     {
       name: Settings.translations.price,
-      cell: (row: IClinicRegistrationListResponseModel) => <>{row.servicePrice} AMD</>,
+      cell: (row: IClinicRegistrationListResponseModel) => <>{row.servicePrice} &#1423;</>,
     },
   ];
 

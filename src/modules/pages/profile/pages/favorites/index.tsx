@@ -67,7 +67,7 @@ class Favorites extends HelperComponent<IState, {}> {
               <span>{item.unitQuantity} {item.unitName}</span>
             </div>
 
-            <h2 className="P-price">{item.price} AMD</h2>
+            <h2 className="P-price">{item.price} &#1423;</h2>
           </Link>)}
         </div>
       </Layout>

@@ -46,7 +46,7 @@ class Orders extends HelperComponent<IState, {}> {
     },
     {
       name: Settings.translations.price,
-      cell: (row: IOrderListResponseModel) => <>{row.totalPrice} AMD</>,
+      cell: (row: IOrderListResponseModel) => <>{row.totalPrice} &#1423;</>,
     },
     {
       name: Settings.translations.status,

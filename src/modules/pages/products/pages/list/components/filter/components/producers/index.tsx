@@ -54,10 +54,10 @@ const Producers = ({ body, onChange }: IProps) => {
       <span className="G-orange-color">{open ? '-' : '+'}</span>
     </h2>
 
-    {open && data.map(item => <div className="P-checkbox-row" key={item.id}>
-      <CheckBox checked={body.producerIds?.includes(item.id)} onChange={() => toggleItem(item.id)} />
+    {open && data.map(item => <label className="P-checkbox-row" onChange={() => toggleItem(item.id)} key={item.id}>
+      <CheckBox checked={body.producerIds?.includes(item.id)} />
       <span className="P-name" title={item.name}>{item.name}</span>
-    </div>)}
+    </label>)}
   </>;
 };
 

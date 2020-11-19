@@ -55,7 +55,7 @@ const ListItem = React.memo((props: IProps) => {
       <h3>{truncateText(data.title)}</h3>
       
       <div className="P-price">
-        <span>{data.discountedPrice || data.price} AMD</span>
+        <span>{data.discountedPrice || data.price} &#1423;</span>
         <CountInput
           step={1}
           min={1}

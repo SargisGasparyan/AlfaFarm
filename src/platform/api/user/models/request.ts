@@ -4,6 +4,7 @@ export interface IRegisterRequestModel {
   firstName: string;
   lastName: string;
   password: string;
+  referralCode?: string;
   dateOfBirth?: string;
   gender?: GenderEnum;
 };

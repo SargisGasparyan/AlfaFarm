@@ -24,6 +24,7 @@
   }
 
   > .P-checkbox-row {
+    cursor        : pointer;
     display       : flex;
     align-items   : center;
     margin-bottom : 15px;
@@ -41,5 +42,13 @@
       white-space   : nowrap;
       text-overflow : ellipsis;
     }
+  }
+
+  > .P-cancel-button {
+    width        : 100%;
+    color        : $text-gray;
+    padding      : 10px 0;
+    margin-top   : 20px;
+    border-color : $text-gray;
   }
 }
