@@ -17,6 +17,7 @@ interface IProps<Value> {
   placeholderOpacity?: boolean;
   changable?: boolean;
   placeholder?: React.ReactChild | string;
+  disabled?: boolean;
   onNewClick?(e: React.MouseEvent<HTMLLIElement>): void;
   className?: string;
   emptyText?: string;
@@ -43,6 +44,7 @@ class Select<Value extends string | number | null | {}> extends HelperPureCompon
     withNew: false,
     changable: true,
     placeholderOpacity: true,
+    disabled: false,
     value: null,
     options: [],
   }
@@ -115,6 +117,7 @@ class Select<Value extends string | number | null | {}> extends HelperPureCompon
 
   public render() {
     const {
+      disabled,
       placeholderOpacity,
       className,
       clear,
@@ -125,13 +128,13 @@ class Select<Value extends string | number | null | {}> extends HelperPureCompon
 
     return (
       <ClickOutside className={className} onClickOutside={() => this.toggleState(false)}>
-        <div className="P-select">
+        <div className={`P-select ${disabled ? 'P-disabled' : ''}`}>
           <div className={`P-select-header ${isOpen ? 'P-select-open' : ''}`} onClick={() => this.toggleState(!isOpen)} title={this.htmlTitle}>
             <span className={!value && placeholderOpacity ? 'P-select-placeholder' : ''}>{this.title}</span>
             {clear && value && <span className="P-select-remove" onClick={this.clearValue}>&times;</span>}
             <i className="icon-Group-5504" />
           </div>
-          {isOpen &&  <this.Options />}
+          {isOpen && !disabled &&  <this.Options />}
         </div>
       </ClickOutside>
     );

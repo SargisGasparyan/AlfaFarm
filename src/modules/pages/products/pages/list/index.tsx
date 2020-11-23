@@ -15,6 +15,7 @@ import Connection from 'platform/services/connection';
 import SortBox from './components/sort-box';
 
 import './style.scss';
+import Pagination from 'components/pagination';
 
 interface IState {
   loading: boolean;
@@ -28,51 +29,24 @@ class List extends HelperComponent<{}, IState> {
     loading: false,
   };
 
-  private pageNo = 1;
-  private lastPage = false;
-
-  public componentDidMount() {
-    this.fetchData();
-    window.addEventListener('scroll', this.scroll);
-  }
-
-  public componentWillUnmount() {
-    super.componentWillUnmount();
-    window.removeEventListener('scroll', this.scroll);
-  }
-
   private filterChange = () => {
-    this.pageNo = 1;
-    this.lastPage = false,
+    // this.pageNo = 1;
+    // this.lastPage = false;
+    // this.fetchData(1);
     Connection.AbortAll();
-    this.fetchData(true);
   }
 
-  private fetchData = (overwrite?: boolean) => this.safeSetState({ loading: true }, async () => {
-    if (!this.lastPage) {
-      const body = {
-        ...buildFilters(),
-        pageNumber: this.pageNo,
-        pageSize: infinityScrollPageLimit,
-      };
+  private fetchData = async (pageNumber: number) => {
+    const body = {
+      ...buildFilters(),
+      pageNumber,
+      pageSize: 16,
+    };
 
-      const result = await ProductController.GetList(body);
-      if (result.aborted) return; // In case if other request will cancel this for performance and traffic
+    const result = await ProductController.GetList(body);
 
-      const data = this.state.data || [];
-
-      this.safeSetState({ data: overwrite ? result.data.list : [...data, ...result.data.list], loading: false });
-      this.lastPage = result.data.pageCount === this.pageNo;
-    } else this.safeSetState({ loading: false });
-  });
-
-  private scroll = () => {
-    const { loading } = this.state;
-    
-    if (!this.lastPage && scrolledToBottom() && !loading) {
-      this.pageNo += 1;
-      this.fetchData();
-    }
+    !result.aborted && this.safeSetState({ data: result.data });
+    return result.data;
   }
 
   public render() {
@@ -84,6 +58,7 @@ class List extends HelperComponent<{}, IState> {
         {!!data.length && <div className="P-list-wrapper">
           <SortBox onChange={this.filterChange} />
           {data.map(item => <Shared.Products.ListItem key={item.id} data={item} />)}
+          <Pagination<IProductListResponseModel> fetchData={this.fetchData} />
         </div>}
       </section>
     ) : <PageLoader />;

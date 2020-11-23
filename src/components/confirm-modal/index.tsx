@@ -5,6 +5,7 @@ import LoaderContent from '../loader-content';
 import Settings from 'platform/services/settings';
 
 import './style.scss';
+import DispatcherChannels from 'platform/constants/dispatcher-channels';
 
 interface IProps {
   onClose?(): void;
@@ -17,12 +18,12 @@ const ConfirmModal = React.memo(({ onClose, onConfirm }: IProps) => {
   const confirm = () => {
     onConfirm && onConfirm();
     setLoading(true);
-    window.dispatchEvent(new Event('userconfirmed'));
+    window.dispatchEvent(new Event(DispatcherChannels.UserConfirmed));
   }
 
   const close = () => {
     onClose && onClose();
-    window.dispatchEvent(new Event('usercanceled'));
+    window.dispatchEvent(new Event(DispatcherChannels.UserCanceled));
   }
 
   return (

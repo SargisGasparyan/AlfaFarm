@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import Table from 'components/table';
 import Settings from 'platform/services/settings';
-import { getMediaPath } from 'platform/services/helper';
+import { getMediaPath, formatPrice } from 'platform/services/helper';
 import ROUTES from 'platform/constants/routes';
 import { IBasketListResponseModel } from 'platform/api/basket/models/response';
 
@@ -46,7 +46,7 @@ const TableList = ({ list, onQuantityChange }: IProps) => {
     {
       name: Settings.translations.price,
       style: { minWidth: 150, maxWidth: 150 },
-      cell: (row: IBasketListResponseModel) => <h3 className="G-fs-24">{row.price} &#1423;</h3>,
+      cell: (row: IBasketListResponseModel) => <h3 className="G-fs-24">{formatPrice(row.price)}</h3>,
     },
   ];
 

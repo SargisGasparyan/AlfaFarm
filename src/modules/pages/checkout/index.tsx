@@ -141,6 +141,17 @@ class Checkout extends HelperComponent<{}, IState> {
     this.safeSetState({ form });
   }
 
+  private validateDeliveryDate = (dateItem: moment.Moment) => {
+    const currentDayStarting = new Date();
+
+    dateItem.hours(currentDayStarting.getHours());
+    dateItem.hours(currentDayStarting.getMinutes());
+    dateItem.hours(currentDayStarting.getSeconds());
+    dateItem.milliseconds(currentDayStarting.getMilliseconds());
+
+    return dateItem.isSameOrAfter(currentDayStarting);
+  }
+
   public render() {
     const { form, submitLoading, chooseAddressOpen, successModalOpen } = this.state;
 
@@ -266,6 +277,7 @@ class Checkout extends HelperComponent<{}, IState> {
               <div className="G-main-form-half-field">
                 <DateTime
                   onChange={this.dateFromChange}
+                  isValidDate={this.validateDeliveryDate}
                   inputProps={{
                     value: form.deliveryDateFrom ? formatDate(form.deliveryDateFrom, true) : '',
                     readOnly: true,
@@ -278,6 +290,7 @@ class Checkout extends HelperComponent<{}, IState> {
               <div className="G-main-form-half-field">
                 <DateTime
                   onChange={this.dateToChange}
+                  isValidDate={this.validateDeliveryDate}
                   inputProps={{
                     value: form.deliveryDateTo ? formatDate(form.deliveryDateTo, true) : '',
                     readOnly: true,

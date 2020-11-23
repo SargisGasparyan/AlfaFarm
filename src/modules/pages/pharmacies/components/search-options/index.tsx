@@ -81,7 +81,7 @@ class SearchOptions extends HelperPureComponent<IProps, IState> {
     return (
       <div className="G-page P-pharmacies-search-options">
         <ShadowText>{Settings.translations.pharmacies}</ShadowText>
-        <form className="G-main-form">
+        <form className="G-main-form P-form">
           <div className="G-main-form-half-field">
             <Select<number>
               clear={true}
@@ -95,6 +95,7 @@ class SearchOptions extends HelperPureComponent<IProps, IState> {
           <div className="G-main-form-half-field">
             <Select<number>
               clear={true}
+              disabled={!cityId}
               value={regionId}
               onChange={this.changeRegion}
               placeholder={Settings.translations.region}

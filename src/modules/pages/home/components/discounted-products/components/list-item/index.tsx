@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Shared } from 'modules';
 import Settings from 'platform/services/settings';
 import { IProductListResponseModel } from 'platform/api/product/models/response';
-import { getMediaPath, truncateText } from 'platform/services/helper';
+import { getMediaPath, truncateText, formatPrice } from 'platform/services/helper';
 import BasketController from 'platform/api/basket';
 import LoaderContent from 'components/loader-content';
 import DispatcherChannels from 'platform/constants/dispatcher-channels';
@@ -36,8 +36,8 @@ const ListItem = React.memo(({ data }: IProps) => {
       {!!data.discount && <Shared.Products.DiscountLabel percent={data.discount} />}
       <div className="P-image" style={{ background: `url('${getMediaPath(data.imagePath)}') center/contain no-repeat` }} />
       <h3>{truncateText(data.title)}</h3>
-      {!!data.discount && <del className="P-without-discount-price">{data.price} &#1423;</del>}
-      <span className="P-price">{data.discountedPrice || data.price} &#1423;</span>
+      {!!data.discount && <del className="P-without-discount-price">{formatPrice(data.price)}</del>}
+      <span className="P-price">{formatPrice(data.discountedPrice || data.price)}</span>
       <LoaderContent
         loading={cartLoading}
         className="G-main-button"

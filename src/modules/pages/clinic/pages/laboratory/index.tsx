@@ -17,6 +17,7 @@ import SuccessModal from 'components/success-modal';
 import { onlyForUsers } from 'platform/guards/routes';
 
 import './style.scss';
+import { formatPrice } from 'platform/services/helper';
 
 
 interface IState {
@@ -51,7 +52,7 @@ class Laboratory extends HelperComponent<{}, {}> {
       name: Settings.translations.laboratory,
       cell: (row: IMedicalServiceListResponseModel) => <div className="G-flex G-flex-justify-between">
         {row.name}
-        <span>{row.price} &#1423;</span>
+        <span>{formatPrice(row.price)}</span>
       </div>,
     },
   ];
