@@ -13,9 +13,11 @@ interface IState {
 };
 
 interface IProps<Data> {
+  page?: number;
   count?: boolean;
   interval: number;
   fetchData: (page: number) => Promise<IPagingResponse<Data>>;
+  pageChangeListener?: string;
 };
 
 class Pagination<Data> extends HelperComponent<IProps<Data>, IState> {
@@ -32,12 +34,25 @@ class Pagination<Data> extends HelperComponent<IProps<Data>, IState> {
 
   public componentDidMount() {
     const query = new URLSearchParams(window.location.search);
-    const page = Number(query.get('page'));
+    const { page, pageChangeListener } = this.props;
 
-    this.setState({ selectedPage: page || 1 }, async () => {
+    pageChangeListener && window.addEventListener(pageChangeListener, this.outsidePageChange);
+
+    this.safeSetState({ selectedPage: page || Number(query.get('page')) || 1 }, async () => {
       await this.getList();
       this.checkSelectedPage();
     });
+  }
+
+  public componentWillUnmount() {
+    super.componentWillUnmount();
+    const { pageChangeListener } = this.props;
+    pageChangeListener && window.removeEventListener(pageChangeListener, this.outsidePageChange);
+  }
+
+  private outsidePageChange = async (e: CustomEvent) => {
+    await this.selectPage(e.detail, true);
+    this.checkSelectedPage();
   }
 
   private get interval() { return this.props.interval + 1; }
@@ -47,28 +62,30 @@ class Pagination<Data> extends HelperComponent<IProps<Data>, IState> {
     const query = new URLSearchParams(window.location.search);
     const x = Number(query.get('page'));
 
-    x > pageCount && this.selectPage(1);
-    this.setState({ selectedPage: x || 1 });
+    if (x > pageCount) {
+      this.selectPage(pageCount);
+      this.safeSetState({ selectedPage: pageCount });
+    } else this.safeSetState({ selectedPage: x || 1 });
   }
 
-  public getList = async () => {
+  public getList = async (outside = false) => {
     const { selectedPage, pageCount } = this.state;
     const { fetchData } = this.props;
 
-    pageCount > 1 && Connection.AbortAll();
+    pageCount > 1 && !outside && Connection.AbortAll();
     const result = await fetchData(selectedPage);
-    result && this.setState({ pageCount: result.pageCount });
+    result && this.safeSetState({ pageCount: result.pageCount });
   }
 
-  public selectPage = (selectedPage: number) => this.setState({ selectedPage }, async () => {
+  public selectPage = async (selectedPage: number, outside = false) => this.safeSetState({ selectedPage }, async () => {
     const query = new URLSearchParams(window.location.search);
     query.set('page', selectedPage.toString());
 
     window.history.replaceState({ path: window.location.pathname }, '', `?${query}`);
-    this.getList();
+    await this.getList(outside);
   });
 
-  public getByNumber = (e: React.SyntheticEvent<HTMLInputElement>) => this.setState({ numberValue: Math.round(+e.currentTarget.value) });
+  public getByNumber = (e: React.SyntheticEvent<HTMLInputElement>) => this.safeSetState({ numberValue: Math.round(+e.currentTarget.value) });
 
   public confirmNumber = (e: any) => {
     const { pageCount, numberValue } = this.state;
@@ -89,25 +106,12 @@ class Pagination<Data> extends HelperComponent<IProps<Data>, IState> {
     return arr;
   }
 
-  // private prevPage = () => {
-  //   const { selectedPage } = this.state;
-  //   const prevPage = selectedPage - 1;
-  //   prevPage && this.selectPage(prevPage);
-  // }
-
-  // private nextPage = () => {
-  //   const { selectedPage, pageCount } = this.state;
-  //   const nextPage = selectedPage + 1;
-  //   nextPage <= pageCount && this.selectPage(nextPage);
-  // };
-
   public render() {
     const { selectedPage, pageCount } = this.state;
     const { count } = this.props;
 
     return (
       <div className="ABM-pagination-wrap">
-        {/* <div className="ABM-button ABM-left" onClick={this.prevPage}>prev</div> */}
         {pageCount > 1 && <div className="ABM-pages-wrap">
           {this.ranges.map((item, index) => <div
             key={index}
@@ -122,7 +126,6 @@ class Pagination<Data> extends HelperComponent<IProps<Data>, IState> {
             onKeyPress={this.confirmNumber}
           />}
         </div>}
-        {/* <div className="ABM-button ABM-right" onClick={this.nextPage}>next</div> */}
       </div>
     );
   }
