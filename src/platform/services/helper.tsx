@@ -36,6 +36,11 @@ export const getTranslationLabel = (value: string) => {
   }).join('');
 }
 
+export const formatPrice = (price: number, includeSymbol = true) => {
+  const formated = price.toLocaleString();
+  return includeSymbol ? <>{formated} &#1423;</> : formated;
+};
+
 export const enumToSelectOptions = <Value extends number>(obj: object, withTranslations: boolean = true, notIncludeValues: Value[] = []) => {
   const options: Array<IDropdownOption<Value>> = [];
   Object.keys(obj).map(item => {

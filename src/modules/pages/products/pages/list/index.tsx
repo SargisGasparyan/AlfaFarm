@@ -1,20 +1,21 @@
 import * as React from 'react';
 
-import HelperComponent from 'platform/classes/helper-component';
 import { Shared } from 'modules';
 import ROUTES from 'platform/constants/routes';
 import { byRoute } from 'platform/decorators/routes';
 import { IProductListResponseModel } from 'platform/api/product/models/response';
-import { infinityScrollPageLimit } from 'platform/constants';
-import { scrolledToBottom } from 'platform/services/helper';
 import ProductController from 'platform/api/product';
 import PageLoader from 'components/page-loader';
 import { buildFilters } from './services/helper';
 import Filter from './components/filter';
 import Connection from 'platform/services/connection';
 import SortBox from './components/sort-box';
+import Pagination from 'components/pagination';
+import HelperPureComponent from 'platform/classes/helper-pure-component';
 
 import './style.scss';
+
+const pageChangeListener = 'productlistpage';
 
 interface IState {
   loading: boolean;
@@ -22,71 +23,46 @@ interface IState {
 };
 
 @byRoute([ROUTES.PRODUCTS.MAIN])
-class List extends HelperComponent<{}, IState> {
+class List extends HelperPureComponent<{}, IState> {
 
   public state: IState = {
     loading: false,
   };
 
-  private pageNo = 1;
-  private lastPage = false;
-
-  public componentDidMount() {
-    this.fetchData();
-    window.addEventListener('scroll', this.scroll);
-  }
-
-  public componentWillUnmount() {
-    super.componentWillUnmount();
-    window.removeEventListener('scroll', this.scroll);
-  }
-
   private filterChange = () => {
-    this.pageNo = 1;
-    this.lastPage = false,
+    window.dispatchEvent(new CustomEvent(pageChangeListener, { detail: 1 }));
     Connection.AbortAll();
-    this.fetchData(true);
   }
 
-  private fetchData = (overwrite?: boolean) => this.safeSetState({ loading: true }, async () => {
-    if (!this.lastPage) {
-      const body = {
-        ...buildFilters(),
-        pageNumber: this.pageNo,
-        pageSize: infinityScrollPageLimit,
-      };
+  private fetchData = async (pageNumber: number) => {
+    const body = {
+      ...buildFilters(),
+      pageNumber,
+      pageSize: 8,
+    };
 
-      const result = await ProductController.GetList(body);
-      if (result.aborted) return; // In case if other request will cancel this for performance and traffic
+    const result = await ProductController.GetList(body);
 
-      const data = this.state.data || [];
-
-      this.safeSetState({ data: overwrite ? result.data.list : [...data, ...result.data.list], loading: false });
-      this.lastPage = result.data.pageCount === this.pageNo;
-    } else this.safeSetState({ loading: false });
-  });
-
-  private scroll = () => {
-    const { loading } = this.state;
-    
-    if (!this.lastPage && scrolledToBottom() && !loading) {
-      this.pageNo += 1;
-      this.fetchData();
-    }
+    !result.aborted && this.safeSetState({ data: result.data.list });
+    return result.data;
   }
 
   public render() {
     const { data } = this.state;
 
-    return data ? (
+    return (
       <section className="G-page P-products-list-page">
         <Filter onChange={this.filterChange} />
-        {!!data.length && <div className="P-list-wrapper">
-          <SortBox onChange={this.filterChange} />
-          {data.map(item => <Shared.Products.ListItem key={item.id} data={item} />)}
-        </div>}
+        <div className="P-list-wrapper">
+          {data && <>
+            <SortBox onChange={this.filterChange} />
+            {data.map(item => <Shared.Products.ListItem key={item.id} data={item} />)}
+          </>}
+          <Pagination<IProductListResponseModel> pageChangeListener={pageChangeListener} fetchData={this.fetchData} />
+        </div>
+        {!data && <PageLoader />}
       </section>
-    ) : <PageLoader />;
+    );
   }
 };
 

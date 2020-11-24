@@ -1155,6 +1155,7 @@ export default {
   all_products: "All products",
   are_you_sure: "Are you sure?",
   written: "Written",
+  confirm_new_password: "Confirm new password",
   confirm_password: "Confirm password",
   current_password: "Current password",
   new_password: "New password",

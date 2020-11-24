@@ -12,6 +12,7 @@ import PharmaciesAvailablity from './components/pharmacies-availablity';
 import PinImage from 'assets/images/pin.png';
 
 import './style.scss';
+import { formatPrice } from 'platform/services/helper';
 
 interface IProps {
   data: IProductDetailsResponseModel;
@@ -74,7 +75,7 @@ class Info extends HelperComponent<IProps, IState> {
       <div className="P-product-details-info">
         <h2 className="P-name">
           {data.title}
-          <span className="G-orange-color G-ml-auto">{data.discountedPrice || data.price} &#1423;</span>
+          <span className="G-orange-color G-ml-auto">{formatPrice(data.discountedPrice || data.price)}</span>
         </h2>
         <h3 className="P-unit">{data.unitQuantity} {data.unitName}</h3>
         {data.category && <h3 className="P-row">

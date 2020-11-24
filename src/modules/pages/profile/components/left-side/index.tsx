@@ -13,6 +13,7 @@ import PersonImage from 'assets/images/person.png';
 import CameraImage from 'assets/images/camera.png';
 
 import './style.scss';
+import DispatcherChannels from 'platform/constants/dispatcher-channels';
 
 class LeftSide extends HelperPureComponent<{}, {}> {
 
@@ -34,6 +35,18 @@ class LeftSide extends HelperPureComponent<{}, {}> {
       const result = await UserController.UploadCover(formData);
       if (result.success) window.location.reload();
     }
+  }
+
+  private logout = () => {
+    window.dispatchEvent(new CustomEvent(DispatcherChannels.ToggleConfirm));
+    window.addEventListener(DispatcherChannels.UserConfirmed, Settings.logout);
+    window.addEventListener(DispatcherChannels.UserCanceled, this.logoutCanceled);
+  }
+
+  private logoutCanceled = () => {
+    window.dispatchEvent(new CustomEvent(DispatcherChannels.ToggleConfirm));
+    window.removeEventListener(DispatcherChannels.UserConfirmed, Settings.logout);
+    window.removeEventListener(DispatcherChannels.UserCanceled, this.logoutCanceled);
   }
 
   public render() {
@@ -69,7 +82,7 @@ class LeftSide extends HelperPureComponent<{}, {}> {
           {item.name}
         </NavLink>)}
 
-        <div onClick={Settings.logout} className="P-link">
+        <div onClick={this.logout} className="P-link">
           {Settings.translations.log_out}
         </div>
       </aside>

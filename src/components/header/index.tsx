@@ -13,16 +13,16 @@ import Storage from 'platform/services/storage';
 import enviroment from 'platform/services/enviroment';
 import { getMediaPath } from 'platform/services/helper';
 import WholesaleContent from './components/wholesale-content';
+import Socket from 'platform/services/socket';
+import NotificationController from 'platform/api/notification';
+import Notifications from './components/notifications';
+import BasketController from 'platform/api/basket';
 
 import LogoImage from 'assets/images/logo.png';
 import PersonImage from 'assets/images/person.png';
 
 import './style.scss';
-import Socket from 'platform/services/socket';
-import NotificationController from 'platform/api/notification';
-import Notifications from './components/notifications';
-import ClickOutside from 'components/click-outside';
-import BasketController from 'platform/api/basket';
+import HelperComponent from 'platform/classes/helper-component';
 
 interface IState {
   authOpen: boolean;
@@ -34,6 +34,7 @@ interface IState {
 };
 
 class Header extends HelperPureComponent<{}, IState> {
+
   public state: IState = {
     authOpen: false,
     categoryOpen: false,

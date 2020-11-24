@@ -1153,6 +1153,7 @@ export default {
   all_products: "Все продукты",
   are_you_sure: "Вы уверены?",
   written: "Написано",
+  confirm_new_password: "Подтвердите новый пароль",
   confirm_password: "Подтвердите пароль",
   current_password: "Действующий пароль",
   new_password: "Новый пароль",

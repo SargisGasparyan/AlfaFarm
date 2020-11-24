@@ -424,6 +424,10 @@
 
 .G-main-textarea {
   height : 150px;
+
+  &::-webkit-scrollbar {
+    width: 0;
+  }
 }
 
 .G-main-button {

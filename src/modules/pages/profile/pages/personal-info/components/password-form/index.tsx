@@ -78,7 +78,7 @@ class PasswordForm extends HelperComponent<{}, IState> {
           />
         </div>
         <div className="G-main-form-field">
-          <p className="G-input-top-label">{Settings.translations.confirm_password}</p>
+          <p className="G-input-top-label">{Settings.translations.confirm_new_password}</p>
           <input
             type="password"
             name="confirmPassword"

@@ -1,9 +1,11 @@
 @import 'src/assets/styles/variables';
 
 .P-products-filter {
-  min-width    : 300px;
-  max-width    : 300px;
-  margin-right : 120px;
+  min-width     : 340px;
+  max-width     : 340px;
+  margin-right  : 80px;
+  border-right  : 2px solid $light-gray;
+  padding-right : 40px;
 
   > h2 {  
     margin      : 40px 0 20px;

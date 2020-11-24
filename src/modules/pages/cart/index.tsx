@@ -10,7 +10,7 @@ import BasketController from 'platform/api/basket';
 import { IBasketListResponseModel, IBasketResponseModel, IBasketChangeResponseModel } from 'platform/api/basket/models/response';
 import Table from 'components/table';
 import EmptyState from 'components/empty-state';
-import { getMediaPath } from 'platform/services/helper';
+import { getMediaPath, formatPrice } from 'platform/services/helper';
 import CountInput from 'components/count-input';
 import Connection from 'platform/services/connection';
 import DispatcherChannels from 'platform/constants/dispatcher-channels';
@@ -59,7 +59,7 @@ class Cart extends HelperComponent<{}, IState> {
     {
       name: Settings.translations.price,
       style: { minWidth: 150, maxWidth: 150 },
-      cell: (row: IBasketListResponseModel) => <h3 className="G-fs-24">{row.price * row.productQuantity} &#1423;</h3>,
+      cell: (row: IBasketListResponseModel) => <h3 className="G-fs-24">{formatPrice(row.price * row.productQuantity)}</h3>,
     },
   ];
 

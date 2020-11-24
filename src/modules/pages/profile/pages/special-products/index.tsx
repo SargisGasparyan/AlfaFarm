@@ -5,7 +5,7 @@ import HelperComponent from 'platform/classes/helper-component';
 import { byPrivateRoute } from 'platform/decorators/routes';
 import ROUTES from 'platform/constants/routes';
 import Layout from '../../components/layout';
-import { getMediaPath, formatDate } from 'platform/services/helper';
+import { getMediaPath, formatDate, formatPrice } from 'platform/services/helper';
 import { IPreferredProductListResponseModel } from 'platform/api/user/models/response';
 import { onlyForUsers } from 'platform/guards/routes';
 import UserController from 'platform/api/user';
@@ -64,7 +64,7 @@ class SpecialProducts extends HelperComponent<IState, {}> {
               <span>{item.unitQuantity} {item.unitName}</span>
             </div>
 
-            <h2 className="P-price">{item.price} &#1423;</h2>
+            <h2 className="P-price">{formatPrice(item.price)}</h2>
             <span
               className={`G-main-color P-edit-icon ${Date.now() < +item.expiredDate ? 'P-disabled' : ''}`}
               onClick={e => this.changeProduct(e, item)}

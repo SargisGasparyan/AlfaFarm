@@ -21,6 +21,7 @@ import 'moment/locale/ru';
 import 'moment/locale/en-gb';
 
 import './assets/styles/index.scss';
+import DispatcherChannels from 'platform/constants/dispatcher-channels';
 
 interface IState {
   confirmOpen: boolean;
@@ -49,7 +50,7 @@ class App extends HelperComponent<{}, IState> {
     window.abortableRequests = [];
     window.routerHistory = createBrowserHistory();
     window.routerHistory.listen(() => window.scrollTo(0, 0));
-    window.addEventListener('toggleconfirm', this.toggleConfirm);
+    window.addEventListener(DispatcherChannels.ToggleConfirm, this.toggleConfirm);
 
     this.safeSetState({ generalAPILoaded: true });
 

@@ -1,5 +1,4 @@
 import { IUserAddressModifyRequestModel } from 'platform/api/userAddress/models/request';
-
 export function validateForm(this: IUserAddressModifyRequestModel, submited?: boolean) {
   let valid = true;
 

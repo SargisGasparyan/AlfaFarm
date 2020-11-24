@@ -41,23 +41,26 @@ class Auth extends HelperComponent<IProps, IState> {
     [ModalContentEnum.SignUp]: () => <SignUp onTypeChange={this.onTypeChange} />,
   };
 
-  private onTypeChange = <ActiveData extends object>(contentType: ModalContentEnum, activeData?: ActiveData) => this.safeSetState({ contentType, activeData });
+  private get closable() {
+    const { contentType } = this.state;
+    return contentType !== ModalContentEnum.Verify && contentType !== ModalContentEnum.NewPassword;
+  }
+
+  private onTypeChange = <ActiveData extends object>(contentType: ModalContentEnum, activeData?: ActiveData) => this.safeSetState({ contentType, activeData: activeData || {} });
 
   private onClose = () => {
     const { onClose } = this.props
-    const { contentType } = this.state;
-
-    ![
-      ModalContentEnum.Verify,
-      ModalContentEnum.SignUp,
-      ModalContentEnum.NewPassword,
-    ].includes(contentType) && onClose();
+    this.closable && onClose();
   }
 
   public render() {
 
     return (
-      <Modal className="P-auth-modal" onClose={this.onClose}>
+      <Modal
+        className="P-auth-modal"
+        unclosable={!this.closable}
+        onClose={this.onClose}
+      >
         <this.ActiveContent />
       </Modal>
     );

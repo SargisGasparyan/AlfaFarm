@@ -16,7 +16,7 @@ import SuccessModal from 'components/success-modal';
 import { onlyForUsers } from 'platform/guards/routes';
 import { infinityScrollPageLimit } from 'platform/constants';
 import DoctorController from 'platform/api/doctor';
-import { scrolledToBottom, getMediaPath } from 'platform/services/helper';
+import { scrolledToBottom, getMediaPath, formatPrice } from 'platform/services/helper';
 import { IDoctorListResponseModel } from 'platform/api/doctor/models/response';
 
 import './style.scss';
@@ -66,7 +66,7 @@ class Doctors extends HelperComponent<{}, {}> {
       name: professionName,
       cell: (row: IMedicalServiceListResponseModel) => <div className="G-flex G-flex-justify-between">
         {row.name}
-        <span>{row.price} &#1423;</span>
+        <span>{formatPrice(row.price)}</span>
       </div>,
     },
   ];

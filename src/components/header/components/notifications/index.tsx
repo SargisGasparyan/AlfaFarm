@@ -35,7 +35,7 @@ class Notifications extends HelperPureComponent<IProps, IState> {
     };
 
     const result = await NotificationController.GetList(body);
-    this.safeSetState({ data: result.data});
+    this.safeSetState({ data: result.data });
   }
 
   public render() {

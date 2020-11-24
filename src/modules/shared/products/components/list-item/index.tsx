@@ -5,7 +5,7 @@ import Settings from 'platform/services/settings';
 import ROUTES from 'platform/constants/routes';
 import CountInput from 'components/count-input';
 import { IProductListResponseModel } from 'platform/api/product/models/response';
-import { getMediaPath, truncateText } from 'platform/services/helper';
+import { getMediaPath, truncateText, formatPrice } from 'platform/services/helper';
 import DiscountLabel from '../discount-label';
 import FavoriteController from 'platform/api/favorite';
 import BasketController from 'platform/api/basket';
@@ -47,15 +47,15 @@ const ListItem = React.memo((props: IProps) => {
       {!!data.discount && <DiscountLabel percent={data.discount} />}
       <div className="P-image" style={{ background: `url('${getMediaPath(data.imagePath)}') center/contain no-repeat` }} />
       
-      <i
+      {!Settings.guest && <i
         onClick={toggleFavorite}
         className={`P-favorite ${data.isFavorite ? 'P-active icon-Group-5520' : 'icon-Group-5518'}`}
-      />
+      />}
 
       <h3>{truncateText(data.title)}</h3>
       
       <div className="P-price">
-        <span>{data.discountedPrice || data.price} &#1423;</span>
+        <span>{formatPrice(data.discountedPrice || data.price)}</span>
         <CountInput
           step={1}
           min={1}
