@@ -62,7 +62,7 @@ class Pagination<Data> extends HelperComponent<IProps<Data>, IState> {
     const query = new URLSearchParams(window.location.search);
     const x = Number(query.get('page'));
 
-    if (x > pageCount) {
+    if (x > (pageCount || 1)) {
       this.selectPage(pageCount);
       this.safeSetState({ selectedPage: pageCount });
     } else this.safeSetState({ selectedPage: x || 1 });
@@ -79,7 +79,7 @@ class Pagination<Data> extends HelperComponent<IProps<Data>, IState> {
 
   public selectPage = async (selectedPage: number, outside = false) => this.safeSetState({ selectedPage }, async () => {
     const query = new URLSearchParams(window.location.search);
-    query.set('page', selectedPage.toString());
+    query.set('page', (selectedPage || 1).toString());
 
     window.history.replaceState({ path: window.location.pathname }, '', `?${query}`);
     await this.getList(outside);
