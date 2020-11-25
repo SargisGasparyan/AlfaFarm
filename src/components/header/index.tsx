@@ -56,7 +56,7 @@ class Header extends HelperPureComponent<{}, IState> {
   public componentDidMount() {
     this.fetchCart();
     setTimeout(this.checkWindow, 500); // Wait for assets load to get the right position of category wrapper link
-
+    window.routerHistory.push(`${ROUTES.PRODUCTS.MAIN}`);
     window.addEventListener('resize', this.checkWindow);
     window.addEventListener(DispatcherChannels.CartItemsUpdate, this.fetchCart);
 
@@ -146,7 +146,7 @@ class Header extends HelperPureComponent<{}, IState> {
         <Link to={ROUTES.HOME} className="P-logo G-mr-auto">
           <img src={LogoImage} className="G-full-width" />
         </Link>
-        
+
         {enviroment.WHOLESALE ? <WholesaleContent /> : <>
           <SearchInput withSubmit={true} onSubmit={this.searchSubmit} />
 
@@ -186,9 +186,9 @@ class Header extends HelperPureComponent<{}, IState> {
           <i className="icon-Group-5503" />
           {!!cartIconNumber && <span>{cartIconNumber > 99 ? '99+' : cartIconNumber}</span>}
         </Link>
-      
+
         <LanguageSwitcher />
-        
+
         {authOpen && <Shared.Auth onClose={this.toggleAuth} />}
         {notificationOpen && <Notifications onClose={this.toggleNotifications} />}
       </header>
