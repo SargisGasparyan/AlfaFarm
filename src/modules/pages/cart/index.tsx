@@ -117,8 +117,8 @@ class Cart extends HelperComponent<{}, IState> {
     return (
       <section className="G-page P-cart-page">
         {data ? <>
-          <h1 className="G-fs-26 G-mb-40 G-full-width">{Settings.translations.cart}</h1>
           {data.items.length ? <>
+            <h1 className="G-fs-26 G-mb-40 G-full-width">{Settings.translations.cart}</h1>
             <Table<IBasketListResponseModel>
               className="P-table G-full-width"
               columnConfig={this.columnConfig}
