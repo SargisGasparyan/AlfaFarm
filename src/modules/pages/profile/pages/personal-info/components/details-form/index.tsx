@@ -124,7 +124,7 @@ class DetailsForm extends HelperComponent<{}, IState> {
             inputProps={{
               value: form.dateOfBirth ? formatDate(form.dateOfBirth, false) : '',
               readOnly: true,
-              className: 'G-main-input',
+              className: `G-main-input ${this.formValidation.errors.dateOfBirth ? 'G-invalid-field' : ''}`,
             }}
           />
         </div>

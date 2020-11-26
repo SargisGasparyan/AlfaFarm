@@ -22,7 +22,7 @@ import LogoImage from 'assets/images/logo.png';
 import PersonImage from 'assets/images/person.png';
 
 import './style.scss';
-import HelperComponent from 'platform/classes/helper-component';
+import Broadcast from "../../platform/services/broadcast";
 
 interface IState {
   authOpen: boolean;
@@ -59,6 +59,7 @@ class Header extends HelperPureComponent<{}, IState> {
     window.routerHistory.push(`${ROUTES.PRODUCTS.MAIN}`);
     window.addEventListener('resize', this.checkWindow);
     window.addEventListener(DispatcherChannels.CartItemsUpdate, this.fetchCart);
+    Broadcast.subscribe(DispatcherChannels.StorageUpdate, this.storageUpdate);
 
     Storage.profile && this.configureNotifications();
   }
@@ -67,6 +68,11 @@ class Header extends HelperPureComponent<{}, IState> {
     super.componentWillUnmount();
     window.removeEventListener('resize', this.checkWindow);
     window.removeEventListener(DispatcherChannels.CartItemsUpdate, this.fetchCart);
+    Broadcast.unsubscribe(DispatcherChannels.StorageUpdate, this.storageUpdate);
+  }
+
+  private storageUpdate = () => {
+    this.forceUpdate();
   }
 
   public async configureNotifications() {

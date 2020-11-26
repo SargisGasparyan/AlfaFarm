@@ -1,7 +1,7 @@
 const DispatcherChannels = {
-  
+
   // Confirmation modal
-  
+
   ToggleConfirm: 'toggleconfirm',
   UserConfirmed: 'userconfirmed',
   UserCanceled: 'usercanceled',
@@ -12,7 +12,11 @@ const DispatcherChannels = {
 
   // Cart
 
-  CartItemsUpdate: 'cartItemsUpdate',
+  CartItemsUpdate: 'cartitemsupdate',
+
+  // Storage
+
+  StorageUpdate: 'storageupdate',
 };
 
 export default DispatcherChannels;

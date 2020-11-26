@@ -14,12 +14,23 @@ import CameraImage from 'assets/images/camera.png';
 
 import './style.scss';
 import DispatcherChannels from 'platform/constants/dispatcher-channels';
+import Broadcast from 'platform/services/broadcast';
+import {IPagingResponse} from "../../../../../platform/constants/interfaces";
+import {IPrescriptionListResponseModel} from "../../../../../platform/api/prescription/models/response";
+
+interface IState {
+  photoPath?: string;
+}
 
 class LeftSide extends HelperPureComponent<{}, {}> {
 
   private uploadInput = React.createRef<HTMLInputElement>();
 
   private options = leftSideOptions();
+
+  public state: IState = {
+    photoPath: Storage.profile.photoPath
+  };
 
   private openUpload = () => {
     const { current } = this.uploadInput;
@@ -33,8 +44,21 @@ class LeftSide extends HelperPureComponent<{}, {}> {
       formData.append('file', files[0]);
 
       const result = await UserController.UploadCover(formData);
-      if (result.success) window.location.reload();
+
+      if (result.success) {
+        Storage.profile.photoPath = result.data;
+        Broadcast.dispatch(DispatcherChannels.StorageUpdate);
+        this.safeSetState({ photoPath: result.data });
+      }
     }
+  }
+
+  public componentDidMount() {
+    Broadcast.subscribe(DispatcherChannels.StorageUpdate, this.storageUpdate);
+  }
+
+  private storageUpdate = () => {
+    this.forceUpdate();
   }
 
   private logout = () => {
@@ -50,6 +74,8 @@ class LeftSide extends HelperPureComponent<{}, {}> {
   }
 
   public render() {
+    const { photoPath } = this.state;
+
     return (
       <aside className="P-profile-left-side">
         <div className="P-main-info">
