@@ -13,6 +13,7 @@ export interface IBasketListResponseModel {
   unitQuantity: number;
   productTitle: string;
   productQuantity: number;
+  isPackage: boolean,
 };
 
 export interface ISavedBasketListResponseModel {
