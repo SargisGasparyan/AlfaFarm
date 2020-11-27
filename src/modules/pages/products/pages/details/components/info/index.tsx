@@ -45,7 +45,7 @@ class Info extends HelperComponent<IProps, IState> {
       await BasketController.Delete(data.id);
       window.dispatchEvent(new CustomEvent(DispatcherChannels.CartItemsUpdate));
     }
-    
+
     this.safeSetState({ count });
   }
 
@@ -75,7 +75,6 @@ class Info extends HelperComponent<IProps, IState> {
       <div className="P-product-details-info">
         <h2 className="P-name">
           {data.title}
-          <span className="G-orange-color G-ml-auto">{formatPrice(data.discountedPrice || data.price)}</span>
         </h2>
         <h3 className="P-unit">{data.unitQuantity} {data.unitName}</h3>
         {data.category && <h3 className="P-row">
@@ -113,6 +112,7 @@ class Info extends HelperComponent<IProps, IState> {
           >{Settings.translations.add_to_cart}</LoaderContent>
 
           {pharmaciesAvailablityOpen && <PharmaciesAvailablity onClose={this.togglePharmaciesAvailablity} data={data} />}
+          <span className="G-orange-color G-ml-auto P-price">{formatPrice(data.discountedPrice || data.price)}</span>
         </div>
       </div>
     );

@@ -3,6 +3,12 @@
 .P-product-details-info {
   width : calc(55% - 50px);
 
+  .P-price {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-right: 40px;
+  }
+
   > .P-name {
     display       : flex;
     margin-bottom : 60px;
@@ -41,6 +47,7 @@
     display         : flex;
     margin-bottom   : 40px;
     justify-content : flex-start;
+    align-items: center;
 
     > .P-count-input {
       height       : 50px;

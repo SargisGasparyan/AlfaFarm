@@ -8,10 +8,16 @@ export function validateForm(this: IUserModifyRequestModel, submited?: boolean) 
     firstName: false,
     lastName: false,
     email: false,
+    dateOfBirth: false,
   };
 
   if (submited && !this.firstName) {
     errors.firstName = true;
+    valid = false;
+  }
+
+  if (submited && !this.dateOfBirth) {
+    errors.dateOfBirth = true;
     valid = false;
   }
 

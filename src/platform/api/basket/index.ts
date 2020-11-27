@@ -73,10 +73,10 @@ class BasketController {
     return result;
   };
 
-  public static Delete = (productId: number): Promise<IResponse<IBasketChangeResponseModel>> => {
+  public static Delete = (productId: number, isPackage: boolean): Promise<IResponse<IBasketChangeResponseModel>> => {
     const result = Connection.DELETE<{}>({
       body: {},
-      action: `${productId}`,
+      action: `${productId}/${isPackage}`,
       controller: BasketController.controller,
       withoutConfirmModal: true,
     });

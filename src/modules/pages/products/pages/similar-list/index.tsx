@@ -63,7 +63,7 @@ class SimilarList extends HelperComponent<RouteComponentProps<IRouteParams>, ISt
 
   private scroll = () => {
     const { loading } = this.state;
-    
+
     if (!this.lastPage && scrolledToBottom() && !loading) {
       this.pageNo += 1;
       this.fetchData();

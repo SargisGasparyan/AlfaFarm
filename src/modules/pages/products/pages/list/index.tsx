@@ -12,6 +12,7 @@ import Connection from 'platform/services/connection';
 import SortBox from './components/sort-box';
 import Pagination from 'components/pagination';
 import HelperPureComponent from 'platform/classes/helper-pure-component';
+import EmptyViewSvg from 'assets/images/emptyView.svg';
 
 import './style.scss';
 
@@ -19,6 +20,7 @@ const pageChangeListener = 'productlistpage';
 
 interface IState {
   loading: boolean;
+  total: null;
   data?: IProductListResponseModel[];
 };
 
@@ -27,6 +29,7 @@ class List extends HelperPureComponent<{}, IState> {
 
   public state: IState = {
     loading: false,
+    total: null,
   };
 
   private filterChange = () => {
@@ -43,21 +46,25 @@ class List extends HelperPureComponent<{}, IState> {
 
     const result = await ProductController.GetList(body);
 
-    !result.aborted && this.safeSetState({ data: result.data.list });
+    !result.aborted && this.safeSetState({ data: result.data.list, total: result.data.totalCount });
     return result.data;
   }
 
   public render() {
-    const { data } = this.state;
+    const { data, total } = this.state;
 
     return (
       <section className="G-page P-products-list-page">
         <Filter onChange={this.filterChange} />
         <div className="P-list-wrapper">
-          {data && <>
+          {data && !!total && <>
             <SortBox onChange={this.filterChange} />
             {data.map(item => <Shared.Products.ListItem key={item.id} data={item} />)}
           </>}
+          {total === 0 && <div className='P-no-data'>
+            <img src={EmptyViewSvg} alt="empty"/>
+            <p className='P-desc'>No search result</p>
+          </div>}
           <Pagination<IProductListResponseModel> pageChangeListener={pageChangeListener} fetchData={this.fetchData} />
         </div>
         {!data && <PageLoader />}

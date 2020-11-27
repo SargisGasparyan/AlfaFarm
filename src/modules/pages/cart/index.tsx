@@ -83,14 +83,14 @@ class Cart extends HelperComponent<{}, IState> {
 
       row.productQuantity = count;
     } else {
-      modifyResult = await BasketController.Delete(row.productId);
+      modifyResult = await BasketController.Delete(row.productId, row.isPackage);
       data && data.items.splice(index, 1);
     }
 
     if (data && modifyResult.data) {
       data.totalPrice = modifyResult.data.totalPrice;
       data.bonus = modifyResult.data.bonus;
-      
+
       this.safeSetState({ data });
       window.dispatchEvent(new CustomEvent(DispatcherChannels.CartItemsUpdate));
     }
@@ -117,8 +117,8 @@ class Cart extends HelperComponent<{}, IState> {
     return (
       <section className="G-page P-cart-page">
         {data ? <>
-          <h1 className="G-fs-26 G-mb-40 G-full-width">{Settings.translations.cart}</h1>
           {data.items.length ? <>
+            <h1 className="G-fs-26 G-mb-40 G-full-width">{Settings.translations.cart}</h1>
             <Table<IBasketListResponseModel>
               className="P-table G-full-width"
               columnConfig={this.columnConfig}
