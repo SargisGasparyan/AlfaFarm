@@ -25,6 +25,7 @@ import DispatcherChannels from 'platform/constants/dispatcher-channels';
 
 interface IState {
   confirmOpen: boolean;
+  confirmText: string;
   initialLoading: boolean;
   generalAPILoaded: boolean;
 };
@@ -35,6 +36,7 @@ class App extends HelperComponent<{}, IState> {
     generalAPILoaded: false,
     initialLoading: false,
     confirmOpen: false,
+    confirmText: '',
   };
 
   public async componentDidMount() {    
@@ -72,13 +74,13 @@ class App extends HelperComponent<{}, IState> {
     if (referralCode) Settings.referralCode = referralCode;
   }
 
-  private toggleConfirm = () => {
+  private toggleConfirm = (e: CustomEvent) => {
     const { confirmOpen } = this.state;
-    this.safeSetState({ confirmOpen: !confirmOpen });
+    this.safeSetState({ confirmOpen: !confirmOpen, confirmText: e.detail || '' });
   }
  
   public render() {
-    const { generalAPILoaded, initialLoading, confirmOpen } = this.state;
+    const { generalAPILoaded, initialLoading, confirmOpen, confirmText } = this.state;
     
 
     return generalAPILoaded ? (
@@ -104,7 +106,7 @@ class App extends HelperComponent<{}, IState> {
               <Redirect to={ROUTES.HOME} />
             </Switch>
           </section>
-          {confirmOpen && <ConfirmModal />}
+          {confirmOpen && <ConfirmModal text={confirmText} />}
           <Footer /> 
         </> : <PageLoader />}
       </Router>

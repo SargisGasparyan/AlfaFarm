@@ -62,7 +62,7 @@ class LeftSide extends HelperPureComponent<{}, {}> {
   }
 
   private logout = () => {
-    window.dispatchEvent(new CustomEvent(DispatcherChannels.ToggleConfirm));
+    window.dispatchEvent(new CustomEvent(DispatcherChannels.ToggleConfirm, { detail: Settings.translations.log_out_question }));
     window.addEventListener(DispatcherChannels.UserConfirmed, Settings.logout);
     window.addEventListener(DispatcherChannels.UserCanceled, this.logoutCanceled);
   }

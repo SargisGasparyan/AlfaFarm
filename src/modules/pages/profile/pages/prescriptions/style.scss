@@ -1,7 +1,10 @@
 @import 'src/assets/styles/variables';
 
 .P-profile-prescriptions {
-
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100% - 120px);
+  justify-content: space-between;
   > .P-content {
     display        : flex;
     overflow       : hidden;

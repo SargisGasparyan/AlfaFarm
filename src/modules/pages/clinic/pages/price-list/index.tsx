@@ -37,7 +37,8 @@ class PriceList extends HelperComponent<{}, {}> {
 
   private onSearchChange = (searchValue: string) => {
     const oldSearchValue = this.state.searchValue;
-    this.safeSetState({ searchValue }, () => searchValue !== oldSearchValue && !searchValue && this.fetchData());
+    this.safeSetState({ searchValue }, () => this.fetchData());
+    // this.safeSetState({ searchValue }, () => searchValue !== oldSearchValue && !searchValue && this.fetchData());
   }
 
   private columnConfig = (name: string) => [

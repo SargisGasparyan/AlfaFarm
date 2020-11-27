@@ -272,32 +272,34 @@ class Checkout extends HelperComponent<{}, IState> {
               />
             </div>
 
-            {form.deliveryType === OrderDeliveryTypeEnum.Delivery && <div className="P-delivery-date G-half-width">
+            {form.deliveryType === OrderDeliveryTypeEnum.Delivery && <div className="P-delivery-date">
               <h4 className="G-fs-normal">{Settings.translations.delivery_date}</h4>
-              <div className="G-main-form-half-field">
-                <DateTime
-                  onChange={this.dateFromChange}
-                  isValidDate={this.validateDeliveryDate}
-                  inputProps={{
-                    value: form.deliveryDateFrom ? formatDate(form.deliveryDateFrom, true) : '',
-                    readOnly: true,
-                    className: `G-main-input ${this.formValidation.errors.deliveryDateFrom ? 'G-invalid-field' : ''}`,
-                    placeholder: '00:00',
-                  }}
-                />
-              </div>
-              <span>&#8213;</span>
-              <div className="G-main-form-half-field">
-                <DateTime
-                  onChange={this.dateToChange}
-                  isValidDate={this.validateDeliveryDate}
-                  inputProps={{
-                    value: form.deliveryDateTo ? formatDate(form.deliveryDateTo, true) : '',
-                    readOnly: true,
-                    className: `G-main-input ${this.formValidation.errors.deliveryDateTo ? 'G-invalid-field' : ''}`,
-                    placeholder: '00:00',
-                  }}
-                />
+              <div>
+                <div className="G-main-form-half-field">
+                  <DateTime
+                    onChange={this.dateFromChange}
+                    isValidDate={this.validateDeliveryDate}
+                    inputProps={{
+                      value: form.deliveryDateFrom ? formatDate(form.deliveryDateFrom, true) : '',
+                      readOnly: true,
+                      className: `G-main-input ${this.formValidation.errors.deliveryDateFrom ? 'G-invalid-field' : ''}`,
+                      placeholder: '00:00',
+                    }}
+                  />
+                </div>
+                <span>&#8213;</span>
+                <div className="G-main-form-half-field">
+                  <DateTime
+                    onChange={this.dateToChange}
+                    isValidDate={this.validateDeliveryDate}
+                    inputProps={{
+                      value: form.deliveryDateTo ? formatDate(form.deliveryDateTo, true) : '',
+                      readOnly: true,
+                      className: `G-main-input ${this.formValidation.errors.deliveryDateTo ? 'G-invalid-field' : ''}`,
+                      placeholder: '00:00',
+                    }}
+                  />
+                </div>
               </div>
             </div>}
           </div>
