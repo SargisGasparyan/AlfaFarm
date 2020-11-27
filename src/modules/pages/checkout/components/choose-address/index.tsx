@@ -47,7 +47,7 @@ class ChooseAddress extends HelperPureComponent<IProps, IState> {
     const { data } = this.state;
     const { onClose } = this.props;
 
-    return (
+    return data.length && (
       <Modal className="P-checkout-choose-address-modal" onClose={() => onClose()}>
         <Table<IUserAddressListResponseModel>
           onRowClick={onClose}

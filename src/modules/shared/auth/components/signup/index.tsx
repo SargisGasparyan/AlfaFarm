@@ -81,7 +81,7 @@ class SignUp extends HelperComponent<IProps, IState> {
     const { form, submitLoading } = this.state;
 
     return <>
-      <h3 className="G-main-color G-text-center">{Settings.translations.choose_password}</h3>
+      <h3 className="G-main-color G-text-center">{Settings.translations.personal_data}</h3>
       <form className="G-main-form">
         <div className="G-main-form-field">
           <input

@@ -205,6 +205,7 @@ class Checkout extends HelperComponent<{}, IState> {
                 onChange={this.addressChange}
                 onPlaceSelected={this.addressSelect}
                 componentRestrictions={{ country: 'am' }}
+                types={[]}
               />
             </div>
             <div className="G-main-form-field">

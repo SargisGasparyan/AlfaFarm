@@ -32,7 +32,16 @@ class Auth extends HelperComponent<IProps, IState> {
     errorMessage: '',
     activeData: {},
   };
-
+  
+  public componentDidMount() {
+    document.body.style.position = 'fixed'
+  }
+  
+  public componentWillUnmount() {
+    super.componentWillUnmount();
+    document.body.style.position = 'unset'
+  }
+  
   private contentTypes = {
     [ModalContentEnum.SignIn]: () => <SignIn onTypeChange={this.onTypeChange} />,
     [ModalContentEnum.SendCode]: () => <SendCode onTypeChange={this.onTypeChange} activeData={this.state.activeData} />,
