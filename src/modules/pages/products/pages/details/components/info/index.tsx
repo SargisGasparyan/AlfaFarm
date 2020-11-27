@@ -39,7 +39,6 @@ class Info extends HelperComponent<IProps, IState> {
 
   private onCountChange = async (count: number) => {
     const { data } = this.props;
-    console.log(count);
 
     if (!count && data) {
       await BasketController.Delete(data.id);

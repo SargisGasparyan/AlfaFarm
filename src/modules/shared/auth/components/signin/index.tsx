@@ -94,7 +94,7 @@ class SignIn extends HelperComponent<IProps, IState> {
     return <>
       <h3 className="G-main-color G-text-center">{Settings.translations.log_in}</h3>
       <form className="G-main-form">
-        <div className="G-main-form-field G-phone-input-wrapper">
+        <div className="G-main-form-field G-phone-input-wrapper G-mb-0">
           <p className="G-input-country-code">+{countryCode}</p>
           <input
             name="username"
@@ -103,6 +103,7 @@ class SignIn extends HelperComponent<IProps, IState> {
             className={`G-main-input ${this.formValidation.errors.username ? 'G-invalid-field' : ''}`}
             onChange={this.changeField}
           />
+          <span className='P-error-message' style={{opacity: form.username && this.formValidation.errors.username ? 1 : 0}}>Phone number format is invalid</span>
         </div>
         <div className="G-main-form-field">
           <input
