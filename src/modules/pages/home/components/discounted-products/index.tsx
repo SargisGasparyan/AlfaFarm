@@ -27,7 +27,6 @@ class DiscountedProducts extends HelperComponent<{}, IState> {
 	
 	private fetchData = async () => {
 		const result = await ProductController.GetList({pageNumber: 1, pageSize: 10, hasDiscount: true});
-		//console.log(result);
 		this.safeSetState({data: result.data.list});
 	}
 	

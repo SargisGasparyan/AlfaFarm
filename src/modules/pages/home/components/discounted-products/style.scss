@@ -17,6 +17,7 @@
       position: unset;
     }
     .react-multiple-carousel__arrow--left {
+      z-index: 0;
       left: 5%;
       background: none;
 
@@ -27,6 +28,7 @@
     }
 
     .react-multiple-carousel__arrow--right {
+      z-index: 0;
       right: 5%;
       background: none;
 

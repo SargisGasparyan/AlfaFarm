@@ -8,6 +8,7 @@ import UserAddressController from 'platform/api/userAddress';
 import Table from 'components/table';
 
 import './style.scss';
+import ROUTES from "../../../../../platform/constants/routes";
 
 interface IProps {
   onClose(chosen?: IUserAddressListResponseModel): void; 
@@ -38,8 +39,8 @@ class ChooseAddress extends HelperPureComponent<IProps, IState> {
 
   private fetchData = async () => {
     const result = await UserAddressController.GetList();
-    console.log(result.data);
-    this.safeSetState({ data: result.data });
+    if (result.data.length) this.safeSetState({ data: result.data });
+    else window.routerHistory.push(ROUTES.PROFILE.ADDRESSES.CREATE)
   }
 
   public render() {
