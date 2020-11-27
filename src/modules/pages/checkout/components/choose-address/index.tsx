@@ -38,6 +38,7 @@ class ChooseAddress extends HelperPureComponent<IProps, IState> {
 
   private fetchData = async () => {
     const result = await UserAddressController.GetList();
+    console.log(result.data);
     this.safeSetState({ data: result.data });
   }
 

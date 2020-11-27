@@ -11,9 +11,29 @@
   > .G-main-ghost-button { margin-top: 75px; }
 
   > .P-list-wrapper {
-    margin          : -4vh;
-    display         : flex;
-    flex-wrap       : wrap;
-    justify-content : center;
+    width: 85%;
+    margin: 0 auto;
+    .react-multi-carousel-list {
+      position: unset;
+    }
+    .react-multiple-carousel__arrow--left {
+      left: 5%;
+      background: none;
+
+      &:before {
+        color: gray;
+        font-size: 50px;
+      }
+    }
+
+    .react-multiple-carousel__arrow--right {
+      right: 5%;
+      background: none;
+
+      &:before {
+        color: gray;
+        font-size: 50px;
+      }
+    }
   }
 }

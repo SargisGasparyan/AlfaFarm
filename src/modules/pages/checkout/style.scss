@@ -19,6 +19,14 @@
     align-items   : flex-start;
     border-radius : $big-radius;
 
+    .P-date {
+      display: flex;
+      justify-content: space-between;
+      > .G-main-form-half-field {
+
+      }
+    }
+
     > .P-main-info, > .P-delivery-form {
       flex      : 1;
       margin    : 20px;
@@ -30,12 +38,13 @@
         width       : 100%;
         display     : flex;
         min-width   : 400px;
-        align-items : center;
+        flex-direction: column;
   
         > h4 {
           color          : $text-gray;
           white-space    : nowrap;
           margin-right   : 20px;
+          margin-bottom: 15px;
           @include normal-font;
         }
   
