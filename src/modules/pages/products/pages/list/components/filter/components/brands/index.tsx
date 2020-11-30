@@ -41,7 +41,7 @@ const Brands = ({ body, onChange }: IProps) => {
       
       bodyCopy.brandIds.length ? query.set('brandIds', bodyCopy.brandIds.join(',')) : query.delete('brandIds');
       window.routerHistory.replace(`${ROUTES.PRODUCTS.MAIN}?${query.toString()}`);
-      window.scrollTo(0, 0);
+      // window.scrollTo(0, 0);
 
       onChange(body);
     }

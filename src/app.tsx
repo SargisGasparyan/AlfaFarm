@@ -51,7 +51,13 @@ class App extends HelperComponent<{}, IState> {
 
     window.abortableRequests = [];
     window.routerHistory = createBrowserHistory();
-    window.routerHistory.listen(() => window.scrollTo(0, 0));
+    window.routerHistory.listen(() => {
+      if (location.pathname !== '/products') {
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+        })
+      }
+    });
     window.addEventListener(DispatcherChannels.ToggleConfirm, this.toggleConfirm);
 
     this.safeSetState({ generalAPILoaded: true });

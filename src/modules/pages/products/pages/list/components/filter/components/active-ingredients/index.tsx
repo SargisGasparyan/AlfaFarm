@@ -42,7 +42,7 @@ const ActiveIngredients = ({ body, onChange }: IProps) => {
       
       bodyCopy.activeIngredientIds.length ? query.set('activeIngredientIds', bodyCopy.activeIngredientIds.join(',')) : query.delete('activeIngredientIds');
       window.routerHistory.replace(`${ROUTES.PRODUCTS.MAIN}?${query.toString()}`);
-      window.scrollTo(0, 0);
+      // window.scrollTo(0, 0);
 
       onChange(body);
     }

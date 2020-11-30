@@ -36,6 +36,7 @@ class Filter extends HelperComponent<IProps, IState> {
   };
 
   public componentDidMount() {
+    window.scrollTo(0, 0);
     this.safeSetState({ body: buildFilters() });
     window.addEventListener(DispatcherChannels.ProductFilterChange, this.outsideFilterChange);
   }

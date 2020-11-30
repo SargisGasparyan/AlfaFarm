@@ -47,13 +47,15 @@ class PasswordForm extends HelperComponent<{}, IState> {
         this.safeSetState({ submitLoading: true }, async () => {
           const form = {...this.state.form};
           const result = await UserController.ChangePassword(form);
-          console.log(result);
           
-          if (!!result.data) window.location.reload();
-          else {
-            this.safeSetState({ submitLoading: false });
+          if (!!result.data) {
+            alertify.success('Password was changed successfully');
+            form.newPassword = '';
+            form.currentPassword = '';
+            form.confirmPassword = '';
+            this.safeSetState({ form, submited: false });
           }
-          alertify.error(`${result.message}`);
+          this.safeSetState({ submitLoading: false });
         });
       } else alertify.error(`Passwords don’t match`);
     });

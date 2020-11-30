@@ -31,7 +31,7 @@ class Notifications extends HelperPureComponent<IProps, IState> {
     const body = {
       pageSize: infinityScrollPageLimit,
       pageNumber: 1,
-      onlyUnseen: true,
+      onlyUnseen: undefined,
     };
 
     const result = await NotificationController.GetList(body);
@@ -65,7 +65,7 @@ class Notifications extends HelperPureComponent<IProps, IState> {
       </Link>,
     };
 
-    return types[item.type];
+    return types[item.type] || null;
   }  
 }
 
