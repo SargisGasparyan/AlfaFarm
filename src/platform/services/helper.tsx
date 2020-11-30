@@ -113,6 +113,7 @@ export const getMonthDays = (() => {
   return (startDate: Date, pushToday = true) => {
     const date = moment(startDate);
     const endDate = moment(date).endOf('month');
+    endDate.add(1, 'days');
     const days = [];
 
     while(date.diff(endDate, 'days') < 0) {
@@ -120,7 +121,6 @@ export const getMonthDays = (() => {
       (!isToday || pushToday) && days.push(getDay(date));
       date.add(1, 'days');
     }
-      
     return days;
   };
 })();

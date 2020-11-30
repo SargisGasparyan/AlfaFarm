@@ -82,7 +82,6 @@ class App extends HelperComponent<{}, IState> {
   public render() {
     const { generalAPILoaded, initialLoading, confirmOpen, confirmText } = this.state;
     
-
     return generalAPILoaded ? (
       <Router history={window.routerHistory}>
         {initialLoading ? <>

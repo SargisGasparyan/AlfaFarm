@@ -205,6 +205,7 @@ class Checkout extends HelperComponent<{}, IState> {
                 onChange={this.addressChange}
                 onPlaceSelected={this.addressSelect}
                 componentRestrictions={{ country: 'am' }}
+                types={[]}
               />
             </div>
             <div className="G-main-form-field">
@@ -274,7 +275,7 @@ class Checkout extends HelperComponent<{}, IState> {
 
             {form.deliveryType === OrderDeliveryTypeEnum.Delivery && <div className="P-delivery-date">
               <h4 className="G-fs-normal">{Settings.translations.delivery_date}</h4>
-              <div>
+              <div className='P-date'>
                 <div className="G-main-form-half-field">
                   <DateTime
                     onChange={this.dateFromChange}
@@ -287,7 +288,6 @@ class Checkout extends HelperComponent<{}, IState> {
                     }}
                   />
                 </div>
-                <span>&#8213;</span>
                 <div className="G-main-form-half-field">
                   <DateTime
                     onChange={this.dateToChange}
