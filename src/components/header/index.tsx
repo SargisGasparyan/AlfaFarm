@@ -154,7 +154,7 @@ class Header extends HelperPureComponent<{}, IState> {
         </Link>
 
         {enviroment.WHOLESALE ? <WholesaleContent /> : <>
-          <SearchInput withSubmit={true} onSubmit={this.searchSubmit} />
+          <SearchInput onChange={this.searchSubmit} />
 
           <Link
             to={ROUTES.PRODUCTS.MAIN}

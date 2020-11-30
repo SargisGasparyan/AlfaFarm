@@ -961,6 +961,7 @@ export default {
   my_addresses: "Мои адреса",
   addresses: "Адреса",
   log_out: "Выйти",
+  log_out_question: 'Вы уверены, что хотите выйти?',
   add_new_address: "+ Добавить новый адрес",
   add_address: "Добавить адрес",
   edit_address: "Редактировать адрес",

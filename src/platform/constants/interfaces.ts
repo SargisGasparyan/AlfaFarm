@@ -4,7 +4,7 @@ import { DropdownNameFunctionType } from './types';
 
 export interface IResponse<Data> {
   data: Data;
-  messages: { key: number, value: string }[];
+  message: string;
   success: boolean;
   abort(): void;
   aborted?: boolean;

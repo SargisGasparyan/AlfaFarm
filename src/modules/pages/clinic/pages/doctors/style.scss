@@ -16,7 +16,7 @@
       width           : 260px;
       border          : 0;
       height          : auto;
-      padding         : 15px;
+      padding         : 10px;
       font-size       : 20px;
       background      : $main-color;
       border-radius   : 30px;
@@ -81,8 +81,10 @@
 
       .G-main-button {
         width     : 240px;
-        padding   : 15px 0;
+        padding   : 10px 0;
         font-size : 20px;
+        margin-top: 15px;
+        margin-bottom: 15px;
       }
 
       .P-total {
