@@ -177,7 +177,7 @@ class Header extends HelperPureComponent<{}, IState> {
             style={{ background: `url('${Storage.profile.photoPath ? getMediaPath(Storage.profile.photoPath) : PersonImage}') center/cover` }}
             className="P-image"
           />
-          <h4>{Storage.profile.firstName} {Storage.profile.lastName}</h4>
+          <h4 className="P-profile-header">{Storage.profile.firstName} {Storage.profile.lastName}</h4>
         </Link> : <span
           onClick={this.toggleAuth}
           className="P-link P-login"

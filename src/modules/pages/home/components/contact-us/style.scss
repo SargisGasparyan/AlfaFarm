@@ -8,8 +8,17 @@
   display        : flex;
   padding-top    : 100px;
   flex-direction : column;
+  overflow: hidden;
 
-  > .P-shadow-text { margin-bottom: 130px; }
+  @media (max-width: $tablet-screen){
+    padding-top: 50px;
+  }
+
+  > .P-shadow-text { margin-bottom: 130px;
+  @media(max-width: $tablet-screen){
+    font-size: 24px !important;
+  }
+  }
 
   > .P-maps {
     width  : calc(100% + #{2 * $page-horizontal-offset});
@@ -17,7 +26,7 @@
     margin : 130px 0 0 (-$page-horizontal-offset);
     border : 0;
   }
- 
+
   > .P-bottom {
     margin          : 0 10vw;
     display         : flex;
@@ -56,7 +65,7 @@
   display        : flex;
   align-items    : center;
   flex-direction : column;
-  
+
   > i { font-size: 70px; }
 
   > h3 {

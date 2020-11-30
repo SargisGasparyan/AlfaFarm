@@ -44,9 +44,9 @@ class ContactUs extends HelperComponent<{}, IState> {
       <section className="G-page P-home-contact-us">
         <ShadowText className="G-text-center">{Settings.translations.contact_us}</ShadowText>
         <Form />
-    
-        <Maps markers={branches} className="P-maps" />
-    
+
+        <Maps markers={branches} className="P-maps P-home-maps" />
+
         <div className="P-bottom">
           <AboutDelivery />
           <AboutBonusCard />

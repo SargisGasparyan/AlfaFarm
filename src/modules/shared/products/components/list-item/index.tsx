@@ -32,7 +32,7 @@ const ListItem = React.memo((props: IProps) => {
   const addToCart = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     setCartLoading(true);
-    
+
     await BasketController.Change({
       productId: data.id,
       productQuantity: count,
@@ -43,34 +43,37 @@ const ListItem = React.memo((props: IProps) => {
   }
 
   return (
-    <Link className="P-products-list-item" to={ROUTES.PRODUCTS.DETAILS.replace(':id', data.id)}>
-      {!!data.discount && <DiscountLabel percent={data.discount} />}
-      <div className="P-image" style={{ background: `url('${getMediaPath(data.imagePath)}') center/contain no-repeat` }} />
-      
-      {!Settings.guest && <i
-        onClick={toggleFavorite}
-        className={`P-favorite ${data.isFavorite ? 'P-active icon-Group-5520' : 'icon-Group-5518'}`}
-      />}
+    <div className='P-padding-products'>
+      <Link className="P-products-list-item" to={ROUTES.PRODUCTS.DETAILS.replace(':id', data.id)}>
+        {!!data.discount && <DiscountLabel percent={data.discount} />}
+        <div className="P-image" style={{ background: `url('${getMediaPath(data.imagePath)}') center/contain no-repeat` }} />
 
-      <h3>{truncateText(data.title)}</h3>
-      
-      <div className="P-price">
-        <span>{formatPrice(data.discountedPrice || data.price)}</span>
-        <CountInput
-          step={1}
-          min={1}
-          value={count}
-          onChange={setCount}
-          onlyPlusIfOne={true}
-        />
-      </div>
+        {!Settings.guest && <i
+            onClick={toggleFavorite}
+            className={`P-favorite ${data.isFavorite ? 'P-active icon-Group-5520' : 'icon-Group-5518'}`}
+        />}
 
-      <LoaderContent
-        loading={cartLoading}
-        className="G-main-button"
-        onClick={addToCart}
-      >{Settings.translations.add}</LoaderContent>
-    </Link>
+        <h3>{truncateText(data.title)}</h3>
+
+        <div className="P-price">
+          <span>{formatPrice(data.discountedPrice || data.price)}</span>
+          <CountInput
+            step={1}
+            min={1}
+            value={count}
+            onChange={setCount}
+            onlyPlusIfOne={true}
+          />
+        </div>
+
+        <LoaderContent
+          loading={cartLoading}
+          className="G-main-button"
+          onClick={addToCart}
+        >{Settings.translations.add}</LoaderContent>
+      </Link>
+    </div>
+
   );
 });
 

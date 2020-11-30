@@ -7,12 +7,46 @@
   border-right  : 2px solid $light-gray;
   padding-right : 40px;
 
-  > h2 {  
+  @media(max-width : 1800px) {
+    min-width     : 240px;
+    max-width     : 240px;
+    padding-right : 20px;
+    margin-right  : 40px;
+
+  }
+
+  @media(max-width : 1200px) {
+    display       : flex;
+    align-items   : center;
+    max-width     : 100%;
+    border-right  : none;
+    padding-right : 0;
+    padding-left: 15px;
+    flex-wrap: wrap;
+    margin-right: 0;
+
+  }
+
+  > h2 {
     margin      : 40px 0 20px;
     font-weight : 300;
 
-    &:first-child { margin-top: 0; }
-    &.P-main-category { cursor: pointer; }
+    &:first-child {
+      margin-top : 0;
+    }
+
+    &.P-main-category {
+      cursor : pointer;
+    }
+
+    @media(max-width : 1200px) {
+      margin       : 0 !important;
+      margin-right : 30px !important;
+    }
+
+    @media(max-width: 766.98px){
+      font-size: 18px;
+    }
   }
 
   > .P-row-title {

@@ -1,3 +1,12 @@
 @import 'src/assets/styles/variables';
 
 @import './responsive';
+
+.P-home-maps{
+  margin: 130px auto 0 !important;
+  width: 100% !important;
+
+  @media(max-width: $tablet-screen){
+    height: 250px !important;
+  }
+}
