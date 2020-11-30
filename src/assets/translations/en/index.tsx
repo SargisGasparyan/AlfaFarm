@@ -1181,6 +1181,7 @@ export default {
   pharmacies: "Pharmacies",
   online_pharmacy: "Online pharmacy",
   online_sales: "Online sales",
+  log_out_question: 'Are you sure you want to sign out?',
   clinic: "Clinic",
   doctors: "Doctors",
   laboratory: "Laboratory",

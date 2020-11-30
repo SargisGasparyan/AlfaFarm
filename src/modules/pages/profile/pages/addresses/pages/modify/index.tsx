@@ -16,7 +16,6 @@ import { IGooglePlace } from 'platform/constants/interfaces';
 
 interface IState {
   form: IUserAddressModifyRequestModel;
-
   submited: boolean;
   submitLoading: boolean;
 };
@@ -83,7 +82,7 @@ class Modify extends HelperComponent<RouteComponentProps<IRouteParams>, IState> 
         const { id } = this.props.match.params;
         const { form } = this.state;
         const result = id ? await UserAddressController.Update(+id, form) : await UserAddressController.Create(form);
-        
+
         if (result.data) window.routerHistory.push(ROUTES.PROFILE.ADDRESSES.MAIN);
         else this.safeSetState({ submitLoading: false });
       });
@@ -114,6 +113,7 @@ class Modify extends HelperComponent<RouteComponentProps<IRouteParams>, IState> 
         <div className="G-flex G-flex-wrap">
           {window.routerHistory.length > 2 && <i className="G-back-icon icon-Group-5529" onClick={this.goBack} />}
           <form className="G-main-form P-form-block G-mr-20">
+            <span className="P-page-title">{ this.props.match.params.id ? Settings.translations.edit_address: Settings.translations.add_address }</span>
             <div className="G-main-form-field">
               <p className="G-input-top-label">{Settings.translations.name}</p>
               <input
@@ -131,7 +131,7 @@ class Modify extends HelperComponent<RouteComponentProps<IRouteParams>, IState> 
                 className={`G-main-input ${this.formValidation.errors.address ? 'G-invalid-field' : ''}`}
                 onChange={this.onAddressChange}
                 onPlaceSelected={this.onAddressSelect}
-                componentRestrictions={{country: 'am'}}
+                componentRestrictions={{ country: 'am' }}
               />
             </div>
             <div className="G-main-form-field">
@@ -180,7 +180,7 @@ class Modify extends HelperComponent<RouteComponentProps<IRouteParams>, IState> 
               />
             </div>
             <LoaderContent
-              className="G-main-button"
+              className="G-main-button G-mt-1"
               loading={submitLoading}
               onClick={this.submit}
             >{Settings.translations.save}</LoaderContent>

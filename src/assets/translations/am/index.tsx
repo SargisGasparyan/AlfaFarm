@@ -985,6 +985,7 @@ export default {
   my_addresses: "Իմ հասցեները",
   addresses: "Հասցեներ",
   log_out: "Դուրս գալ",
+  log_out_question: 'Վստա՞հ եք, որ ցանկանում եք դուրս գալ',
   add_new_address: "+ Ավելացնել նոր հասցե",
   add_address: "Ավելացնել հասցե",
   edit_address: "Փոփոխել հասցեն",

@@ -273,7 +273,7 @@ class Checkout extends HelperComponent<{}, IState> {
               />
             </div>
 
-            {form.deliveryType === OrderDeliveryTypeEnum.Delivery && <div className="P-delivery-date G-half-width">
+            {form.deliveryType === OrderDeliveryTypeEnum.Delivery && <div className="P-delivery-date">
               <h4 className="G-fs-normal">{Settings.translations.delivery_date}</h4>
               <div className='P-date'>
                 <div className="G-main-form-half-field">
