@@ -34,6 +34,7 @@ const TableList = ({ list, onQuantityChange }: IProps) => {
     },
     {
       name: Settings.translations.quantity,
+      style: { minWidth: 150, maxWidth: 150 },
       cell: (row: IBasketListResponseModel, index: number) => onQuantityChange ?
       <CountInput
         value={row.productQuantity}

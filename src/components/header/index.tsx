@@ -56,7 +56,7 @@ class Header extends HelperPureComponent<{}, IState> {
   public componentDidMount() {
     this.fetchCart();
     setTimeout(this.checkWindow, 500); // Wait for assets load to get the right position of category wrapper link
-    window.routerHistory.push(`${ROUTES.PRODUCTS.MAIN}`);
+    // window.routerHistory.push(`${ROUTES.PRODUCTS.MAIN}`);
     window.addEventListener('resize', this.checkWindow);
     window.addEventListener(DispatcherChannels.CartItemsUpdate, this.fetchCart);
     Broadcast.subscribe(DispatcherChannels.StorageUpdate, this.storageUpdate);

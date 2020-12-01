@@ -42,7 +42,7 @@ const Producers = ({ body, onChange }: IProps) => {
       
       bodyCopy.producerIds.length ? query.set('producerIds', bodyCopy.producerIds.join(',')) : query.delete('producerIds');
       window.routerHistory.replace(`${ROUTES.PRODUCTS.MAIN}?${query.toString()}`);
-      window.scrollTo(0, 0);
+      // window.scrollTo(0, 0);
 
       onChange(body);
     }
