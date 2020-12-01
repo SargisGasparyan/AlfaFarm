@@ -1195,6 +1195,7 @@ export default {
   availability_at_the_nearest_pharmacy: "Availability at the nearest pharmacy",
   good_morning: "Good morning",
   home: "Home page",
+  wrong_password_length: 'Password should contain at least 6 characters',
   good_afternoon: "Good afternoon",
   good_evening: "Good evening",
   show_less: "Show less",

@@ -8,7 +8,7 @@ import Settings from 'platform/services/settings';
 import { byRoute } from 'platform/decorators/routes';
 import HelperComponent from 'platform/classes/helper-component';
 import LoaderContent from 'components/loader-content';
-import { countryCode } from 'platform/constants';
+import { countryCode, currency } from 'platform/constants';
 import { OrderDeliveryTypeEnum } from 'platform/api/order/constants/enums';
 import Select from 'components/select';
 import { OrderDeliveryTypeDropdown } from 'platform/constants/dropdowns';
@@ -25,13 +25,20 @@ import OrderController from 'platform/api/order';
 import SuccessModal from 'components/success-modal';
 
 import './style.scss';
+import Radio from 'components/radio';
+import { PaymentType } from 'platform/constants/enums';
+import PaymentController from 'platform/api/payment';
 
+import arca from 'assets/images/Arca.png';
+import master from 'assets/images/master.png';
+import visa from 'assets/images/visaImage.svg';
 interface IState {
   form: IOrderModifyRequestModel;
   submited: boolean;
   submitLoading: boolean;
   chooseAddressOpen: boolean;
   successModalOpen: boolean;
+  isPayment: boolean;
 };
 
 @byRoute(ROUTES.CHECKOUT)
@@ -47,7 +54,9 @@ class Checkout extends HelperComponent<{}, IState> {
       lastName: '',
       phoneNumber: '',
       deliveryType: OrderDeliveryTypeEnum.Delivery,
+      paymentType: PaymentType.Cash
     },
+    isPayment: false
   };
 
   private get formValidation() {
@@ -104,15 +113,9 @@ class Checkout extends HelperComponent<{}, IState> {
   private submit = (e: React.SyntheticEvent) => {
     e.preventDefault();
     this.safeSetState({ submited: true }, () => {
-      this.formValidation.valid && this.safeSetState({ submitLoading: true }, async () => {
-        const { form } = this.state;
-        const result = await OrderController.Create(form);
-        if (result.success) this.safeSetState({ successModalOpen: true });
-        else this.safeSetState({ submitLoading: false });
-      });
+      this.formValidation.valid && this.safeSetState({ isPayment: true });
     });
   }
-
   private openAddressChoose = (e: React.SyntheticEvent) => {
     e.preventDefault();
     this.safeSetState({ chooseAddressOpen: true });
@@ -151,14 +154,72 @@ class Checkout extends HelperComponent<{}, IState> {
 
     return dateItem.isSameOrAfter(currentDayStarting);
   }
+  private choosePaymentType = async (type: PaymentType) => {
+    const { form } = this.state;
+    if (type === PaymentType.IPay) {
+      const res = await PaymentController.getUserCards();
+      if (res && res.success) {
+        
+      }
+    }
+    form.paymentType = type;
+    this.safeSetState({ form });
+  }
+  private finishCheckout = (e: React.SyntheticEvent) => {
+    e.preventDefault();
+    const { form } = this.state;
+    form.paymentType = PaymentType.Cash;
+    this.safeSetState({ submitLoading: true, form }, async () => {
+      const result = await OrderController.Create(form);
+      if (result.success) {
+        // if (form.paymentType === PaymentType.IPay) {
+        //   const onlinePayRes = await PaymentController.registerCard();
+        //   if (onlinePayRes.success) {
 
+        //   }
+        // }
+        this.safeSetState({ successModalOpen: true });
+      }
+      else this.safeSetState({ submitLoading: false });
+    });
+  }
+  private Payment = () => {
+    const { form, submitLoading } = this.state;
+    return <div className="P-choose-payment-type-section">
+      <div className="P-payment-types">
+        <div>
+          <Radio<PaymentType> callback={(data: PaymentType) => this.choosePaymentType(data)} value={PaymentType.Cash} isChecked={form.paymentType === PaymentType.Cash}>
+            {Settings.translations.cash}
+          </Radio>
+        </div>
+        <div>
+          <Radio<PaymentType> callback={(data: PaymentType) => this.choosePaymentType(data)} value={PaymentType.IPay} isChecked={form.paymentType === PaymentType.IPay}>
+            <span>{Settings.translations.card}</span>
+            <div className="P-online-pay-icons">
+              <div style={ { background: `url(${arca}) center/contain no-repeat` } } />
+              <div style={ { background: `url(${visa}) center/cover no-repeat` } } />
+              <div style={ { background: `url(${master}) center/contain no-repeat` } } />
+            </div>
+          </Radio>
+        </div>
+      </div>
+      <p>{Settings.translations.total} 15,000 {currency}</p>
+      <div className="P-choose-payment-buttons">
+        <LoaderContent
+          className="G-main-button"
+          loading={submitLoading}
+          onClick={this.finishCheckout}
+        >{Settings.translations.pay}</LoaderContent>
+      </div>
+    </div>
+  }
   public render() {
-    const { form, submitLoading, chooseAddressOpen, successModalOpen } = this.state;
+    const { form, submitLoading, chooseAddressOpen, successModalOpen, isPayment } = this.state;
 
     return (
       <section className="G-page P-checkout-page">
-        <h1 className="G-page-title">{Settings.translations.fill_your_information}</h1>
-        <form className="G-main-form">
+        <h1 className="G-page-title">{!isPayment ? Settings.translations.fill_your_information : Settings.translations.payment_method}</h1>
+        {!isPayment ? <form className="G-main-form">
           <div className="P-main-info G-half-width">
             <div className="G-main-form-field">
               <input
@@ -318,7 +379,7 @@ class Checkout extends HelperComponent<{}, IState> {
             >{Settings.translations.choose_address}</LoaderContent>}
             {chooseAddressOpen && <ChooseAddress onClose={this.closeAddressChoose} />}
           </div>
-        </form>
+        </form> : <this.Payment />}
         {successModalOpen && <SuccessModal text={Settings.translations.order_success} onClose={() => window.routerHistory.push(ROUTES.HOME)} />}
       </section>
     );

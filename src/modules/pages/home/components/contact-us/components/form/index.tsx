@@ -1,90 +1,88 @@
 import * as React from 'react';
-
 import HelperComponent from "platform/classes/helper-component";
 import Settings from 'platform/services/settings';
 import LoaderContent from 'components/loader-content';
-import { validateForm } from '../../services/helper';
-
+import { IContactUsBodyModel } from 'platform/api/support/models';
+import { isValidEmail } from 'platform/services/validator';
+import SupportController from 'platform/api/support';
+import {validateForm} from './service/helper';
 interface IState {
-  form: {
-    name: string;
-    email: string;
-    text: string;
-  };
+  body: IContactUsBodyModel;
   submited: boolean;
   submitLoading: boolean;
-};
-
-class Form extends HelperComponent<{}, {}> {
-
+}
+class Form extends HelperComponent<{}, IState> {
   public state: IState = {
-    submited: false,
-    submitLoading: false,
-    form: {
+    body: {
       name: '',
       email: '',
-      text: '',
+      content: ''
     },
-  };
-
-  private changeField = (e: React.SyntheticEvent<HTMLInputElement>) => {
-    const { form } = this.state;
-    form[e.currentTarget.name] = e.currentTarget.value;
-    this.safeSetState({ form });
+    submited: false,
+    submitLoading: false
   }
-
   private get formValidation() {
-    const { submited, form } = this.state;
-    return validateForm.call(form, submited);
+    const { submited, body } = this.state;
+    return validateForm.call(body, submited);
   }
-
-  private submit = (e: React.SyntheticEvent) => {
+  private change = (e: React.SyntheticEvent<any>) => {
+    const { body } = this.state;
+    body[e.currentTarget.name] = e.currentTarget.value;
+    this.safeSetState({ body });
+  }
+  private apply = async (e: React.SyntheticEvent) => {
     e.preventDefault();
+    const { body } = this.state;
     this.safeSetState({ submited: true }, () => {
-      this.formValidation.valid && window.location.reload();
+      this.formValidation.valid && this.safeSetState({ submitLoading: true }, async () => {
+        const res = await SupportController.createRequest(body);
+        if (res.success) {
+          const alertify = await import('alertifyjs');
+          alertify.success(Settings.translations.request_success);
+          body.content = '';
+          body.email = '';
+          body.email = '';
+          this.safeSetState({ body });
+        }
+        this.safeSetState({ submitLoading: false })
+      });
     });
   }
-
   public render() {
-    const { form, submitLoading } = this.state;
-
+    const { submitLoading } = this.state;
     return (
       <form className="G-main-form G-ml-auto G-mr-auto">
         <div className="G-main-form-field">
           <input
-            name="name"
-            value={form.name || ''}
-            className={`G-main-input ${this.formValidation.errors.name ? 'G-invalid-field' : ''}`}
             placeholder={Settings.translations.name}
-            onChange={this.changeField}
+            className={`G-main-input ${this.formValidation.errors.name ? 'G-invalid-field' : ''}`}
+            name="name"
+            onChange={this.change}
           />
         </div>
         <div className="G-main-form-field">
           <input
-            name="email"
-            value={form.email || ''}
-            className={`G-main-input ${this.formValidation.errors.email ? 'G-invalid-field' : ''}`}
             placeholder={Settings.translations.email}
-            onChange={this.changeField}
+            name="email"
+            className={`G-main-input ${this.formValidation.errors.email ? 'G-invalid-field' : ''}`}
+            onChange={this.change}
           />
         </div>
         <div className="G-main-form-field">
-          <input
-            name="text"
-            value={form.text || ''}
-            className={`G-main-input ${this.formValidation.errors.text ? 'G-invalid-field' : ''}`}
+          <textarea
             placeholder={Settings.translations.message}
-            onChange={this.changeField}
+            name="content"
+            className={`G-main-textarea ${this.formValidation.errors.content ? 'G-invalid-field' : ''}`}
+            onChange={this.change}
           />
         </div>
         <LoaderContent
-          className="G-main-button"
+          onClick={this.apply}
           loading={submitLoading}
-          onClick={this.submit}
+          className="G-main-button"
         >{Settings.translations.send}</LoaderContent>
       </form>
     );
   }
 };
-
 export default Form;

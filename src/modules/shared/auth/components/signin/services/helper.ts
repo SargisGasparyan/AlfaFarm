@@ -1,5 +1,5 @@
 import { ILoginRequestModel } from "platform/api/auth/models/request";
-import { isValidPhone } from 'platform/services/validator';
+import { isValidPhone, isValidPassword } from 'platform/services/validator';
 
 export function validateForm(this: ILoginRequestModel, submited?: boolean) {
   let valid = true;
