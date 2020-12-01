@@ -101,9 +101,15 @@ class Filter extends HelperComponent<IProps, IState> {
           className="P-main-category"
         >{item.name}</h2>) : <>
           <PriceRange body={body} onChange={this.bodyChange} />
-          <Brands body={body} onChange={this.bodyChange} />
-          <Producers body={body} onChange={this.bodyChange} />
-          <ActiveIngredients body={body} onChange={this.bodyChange} />
+          <div className="P-row-wrap">
+            <Brands body={body} onChange={this.bodyChange} />
+          </div>
+          <div className="P-row-wrap">
+            <Producers body={body} onChange={this.bodyChange} />
+          </div>
+          <div className="P-row-wrap">
+            <ActiveIngredients body={body} onChange={this.bodyChange} />
+          </div>
           
           <button
             className="G-main-ghost-button P-cancel-button"

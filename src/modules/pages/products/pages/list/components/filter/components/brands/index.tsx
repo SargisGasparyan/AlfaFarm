@@ -53,10 +53,14 @@ const Brands = ({ body, onChange }: IProps) => {
       <span className="G-orange-color">{open ? '-' : '+'}</span>
     </h2>
 
-    {open && data.map(item => <label className="P-checkbox-row" onChange={() => toggleItem(item.id)} key={item.id}>
-      <CheckBox checked={body.brandIds?.includes(item.id)} />
-      <span className="P-name" title={item.name}>{item.name}</span>
-    </label>)}
+    {open ?
+      <div className="P-row-content">
+        {data.map(item => <label className="P-checkbox-row" onChange={() => toggleItem(item.id)} key={item.id}>
+          <CheckBox checked={body.brandIds?.includes(item.id)} />
+          <span className="P-name" title={item.name}>{item.name}</span>
+        </label>)}
+      </div>
+    : null}
   </>;
 };
 
