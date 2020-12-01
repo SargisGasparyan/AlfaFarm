@@ -125,13 +125,13 @@ class Laboratory extends HelperComponent<{}, {}> {
                   onClick={this.submit}
                   disabled={!chosenDate}
                 >
-                  {Settings.translations.sign_up}
+                  {Settings.translations.book}
                 </LoaderContent>
               </div>
             </div>
 
             <Dates chosen={chosenService ? data.find(item => item.id === chosenService) : undefined} />
-            {showSuccess && <SuccessModal text={Settings.translations.success} onClose={this.toggleSuccessModal} />}
+            {showSuccess && <SuccessModal text={Settings.translations.success_book} onClose={this.toggleSuccessModal} />}
           </> : <PageLoader />}
         </div>
       </section>

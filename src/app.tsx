@@ -45,7 +45,7 @@ class App extends HelperComponent<{}, IState> {
     const alertify = await import('alertifyjs');
     moment.locale(Settings.shortCode);
     alertify.set('notifier','position', 'bottom-center');
-    alertify.set('notifier','delay', 20);
+    alertify.set('notifier','delay', 5);
 
     //? For SSR to fully load Browser API (general for 'window')
 

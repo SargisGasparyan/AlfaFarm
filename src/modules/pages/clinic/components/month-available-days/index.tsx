@@ -147,7 +147,7 @@ class MonthAvailableDays extends HelperPureComponent<IProps, {}> {
         <h3>{month.name} &gt; <span className="G-text-gray-color">{Settings.translations.available_days}</span></h3>
         {this.availableDays.map((item, index) => service ? <TooltipTrigger
           key={index}
-          placement="bottom-start"
+          placement="right"
           tooltip={this.Tooltip}
           onVisibilityChange={shown => this.onTooltipToggle(shown, item.date)}
         >

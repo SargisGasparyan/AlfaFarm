@@ -176,7 +176,7 @@ class Doctors extends HelperComponent<{}, {}> {
                 disabled={this.registerDisabled(item.id)}
                 onClick={this.submit}
               >
-                {Settings.translations.sign_up}
+                {Settings.translations.book}
               </LoaderContent>: null }
             </div>
             <Dates
@@ -184,7 +184,7 @@ class Doctors extends HelperComponent<{}, {}> {
               chosen={chosenService && chosenDoctor === item.id ? item.services.find(sub => sub.id === chosenService) : undefined}
             />
           </div>) : <PageLoader />}
-          {showSuccess && <SuccessModal text={Settings.translations.success} onClose={this.toggleSuccessModal} />}
+          {showSuccess && <SuccessModal text={Settings.translations.success_book} onClose={this.toggleSuccessModal} />}
         </div>
       </section>
     );
