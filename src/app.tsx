@@ -51,7 +51,13 @@ class App extends HelperComponent<{}, IState> {
 
     window.abortableRequests = [];
     window.routerHistory = createBrowserHistory();
-    window.routerHistory.listen(() => window.scrollTo(0, 0));
+    window.routerHistory.listen(() => {
+      if (location.pathname !== '/products') {
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+        })
+      }
+    });
     window.addEventListener(DispatcherChannels.ToggleConfirm, this.toggleConfirm);
 
     this.safeSetState({ generalAPILoaded: true });
@@ -82,7 +88,6 @@ class App extends HelperComponent<{}, IState> {
   public render() {
     const { generalAPILoaded, initialLoading, confirmOpen, confirmText } = this.state;
     
-
     return generalAPILoaded ? (
       <Router history={window.routerHistory}>
         {initialLoading ? <>

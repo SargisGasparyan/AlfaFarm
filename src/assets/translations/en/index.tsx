@@ -1028,7 +1028,7 @@ export default {
   language: "Language",
   ineed_app: "ineed app",
   change_password: "Change password",
-  personal_data: "Personal data",
+  personal_data: "Personal information",
   save_changes: "Save changes",
   verification: "Verification",
   verification_text: "Please type the verification code",

@@ -42,18 +42,22 @@ class PasswordForm extends HelperComponent<{}, IState> {
   private submit = (e: React.SyntheticEvent) => {
     e.preventDefault();
     this.safeSetState({ submited: true }, async () => {
-      this.formValidation.valid && this.safeSetState({ submitLoading: true }, async () => {
-        const form = {...this.state.form};
-        const result = await UserController.ChangePassword(form);
-        console.log(result);
-        
-        if (!!result.data) window.location.reload();
-        else {
-          const alertify = await import('alertifyjs');
-          alertify.error(`${result.message}`)
+      const alertify = await import('alertifyjs');
+      if (this.formValidation.valid) {
+        this.safeSetState({ submitLoading: true }, async () => {
+          const form = {...this.state.form};
+          const result = await UserController.ChangePassword(form);
+          
+          if (!!result.data) {
+            alertify.success('Password was changed successfully');
+            form.newPassword = '';
+            form.currentPassword = '';
+            form.confirmPassword = '';
+            this.safeSetState({ form, submited: false });
+          }
           this.safeSetState({ submitLoading: false });
-        }
-      });
+        });
+      } else alertify.error(`Passwords don’t match`);
     });
   }
 

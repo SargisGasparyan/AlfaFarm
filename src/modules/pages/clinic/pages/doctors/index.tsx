@@ -169,6 +169,7 @@ class Doctors extends HelperComponent<{}, {}> {
                 columnConfig={this.columnConfig(item.professionName)}
                 data={item.services}
               />
+              {item.services && item.services.length > 0 ?
               <LoaderContent
                 className="G-main-button"
                 loading={submitLoading}
@@ -176,7 +177,7 @@ class Doctors extends HelperComponent<{}, {}> {
                 onClick={this.submit}
               >
                 {Settings.translations.sign_up}
-              </LoaderContent>
+              </LoaderContent>: null }
             </div>
             <Dates
               doctorId={chosenDoctor}
