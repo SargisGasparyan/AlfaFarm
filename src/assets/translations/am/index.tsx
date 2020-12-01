@@ -990,6 +990,7 @@ export default {
   add_address: "Ավելացնել հասցե",
   edit_address: "Փոփոխել հասցեն",
   save: "Պահպանել",
+  wrong_password_length: 'Գաղտնաբառը պետք է պարունակի առնվազն 6 նիշ',
   save_cart: "Պահպանել զամբյուղը",
   saved_carts: "Նախընտրելի զամբյուղներ",
   default_address: "Նախանշված հասցե",

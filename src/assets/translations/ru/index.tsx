@@ -959,6 +959,7 @@ export default {
   special_products_replace_fail: (date: string) => `Заменить товар можно только после ${date}`,
   my_wallet: "Мой бумажник",
   my_addresses: "Мои адреса",
+  wrong_password_length: 'Пароль должен содержать не менее 6 символов.',
   addresses: "Адреса",
   log_out: "Выйти",
   log_out_question: 'Вы уверены, что хотите выйти?',
