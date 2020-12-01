@@ -23,3 +23,7 @@ export enum WeekDaysEnum {
   Saturday,
   Sunday,
 };
+export enum PaymentType {
+  Cash,
+  IPay
+}

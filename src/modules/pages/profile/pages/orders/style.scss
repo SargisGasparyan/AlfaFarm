@@ -49,4 +49,8 @@
 
     &:last-child { border-bottom: 0; }
   }
+
+  .P-data-table-body {
+    min-height: 600px;
+  }
 }

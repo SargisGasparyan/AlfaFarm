@@ -36,7 +36,7 @@ class PasswordForm extends HelperComponent<{}, IState> {
   private changeField = (e: React.SyntheticEvent<HTMLInputElement>) => {
     const { form } = this.state;
     form[e.currentTarget.name] = e.currentTarget.value;
-    this.safeSetState({ form, edited: true });
+    this.safeSetState({ form, edited: true, submited: false });
   }
 
   private submit = (e: React.SyntheticEvent) => {

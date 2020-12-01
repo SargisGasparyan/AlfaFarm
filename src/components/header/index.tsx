@@ -126,11 +126,13 @@ class Header extends HelperPureComponent<{}, IState> {
   private searchSubmit = (value: string) => {
     const query = new URLSearchParams(window.location.search);
     const oldValue = query.get('text');
+    if (value.length) {
 
-    if (oldValue !== value) {
-      query.set('text', value);
-      window.routerHistory.push(`${ROUTES.PRODUCTS.MAIN}?${query.toString()}`);
-      window.dispatchEvent(new Event(DispatcherChannels.ProductFilterChange));
+      if (oldValue !== value) {
+        query.set('text', value);
+        window.routerHistory.push(`${ROUTES.PRODUCTS.MAIN}?${query.toString()}`);
+        window.dispatchEvent(new Event(DispatcherChannels.ProductFilterChange));
+      }
     }
   }
 

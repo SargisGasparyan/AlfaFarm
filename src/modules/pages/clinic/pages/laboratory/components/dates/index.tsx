@@ -30,7 +30,7 @@ class Dates extends HelperComponent<IProps, IState> {
 
     if (!prevProps.chosen && chosen) {
       const result = await ClinicRegistrationController.GetLaboratoryBusyHours([chosen.id]);
-      this.safeSetState({ busyHours: result.data });
+      this.safeSetState({ busyHours: result.data.registrations });
     }
   }
 
