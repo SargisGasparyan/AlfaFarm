@@ -56,7 +56,6 @@ class Header extends HelperPureComponent<{}, IState> {
   public componentDidMount() {
     this.fetchCart();
     setTimeout(this.checkWindow, 500); // Wait for assets load to get the right position of category wrapper link
-    window.routerHistory.push(`${ROUTES.PRODUCTS.MAIN}`);
     window.addEventListener('resize', this.checkWindow);
     window.addEventListener(DispatcherChannels.CartItemsUpdate, this.fetchCart);
     Broadcast.subscribe(DispatcherChannels.StorageUpdate, this.storageUpdate);
@@ -126,11 +125,13 @@ class Header extends HelperPureComponent<{}, IState> {
   private searchSubmit = (value: string) => {
     const query = new URLSearchParams(window.location.search);
     const oldValue = query.get('text');
+    if (value.length) {
 
-    if (oldValue !== value) {
-      query.set('text', value);
-      window.routerHistory.push(`${ROUTES.PRODUCTS.MAIN}?${query.toString()}`);
-      window.dispatchEvent(new Event(DispatcherChannels.ProductFilterChange));
+      if (oldValue !== value) {
+        query.set('text', value);
+        window.routerHistory.push(`${ROUTES.PRODUCTS.MAIN}?${query.toString()}`);
+        window.dispatchEvent(new Event(DispatcherChannels.ProductFilterChange));
+      }
     }
   }
 

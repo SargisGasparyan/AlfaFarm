@@ -74,9 +74,9 @@ class SignIn extends HelperComponent<IProps, IState> {
 
   private submit = (e: React.SyntheticEvent) => {
     e.preventDefault();
+    const form = {...this.state.form};
     this.safeSetState({ submited: true }, async () => {
       this.formValidation.valid && this.safeSetState({ submitLoading: true }, async () => {
-        const form = {...this.state.form};
         form.username = `+${countryCode}${form.username}`;
 
         const result = await AuthController.Login(form);

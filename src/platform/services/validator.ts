@@ -19,10 +19,13 @@ export const isValidEmail = (value?: string | null): boolean => {
   const ucom = '55|95|41|44|60';
   const mts = '93|94|77|49|98';
   const Mobregex = new RegExp(`^(374)((?:${mts}|${beeline}|${ucom})([0-9]{6}))$`);
-  if (!value) {
-    return false;
-  }
+  if (!value) return false;
   return regex.test(value) || Mobregex.test(value);
+}
+
+export const isValidPassword = (value?: string | null): boolean => {
+  if (!value) return false;
+  return value.length >= 6;
 }
 
 export const isValidDateRange = (from?: string | Date, to?: string | Date, optional = true) => {
