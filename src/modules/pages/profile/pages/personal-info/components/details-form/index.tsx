@@ -73,7 +73,10 @@ class DetailsForm extends HelperComponent<{}, IState> {
       });
     });
   }
-
+  private isValidDate = (date: moment.Moment) => {
+    const invalidDate = new Date();
+    return !date.isSameOrAfter(invalidDate);
+  }
   public render() {
     const { form, edited, submitLoading } = this.state;
 
@@ -121,6 +124,7 @@ class DetailsForm extends HelperComponent<{}, IState> {
             onChange={this.changeDateOfBirth}
             closeOnSelect={true}
             timeFormat={false}
+            isValidDate={this.isValidDate}
             inputProps={{
               value: form.dateOfBirth ? formatDate(form.dateOfBirth, false) : '',
               readOnly: true,
