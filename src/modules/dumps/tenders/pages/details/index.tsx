@@ -41,7 +41,7 @@ class Details extends HelperComponent<RouteComponentProps<IRouteParams>, IState>
   private downloadRelated = () => {
     const { data } = this.state;
     data && data.relatedFiles.map(async item => {
-      const result = await fetch(enviroment.BASE_URL + item.path).then(res => res.blob());
+      const result = await fetch(item.path).then(res => res.blob());
       const a = document.createElement('a');
       a.setAttribute('href', URL.createObjectURL(result));
       a.setAttribute('download', '');

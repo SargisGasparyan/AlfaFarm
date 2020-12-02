@@ -21,7 +21,7 @@ class ClinicRegistrationController {
     return result;
   };
 
-  public static GetLaboratoryBusyHours = (serviceIds: number[]): Promise<IResponse<IClinicRegistrationBusyHourResponseModel[]>> => {
+  public static GetLaboratoryBusyHours = (serviceIds: number[]): Promise<IResponse<IClinicRegistrationDoctorBusyHourResponseModel>> => {
     const result = Connection.GET({
       action: 'laboratoryBusyHours',
       query: { serviceIds },

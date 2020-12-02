@@ -1,5 +1,4 @@
 import * as React from 'react';
-
 import HelperComponent from "platform/classes/helper-component";
 import Settings from 'platform/services/settings';
 import LoaderContent from 'components/loader-content';
@@ -86,5 +85,4 @@ class Form extends HelperComponent<{}, IState> {
     );
   }
 };
-
 export default Form;
