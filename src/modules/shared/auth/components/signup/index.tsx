@@ -63,6 +63,7 @@ class SignUp extends HelperComponent<IProps, IState> {
 
   private submit = (e: React.SyntheticEvent) => {
     e.preventDefault();
+    if (!!Settings.authToken) Settings.token = Settings.authToken;
     this.safeSetState({ submited: true }, async () => {
       this.formValidation.valid && this.safeSetState({ submitLoading: true }, async () => {
         const { form } = this.state;
@@ -77,6 +78,10 @@ class SignUp extends HelperComponent<IProps, IState> {
     });
   }
 
+  private isValidDate = (date: moment.Moment) => {
+    const invalidDate = new Date();
+    return !date.isSameOrAfter(invalidDate);
+  }
   public render() {
     const { form, submitLoading } = this.state;
 
@@ -114,6 +119,7 @@ class SignUp extends HelperComponent<IProps, IState> {
           <DateTime
             onChange={this.changeDateOfBirth}
             timeFormat={false}
+            isValidDate={this.isValidDate}
             closeOnSelect={true}
             inputProps={{
               value: form.dateOfBirth ? formatDate(form.dateOfBirth, false) : '',

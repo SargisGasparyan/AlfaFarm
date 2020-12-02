@@ -27,6 +27,7 @@ class Connection {
   //? To set header default configuration
   private static createHeaders = (isUpload: boolean): Headers => {
     const HEADERS = new Headers();
+    Settings.authToken ? HEADERS.append('Authorization', `Bearer ${Settings.authToken}`) : 
     Settings.token && HEADERS.append('Authorization', `Bearer ${Settings.token}`);
     HEADERS.append('Language', Settings.language.toString());
     HEADERS.append('OsType', OSTypeEnum.Web.toString());

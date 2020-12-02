@@ -159,7 +159,7 @@ class Checkout extends HelperComponent<{}, IState> {
     if (type === PaymentType.IPay) {
       const res = await PaymentController.getUserCards();
       if (res && res.success) {
-        
+        console.log(res);
       }
     }
     form.paymentType = type;

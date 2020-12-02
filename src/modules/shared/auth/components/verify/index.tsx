@@ -54,7 +54,7 @@ class RestoreVerify extends HelperComponent<IProps, IState> {
 
         const result = await AuthController.Verify(form);
         if (result.data) {
-          Settings.token = result.data.accessToken;
+          Settings.authToken = result.data.accessToken;
           activeData.fromSocial ? window.location.reload() : onTypeChange(activeData.signUp ? ModalContentEnum.SignUp : ModalContentEnum.NewPassword);
         } else this.safeSetState({ submitLoading: false });
       });

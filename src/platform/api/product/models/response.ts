@@ -18,12 +18,15 @@ export interface IProductDetailsResponseModel {
   title: string;
   isFavorite: boolean;
   basketCount: number;
+  packagePrice: number;
   description: string;
   price: number;
   discountedPrice?: number;
   discount?: number;
   unitName: string;
+  discountedPackagePrice: number;
   unitQuantity: number;
+  havePackage: boolean;
   images: IFile[];
   category: IProductDetailsCategoryResponseModel;
   brand: IProductDetailsCategoryResponseModel;
