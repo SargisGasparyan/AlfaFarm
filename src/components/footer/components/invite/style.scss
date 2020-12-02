@@ -1,0 +1,22 @@
+@import 'src/assets/styles/helper';
+@import 'src/assets/styles/variables';
+
+button.P-footer-invite-button {
+  padding    : 10px 40px;
+  margin-top : 10px;
+}
+
+.P-footer-invite-modal .P-modal-content > div {
+  color          : $main-color;
+  padding        : 60px 30px;
+  display        : flex;
+  align-items    : center;
+  flex-direction : column;
+
+  > h3 {
+    font-size      : 20px;
+    margin-bottom  : 50px;
+    text-transform : uppercase;
+    @include bold-font();
+  }
+}

@@ -50,12 +50,11 @@ class SavedBasketItems extends HelperComponent<RouteComponentProps<IRouteParams>
     const { data } = this.state;
 
     if (data) {
-      const basketItems = data.map(item => ({
+      await Promise.all(data.map(item => BasketController.Change({
         productId: item.productId,
         productQuantity: item.productQuantity,
-      }));
+      })));
 
-      await BasketController.Change(basketItems);
       window.routerHistory.push(ROUTES.CART);
     }
   }

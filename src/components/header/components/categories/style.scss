@@ -27,12 +27,13 @@
       margin-left   : 15px;
       border-radius : $radius;
 
-      > div {  
+      > div {
+        color         : black;
         cursor        : pointer;
         display       : flex;
         padding       : 15px 10px 15px 40px;
+        text-align    : initial; // Cause inheriting from parent
         align-items   : center;
-        margin-bottom : 10px;
         border-radius : $small-radius;
   
         &:last-child { margin-bottom: 0; }

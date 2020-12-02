@@ -3,6 +3,19 @@
 .P-product-details-info {
   width : calc(55% - 50px);
 
+  .P-price {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-right: 40px;
+    display: flex;
+    align-items: center;
+    > del {
+      color: #8D8D8D;
+      display: block;
+      margin-right: 30px;
+    }
+  }
+
   > .P-name {
     display       : flex;
     margin-bottom : 60px;
@@ -41,6 +54,7 @@
     display         : flex;
     margin-bottom   : 40px;
     justify-content : flex-start;
+    align-items: center;
 
     > .P-count-input {
       height       : 50px;
@@ -52,4 +66,17 @@
       padding : 15px 50px;
     }
   }
+}
+.P-count-info {
+  margin: 20px 0 30px 0;
+  > span {
+    width: 50%;
+    font-size: 18px;
+    font-weight: bold;
+    color:#49B748;
+    cursor: pointer;
+  }
+}
+.P-selected-count-type {
+  color: #000 !important;
 }

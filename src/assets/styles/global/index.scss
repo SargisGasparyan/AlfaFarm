@@ -39,7 +39,7 @@
     }
   }
 
-  .G-page-min-height { 
+  .G-page-min-height {
     min-height: 300px;
    }
 }
@@ -63,7 +63,7 @@
   text-decoration : none;
   @include normal-font;
 
-  &:hover { 
+  &:hover {
 
     color      : white;
     background : $main-color;
@@ -91,7 +91,7 @@
     > .G-field { margin-bottom: 0; }
     > .G-field-description { margin-top: 10px; }
     > h4 {
-    
+
       margin    : 0 0 5px;
       font-size : $normal-fs;
       @include normal-font;
@@ -123,9 +123,9 @@
     justify-content : center;
     text-decoration : none;
   }
-  
+
   .G-form-checkbox {
-  
+
     width   : auto;
     cursor  : pointer;
     margin  : 10px auto 5px 0;
@@ -136,9 +136,9 @@
       display     : flex;
       align-items : center;
     }
-  
+
     > h3 {
-      
+
       margin      : 0 0 0 15px;
       font-size   : $normal-fs;
       @include normal-font;
@@ -258,7 +258,7 @@
 }
 
 .G-see-more-label {
-    
+
   color           : $main-color;
   height          : 100%;
   display         : flex;
@@ -274,12 +274,12 @@
 
   border  : 1px solid black;
   padding : 5px;
-  
+
   tr, td {
 
     border  : 1px solid black;
     padding : 10px;
-  }  
+  }
 }
 
 .G-square-image-block {
@@ -338,7 +338,7 @@
 .G-flex-align-center { align-items: center; }
 .G-flex-align-start { align-items: flex-start; }
 .G-flex-column { flex-direction: column; }
- 
+
 // #endregion Flex
 
 // #region Texts
@@ -406,8 +406,6 @@
     padding-right : 10px;
   }
 
-  > .G-input-top-label ~ .G-input-country-code { top: 55px }
-
   > .G-main-input { padding-left: 80px; }
 }
 
@@ -426,6 +424,10 @@
 
 .G-main-textarea {
   height : 150px;
+
+  &::-webkit-scrollbar {
+    width: 0;
+  }
 }
 
 .G-main-button {
@@ -446,6 +448,23 @@
   background      : transparent;
   border-radius   : 20px;
   text-decoration : none;
+}
+
+.G-no-data {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  text-align: center;
+  transform: translate(-50%, -50%);
+  color: gray;
+
+  > .P-desc {
+    font-size: 25px;
+  }
+}
+
+.G-mb-0 {
+  margin-bottom: 0!important;
 }
 
 // #endregion Forms

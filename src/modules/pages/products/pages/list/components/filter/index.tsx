@@ -14,6 +14,7 @@ import DispatcherChannels from 'platform/constants/dispatcher-channels';
 import PriceRange from './components/price-range';
 
 import './style.scss';
+import Settings from 'platform/services/settings';
 
 interface IProps {
   onChange(): void;
@@ -35,6 +36,7 @@ class Filter extends HelperComponent<IProps, IState> {
   };
 
   public componentDidMount() {
+    window.scrollTo(0, 0);
     this.safeSetState({ body: buildFilters() });
     window.addEventListener(DispatcherChannels.ProductFilterChange, this.outsideFilterChange);
   }
@@ -46,6 +48,28 @@ class Filter extends HelperComponent<IProps, IState> {
 
   private outsideFilterChange = () => {
     const body = buildFilters();
+    this.bodyChange(body);
+  }
+
+  private cancel = () => {
+    const query = new URLSearchParams(window.location.search);
+    const { body } = this.state;
+    
+    body.brandIds = [];
+    body.activeIngredientIds = [];
+    body.producerIds = [];
+    delete body.minPrice;
+    delete body.maxPrice;
+
+    query.delete('brandIds');
+    query.delete('activeIngredientIds');
+    query.delete('producerIds');
+    query.delete('minPrice');
+    query.delete('maxPrice');
+
+    window.routerHistory.replace(`${ROUTES.PRODUCTS.MAIN}?${query.toString()}`);
+    window.scrollTo(0, 0);
+    
     this.bodyChange(body);
   }
 
@@ -77,9 +101,20 @@ class Filter extends HelperComponent<IProps, IState> {
           className="P-main-category"
         >{item.name}</h2>) : <>
           <PriceRange body={body} onChange={this.bodyChange} />
-          <Brands body={body} onChange={this.bodyChange} />
-          <Producers body={body} onChange={this.bodyChange} />
-          <ActiveIngredients body={body} onChange={this.bodyChange} />
+          <div className="P-row-wrap">
+            <Brands body={body} onChange={this.bodyChange} />
+          </div>
+          <div className="P-row-wrap">
+            <Producers body={body} onChange={this.bodyChange} />
+          </div>
+          <div className="P-row-wrap">
+            <ActiveIngredients body={body} onChange={this.bodyChange} />
+          </div>
+          
+          <button
+            className="G-main-ghost-button P-cancel-button"
+            onClick={this.cancel}
+          >{Settings.translations.cancel}</button>
         </>}
       </div>
     );

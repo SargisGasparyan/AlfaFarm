@@ -1,9 +1,9 @@
 @import 'src/assets/styles/variables';
 
 .P-blog-details-images {
-  width         : calc(45% - 15px);
+  width         : 100%;
   display       : flex;
-  margin-bottom : 60px;
+  margin-bottom : 40px;
 
   > .P-current-image {
     width           : 100%;

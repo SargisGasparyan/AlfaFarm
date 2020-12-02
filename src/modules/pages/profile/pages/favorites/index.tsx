@@ -7,7 +7,7 @@ import ROUTES from 'platform/constants/routes';
 import Layout from '../../components/layout';
 import FavoriteController from 'platform/api/favorite';
 import Settings from 'platform/services/settings';
-import { getMediaPath } from 'platform/services/helper';
+import { getMediaPath, formatPrice } from 'platform/services/helper';
 import { IFavoriteListResponseModel } from 'platform/api/favorite/models/response';
 
 import './style.scss';
@@ -30,13 +30,13 @@ class Favorites extends HelperComponent<IState, {}> {
     this.safeSetState({ data: result.data.map(item => ({ ...item, isFavorite: true })) });
   }
 
-  private toggleFavorite = async (e: React.SyntheticEvent, item: IFavoriteListResponseModel) => {
+  private toggleFavorite = async (e: React.SyntheticEvent, index: number) => {
     e.preventDefault();
     const { data } = this.state;
-    const result = await FavoriteController.AddOrRemove(item.id);
+    const result = await FavoriteController.AddOrRemove(data[index].id);
 
     if (result.success) {
-      item.isFavorite = !item.isFavorite;
+      data.splice(index, 1);
       this.safeSetState({ data });
     }
   }
@@ -47,7 +47,7 @@ class Favorites extends HelperComponent<IState, {}> {
     return (
       <Layout>
         <div className="G-flex P-profile-favorites">
-          {data.map(item => <Link
+          {data.map((item, index) => <Link
             to={ROUTES.PRODUCTS.DETAILS.replace(':id', item.id)}
             key={item.id}
             className="P-list-item"
@@ -56,10 +56,10 @@ class Favorites extends HelperComponent<IState, {}> {
               className="P-image G-square-image-block"
               style={{ background: `url('${getMediaPath(item.imagePath)}') center/cover` }}
             >
-              <i
-                onClick={e => this.toggleFavorite(e, item)}
+              {!Settings.guest && <i
+                onClick={e => this.toggleFavorite(e, index)}
                 className={`P-favorite ${item.isFavorite ? 'P-active icon-Group-5520' : 'icon-Group-5518'}`}
-              />
+              />}
             </div>
 
             <div className="P-main-info">
@@ -67,7 +67,7 @@ class Favorites extends HelperComponent<IState, {}> {
               <span>{item.unitQuantity} {item.unitName}</span>
             </div>
 
-            <h2 className="P-price">{item.price} AMD</h2>
+            <h2 className="P-price">{formatPrice(item.price)}</h2>
           </Link>)}
         </div>
       </Layout>

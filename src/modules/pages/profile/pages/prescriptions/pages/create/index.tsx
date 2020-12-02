@@ -10,9 +10,9 @@ import { IPrescriptionModifyRequestModel } from 'platform/api/prescription/model
 import { validateForm } from './services/helper';
 import HelperComponent from 'platform/classes/helper-component';
 import PrescriptionController from 'platform/api/prescription';
+import SuccessModal from 'components/success-modal';
 
 import './style.scss';
-import SuccessModal from 'components/success-modal';
 
 interface IState {
   form: IPrescriptionModifyRequestModel;
@@ -170,7 +170,7 @@ class Create extends HelperComponent<{}, IState> {
           </form>
         </div>
 
-        {showSuccess && <SuccessModal text="Շնորհակալություն դեղատոմսի դիտարկման հայտն ընդունված է։ Դեղատոմսը կուսումնասիրվի, և դեղերի ցանկը կուղարկի ձեզ հնարավորինս կարճ ժամանակահատվածում։" onClose={this.toggleSuccessModal} />}
+        {showSuccess && <SuccessModal text="Շնորհակալություն, դեղատոմսի դիտարկման հայտն ընդունված է։ Դեղատոմսը կուսումնասիրվի, և դեղերի ցանկը կուղարկվի ձեզ հնարավորինս կարճ ժամանակահատվածում։" onClose={this.toggleSuccessModal} />}
       </Layout>
     );
   }

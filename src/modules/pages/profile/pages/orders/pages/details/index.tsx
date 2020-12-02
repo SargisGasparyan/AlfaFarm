@@ -46,6 +46,15 @@ class Details extends HelperComponent<RouteComponentProps<IRouteParams>, IState>
 
   private goBack = () => window.routerHistory.goBack();
 
+  private repeatOrder = async () => {
+    const { data } = this.state;
+
+    if (data) {
+      const result = await OrderController.Repeat(data.id);
+      result.data && window.routerHistory.push(ROUTES.CART);
+    }
+  }
+
   public render() {
     const { data } = this.state;
 
@@ -111,6 +120,12 @@ class Details extends HelperComponent<RouteComponentProps<IRouteParams>, IState>
           </div>}
 
           <Shared.Products.TableList list={data.baskets} />
+
+          <div className="P-actions-block">
+            <button className="G-main-button" onClick={this.repeatOrder}>
+              {Settings.translations.buy_again}
+            </button>
+          </div>
         </div> : <PageLoader />}
       </Layout>
     );

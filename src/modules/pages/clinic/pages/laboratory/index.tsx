@@ -17,6 +17,7 @@ import SuccessModal from 'components/success-modal';
 import { onlyForUsers } from 'platform/guards/routes';
 
 import './style.scss';
+import { formatPrice } from 'platform/services/helper';
 
 
 interface IState {
@@ -51,7 +52,7 @@ class Laboratory extends HelperComponent<{}, {}> {
       name: Settings.translations.laboratory,
       cell: (row: IMedicalServiceListResponseModel) => <div className="G-flex G-flex-justify-between">
         {row.name}
-        <span>{row.price} AMD</span>
+        <span>{formatPrice(row.price)}</span>
       </div>,
     },
   ];
@@ -124,13 +125,13 @@ class Laboratory extends HelperComponent<{}, {}> {
                   onClick={this.submit}
                   disabled={!chosenDate}
                 >
-                  {Settings.translations.sign_up}
+                  {Settings.translations.book}
                 </LoaderContent>
               </div>
             </div>
 
             <Dates chosen={chosenService ? data.find(item => item.id === chosenService) : undefined} />
-            {showSuccess && <SuccessModal text={Settings.translations.success} onClose={this.toggleSuccessModal} />}
+            {showSuccess && <SuccessModal text={Settings.translations.success_book} onClose={this.toggleSuccessModal} />}
           </> : <PageLoader />}
         </div>
       </section>

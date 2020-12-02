@@ -29,7 +29,7 @@ class Categories extends HelperComponent<IProps, {}> {
   private fetchData = async (index: number, parentId?: number) => {
     const { lists } = this.state;
     lists.length = index;
-    
+
     if (parentId) {
       const existingItem = DataCache.alreadyFetched.find(item => item.id === parentId);
 
@@ -60,7 +60,8 @@ class Categories extends HelperComponent<IProps, {}> {
     }
   }
 
-  private clickItem = (category: ICategoryListResponseModel) => {
+  private clickItem = (e: React.SyntheticEvent, category: ICategoryListResponseModel) => {
+    e.preventDefault();
     const { onClose } = this.props;
     window.routerHistory.push(`${ROUTES.PRODUCTS.MAIN}?categoryIds=${category.id}`);
     window.dispatchEvent(new Event(DispatcherChannels.ProductFilterChange));
@@ -76,16 +77,16 @@ class Categories extends HelperComponent<IProps, {}> {
         <div className="P-header-categories-wrapper">
           <div className="P-content" style={{ minWidth: window.innerWidth - openPosition }}>
             {lists.map((item, index) => <div key={index} className="P-list">
-                {item.map(sub => <div
-                  key={sub.id}
-                  className={''}
-                  onMouseOver={() => this.hoverItem(index, sub)}
-                  onClick={() => this.clickItem(sub)}
-                >
-                  {/* {sub.icon && <img src={sub.icon} alt="category icon" />} */}
-                  <h3>{sub.name}</h3>
-                  {sub.hasChildren && <i className="icon-Group-5513" />}
-                </div>)}
+              {item.map(sub => <div
+                key={sub.id}
+                className={''}
+                onMouseOver={() => this.hoverItem(index, sub)}
+                onClick={e => this.clickItem(e, sub)}
+              >
+                {/* {sub.icon && <img src={sub.icon} alt="category icon" />} */}
+                <h3>{sub.name}</h3>
+                {sub.hasChildren && <i className="icon-Group-5513" />}
+              </div>)}
             </div>)}
           </div>
         </div>

@@ -35,6 +35,16 @@ class OrderController {
 
     return result;
   };
+
+  public static Repeat = (id: number): Promise<IResponse<boolean>> => {
+    const result = Connection.POST<{}>({
+      body: {},
+      action: `repeat/${id}`,
+      controller: OrderController.controller,
+    });
+
+    return result;
+  };
 };
 
 export default OrderController;

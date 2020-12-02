@@ -36,19 +36,28 @@ class PasswordForm extends HelperComponent<{}, IState> {
   private changeField = (e: React.SyntheticEvent<HTMLInputElement>) => {
     const { form } = this.state;
     form[e.currentTarget.name] = e.currentTarget.value;
-    this.safeSetState({ form, edited: true });
+    this.safeSetState({ form, edited: true, submited: false });
   }
 
   private submit = (e: React.SyntheticEvent) => {
     e.preventDefault();
     this.safeSetState({ submited: true }, async () => {
-      this.formValidation.valid && this.safeSetState({ submitLoading: true }, async () => {
-        const form = {...this.state.form};
-        const result = await UserController.ChangePassword(form);
-        
-        if (result.data) window.location.reload();
-        else this.safeSetState({ submitLoading: false });
-      });
+      const alertify = await import('alertifyjs');
+      if (this.formValidation.valid) {
+        this.safeSetState({ submitLoading: true }, async () => {
+          const form = {...this.state.form};
+          const result = await UserController.ChangePassword(form);
+          
+          if (!!result.data) {
+            alertify.success('Password was changed successfully');
+            form.newPassword = '';
+            form.currentPassword = '';
+            form.confirmPassword = '';
+            this.safeSetState({ form, submited: false });
+          }
+          this.safeSetState({ submitLoading: false });
+        });
+      } else alertify.error(`Passwords don’t match`);
     });
   }
 
@@ -78,7 +87,7 @@ class PasswordForm extends HelperComponent<{}, IState> {
           />
         </div>
         <div className="G-main-form-field">
-          <p className="G-input-top-label">{Settings.translations.confirm_password}</p>
+          <p className="G-input-top-label">{Settings.translations.confirm_new_password}</p>
           <input
             type="password"
             name="confirmPassword"

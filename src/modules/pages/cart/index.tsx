@@ -7,10 +7,10 @@ import Settings from 'platform/services/settings';
 import { byRoute } from 'platform/decorators/routes';
 import HelperComponent from 'platform/classes/helper-component';
 import BasketController from 'platform/api/basket';
-import { IBasketListResponseModel, IBasketResponseModel } from 'platform/api/basket/models/response';
+import { IBasketListResponseModel, IBasketResponseModel, IBasketChangeResponseModel } from 'platform/api/basket/models/response';
 import Table from 'components/table';
 import EmptyState from 'components/empty-state';
-import { getMediaPath } from 'platform/services/helper';
+import { getMediaPath, formatPrice } from 'platform/services/helper';
 import CountInput from 'components/count-input';
 import Connection from 'platform/services/connection';
 import DispatcherChannels from 'platform/constants/dispatcher-channels';
@@ -18,6 +18,7 @@ import Storage from 'platform/services/storage';
 import PageLoader from 'components/page-loader';
 
 import './style.scss';
+import { IResponse } from 'platform/constants/interfaces';
 
 interface IState {
   data?: IBasketResponseModel;
@@ -48,17 +49,17 @@ class Cart extends HelperComponent<{}, IState> {
     },
     {
       name: Settings.translations.quantity,
-      cell: (row: IBasketListResponseModel) => <CountInput
+      cell: (row: IBasketListResponseModel, index: number) => <CountInput
         min={0}
         step={1}
         value={row.productQuantity}
-        onChange={count => this.changeCount(row, count)}
+        onChange={count => this.changeCount(row, index, count)}
       />,
     },
     {
       name: Settings.translations.price,
       style: { minWidth: 150, maxWidth: 150 },
-      cell: (row: IBasketListResponseModel) => <h3 className="G-fs-24">{row.price * row.productQuantity} AMD</h3>,
+      cell: (row: IBasketListResponseModel) => <h3 className="G-fs-24">{formatPrice(row.price * row.productQuantity)}</h3>,
     },
   ];
 
@@ -69,17 +70,30 @@ class Cart extends HelperComponent<{}, IState> {
     this.safeSetState({ data: result.data });
   }
 
-  private changeCount = async (row: IBasketListResponseModel, count: number) => {
+  private changeCount = async (row: IBasketListResponseModel, index: number, count: number) => {
+    const { data } = this.state;
+    let modifyResult: IResponse<IBasketChangeResponseModel>;
+
     if (count) {
       Connection.AbortAll();
-      await BasketController.Change([{
+      modifyResult = await BasketController.Change({
         productId: row.productId,
         productQuantity: count,
-      }]);
-    } else await BasketController.Delete([row.id]);
+      });
 
-    this.fetchData();
-    window.dispatchEvent(new CustomEvent(DispatcherChannels.CartItemsUpdate));
+      row.productQuantity = count;
+    } else {
+      modifyResult = await BasketController.Delete(row.productId, row.isPackage);
+      data && data.items.splice(index, 1);
+    }
+
+    if (data && modifyResult.data) {
+      data.totalPrice = modifyResult.data.totalPrice;
+      data.bonus = modifyResult.data.bonus;
+
+      this.safeSetState({ data });
+      window.dispatchEvent(new CustomEvent(DispatcherChannels.CartItemsUpdate));
+    }
   }
 
   private toggleCartSave = () => {
@@ -103,8 +117,8 @@ class Cart extends HelperComponent<{}, IState> {
     return (
       <section className="G-page P-cart-page">
         {data ? <>
-          <h1 className="G-fs-26 G-mb-40 G-full-width">{Settings.translations.cart}</h1>
           {data.items.length ? <>
+            <h1 className="G-fs-26 G-mb-40 G-full-width">{Settings.translations.cart}</h1>
             <Table<IBasketListResponseModel>
               className="P-table G-full-width"
               columnConfig={this.columnConfig}
@@ -114,7 +128,7 @@ class Cart extends HelperComponent<{}, IState> {
             <div className="P-data-block">
               <div>
                 <span className="G-fs-normal">{Settings.translations.total}</span>
-                <h1 className="G-orange-color G-fs-24 G-mt-5">{data.totalPrice} AMD</h1>
+                <h1 className="G-orange-color G-fs-24 G-mt-5">{data.totalPrice} &#1423;</h1>
               </div>
             </div>
 

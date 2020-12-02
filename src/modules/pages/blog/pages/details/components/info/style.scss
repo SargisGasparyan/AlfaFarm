@@ -1,11 +1,11 @@
 @import 'src/assets/styles/variables';
 
 .P-blog-details-info {
-  width : calc(55% - 50px);
+  width : 100%;
 
   > .P-name {
     display       : flex;
-    margin-bottom : 60px;
+    margin-bottom : 40px;
   }
 
   > h3 {

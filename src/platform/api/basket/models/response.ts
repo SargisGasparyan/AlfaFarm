@@ -13,9 +13,15 @@ export interface IBasketListResponseModel {
   unitQuantity: number;
   productTitle: string;
   productQuantity: number;
+  isPackage: boolean,
 };
 
 export interface ISavedBasketListResponseModel {
   id: number;
   itemsCount: number;
+};
+
+export interface IBasketChangeResponseModel {
+  bonus: number;
+  totalPrice: number;
 };

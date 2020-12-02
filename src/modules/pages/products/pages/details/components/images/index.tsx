@@ -10,6 +10,7 @@ import { IFavoriteListResponseModel } from 'platform/api/favorite/models/respons
 import FavoriteController from 'platform/api/favorite';
 
 import './style.scss';
+import Settings from 'platform/services/settings';
 
 interface IProps {
   data: IProductDetailsResponseModel;
@@ -68,16 +69,16 @@ class Images extends HelperPureComponent<IProps, IState> {
 
     return (
       <div className="P-product-details-images">
-        {!!data.discount && <Shared.Products.DiscountLabel percent={data.discount}/>}
+        {!!data.discountedPrice && <Shared.Products.DiscountLabel percent={-Math.round(100 - (100 / data.price * data.discountedPrice))}/>}
         <div className="P-current-image">
           <div>
             <img src={getMediaPath(this.activeImage)} />
           </div>
 
-          <i
+          {!Settings.guest && <i
             onClick={e => this.toggleFavorite(e, data)}
             className={`P-favorite ${data.isFavorite ? 'P-active icon-Group-5520' : 'icon-Group-5518'}`}
-          />
+          />}
         </div>
         {!!thumbImages.length && <div className="P-thumbs">
           {thumbImages.map(item => <div

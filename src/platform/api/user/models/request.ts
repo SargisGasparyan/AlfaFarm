@@ -4,9 +4,10 @@ export interface IRegisterRequestModel {
   firstName: string;
   lastName: string;
   password: string;
+  referralCode?: string;
   dateOfBirth?: string;
   gender?: GenderEnum;
-}
+};
 
 export interface IUserModifyRequestModel {
   firstName: string;
@@ -14,9 +15,14 @@ export interface IUserModifyRequestModel {
   email: string;
   dateOfBirth: string;
   gender: GenderEnum;
-}
+};
 
 export interface IUserPasswordModifyRequestModel {
   newPassword: string;
   currentPassword: string;
-}
+};
+
+export interface IPreferredProductUpdateRequestModel {
+  newProductId: number;
+  oldProductId?: number;
+};

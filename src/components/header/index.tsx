@@ -13,16 +13,16 @@ import Storage from 'platform/services/storage';
 import enviroment from 'platform/services/enviroment';
 import { getMediaPath } from 'platform/services/helper';
 import WholesaleContent from './components/wholesale-content';
+import Socket from 'platform/services/socket';
+import NotificationController from 'platform/api/notification';
+import Notifications from './components/notifications';
+import BasketController from 'platform/api/basket';
 
 import LogoImage from 'assets/images/logo.png';
 import PersonImage from 'assets/images/person.png';
 
 import './style.scss';
-import Socket from 'platform/services/socket';
-import NotificationController from 'platform/api/notification';
-import Notifications from './components/notifications';
-import ClickOutside from 'components/click-outside';
-import BasketController from 'platform/api/basket';
+import Broadcast from "../../platform/services/broadcast";
 
 interface IState {
   authOpen: boolean;
@@ -34,6 +34,7 @@ interface IState {
 };
 
 class Header extends HelperPureComponent<{}, IState> {
+
   public state: IState = {
     authOpen: false,
     categoryOpen: false,
@@ -55,9 +56,10 @@ class Header extends HelperPureComponent<{}, IState> {
   public componentDidMount() {
     this.fetchCart();
     setTimeout(this.checkWindow, 500); // Wait for assets load to get the right position of category wrapper link
-
-    window.addEventListener('resize', this.checkWindow);
+    // window.routerHistory.push(`${ROUTES.PRODUCTS.MAIN}`);
+    window.addEventListener('resize', this.checkWindow); // TODO code refactor checkWindow
     window.addEventListener(DispatcherChannels.CartItemsUpdate, this.fetchCart);
+    Broadcast.subscribe(DispatcherChannels.StorageUpdate, this.storageUpdate);
 
     Storage.profile && this.configureNotifications();
   }
@@ -66,6 +68,11 @@ class Header extends HelperPureComponent<{}, IState> {
     super.componentWillUnmount();
     window.removeEventListener('resize', this.checkWindow);
     window.removeEventListener(DispatcherChannels.CartItemsUpdate, this.fetchCart);
+    Broadcast.unsubscribe(DispatcherChannels.StorageUpdate, this.storageUpdate);
+  }
+
+  private storageUpdate = () => {
+    this.forceUpdate();
   }
 
   public async configureNotifications() {
@@ -106,8 +113,8 @@ class Header extends HelperPureComponent<{}, IState> {
   private closeCategories = (e?: MouseEvent) => {
     const { categoryOpen } = this.state;
     const canBeClosed = !e || (
-      this.header.current &&
-      !this.header.current.contains(e.target as Node)
+      this.categoryOpenLink.current &&
+      !this.categoryOpenLink.current.contains(e.target as Node)
     );
 
     if (categoryOpen && canBeClosed) {
@@ -119,11 +126,13 @@ class Header extends HelperPureComponent<{}, IState> {
   private searchSubmit = (value: string) => {
     const query = new URLSearchParams(window.location.search);
     const oldValue = query.get('text');
+    if (value.length) {
 
-    if (oldValue !== value) {
-      query.set('text', value);
-      window.routerHistory.push(`${ROUTES.PRODUCTS.MAIN}?${query.toString()}`);
-      window.dispatchEvent(new Event(DispatcherChannels.ProductFilterChange));
+      if (oldValue !== value) {
+        query.set('text', value);
+        window.routerHistory.push(`${ROUTES.PRODUCTS.MAIN}?${query.toString()}`);
+        window.dispatchEvent(new Event(DispatcherChannels.ProductFilterChange));
+      }
     }
   }
 
@@ -145,9 +154,9 @@ class Header extends HelperPureComponent<{}, IState> {
         <Link to={ROUTES.HOME} className="P-logo G-mr-auto">
           <img src={LogoImage} className="G-full-width" />
         </Link>
-        
+
         {enviroment.WHOLESALE ? <WholesaleContent /> : <>
-          <SearchInput withSubmit={true} onSubmit={this.searchSubmit} />
+          <SearchInput onChange={this.searchSubmit} />
 
           <Link
             to={ROUTES.PRODUCTS.MAIN}
@@ -155,7 +164,10 @@ class Header extends HelperPureComponent<{}, IState> {
             onMouseOver={this.openCategories}
             onClick={this.openProducts}
             className={`P-link ${categoryOpen ? 'P-active' : ''}`}
-          >{Settings.translations.online_pharmacy}</Link>
+          >
+            {Settings.translations.online_pharmacy}
+            {!!categoryOpenPosition && categoryOpen && <Categories openPosition={categoryOpenPosition} onClose={this.closeCategories} />}
+          </Link>
 
           <NavLink {...this.navLinkProps} to={ROUTES.PHARMACIES}>{Settings.translations.pharmacies}</NavLink>
           <NavLink {...this.navLinkProps} to={ROUTES.CLINIC.MAIN}>{Settings.translations.clinic}</NavLink>
@@ -175,19 +187,18 @@ class Header extends HelperPureComponent<{}, IState> {
 
         {Storage.profile && <a onClick={this.toggleNotifications} className="P-link P-icon G-normal-link P-notification">
           <i className="icon-Group-5515" />
-          {!!notificationIconNumber && <span>{notificationIconNumber > 9 ? '9+' : notificationIconNumber}</span>}
+          {!!notificationIconNumber && <span>{notificationIconNumber > 99 ? '99+' : notificationIconNumber}</span>}
         </a>}
 
         <Link to={ROUTES.CART} className="P-link P-icon G-normal-link P-cart">
           <i className="icon-Group-5503" />
-          {!!cartIconNumber && <span>{cartIconNumber > 9 ? '9+' : cartIconNumber}</span>}
+          {!!cartIconNumber && <span>{cartIconNumber > 99 ? '99+' : cartIconNumber}</span>}
         </Link>
-      
+
         <LanguageSwitcher />
-        
+
         {authOpen && <Shared.Auth onClose={this.toggleAuth} />}
         {notificationOpen && <Notifications onClose={this.toggleNotifications} />}
-        {!!categoryOpenPosition && categoryOpen && <Categories openPosition={categoryOpenPosition} onClose={this.closeCategories} />}
       </header>
     );
   }

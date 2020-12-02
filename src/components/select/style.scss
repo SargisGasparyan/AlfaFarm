@@ -8,6 +8,12 @@
   font-size : 16px;
   @include normal-font;
 
+  &.P-disabled {
+    opacity : .5;
+
+    > .P-select-header { cursor: initial; }
+  }
+
   > .P-select-header {
 
     cursor          : pointer;
@@ -47,8 +53,8 @@
   > .P-select-body {
 
     top             : 55px;
-    right           : 0;
-    min-width       : 100%;
+    left            : 0;
+    min-width       : 50%;
     border          : 1px solid #D6D6D6;
     margin          : 0;
     z-index         : 19999;
@@ -65,10 +71,10 @@
       width         : 100%;
       max-width     : 100%;
       cursor        : pointer;
-      height        : 40px;
+      height        : 35px;
       display       : inline-block;
       overflow      : hidden;
-      line-height   : 40px;
+      line-height   : 35px;
       padding       : 0px 20px;
       white-space   : nowrap;
       text-overflow : ellipsis;

@@ -13,6 +13,7 @@ import MedicalServiceController from 'platform/api/medicalService';
 import { onlyForUsers } from 'platform/guards/routes';
 
 import './style.scss';
+import { formatPrice } from 'platform/services/helper';
 
 interface IState {
   data?: IMedicalServicePriceListResponseModel[];
@@ -34,7 +35,11 @@ class PriceList extends HelperComponent<{}, {}> {
     this.safeSetState({ data: result.data });
   }
 
-  private onSearchChange = (searchValue: string) => this.safeSetState({ searchValue });
+  private onSearchChange = (searchValue: string) => {
+    const oldSearchValue = this.state.searchValue;
+    this.safeSetState({ searchValue }, () => this.fetchData());
+    // this.safeSetState({ searchValue }, () => searchValue !== oldSearchValue && !searchValue && this.fetchData());
+  }
 
   private columnConfig = (name: string) => [
     {
@@ -44,7 +49,7 @@ class PriceList extends HelperComponent<{}, {}> {
     {
       name: Settings.translations.price,
       style: { minWidth: 200, maxWidth: 200 },
-      cell: (row: IMedicalServiceListResponseModel) => <b className="G-orange-color">{row.price} AMD</b>,
+      cell: (row: IMedicalServiceListResponseModel) => <b className="G-orange-color">{formatPrice(row.price)}</b>,
     },
   ];
 

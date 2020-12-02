@@ -2,7 +2,7 @@
 @import 'src/assets/styles/variables';
 
 .P-products-list-item {
-  width           : calc(100% / 5 - 40px);
+  width           : calc(100% / 4 - 40px);
   color           : black;
   margin          : 20px;
   border          : 1px solid $light-gray;
@@ -35,7 +35,10 @@
   }
 
   > h3 {
+    height        : 72px;
+    display       : flex;
     text-align    : center;
+    align-items   : center;
     margin-bottom : 40px;
   }
 

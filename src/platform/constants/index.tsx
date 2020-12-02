@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 export const currency = <>&#1423;</>;
-export const paginationPageLimit = 6;
+export const paginationPageLimit = 10;
 export const infinityScrollPageLimit = 30;
 export const infinityScrollMax = 200;
 export const googlePlacesTypes = ['geocode', 'establishment'];

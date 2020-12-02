@@ -9,6 +9,7 @@ import ProductController from 'platform/api/product';
 import { IProductPriceRangeResponseModel } from 'platform/api/product/models/response';
 
 import { gray, mainColor } from 'assets/styles/variables.scss';
+import { formatPrice } from 'platform/services/helper';
 
 interface IProps {
   body: IProductFilterRequestModel;
@@ -49,7 +50,7 @@ const PriceRange = ({ body, onChange }: IProps) => {
 
 
   return priceRange && value ? <>
-    <h2>{Settings.translations.price} ({value[0]}-{value[1]}) AMD</h2>
+    <h2>{Settings.translations.price} ({formatPrice(value[0])}-{formatPrice(value[1])})</h2>
 
     <Range
       min={priceRange.min}

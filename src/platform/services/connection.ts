@@ -8,6 +8,7 @@ import Settings from './settings';
 import { OSTypeEnum, LanguageEnum } from '../constants/enums';
 import { NoneJSONRequestBody } from '../constants/types';
 import { IRequest, IBodyRequest, IResponse } from '../constants/interfaces';
+import DispatcherChannels from 'platform/constants/dispatcher-channels';
 
 class Connection {
 
@@ -26,6 +27,7 @@ class Connection {
   //? To set header default configuration
   private static createHeaders = (isUpload: boolean): Headers => {
     const HEADERS = new Headers();
+    Settings.authToken ? HEADERS.append('Authorization', `Bearer ${Settings.authToken}`) : 
     Settings.token && HEADERS.append('Authorization', `Bearer ${Settings.token}`);
     HEADERS.append('Language', Settings.language.toString());
     HEADERS.append('OsType', OSTypeEnum.Web.toString());
@@ -46,9 +48,9 @@ class Connection {
       if (contentType && contentType.indexOf("application/json") !== -1) {
         response.json().then((result: IResponse<any>) => {
           const success = dataAsSuccess ? result.data : result.success;
-          if (!success && !withoutError && result.messages && result.messages[0]) {
+          if (!success && !withoutError && result.message) {
             alertify.dismissAll();
-            alertify.error(result.messages[0].value);
+            alertify.error(result.message);
           }
           
           resolve(result);
@@ -112,9 +114,9 @@ class Connection {
     return new Promise(resolve => {
       const userCanceled = async () => {
         resolve(false);
-        window.removeEventListener('usercanceled', userCanceled);
-        window.removeEventListener('userconfirmed', userConfirmed);
-        window.dispatchEvent(new CustomEvent('toggleconfirm'));
+        window.removeEventListener(DispatcherChannels.UserCanceled, userCanceled);
+        window.removeEventListener(DispatcherChannels.UserConfirmed, userConfirmed);
+        window.dispatchEvent(new CustomEvent(DispatcherChannels.ToggleConfirm));
       }
 
       const userConfirmed = async () => {
@@ -136,18 +138,12 @@ class Connection {
           !data.unabortable && window.abortableRequests.splice(window.abortableRequests.indexOf(abort), 1);
           resolve({ aborted: true });
         }
-
-        if (!withoutConfirmModal) {
-          window.removeEventListener('usercanceled', userCanceled);
-          window.removeEventListener('userconfirmed', userConfirmed);
-          window.dispatchEvent(new CustomEvent('toggleconfirm'));
-        }
       }
 
       if (!withoutConfirmModal) {
-        window.dispatchEvent(new CustomEvent('toggleconfirm'));
-        window.addEventListener('usercanceled', userCanceled);
-        window.addEventListener('userconfirmed', userConfirmed);
+        window.dispatchEvent(new CustomEvent(DispatcherChannels.ToggleConfirm));
+        window.addEventListener(DispatcherChannels.UserCanceled, userCanceled);
+        window.addEventListener(DispatcherChannels.UserConfirmed, userConfirmed);
       } else userConfirmed();
     });
     

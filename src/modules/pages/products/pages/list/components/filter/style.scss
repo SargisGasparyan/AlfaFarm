@@ -1,45 +1,74 @@
 @import 'src/assets/styles/variables';
 
 .P-products-filter {
-  min-width    : 300px;
-  max-width    : 300px;
-  margin-right : 120px;
+  min-width     : 340px;
+  max-width     : 340px;
+  margin-right  : 80px;
+  border-right  : 2px solid $light-gray;
+  padding-right : 40px;
 
-  > h2 {  
-    margin      : 40px 0 20px;
-    font-weight : 300;
-
-    &:first-child { margin-top: 0; }
-    &.P-main-category { cursor: pointer; }
+  .P-main-category {
+    cursor: pointer;
+    font-weight: 300;
+    margin-bottom: 40px;
   }
 
-  > .P-row-title {
-    cursor          : pointer;
-    display         : flex;
-    user-select     : none;
-    align-items     : center;
-    justify-content : space-between;
+  .P-row-wrap {
+    border        : 1px solid $light-gray;
+    border-radius : 20px;
+    padding       : 4px 15px 9px;
+    margin-top    : 10px;
 
-    > span { font-size: 34px; }
+    .P-row-content {
+      max-height : 200px;
+      overflow-y : auto;
+      margin-top: 20px;
+    }
+
+    > h2 {  
+      font-weight : 300;
+  
+      &.P-main-category { cursor: pointer; }
+    }
+  
+    > .P-row-title {
+      cursor          : pointer;
+      display         : flex;
+      user-select     : none;
+      align-items     : center;
+      justify-content : space-between;
+  
+      > span { font-size: 34px; }
+    }
+  
+    .P-checkbox-row {
+      cursor        : pointer;
+      display       : flex;
+      align-items   : center;
+      margin-bottom : 15px;
+  
+      > .rc-checkbox {
+        display     : flex;
+        align-items : center;
+      }
+  
+      > .P-name {
+        width         : 100%;
+        overflow      : hidden;
+        font-size     : $normal-fs;
+        margin-left   : 10px;
+        white-space   : nowrap;
+        text-overflow : ellipsis;
+      }
+    }
   }
 
-  > .P-checkbox-row {
-    display       : flex;
-    align-items   : center;
-    margin-bottom : 15px;
 
-    > .rc-checkbox {
-      display     : flex;
-      align-items : center;
-    }
-
-    > .P-name {
-      width         : 100%;
-      overflow      : hidden;
-      font-size     : $normal-fs;
-      margin-left   : 10px;
-      white-space   : nowrap;
-      text-overflow : ellipsis;
-    }
+  > .P-cancel-button {
+    width        : 100%;
+    color        : $text-gray;
+    padding      : 10px 0;
+    margin-top   : 20px;
+    border-color : $text-gray;
   }
 }

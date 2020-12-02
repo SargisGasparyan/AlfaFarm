@@ -21,9 +21,11 @@ import 'moment/locale/ru';
 import 'moment/locale/en-gb';
 
 import './assets/styles/index.scss';
+import DispatcherChannels from 'platform/constants/dispatcher-channels';
 
 interface IState {
   confirmOpen: boolean;
+  confirmText: string;
   initialLoading: boolean;
   generalAPILoaded: boolean;
 };
@@ -34,44 +36,58 @@ class App extends HelperComponent<{}, IState> {
     generalAPILoaded: false,
     initialLoading: false,
     confirmOpen: false,
+    confirmText: '',
   };
 
   public async componentDidMount() {    
     //? Library config
+
     const alertify = await import('alertifyjs');
     moment.locale(Settings.shortCode);
     alertify.set('notifier','position', 'bottom-center');
-    alertify.set('notifier','delay', 20);
+    alertify.set('notifier','delay', 5);
 
     //? For SSR to fully load Browser API (general for 'window')
+
     window.abortableRequests = [];
     window.routerHistory = createBrowserHistory();
-    window.routerHistory.listen(() => window.scrollTo(0, 0));
+    window.routerHistory.listen(() => {
+      if (location.pathname !== '/products') {
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+        })
+      }
+    });
+    window.addEventListener(DispatcherChannels.ToggleConfirm, this.toggleConfirm);
+
     this.safeSetState({ generalAPILoaded: true });
 
     //? Seed
-    try {
-      await Socket.connect(); 
-    } catch (e) { /* */ }
+
+    try { await Socket.connect(); }
+    catch { /* */ }
 
     //? Backend initial data fetch
+
     const success = await Storage.fetchDefault();
     if (success) this.safeSetState({ initialLoading: true });
     else window.location.reload();
     
-    //? 
-    window.addEventListener('toggleconfirm', this.toggleConfirm);
+    //? Check for invitation
+
+    const query = new URLSearchParams(window.location.search);
+    const referralCode = query.get('referral');
+    if (referralCode) Settings.referralCode = referralCode;
   }
 
-  private toggleConfirm = () => {
+  private toggleConfirm = (e: CustomEvent) => {
     const { confirmOpen } = this.state;
-    this.safeSetState({ confirmOpen: !confirmOpen });
+    this.safeSetState({ confirmOpen: !confirmOpen, confirmText: e.detail || '' });
   }
  
   public render() {
-    const { generalAPILoaded, initialLoading, confirmOpen } = this.state;
+    const { generalAPILoaded, initialLoading, confirmOpen, confirmText } = this.state;
     
-
     return generalAPILoaded ? (
       <Router history={window.routerHistory}>
         {initialLoading ? <>
@@ -95,7 +111,7 @@ class App extends HelperComponent<{}, IState> {
               <Redirect to={ROUTES.HOME} />
             </Switch>
           </section>
-          {confirmOpen && <ConfirmModal />}
+          {confirmOpen && <ConfirmModal text={confirmText} />}
           <Footer /> 
         </> : <PageLoader />}
       </Router>

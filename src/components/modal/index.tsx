@@ -2,7 +2,7 @@ import * as React       from 'react';
 import { createPortal } from 'react-dom';
 
 import ClickOutside from '../click-outside';
-import HelperPureComponent from 'platform/classes/helper-pure-component';
+import HelperComponent from 'platform/classes/helper-component';
 
 import './style.scss';
 
@@ -10,24 +10,11 @@ interface IProps {
   children: React.ReactNode;
   className?: string;
   onClose?(): void;
+  unclosable?: boolean;
   withoutPortal?: boolean;
 };
 
-interface IState {
-  closed: boolean;
-};
-
-class Modal extends HelperPureComponent<IProps, IState> {
-
-  public static defaultProps = {
-    children: null,
-    className: '',
-  }
-
-  public state: IState = {
-    closed: false,
-  }
-
+class Modal extends HelperComponent<IProps, {}> {
   public componentDidMount() {
     // document.body.style.overflowY = 'hidden';
   }
@@ -39,18 +26,18 @@ class Modal extends HelperPureComponent<IProps, IState> {
 
   private close = (e: MouseEvent | React.SyntheticEvent<HTMLElement>) => {
     e.stopPropagation();
-    const { onClose } = this.props;
-    onClose && onClose();
+    const { onClose, unclosable } = this.props;
+    onClose && !unclosable && onClose();
   }
 
   private Content = () => {
-    const { children, className } = this.props;
+    const { children, unclosable, className } = this.props;
 
     return (
       <div className={`P-modal-wrapper ${className || ''}`}>
         <ClickOutside onClickOutside={this.close}>
           <div className="P-modal-content">
-            <i className="P-close icon-Group-5032" onClick={this.close} />
+            {!unclosable && <i className="P-close icon-Group-5032" onClick={this.close} />}
             <div>{children}</div>
           </div>
         </ClickOutside>

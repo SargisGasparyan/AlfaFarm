@@ -45,7 +45,7 @@ class UserController {
     return result;
   };
 
-  public static UploadCover = (body: FormData): Promise<IResponse<boolean>> => {
+  public static UploadCover = (body: FormData): Promise<IResponse<string>> => {
     const result = Connection.POST<FormData>({
       body,
       action: 'cover',

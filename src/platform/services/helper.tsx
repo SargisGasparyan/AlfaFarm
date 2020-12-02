@@ -36,6 +36,11 @@ export const getTranslationLabel = (value: string) => {
   }).join('');
 }
 
+export const formatPrice = (price: number, includeSymbol = true) => {
+  const formated = price.toLocaleString();
+  return includeSymbol ? <>{formated} &#1423;</> : formated;
+};
+
 export const enumToSelectOptions = <Value extends number>(obj: object, withTranslations: boolean = true, notIncludeValues: Value[] = []) => {
   const options: Array<IDropdownOption<Value>> = [];
   Object.keys(obj).map(item => {
@@ -108,6 +113,7 @@ export const getMonthDays = (() => {
   return (startDate: Date, pushToday = true) => {
     const date = moment(startDate);
     const endDate = moment(date).endOf('month');
+    endDate.add(1, 'days');
     const days = [];
 
     while(date.diff(endDate, 'days') < 0) {
@@ -115,7 +121,6 @@ export const getMonthDays = (() => {
       (!isToday || pushToday) && days.push(getDay(date));
       date.add(1, 'days');
     }
-      
     return days;
   };
 })();
@@ -138,6 +143,8 @@ export const getHoverDirection = (e: React.MouseEvent, element?: HTMLElement) =>
 
 export const getMediaPath = (path?: string | null) => {  
   // This function is for making some changes on image path before render...
-  
   return path || '';
 }
+
+export const truncateText = (value: string, limit: number = 38) =>
+  value.length > limit ? value.substring(0, limit) + '...' : value;

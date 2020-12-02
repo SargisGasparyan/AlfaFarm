@@ -5,13 +5,13 @@
 
 footer {
   display        : flex;
-  padding        : 25px $page-horizontal-offset;
+  padding        : 10px $page-horizontal-offset;
   box-shadow     : 0 0 50px transparentize(#000000, .9);
   flex-direction : column;
 
   > .P-logo {
     width         : 170px;
-    margin-bottom : 40px;
+    margin-bottom : 15px;
   }
 
   > .P-content {
@@ -20,10 +20,12 @@ footer {
     justify-content : space-between;
 
     > .P-column {
-      max-width : 350px;
+      display        : flex;
+      max-width      : 350px;
+      flex-direction : column;
 
       > p {
-        line-height   : 42px;
+        line-height   : 32px;
         margin-bottom : 20px;
       }
 
@@ -41,7 +43,7 @@ footer {
         display         : flex;
         align-items     : center;
         line-height     : 24px;
-        margin-bottom   : 20px;
+        margin-bottom   : 12px;
 
         > i {
           font-size    : 24px;
@@ -57,7 +59,6 @@ footer {
 
       > .P-social-links {
         display    : flex;
-        margin-top : 20px;
 
         > a {
           color : $text-gray;
@@ -69,7 +70,7 @@ footer {
   }
 
   > .P-mobile-app {
-    margin-top : 40px;
+    margin-top : 13px;
 
     > img {
       width        : 150px;

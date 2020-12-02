@@ -19,6 +19,14 @@
     align-items   : flex-start;
     border-radius : $big-radius;
 
+    .P-date {
+      display: flex;
+      justify-content: space-between;
+      > .G-main-form-half-field {
+
+      }
+    }
+
     > .P-main-info, > .P-delivery-form {
       flex      : 1;
       margin    : 20px;
@@ -29,30 +37,76 @@
         flex        : 1;
         width       : 100%;
         display     : flex;
+        justify-content: space-between;
         min-width   : 400px;
-        align-items : center;
-  
+        align-items: center;
         > h4 {
           color          : $text-gray;
           white-space    : nowrap;
           margin-right   : 20px;
+          margin-bottom: 15px;
           @include normal-font;
         }
-  
-        > span {
-          color  : $text-gray;
-          margin : 0 10px;
+        > div {
+          display     : flex;
+          align-items : center;
+          margin-top  : 20px;
+          > span {
+            color  : $text-gray;
+            margin : 0 10px;
+          }
+    
+          > .G-main-form-half-field {
+            margin-bottom : 0;
+          }
         }
-  
-        > .G-main-form-half-field {
-          margin-bottom : 0;
-        }
-      }
+      } //
     }
 
     .G-main-button {
       width  : 400px;
       margin : 0 auto 20px;
     }
+  }
+}
+.P-choose-payment-type-section {
+  width         : 800px;
+  margin        : 0 auto;
+  padding       : 20px 60px;
+  max-width     : 100%;
+  box-shadow    : $default-block-shadow;
+  align-items   : flex-start;
+  border-radius : $big-radius;
+  > p {
+    display: block;
+    width: 100%;
+    margin: 20px 0;
+    text-align: center;
+    font-size: 24px;
+    color: #F36E26;
+    font-weight: 700;
+  }
+  .P-choose-payment-buttons {
+    width: fit-content;
+    margin: 40px auto 0;
+    > .G-main-button {
+      width  : 350px;
+      margin : 0 auto 20px;
+    }
+  }
+  .P-payment-types {
+    > div {
+      margin-bottom: 30px;
+
+    }
+  }
+}
+.P-online-pay-icons {
+  margin-top: 20px;
+  display: flex;
+  > div {
+    width: 60px;
+    height: 20px;
+    margin-right: 15px;
   }
 }

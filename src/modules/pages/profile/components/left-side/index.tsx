@@ -13,12 +13,24 @@ import PersonImage from 'assets/images/person.png';
 import CameraImage from 'assets/images/camera.png';
 
 import './style.scss';
+import DispatcherChannels from 'platform/constants/dispatcher-channels';
+import Broadcast from 'platform/services/broadcast';
+import {IPagingResponse} from "../../../../../platform/constants/interfaces";
+import {IPrescriptionListResponseModel} from "../../../../../platform/api/prescription/models/response";
+
+interface IState {
+  photoPath?: string;
+}
 
 class LeftSide extends HelperPureComponent<{}, {}> {
 
   private uploadInput = React.createRef<HTMLInputElement>();
 
   private options = leftSideOptions();
+
+  public state: IState = {
+    photoPath: Storage.profile.photoPath
+  };
 
   private openUpload = () => {
     const { current } = this.uploadInput;
@@ -32,11 +44,38 @@ class LeftSide extends HelperPureComponent<{}, {}> {
       formData.append('file', files[0]);
 
       const result = await UserController.UploadCover(formData);
-      if (result.success) window.location.reload();
+
+      if (result.success) {
+        Storage.profile.photoPath = result.data;
+        Broadcast.dispatch(DispatcherChannels.StorageUpdate);
+        this.safeSetState({ photoPath: result.data });
+      }
     }
   }
 
+  public componentDidMount() {
+    Broadcast.subscribe(DispatcherChannels.StorageUpdate, this.storageUpdate);
+  }
+
+  private storageUpdate = () => {
+    this.forceUpdate();
+  }
+
+  private logout = () => {
+    window.dispatchEvent(new CustomEvent(DispatcherChannels.ToggleConfirm, { detail: Settings.translations.log_out_question }));
+    window.addEventListener(DispatcherChannels.UserConfirmed, Settings.logout);
+    window.addEventListener(DispatcherChannels.UserCanceled, this.logoutCanceled);
+  }
+
+  private logoutCanceled = () => {
+    window.dispatchEvent(new CustomEvent(DispatcherChannels.ToggleConfirm));
+    window.removeEventListener(DispatcherChannels.UserConfirmed, Settings.logout);
+    window.removeEventListener(DispatcherChannels.UserCanceled, this.logoutCanceled);
+  }
+
   public render() {
+    const { photoPath } = this.state;
+
     return (
       <aside className="P-profile-left-side">
         <div className="P-main-info">
@@ -69,7 +108,7 @@ class LeftSide extends HelperPureComponent<{}, {}> {
           {item.name}
         </NavLink>)}
 
-        <div onClick={Settings.logout} className="P-link">
+        <div onClick={this.logout} className="P-link">
           {Settings.translations.log_out}
         </div>
       </aside>

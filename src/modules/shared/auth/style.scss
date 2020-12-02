@@ -2,29 +2,34 @@
 @import 'src/assets/styles/variables';
 
 .P-auth-modal .P-modal-content > div {
-  padding        : 60px 30px;
+  padding        : 30px 30px;
   display        : flex;
   align-items    : center;
   flex-direction : column;
-  
+
+  .P-error-message {
+    color: red;
+    font-size: 13px;
+    margin-left: 10px;
+  }
+
   > h3 {
     font-size      : 20px;
-    margin-bottom  : 50px;
+    margin-bottom  : 30px;
     text-transform : uppercase;
     @include bold-font();
   }
 
   > .P-sign-in-restore-password {
-    width      : 100%;
     color      : black;
-    margin     : 20px 0;
+    margin     : 5px 0 0 auto;
     cursor     : pointer;
     text-align : right;
   }
 
   > .P-sign-in-register-text {
     color  : black;
-    margin : 40px 0 20px;
+    margin : 20px 0 20px;
   }
 
   > .P-sign-in-register {

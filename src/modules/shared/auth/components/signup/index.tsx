@@ -63,22 +63,30 @@ class SignUp extends HelperComponent<IProps, IState> {
 
   private submit = (e: React.SyntheticEvent) => {
     e.preventDefault();
+    if (!!Settings.authToken) Settings.token = Settings.authToken;
     this.safeSetState({ submited: true }, async () => {
       this.formValidation.valid && this.safeSetState({ submitLoading: true }, async () => {
         const { form } = this.state;
+        if (Settings.referralCode) form.referralCode = Settings.referralCode;
 
         const result = await UserController.Register(form);
-        if (result.data) window.location.reload();
-        else this.safeSetState({ submitLoading: false });
+        if (result.data) {
+          Settings.referralCode = '';
+          window.location.reload();
+        } else this.safeSetState({ submitLoading: false });
       });
     });
   }
 
+  private isValidDate = (date: moment.Moment) => {
+    const invalidDate = new Date();
+    return !date.isSameOrAfter(invalidDate);
+  }
   public render() {
     const { form, submitLoading } = this.state;
 
     return <>
-      <h3 className="G-main-color G-text-center">{Settings.translations.choose_password}</h3>
+      <h3 className="G-main-color G-text-center">{Settings.translations.personal_data}</h3>
       <form className="G-main-form">
         <div className="G-main-form-field">
           <input
@@ -111,6 +119,7 @@ class SignUp extends HelperComponent<IProps, IState> {
           <DateTime
             onChange={this.changeDateOfBirth}
             timeFormat={false}
+            isValidDate={this.isValidDate}
             closeOnSelect={true}
             inputProps={{
               value: form.dateOfBirth ? formatDate(form.dateOfBirth, false) : '',

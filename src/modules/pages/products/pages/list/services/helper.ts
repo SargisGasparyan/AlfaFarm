@@ -8,6 +8,7 @@ export const buildFilters = () => {
   const activeIngredientIds = query.get('activeIngredientIds');
   const minPrice = query.get('minPrice');
   const maxPrice = query.get('maxPrice');
+  const sortBy = query.get('sortBy');
 
   const body: IProductFilterRequestModel = {
     text: query.get('text') || '',
@@ -17,6 +18,7 @@ export const buildFilters = () => {
     activeIngredientIds: activeIngredientIds ? activeIngredientIds.split(',').map(item => +item) : [],
     minPrice: minPrice ? +minPrice : undefined,
     maxPrice: maxPrice ? +maxPrice : undefined,
+    sortBy: sortBy ? +sortBy : undefined,
   };
 
   return body;

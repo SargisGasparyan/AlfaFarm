@@ -16,7 +16,7 @@ import SuccessModal from 'components/success-modal';
 import { onlyForUsers } from 'platform/guards/routes';
 import { infinityScrollPageLimit } from 'platform/constants';
 import DoctorController from 'platform/api/doctor';
-import { scrolledToBottom, getMediaPath } from 'platform/services/helper';
+import { scrolledToBottom, getMediaPath, formatPrice } from 'platform/services/helper';
 import { IDoctorListResponseModel } from 'platform/api/doctor/models/response';
 
 import './style.scss';
@@ -66,7 +66,7 @@ class Doctors extends HelperComponent<{}, {}> {
       name: professionName,
       cell: (row: IMedicalServiceListResponseModel) => <div className="G-flex G-flex-justify-between">
         {row.name}
-        <span>{row.price} AMD</span>
+        <span>{formatPrice(row.price)}</span>
       </div>,
     },
   ];
@@ -169,21 +169,22 @@ class Doctors extends HelperComponent<{}, {}> {
                 columnConfig={this.columnConfig(item.professionName)}
                 data={item.services}
               />
+              {item.services && item.services.length > 0 ?
               <LoaderContent
                 className="G-main-button"
                 loading={submitLoading}
                 disabled={this.registerDisabled(item.id)}
                 onClick={this.submit}
               >
-                {Settings.translations.sign_up}
-              </LoaderContent>
+                {Settings.translations.book}
+              </LoaderContent>: null }
             </div>
             <Dates
               doctorId={chosenDoctor}
               chosen={chosenService && chosenDoctor === item.id ? item.services.find(sub => sub.id === chosenService) : undefined}
             />
           </div>) : <PageLoader />}
-          {showSuccess && <SuccessModal text={Settings.translations.success} onClose={this.toggleSuccessModal} />}
+          {showSuccess && <SuccessModal text={Settings.translations.success_book} onClose={this.toggleSuccessModal} />}
         </div>
       </section>
     );

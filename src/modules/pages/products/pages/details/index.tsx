@@ -29,7 +29,9 @@ class Details extends HelperComponent<IProps, {}> {
 
   private goBack = () => window.routerHistory.goBack();
 
-  public componentDidMount() { this.fetchData(); }
+  public componentDidMount() {
+    this.fetchData();
+  }
 
   public componentDidUpdate(prevProps: IProps) {
     const { id } = this.props.match.params;
