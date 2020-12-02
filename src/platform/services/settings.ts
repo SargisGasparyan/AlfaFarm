@@ -19,7 +19,7 @@ class Settings {
 
   public static googlePlayURL = 'https://play.google.com/store/apps/details?id=am.armboldmind.ineed';
   public static appStoreURL = 'https://apps.apple.com/am/app/id1465885901';
-
+  public static authToken: string = '';
   public static facebookURL = 'https://www.facebook.com/ineedGlobalMarket/';
   public static instagramURL = 'https://www.instagram.com/ineed.market/';
   public static linkedinURL = 'https://www.linkedin.com/company/ineed.am/about/';

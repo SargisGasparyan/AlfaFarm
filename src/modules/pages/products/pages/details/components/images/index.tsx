@@ -69,7 +69,7 @@ class Images extends HelperPureComponent<IProps, IState> {
 
     return (
       <div className="P-product-details-images">
-        {!!data.discount && <Shared.Products.DiscountLabel percent={data.discount}/>}
+        {!!data.discountedPrice && <Shared.Products.DiscountLabel percent={-Math.round(100 - (100 / data.price * data.discountedPrice))}/>}
         <div className="P-current-image">
           <div>
             <img src={getMediaPath(this.activeImage)} />

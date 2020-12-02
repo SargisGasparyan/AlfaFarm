@@ -982,6 +982,8 @@ export default {
   medical_history: "Բժշկական պատմություն",
   special_products: "Հատուկ ապրանքներ",
   special_products_replace_fail: (date: string) => `Ապրանքը կարող եք փոխարինել ոչ շուտ քան ${date}`,
+  package: 'Տուփ',
+  item: 'Հատ',
   my_wallet: "Իմ դրամապանակը",
   my_addresses: "Իմ հասցեները",
   addresses: "Հասցեներ",

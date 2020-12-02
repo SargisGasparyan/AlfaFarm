@@ -13,6 +13,7 @@ import PinImage from 'assets/images/pin.png';
 
 import './style.scss';
 import { formatPrice } from 'platform/services/helper';
+import { currency } from 'platform/constants';
 
 interface IProps {
   data: IProductDetailsResponseModel;
@@ -21,6 +22,7 @@ interface IProps {
 interface IState {
   count: number;
   cartLoading: boolean;
+  havePackage: boolean;
   pharmaciesAvailablityOpen: boolean;
 };
 
@@ -30,11 +32,12 @@ class Info extends HelperComponent<IProps, IState> {
     count: 0,
     cartLoading: false,
     pharmaciesAvailablityOpen: false,
+    havePackage: false
   };
 
   public componentDidMount() {
     const { data } = this.props;
-    data.basketCount && this.safeSetState({ count: data.basketCount });
+    data.basketCount && this.safeSetState({ count: data.basketCount, havePackage: data.havePackage });
   }
 
   private onCountChange = async (count: number) => {
@@ -66,9 +69,33 @@ class Info extends HelperComponent<IProps, IState> {
     this.safeSetState({ pharmaciesAvailablityOpen: !pharmaciesAvailablityOpen });
   }
 
+  private UnitCount = () => {
+    const { data } = this.props;
+    const { havePackage } = this.state;
+    if (data.havePackage) {
+      return <span>
+        <span className={`${havePackage ? 'P-selected-count-type' : ''}`} onClick={() => this.safeSetState({ havePackage: true })}>{Settings.translations.package}</span> / 
+        <span className={`${!havePackage ? 'P-selected-count-type' : ''}`} onClick={() => this.safeSetState({ havePackage: false })}>{Settings.translations.item}</span>
+      </span>
+    } else return <span className="P-selected-count-type">{data.unitName}</span>
+  }  
+
+  private get price() {
+    const { data } = this.props;
+    const { havePackage } = this.state;
+
+    if (havePackage) return data.discountedPackagePrice || data.packagePrice;
+    return data.discountedPrice || data.price;
+  }
+  private get defaultPrice() {
+    const { data } = this.props;
+    const { havePackage } = this.state;
+    if (havePackage) return data.packagePrice || null;
+    return data.price;
+  }
   public render() {
     const { data } = this.props;
-    const { count, cartLoading, pharmaciesAvailablityOpen } = this.state;
+    const { count, cartLoading, pharmaciesAvailablityOpen, havePackage } = this.state;
 
     return (
       <div className="P-product-details-info">
@@ -96,6 +123,7 @@ class Info extends HelperComponent<IProps, IState> {
         </h3>}
         <h3>{Settings.translations.description}</h3>
         <p className="P-description">{data.description}</p>
+        <div className="P-count-info"><this.UnitCount /></div>
         <div className="P-cart-actions">
           {!!count && <CountInput
             min={0}
@@ -111,7 +139,7 @@ class Info extends HelperComponent<IProps, IState> {
           >{Settings.translations.add_to_cart}</LoaderContent>
 
           {pharmaciesAvailablityOpen && <PharmaciesAvailablity onClose={this.togglePharmaciesAvailablity} data={data} />}
-          <span className="G-orange-color G-ml-auto P-price">{formatPrice(data.discountedPrice || data.price)}</span>
+          <span className="G-orange-color G-ml-auto P-price"><del>{!!this.defaultPrice && formatPrice(this.defaultPrice)}</del> {formatPrice(this.price)}</span>
         </div>
       </div>
     );
