@@ -148,8 +148,8 @@ class Checkout extends HelperComponent<{}, IState> {
     const currentDayStarting = new Date();
 
     dateItem.hours(currentDayStarting.getHours());
-    dateItem.hours(currentDayStarting.getMinutes());
-    dateItem.hours(currentDayStarting.getSeconds());
+    dateItem.minutes(currentDayStarting.getMinutes());
+    dateItem.seconds(currentDayStarting.getSeconds());
     dateItem.milliseconds(currentDayStarting.getMilliseconds());
 
     return dateItem.isSameOrAfter(currentDayStarting);
@@ -334,9 +334,8 @@ class Checkout extends HelperComponent<{}, IState> {
               />
             </div>
 
-            {form.deliveryType === OrderDeliveryTypeEnum.Delivery && <div className="P-delivery-date">
+            {form.deliveryType === OrderDeliveryTypeEnum.Delivery && <div className="P-delivery-date G-flex G-align-center">
               <h4 className="G-fs-normal">{Settings.translations.delivery_date}</h4>
-              <div className='P-date'>
                 <div className="G-main-form-half-field">
                   <DateTime
                     onChange={this.dateFromChange}
@@ -349,7 +348,7 @@ class Checkout extends HelperComponent<{}, IState> {
                     }}
                   />
                 </div>
-                <div className="G-main-form-half-field">
+                {/* <div className="G-main-form-half-field">
                   <DateTime
                     onChange={this.dateToChange}
                     isValidDate={this.validateDeliveryDate}
@@ -360,8 +359,7 @@ class Checkout extends HelperComponent<{}, IState> {
                       placeholder: '00:00',
                     }}
                   />
-                </div>
-              </div>
+                </div> */}
             </div>}
           </div>
 
