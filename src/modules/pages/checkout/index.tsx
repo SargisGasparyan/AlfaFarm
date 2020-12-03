@@ -32,6 +32,7 @@ import PaymentController from 'platform/api/payment';
 import arca from 'assets/images/Arca.png';
 import master from 'assets/images/master.png';
 import visa from 'assets/images/visaImage.svg';
+import DispatcherChannels from 'platform/constants/dispatcher-channels';
 interface IState {
   form: IOrderModifyRequestModel;
   submited: boolean;
@@ -178,7 +179,7 @@ class Checkout extends HelperComponent<{}, IState> {
 
         //   }
         // }
-        this.safeSetState({ successModalOpen: true });
+        this.safeSetState({ successModalOpen: true }, () => window.dispatchEvent(new CustomEvent(DispatcherChannels.CartItemsUpdate)));
       }
       else this.safeSetState({ submitLoading: false });
     });
