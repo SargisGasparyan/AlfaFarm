@@ -14,7 +14,7 @@ interface IProps {
 };
 
 const ListItem = React.memo(({ data }: IProps) => (
-  <div className="P-home-news-list-item">
+  <div className="P-home-news-list-item" onClick={() => window.routerHistory.push(`${ROUTES.NEWS.DETAILS}/${data.id}`)}>
     <div className="P-image" style={{ background: `url('${getMediaPath(data.imagePath)}') center/cover` }} />
     <div className="P-content">
       <h3>{data.title}</h3>

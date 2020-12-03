@@ -23,6 +23,7 @@ const OrderACall = React.memo(() => {
         <p className="G-input-country-code">+{countryCode}</p>
         <input
           className="G-main-input"
+          maxLength={8}
           placeholder={Settings.translations.phone_number}
         />
       </div>
