@@ -32,9 +32,11 @@ class ContactUs extends HelperComponent<{}, IState> {
       pageNumber: 1,
     });
 
-    this.safeSetState({ branches: result.data.list.map(item => ({
-      position: { lat: item.addressLat, lng: item.addressLng },
-    })) });
+    this.safeSetState({
+      branches: result.data.list.map(item => ({
+        position: { lat: item.addressLat, lng: item.addressLng },
+      }))
+    });
   }
 
   public render() {
@@ -44,9 +46,9 @@ class ContactUs extends HelperComponent<{}, IState> {
       <section className="G-page P-home-contact-us">
         <ShadowText className="G-text-center">{Settings.translations.contact_us}</ShadowText>
         <Form />
-    
-        <Maps markers={branches} className="P-maps" />
-    
+
+          <Maps markers={branches} className="P-maps P-home-map" />
+
         <div className="P-bottom">
           <AboutDelivery />
           <AboutBonusCard />

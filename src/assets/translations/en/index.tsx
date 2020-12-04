@@ -1188,6 +1188,7 @@ export default {
   doctors: "Doctors",
   laboratory: "Laboratory",
   item: 'item',
+  delete_saved_product_basket: 'Do you want to delete the saved basket?',
   price_list: "Price list",
   blog: "Blog",
   news: "News",
