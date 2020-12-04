@@ -49,10 +49,10 @@ const Producers = ({ body, onChange }: IProps) => {
   }
 
   return <>
-    <h2 className="P-row-title" onClick={() => setOpen(!open)}>
+    <h3 className="P-row-title" onClick={() => setOpen(!open)}>
       {Settings.translations.producer}
       <span className="G-orange-color">{open ? '-' : '+'}</span>
-    </h2>
+    </h3>
 
     {open ?
       <div className="P-row-content">

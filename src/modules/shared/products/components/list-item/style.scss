@@ -1,6 +1,8 @@
 @import 'src/assets/styles/helper';
 @import 'src/assets/styles/variables';
 
+@import './responsive';
+
 .P-products-list-item {
   width           : calc(100% / 4 - 40px);
   color           : black;
@@ -9,7 +11,7 @@
   display         : flex;
   padding         : 10px 30px 30px;
   position        : relative;
-  min-width       : 280px;
+  min-width       : 150px;
   background      : white;
   border-radius   : $big-radius;
   flex-direction  : column;

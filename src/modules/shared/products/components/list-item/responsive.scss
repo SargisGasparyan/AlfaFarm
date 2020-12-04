@@ -1,0 +1,17 @@
+@media (max-width: $max-screen) {
+  a.P-products-list-item {
+    width : calc(100% / 3 - 40px);
+  }
+}
+
+@media (max-width: $medium-screen) {
+  a.P-products-list-item {
+    width : calc(100% / 2 - 40px);
+  }
+}
+
+@media (max-width: $mobile-screen) {
+  a.P-products-list-item {
+    width : calc(100% / 1 - 40px);
+  }
+}
