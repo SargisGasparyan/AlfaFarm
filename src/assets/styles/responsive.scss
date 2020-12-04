@@ -6,3 +6,7 @@
 
   .G-page { padding: $page-vertical-offset $page-horizontal-offset; }
 }
+
+@media (max-width: $mobile-screen) {
+  .G-main-form .G-main-form-half-field { width: 100%; }
+}
