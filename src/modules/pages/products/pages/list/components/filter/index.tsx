@@ -15,18 +15,21 @@ import PriceRange from './components/price-range';
 
 import './style.scss';
 import Settings from 'platform/services/settings';
+import Screen from 'components/screen';
 
 interface IProps {
   onChange(): void;
 };
 
 interface IState {
+  mobileOpen: boolean;
   body: IProductFilterRequestModel;
 };
 
 class Filter extends HelperComponent<IProps, IState> {
 
   public state: IState = {
+    mobileOpen: false,
     body: {
       brandIds: [],
       producerIds: [],
@@ -90,7 +93,25 @@ class Filter extends HelperComponent<IProps, IState> {
     this.safeSetState({ body }, onChange);
   }
 
+  private toggleMobile = () => {
+    const { mobileOpen } = this.state;
+    this.safeSetState({ mobileOpen: !mobileOpen });
+  }
+
   public render() {
+    const { mobileOpen } = this.state;
+
+    return (
+      <Screen.Tablet>
+        {(match: boolean) => match ? <>
+          <h2 onClick={this.toggleMobile} className="P-products-filter-toggle">{Settings.translations.filter} <i className="icon-Group-5504" /></h2>
+          {mobileOpen && <this.Content />}
+        </> : <this.Content />}
+      </Screen.Tablet>
+    );
+  }
+
+  private Content = () => {
     const { body } = this.state;
 
     return (

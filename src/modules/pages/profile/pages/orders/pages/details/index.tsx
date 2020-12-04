@@ -10,7 +10,7 @@ import OrderController from 'platform/api/order';
 import { IOrderDetailsResponseModel } from 'platform/api/order/models/response';
 import PageLoader from 'components/page-loader';
 import Settings from 'platform/services/settings';
-import { formatDate, getViewEnum } from 'platform/services/helper';
+import { formatDate, formatPrice, getViewEnum } from 'platform/services/helper';
 import { OrderStatusEnum } from 'platform/api/order/constants/enums';
 import enviroment from 'platform/services/enviroment';
 import { Shared } from 'modules';
@@ -82,7 +82,7 @@ class Details extends HelperComponent<RouteComponentProps<IRouteParams>, IState>
 
             <h3 className="G-flex G-mb-30 G-flex-justify-between">
               {Settings.translations.price}
-              <span>{data.totalPrice}</span>
+              <span>{formatPrice(data.totalPrice)}</span>
             </h3>
             
             <h3 className="G-flex G-mb-30 G-flex-justify-between">

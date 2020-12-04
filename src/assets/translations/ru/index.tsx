@@ -955,6 +955,7 @@ export default {
   item: 'Штука',
   my_requests: "Мои запросы",
   my_companies: "Мои компании",
+  delete_saved_product_basket: 'Вы хотите удалить сохраненную корзину?',
   my_registrations: "Мои регистрации",
   medical_history: "История болезни",
   special_products: "Специальные продукты",

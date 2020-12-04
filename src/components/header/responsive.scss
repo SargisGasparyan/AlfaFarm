@@ -1,0 +1,31 @@
+@import 'assets/styles/variables.scss';
+
+.P-mobile-header {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .P-burger-menu {
+    display: block;
+    > i {
+      color: #F26D26;
+      font-size: 24px;
+    }
+  }
+  .P-logo-mobile {
+    display: block;
+    width: 130px;
+    height: 70px;
+  }
+  .P-mobile-header-icons {
+    display: flex;
+    justify-content: space-between;
+    > a {
+      margin-right: 15px;
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+}

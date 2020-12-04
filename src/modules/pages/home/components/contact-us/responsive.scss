@@ -4,3 +4,9 @@
     > h3 { font-size: 14px; }
   }
 }
+@media (max-width: 1300px) {
+  .P-home-map {
+    width: 100% !important;
+    margin: 130px auto 110px !important;
+  }
+}

@@ -6,3 +6,20 @@
 
   .G-page { padding: $page-vertical-offset $page-horizontal-offset; }
 }
+@media (max-width: 1690px) {
+  .P-list-wrapper {
+    overflow-y: auto !important;
+    .react-multi-carousel-list {
+      > ul > li {
+        width: 330px !important;
+      }
+    }
+  }
+  .react-multi-carousel-track {
+  }
+  > li {
+    // margin-right: 20px;
+    // overflow-y: auto !important;
+
+  }
+}

@@ -34,14 +34,18 @@ class Form extends HelperComponent<{}, IState> {
     e.preventDefault();
     const { body } = this.state;
     this.safeSetState({ submited: true }, () => {
-      this.formValidation.valid && this.safeSetState({ submitLoading: true }, async () => {
+      !!this.formValidation.valid && this.safeSetState({ submitLoading: true }, async () => {
         const res = await SupportController.createRequest(body);
         if (res.success) {
           const alertify = await import('alertifyjs');
           alertify.success(Settings.translations.request_success);
-          body.content = '';
-          body.email = '';
-          body.email = '';
+          this.safeSetState({ submited: false }, () => {
+            body.content = '';
+            body.email = '';
+            body.name = '';
+          });
+          console.log(body);
+          
           this.safeSetState({ body });
         }
         this.safeSetState({ submitLoading: false })
@@ -49,7 +53,7 @@ class Form extends HelperComponent<{}, IState> {
     });
   }
   public render() {
-    const { submitLoading } = this.state;
+    const { submitLoading, body } = this.state;
     return (
       <form className="G-main-form G-ml-auto G-mr-auto">
         <div className="G-main-form-field">
@@ -57,6 +61,7 @@ class Form extends HelperComponent<{}, IState> {
             placeholder={Settings.translations.name}
             className={`G-main-input ${this.formValidation.errors.name ? 'G-invalid-field' : ''}`}
             name="name"
+            value={body.name}
             onChange={this.change}
           />
         </div>
@@ -64,6 +69,7 @@ class Form extends HelperComponent<{}, IState> {
           <input
             placeholder={Settings.translations.email}
             name="email"
+            value={body.email}
             className={`G-main-input ${this.formValidation.errors.email ? 'G-invalid-field' : ''}`}
             onChange={this.change}
           />
@@ -72,6 +78,7 @@ class Form extends HelperComponent<{}, IState> {
           <textarea
             placeholder={Settings.translations.message}
             name="content"
+            value={body.content}
             className={`G-main-textarea ${this.formValidation.errors.content ? 'G-invalid-field' : ''}`}
             onChange={this.change}
           />
