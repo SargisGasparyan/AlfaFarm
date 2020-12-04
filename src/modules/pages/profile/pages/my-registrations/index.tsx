@@ -7,7 +7,7 @@ import ROUTES from 'platform/constants/routes';
 import Layout from '../../components/layout';
 import Settings from 'platform/services/settings';
 import Table from 'components/table';
-import { formatDate } from 'platform/services/helper';
+import { formatDate, formatPrice } from 'platform/services/helper';
 import { IClinicRegistrationListResponseModel } from 'platform/api/clinicRegistration/models/response';
 import { onlyForUsers } from 'platform/guards/routes';
 import ClinicRegistrationController from 'platform/api/clinicRegistration';
@@ -38,7 +38,7 @@ class MyRegistrations extends HelperComponent<IState, {}> {
     },
     {
       name: Settings.translations.price,
-      cell: (row: IClinicRegistrationListResponseModel) => <>{row.servicePrice} &#1423;</>,
+      cell: (row: IClinicRegistrationListResponseModel) => formatPrice(row.servicePrice),
     },
   ];
 

@@ -147,4 +147,4 @@ export const getMediaPath = (path?: string | null) => {
 }
 
 export const truncateText = (value: string, limit: number = 38) =>
-  value.length > limit ? value.substring(0, limit) + '...' : value;
+  value && (value.length > limit) ? value.substring(0, limit) + '...' : value;
