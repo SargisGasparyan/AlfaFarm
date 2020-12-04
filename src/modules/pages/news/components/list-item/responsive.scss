@@ -1,0 +1,11 @@
+@media (max-width: $medium-screen) {
+  div.P-news-list-item {
+    width : calc(50% - 40px);
+  }
+}
+
+@media (max-width: $tablet-screen) {
+  div.P-news-list-item {
+    width : calc(100% - 40px);
+  }
+}

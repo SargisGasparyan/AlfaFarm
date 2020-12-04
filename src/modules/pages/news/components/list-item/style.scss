@@ -1,5 +1,7 @@
 @import 'src/assets/styles/variables';
 
+@import './responsive';
+
 .P-news-list-item {
   width         : calc(100% / 3 - 40px);
   border        : 1px solid $light-gray;
