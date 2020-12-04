@@ -6,12 +6,12 @@
 
 @media (max-width: $medium-screen) {
   a.P-products-list-item {
-    width : calc(100% / 2 - 40px);
+    width : calc(50% - 40px);
   }
 }
 
 @media (max-width: $mobile-screen) {
   a.P-products-list-item {
-    width : calc(100% / 1 - 40px);
+    width : calc(100% - 40px);
   }
 }
