@@ -1,0 +1,15 @@
+@media (max-width: $tablet-screen) {
+  div.P-about-us-first-part {
+    > .P-image {
+      width      : 100%;
+      height     : 60vh;
+      min-height : initial;
+    }
+
+    > .P-content {
+      width      : 100%;
+      padding    : 20px;
+      min-height : initial;
+    }
+  }
+}
