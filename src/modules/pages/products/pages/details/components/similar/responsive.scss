@@ -1,0 +1,23 @@
+@media (max-width: $max-screen) {
+  div.P-product-details-similar > .P-list > .P-products-list-item {
+    width : calc(25% - 40px);
+  }
+}
+
+@media (max-width: $medium-screen) {
+  div.P-product-details-similar > .P-list > .P-products-list-item {
+    width : calc(100% / 3 - 40px);
+  }
+}
+
+@media (max-width: $mobile-screen) {
+  div.P-product-details-similar > .P-list > .P-products-list-item {
+    width : calc(50% - 40px);
+  }
+}
+
+@media (max-width: $small-mobile-screen) {
+  div.P-product-details-similar > .P-list > .P-products-list-item {
+    width : calc(100% - 40px);
+  }
+}

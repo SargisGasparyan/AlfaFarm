@@ -1,5 +1,7 @@
 @import 'src/assets/styles/variables';
 
+@import './responsive';
+
 .P-product-details-similar {
   width          : 100%;
   display        : flex;
@@ -19,5 +21,9 @@
     display         : flex;
     flex-wrap       : wrap;
     justify-content : center;
+
+    .P-products-list-item {
+      width : calc(20% - 40px);
+    }
   }
 }

@@ -8,12 +8,11 @@ import LoaderContent from 'components/loader-content';
 import BasketController from 'platform/api/basket';
 import DispatcherChannels from 'platform/constants/dispatcher-channels';
 import PharmaciesAvailablity from './components/pharmacies-availablity';
+import { formatPrice } from 'platform/services/helper';
 
 import PinImage from 'assets/images/pin.png';
 
 import './style.scss';
-import { formatPrice } from 'platform/services/helper';
-import { currency } from 'platform/constants';
 
 interface IProps {
   data: IProductDetailsResponseModel;
@@ -139,7 +138,7 @@ class Info extends HelperComponent<IProps, IState> {
           >{Settings.translations.add_to_cart}</LoaderContent>
 
           {pharmaciesAvailablityOpen && <PharmaciesAvailablity onClose={this.togglePharmaciesAvailablity} data={data} />}
-          <span className="G-orange-color G-ml-auto P-price"><del>{!!this.defaultPrice && formatPrice(this.defaultPrice)}</del> {formatPrice(this.price)}</span>
+          <span className="G-orange-color P-price"><del>{!!this.defaultPrice && formatPrice(this.defaultPrice)}</del> {formatPrice(this.price)}</span>
         </div>
       </div>
     );

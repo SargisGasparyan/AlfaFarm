@@ -3,19 +3,6 @@
 .P-product-details-info {
   width : calc(55% - 50px);
 
-  .P-price {
-    font-size: 1.5em;
-    font-weight: bold;
-    margin-right: 40px;
-    display: flex;
-    align-items: center;
-    > del {
-      color: #8D8D8D;
-      display: block;
-      margin-right: 30px;
-    }
-  }
-
   > .P-name {
     display       : flex;
     margin-bottom : 60px;
@@ -52,31 +39,49 @@
 
   > .P-cart-actions {
     display         : flex;
+    flex-wrap       : wrap;
+    align-items     : center;
     margin-bottom   : 40px;
     justify-content : flex-start;
-    align-items: center;
-
-    > .P-count-input {
-      height       : 50px;
-      margin-right : 60px;
-    }
 
     > .G-main-button {
-
+      margin  : 10px auto 10px 0;
       padding : 15px 50px;
     }
+
+    > .P-price {
+      padding     : 10px 0;
+      display     : flex;
+      font-size   : 1.5em;
+      font-weight : bold;
+      align-items : center;
+      
+      > del {
+        color        : #8D8D8D;
+        display      : block;
+        margin-right : 30px;
+      }
+    }
+
+    > .P-count-input {
+      height : 50px;
+      margin : 10px 60px 10px 0;
+    }
   }
-}
-.P-count-info {
-  margin: 20px 0 30px 0;
-  > span {
-    width: 50%;
-    font-size: 18px;
-    font-weight: bold;
-    color:#49B748;
-    cursor: pointer;
+
+  > .P-count-info {
+    margin : 20px 0 30px 0;
+  
+    > span {
+      width       : 50%;
+      color       :#49B748;
+      cursor      : pointer;
+      font-size   : 18px;
+      font-weight : bold;
+    }
+  
+    .P-selected-count-type {
+      color : #000 !important;
+    }
   }
-}
-.P-selected-count-type {
-  color: #000 !important;
 }
