@@ -1,3 +1,18 @@
+@import 'assets/styles/variables.scss';
+
 @media (max-width: $tablet-screen) {
   .P-home-page .P-shadow-text { margin-bottom: 80px !important; }
+}
+
+@media(max-width: $mobile-screen) {
+  .P-home-page {
+    > .G-page {
+      padding: 30px 20px;
+    }
+    .P-home-contact-us {
+      .P-bottom {
+        padding-top: 0 !important;
+      }
+    }
+  }
 }
