@@ -8,13 +8,6 @@
   padding-top    : 100px;
   padding-bottom : 100px;
 
-
-  @media(max-width: 1200px){
-    flex-direction: column;
-    padding-top: 50px;
-    padding-bottom: 50px !important;
-  }
-
   > .P-shadow-text { margin-bottom: 130px; }
 
   > .G-main-ghost-button { margin-top: 75px; }
@@ -24,18 +17,16 @@
     display     : flex;
     flex-wrap   : wrap;
     align-items : flex-start;
-    @media(max-width: 1200px){
-      margin: 0;
-    }
+
     > .P-no-data {
-      position: absolute;
-      text-align: center;
-      color: gray;
-      left: 50%;
-      top: 40%;
+      position   : absolute;
+      text-align : center;
+      color      : gray;
+      left       : 50%;
+      top        : 40%;
 
       > .P-desc {
-        font-size: 25px;
+        font-size : 25px;
       }
     }
   }
