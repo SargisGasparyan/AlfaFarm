@@ -107,10 +107,9 @@ class Connection {
   }
 
   //? DELETE request
-  public static DELETE = async <Body extends object>(data: IBodyRequest<Body>): Promise<any> => {
+  public static DELETE = async <Body extends object>(data: IBodyRequest<Body>, confirmQuestion?: string): Promise<any> => {
     const abort = new AbortController();
     const { controller, action, body, query, noneJSONBody, withoutConfirmModal } = data;
-
     return new Promise(resolve => {
       const userCanceled = async () => {
         resolve(false);
@@ -138,10 +137,13 @@ class Connection {
           !data.unabortable && window.abortableRequests.splice(window.abortableRequests.indexOf(abort), 1);
           resolve({ aborted: true });
         }
+        window.dispatchEvent(new CustomEvent(DispatcherChannels.ToggleConfirm, { detail: confirmQuestion }));
+        window.removeEventListener(DispatcherChannels.UserCanceled, userCanceled);
+        window.removeEventListener(DispatcherChannels.UserConfirmed, userConfirmed);
       }
 
       if (!withoutConfirmModal) {
-        window.dispatchEvent(new CustomEvent(DispatcherChannels.ToggleConfirm));
+        window.dispatchEvent(new CustomEvent(DispatcherChannels.ToggleConfirm, { detail: confirmQuestion }));
         window.addEventListener(DispatcherChannels.UserCanceled, userCanceled);
         window.addEventListener(DispatcherChannels.UserConfirmed, userConfirmed);
       } else userConfirmed();

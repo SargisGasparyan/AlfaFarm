@@ -2,6 +2,7 @@ import Connection from '../../services/connection';
 import { IResponse } from '../../constants/interfaces';
 import { IBasketChangeRequestModel } from './models/request';
 import { IBasketListResponseModel, ISavedBasketListResponseModel, IBasketResponseModel, IBasketChangeResponseModel } from './models/response';
+import Settings from 'platform/services/settings';
 
 class BasketController {
 
@@ -68,7 +69,7 @@ class BasketController {
       body: {},
       action: `saved/${id}`,
       controller: BasketController.controller,
-    });
+    }, Settings.translations.delete_saved_product_basket);
 
     return result;
   };
