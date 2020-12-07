@@ -1,11 +1,12 @@
 @import 'src/assets/styles/helper';
 @import 'src/assets/styles/variables';
 
+@import './responsive';
+
 .P-product-pharmacies-availablity-modal .P-modal-content {
-  width     : 1200px;
-  padding   : 0;
-  overflow  : hidden;
-  max-width : 100%;
+  width    : 1200px;
+  padding  : 0;
+  overflow : hidden;
 
   > .P-close { color: black; }
 
@@ -53,10 +54,11 @@
         min-width : 500px;
 
         > .P-search-input {
-          top      : 20px;
-          left     : 20px;
-          z-index  : 1;
-          position : absolute;
+          top       : 20px;
+          left      : 20px;
+          z-index   : 1;
+          position  : absolute;
+          max-width : calc(100vw - 100px);
         }
 
         > .P-google-maps {
