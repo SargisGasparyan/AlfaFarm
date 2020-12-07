@@ -7,12 +7,10 @@ import AboutDelivery from './components/about-delivery';
 import AboutBonusCard from './components/about-bonus-card';
 import AboutMobileApp from './components/about-mobile-app';
 import Maps, { IMarkerProps } from 'components/maps';
-import HelperPureComponent from 'platform/classes/helper-pure-component';
-
-import './style.scss';
-import { IPharmacyBranchListResponseModel } from 'platform/api/pharmacyBranch/models/response';
 import HelperComponent from 'platform/classes/helper-component';
 import PharmacyBranchController from 'platform/api/pharmacyBranch';
+
+import './style.scss';
 
 interface IState {
   branches: IMarkerProps[];
@@ -47,7 +45,7 @@ class ContactUs extends HelperComponent<{}, IState> {
         <ShadowText className="G-text-center">{Settings.translations.contact_us}</ShadowText>
         <Form />
 
-          <Maps markers={branches} className="P-maps P-home-map" />
+        <Maps markers={branches} className="P-maps" />
 
         <div className="P-bottom">
           <AboutDelivery />

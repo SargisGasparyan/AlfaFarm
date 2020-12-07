@@ -81,7 +81,7 @@ class SearchOptions extends HelperPureComponent<IProps, IState> {
     return (
       <div className="G-page P-pharmacies-search-options">
         <ShadowText>{Settings.translations.pharmacies}</ShadowText>
-        <form className="G-main-form P-form">
+        <form className="G-main-form P-form P-">
           <div className="G-main-form-half-field">
             <Select<number>
               clear={true}
