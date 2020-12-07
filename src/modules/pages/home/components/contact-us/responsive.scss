@@ -1,6 +1,5 @@
 @media (max-width: $tablet-screen) {
   .G-page.P-home-contact-us {
-
     .P-shadow-text {
       font-size : 24px;
     }
@@ -15,6 +14,12 @@
 @media (max-width: $medium-screen) {
   .G-page.P-home-contact-us .P-maps {
     width  : 100% !important;
-    margin : 130px auto 110px !important;
+    margin : 130px auto 0 !important;
+  }
+}
+
+@media (max-width: $mobile-screen) {
+  .G-page.P-home-contact-us > div.P-bottom {
+    padding-bottom : 0;
   }
 }

@@ -31,7 +31,6 @@ class SavedBasketItems extends HelperComponent<RouteComponentProps<IRouteParams>
 
   public componentDidMount() {
     this.fetchData();
-    window.addEventListener(DispatcherChannels.UserConfirmed, () => this.deleteSaved());
   }
 
   private fetchData = async () => {
@@ -43,11 +42,11 @@ class SavedBasketItems extends HelperComponent<RouteComponentProps<IRouteParams>
   private deleteSaved = async () => {
     const { id } = this.props.match.params;
     const result = await BasketController.DeleteSaved(+id);
-    result.success && this.goBack();
+    if (result && result.success) {
+      this.goBack();
+    }
   }
-  private confirmDelete = () => {
-    window.dispatchEvent(new CustomEvent(DispatcherChannels.ToggleConfirm, { detail: Settings.translations.delete_saved_product_basket }));
-  }
+
   private goBack = () => window.routerHistory.goBack();
 
   private buy = async () => {
@@ -80,7 +79,7 @@ class SavedBasketItems extends HelperComponent<RouteComponentProps<IRouteParams>
         {data ? <div className="P-profile-order-saved-basket-items">
           {window.routerHistory.length > 2 && <i className="G-back-icon icon-Group-5529" onClick={this.goBack} />}
           <Shared.Products.TableList list={data} onQuantityChange={this.changeQuantity} />
-          <button className="G-main-ghost-button G-ml-auto" onClick={this.confirmDelete}>{Settings.translations.delete}</button>
+          <button className="G-main-ghost-button G-ml-auto" onClick={this.deleteSaved}>{Settings.translations.delete}</button>
           <button className="G-main-button G-ml-20" onClick={this.buy}>{Settings.translations.buy}</button>
         </div> : <PageLoader />}
       </Layout>
