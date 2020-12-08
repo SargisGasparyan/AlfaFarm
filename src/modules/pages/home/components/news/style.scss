@@ -7,9 +7,18 @@
   padding-bottom : 100px;
   flex-direction : column;
 
-  > .P-shadow-text { margin-bottom: 130px; }
+  @media(max-width : $tablet-screen) {
+    padding-top    : 50px;
+    padding-bottom : 50px;
+  }
 
-  > .G-main-ghost-button { margin-top: 75px; }
+  > .P-shadow-text {
+    margin-bottom : 130px;
+  }
+
+  > .G-main-ghost-button {
+    margin-top : 75px;
+  }
 
   > .P-list-wrapper {
     margin          : -15px;

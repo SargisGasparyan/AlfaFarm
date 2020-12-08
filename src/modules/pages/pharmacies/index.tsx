@@ -10,6 +10,7 @@ import { IPharmacyBranchListResponseModel } from 'platform/api/pharmacyBranch/mo
 import PharmacyBranchController from 'platform/api/pharmacyBranch';
 
 import './style.scss';
+import Settings from 'platform/services/settings';
 
 interface IState {
   data?: IPharmacyBranchListResponseModel[];

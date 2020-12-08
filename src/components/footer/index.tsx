@@ -36,7 +36,7 @@ const Footer = React.memo(() => (
       {!enviroment.WHOLESALE && <>
         <div className="P-column">
           <h3 className="G-main-color">{Settings.translations.wholesale_sale}</h3>
-          <a href={Settings.wholesaleURL + ROUTES.SERVICES}>{Settings.translations.services}</a>
+          <a href={Settings.wholesaleURL + ROUTES.SERVICES} target="blank">{Settings.translations.services}</a>
         </div>
         <div className="P-column">
           <h3 className="G-main-color">{Settings.translations.retail_sale}</h3>

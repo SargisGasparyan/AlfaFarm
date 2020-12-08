@@ -39,7 +39,7 @@ class App extends HelperComponent<{}, IState> {
     confirmText: '',
   };
 
-  public async componentDidMount() {    
+  public async componentDidMount() {
     //? Library config
 
     const alertify = await import('alertifyjs');
@@ -72,7 +72,7 @@ class App extends HelperComponent<{}, IState> {
     const success = await Storage.fetchDefault();
     if (success) this.safeSetState({ initialLoading: true });
     else window.location.reload();
-    
+
     //? Check for invitation
 
     const query = new URLSearchParams(window.location.search);
@@ -84,10 +84,10 @@ class App extends HelperComponent<{}, IState> {
     const { confirmOpen } = this.state;
     this.safeSetState({ confirmOpen: !confirmOpen, confirmText: e.detail || '' });
   }
- 
+
   public render() {
     const { generalAPILoaded, initialLoading, confirmOpen, confirmText } = this.state;
-    
+
     return generalAPILoaded ? (
       <Router history={window.routerHistory}>
         {initialLoading ? <>
@@ -107,12 +107,12 @@ class App extends HelperComponent<{}, IState> {
                 path={item.path}
                 component={item.component}
               />))}
-              
+
               <Redirect to={ROUTES.HOME} />
             </Switch>
           </section>
           {confirmOpen && <ConfirmModal text={confirmText} />}
-          <Footer /> 
+          <Footer />
         </> : <PageLoader />}
       </Router>
     ) : null;

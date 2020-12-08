@@ -1,0 +1,11 @@
+@media (max-width: $tablet-screen) {
+  div.P-tender-details-images {
+    width     : 100%;
+    flex-wrap : wrap;
+
+    > .P-current-image {
+      height     : 350px;
+      min-height : initial;
+    }
+  }
+}

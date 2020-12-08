@@ -71,7 +71,6 @@ class Orders extends HelperComponent<IState, {}> {
 
     return (
       <Layout>
-        <SavedBaskets />
         <h2 className="G-main-color G-mb-30">{Settings.translations.order_history}</h2>
         <div className="G-flex P-profile-orders">
           {data && <Table<IOrderListResponseModel>

@@ -16,6 +16,7 @@ import enviroment from 'platform/services/enviroment';
 import { Shared } from 'modules';
 
 import './style.scss';
+import DispatcherChannels from 'platform/constants/dispatcher-channels';
 
 
 interface IState {
@@ -30,12 +31,19 @@ interface IRouteParams {
 @byPrivateRoute(ROUTES.PROFILE.ORDERS.DETAILS)
 class Details extends HelperComponent<RouteComponentProps<IRouteParams>, IState> {
 
-  public state: IState = { };
+  public state: IState = {};
 
   public componentDidMount() {
     this.fetchData();
+    window.addEventListener(DispatcherChannels.UserConfirmed, this.cancel);
+    window.addEventListener(DispatcherChannels.UserCanceled, this.toggleConfirm);
   }
+  public componentWillUnmount() {
+    super.componentWillUnmount();
+    window.removeEventListener(DispatcherChannels.UserConfirmed, this.cancel);
+    window.removeEventListener(DispatcherChannels.UserCanceled, this.toggleConfirm);
 
+  }
   private statusViewEnum = getViewEnum(OrderStatusEnum);
 
   private fetchData = async () => {
@@ -54,7 +62,19 @@ class Details extends HelperComponent<RouteComponentProps<IRouteParams>, IState>
       result.data && window.routerHistory.push(ROUTES.CART);
     }
   }
-
+  private toggleConfirm = () => window.dispatchEvent(new CustomEvent(DispatcherChannels.ToggleConfirm, { detail: Settings.translations.cancel_order }));
+  private cancel = async () => {
+    const { data } = this.state;
+    const alertify = await import('alertifyjs');
+    if (data) {
+      const res = await OrderController.Cancel(data?.id);
+      if (res && res.data) {
+        alertify.success(Settings.translations.order_canceled);
+        this.toggleConfirm();
+        this.fetchData();
+      } else alertify.error(res.message)
+    }
+  }
   public render() {
     const { data } = this.state;
 
@@ -64,17 +84,22 @@ class Details extends HelperComponent<RouteComponentProps<IRouteParams>, IState>
           {window.routerHistory.length > 2 && <i className="G-back-icon icon-Group-5529" onClick={this.goBack} />}
           <div className="P-main-info-block G-mr-20">
             <h2 className="G-mb-40 G-orange-color">{Settings.translations.order}</h2>
-            
+
             <h3 className="G-flex G-mb-30 G-flex-justify-between">
               {Settings.translations.date}
               <span>{formatDate(data.createdDate)}</span>
             </h3>
-            
+
+            <h3 className="G-flex G-mb-30 G-flex-justify-between">
+              {Settings.translations.status}
+              <span>{OrderStatusEnum[data.status]}</span>
+            </h3>
+
             <h3 className="G-flex G-mb-30 G-flex-justify-between">
               {Settings.translations.quantity}
               <span>{data.productQuantity}</span>
             </h3>
-            
+
             {data.deliveryDate && <h3 className="G-flex G-mb-30 G-flex-justify-between">
               {Settings.translations.delivery_date}
               <span>{formatDate(data.deliveryDate)}</span>
@@ -84,7 +109,7 @@ class Details extends HelperComponent<RouteComponentProps<IRouteParams>, IState>
               {Settings.translations.price}
               <span>{formatPrice(data.totalPrice)}</span>
             </h3>
-            
+
             <h3 className="G-flex G-mb-30 G-flex-justify-between">
               {Settings.translations.status}
               <span>{Settings.translations[this.statusViewEnum[data.status]]}</span>
@@ -122,7 +147,10 @@ class Details extends HelperComponent<RouteComponentProps<IRouteParams>, IState>
           <Shared.Products.TableList list={data.baskets} />
 
           <div className="P-actions-block">
-            <button className="G-main-button" onClick={this.repeatOrder}>
+            {data.status === OrderStatusEnum.Pending && <button className="G-main-button" onClick={this.toggleConfirm}>
+              {Settings.translations.cancel}
+            </button>}
+            <button className="G-main-button G-ml-20" onClick={this.repeatOrder}>
               {Settings.translations.buy_again}
             </button>
           </div>

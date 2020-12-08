@@ -112,12 +112,13 @@ class Connection {
     const { controller, action, body, query, noneJSONBody, withoutConfirmModal } = data;
     return new Promise(resolve => {
       const userCanceled = async () => {
+        console.log('canceled');
+        
         resolve(false);
         window.removeEventListener(DispatcherChannels.UserCanceled, userCanceled);
         window.removeEventListener(DispatcherChannels.UserConfirmed, userConfirmed);
         window.dispatchEvent(new CustomEvent(DispatcherChannels.ToggleConfirm));
       }
-
       const userConfirmed = async () => {
         const onlyQuery: boolean = (!action && query) as boolean;
         const HEADERS = Connection.createHeaders(false);

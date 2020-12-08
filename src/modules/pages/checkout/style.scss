@@ -37,20 +37,22 @@
         flex        : 1;
         width       : 100%;
         display     : flex;
-        justify-content: space-between;
         min-width   : 400px;
         align-items: center;
         > h4 {
           color          : $text-gray;
           white-space    : nowrap;
           margin-right   : 20px;
-          margin-bottom: 15px;
           @include normal-font;
         }
         > div {
           display     : flex;
           align-items : center;
           margin-top  : 20px;
+          width: 100% !important;
+          > div {
+            width: 100%;
+          }
           > span {
             color  : $text-gray;
             margin : 0 10px;

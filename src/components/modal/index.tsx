@@ -16,12 +16,12 @@ interface IProps {
 
 class Modal extends HelperComponent<IProps, {}> {
   public componentDidMount() {
-    // document.body.style.overflowY = 'hidden';
+    document.body.style.overflowY = 'hidden';
   }
 
   public componentWillUnmount() {
     super.componentWillUnmount();
-    // document.body.style.overflowY = 'initial';
+    document.body.style.overflowY = 'initial';
   }
 
   private close = (e: MouseEvent | React.SyntheticEvent<HTMLElement>) => {
