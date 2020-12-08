@@ -5,6 +5,7 @@
   width           : 100%;
   border          : 1px solid $light-gray;
   display         : flex;
+  overflow        : hidden;
   min-height      : 280px;
   background      : white;
   align-items     : center;
@@ -21,6 +22,7 @@
     flex            : 1;
     color           : black;
     height          : 100%;
+    margin          : 10px 0;
     padding         : 30px 50px;
     display         : flex;
     flex-direction  : column;
@@ -39,11 +41,17 @@
     > div {
       display         : flex;
       margin-top      : auto;
+      flex-wrap       : wrap;
       justify-content : space-between;
 
-      > h3 { @include normal-font; }
+      > h3 {
+        @include normal-font;
+        display     : flex;
+        align-items : center;
+      }
 
       > .G-main-button {
+        margin          : 10px 0;
         padding         : 7px 30px;
         text-decoration : none;
       }
