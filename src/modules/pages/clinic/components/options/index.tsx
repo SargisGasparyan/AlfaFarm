@@ -31,7 +31,7 @@ class Options extends HelperPureComponent<{}, {}> {
         <Link to={ROUTES.CLINIC.DOCTORS} onClick={this.linkClicked} className="G-main-ghost-button">{Settings.translations.doctors}</Link>
         <Link to={ROUTES.CLINIC.LABORATORY} onClick={this.linkClicked} className="G-main-ghost-button">{Settings.translations.laboratory}</Link>
         <Link to={ROUTES.CLINIC.PRICE_LIST} onClick={this.linkClicked} className="G-main-ghost-button">{Settings.translations.price_list}</Link>
-        <Link to={ROUTES.CLINIC.ABOUT_US} onClick={this.linkClicked} className="G-main-ghost-button">{Settings.translations.about_us}</Link>
+        <Link to={ROUTES.CLINIC.ABOUT_US} onClick={this.linkClicked} className="G-main-ghost-button">{Settings.translations.about_clinic}</Link>
 
         {!RouteService.isRoute(ROUTES.CLINIC.MAIN) && <div className="P-cardiogram">
           <img src={CardiogramRed} />
