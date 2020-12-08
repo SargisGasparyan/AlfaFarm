@@ -45,6 +45,15 @@ class OrderController {
 
     return result;
   };
+  public static Cancel = (id: number): Promise<IResponse<boolean>> => {
+    const result = Connection.PUT<{}>({
+      body: {},
+      action: `cancel/${id}`,
+      controller: OrderController.controller
+    });
+
+    return result;
+  }
 };
 
 export default OrderController;

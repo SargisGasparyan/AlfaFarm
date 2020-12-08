@@ -78,9 +78,8 @@ class BasketController {
     const result = Connection.DELETE<{}>({
       body: {},
       action: `${productId}/${isPackage}`,
-      controller: BasketController.controller,
-      withoutConfirmModal: true,
-    });
+      controller: BasketController.controller
+    }, Settings.translations.delete_product_from_basket);
 
     return result;
   };

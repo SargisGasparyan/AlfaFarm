@@ -11,6 +11,7 @@ import { getMediaPath, formatPrice } from 'platform/services/helper';
 import { IFavoriteListResponseModel } from 'platform/api/favorite/models/response';
 
 import './style.scss';
+import SavedBaskets from '../orders/components/saved-baskets';
 
 interface IState {
   data: IFavoriteListResponseModel[];
@@ -46,6 +47,8 @@ class Favorites extends HelperComponent<IState, {}> {
 
     return (
       <Layout>
+        <SavedBaskets />
+
         <div className="G-flex P-profile-favorites">
           {data.map((item, index) => <Link
             to={ROUTES.PRODUCTS.DETAILS.replace(':id', item.id)}

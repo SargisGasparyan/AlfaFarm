@@ -29,9 +29,8 @@ interface IState {
 class Cart extends HelperComponent<{}, IState> {
 
   public state: IState = {
-    cartSaved: false,
+    cartSaved: false
   };
-
   private columnConfig = [
     {
       name: Settings.translations.product,
@@ -61,10 +60,26 @@ class Cart extends HelperComponent<{}, IState> {
       style: { minWidth: 150, maxWidth: 150 },
       cell: (row: IBasketListResponseModel) => <h3 className="G-fs-24">{formatPrice(row.price * row.productQuantity)}</h3>,
     },
+    {
+      name: '',
+      style: { maxWidth: 70 },
+      cell: (row: IBasketListResponseModel) => <div className="P-basket-remove-item">
+        <i className="icon-Group-5032 G-orange-color G-cursor-pointer G-fs-24" onClick={() => this.deleteBasketItem(row)} />
+      </div>
+    }
   ];
-
-  public componentDidMount() { this.fetchData(); }
-
+  public componentDidMount() {
+    this.fetchData();
+    this.updateBasketCount();
+  }
+  private deleteBasketItem = async (item: IBasketListResponseModel) => {
+    const result = await BasketController.Delete(item.productId, item.isPackage);
+    if (result.success) {
+      this.updateBasketCount();
+      this.fetchData();
+    }
+  }
+  private updateBasketCount = () => window.dispatchEvent(new CustomEvent(DispatcherChannels.CartItemsUpdate));
   private fetchData = async () => {
     const result = await BasketController.GetList();
     this.safeSetState({ data: result.data });
@@ -85,6 +100,7 @@ class Cart extends HelperComponent<{}, IState> {
     } else {
       modifyResult = await BasketController.Delete(row.productId, row.isPackage);
       data && data.items.splice(index, 1);
+      this.updateBasketCount();
     }
 
     if (data && modifyResult.data) {
@@ -118,7 +134,13 @@ class Cart extends HelperComponent<{}, IState> {
       <section className="G-page P-cart-page">
         {data ? <>
           {data.items.length ? <>
-            <h1 className="G-fs-26 G-mb-40 G-full-width">{Settings.translations.cart}</h1>
+            <div className="G-flex G-flex-justify-between G-flex-align-center G-mb-40 G-full-width">
+              <h1 className="G-fs-26 G-full-width">{Settings.translations.cart}</h1>
+              {/* <button
+                className="G-main-button G-ml-auto G-fs-normal P-pay-button"
+                onClick={this.clearAllConfirm}
+              >{Settings.translations.clear_basket}</button> */}
+            </div>
             <Table<IBasketListResponseModel>
               className="P-table G-full-width"
               columnConfig={this.columnConfig}
@@ -128,7 +150,7 @@ class Cart extends HelperComponent<{}, IState> {
             <div className="P-data-block">
               <div>
                 <span className="G-fs-normal">{Settings.translations.total}</span>
-                <h1 className="G-orange-color G-fs-24 G-mt-5">{data.totalPrice} &#1423;</h1>
+                <h1 className="G-orange-color G-fs-24 G-mt-5">{formatPrice(data.totalPrice)}</h1>
               </div>
             </div>
 
