@@ -18,7 +18,7 @@ import PlaceController from 'platform/api/place';
 import { IDropdownOption, IGooglePlace } from 'platform/constants/interfaces';
 import { validateForm } from './services/helper';
 
-import { formatDate } from 'platform/services/helper';
+import { formatDate, formatPrice } from 'platform/services/helper';
 import ChooseAddress from './components/choose-address';
 import { IUserAddressListResponseModel } from 'platform/api/userAddress/models/response';
 import OrderController from 'platform/api/order';
@@ -40,6 +40,7 @@ interface IState {
   chooseAddressOpen: boolean;
   successModalOpen: boolean;
   isPayment: boolean;
+  total: number | null;
 };
 
 @byRoute(ROUTES.CHECKOUT)
@@ -57,7 +58,8 @@ class Checkout extends HelperComponent<{}, IState> {
       deliveryType: OrderDeliveryTypeEnum.Delivery,
       paymentType: PaymentType.Cash
     },
-    isPayment: false
+    isPayment: false,
+    total: null
   };
 
   private get formValidation() {
@@ -74,9 +76,14 @@ class Checkout extends HelperComponent<{}, IState> {
       form.email = Storage.profile.email;
       this.safeSetState({ form });
     }
+    this.getTotalPrice();
   }
-
-  private changeField = (e: React.SyntheticEvent<HTMLInputElement>) => {
+  private getTotalPrice = () => {
+    const query = new URLSearchParams(window.location.search);
+    const price = query.get('total');
+    price && this.safeSetState({ total: +price });
+  }
+  private changeField = (e: React.SyntheticEvent<any>) => {
     const { form } = this.state;
     form[e.currentTarget.name] = e.currentTarget.value;
     this.safeSetState({ form });
@@ -185,7 +192,7 @@ class Checkout extends HelperComponent<{}, IState> {
     });
   }
   private Payment = () => {
-    const { form, submitLoading } = this.state;
+    const { form, submitLoading, total } = this.state;
     return <div className="P-choose-payment-type-section">
       <div className="P-payment-types">
         <div>
@@ -204,7 +211,7 @@ class Checkout extends HelperComponent<{}, IState> {
           </Radio>
         </div>
       </div>
-      <p>{Settings.translations.total} 15,000 {currency}</p>
+      {total && <p>{Settings.translations.total} {formatPrice(total)}</p>}
       <div className="P-choose-payment-buttons">
         <LoaderContent
           className="G-main-button"
@@ -317,15 +324,6 @@ class Checkout extends HelperComponent<{}, IState> {
             </div>
           </div>
           <div className="P-delivery-form G-half-width">
-            <div className="G-main-form-field">
-              <input
-                name="comment"
-                value={form.comment || ''}
-                className="G-main-input"
-                placeholder={Settings.translations.comment}
-                onChange={this.changeField}
-              />
-            </div>
             <div className="G-main-form-field G-phone-input-wrapper P-checkout-select">
               <Select<OrderDeliveryTypeEnum>
                 options={OrderDeliveryTypeDropdown()}
@@ -336,7 +334,6 @@ class Checkout extends HelperComponent<{}, IState> {
             </div>
 
             {form.deliveryType === OrderDeliveryTypeEnum.Delivery && <div className="P-delivery-date G-flex G-align-center">
-              <h4 className="G-fs-normal">{Settings.translations.delivery_date}</h4>
                 <div className="G-main-form-half-field">
                   <DateTime
                     onChange={this.dateFromChange}
@@ -345,7 +342,7 @@ class Checkout extends HelperComponent<{}, IState> {
                       value: form.deliveryDateFrom ? formatDate(form.deliveryDateFrom, true) : '',
                       readOnly: true,
                       className: `G-main-input ${this.formValidation.errors.deliveryDateFrom ? 'G-invalid-field' : ''}`,
-                      placeholder: '00:00',
+                      placeholder: Settings.translations.delivery_date,
                     }}
                   />
                 </div>
@@ -362,6 +359,15 @@ class Checkout extends HelperComponent<{}, IState> {
                   />
                 </div> */}
             </div>}
+            <div className="G-main-form-field P-comment-field">
+              <textarea
+                name="comment"
+                value={form.comment || ''}
+                className="G-main-input"
+                placeholder={Settings.translations.comment}
+                onChange={this.changeField}
+              />
+            </div>
           </div>
 
           <div className="G-flex G-flex-column">

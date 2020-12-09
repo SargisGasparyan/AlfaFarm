@@ -60,7 +60,15 @@ class Images extends HelperPureComponent<IProps, IState> {
       isFavorite: !data.isFavorite,
     });
   }
+  private zoom = (e: React.MouseEvent) => {
+    const zoomer = e.currentTarget as HTMLElement;
+    const offsetX = e.nativeEvent.offsetX;
+    const offsetY = e.nativeEvent.offsetY;
 
+    const x = offsetX / zoomer.offsetWidth * 100;
+    const y = offsetY / zoomer.offsetHeight * 100;
+    zoomer.style.backgroundPosition = x + '% ' + y + '%';
+  }
   public render() {
     const { data } = this.props;
     const { activeId } = this.state;
@@ -69,9 +77,9 @@ class Images extends HelperPureComponent<IProps, IState> {
 
     return (
       <div className="P-product-details-images">
-        {!!data.discountedPrice && <Shared.Products.DiscountLabel percent={-Math.round(100 - (100 / data.price * data.discountedPrice))}/>}
+        {!!data.promotion.percent && <Shared.Products.DiscountLabel percent={data.promotion.percent} type={data.promotion.promotionType} />}
         <div className="P-current-image">
-          <div>
+          <div onMouseMove={this.zoom} style={{ backgroundImage: `url("${this.activeImage}")` }} className="I-zoomable-image">
             <img src={getMediaPath(this.activeImage)} />
           </div>
 

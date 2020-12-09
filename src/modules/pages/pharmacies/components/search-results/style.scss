@@ -81,7 +81,37 @@
             }
           }
         }
+
       }
+    }
+  }
+}
+.P-home-info-window {
+  width   : 320px;
+  padding : 10px 20px;
+
+  > h3 {
+    font-size : 22px;
+    @include normal-font;
+  }
+
+  > .P-info-row {
+    display     : flex;
+    font-size   : 18px;
+    margin-top  : 20px;
+    @include normal-font;
+
+    > i {
+      font-size    : 26px;
+      margin-right : 20px;
+    }
+
+    span {
+
+      display    : block;
+      margin-top : 10px;
+
+      &:first-of-type { margin-top: 0; }
     }
   }
 }

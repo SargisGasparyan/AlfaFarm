@@ -124,7 +124,7 @@ class Cart extends HelperComponent<{}, IState> {
       await BasketController.Save(basketIds);
     }
 
-    window.routerHistory.push(ROUTES.CHECKOUT);
+    window.routerHistory.push(`${ROUTES.CHECKOUT}?total=${data?.totalPrice}`);
   }
 
   public render() {

@@ -9,6 +9,7 @@ export interface IProductListResponseModel {
   isFavorite: boolean;
   discount?: number;
   imagePath?: string;
+  promotion: IPromotionModel;
   unitName: string;
   unitQuantity: number;
 };
@@ -23,6 +24,7 @@ export interface IProductDetailsResponseModel {
   price: number;
   discountedPrice?: number;
   discount?: number;
+  promotion: IPromotionModel;
   unitName: string;
   discountedPackagePrice: number;
   unitQuantity: number;
@@ -32,7 +34,11 @@ export interface IProductDetailsResponseModel {
   brand: IProductDetailsCategoryResponseModel;
   activeIngredients: IProductDetailsActiveIngredientResponseModel[];
 }
-
+export interface IPromotionModel {
+  percent: number;
+  promotionType: number;
+  result: number;
+}
 export interface IProductDetailsCategoryResponseModel {
   id: number;
   name: string;

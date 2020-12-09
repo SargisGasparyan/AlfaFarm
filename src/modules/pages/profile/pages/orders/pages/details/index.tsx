@@ -72,6 +72,7 @@ class Details extends HelperComponent<RouteComponentProps<IRouteParams>, IState>
         alertify.success(Settings.translations.order_canceled);
         this.toggleConfirm();
         this.fetchData();
+        window.routerHistory.goBack();
       } else alertify.error(res.message)
     }
   }
