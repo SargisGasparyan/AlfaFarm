@@ -64,7 +64,7 @@ class Cart extends HelperComponent<{}, IState> {
       name: '',
       style: { maxWidth: 70 },
       cell: (row: IBasketListResponseModel) => <div className="P-basket-remove-item">
-        <i className="icon-Group-5032 G-orange-color G-cursor-pointer G-fs-24" onClick={() => this.deleteBasketItem(row)} />
+        <i className="icon-Group-5032 G-orange-color G-cursor-pointer G-fs-18" onClick={() => this.deleteBasketItem(row)} />
       </div>
     }
   ];

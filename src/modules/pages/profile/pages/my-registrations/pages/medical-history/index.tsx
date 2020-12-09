@@ -14,6 +14,7 @@ import { IMedicalServiceListResponseModel } from 'platform/api/medicalHistory/mo
 
 import './style.scss';
 import PageLoader from 'components/page-loader';
+import EmptyState from 'components/empty-state';
 
 
 interface IState {
@@ -75,7 +76,7 @@ class MedicalHistory extends HelperComponent<IState, {}> {
             <Link to={ROUTES.PROFILE.MY_REGISTRATIONS.MAIN}>{Settings.translations.my_registrations}</Link>
             <span>{Settings.translations.medical_history}</span>
           </h2>
-          {data ? data.map(item => <div key={item.id} className="P-list-item">
+          {data && data.length ? data.map(item => <div key={item.id} className="P-list-item">
             <div className="P-main-info">
               <h3>{Settings.translations.date}</h3>
               <span>{formatDate(item.createdDate)}</span>
@@ -92,7 +93,7 @@ class MedicalHistory extends HelperComponent<IState, {}> {
                 className="P-image"
               />)}
             </div>
-          </div>) : <PageLoader />}          
+          </div>) : <EmptyState text={Settings.translations.empty_medical_history} />}          
         </section>
       </Layout>
     );

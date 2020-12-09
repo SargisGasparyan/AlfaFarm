@@ -33,8 +33,8 @@ const ConfirmModal = React.memo(({ text, onClose, onConfirm }: IProps) => {
         <h2>{Settings.translations.are_you_sure}</h2>
         <p>{text || Settings.translations.confirm_description}</p>
         <div className="G-flex">
-        <span onClick={close}>{Settings.translations.cancel}</span>
-        <LoaderContent loading={loading} onClick={confirm} className="G-form-button">{Settings.translations.confirm}</LoaderContent>
+        <span onClick={close}>{Settings.translations.no}</span>
+        <LoaderContent loading={loading} onClick={confirm} className="G-form-button">{Settings.translations.yes}</LoaderContent>
         </div>
       </div>
     </Modal>

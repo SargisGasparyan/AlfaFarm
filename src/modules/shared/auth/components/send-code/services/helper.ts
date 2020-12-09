@@ -5,12 +5,12 @@ export function validateForm(this: ISendCodeRequestModel, submited?: boolean) {
   let valid = true;
 
   const errors = {
-    phoneNumber: false,
+    number: false,
     password: false,
   };
 
-  if (submited && !isValidPhone(this.phoneNumber)) {
-    errors.phoneNumber = true;
+  if (submited && !isValidPhone(this.number)) {
+    errors.number = true;
     valid = false;
   }
 

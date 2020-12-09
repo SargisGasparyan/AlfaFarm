@@ -326,7 +326,7 @@ class Checkout extends HelperComponent<{}, IState> {
                 onChange={this.changeField}
               />
             </div>
-            <div className="G-main-form-field G-phone-input-wrapper">
+            <div className="G-main-form-field G-phone-input-wrapper P-checkout-select">
               <Select<OrderDeliveryTypeEnum>
                 options={OrderDeliveryTypeDropdown()}
                 className="G-main-select"
@@ -335,7 +335,7 @@ class Checkout extends HelperComponent<{}, IState> {
               />
             </div>
 
-            {form.deliveryType === OrderDeliveryTypeEnum.Delivery && <div className="P-delivery-date G-flex G-align-center">
+            <div className="P-delivery-date G-flex G-align-center">
               <h4 className="G-fs-normal">{Settings.translations.delivery_date}</h4>
                 <div className="G-main-form-half-field">
                   <DateTime
@@ -361,7 +361,7 @@ class Checkout extends HelperComponent<{}, IState> {
                     }}
                   />
                 </div> */}
-            </div>}
+            </div>
           </div>
 
           <div className="G-flex G-flex-column">
