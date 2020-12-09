@@ -29,7 +29,7 @@ interface IState {
 class Info extends HelperComponent<IProps, IState> {
 
   public state: IState = {
-    count: 0,
+    count: 1,
     cartLoading: false,
     pharmaciesAvailablityOpen: false,
     havePackage: false
@@ -125,12 +125,12 @@ class Info extends HelperComponent<IProps, IState> {
         <p className="P-description">{data.description}</p>
         <div className="P-count-info"><this.UnitCount /></div>
         <div className="P-cart-actions">
-          {!!count && <CountInput
+          <CountInput
             min={0}
             step={1}
             value={count}
             onChange={this.onCountChange}
-          />}
+          />
 
           <LoaderContent
             loading={cartLoading}

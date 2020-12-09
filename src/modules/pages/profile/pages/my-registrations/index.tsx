@@ -17,6 +17,7 @@ import Pagination from 'components/pagination';
 import MedicalHistory from './pages/medical-history';
 
 import './style.scss';
+import EmptyState from 'components/empty-state';
 
 interface IState {
   data?: IPagingResponse<IClinicRegistrationListResponseModel>;
@@ -65,10 +66,10 @@ class MyRegistrations extends HelperComponent<IState, {}> {
             <Link to={ROUTES.PROFILE.MY_REGISTRATIONS.MEDICAL_HISTORY}>{Settings.translations.medical_history}</Link>
           </h2>
           <div className="G-flex P-list">
-            {data && <Table<IClinicRegistrationListResponseModel>
+            {data && data.list.length ? <Table<IClinicRegistrationListResponseModel>
               columnConfig={this.columnConfig}
               data={data.list}
-            />}
+            /> : <EmptyState text={Settings.translations.empty_registrations_list} />}
           </div>
           
           <Pagination<IClinicRegistrationListResponseModel> fetchData={this.fetchData} />

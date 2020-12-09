@@ -12,6 +12,7 @@ import { IFavoriteListResponseModel } from 'platform/api/favorite/models/respons
 
 import './style.scss';
 import SavedBaskets from '../orders/components/saved-baskets';
+import EmptyState from 'components/empty-state';
 
 interface IState {
   data: IFavoriteListResponseModel[];
@@ -44,13 +45,11 @@ class Favorites extends HelperComponent<IState, {}> {
 
   public render() {
     const { data } = this.state;
-
     return (
       <Layout>
         <SavedBaskets />
-
         <div className="G-flex P-profile-favorites">
-          {data.map((item, index) => <Link
+          {data.length ? data.map((item, index) => <Link
             to={ROUTES.PRODUCTS.DETAILS.replace(':id', item.id)}
             key={item.id}
             className="P-list-item"
@@ -71,7 +70,7 @@ class Favorites extends HelperComponent<IState, {}> {
             </div>
 
             <h2 className="P-price">{formatPrice(item.price)}</h2>
-          </Link>)}
+          </Link>) : <EmptyState text={Settings.translations.empty_favorites_list} />}
         </div>
       </Layout>
     );

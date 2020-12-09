@@ -5,6 +5,8 @@ import { byPrivateRoute } from 'platform/decorators/routes';
 import ROUTES from 'platform/constants/routes';
 import { onlyForUsers } from 'platform/guards/routes';
 import Layout from '../../components/layout';
+import EmptyState from 'components/empty-state';
+import Settings from 'platform/services/settings';
 
 @byPrivateRoute(ROUTES.PROFILE.MY_WALLET, [onlyForUsers])
 class MyWallet extends HelperComponent<{}, {}> {
@@ -14,6 +16,7 @@ class MyWallet extends HelperComponent<{}, {}> {
     return (
       <Layout>
         {/* */}
+        <EmptyState text={Settings.translations.no_lists} />
       </Layout>
     );
   }

@@ -19,6 +19,7 @@ import { paginationPageLimit } from 'platform/constants';
 import { IPagingResponse } from 'platform/constants/interfaces';
 
 import './style.scss';
+import EmptyState from 'components/empty-state';
 
 interface IState {
   data?: IPagingResponse<IOrderListResponseModel>;
@@ -73,11 +74,11 @@ class Orders extends HelperComponent<IState, {}> {
       <Layout>
         <h2 className="G-main-color G-mb-30">{Settings.translations.order_history}</h2>
         <div className="G-flex P-profile-orders">
-          {data && <Table<IOrderListResponseModel>
+          {data && data.list.length ? <Table<IOrderListResponseModel>
             redirectUrl={row => ROUTES.PROFILE.ORDERS.DETAILS.replace(':id', row.id)}
             columnConfig={this.columnConfig}
             data={data.list}
-          />}
+          /> : <EmptyState text={Settings.translations.empty_orders_list} />}
         </div>
         <Pagination<IOrderListResponseModel> fetchData={this.fetchData} />
       </Layout>

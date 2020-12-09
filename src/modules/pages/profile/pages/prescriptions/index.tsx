@@ -19,6 +19,7 @@ import { PrescriptionStatusEnum } from 'platform/api/prescription/constants/enum
 import Pagination from 'components/pagination';
 
 import './style.scss';
+import EmptyState from 'components/empty-state';
 
 interface IState {
   data?: IPagingResponse<IPrescriptionListResponseModel>;
@@ -89,10 +90,10 @@ class Prescriptions extends HelperComponent<IState, {}> {
               </Link>
             </h3>
             
-            {data && <Table<IPrescriptionListResponseModel>
+            {data && data.list.length ? <Table<IPrescriptionListResponseModel>
               columnConfig={this.columnConfig}
               data={data.list}
-            />}
+            /> : <EmptyState text={Settings.translations.empty_prescriptions_list} />}
           </div>
           
           <Pagination<IPrescriptionListResponseModel> fetchData={this.fetchData} />
