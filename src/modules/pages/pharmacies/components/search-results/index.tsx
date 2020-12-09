@@ -74,11 +74,11 @@ class SearchResults extends HelperComponent<IProps, IState> {
 
         <div className="P-content">
           <div className="P-list">
-            {this.data.map((item, index) => <h3
+            {this.data.length ? this.data.map((item, index) => <h3
               key={item.id}
               onMouseOver={() => this.toggleMarker(index)}
               onMouseOut={() => this.toggleMarker()}
-            >{item.name}</h3>)}
+            >{item.name}</h3>) : <h3>{Settings.translations.no_search_result}</h3>}
           </div>
 
 

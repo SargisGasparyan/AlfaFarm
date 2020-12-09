@@ -54,7 +54,7 @@ const ListItem = React.memo((props: IProps) => {
 
       <h3>{truncateText(data.title)}</h3>
       
-      <div className="P-price">
+      <div className="P-price" onClick={(e: React.SyntheticEvent) => e.preventDefault()}>
         <span>{formatPrice(data.discountedPrice || data.price)}</span>
         <CountInput
           step={1}

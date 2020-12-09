@@ -75,7 +75,9 @@ class DetailsForm extends HelperComponent<{}, IState> {
   }
   private isValidDate = (date: moment.Moment) => {
     const invalidDate = new Date();
-    return !date.isSameOrAfter(invalidDate);
+    const minDate = new Date();
+    const minDateFormat = minDate.setFullYear(1920);
+    return !date.isSameOrAfter(invalidDate) && date.isSameOrAfter(minDateFormat);
   }
   public render() {
     const { form, edited, submitLoading } = this.state;

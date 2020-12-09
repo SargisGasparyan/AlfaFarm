@@ -79,11 +79,11 @@ class PharmaciesAvailablity extends HelperComponent<IProps, IState> {
           <Screen.Desktop>
             {(match: boolean) => match && <div className="P-list">
               <h2>{Settings.translations.availability_at_the_nearest_pharmacy}</h2>
-              {this.filteredData.map((item, index) => <h3
+              {this.filteredData.length ? this.filteredData.map((item, index) => <h3
                 key={item.id}
                 onMouseOver={() => this.toggleMarker(index)}
                 onMouseOut={() => this.toggleMarker()}
-              >{item.name}</h3>)}
+              >{item.name}</h3>) : <h3>{Settings.translations.no_search_result}</h3>}
             </div>}
           </Screen.Desktop>
 

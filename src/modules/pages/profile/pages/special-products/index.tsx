@@ -12,6 +12,7 @@ import UserController from 'platform/api/user';
 import Settings from 'platform/services/settings';
 
 import './style.scss';
+import EmptyState from 'components/empty-state';
 
 interface IState {
   data: IPreferredProductListResponseModel[];
@@ -49,7 +50,7 @@ class SpecialProducts extends HelperComponent<IState, {}> {
     return (
       <Layout>
         <div className="G-flex P-profile-special-products">
-          {data.map(item => <Link
+          {data.length ? data.map(item => <Link
             to={ROUTES.PRODUCTS.DETAILS.replace(':id', item.id)}
             key={item.id}
             className="P-list-item"
@@ -71,7 +72,7 @@ class SpecialProducts extends HelperComponent<IState, {}> {
             >
               <i className="icon-Group-5545" />
             </span>
-          </Link>)}
+          </Link>) : <EmptyState text={Settings.translations.empty_special_products} />}
         </div>
       </Layout>
     );

@@ -152,7 +152,7 @@ class Doctors extends HelperComponent<{}, {}> {
         <Options />
         <h1 id="clinic-page-start" className="G-main-color G-page-title">
           {Settings.translations.doctors}
-          <SearchInput withSubmit={true} onSubmit={this.search} />
+          <SearchInput onChange={this.search} />
         </h1>
         <div className="P-content">
           {data ? data.map(item => <div key={item.id} className="P-item">

@@ -28,7 +28,7 @@ interface IState {
 class Info extends HelperComponent<IProps, IState> {
 
   public state: IState = {
-    count: 0,
+    count: 1,
     cartLoading: false,
     pharmaciesAvailablityOpen: false,
     havePackage: false
@@ -89,12 +89,12 @@ class Info extends HelperComponent<IProps, IState> {
   private get defaultPrice() {
     const { data } = this.props;
     const { havePackage } = this.state;
-    if (havePackage) return data.packagePrice || null;
+    if (havePackage) return data.packagePrice;
     return data.price;
   }
   public render() {
     const { data } = this.props;
-    const { count, cartLoading, pharmaciesAvailablityOpen, havePackage } = this.state;
+    const { count, cartLoading, pharmaciesAvailablityOpen } = this.state;
 
     return (
       <div className="P-product-details-info">
@@ -124,12 +124,12 @@ class Info extends HelperComponent<IProps, IState> {
         <p className="P-description">{data.description}</p>
         <div className="P-count-info"><this.UnitCount /></div>
         <div className="P-cart-actions">
-          {!!count && <CountInput
+          <CountInput
             min={0}
             step={1}
             value={count}
             onChange={this.onCountChange}
-          />}
+          />
 
           <LoaderContent
             loading={cartLoading}
@@ -138,7 +138,10 @@ class Info extends HelperComponent<IProps, IState> {
           >{Settings.translations.add_to_cart}</LoaderContent>
 
           {pharmaciesAvailablityOpen && <PharmaciesAvailablity onClose={this.togglePharmaciesAvailablity} data={data} />}
-          <span className="G-orange-color P-price"><del>{!!this.defaultPrice && formatPrice(this.defaultPrice)}</del> {formatPrice(this.price)}</span>
+          <span className="G-orange-color P-price">
+            <del>{this.defaultPrice > this.price && formatPrice(this.defaultPrice)}</del>
+            {formatPrice(this.price)}
+          </span>
         </div>
       </div>
     );

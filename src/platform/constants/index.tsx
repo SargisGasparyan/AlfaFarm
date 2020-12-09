@@ -4,7 +4,7 @@ export const currency = <>&#1423;</>;
 export const paginationPageLimit = 10;
 export const infinityScrollPageLimit = 30;
 export const infinityScrollMax = 200;
-export const googlePlacesTypes = ['geocode', 'establishment'];
+export const googlePlacesTypes = ['geocode', 'establishment', 'street_address', 'street_number', 'city_hall'];
 export const geolocation = { lat: 40.1792, lng: 44.4991 };
 export const googlePlacesRestrictions = { country: ['am', 'az'] };
 //* az - only for choosing places in Arcakh.
