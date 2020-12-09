@@ -112,13 +112,12 @@ class Connection {
     const { controller, action, body, query, noneJSONBody, withoutConfirmModal } = data;
     return new Promise(resolve => {
       const userCanceled = async () => {
-        console.log('canceled');
-        
         resolve(false);
         window.removeEventListener(DispatcherChannels.UserCanceled, userCanceled);
         window.removeEventListener(DispatcherChannels.UserConfirmed, userConfirmed);
         window.dispatchEvent(new CustomEvent(DispatcherChannels.ToggleConfirm));
       }
+
       const userConfirmed = async () => {
         const onlyQuery: boolean = (!action && query) as boolean;
         const HEADERS = Connection.createHeaders(false);
@@ -138,9 +137,12 @@ class Connection {
           !data.unabortable && window.abortableRequests.splice(window.abortableRequests.indexOf(abort), 1);
           resolve({ aborted: true });
         }
-        window.dispatchEvent(new CustomEvent(DispatcherChannels.ToggleConfirm, { detail: confirmQuestion }));
-        window.removeEventListener(DispatcherChannels.UserCanceled, userCanceled);
-        window.removeEventListener(DispatcherChannels.UserConfirmed, userConfirmed);
+
+        if (!withoutConfirmModal) {
+          window.dispatchEvent(new CustomEvent(DispatcherChannels.ToggleConfirm, { detail: confirmQuestion }));
+          window.removeEventListener(DispatcherChannels.UserCanceled, userCanceled);
+          window.removeEventListener(DispatcherChannels.UserConfirmed, userConfirmed);  
+        }
       }
 
       if (!withoutConfirmModal) {
