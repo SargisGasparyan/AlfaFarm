@@ -11,13 +11,8 @@
   flex-direction : column;
   overflow       : hidden;
 
-
   > .P-shadow-text {
     margin-bottom : 90px;
-
-    @media (max-width : 1400px) {
-    font-size: 40px;
-    }
   }
 
   > .P-content {
@@ -89,28 +84,7 @@
             }
           }
         }
-      }
-    }
-  }
-}
 
-
-
-@media(max-width:990.98px ){
-  .P-pharmacies-search-results{
-    min-height: auto !important;
-    height : auto !important;
-    .P-content{
-      flex-direction: column;
-    }
-
-    .P-maps-wrapper{
-      width: 100% !important;
-      height: 300px !important;
-      min-width: auto !important;
-
-      .P-search-input{
-       width: 80vw;
       }
     }
   }

@@ -16,6 +16,7 @@ import PriceRange from './components/price-range';
 import './style.scss';
 import Settings from 'platform/services/settings';
 import Screen from 'components/screen';
+import CheckBox from 'rc-checkbox';
 
 interface IProps {
   onChange(): void;
@@ -69,6 +70,7 @@ class Filter extends HelperComponent<IProps, IState> {
     query.delete('producerIds');
     query.delete('minPrice');
     query.delete('maxPrice');
+    query.delete('hasDiscount');
 
     window.routerHistory.replace(`${ROUTES.PRODUCTS.MAIN}?${query.toString()}`);
     window.scrollTo(0, 0);
@@ -98,6 +100,20 @@ class Filter extends HelperComponent<IProps, IState> {
     this.safeSetState({ mobileOpen: !mobileOpen });
   }
 
+  private toggleDiscount = () => {
+    const { body } = this.state;
+    const { onChange } = this.props;
+
+    body.hasDiscount = !body.hasDiscount;
+    const query = new URLSearchParams(window.location.search);
+
+    if (body.hasDiscount) query.set('hasDiscount', 'true');
+    else query.delete('hasDiscount');
+
+    window.routerHistory.replace(`${ROUTES.PRODUCTS.MAIN}?${query.toString()}`);
+    this.safeSetState({ body }, onChange);
+  }
+
   public render() {
     const { mobileOpen } = this.state;
 
@@ -122,6 +138,12 @@ class Filter extends HelperComponent<IProps, IState> {
           className="P-main-category"
         >{item.name}</h2>) : <>
           <PriceRange body={body} onChange={this.bodyChange} />
+
+          <label className="P-discount-label">
+            <CheckBox checked={body.hasDiscount} onChange={this.toggleDiscount} />
+            {Settings.translations.sale}
+          </label>
+
           <div className="P-row-wrap">
             <Brands body={body} onChange={this.bodyChange} />
           </div>

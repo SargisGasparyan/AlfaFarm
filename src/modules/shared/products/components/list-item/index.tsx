@@ -44,7 +44,7 @@ const ListItem = React.memo((props: IProps) => {
 
   return (
     <Link className="P-products-list-item" to={ROUTES.PRODUCTS.DETAILS.replace(':id', data.id)}>
-      {!!data.discount && <DiscountLabel percent={data.discount} />}
+      {!!data.promotion.percent && <DiscountLabel percent={data.promotion.percent} type={data.promotion.promotionType} />}
       <div className="P-image" style={{ background: `url('${getMediaPath(data.imagePath)}') center/contain no-repeat` }} />
       
       {!Settings.guest && <i
@@ -55,7 +55,7 @@ const ListItem = React.memo((props: IProps) => {
       <h3>{truncateText(data.title)}</h3>
       
       <div className="P-price" onClick={(e: React.SyntheticEvent) => e.preventDefault()}>
-        <span>{formatPrice(data.discountedPrice || data.price)}</span>
+        <span>{formatPrice(data.promotion.result ? data.price - data.promotion.result : data.price)}</span>
         <CountInput
           step={1}
           min={1}

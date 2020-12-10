@@ -19,6 +19,8 @@ import PageLoader from 'components/page-loader';
 
 import './style.scss';
 import { IResponse } from 'platform/constants/interfaces';
+import { PromotionType } from 'platform/constants/enums';
+import { format } from 'path';
 
 interface IState {
   data?: IBasketResponseModel;
@@ -56,9 +58,18 @@ class Cart extends HelperComponent<{}, IState> {
       />,
     },
     {
+      name: 'Bonus',
+      cell: (row: IBasketListResponseModel) => <h3 className="G-fs-24">{row.promotion.promotionType === PromotionType.Bonus ? row.productQuantity * row.promotion.result : 0}</h3>,
+    },
+    {
       name: Settings.translations.price,
-      style: { minWidth: 150, maxWidth: 150 },
-      cell: (row: IBasketListResponseModel) => <h3 className="G-fs-24">{formatPrice(row.price * row.productQuantity)}</h3>,
+      cell: (row: IBasketListResponseModel) =>
+        <div className="G-flex G-flex-column G-align-center G-justify-center">
+          <div>{row.promotion.promotionType === PromotionType.Discount && !!row.promotion.result ? <del>{formatPrice(row.productQuantity * row.price)}</del> : null}</div>
+          <h3 className="G-fs-24">
+            {row.promotion.promotionType === PromotionType.Discount ? formatPrice((row.productQuantity * row.totalPrice) - row.promotion.result) : formatPrice(row.productQuantity * row.price)}
+          </h3>
+        </div>,
     },
     {
       name: '',
@@ -95,7 +106,6 @@ class Cart extends HelperComponent<{}, IState> {
         productId: row.productId,
         productQuantity: count,
       });
-
       row.productQuantity = count;
     } else {
       modifyResult = await BasketController.Delete(row.productId, row.isPackage);
@@ -104,10 +114,8 @@ class Cart extends HelperComponent<{}, IState> {
     }
 
     if (data && modifyResult.data) {
-      data.totalPrice = modifyResult.data.totalPrice;
-      data.bonus = modifyResult.data.bonus;
 
-      this.safeSetState({ data });
+      this.safeSetState({ data: modifyResult.data });
       window.dispatchEvent(new CustomEvent(DispatcherChannels.CartItemsUpdate));
     }
   }
@@ -124,9 +132,8 @@ class Cart extends HelperComponent<{}, IState> {
       await BasketController.Save(basketIds);
     }
 
-    window.routerHistory.push(ROUTES.CHECKOUT);
+    window.routerHistory.push(`${ROUTES.CHECKOUT}?total=${data?.totalPrice}`);
   }
-
   public render() {
     const { data, cartSaved } = this.state;
 
@@ -148,10 +155,18 @@ class Cart extends HelperComponent<{}, IState> {
             />
 
             <div className="P-data-block">
-              <div>
+              <div className="G-mr-40">
                 <span className="G-fs-normal">{Settings.translations.total}</span>
-                <h1 className="G-orange-color G-fs-24 G-mt-5">{formatPrice(data.totalPrice)}</h1>
+                <div className="G-flex G-flex-column G-align-center G-justify-center">
+                  {!!data.totalDiscountedPrice && <del>{data.totalPrice}</del>}
+                  <h1 className="G-orange-color G-fs-24 G-mt-5">{formatPrice(data.totalDiscountedPrice || data.totalPrice)}</h1>
+                </div>
               </div>
+              <div>
+                <span className="G-fs-normal">{ Settings.translations.bonus_count }</span>
+                <h1 className="G-main-color G-fs-24 G-mt-5">{data.totalBonus}</h1>
+              </div>
+
             </div>
 
             {Storage.profile && <div className="P-data-block">

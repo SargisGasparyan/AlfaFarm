@@ -18,7 +18,7 @@ import PlaceController from 'platform/api/place';
 import { IDropdownOption, IGooglePlace } from 'platform/constants/interfaces';
 import { validateForm } from './services/helper';
 
-import { formatDate } from 'platform/services/helper';
+import { formatDate, formatPrice } from 'platform/services/helper';
 import ChooseAddress from './components/choose-address';
 import { IUserAddressListResponseModel } from 'platform/api/userAddress/models/response';
 import OrderController from 'platform/api/order';
@@ -57,8 +57,10 @@ class Checkout extends HelperComponent<{}, IState> {
       deliveryType: OrderDeliveryTypeEnum.Delivery,
       paymentType: PaymentType.Cash
     },
-    isPayment: false
+    isPayment: false,
   };
+
+  private total: number | null;
 
   private get formValidation() {
     const { submited, form } = this.state;
@@ -72,11 +74,18 @@ class Checkout extends HelperComponent<{}, IState> {
       form.lastName = Storage.profile.lastName;
       form.phoneNumber = Storage.profile.phoneNumber.substring(`+${countryCode}`.length);
       form.email = Storage.profile.email;
+      this.getTotalPrice(); 
       this.safeSetState({ form });
     }
   }
+  
+  private getTotalPrice = () => {
+    const query = new URLSearchParams(window.location.search);
+    const price = query.get('total');
+    if (price)  this.total = +price;
+  }
 
-  private changeField = (e: React.SyntheticEvent<HTMLInputElement>) => {
+  private changeField = (e: React.SyntheticEvent<any>) => {
     const { form } = this.state;
     form[e.currentTarget.name] = e.currentTarget.value;
     this.safeSetState({ form });
@@ -102,12 +111,6 @@ class Checkout extends HelperComponent<{}, IState> {
   private dateFromChange = (chosen: Moment) => {
     const { form } = this.state;
     form.deliveryDateFrom = chosen.toISOString();
-    this.safeSetState({ form });
-  }
-
-  private dateToChange = (chosen: Moment) => {
-    const { form } = this.state;
-    form.deliveryDateTo = chosen.toISOString();
     this.safeSetState({ form });
   }
 
@@ -155,6 +158,7 @@ class Checkout extends HelperComponent<{}, IState> {
 
     return dateItem.isSameOrAfter(currentDayStarting);
   }
+
   private choosePaymentType = async (type: PaymentType) => {
     const { form } = this.state;
     if (type === PaymentType.IPay) {
@@ -166,6 +170,7 @@ class Checkout extends HelperComponent<{}, IState> {
     form.paymentType = type;
     this.safeSetState({ form });
   }
+
   private finishCheckout = (e: React.SyntheticEvent) => {
     e.preventDefault();
     const { form } = this.state;
@@ -184,36 +189,9 @@ class Checkout extends HelperComponent<{}, IState> {
       else this.safeSetState({ submitLoading: false });
     });
   }
-  private Payment = () => {
-    const { form, submitLoading } = this.state;
-    return <div className="P-choose-payment-type-section">
-      <div className="P-payment-types">
-        <div>
-          <Radio<PaymentType> callback={(data: PaymentType) => this.choosePaymentType(data)} value={PaymentType.Cash} isChecked={form.paymentType === PaymentType.Cash}>
-            {Settings.translations.cash}
-          </Radio>
-        </div>
-        <div>
-          <Radio<PaymentType> callback={(data: PaymentType) => this.choosePaymentType(data)} value={PaymentType.IPay} isChecked={form.paymentType === PaymentType.IPay}>
-            <span>{Settings.translations.card}</span>
-            <div className="P-online-pay-icons">
-              <div style={ { background: `url(${arca}) center/contain no-repeat` } } />
-              <div style={ { background: `url(${visa}) center/cover no-repeat` } } />
-              <div style={ { background: `url(${master}) center/contain no-repeat` } } />
-            </div>
-          </Radio>
-        </div>
-      </div>
-      <p>{Settings.translations.total} 15,000 {currency}</p>
-      <div className="P-choose-payment-buttons">
-        <LoaderContent
-          className="G-main-button"
-          loading={submitLoading}
-          onClick={this.finishCheckout}
-        >{Settings.translations.pay}</LoaderContent>
-      </div>
-    </div>
-  }
+
+  private navigateToHome = () => window.routerHistory.push(ROUTES.HOME);
+
   public render() {
     const { form, submitLoading, chooseAddressOpen, successModalOpen, isPayment } = this.state;
 
@@ -317,15 +295,6 @@ class Checkout extends HelperComponent<{}, IState> {
             </div>
           </div>
           <div className="P-delivery-form G-half-width">
-            <div className="G-main-form-field">
-              <input
-                name="comment"
-                value={form.comment || ''}
-                className="G-main-input"
-                placeholder={Settings.translations.comment}
-                onChange={this.changeField}
-              />
-            </div>
             <div className="G-main-form-field G-phone-input-wrapper P-checkout-select">
               <Select<OrderDeliveryTypeEnum>
                 options={OrderDeliveryTypeDropdown()}
@@ -336,31 +305,28 @@ class Checkout extends HelperComponent<{}, IState> {
             </div>
 
             <div className="P-delivery-date G-flex G-align-center">
-              <h4 className="G-fs-normal">{Settings.translations.delivery_date}</h4>
-                <div className="G-main-form-half-field">
-                  <DateTime
-                    onChange={this.dateFromChange}
-                    isValidDate={this.validateDeliveryDate}
-                    inputProps={{
-                      value: form.deliveryDateFrom ? formatDate(form.deliveryDateFrom, true) : '',
-                      readOnly: true,
-                      className: `G-main-input ${this.formValidation.errors.deliveryDateFrom ? 'G-invalid-field' : ''}`,
-                      placeholder: '00:00',
-                    }}
-                  />
-                </div>
-                {/* <div className="G-main-form-half-field">
-                  <DateTime
-                    onChange={this.dateToChange}
-                    isValidDate={this.validateDeliveryDate}
-                    inputProps={{
-                      value: form.deliveryDateTo ? formatDate(form.deliveryDateTo, true) : '',
-                      readOnly: true,
-                      className: `G-main-input ${this.formValidation.errors.deliveryDateTo ? 'G-invalid-field' : ''}`,
-                      placeholder: '00:00',
-                    }}
-                  />
-                </div> */}
+              <div className="G-main-form-half-field">
+                <DateTime
+                  onChange={this.dateFromChange}
+                  isValidDate={this.validateDeliveryDate}
+                  inputProps={{
+                    value: form.deliveryDateFrom ? formatDate(form.deliveryDateFrom, true) : '',
+                    readOnly: true,
+                    className: `G-main-input ${this.formValidation.errors.deliveryDateFrom ? 'G-invalid-field' : ''}`,
+                    placeholder: Settings.translations.delivery_date,
+                  }}
+                />
+              </div>
+            </div>
+
+            <div className="G-main-form-field P-comment-field">
+              <textarea
+                name="comment"
+                value={form.comment || ''}
+                className="G-main-input"
+                placeholder={Settings.translations.comment}
+                onChange={this.changeField}
+              />
             </div>
           </div>
 
@@ -379,9 +345,43 @@ class Checkout extends HelperComponent<{}, IState> {
             {chooseAddressOpen && <ChooseAddress onClose={this.closeAddressChoose} />}
           </div>
         </form> : <this.Payment />}
-        {successModalOpen && <SuccessModal text={Settings.translations.order_success} onClose={() => window.routerHistory.push(ROUTES.HOME)} />}
+
+        {successModalOpen && <SuccessModal text={Settings.translations.order_success} onClose={this.navigateToHome} />}
       </section>
     );
+  }
+
+  private Payment = () => {
+    const { form, submitLoading } = this.state;
+    return <div className="P-choose-payment-type-section">
+      <div className="P-payment-types">
+        <div>
+          <Radio<PaymentType> callback={(data: PaymentType) => this.choosePaymentType(data)} value={PaymentType.Cash} isChecked={form.paymentType === PaymentType.Cash}>
+            {Settings.translations.cash}
+          </Radio>
+        </div>
+        <div>
+          <Radio<PaymentType> callback={(data: PaymentType) => this.choosePaymentType(data)} value={PaymentType.IPay} isChecked={form.paymentType === PaymentType.IPay}>
+            <span>{Settings.translations.card}</span>
+            <div className="P-online-pay-icons">
+              <div style={{ background: `url(${arca}) center/contain no-repeat` }} />
+              <div style={{ background: `url(${visa}) center/cover no-repeat` }} />
+              <div style={{ background: `url(${master}) center/contain no-repeat` }} />
+            </div>
+          </Radio>
+        </div>
+      </div>
+      
+      {this.total && <p>{Settings.translations.total} {formatPrice(this.total)}</p>}
+
+      <div className="P-choose-payment-buttons">
+        <LoaderContent
+          className="G-main-button"
+          loading={submitLoading}
+          onClick={this.finishCheckout}
+        >{Settings.translations.pay}</LoaderContent>
+      </div>
+    </div>
   }
 };
 

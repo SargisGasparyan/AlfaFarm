@@ -9,6 +9,7 @@ export const buildFilters = () => {
   const minPrice = query.get('minPrice');
   const maxPrice = query.get('maxPrice');
   const sortBy = query.get('sortBy');
+  const hasDiscount = query.get('hasDiscount');
 
   const body: IProductFilterRequestModel = {
     text: query.get('text') || '',
@@ -19,6 +20,7 @@ export const buildFilters = () => {
     minPrice: minPrice ? +minPrice : undefined,
     maxPrice: maxPrice ? +maxPrice : undefined,
     sortBy: sortBy ? +sortBy : undefined,
+    hasDiscount: !!hasDiscount,
   };
 
   return body;
