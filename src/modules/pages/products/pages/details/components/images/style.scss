@@ -72,3 +72,26 @@
     }
   }
 }
+.I-zoomable-image {
+
+  width               : 100%;
+  // width               : 72%;
+  cursor              : crosshair;
+  position            : relative;
+  overflow            : hidden;
+  background-size     : 200%;
+  background-position : 50% 50%;
+  background-repeat   : no-repeat;
+  height              : 100%;
+  > img {
+
+    width      : 100%;
+    display    : block;
+    background : white;
+    transition : opacity .5s;
+    height     : 100%;
+    object-fit : contain;
+
+    &:hover { opacity: 0; }
+  }
+}

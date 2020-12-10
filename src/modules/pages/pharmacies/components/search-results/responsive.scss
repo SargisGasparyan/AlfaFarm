@@ -3,3 +3,9 @@
     width: 100%;
   }
 }
+
+@media (max-width: $medium-screen) {
+  .G-page.P-pharmacies-search-results > .P-shadow-text {
+    font-size: 40px;
+  }
+}

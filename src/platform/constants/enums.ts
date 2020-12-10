@@ -27,3 +27,7 @@ export enum PaymentType {
   Cash,
   IPay
 }
+export enum PromotionType {
+  Discount,
+  Bonus
+}

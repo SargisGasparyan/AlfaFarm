@@ -9,7 +9,9 @@ import BasketController from 'platform/api/basket';
 import DispatcherChannels from 'platform/constants/dispatcher-channels';
 import PharmaciesAvailablity from './components/pharmacies-availablity';
 import { formatPrice } from 'platform/services/helper';
-
+import { currency } from 'platform/constants';
+import ROUTES from 'platform/constants/routes';
+import { PromotionType } from 'platform/constants/enums';
 import PinImage from 'assets/images/pin.png';
 
 import './style.scss';
@@ -84,7 +86,7 @@ class Info extends HelperComponent<IProps, IState> {
     const { havePackage } = this.state;
 
     if (havePackage) return data.discountedPackagePrice || data.packagePrice;
-    return data.discountedPrice || data.price;
+    return data.price - data.promotion.result;
   }
   private get defaultPrice() {
     const { data } = this.props;
@@ -92,6 +94,13 @@ class Info extends HelperComponent<IProps, IState> {
     if (havePackage) return data.packagePrice;
     return data.price;
   }
+
+  private navigateToCategory = (id: number) => {
+    const query = new URLSearchParams(window.location.search);
+    query.set('categoryIds', `${id}`);
+    window.routerHistory.replace(`${ROUTES.PRODUCTS.MAIN}?${query.toString()}`);
+  }
+  
   public render() {
     const { data } = this.props;
     const { count, cartLoading, pharmaciesAvailablityOpen } = this.state;
@@ -104,7 +113,7 @@ class Info extends HelperComponent<IProps, IState> {
         <h3 className="P-unit">{data.unitQuantity} {data.unitName}</h3>
         {data.category && <h3 className="P-row">
           {Settings.translations.category}
-          <span className="P-value">{data.category.name}</span>
+          <span className="P-value G-cursor-pointer" onClick={() => this.navigateToCategory(data.category.id)}>{data.category.name}</span>
         </h3>}
         {data.brand && <h3 className="P-row">
           {Settings.translations.brand}
@@ -138,8 +147,8 @@ class Info extends HelperComponent<IProps, IState> {
           >{Settings.translations.add_to_cart}</LoaderContent>
 
           {pharmaciesAvailablityOpen && <PharmaciesAvailablity onClose={this.togglePharmaciesAvailablity} data={data} />}
-          <span className="G-orange-color P-price">
-            <del>{this.defaultPrice > this.price && formatPrice(this.defaultPrice)}</del>
+          <span className="G-orange-color G-ml-auto P-price">
+            <del>{data.promotion.promotionType === PromotionType.Discount && formatPrice(data.price)}</del>
             {formatPrice(this.price)}
           </span>
         </div>
