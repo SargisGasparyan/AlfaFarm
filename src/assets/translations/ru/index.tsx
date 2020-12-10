@@ -1150,7 +1150,7 @@ export default {
   product: "Товар",
   see_more: "Показать больше",
   pickup: "Подобрать",
-  sale: "Продаж",
+  sale: "Распродажа",
   sort_by: "Сортировать по",
   show_all: "Показать все",
   search: "Поиск",

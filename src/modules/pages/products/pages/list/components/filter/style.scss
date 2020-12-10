@@ -27,10 +27,19 @@
     margin-bottom : 40px;
   }
 
+  > .P-discount-label {
+    color         : $orange;
+    display       : block;
+    font-size     : 20px;
+    margin-bottom : 30px;
+
+    > span { margin-right : 10px; }
+  }
+
   .P-row-wrap {
     border        : 1px solid $light-gray;
     border-radius : 20px;
-    padding       : 4px 15px 9px;
+    padding       : 2px 15px 6px;
     margin-top    : 10px;
 
     .P-row-content {

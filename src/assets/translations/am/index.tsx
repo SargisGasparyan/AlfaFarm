@@ -1175,7 +1175,7 @@ export default {
   product: "Ապրանք",
   see_more: "Տեսնել ավելին",
   pickup: "Վերցնել",
-  sale: "Վաճառք",
+  sale: "Զեղչ",
   sort_by: "Դասակարգել ըստ",
   show_all: "Տեսնել բոլորը",
   search: "Որոնել",
