@@ -5,34 +5,70 @@ import Settings from 'platform/services/settings';
 import * as React from 'react';
 import { NavLink } from 'react-router-dom';
 import './index.scss';
+import DispatcherChannels from 'platform/constants/dispatcher-channels';
 interface IState {
   search: string;
 }
 interface IProps {
-  close: () => void;
+  onClose(): void;
 }
 class MobileMenu extends HelperComponent<IProps, IState> {
   public state: IState = {
     search: ''
-  }
+  };
+
   private navLinkProps = {
     className: 'P-link',
     activeClassName: 'P-active',
     exact: true,
   };
+
+  public componentDidMount() {
+    document.body.style.overflow = 'hidden';
+  }
+
+  public componentWillUnmount() {
+    super.componentWillUnmount();
+    document.body.style.overflow = 'initial';
+  }
+
+  private searchSubmit = (value: string) => {
+    const { onClose } = this.props;
+    const query = new URLSearchParams(window.location.search);
+    const oldValue = query.get('text');
+    
+    if (oldValue !== value) {
+      if (value.length) query.set('text', value);
+      else query.delete('text');
+  
+      window.routerHistory.push(`${ROUTES.PRODUCTS.MAIN}?${query.toString()}`);
+      window.dispatchEvent(new Event(DispatcherChannels.ProductFilterChange));
+      onClose();
+    }
+  }
+
   private change = (value: string) => this.safeSetState({ search: value });
+
   public render() {
-    const { close } = this.props;
+    const { onClose } = this.props;
+
     return (
       <div className="P-mobile-menu">
-        <span className="P-mobile-menu-close"><i className="icon-Group-5032 G-orange-color G-cursor-pointer G-fs-24" onClick={close} /></span>
+        <span className="P-mobile-menu-close"><i className="icon-Group-5032 G-orange-color G-cursor-pointer" onClick={onClose} /></span>
         <div className="P-mobile-menu-content">
-          <div className="G-mb-20"><SearchInput onChange={this.change} /></div>
-          <NavLink {...this.navLinkProps} to={ROUTES.PHARMACIES} onClick={close}>{Settings.translations.pharmacies}</NavLink>
-          <NavLink {...this.navLinkProps} to={ROUTES.CLINIC.MAIN} onClick={close}>{Settings.translations.clinic}</NavLink>
-          <NavLink {...this.navLinkProps} to={ROUTES.BLOG.MAIN} onClick={close}>{Settings.translations.blog}</NavLink>
+          <div className="G-mb-20">
+            <SearchInput
+              onChange={this.change}
+              onSubmit={this.searchSubmit}
+              withSubmit={true}
+            />
+          </div>
+          
+          <NavLink {...this.navLinkProps} to={ROUTES.PHARMACIES} onClick={onClose}>{Settings.translations.pharmacies}</NavLink>
+          <NavLink {...this.navLinkProps} to={ROUTES.CLINIC.MAIN} onClick={onClose}>{Settings.translations.clinic}</NavLink>
+          <NavLink {...this.navLinkProps} to={ROUTES.BLOG.MAIN} onClick={onClose}>{Settings.translations.blog}</NavLink>
         </div>
-        <div className="P-mobile-menu-layer" onClick={close} />
+        <div className="P-mobile-menu-layer" onClick={onClose} />
       </div>);
   }
 }

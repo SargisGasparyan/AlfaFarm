@@ -21,6 +21,10 @@
     bottom    : -6px;
     position  : absolute;
     transform : translateY(50%);
+
+    > img {
+      width : 100%;
+    }
   }
 
   > .G-main-ghost-button {

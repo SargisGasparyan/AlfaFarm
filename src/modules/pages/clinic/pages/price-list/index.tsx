@@ -62,7 +62,11 @@ class PriceList extends HelperComponent<{}, {}> {
         <div id="clinic-page-start" className="P-content">
           <h1 className="G-main-color P-title">
             {Settings.translations.price_list}
-            <SearchInput withSubmit={true} onChange={this.onSearchChange} onSubmit={this.fetchData} />
+            <SearchInput
+              withSubmit={true}
+              onChange={this.onSearchChange}
+              onSubmit={this.fetchData}
+            />
           </h1>
           {data ? data.map(item => <Table<IMedicalServiceListResponseModel>
             key={item.id}

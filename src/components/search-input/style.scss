@@ -1,9 +1,10 @@
 @import 'src/assets/styles/variables';
 
 .P-search-input {
-  width    : 400px;
-  display  : flex;
-  position : relative;
+  width     : 400px;
+  display   : flex;
+  position  : relative;
+  max-width : 100%;
 
   &.P-search-input-submit > input { padding-right: 80px; }
 

@@ -13,6 +13,9 @@ import { IUserAddressModifyRequestModel } from 'platform/api/userAddress/models/
 import UserAddressController from 'platform/api/userAddress';
 import generic from 'platform/decorators/generic';
 import { IGooglePlace } from 'platform/constants/interfaces';
+import { trimForm } from 'platform/services/helper';
+
+import './style.scss';
 
 interface IState {
   form: IUserAddressModifyRequestModel;
@@ -81,7 +84,8 @@ class Modify extends HelperComponent<RouteComponentProps<IRouteParams>, IState> 
       this.formValidation.valid && this.safeSetState({ submitLoading: true }, async () => {
         const { id } = this.props.match.params;
         const { form } = this.state;
-        const result = id ? await UserAddressController.Update(+id, form) : await UserAddressController.Create(form);
+        const trimedForm = trimForm<IUserAddressModifyRequestModel>(form);
+        const result = id ? await UserAddressController.Update(+id, trimedForm) : await UserAddressController.Create(trimedForm);
 
         if (result.data) window.routerHistory.push(ROUTES.PROFILE.ADDRESSES.MAIN);
         else this.safeSetState({ submitLoading: false });
@@ -110,7 +114,7 @@ class Modify extends HelperComponent<RouteComponentProps<IRouteParams>, IState> 
 
     return (
       <Layout>
-        <div className="G-flex G-flex-wrap">
+        <div className="G-flex G-flex-wrap P-profile-addresses-modify">
           {window.routerHistory.length > 2 && <i className="G-back-icon icon-Group-5529" onClick={this.goBack} />}
           <form className="G-main-form P-form-block G-mr-20">
             <span className="P-page-title">{ this.props.match.params.id ? Settings.translations.edit_address: Settings.translations.add_address }</span>
