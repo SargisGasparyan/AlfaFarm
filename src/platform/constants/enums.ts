@@ -28,6 +28,6 @@ export enum PaymentType {
   IPay
 }
 export enum PromotionType {
-  Discount,
-  Bonus
+  Bonus,
+  Discount
 }

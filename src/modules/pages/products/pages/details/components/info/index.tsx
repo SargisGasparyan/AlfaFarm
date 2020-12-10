@@ -9,9 +9,9 @@ import BasketController from 'platform/api/basket';
 import DispatcherChannels from 'platform/constants/dispatcher-channels';
 import PharmaciesAvailablity from './components/pharmacies-availablity';
 import { formatPrice } from 'platform/services/helper';
-import { currency } from 'platform/constants';
 import ROUTES from 'platform/constants/routes';
 import { PromotionType } from 'platform/constants/enums';
+
 import PinImage from 'assets/images/pin.png';
 
 import './style.scss';
@@ -75,11 +75,11 @@ class Info extends HelperComponent<IProps, IState> {
     const { havePackage } = this.state;
     if (data.havePackage) {
       return <span>
-        <span className={`${havePackage ? 'P-selected-count-type' : ''}`} onClick={() => this.safeSetState({ havePackage: true })}>{Settings.translations.package}</span> / 
+        <span className={`${havePackage ? 'P-selected-count-type' : ''}`} onClick={() => this.safeSetState({ havePackage: true })}>{Settings.translations.package}</span> /
         <span className={`${!havePackage ? 'P-selected-count-type' : ''}`} onClick={() => this.safeSetState({ havePackage: false })}>{Settings.translations.item}</span>
       </span>
     } else return <span className="P-selected-count-type">{data.unitName}</span>
-  }  
+  }
 
   private get price() {
     const { data } = this.props;
@@ -88,6 +88,13 @@ class Info extends HelperComponent<IProps, IState> {
     if (havePackage) return data.discountedPackagePrice || data.packagePrice;
     return data.price - data.promotion.result;
   }
+
+  private navigateToCategory = (id: number) => {
+    const query = new URLSearchParams(window.location.search);
+    query.set('categoryIds', `${id}`);
+    window.routerHistory.replace(`${ROUTES.PRODUCTS.MAIN}?${query.toString()}`);
+  }
+
   private get defaultPrice() {
     const { data } = this.props;
     const { havePackage } = this.state;
@@ -95,12 +102,6 @@ class Info extends HelperComponent<IProps, IState> {
     return data.price;
   }
 
-  private navigateToCategory = (id: number) => {
-    const query = new URLSearchParams(window.location.search);
-    query.set('categoryIds', `${id}`);
-    window.routerHistory.replace(`${ROUTES.PRODUCTS.MAIN}?${query.toString()}`);
-  }
-  
   public render() {
     const { data } = this.props;
     const { count, cartLoading, pharmaciesAvailablityOpen } = this.state;
@@ -149,7 +150,7 @@ class Info extends HelperComponent<IProps, IState> {
           {pharmaciesAvailablityOpen && <PharmaciesAvailablity onClose={this.togglePharmaciesAvailablity} data={data} />}
           <span className="G-orange-color G-ml-auto P-price">
             <del>{data.promotion.promotionType === PromotionType.Discount && formatPrice(data.price)}</del>
-            {formatPrice(this.price)}
+            {data.promotion.promotionType === PromotionType.Discount && data.promotion.result ? formatPrice(this.price - data.promotion.result) : formatPrice(this.price)}
           </span>
         </div>
       </div>

@@ -3,51 +3,26 @@
 .P-empty-state {
 
   width      : 100%;
+  margin-left: auto;
   height     : 100%;
   display    : flex;
-  min-height : inherit;
+  min-height : 500px;
 
   > div {
-
     width  : 500px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin : auto;
 
-    > i {
 
-      color           : $main-color;
-      width           : 100%;
-      display         : flex;
-      font-size       : 100px;      
-      margin-bottom   : 50px;
-      justify-content : center;
-    }
-
-    > div[aria-label=animation] {
-
-      width         : 150px !important;
-      height        : 150px !important;
-      margin-bottom : 50px !important;
-    }
-
-    > p {
-
-      color      : $text-gray;
-      margin     : 0;
-      font-size  : $normal-fs;
-      text-align : center;
-    }
-
-    > button {
-    
-      height        : 50px;
-      margin        : 0 auto;
-      border        : 1px solid black;
-      display       : block;
-      padding       : 0 40px;
-      font-size     : 16px;
-      margin-top    : 30px;
-      background    : transparent;
-      border-radius : $small-radius;
+    .P-empty-list {
+      text-align: center;
+      > p {
+        font-size: 18px;
+        color: $text-gray;
+      }
     }
   }
 }
