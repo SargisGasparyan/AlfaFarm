@@ -140,7 +140,8 @@ class Info extends HelperComponent<IProps, IState> {
           >{Settings.translations.add_to_cart}</LoaderContent>
 
           {pharmaciesAvailablityOpen && <PharmaciesAvailablity onClose={this.togglePharmaciesAvailablity} data={data} />}
-          <span className="G-orange-color G-ml-auto P-price"><del>{data.promotion.promotionType === PromotionType.Discount && formatPrice(data.price)}</del> {formatPrice(this.price)}</span>
+          <span className="G-orange-color G-ml-auto P-price"><del>{data.promotion.promotionType === PromotionType.Discount && formatPrice(data.price)}</del>
+          {data.promotion.promotionType === PromotionType.Discount && data.promotion.result ? formatPrice(this.price - data.promotion.result) : formatPrice(this.price)}</span>
         </div>
       </div>
     );

@@ -16,7 +16,7 @@ class MyWallet extends HelperComponent<{}, {}> {
     return (
       <Layout>
         {/* */}
-        <EmptyState text={Settings.translations.no_lists} />
+        <EmptyState text={Settings.translations.empty_card_list} />
       </Layout>
     );
   }

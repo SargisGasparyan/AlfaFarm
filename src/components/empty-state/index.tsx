@@ -14,7 +14,7 @@ const EmptyState = React.memo(({ buttonText, text, onClick }: IProps) => {
   return (
     <div className="P-empty-state">
       <div>
-        <div className='G-no-data'>
+        <div className='P-empty-list'>
           <img src={EmptyViewSvg} alt="empty"/>
           <p className='P-desc'>{text}</p>
         </div>
