@@ -9,6 +9,12 @@
 
   .P-burger-menu {
     display : block;
+    
+    > img {
+      width  : 24px;
+      height : 24px;
+      cursor : pointer;
+    }
 
     > i {
       color     : #F26D26;

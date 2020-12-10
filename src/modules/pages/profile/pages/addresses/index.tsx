@@ -11,9 +11,9 @@ import { IUserAddressListResponseModel } from 'platform/api/userAddress/models/r
 import UserAddressController from 'platform/api/userAddress';
 import Modify from './pages/modify';
 import { onlyForUsers } from 'platform/guards/routes';
+import EmptyState from 'components/empty-state';
 
 import './style.scss';
-import EmptyState from 'components/empty-state';
 
 interface IState {
   data: IUserAddressListResponseModel[];
@@ -75,7 +75,7 @@ class Addresses extends HelperComponent<IState, {}> {
             className="G-normal-link G-main-button G-ml-auto G-fs-16"
           >{Settings.translations.add_address}</Link>
         </div>
-        {data.length ? <div className="G-flex P-profile-orders">
+        {data.length ? <div className="G-flex P-profile-addresses">
           <Table<IUserAddressListResponseModel>
             columnConfig={this.columnConfig}
             data={data}

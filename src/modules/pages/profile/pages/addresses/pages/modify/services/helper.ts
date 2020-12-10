@@ -7,7 +7,7 @@ export function validateForm(this: IUserAddressModifyRequestModel, submited?: bo
     address: false,
   };
 
-  if (submited && !this.name) {
+  if (submited && !this.name.trim()) {
     errors.name = true;
     valid = false;
   }

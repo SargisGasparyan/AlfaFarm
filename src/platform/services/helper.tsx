@@ -148,3 +148,14 @@ export const getMediaPath = (path?: string | null) => {
 
 export const truncateText = (value: string, limit: number = 38) =>
   value && (value.length > limit) ? value.substring(0, limit) + '...' : value;
+
+export const trimForm = <Type extends { [key: string]: any }>(value: Type) => {
+  const result: Partial<Type> = {};
+
+  for (const key in value) {
+    if (value.hasOwnProperty(key) && typeof value[key] === 'string') 
+      result[key] = value[key].trim();
+  }
+
+  return result as Type;
+}

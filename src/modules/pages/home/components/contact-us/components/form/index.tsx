@@ -6,25 +6,29 @@ import { IContactUsBodyModel } from 'platform/api/support/models';
 import { isValidEmail } from 'platform/services/validator';
 import SupportController from 'platform/api/support';
 import {validateForm} from './service/helper';
+import Storage from 'platform/services/storage';
 interface IState {
   body: IContactUsBodyModel;
   submited: boolean;
   submitLoading: boolean;
 }
 class Form extends HelperComponent<{}, IState> {
+
   public state: IState = {
     body: {
-      name: '',
-      email: '',
+      name: Storage.profile ? `${Storage.profile.firstName} ${Storage.profile.lastName}` : '',
+      email: Storage.profile ? Storage.profile.email : '',
       content: ''
     },
     submited: false,
     submitLoading: false
   }
+
   private get formValidation() {
     const { submited, body } = this.state;
     return validateForm.call(body, submited);
   }
+  
   private change = (e: React.SyntheticEvent<any>) => {
     const { body } = this.state;
     body[e.currentTarget.name] = e.currentTarget.value;
