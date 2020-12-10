@@ -9,8 +9,16 @@
   padding-top    : 100px;
   padding-bottom : 0;
   flex-direction : column;
+  overflow       : hidden;
 
-  > .P-shadow-text { margin-bottom: 90px; }
+
+  > .P-shadow-text {
+    margin-bottom : 90px;
+
+    @media (max-width : 1400px) {
+    font-size: 40px;
+    }
+  }
 
   > .P-content {
     width      : 100%;
@@ -51,67 +59,38 @@
       > .P-google-maps {
         width  : 100%;
         height : 100%;
-  
+
         .P-info-window {
           width   : 300px;
           padding : 10px 20px;
-  
+
           > h3 {
             font-size : 22px;
             @include normal-font;
           }
-  
+
           > .P-info-row {
             display     : flex;
             font-size   : 18px;
             margin-top  : 20px;
             @include normal-font;
-  
+
             > i {
               font-size    : 26px;
               margin-right : 20px;
             }
-  
+
             span {
-  
+
               display    : block;
               margin-top : 10px;
-  
+
               &:first-of-type { margin-top: 0; }
             }
           }
         }
 
       }
-    }
-  }
-}
-.P-home-info-window {
-  width   : 320px;
-  padding : 10px 20px;
-
-  > h3 {
-    font-size : 22px;
-    @include normal-font;
-  }
-
-  > .P-info-row {
-    display     : flex;
-    font-size   : 18px;
-    margin-top  : 20px;
-    @include normal-font;
-
-    > i {
-      font-size    : 26px;
-      margin-right : 20px;
-    }
-
-    span {
-
-      display    : block;
-      margin-top : 10px;
-
-      &:first-of-type { margin-top: 0; }
     }
   }
 }

@@ -50,7 +50,7 @@ class RestoreVerify extends HelperComponent<IProps, IState> {
         const { onTypeChange } = this.props;
         const { form } = this.state;
         const activeData = this.props.activeData as { form: ISendCodeRequestModel, signUp: boolean, fromSocial: boolean };
-        form.phoneNumber = activeData.form.phoneNumber;
+        form.phoneNumber = activeData.form.number;
 
         const result = await AuthController.Verify(form);
         if (result.data) {

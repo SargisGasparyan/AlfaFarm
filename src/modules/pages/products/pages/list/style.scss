@@ -19,14 +19,14 @@
     align-items : flex-start;
 
     > .P-no-data {
-      position: absolute;
-      text-align: center;
-      color: gray;
-      left: 50%;
-      top: 40%;
+      position   : absolute;
+      text-align : center;
+      color      : gray;
+      left       : 50%;
+      top        : 40%;
 
       > .P-desc {
-        font-size: 25px;
+        font-size : 25px;
       }
     }
   }

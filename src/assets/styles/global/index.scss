@@ -5,6 +5,10 @@
   padding    : $page-vertical-offset $page-horizontal-offset;
   min-height : calc(100vh - #{$header-size});
 
+  @media(max-width : $tablet-screen) {
+    padding : 15px !important;
+  }
+
   .G-page-title {
     color         : $main-color;
     width         : 100%;

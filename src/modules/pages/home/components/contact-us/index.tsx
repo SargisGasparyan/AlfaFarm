@@ -7,15 +7,14 @@ import AboutDelivery from './components/about-delivery';
 import AboutBonusCard from './components/about-bonus-card';
 import AboutMobileApp from './components/about-mobile-app';
 import Maps, { IMarkerProps } from 'components/maps';
-import HelperPureComponent from 'platform/classes/helper-pure-component';
-
-import './style.scss';
-import { IPharmacyBranchListResponseModel } from 'platform/api/pharmacyBranch/models/response';
 import HelperComponent from 'platform/classes/helper-component';
 import PharmacyBranchController from 'platform/api/pharmacyBranch';
 import { Marker, InfoWindow } from 'react-google-maps';
 import { formatTime, getViewEnum } from 'platform/services/helper';
 import { WeekDaysEnum } from 'platform/constants/enums';
+
+import './style.scss';
+import { IPharmacyBranchListResponseModel } from 'platform/api/pharmacyBranch/models/response';
 
 interface IState {
   branches: IPharmacyBranchListResponseModel[];

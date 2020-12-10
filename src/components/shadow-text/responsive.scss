@@ -1,3 +1,7 @@
 @media (max-width: $tablet-screen) {
-  h1.P-shadow-text { font-size: 36px !important; }
+  h1.P-shadow-text { font-size: 36px !important; margin-bottom: 40px !important }
+}
+
+@media (max-width: $mobile-screen) {
+  h1.P-shadow-text { font-size: 30px !important; margin-bottom: 20px !important }
 }

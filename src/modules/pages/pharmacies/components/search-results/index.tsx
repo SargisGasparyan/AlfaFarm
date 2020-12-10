@@ -27,7 +27,7 @@ class SearchResults extends HelperComponent<IProps, IState> {
   public state: IState = {
     searchValue: '',
   };
-  
+
   private weeksViewEnum = getViewEnum(WeekDaysEnum);
 
   private get data() {
@@ -70,7 +70,7 @@ class SearchResults extends HelperComponent<IProps, IState> {
 
     return (
       <section id="pharmacy-search-results" className="G-page P-pharmacies-search-results">
-        <ShadowText className="G-text-center">{Settings.translations.search_results}</ShadowText>
+        <ShadowText className="G-text-center ">{Settings.translations.search_results}</ShadowText>
 
         <div className="P-content">
           <div className="P-list">
@@ -80,7 +80,7 @@ class SearchResults extends HelperComponent<IProps, IState> {
               onMouseOut={() => this.toggleMarker()}
             >{item.name}</h3>) : <h3>{Settings.translations.no_search_result}</h3>}
           </div>
-          
+
 
           <div className="P-maps-wrapper">
             <SearchInput onChange={this.onSearchChange} />

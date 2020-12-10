@@ -1,5 +1,7 @@
 @import 'src/assets/styles/variables';
 
+@import './responsive';
+
 .P-blog-list-item {
   width         : calc(100% / 3 - 40px);
   border        : 1px solid $light-gray;

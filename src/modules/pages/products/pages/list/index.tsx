@@ -42,7 +42,7 @@ class List extends HelperPureComponent<{}, IState> {
     const body = {
       ...buildFilters(),
       pageNumber,
-      pageSize: 8,
+      pageSize: 12,
     };
 
     const result = await ProductController.GetList(body);

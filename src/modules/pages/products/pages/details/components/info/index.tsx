@@ -8,14 +8,14 @@ import LoaderContent from 'components/loader-content';
 import BasketController from 'platform/api/basket';
 import DispatcherChannels from 'platform/constants/dispatcher-channels';
 import PharmaciesAvailablity from './components/pharmacies-availablity';
-
-import PinImage from 'assets/images/pin.png';
-
-import './style.scss';
 import { formatPrice } from 'platform/services/helper';
 import { currency } from 'platform/constants';
 import ROUTES from 'platform/constants/routes';
 import { PromotionType } from 'platform/constants/enums';
+import PinImage from 'assets/images/pin.png';
+
+import './style.scss';
+
 
 interface IProps {
   data: IProductDetailsResponseModel;
@@ -76,11 +76,11 @@ class Info extends HelperComponent<IProps, IState> {
     const { havePackage } = this.state;
     if (data.havePackage) {
       return <span>
-        <span className={`${havePackage ? 'P-selected-count-type' : ''}`} onClick={() => this.safeSetState({ havePackage: true })}>{Settings.translations.package}</span> / 
+        <span className={`${havePackage ? 'P-selected-count-type' : ''}`} onClick={() => this.safeSetState({ havePackage: true })}>{Settings.translations.package}</span> /
         <span className={`${!havePackage ? 'P-selected-count-type' : ''}`} onClick={() => this.safeSetState({ havePackage: false })}>{Settings.translations.item}</span>
       </span>
     } else return <span className="P-selected-count-type">{data.unitName}</span>
-  }  
+  }
 
   private get price() {
     const { data } = this.props;
@@ -94,9 +94,15 @@ class Info extends HelperComponent<IProps, IState> {
     query.set('categoryIds', `${id}`);
     window.routerHistory.replace(`${ROUTES.PRODUCTS.MAIN}?${query.toString()}`);
   }
+  private get defaultPrice() {
+    const { data } = this.props;
+    const { havePackage } = this.state;
+    if (havePackage) return data.packagePrice;
+    return data.price;
+  }
   public render() {
     const { data } = this.props;
-    const { count, cartLoading, pharmaciesAvailablityOpen, havePackage } = this.state;
+    const { count, cartLoading, pharmaciesAvailablityOpen } = this.state;
 
     return (
       <div className="P-product-details-info">
@@ -140,10 +146,10 @@ class Info extends HelperComponent<IProps, IState> {
           >{Settings.translations.add_to_cart}</LoaderContent>
 
           {pharmaciesAvailablityOpen && <PharmaciesAvailablity onClose={this.togglePharmaciesAvailablity} data={data} />}
-          <span className="G-orange-color G-ml-auto P-price"><del>{data.promotion.promotionType === PromotionType.Discount && formatPrice(data.price)}</del>
+        <span className="G-orange-color G-ml-auto P-price"><del>{data.promotion.promotionType === PromotionType.Discount && formatPrice(data.price)}</del>
           {data.promotion.promotionType === PromotionType.Discount && data.promotion.result ? formatPrice(this.price - data.promotion.result) : formatPrice(this.price)}</span>
-        </div>
       </div>
+      </div >
     );
   };
 };

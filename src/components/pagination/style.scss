@@ -15,7 +15,7 @@
     cursor : pointer;
     margin : 0 5px;
   }
-  
+
   .ABM-pages-wrap {
     height      : 20px;
     cursor      : pointer;
@@ -33,7 +33,9 @@
       transition      : transform .4s;
       align-items     : center;
       justify-content : center;
-    
+    @media(max-width: 766.98px){
+      margin: 0 7px;
+    }
       &.ABM-selected {
         width         : 45px;
         color         : $main-color;
@@ -45,7 +47,7 @@
       }
     }
   }
-  
+
   .ABM-count-input {
     width   : 50px;
     display : block;

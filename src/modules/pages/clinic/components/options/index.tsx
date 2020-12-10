@@ -6,12 +6,12 @@ import HelperPureComponent from 'platform/classes/helper-pure-component';
 import ShadowText from 'components/shadow-text';
 import Settings from 'platform/services/settings';
 import ROUTES from 'platform/constants/routes';
+import RouteService from 'platform/services/routes';
 
 import ClinicImage from 'assets/images/clinic_background.png';
 import CardiogramRed from 'assets/images/cardiogram_red.png';
 
 import './style.scss';
-import RouteService from 'platform/services/routes';
 
 class Options extends HelperPureComponent<{}, {}> {
 

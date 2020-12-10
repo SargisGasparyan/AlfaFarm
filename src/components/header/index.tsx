@@ -181,7 +181,7 @@ class Header extends HelperPureComponent<{}, IState> {
 
     return (
       <header ref={this.header} className="G-flex G-flex-align-center G-flex-justify-center">
-        <Screen.Tablet>
+        <Screen.SmallDesktop>
           {((matches: boolean) =>
             !matches ?
               <>
@@ -236,7 +236,7 @@ class Header extends HelperPureComponent<{}, IState> {
               </>
               : <this.Mobile />
           )}
-        </Screen.Tablet>
+        </Screen.SmallDesktop>
 
 
       </header>

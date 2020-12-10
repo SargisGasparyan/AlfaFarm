@@ -19,10 +19,11 @@ class Carousel extends HelperPureComponent<{}, {}> {
     return (
       <Slider
         dots={true}
-        autoplay={true}
+        autoplay={false}
         autoplaySpeed={5000}
         slidesToShow={1}
         slidesToScroll={1}
+        arrows={false}
       >
         <div>
           <div className="G-page P-home-carousel-slide" style={{ background: `url('${HomeImage}') center/cover` }}>

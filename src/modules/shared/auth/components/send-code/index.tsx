@@ -28,7 +28,7 @@ class SendCode extends HelperComponent<IProps, IState> {
     submitLoading: false,
     form: {
       fromForgot: false,
-      phoneNumber: '',
+      number: '',
     },
   };
 
@@ -52,7 +52,7 @@ class SendCode extends HelperComponent<IProps, IState> {
         const form = {...this.state.form};
         const activeData = this.props.activeData as { signUp: boolean, fromSocial: boolean } || null;
         const isSignUp = activeData ? activeData.signUp : false;
-        form.phoneNumber = `+${countryCode}${form.phoneNumber}`;
+        form.number = `+${countryCode}${form.number}`;
         form.fromForgot = !isSignUp;
 
         const result = await AuthController.SendCode(form);
@@ -74,11 +74,11 @@ class SendCode extends HelperComponent<IProps, IState> {
         <div className="G-main-form-field G-phone-input-wrapper">
           <p className="G-input-country-code">+{countryCode}</p>
           <input
-            name="phoneNumber"
-            value={form.phoneNumber}
+            name="number"
+            value={form.number}
             placeholder={Settings.translations.phone_number}
             onChange={this.changeField}
-            className={`G-main-input ${this.formValidation.errors.phoneNumber ? 'G-invalid-field' : ''}`}
+            className={`G-main-input ${this.formValidation.errors.number ? 'G-invalid-field' : ''}`}
           />
         </div>
         <LoaderContent
