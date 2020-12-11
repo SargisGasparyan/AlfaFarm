@@ -10,13 +10,14 @@ import { IBrandListResponseModel } from 'platform/api/brand/models/response';
 interface IProps {
   body: IProductFilterRequestModel;
   onChange(body: IProductFilterRequestModel): void;
+  close?: () => void;
 }
 
-const Brands = ({ body, onChange }: IProps) => {
+const Brands = ({ body, onChange, close }: IProps) => {
   const prevCategoryIdRef = React.useRef<number>();
   const [open, setOpen] = React.useState(!!body.brandIds?.length);
   const [data, setData] = React.useState<IBrandListResponseModel[]>([]);
-
+  close && setOpen(false);
   React.useEffect(() => {
     const categoryId = body.categoryIds && body.categoryIds[0];
 

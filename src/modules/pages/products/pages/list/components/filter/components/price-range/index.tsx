@@ -50,7 +50,7 @@ const PriceRange = ({ body, onChange }: IProps) => {
 
 
   return priceRange && value ? <>
-    <h2>{Settings.translations.price} ({formatPrice(value[0])}-{formatPrice(value[1])})</h2>
+    <h2>{Settings.translations.price} ({formatPrice(value[0])} - {formatPrice(value[1])})</h2>
 
     <Range
       min={priceRange.min}
