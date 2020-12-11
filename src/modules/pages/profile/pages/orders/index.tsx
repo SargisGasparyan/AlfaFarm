@@ -11,15 +11,13 @@ import OrderController from 'platform/api/order';
 import { IOrderListResponseModel } from 'platform/api/order/models/response';
 import { OrderStatusEnum } from 'platform/api/order/constants/enums';
 import { getViewEnum, formatDate } from 'platform/services/helper';
-import SavedBaskets from './components/saved-baskets';
-import SavedBasketItems from './pages/saved-basket-items';
 import Details from './pages/details';
 import Pagination from 'components/pagination';
 import { paginationPageLimit } from 'platform/constants';
 import { IPagingResponse } from 'platform/constants/interfaces';
+import EmptyState from 'components/empty-state';
 
 import './style.scss';
-import EmptyState from 'components/empty-state';
 
 interface IState {
   data?: IPagingResponse<IOrderListResponseModel>;
@@ -86,4 +84,4 @@ class Orders extends HelperComponent<IState, {}> {
   }
 }
 
-export default { Orders, Details, SavedBasketItems };
+export default { Orders, Details };

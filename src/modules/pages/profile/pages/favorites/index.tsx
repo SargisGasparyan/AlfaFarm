@@ -9,16 +9,17 @@ import FavoriteController from 'platform/api/favorite';
 import Settings from 'platform/services/settings';
 import { getMediaPath, formatPrice } from 'platform/services/helper';
 import { IFavoriteListResponseModel } from 'platform/api/favorite/models/response';
+import SavedBaskets from './components/saved-baskets';
+import SavedBasketItems from './pages/saved-basket-items';
+import EmptyState from 'components/empty-state';
 
 import './style.scss';
-import SavedBaskets from '../orders/components/saved-baskets';
-import EmptyState from 'components/empty-state';
 
 interface IState {
   data: IFavoriteListResponseModel[];
 };
 
-@byPrivateRoute(ROUTES.PROFILE.FAVORITES)
+@byPrivateRoute(ROUTES.PROFILE.FAVORITES.MAIN)
 class Favorites extends HelperComponent<IState, {}> {
 
   public state: IState = {
@@ -77,4 +78,4 @@ class Favorites extends HelperComponent<IState, {}> {
   }
 }
 
-export default Favorites;
+export default { Favorites, SavedBasketItems };

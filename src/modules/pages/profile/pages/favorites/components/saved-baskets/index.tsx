@@ -17,10 +17,10 @@ const SavedBaskets = React.memo(() => {
 
   return data && data.length ? <>
     <h2 className="G-main-color G-mb-30">{Settings.translations.saved_carts}</h2>
-    <div className="P-order-saved-baskets">
+    <div className="P-favorites-saved-baskets">
       {data.map((item, index) => <Link
         key={item.id}
-        to={ROUTES.PROFILE.ORDERS.SAVED_BASKET_ITEMS.replace(':id', item.id)}
+        to={ROUTES.PROFILE.FAVORITES.SAVED_BASKET_ITEMS.replace(':id', item.id)}
         className="P-list-item"
       >
         <span className="P-index">{index + 1}</span>
