@@ -25,6 +25,7 @@ export interface IProductDetailsResponseModel {
   discountedPrice?: number;
   discount?: number;
   promotion: IPromotionModel;
+  packagePromotion: IPromotionModel;
   unitName: string;
   discountedPackagePrice: number;
   unitQuantity: number;

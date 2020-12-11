@@ -16,4 +16,8 @@ export interface IProductFilterRequestModel {
   maxPrice?: number;
   categoryIds?: number[];
 };
-
+export interface IGetProductPromotionByQuantityModel {
+  productId: number | null;
+  quantity: number;
+  isPackage: boolean;
+}

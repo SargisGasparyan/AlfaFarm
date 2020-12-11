@@ -1,6 +1,6 @@
 import Connection from '../../services/connection';
 import { IResponse, IPagingResponse } from '../../constants/interfaces';
-import { IProductListRequestModel, IProductRelatedListRequestModel, IProductFilterRequestModel } from './models/request';
+import { IProductListRequestModel, IProductRelatedListRequestModel, IProductFilterRequestModel, IGetProductPromotionByQuantityModel } from './models/request';
 import { IProductListResponseModel, IProductDetailsResponseModel, IProductPriceRangeResponseModel, IProductAvailablityResponseModel } from './models/response';
 
 class ProductController {
@@ -54,6 +54,16 @@ class ProductController {
 
     return result;
   };
+
+  public static GetProductPromotionByQuantity = (body: IGetProductPromotionByQuantityModel): Promise<IResponse<any>> => {
+    const result = Connection.POST<IGetProductPromotionByQuantityModel>({
+      body,
+      action: 'getProductByQuantity',
+      controller: ProductController.controller
+    });
+
+    return result;
+  } 
 
   // For SSR to Fill meta tags
   public static ServerDetails = (id: string): Promise<IResponse<IProductDetailsResponseModel>> => {
