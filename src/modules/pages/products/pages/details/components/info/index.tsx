@@ -63,7 +63,7 @@ class Info extends HelperComponent<IProps, IState> {
     const { promotionModel } = this.state;
     const result = await ProductController.GetProductPromotionByQuantity(promotionModel);
     if (result.success) {
-
+      //
     }
   }
   private changeCart = () => this.safeSetState({ cartLoading: true }, async () => {
@@ -148,7 +148,7 @@ class Info extends HelperComponent<IProps, IState> {
 
           {pharmaciesAvailablityOpen && <PharmaciesAvailablity onClose={this.togglePharmaciesAvailablity} data={data} />}
           <span className="G-orange-color G-ml-auto P-price">
-            <span></span>
+            <span />
             {data.promotion.promotionType === PromotionType.Discount ? 
             <> <del>{formatPrice(this.price)}</del> {formatPrice(this.discountedPrice)} </> : <><span>Bonus: { this.discountedPrice }</span> {formatPrice(this.price)}</>}
           </span>
