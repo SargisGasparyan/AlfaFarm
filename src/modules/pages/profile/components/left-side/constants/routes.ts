@@ -13,7 +13,7 @@ export const leftSideOptions = () => !enviroment.WHOLESALE ? [
   },
   {
     name: Settings.translations.favorites,
-    path: ROUTES.PROFILE.FAVORITES,
+    path: ROUTES.PROFILE.FAVORITES.MAIN,
   },
   {
     name: Settings.translations.special_products,
