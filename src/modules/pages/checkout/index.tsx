@@ -298,7 +298,7 @@ class Checkout extends HelperComponent<{}, IState> {
             <div className="G-main-form-field G-phone-input-wrapper P-checkout-select">
               <Select<OrderDeliveryTypeEnum>
                 options={OrderDeliveryTypeDropdown()}
-                className="G-main-select"
+                className="G-main-select P-checkout-select-item"
                 value={form.deliveryType}
                 onChange={this.changeDeliveryType}
               />

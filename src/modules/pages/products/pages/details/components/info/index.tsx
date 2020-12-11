@@ -36,7 +36,7 @@ class Info extends HelperComponent<IProps, IState> {
     count: 1,
     cartLoading: false,
     pharmaciesAvailablityOpen: false,
-    isSelectedPackage: false,
+    isSelectedPackage: true,
     promotionModel: {
       productId: null,
       quantity: 1,

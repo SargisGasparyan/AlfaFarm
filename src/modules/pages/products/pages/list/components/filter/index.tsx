@@ -62,6 +62,7 @@ class Filter extends HelperComponent<IProps, IState> {
     body.brandIds = [];
     body.activeIngredientIds = [];
     body.producerIds = [];
+    body.hasDiscount = false;
     delete body.minPrice;
     delete body.maxPrice;
 
