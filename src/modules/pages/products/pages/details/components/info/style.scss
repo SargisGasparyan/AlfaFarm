@@ -61,6 +61,11 @@
         display      : block;
         margin-right : 30px;
       }
+      > span {
+        color: $main-color;
+        display: block;
+        margin-right: 40px;
+      }
     }
 
     > .P-count-input {

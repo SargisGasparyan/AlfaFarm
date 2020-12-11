@@ -33,7 +33,7 @@ const ListItem = React.memo(({ data }: IProps) => {
 
   return (
     <Link to={ROUTES.PRODUCTS.DETAILS.replace(':id', data.id)} className="P-home-discounted-products-list-item">
-      {!!data.discount && <Shared.Products.DiscountLabel percent={data.discount} />}
+      {!!data.promotion.percent && <Shared.Products.DiscountLabel percent={data.promotion.percent} type={data.promotion.promotionType} />}
       <div className="P-image" style={{ background: `url('${getMediaPath(data.imagePath)}') center/contain no-repeat` }} />
       <h3>{truncateText(data.title)}</h3>
       {!!data.discount && <del className="P-without-discount-price">{formatPrice(data.price)}</del>}

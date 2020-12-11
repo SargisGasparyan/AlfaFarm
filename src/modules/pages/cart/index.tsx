@@ -59,15 +59,15 @@ class Cart extends HelperComponent<{}, IState> {
     },
     {
       name: 'Bonus',
-      cell: (row: IBasketListResponseModel) => <h3 className="G-fs-24">{row.promotion.promotionType === PromotionType.Bonus ? row.productQuantity * row.promotion.result : 0}</h3>,
+      cell: (row: IBasketListResponseModel) => <h3 className="G-fs-24">{row.promotion.promotionType === PromotionType.Bonus ? row.promotion.result : 0}</h3>,
     },
     {
       name: Settings.translations.price,
       cell: (row: IBasketListResponseModel) =>
         <div className="G-flex G-flex-column G-align-center G-justify-center">
-          <div>{row.promotion.promotionType === PromotionType.Discount && !!row.promotion.result ? <del>{formatPrice(row.productQuantity * row.price)}</del> : null}</div>
+          <div>{row.promotion.promotionType === PromotionType.Discount && row.promotion.result > 0 ? <del>{formatPrice(row.price)}</del> : null}</div>
           <h3 className="G-fs-24">
-            {row.promotion.promotionType === PromotionType.Discount ? formatPrice((row.productQuantity * row.totalPrice) - row.promotion.result) : formatPrice(row.productQuantity * row.price)}
+            {row.promotion.promotionType === PromotionType.Discount ? formatPrice(row.promotion.result) : formatPrice(row.productQuantity * row.price)}
           </h3>
         </div>,
     },
@@ -132,7 +132,7 @@ class Cart extends HelperComponent<{}, IState> {
       await BasketController.Save(basketIds);
     }
 
-    window.routerHistory.push(`${ROUTES.CHECKOUT}?total=${data?.totalPrice}`);
+    window.routerHistory.push(`${ROUTES.CHECKOUT}?total=${data?.totalDiscountedPrice || data?.totalPrice}`);
   }
   public render() {
     const { data, cartSaved } = this.state;
@@ -155,6 +155,7 @@ class Cart extends HelperComponent<{}, IState> {
             />
 
             <div className="P-data-block">
+
               <div className="G-mr-40">
                 <span className="G-fs-normal">{Settings.translations.total}</span>
                 <div className="G-flex G-flex-column G-align-center G-justify-center">
@@ -162,8 +163,9 @@ class Cart extends HelperComponent<{}, IState> {
                   <h1 className="G-orange-color G-fs-24 G-mt-5">{formatPrice(data.totalDiscountedPrice || data.totalPrice)}</h1>
                 </div>
               </div>
+
               <div>
-                <span className="G-fs-normal">{ Settings.translations.bonus_count }</span>
+                <span className="G-fs-normal">{Settings.translations.bonus_count}</span>
                 <h1 className="G-main-color G-fs-24 G-mt-5">{data.totalBonus}</h1>
               </div>
 

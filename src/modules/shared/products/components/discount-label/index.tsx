@@ -11,7 +11,7 @@ interface IProps {
 
 const DiscountLabel = React.memo(({ percent, type }: IProps) => (
   <div className="P-products-discount-label" style={{ background: `url(${type === PromotionType.Discount ? discount : bonus}) left/contain no-repeat` }}>
-    <span>-{percent}%</span>
+    <span>{type === PromotionType.Discount ? '-' : ''}{percent}%</span>
   </div>
 ));
 
