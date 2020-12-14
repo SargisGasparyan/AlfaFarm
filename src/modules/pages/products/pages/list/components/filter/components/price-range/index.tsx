@@ -1,5 +1,3 @@
-
-
 import * as React from 'react';
 import { IProductFilterRequestModel } from 'platform/api/product/models/request';
 import ROUTES from 'platform/constants/routes';
@@ -10,6 +8,8 @@ import { IProductPriceRangeResponseModel } from 'platform/api/product/models/res
 
 import { gray, mainColor } from 'assets/styles/variables.scss';
 import { formatPrice } from 'platform/services/helper';
+
+import './style.scss';
 
 interface IProps {
   body: IProductFilterRequestModel;
@@ -31,6 +31,8 @@ const PriceRange = ({ body, onChange }: IProps) => {
       });
 
     prevCategoryIdRef.current = categoryId;
+
+    !body.minPrice && !body.maxPrice && priceRange && setValue([priceRange.min, priceRange.max]);
   });
 
   const changePrice = ([minPrice, maxPrice]: [number, number]) => {
@@ -45,7 +47,7 @@ const PriceRange = ({ body, onChange }: IProps) => {
     bodyCopy.maxPrice = maxPrice;
     setValue([bodyCopy.minPrice, bodyCopy.maxPrice]);
     
-    onChange(body);
+    onChange(bodyCopy);
   }
 
 
@@ -59,7 +61,7 @@ const PriceRange = ({ body, onChange }: IProps) => {
       onChange={changePrice}
       renderThumb={({ props }) => <div {...props} className="P-range-thumb" />}
       renderTrack={({ props, children }) => (
-        <div className="P-range-track">
+        <div className="P-products-filter-price-range P-range-track">
           <div
             className="P-range-track-active"
             ref={props.ref}
