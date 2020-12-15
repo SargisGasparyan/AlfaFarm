@@ -8,8 +8,11 @@ import { IProductPriceRangeResponseModel } from 'platform/api/product/models/res
 
 import { gray, mainColor } from 'assets/styles/variables.scss';
 import { formatPrice } from 'platform/services/helper';
+import useSubscriber from 'platform/hooks/use-subcriber';
+import DispatcherChannels from 'platform/constants/dispatcher-channels';
 
 import './style.scss';
+
 
 interface IProps {
   body: IProductFilterRequestModel;
@@ -31,9 +34,9 @@ const PriceRange = ({ body, onChange }: IProps) => {
       });
 
     prevCategoryIdRef.current = categoryId;
-
-    !body.minPrice && !body.maxPrice && priceRange && setValue([priceRange.min, priceRange.max]);
   });
+
+  useSubscriber(DispatcherChannels.ProductFilterClear, () => priceRange && setValue([priceRange.min, priceRange.max]));
 
   const changePrice = ([minPrice, maxPrice]: [number, number]) => {
     const bodyCopy = {...body};

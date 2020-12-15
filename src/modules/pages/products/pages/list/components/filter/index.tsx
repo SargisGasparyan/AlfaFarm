@@ -16,6 +16,7 @@ import PriceRange from './components/price-range';
 import Settings from 'platform/services/settings';
 import Screen from 'components/screen';
 import './style.scss';
+import Broadcast from 'platform/services/broadcast';
 
 
 interface IProps {
@@ -76,7 +77,8 @@ class Filter extends HelperComponent<IProps, IState> {
     window.routerHistory.replace(`${ROUTES.PRODUCTS.MAIN}?${query.toString()}`);
     window.scrollTo(0, 0);
     
-    this.bodyChange(body);
+    this.bodyChange({...body});
+    Broadcast.dispatch(DispatcherChannels.ProductFilterClear);
   }
 
   private chooseMainCategory = (id: number) => {
