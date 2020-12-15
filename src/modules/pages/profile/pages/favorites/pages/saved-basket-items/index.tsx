@@ -10,10 +10,9 @@ import PageLoader from 'components/page-loader';
 import BasketController from 'platform/api/basket';
 import { IBasketListResponseModel } from 'platform/api/basket/models/response';
 import Settings from 'platform/services/settings';
+import { Shared } from 'modules';
 
 import './style.scss';
-import { Shared } from 'modules';
-import DispatcherChannels from 'platform/constants/dispatcher-channels';
 
 interface IState {
   data?: IBasketListResponseModel[];
@@ -24,7 +23,7 @@ interface IRouteParams {
 };
 
 @generic<RouteComponentProps<IRouteParams>>(withRouter)
-@byPrivateRoute(ROUTES.PROFILE.ORDERS.SAVED_BASKET_ITEMS)
+@byPrivateRoute(ROUTES.PROFILE.FAVORITES.SAVED_BASKET_ITEMS)
 class SavedBasketItems extends HelperComponent<RouteComponentProps<IRouteParams>, IState> {
 
   public state: IState = { };
@@ -76,7 +75,7 @@ class SavedBasketItems extends HelperComponent<RouteComponentProps<IRouteParams>
 
     return (
       <Layout>
-        {data ? <div className="P-profile-order-saved-basket-items">
+        {data ? <div className="P-profile-favorites-saved-basket-items">
           {window.routerHistory.length > 2 && <i className="G-back-icon icon-Group-5529" onClick={this.goBack} />}
           <Shared.Products.TableList list={data} onQuantityChange={this.changeQuantity} />
           <button className="G-main-ghost-button G-ml-auto" onClick={this.deleteSaved}>{Settings.translations.delete}</button>

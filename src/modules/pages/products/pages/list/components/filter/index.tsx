@@ -1,4 +1,5 @@
 import * as React from 'react';
+import CheckBox from 'rc-checkbox';
 
 import HelperComponent from "platform/classes/helper-component";
 
@@ -12,11 +13,11 @@ import Producers from './components/producers';
 import ActiveIngredients from './components/active-ingredients';
 import DispatcherChannels from 'platform/constants/dispatcher-channels';
 import PriceRange from './components/price-range';
-
-import './style.scss';
 import Settings from 'platform/services/settings';
 import Screen from 'components/screen';
-import CheckBox from 'rc-checkbox';
+import './style.scss';
+import Broadcast from 'platform/services/broadcast';
+
 
 interface IProps {
   onChange(): void;
@@ -76,7 +77,8 @@ class Filter extends HelperComponent<IProps, IState> {
     window.routerHistory.replace(`${ROUTES.PRODUCTS.MAIN}?${query.toString()}`);
     window.scrollTo(0, 0);
     
-    this.bodyChange(body);
+    this.bodyChange({...body});
+    Broadcast.dispatch(DispatcherChannels.ProductFilterClear);
   }
 
   private chooseMainCategory = (id: number) => {
