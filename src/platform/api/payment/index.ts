@@ -1,5 +1,6 @@
 import Connection    from '../../services/connection';
 import { IResponse } from '../../constants/interfaces';
+import { IUserCardListModel } from './models/response';
 
 class PaymentController {
  
@@ -13,7 +14,7 @@ class PaymentController {
 
     return result;
   };
-  public static getUserCards = (): Promise<IResponse<any>> => {
+  public static getUserCards = (): Promise<IResponse<IUserCardListModel[]>> => {
     const result = Connection.GET({
       action: 'getUserCards',
       controller: PaymentController.controller,

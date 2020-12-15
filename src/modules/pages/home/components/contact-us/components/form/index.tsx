@@ -45,11 +45,9 @@ class Form extends HelperComponent<{}, IState> {
           alertify.success(Settings.translations.request_success);
           this.safeSetState({ submited: false }, () => {
             body.content = '';
-            body.email = '';
-            body.name = '';
+            body.email = Storage.profile.email || '',
+            body.name = (Storage.profile.firstName + Storage.profile.lastName) || '';
           });
-          console.log(body);
-          
           this.safeSetState({ body });
         }
         this.safeSetState({ submitLoading: false })

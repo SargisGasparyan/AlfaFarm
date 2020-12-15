@@ -2,10 +2,9 @@ import * as React from 'react';
 
 import ShadowText from 'components/shadow-text';
 import Settings from 'platform/services/settings';
-
 import './style.scss';
 
-const FirstPart = React.memo(() => <div className="P-clinic-about-us-first-part">
+const FirstPart = React.memo(() => <div className="P-clinic-about-us-first-part P-clinic-about-us-tablet">
   <div className="P-image" />
   <div className="P-content">
     <ShadowText>{Settings.translations.about_us}</ShadowText>

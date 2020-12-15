@@ -32,7 +32,7 @@ class News extends HelperComponent<{}, IState> {
     const { data } = this.state;
 
     return data.length ? (
-      <section className="G-page P-home-news">
+      <section className="G-page P-home-news P-home-news">
         <ShadowText className="G-text-center">{Settings.translations.news}</ShadowText>
 
         <div className="P-list-wrapper">

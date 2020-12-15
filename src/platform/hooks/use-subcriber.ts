@@ -9,10 +9,7 @@ const useSubscriber = (channelName: string, callback: IChannelCallback): void =>
   Broadcast.subscribe(channelName, ref.current);
 
   React.useEffect(() => {
-    return () => {
-      console.log('mtavvv');
-      ref.current && Broadcast.unsubscribe(channelName, ref.current);
-    }
+    return () => ref.current && Broadcast.unsubscribe(channelName, ref.current);
   }, []);
 } 
 

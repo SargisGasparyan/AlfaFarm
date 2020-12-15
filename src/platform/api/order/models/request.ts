@@ -8,6 +8,7 @@ export interface IOrderModifyRequestModel {
   userAddressId?: number;
   addressText?: string;
   addressLat?: number;
+  creditCardId?: number;
   addressLng?: number;
   addressBuilding?: string;
   addressEntrance?: string;
