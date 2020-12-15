@@ -1,0 +1,15 @@
+@import 'assets/styles/variables.scss';
+
+@media(max-width: $tablet-screen) {
+  .P-clinic-about-us-tablet {
+    flex-direction: column;
+    > .P-image {
+      width: 100% !important;
+    }
+    > .P-content {
+      width: 100% !important;
+      padding: 20px 10px !important;
+      min-height: calc(80vh - 370px) !important;
+    }
+  }
+}

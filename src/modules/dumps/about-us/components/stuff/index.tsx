@@ -3,6 +3,7 @@ import * as React from 'react';
 import ShadowText from 'components/shadow-text';
 import Settings from 'platform/services/settings';
 
+import './responsive.scss';
 import './style.scss';
 
 const Stuff = React.memo(() => <div className="P-about-us-stuff">

@@ -29,10 +29,9 @@ import Radio from 'components/radio';
 import { PaymentType } from 'platform/constants/enums';
 import PaymentController from 'platform/api/payment';
 
-import arca from 'assets/images/Arca.png';
-import master from 'assets/images/master.png';
-import visa from 'assets/images/visaImage.svg';
+
 import DispatcherChannels from 'platform/constants/dispatcher-channels';
+import PaymentMethod from './components/payment';
 interface IState {
   form: IOrderModifyRequestModel;
   submited: boolean;
@@ -40,10 +39,13 @@ interface IState {
   chooseAddressOpen: boolean;
   successModalOpen: boolean;
   isPayment: boolean;
+  idramAmount: number | null;
+  idramNId: number | null;
 };
 
 @byRoute(ROUTES.CHECKOUT)
 class Checkout extends HelperComponent<{}, IState> {
+  private submitForm: React.RefObject<HTMLFormElement> = React.createRef();
 
   public state: IState = {
     submited: false,
@@ -58,6 +60,8 @@ class Checkout extends HelperComponent<{}, IState> {
       paymentType: PaymentType.Cash
     },
     isPayment: false,
+    idramAmount: null,
+    idramNId: null
   };
 
   private total: number | null;
@@ -74,15 +78,15 @@ class Checkout extends HelperComponent<{}, IState> {
       form.lastName = Storage.profile.lastName;
       form.phoneNumber = Storage.profile.phoneNumber.substring(`+${countryCode}`.length);
       form.email = Storage.profile.email;
-      this.getTotalPrice(); 
+      this.getTotalPrice();
       this.safeSetState({ form });
     }
   }
-  
+
   private getTotalPrice = () => {
     const query = new URLSearchParams(window.location.search);
     const price = query.get('total');
-    if (price)  this.total = +price;
+    if (price) this.total = +price;
   }
 
   private changeField = (e: React.SyntheticEvent<any>) => {
@@ -174,16 +178,13 @@ class Checkout extends HelperComponent<{}, IState> {
   private finishCheckout = (e: React.SyntheticEvent) => {
     e.preventDefault();
     const { form } = this.state;
-    form.paymentType = PaymentType.Cash;
+    const query = new URLSearchParams(window.location.search);
+    form.paymentType = Number(query.get('paymentType'));
+    form.creditCardId = Number(query.get('card'));
     this.safeSetState({ submitLoading: true, form }, async () => {
+      this.submitForm.current && this.submitForm.current.submit();
       const result = await OrderController.Create(form);
       if (result.success) {
-        // if (form.paymentType === PaymentType.IPay) {
-        //   const onlinePayRes = await PaymentController.registerCard();
-        //   if (onlinePayRes.success) {
-
-        //   }
-        // }
         this.safeSetState({ successModalOpen: true }, () => window.dispatchEvent(new CustomEvent(DispatcherChannels.CartItemsUpdate)));
       }
       else this.safeSetState({ submitLoading: false });
@@ -344,44 +345,17 @@ class Checkout extends HelperComponent<{}, IState> {
             >{Settings.translations.choose_address}</LoaderContent>}
             {chooseAddressOpen && <ChooseAddress onClose={this.closeAddressChoose} />}
           </div>
-        </form> : <this.Payment />}
+        </form> : <PaymentMethod callback={(e: React.SyntheticEvent) => this.finishCheckout(e)} />}
 
         {successModalOpen && <SuccessModal text={Settings.translations.order_success} onClose={this.navigateToHome} />}
+        {/* <form action="https://money.idram.am/payment.aspx" ref={this.submitForm} method="POST">
+          <input type="hidden" name="EDP_LANGUAGE" value="AM" />
+          <input type="hidden" name="EDP_REC_ACCOUNT" value="110000055" />
+          <input type="hidden" name="EDP_AMOUNT" value={this.state.idramAmount || ''} />
+          <input type="hidden" name="EDP_BILL_NO" value={this.state.idramNId || ''} />
+        </form> */}
       </section>
     );
-  }
-
-  private Payment = () => {
-    const { form, submitLoading } = this.state;
-    return <div className="P-choose-payment-type-section">
-      <div className="P-payment-types">
-        <div>
-          <Radio<PaymentType> callback={(data: PaymentType) => this.choosePaymentType(data)} value={PaymentType.Cash} isChecked={form.paymentType === PaymentType.Cash}>
-            {Settings.translations.cash}
-          </Radio>
-        </div>
-        <div>
-          <Radio<PaymentType> callback={(data: PaymentType) => this.choosePaymentType(data)} value={PaymentType.IPay} isChecked={form.paymentType === PaymentType.IPay}>
-            <span>{Settings.translations.card}</span>
-            <div className="P-online-pay-icons">
-              <div style={{ background: `url(${arca}) center/contain no-repeat` }} />
-              <div style={{ background: `url(${visa}) center/cover no-repeat` }} />
-              <div style={{ background: `url(${master}) center/contain no-repeat` }} />
-            </div>
-          </Radio>
-        </div>
-      </div>
-      
-      {this.total && <p>{Settings.translations.total} {formatPrice(this.total)}</p>}
-
-      <div className="P-choose-payment-buttons">
-        <LoaderContent
-          className="G-main-button"
-          loading={submitLoading}
-          onClick={this.finishCheckout}
-        >{Settings.translations.pay}</LoaderContent>
-      </div>
-    </div>
   }
 };
 
