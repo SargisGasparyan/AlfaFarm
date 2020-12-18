@@ -6,6 +6,8 @@ import CheckBox from 'rc-checkbox';
 import { infinityScrollMax } from 'platform/constants';
 import BrandController from 'platform/api/brand';
 import { IBrandListResponseModel } from 'platform/api/brand/models/response';
+import useSubscriber from 'platform/hooks/use-subcriber';
+import DispatcherChannels from 'platform/constants/dispatcher-channels';
 
 interface IProps {
   body: IProductFilterRequestModel;
@@ -17,7 +19,7 @@ const Brands = ({ body, onChange, close }: IProps) => {
   const prevCategoryIdRef = React.useRef<number>();
   const [open, setOpen] = React.useState(!!body.brandIds?.length);
   const [data, setData] = React.useState<IBrandListResponseModel[]>([]);
-  close && setOpen(false);
+
   React.useEffect(() => {
     const categoryId = body.categoryIds && body.categoryIds[0];
 
@@ -29,6 +31,8 @@ const Brands = ({ body, onChange, close }: IProps) => {
 
     prevCategoryIdRef.current = categoryId;
   });
+
+  useSubscriber(DispatcherChannels.ProductFilterClear, () => setOpen(false));
 
   const toggleItem = (id: number) => {
     const bodyCopy = {...body};

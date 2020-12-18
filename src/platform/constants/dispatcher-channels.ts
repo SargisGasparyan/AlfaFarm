@@ -9,6 +9,7 @@ const DispatcherChannels = {
   // Products
 
   ProductFilterChange: 'productfilterchange',
+  ProductFilterClear: 'productfilterclear',
 
   // Cart
 

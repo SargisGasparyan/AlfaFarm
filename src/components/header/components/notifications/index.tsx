@@ -27,10 +27,10 @@ class Notifications extends HelperPureComponent<IProps, IState> {
 
   public componentDidMount() {
     this.fetchData();
-    document.body.style.overflowY = 'hidden';
+    // document.body.style.overflowY = 'hidden';
   }
   public componentWillUnmount() {
-    document.body.style.overflowY = 'initial';
+    // document.body.style.overflowY = 'initial';
   }
 
   private fetchData = async () => {
@@ -67,7 +67,7 @@ class Notifications extends HelperPureComponent<IProps, IState> {
         onClick={onClose}
       >
         {item.description}
-        <span>{formatDate(item.createdDate, false)}</span>
+        <span>{formatDate(item.createdDate, true)}</span>
       </Link>,
     };
 

@@ -4,10 +4,11 @@
   width         : 100%;
   display       : flex;
   flex-wrap     : wrap;
-  border-bottom : 1px solid $light-gray;
-
+  border        : 1px solid $light-gray;
+  padding       : 15px;
+  border-radius: 12px;
   > div {
-    margin-bottom : 40px;
+    // margin-bottom : 40px;
     
     &.P-image {
       flex      : 1;

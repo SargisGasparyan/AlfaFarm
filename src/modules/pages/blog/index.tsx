@@ -16,6 +16,7 @@ import PageLoader from 'components/page-loader';
 import Details from './pages/details';
 
 import './style.scss';
+import EmptyState from 'components/empty-state';
 
 interface IState {
   data?: IBlogListResponseModel[];
@@ -74,12 +75,12 @@ class Blog extends HelperComponent<{}, IState> {
     return (
       <section className="G-page P-blog-page">
         {sortedData ? <>
-          <ShadowText className="G-page-title">{Settings.translations.blog}</ShadowText>
+          {!!sortedData.length && <ShadowText className="G-page-title">{Settings.translations.blog}</ShadowText>}
           {firstItem && <FirstItem data={firstItem} />}
           
-          {!!sortedData.length && <div className="P-list-wrapper">
+          {!!sortedData.length ? <div className="P-list-wrapper">
             {sortedData.map(item => <ListItem key={item.id} data={item} />)}
-          </div>}
+          </div> : <EmptyState text={Settings.translations.empty_blogs_list} />}
         </> : <PageLoader />}
       </section>
     );

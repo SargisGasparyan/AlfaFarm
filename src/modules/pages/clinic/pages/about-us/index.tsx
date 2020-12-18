@@ -8,6 +8,7 @@ import SecondPart from './components/second-part';
 import Options from '../../components/options';
 import { onlyForUsers } from 'platform/guards/routes';
 
+import './responsive.scss';
 import './style.scss';
 
 @byRoute(ROUTES.CLINIC.ABOUT_US, [onlyForUsers])

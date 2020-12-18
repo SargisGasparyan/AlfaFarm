@@ -14,6 +14,7 @@ import { onlyForUsers } from 'platform/guards/routes';
 
 import './style.scss';
 import { formatPrice } from 'platform/services/helper';
+import EmptyState from 'components/empty-state';
 
 interface IState {
   data?: IMedicalServicePriceListResponseModel[];
@@ -68,11 +69,11 @@ class PriceList extends HelperComponent<{}, {}> {
               onSubmit={this.fetchData}
             />
           </h1>
-          {data ? data.map(item => <Table<IMedicalServiceListResponseModel>
+          {data?.length ? data.map(item => <Table<IMedicalServiceListResponseModel>
             key={item.id}
             columnConfig={this.columnConfig(item.name)}
             data={item.services}
-          />) : <PageLoader />}
+          />) : <EmptyState text={Settings.translations.empty_price_list} />}
         </div>
       </section>
     );

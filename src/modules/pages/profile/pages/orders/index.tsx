@@ -67,7 +67,7 @@ class Orders extends HelperComponent<IState, {}> {
 
   public render() {
     const { data } = this.state;
-
+    
     return (
       <Layout>
         <h2 className="G-main-color G-mb-30">{Settings.translations.order_history}</h2>

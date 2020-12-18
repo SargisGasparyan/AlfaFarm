@@ -25,7 +25,10 @@ export enum WeekDaysEnum {
 };
 export enum PaymentType {
   Cash,
-  IPay
+  IPay,
+  PostTerminal,
+  Idram,
+  Telcell
 }
 export enum PromotionType {
   Bonus,

@@ -10,7 +10,6 @@ import Stuff from './components/stuff';
 import CardiogramImage from 'assets/images/cardiogram.png';
 
 import './style.scss';
-
 @byRoute(ROUTES.ABOUT_US)
 class AboutUs extends HelperPureComponent<{}, {}> {
 
