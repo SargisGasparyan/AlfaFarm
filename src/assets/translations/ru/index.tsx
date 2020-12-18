@@ -1073,6 +1073,14 @@ export default {
   canceled: "Отменен",
   pending: "В ожидании",
   success: "Успешный",
+
+  failed:'Не удачно',
+  attached_to_carrier: 'В ожидании',
+  confirmed_by_branch_admin: 'В ожидании',
+  not_completed: 'В ожидании',
+  ready_to_start:  'Собранный',
+  started: 'В процессе',
+
   success_book: "Спасибо! Ваш запрос на регистрацию был одобрен. Вы можете следить за статусом вашего приëма в разделе «Мои приëмы» на вашей Личной странице.",
   best_selling: "Самые продаваемые",
   new_products: "Новые продукты",
@@ -1139,6 +1147,8 @@ export default {
   bonus_count: 'Кол. бонусов',
   checkout: "Оформить заказ",
   type: "Тип",
+  empty_price_list: 'Список цен пуст',
+  empty_blogs_list: 'Лист блогов пуст.',
   pricing: "Платеж",
   additionally: "Дополнительно",
   comment: "Комментарий",

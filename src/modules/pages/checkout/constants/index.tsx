@@ -10,5 +10,9 @@ export const PaymentTypeItems: IPaymentTypeItemModel[] = [
   {
     name: Settings.translations.card,
     type: PaymentType.IPay
+  },
+  {
+    name: 'IDram',
+    type: PaymentType.Idram
   }
 ];

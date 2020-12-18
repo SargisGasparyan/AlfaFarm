@@ -15,7 +15,7 @@ interface IProps {
 
 const ListItem = React.memo(({ data }: IProps) => (
   <div className="P-blog-list-item">
-    <div className="P-image" style={{ background: `url('${getMediaPath(data.imagePath)}') center/cover` }} />
+    <div className="P-image" style={{ background: `url('${getMediaPath(data.imagePath)}') center/contain no-repeat` }} />
     <div className="P-content">
       <h3>{truncateText(data.title, 60)}</h3>
       <Link

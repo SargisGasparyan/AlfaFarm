@@ -47,7 +47,7 @@ class List extends HelperPureComponent<{}, IState> {
 
     const result = await ProductController.GetList(body);
 
-    !result.aborted && this.safeSetState({ data: result.data.list, total: result.data.totalCount, loading: false });
+    !result.aborted && this.safeSetState({ data: result.data.list, total: result.data.totalCount, loading: false }, ()=> window.scrollTo(0, 0));
     return result.data;
   }
 

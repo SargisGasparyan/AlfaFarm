@@ -99,7 +99,7 @@ class Doctors extends HelperComponent<{}, {}> {
     }
   }
 
-  private search = (value: string) => this.safeSetState({ searchValue: value }, () => {
+  private search = (value: string) => this.safeSetState({ searchValue: value, loading: true }, () => {
     this.pageNo = 1;
     this.lastPage = false;
     this.fetchData(true);
@@ -145,7 +145,7 @@ class Doctors extends HelperComponent<{}, {}> {
   });
 
   public render() {
-    const { data, chosenService, chosenDoctor, submitLoading, showSuccess } = this.state;
+    const { data, chosenService, chosenDoctor, submitLoading, showSuccess, loading } = this.state;
 
     return (
       <section className="G-page P-clinic-doctors-page">
@@ -184,7 +184,8 @@ class Doctors extends HelperComponent<{}, {}> {
               chosen={chosenService && chosenDoctor === item.id ? item.services.find(sub => sub.id === chosenService) : undefined}
             />
           </div>) : <PageLoader />}
-          {showSuccess && <SuccessModal text={Settings.translations.success_book} onClose={this.toggleSuccessModal} />}
+          {loading && <PageLoader />}
+          {showSuccess && <SuccessModal text={Settings.translations.success_book} onClose={this.toggleSuccessModal} link={{ path: `${ROUTES.PROFILE.MY_REGISTRATIONS.MAIN}`, name: `${Settings.translations.my_registrations}` }} />}
         </div>
       </section>
     );

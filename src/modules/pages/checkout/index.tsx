@@ -25,7 +25,6 @@ import OrderController from 'platform/api/order';
 import SuccessModal from 'components/success-modal';
 
 import './style.scss';
-import Radio from 'components/radio';
 import { PaymentType } from 'platform/constants/enums';
 import PaymentController from 'platform/api/payment';
 
@@ -86,6 +85,7 @@ class Checkout extends HelperComponent<{}, IState> {
   private getTotalPrice = () => {
     const query = new URLSearchParams(window.location.search);
     const price = query.get('total');
+    this.safeSetState({ idramAmount: price });
     if (price) this.total = +price;
   }
 
@@ -182,9 +182,9 @@ class Checkout extends HelperComponent<{}, IState> {
     form.paymentType = Number(query.get('paymentType'));
     form.creditCardId = Number(query.get('card'));
     this.safeSetState({ submitLoading: true, form }, async () => {
-      this.submitForm.current && this.submitForm.current.submit();
       const result = await OrderController.Create(form);
       if (result.success) {
+        if (form.paymentType === PaymentType.Idram) { document.getElementById('currentId')?.click(); }
         this.safeSetState({ successModalOpen: true }, () => window.dispatchEvent(new CustomEvent(DispatcherChannels.CartItemsUpdate)));
       }
       else this.safeSetState({ submitLoading: false });
@@ -348,12 +348,16 @@ class Checkout extends HelperComponent<{}, IState> {
         </form> : <PaymentMethod callback={(e: React.SyntheticEvent) => this.finishCheckout(e)} />}
 
         {successModalOpen && <SuccessModal text={Settings.translations.order_success} onClose={this.navigateToHome} />}
-        {/* <form action="https://money.idram.am/payment.aspx" ref={this.submitForm} method="POST">
-          <input type="hidden" name="EDP_LANGUAGE" value="AM" />
-          <input type="hidden" name="EDP_REC_ACCOUNT" value="110000055" />
+
+        <form action="https://money.idram.am/payment.aspx" method="POST" target="blank">
+          <input type="hidden" name="EDP_LANGUAGE" value="EN" />
+          <input type="hidden" name="EDP_REC_ACCOUNT" value="110000601" />
+          <input type="hidden" name="EDP_DESCRIPTION" value="Order description" />
           <input type="hidden" name="EDP_AMOUNT" value={this.state.idramAmount || ''} />
           <input type="hidden" name="EDP_BILL_NO" value={this.state.idramNId || ''} />
-        </form> */}
+          <input type="submit" value="submit" id="currentId" className="G-dn" />
+        </form>
+
       </section>
     );
   }

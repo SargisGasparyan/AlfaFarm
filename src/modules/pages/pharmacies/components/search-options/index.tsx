@@ -103,7 +103,7 @@ class SearchOptions extends HelperPureComponent<IProps, IState> {
             />
           </div>
 
-          <button className="G-main-button" onClick={this.submit}>{Settings.translations.search}</button>
+          <button className="G-main-button G-mt-20" onClick={this.submit}>{Settings.translations.search}</button>
         </form>
       </div>
     );

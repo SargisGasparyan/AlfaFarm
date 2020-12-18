@@ -16,30 +16,30 @@ const PaymentMethod = React.memo(({ callback }: IPaymentMethod) => {
 
   const total = () => {
     const query = new URLSearchParams(window.location.search);
-    const total = query.get('total');
-    return Number(total);
+    const item = query.get('total');
+    return Number(item);
   }
 
   const pay = (e: React.SyntheticEvent) => { setLoading(true); callback(e); };
 
-  const chooseType = (type: PaymentType) => {
-    setType(type);
+  const chooseType = (item: PaymentType) => {
+    setType(item);
     const query = new URLSearchParams(window.location.search);
-    query.set('paymentType', type.toString());
-    type && window.routerHistory.push(`${window.location.pathname}?${query.toString()}`);
+    query.set('paymentType', item.toString());
+    item && window.routerHistory.push(`${window.location.pathname}?${query.toString()}`);
   }
 
-  const child = (type: PaymentType) => {
+  const child = (item: PaymentType) => {
     const content = {
       [PaymentType.Cash]: null,
       [PaymentType.IPay]: <IPay />
     };
-    return content[type];
+    return content[item];
   }
   return <div className="P-choose-payment-type-section">
     <div className="P-payment-types">
       {PaymentTypeItems.map((item, index) => <div key={index}>
-        <Radio<PaymentType> callback={(type: PaymentType) => chooseType(type)} value={item.type} isChecked={type === item.type}>
+        <Radio<PaymentType> callback={(x: PaymentType) => chooseType(x)} value={item.type} isChecked={type === item.type}>
           <span>{item.name}</span>
           {type === item.type && child(item.type)}
         </Radio>

@@ -8,6 +8,9 @@
   @media(max-width : $tablet-screen) {
     padding : 15px !important;
   }
+  .G-no-text-decoration {
+    text-decoration: none !important;
+  }
 
   .G-page-title {
     color         : $main-color;
@@ -466,7 +469,9 @@
     font-size: 25px;
   }
 }
-
+.G-dn {
+  display: none !important; 
+}
 .G-mb-0 {
   margin-bottom: 0!important;
 }

@@ -92,11 +92,6 @@ class Details extends HelperComponent<RouteComponentProps<IRouteParams>, IState>
             </h3>
 
             <h3 className="G-flex G-mb-30 G-flex-justify-between">
-              {Settings.translations.status}
-              <span>{OrderStatusEnum[data.status]}</span>
-            </h3>
-
-            <h3 className="G-flex G-mb-30 G-flex-justify-between">
               {Settings.translations.quantity}
               <span>{data.productQuantity}</span>
             </h3>

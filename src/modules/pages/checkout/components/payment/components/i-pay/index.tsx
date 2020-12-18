@@ -24,8 +24,10 @@ const IPay = React.memo(() => {
   React.useEffect(() => {
     PaymentController.getUserCards().then(result => {
       setList(result.data);
-      result.data.length && setCard(result.data[0].id);
-      apply(result.data[0].id);
+      if (!!result.data.length) {
+        setCard(result.data[0].id);
+        apply( result.data[0].id);
+      } 
     });
   }, []);
 
