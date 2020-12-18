@@ -36,9 +36,10 @@ const PaymentMethod = React.memo(({ callback }: IPaymentMethod) => {
     };
     return content[item];
   }
+  
   return <div className="P-choose-payment-type-section">
     <div className="P-payment-types">
-      {PaymentTypeItems.map((item, index) => <div key={index}>
+      {PaymentTypeItems().map((item, index) => <div key={index}>
         <Radio<PaymentType> callback={(x: PaymentType) => chooseType(x)} value={item.type} isChecked={type === item.type}>
           <span>{item.name}</span>
           {type === item.type && child(item.type)}

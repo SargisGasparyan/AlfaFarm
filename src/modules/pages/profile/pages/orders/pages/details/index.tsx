@@ -125,16 +125,6 @@ class Details extends HelperComponent<RouteComponentProps<IRouteParams>, IState>
             </h3>
 
             <h3 className="G-flex G-mb-30 G-flex-justify-between">
-              {Settings.translations.city}
-              <span>{data.cityName}</span>
-            </h3>
-
-            <h3 className="G-flex G-mb-30 G-flex-justify-between">
-              {Settings.translations.region}
-              <span>{data.regionName}</span>
-            </h3>
-
-            <h3 className="G-flex G-mb-30 G-flex-justify-between">
               {Settings.translations.address}
               <span>{data.address}</span>
             </h3>
