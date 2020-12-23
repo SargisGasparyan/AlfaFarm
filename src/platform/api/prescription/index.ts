@@ -9,7 +9,7 @@ class PrescriptionController {
   private static controller = 'prescription';
 
   public static GetList = (body: IPrescriptionListRequestModel): Promise<IResponse<IPagingResponse<IPrescriptionListResponseModel>>> => {
-    const result = Connection.POST<IPrescriptionListRequestModel>({
+    const result = Connection.POST({
       body,
       action: 'list',
       controller: PrescriptionController.controller,
@@ -28,7 +28,7 @@ class PrescriptionController {
   };
 
   public static Create = (body: IPrescriptionModifyRequestModel): Promise<IResponse<number>> => {
-    const result = Connection.POST<IPrescriptionModifyRequestModel>({
+    const result = Connection.POST({
       body,
       action: '',
       controller: PrescriptionController.controller,
@@ -38,7 +38,7 @@ class PrescriptionController {
   };
 
   public static UploadFile = (id: number, body: FormData): Promise<IResponse<boolean>> => {
-    const result = Connection.POST<FormData>({
+    const result = Connection.POST({
       body,
       action: `file/${id}`,
       controller: PrescriptionController.controller,
@@ -49,7 +49,7 @@ class PrescriptionController {
   };
 
   public static DeleteFile = (id: number, files: number[]): Promise<IResponse<boolean>> => {
-    const result = Connection.DELETE<{}>({
+    const result = Connection.DELETE({
       body: {},
       query: { files },
       action: `file/${id}`,

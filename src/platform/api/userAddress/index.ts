@@ -26,7 +26,7 @@ class UserAddressController {
   };
 
   public static Create = (body: IUserAddressModifyRequestModel): Promise<IResponse<number>> => {
-    const result = Connection.POST<IUserAddressModifyRequestModel>({
+    const result = Connection.POST({
       body,
       action: '',
       controller: UserAddressController.controller,
@@ -36,7 +36,7 @@ class UserAddressController {
   };
 
   public static Update = (id: number, body: IUserAddressModifyRequestModel): Promise<IResponse<boolean>> => {
-    const result = Connection.PUT<IUserAddressModifyRequestModel>({
+    const result = Connection.PUT({
       body,
       action: `${id}`,
       controller: UserAddressController.controller,
@@ -46,7 +46,7 @@ class UserAddressController {
   };
 
   public static Delete = (id: number): Promise<IResponse<boolean>> => {
-    const result = Connection.DELETE<{}>({
+    const result = Connection.DELETE({
       body: {},
       action: `${id}`,
       controller: UserAddressController.controller,

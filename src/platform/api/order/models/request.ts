@@ -1,6 +1,6 @@
 import { OrderDeliveryTypeEnum } from '../constants/enums';
 import { IPagingRequest } from 'platform/constants/interfaces';
-import { PaymentType } from 'platform/constants/enums';
+import { PaymentTypeEnum } from 'platform/constants/enums';
 
 export interface IOrderListRequestModel extends IPagingRequest {};
 
@@ -9,6 +9,7 @@ export interface IOrderModifyRequestModel {
   addressText?: string;
   addressLat?: number;
   creditCardId?: number;
+  usedBonus?: number;
   addressLng?: number;
   addressBuilding?: string;
   addressEntrance?: string;
@@ -24,5 +25,10 @@ export interface IOrderModifyRequestModel {
   deliveryDateFrom?: string;
   deliveryDateTo?: string;
   basketIds?: number[];
-  paymentType?: PaymentType;
+  paymentType?: PaymentTypeEnum;
+};
+
+export interface IOrderResultRequestModel {
+  usingBonus: number;
+  deliveryType: OrderDeliveryTypeEnum;
 };

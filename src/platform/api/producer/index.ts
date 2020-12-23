@@ -8,7 +8,7 @@ class ProducerController {
   private static controller = 'producer';
 
   public static GetList = (body: IProducerListRequestModel): Promise<IResponse<IPagingResponse<IProducerListResponseModel>>> => {
-    const result = Connection.POST<IProducerListRequestModel>({
+    const result = Connection.POST({
       body,
       action: 'list',
       controller: ProducerController.controller,

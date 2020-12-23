@@ -27,7 +27,7 @@ class BasketController {
   };
 
   public static Change = (body: IBasketChangeRequestModel): Promise<IResponse<IBasketChangeResponseModel>> => {
-    const result = Connection.PUT<IBasketChangeRequestModel>({
+    const result = Connection.PUT({
       body,
       action: '',
       controller: BasketController.controller,
@@ -37,7 +37,7 @@ class BasketController {
   };
 
   public static Save = (body: number[]): Promise<IResponse<boolean>> => {
-    const result = Connection.POST<number[]>({
+    const result = Connection.POST({
       body,
       action: 'save',
       controller: BasketController.controller,
@@ -65,7 +65,7 @@ class BasketController {
   };
 
   public static DeleteSaved = (id: number): Promise<IResponse<boolean>> => {
-    const result = Connection.DELETE<{}>({
+    const result = Connection.DELETE({
       body: {},
       action: `saved/${id}`,
       controller: BasketController.controller,
@@ -75,7 +75,7 @@ class BasketController {
   };
 
   public static Delete = (productId: number, isPackage?: boolean): Promise<IResponse<IBasketChangeResponseModel>> => {
-    const result = Connection.DELETE<{}>({
+    const result = Connection.DELETE({
       body: {},
       action: `${productId}/${isPackage}`,
       controller: BasketController.controller,

@@ -352,6 +352,7 @@
 // #region Texts
 
 .G-text-center { text-align: center; }
+.G-text-bold { @include bold-font; }
 
 // #endregion Texts
 

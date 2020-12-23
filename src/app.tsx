@@ -22,6 +22,7 @@ import 'moment/locale/en-gb';
 
 import './assets/styles/index.scss';
 import DispatcherChannels from 'platform/constants/dispatcher-channels';
+import BonusCardController from 'platform/api/bonusCard';
 
 interface IState {
   confirmOpen: boolean;
@@ -58,6 +59,7 @@ class App extends HelperComponent<{}, IState> {
         })
       }
     });
+
     window.addEventListener(DispatcherChannels.ToggleConfirm, this.toggleConfirm);
 
     this.safeSetState({ generalAPILoaded: true });

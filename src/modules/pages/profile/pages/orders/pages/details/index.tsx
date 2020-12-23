@@ -11,13 +11,13 @@ import { IOrderDetailsResponseModel } from 'platform/api/order/models/response';
 import PageLoader from 'components/page-loader';
 import Settings from 'platform/services/settings';
 import { formatDate, formatPrice, getViewEnum } from 'platform/services/helper';
-import { OrderStatusEnum } from 'platform/api/order/constants/enums';
+import { PaymentTypeEnum } from 'platform/constants/enums';
 import enviroment from 'platform/services/enviroment';
+import DispatcherChannels from 'platform/constants/dispatcher-channels';
+import { OrderStatusEnum } from 'platform/api/order/constants/enums';
 import { Shared } from 'modules';
 
 import './style.scss';
-import DispatcherChannels from 'platform/constants/dispatcher-channels';
-
 
 interface IState {
   data?: IOrderDetailsResponseModel;
@@ -45,6 +45,7 @@ class Details extends HelperComponent<RouteComponentProps<IRouteParams>, IState>
 
   }
   private statusViewEnum = getViewEnum(OrderStatusEnum);
+  private paymentViewEnum = getViewEnum(PaymentTypeEnum);
 
   private fetchData = async () => {
     const { id } = this.props.match.params;
@@ -66,6 +67,7 @@ class Details extends HelperComponent<RouteComponentProps<IRouteParams>, IState>
   private cancel = async () => {
     const { data } = this.state;
     const alertify = await import('alertifyjs');
+    
     if (data) {
       const res = await OrderController.Cancel(data?.id);
       if (res && res.data) {
@@ -109,6 +111,11 @@ class Details extends HelperComponent<RouteComponentProps<IRouteParams>, IState>
             <h3 className="G-flex G-mb-30 G-flex-justify-between">
               {Settings.translations.status}
               <span>{Settings.translations[this.statusViewEnum[data.status]]}</span>
+            </h3>
+
+            <h3 className="G-flex G-mb-30 G-flex-justify-between">
+              {Settings.translations.payment_method}
+              <span>{Settings.translations[this.paymentViewEnum[data.paymentType]]}</span>
             </h3>
           </div>
           {!enviroment.WHOLESALE && <div className="P-address-block">

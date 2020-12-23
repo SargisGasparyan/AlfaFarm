@@ -26,12 +26,12 @@ class DiscountedProducts extends HelperComponent<{}, IState> {
 	}
 	
 	private fetchData = async () => {
-		const result = await ProductController.GetList({pageNumber: 1, pageSize: 10, hasDiscount: true});
-		this.safeSetState({data: result.data.list});
+		const result = await ProductController.GetList({ pageNumber: 1, pageSize: 10, hasDiscount: true });
+		this.safeSetState({ data: result.data.list });
 	}
 	
 	public render() {
-		const {data} = this.state;
+		const { data } = this.state;
 		
 		return data.length ? (
 			<section className="G-page P-home-discounted-products">
@@ -44,7 +44,7 @@ class DiscountedProducts extends HelperComponent<{}, IState> {
 					</MultiCarousel>
 				</div>
 				<Link
-					to={ROUTES.PRODUCTS.MAIN}
+					to={`${ROUTES.PRODUCTS.MAIN}?hasDiscount=true`}
 					className="G-main-ghost-button G-ml-auto G-mr-auto"
 				>{Settings.translations.show_all}</Link>
 			</section>
