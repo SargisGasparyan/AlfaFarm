@@ -16,7 +16,7 @@ class FavoriteController {
   };
 
   public static AddOrRemove = (id: number): Promise<IResponse<boolean>> => {
-    const result = Connection.POST<{}>({
+    const result = Connection.POST({
       body: {},
       action: `addRemove/${id}`,
       controller: FavoriteController.controller,

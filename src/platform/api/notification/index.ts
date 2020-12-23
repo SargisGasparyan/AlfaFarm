@@ -8,7 +8,7 @@ class NotificationController {
   private static controller = 'notification';
 
   public static GetList = (body: INotificationListRequestModel): Promise<IResponse<IPagingResponse<INotificationListResponseModel>>> => {
-    const result = Connection.POST<INotificationListRequestModel>({
+    const result = Connection.POST({
       body,
       action: 'list',
       controller: NotificationController.controller,

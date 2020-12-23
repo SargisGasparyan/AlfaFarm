@@ -3,7 +3,6 @@ import { IResponse, IPagingResponse } from '../../constants/interfaces';
 import { IClinicRegistrationModifyRequestModel, IClinicRegistrationListRequestModel } from './models/request';
 import {
   IClinicRegistrationListResponseModel,
-  IClinicRegistrationBusyHourResponseModel,
   IClinicRegistrationDoctorBusyHourResponseModel,
 } from './models/response';
 
@@ -12,7 +11,7 @@ class ClinicRegistrationController {
   private static controller = 'clinicRegistration';
 
   public static GetList = (body: IClinicRegistrationListRequestModel): Promise<IResponse<IPagingResponse<IClinicRegistrationListResponseModel>>> => {
-    const result = Connection.POST<IClinicRegistrationListRequestModel>({
+    const result = Connection.POST({
       body,
       action: 'list',
       controller: ClinicRegistrationController.controller,
@@ -41,7 +40,7 @@ class ClinicRegistrationController {
   };
 
   public static Create = (body: IClinicRegistrationModifyRequestModel[]): Promise<IResponse<boolean>> => {
-    const result = Connection.POST<IClinicRegistrationModifyRequestModel[]>({
+    const result = Connection.POST({
       body,
       action: '',
       controller: ClinicRegistrationController.controller,

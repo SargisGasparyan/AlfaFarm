@@ -1,18 +1,18 @@
-import { PaymentType } from 'platform/constants/enums';
+import { PaymentTypeEnum } from 'platform/constants/enums';
 import Settings from 'platform/services/settings';
-import { IPaymentTypeItemModel } from './interfaces';
+import { IPaymentTypeEnumItemModel } from './interfaces';
 
-export const PaymentTypeItems = (): IPaymentTypeItemModel[] => [
+export const PaymentTypeEnumItems = (): IPaymentTypeEnumItemModel[] => [
   {
     name: Settings.translations.cash,
-    type: PaymentType.Cash
+    type: PaymentTypeEnum.Cash
   },
   {
     name: Settings.translations.card,
-    type: PaymentType.IPay
+    type: PaymentTypeEnum.IPay
   },
   {
     name: 'IDram',
-    type: PaymentType.Idram
+    type: PaymentTypeEnum.Idram
   }
 ];

@@ -10,13 +10,13 @@ import DispatcherChannels from 'platform/constants/dispatcher-channels';
 import PharmaciesAvailablity from './components/pharmacies-availablity';
 import { formatPrice } from 'platform/services/helper';
 import ROUTES from 'platform/constants/routes';
-import { PromotionType } from 'platform/constants/enums';
+import { PromotionTypeEnum } from 'platform/constants/enums';
+import { IGetProductPromotionByQuantityModel } from 'platform/api/product/models/request';
+import ProductController from 'platform/api/product';
 
 import PinImage from 'assets/images/pin.png';
 
 import './style.scss';
-import { IGetProductPromotionByQuantityModel } from 'platform/api/product/models/request';
-import ProductController from 'platform/api/product';
 
 interface IProps {
   data: IProductDetailsResponseModel;
@@ -99,8 +99,19 @@ class Info extends HelperComponent<IProps, IState> {
     query.set('categoryIds', `${id}`);
     window.routerHistory.replace(`${ROUTES.PRODUCTS.MAIN}?${query.toString()}`);
   }
-  private get discountedPrice() { return Math.round((!this.state.isSelectedPackage ? this.props.data.promotion.result : this.props.data.packagePromotion.result) * 10) / 10 };
-  private get price() { return !this.state.isSelectedPackage ? this.props.data.price : this.props.data.packagePrice; }
+  private get discountedPrice() {
+    const { data } = this.props;
+    const { isSelectedPackage } = this.state;
+
+    return Math.round((isSelectedPackage ? data.packagePromotion.result : data.promotion.result) * 10) / 10
+  };
+
+  private get price() {
+    const { data } = this.props;
+    const { isSelectedPackage } = this.state;
+
+    return isSelectedPackage ? data.price : data.packagePrice;
+  }
   public render() {
     const { data } = this.props;
     const { count, cartLoading, pharmaciesAvailablityOpen, isSelectedPackage } = this.state;
@@ -149,7 +160,7 @@ class Info extends HelperComponent<IProps, IState> {
           {pharmaciesAvailablityOpen && <PharmaciesAvailablity onClose={this.togglePharmaciesAvailablity} data={data} />}
           <span className="G-orange-color G-ml-auto P-price">
             <span />
-            {data.promotion.promotionType === PromotionType.Discount ? 
+            {data.promotion.promotionType === PromotionTypeEnum.Discount ? 
             <> <del>{formatPrice(this.price)}</del> {formatPrice(this.discountedPrice)} </> : <><span>Bonus: { this.discountedPrice }</span> {formatPrice(this.price)}</>}
           </span>
         </div>

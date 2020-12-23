@@ -26,7 +26,7 @@ class UserController {
   };
 
   public static UpdatePreferredProductList = (body: IPreferredProductUpdateRequestModel): Promise<IResponse<boolean>> => {
-    const result = Connection.PUT<IPreferredProductUpdateRequestModel>({
+    const result = Connection.PUT({
       body,
       action: 'preferredProductList',
       controller: UserController.controller,
@@ -36,7 +36,7 @@ class UserController {
   };
 
   public static Update = (body: IUserModifyRequestModel): Promise<IResponse<boolean>> => {
-    const result = Connection.PUT<IUserModifyRequestModel>({
+    const result = Connection.PUT({
       body,
       action: '',
       controller: UserController.controller,
@@ -46,7 +46,7 @@ class UserController {
   };
 
   public static UploadCover = (body: FormData): Promise<IResponse<string>> => {
-    const result = Connection.POST<FormData>({
+    const result = Connection.POST({
       body,
       action: 'cover',
       controller: UserController.controller,
@@ -57,7 +57,7 @@ class UserController {
   };
 
   public static Register = (body: IRegisterRequestModel): Promise<IResponse<boolean>> => {
-    const result = Connection.POST<IRegisterRequestModel>({
+    const result = Connection.POST({
       body,
       action: 'register',
       controller: UserController.controller,
@@ -67,7 +67,7 @@ class UserController {
   };
 
   public static ChangePassword = (body: IUserPasswordModifyRequestModel): Promise<IResponse<boolean>> => {
-    const result = Connection.PUT<IUserPasswordModifyRequestModel>({
+    const result = Connection.PUT({
       body,
       action: 'password',
       controller: UserController.controller,

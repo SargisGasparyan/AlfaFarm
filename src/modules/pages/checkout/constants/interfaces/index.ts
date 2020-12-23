@@ -1,6 +1,6 @@
-import { PaymentType } from 'platform/constants/enums';
+import { PaymentTypeEnum } from 'platform/constants/enums';
 
-export interface IPaymentTypeItemModel {
+export interface IPaymentTypeEnumItemModel {
   name: string;
-  type: PaymentType;
+  type: PaymentTypeEnum;
 }

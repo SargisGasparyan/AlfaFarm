@@ -8,7 +8,7 @@ class ActiveIngredientController {
   private static controller = 'activeIngredient';
 
   public static GetList = (body: IActiveIngredientListRequestModel): Promise<IResponse<IPagingResponse<IActiveIngredientListResponseModel>>> => {
-    const result = Connection.POST<IActiveIngredientListRequestModel>({
+    const result = Connection.POST({
       action: 'list',
       controller: ActiveIngredientController.controller,
       body,

@@ -2,41 +2,47 @@ import * as React from 'react';
 import * as DateTime from 'react-datetime';
 import { Moment } from 'moment';
 import Autocomplete from 'react-google-autocomplete';
+import CheckBox from 'rc-checkbox';
 
 import ROUTES from 'platform/constants/routes';
 import Settings from 'platform/services/settings';
 import { byRoute } from 'platform/decorators/routes';
 import HelperComponent from 'platform/classes/helper-component';
 import LoaderContent from 'components/loader-content';
-import { countryCode, currency } from 'platform/constants';
+import { countryCode } from 'platform/constants';
 import { OrderDeliveryTypeEnum } from 'platform/api/order/constants/enums';
 import Select from 'components/select';
 import { OrderDeliveryTypeDropdown } from 'platform/constants/dropdowns';
 import { IOrderModifyRequestModel } from 'platform/api/order/models/request';
 import Storage from 'platform/services/storage';
-import PlaceController from 'platform/api/place';
 import { IDropdownOption, IGooglePlace } from 'platform/constants/interfaces';
 import { validateForm } from './services/helper';
-
 import { formatDate, formatPrice } from 'platform/services/helper';
 import ChooseAddress from './components/choose-address';
 import { IUserAddressListResponseModel } from 'platform/api/userAddress/models/response';
 import OrderController from 'platform/api/order';
 import SuccessModal from 'components/success-modal';
-
-import './style.scss';
-import { PaymentType } from 'platform/constants/enums';
+import { PaymentTypeEnum } from 'platform/constants/enums';
 import PaymentController from 'platform/api/payment';
-
-
 import DispatcherChannels from 'platform/constants/dispatcher-channels';
 import PaymentMethod from './components/payment';
+import { IBonusCardDetailsWithHistoryResponseModel } from 'platform/api/bonusCard/models/response';
+import BonusCardController from 'platform/api/bonusCard';
+import NumberInput from 'components/number-input';
+import { IOrderResultResponseModel } from 'platform/api/order/models/response';
+
+import './style.scss';
+
 interface IState {
+  bonusDetails?: IBonusCardDetailsWithHistoryResponseModel;
+  resultInfo?: IOrderResultResponseModel;
   form: IOrderModifyRequestModel;
   submited: boolean;
   submitLoading: boolean;
   chooseAddressOpen: boolean;
   successModalOpen: boolean;
+  initialTotalDiscountedPrice: number;
+  isUsingBonus: boolean;
   isPayment: boolean;
   idramAmount: number | null;
   idramNId: number | null;
@@ -44,26 +50,25 @@ interface IState {
 
 @byRoute(ROUTES.CHECKOUT)
 class Checkout extends HelperComponent<{}, IState> {
-  private submitForm: React.RefObject<HTMLFormElement> = React.createRef();
 
   public state: IState = {
     submited: false,
     submitLoading: false,
     chooseAddressOpen: false,
     successModalOpen: false,
+    isUsingBonus: false,
+    initialTotalDiscountedPrice: 0,
     form: {
       firstName: '',
       lastName: '',
       phoneNumber: '',
       deliveryType: OrderDeliveryTypeEnum.Delivery,
-      paymentType: PaymentType.Cash
+      paymentType: PaymentTypeEnum.Cash
     },
     isPayment: false,
     idramAmount: null,
     idramNId: null
   };
-
-  private total: number | null;
 
   private get formValidation() {
     const { submited, form } = this.state;
@@ -78,6 +83,8 @@ class Checkout extends HelperComponent<{}, IState> {
       form.phoneNumber = Storage.profile.phoneNumber.substring(`+${countryCode}`.length);
       form.email = Storage.profile.email;
       this.getTotalPrice();
+      this.getBonusDetails();
+      this.getResultInfo();
       this.safeSetState({ form });
     }
   }
@@ -86,13 +93,40 @@ class Checkout extends HelperComponent<{}, IState> {
     const query = new URLSearchParams(window.location.search);
     const price = query.get('total');
     this.safeSetState({ idramAmount: price });
-    if (price) this.total = +price;
   }
 
-  private changeField = (e: React.SyntheticEvent<any>) => {
+  private getBonusDetails = async () => {
+    const result = await BonusCardController.GetDetailsWithHistory({
+      pageNumber: 1,
+      pageSize: 1,
+    });
+    
+    this.safeSetState({ bonusDetails: result.data });
+  }
+
+  private getResultInfo = async (bonus = 0) => {
+    const { form, initialTotalDiscountedPrice } = this.state;
+    const result = await OrderController.GetResult({
+      usingBonus: bonus,
+      deliveryType: form.deliveryType,
+    });
+    
+    result.data && this.safeSetState({
+      resultInfo: result.data,
+      initialTotalDiscountedPrice: initialTotalDiscountedPrice || result.data.totalDiscountedPrice,
+    });
+  }
+
+  private changeField = (e: React.SyntheticEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { form } = this.state;
     form[e.currentTarget.name] = e.currentTarget.value;
     this.safeSetState({ form });
+  }
+
+  private bonusChange = (e: React.SyntheticEvent<HTMLInputElement>) => {
+    const { form } = this.state;
+    form.usedBonus = +e.currentTarget.value;
+    this.safeSetState({ form }, () => this.getResultInfo(form.usedBonus));
   }
 
   private addressChange = (e: React.SyntheticEvent<HTMLInputElement>) => {
@@ -163,9 +197,9 @@ class Checkout extends HelperComponent<{}, IState> {
     return dateItem.isSameOrAfter(currentDayStarting);
   }
 
-  private choosePaymentType = async (type: PaymentType) => {
+  private choosePaymentTypeEnum = async (type: PaymentTypeEnum) => {
     const { form } = this.state;
-    if (type === PaymentType.IPay) {
+    if (type === PaymentTypeEnum.IPay) {
       const res = await PaymentController.getUserCards();
       if (res && res.success) {
         console.log(res);
@@ -173,6 +207,11 @@ class Checkout extends HelperComponent<{}, IState> {
     }
     form.paymentType = type;
     this.safeSetState({ form });
+  }
+
+  private toggleUsingBonus = async () => {
+    const { isUsingBonus } = this.state;
+    this.safeSetState({ isUsingBonus: !isUsingBonus });
   }
 
   private finishCheckout = (e: React.SyntheticEvent) => {
@@ -184,7 +223,7 @@ class Checkout extends HelperComponent<{}, IState> {
     this.safeSetState({ submitLoading: true, form }, async () => {
       const result = await OrderController.Create(form);
       if (result.success) {
-        if (form.paymentType === PaymentType.Idram) { document.getElementById('currentId')?.click(); }
+        if (form.paymentType === PaymentTypeEnum.Idram) { document.getElementById('currentId')?.click(); }
         this.safeSetState({ successModalOpen: true }, () => window.dispatchEvent(new CustomEvent(DispatcherChannels.CartItemsUpdate)));
       }
       else this.safeSetState({ submitLoading: false });
@@ -194,7 +233,17 @@ class Checkout extends HelperComponent<{}, IState> {
   private navigateToHome = () => window.routerHistory.push(ROUTES.HOME);
 
   public render() {
-    const { form, submitLoading, chooseAddressOpen, successModalOpen, isPayment } = this.state;
+    const {
+      form,
+      submitLoading,
+      resultInfo,
+      bonusDetails,
+      chooseAddressOpen,
+      successModalOpen,
+      initialTotalDiscountedPrice,
+      isUsingBonus,
+      isPayment,
+    } = this.state;
 
     return (
       <section className="G-page P-checkout-page">
@@ -329,6 +378,30 @@ class Checkout extends HelperComponent<{}, IState> {
                 onChange={this.changeField}
               />
             </div>
+
+            {bonusDetails &&
+            !!initialTotalDiscountedPrice &&
+            !!bonusDetails.bonusCardDetails.amount && <div className="G-main-form-field G-flex G-flex-wrap">
+              <CheckBox checked={isUsingBonus}  onClick={this.toggleUsingBonus} />
+              {Settings.translations.use_bonus_points}
+              {isUsingBonus && <>
+                <span className="G-ml-auto G-text-bold G-orange-color">{bonusDetails.bonusCardDetails.amount}</span>
+                <NumberInput
+                  max={Math.min(initialTotalDiscountedPrice, bonusDetails.bonusCardDetails.amount)}
+                  value={form.usedBonus || ''}
+                  className="G-main-input G-full-width G-mt-20"
+                  placeholder={Settings.translations.bonus}
+                  onChange={this.bonusChange}
+                />
+              </>}
+            </div>}
+
+            {resultInfo && <>
+              <h3 className="G-mt-40 G-flex G-flex-justify-between">{Settings.translations.price} <span>{formatPrice(resultInfo.totalDiscountedPrice)}</span></h3>
+              <h3 className="G-mt-10 G-flex G-flex-justify-between">{Settings.translations.bonus} <span>{resultInfo.receivedBonus}</span></h3>
+              <h3 className="G-mt-10 G-flex G-flex-justify-between">{Settings.translations.delivery_fee} <span>{formatPrice(resultInfo.deliveryFee)}</span></h3>
+              <h2 className="G-mt-10 G-flex G-flex-justify-between">{Settings.translations.total} <span className="G-orange-color">{formatPrice(resultInfo.totalPrice)}</span></h2>
+            </>}
           </div>
 
           <div className="G-flex G-flex-column">

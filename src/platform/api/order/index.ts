@@ -1,14 +1,14 @@
 import Connection from '../../services/connection';
 import { IResponse, IPagingResponse } from '../../constants/interfaces';
-import { IOrderListResponseModel, IOrderDetailsResponseModel } from './models/response';
-import { IOrderModifyRequestModel, IOrderListRequestModel } from './models/request';
+import { IOrderListResponseModel, IOrderDetailsResponseModel, IOrderResultResponseModel } from './models/response';
+import { IOrderModifyRequestModel, IOrderListRequestModel, IOrderResultRequestModel } from './models/request';
 
 class OrderController {
 
   private static controller = 'order';
 
   public static GetHistory = (body: IOrderListRequestModel): Promise<IResponse<IPagingResponse<IOrderListResponseModel>>> => {
-    const result = Connection.POST<IOrderListRequestModel>({
+    const result = Connection.POST({
       body,
       action: 'history',
       controller: OrderController.controller,
@@ -26,8 +26,19 @@ class OrderController {
     return result;
   };
 
+
+  public static GetResult = (body: IOrderResultRequestModel): Promise<IResponse<IOrderResultResponseModel>> => {
+    const result = Connection.POST({
+      body,
+      action: 'getOrderResult',
+      controller: OrderController.controller,
+    });
+
+    return result;
+  };
+
   public static Create = (body: IOrderModifyRequestModel): Promise<IResponse<boolean>> => {
-    const result = Connection.POST<IOrderModifyRequestModel>({
+    const result = Connection.POST({
       body,
       action: '',
       controller: OrderController.controller,
@@ -37,7 +48,7 @@ class OrderController {
   };
 
   public static Repeat = (id: number): Promise<IResponse<boolean>> => {
-    const result = Connection.POST<{}>({
+    const result = Connection.POST({
       body: {},
       action: `repeat/${id}`,
       controller: OrderController.controller,
@@ -46,7 +57,7 @@ class OrderController {
     return result;
   };
   public static Cancel = (id: number): Promise<IResponse<boolean>> => {
-    const result = Connection.PUT<{}>({
+    const result = Connection.PUT({
       body: {},
       action: `cancel/${id}`,
       controller: OrderController.controller

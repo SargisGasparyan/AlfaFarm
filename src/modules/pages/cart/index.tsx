@@ -19,7 +19,7 @@ import PageLoader from 'components/page-loader';
 
 import './style.scss';
 import { IResponse } from 'platform/constants/interfaces';
-import { PromotionType } from 'platform/constants/enums';
+import { PromotionTypeEnum } from 'platform/constants/enums';
 import { format } from 'path';
 
 interface IState {
@@ -59,15 +59,15 @@ class Cart extends HelperComponent<{}, IState> {
     },
     {
       name: 'Bonus',
-      cell: (row: IBasketListResponseModel) => <h3 className="G-fs-24">{row.promotion.promotionType === PromotionType.Bonus ? row.promotion.result : 0}</h3>,
+      cell: (row: IBasketListResponseModel) => <h3 className="G-fs-24">{row.promotion.promotionType === PromotionTypeEnum.Bonus ? row.promotion.result : 0}</h3>,
     },
     {
       name: Settings.translations.price,
       cell: (row: IBasketListResponseModel) =>
         <div className="G-flex G-flex-column G-align-center G-justify-center">
-          <div>{row.promotion.promotionType === PromotionType.Discount && row.promotion.result > 0 ? <del>{formatPrice(row.totalPrice)}</del> : null}</div>
+          <div>{row.promotion.promotionType === PromotionTypeEnum.Discount && row.promotion.result > 0 ? <del>{formatPrice(row.totalPrice)}</del> : null}</div>
           <h3 className="G-fs-24">
-            {row.promotion.promotionType === PromotionType.Discount ? formatPrice(row.promotion.result) : formatPrice(row.productQuantity * row.price)}
+            {row.promotion.promotionType === PromotionTypeEnum.Discount ? formatPrice(row.promotion.result) : formatPrice(row.productQuantity * row.price)}
           </h3>
         </div>,
     },

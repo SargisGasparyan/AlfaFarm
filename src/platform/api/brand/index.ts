@@ -8,7 +8,7 @@ class BrandController {
   private static controller = 'brand';
 
   public static GetList = (body: IBrandListRequestModel): Promise<IResponse<IPagingResponse<IBrandListResponseModel>>> => {
-    const result = Connection.POST<IBrandListRequestModel>({
+    const result = Connection.POST({
       body,
       action: 'list',
       controller: BrandController.controller,
