@@ -10,7 +10,7 @@ import './style.scss';
 @byRoute(ROUTES.HOW_TO_USE_APP)
 class HowToUseApp extends HelperPureComponent<{}, {}> {
 
-  iframeProps = {
+  private iframeProps = {
     frameBorder: 0,
     allowfullscreen: "allowfullscreen",
     mozallowfullscreen: "mozallowfullscreen",

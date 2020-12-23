@@ -3,7 +3,7 @@ import * as React from 'react';
 import ClickOutside from '../../../click-outside';
 import HelperComponent from 'platform/classes/helper-component';
 import { ICategoryListResponseModel } from 'platform/api/category/models/response';
-import CategoryController, { ICategory } from 'platform/api/category';
+import CategoryController from 'platform/api/category';
 import DataCache from './services/data-cache';
 
 import './style.scss';
