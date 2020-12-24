@@ -117,6 +117,10 @@ class Details extends HelperComponent<RouteComponentProps<IRouteParams>, IState>
               {Settings.translations.payment_method}
               <span>{Settings.translations[this.paymentViewEnum[data.paymentType]]}</span>
             </h3>
+            <h3 className="G-flex G-mb-30 G-flex-justify-between">
+              {Settings.translations.comment}
+              <span>{data.comment || '-'}</span>
+            </h3>
           </div>
           {!enviroment.WHOLESALE && <div className="P-address-block">
             <h2 className="G-mb-40 G-orange-color">{Settings.translations.address}</h2>

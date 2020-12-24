@@ -84,21 +84,44 @@ class Info extends HelperComponent<IProps, IState> {
     this.safeSetState({ pharmaciesAvailablityOpen: !pharmaciesAvailablityOpen });
   }
 
+  private togglePackage = () => {
+    const { isSelectedPackage } = this.state;
+    this.safeSetState({ isSelectedPackage: !isSelectedPackage });
+  }
+
   private UnitCount = () => {
     const { data } = this.props;
     const { isSelectedPackage } = this.state;
     if (data.havePackage) {
-      return <span>
-        <span className={`${isSelectedPackage ? 'P-selected-count-type' : ''}`} onClick={() => this.safeSetState({ isSelectedPackage: true })}>{Settings.translations.package}</span> /
-        <span className={`${!isSelectedPackage ? 'P-selected-count-type' : ''}`} onClick={() => this.safeSetState({ isSelectedPackage: false })}>{Settings.translations.item}</span>
+      return <span onClick={this.togglePackage}>
+        <span className={`${isSelectedPackage ? 'P-selected-count-type' : ''}`}>{Settings.translations.package}</span>
+        &nbsp; / &nbsp;
+        <span className={`${!isSelectedPackage ? 'P-selected-count-type' : ''}`}>{Settings.translations.item}</span>
       </span>
     } else return <span className="P-selected-count-type">{data.unitName}</span>
   }
-  private navigateToCategory = (id: number) => {
+
+  private navigateToCategory = () => {
+    const { id } = this.props.data.category;
     const query = new URLSearchParams(window.location.search);
     query.set('categoryIds', `${id}`);
-    window.routerHistory.replace(`${ROUTES.PRODUCTS.MAIN}?${query.toString()}`);
+    window.routerHistory.push(`${ROUTES.PRODUCTS.MAIN}?${query.toString()}`);
   }
+
+  private navigateToBrand = () => {
+    const { id } = this.props.data.brand;
+    const query = new URLSearchParams(window.location.search);
+    query.set('brandIds', `${id}`);
+    window.routerHistory.push(`${ROUTES.PRODUCTS.MAIN}?${query.toString()}`);
+  }
+
+  private navigateToActiveIngredients = () => {
+    const { activeIngredients } = this.props.data;
+    const query = new URLSearchParams(window.location.search);
+    query.set('activeIngredientIds', activeIngredients.map(item => item.id).join(','));
+    window.routerHistory.push(`${ROUTES.PRODUCTS.MAIN}?${query.toString()}`);
+  }
+
   private get discountedPrice() {
     const { data } = this.props;
     const { isSelectedPackage } = this.state;
@@ -110,11 +133,11 @@ class Info extends HelperComponent<IProps, IState> {
     const { data } = this.props;
     const { isSelectedPackage } = this.state;
 
-    return isSelectedPackage ? data.price : data.packagePrice;
+    return isSelectedPackage ? data.packagePrice : data.price;
   }
   public render() {
     const { data } = this.props;
-    const { count, cartLoading, pharmaciesAvailablityOpen, isSelectedPackage } = this.state;
+    const { count, cartLoading, pharmaciesAvailablityOpen } = this.state;
 
     return (
       <div className="P-product-details-info">
@@ -124,11 +147,11 @@ class Info extends HelperComponent<IProps, IState> {
         <h3 className="P-unit">{data.unitQuantity} {data.unitName}</h3>
         {data.category && <h3 className="P-row">
           {Settings.translations.category}
-          <span className="P-value G-cursor-pointer" onClick={() => this.navigateToCategory(data.category.id)}>{data.category.name}</span>
+          <span className="P-value G-cursor-pointer" onClick={this.navigateToCategory}>{data.category.name}</span>
         </h3>}
         {data.brand && <h3 className="P-row">
           {Settings.translations.brand}
-          <span className="P-value">{data.brand.name}</span>
+          <span className="P-value G-cursor-pointer" onClick={this.navigateToBrand}>{data.brand.name}</span>
         </h3>}
         <h3 className="P-row">
           {Settings.translations.availability_at_the_nearest_pharmacy}
@@ -138,7 +161,7 @@ class Info extends HelperComponent<IProps, IState> {
         </h3>
         {data.activeIngredients && <h3 className="P-row">
           {Settings.translations.active_ingredients}
-          <span className="P-value">{data.activeIngredients.map(item => item.name).join(', ')}</span>
+          <span className="P-value G-cursor-pointer" onClick={this.navigateToActiveIngredients}>{data.activeIngredients.map(item => item.name).join(', ')}</span>
         </h3>}
         <h3>{Settings.translations.description}</h3>
         <p className="P-description">{data.description}</p>

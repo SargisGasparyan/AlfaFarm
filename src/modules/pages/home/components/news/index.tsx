@@ -13,23 +13,25 @@ import './style.scss';
 
 interface IState {
   data: INewsListResponseModel[];
+  showAll: boolean;
 }
 
 class News extends HelperComponent<{}, IState> {
 
   public state: IState = {
     data: [],
+    showAll: false,
   };
 
   public componentDidMount() { this.fetchData(); }
 
   private fetchData = async () => {
     const result = await NewsController.GetList({ pageNumber: 1, pageSize: 4 });
-    this.safeSetState({ data: result.data.list });
+    this.safeSetState({ data: result.data.list, showAll: result.data.pageCount > 1 });
   }
 
   public render() {
-    const { data } = this.state;
+    const { data, showAll } = this.state;
 
     return data.length ? (
       <section className="G-page P-home-news P-home-news">
@@ -39,10 +41,10 @@ class News extends HelperComponent<{}, IState> {
           {data.map(item => <ListItem key={item.id} data={item} />)}
         </div>
 
-        <Link
+        {showAll && <Link
           to={ROUTES.NEWS.MAIN}
           className="G-main-ghost-button G-ml-auto G-mr-auto"
-        >{Settings.translations.show_all}</Link>
+        >{Settings.translations.show_all}</Link>}
       </section>
     ) : null;
   }
