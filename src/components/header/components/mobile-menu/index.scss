@@ -22,5 +22,18 @@
 
   .P-mobile-menu-content {
     margin-top: 40px;
+
+    > .P-header-language-switcher {
+      width   : 80px;
+      padding : 0 15px 10px;
+
+      > .P-select {
+        height : 40px;
+
+        > .P-select-header, .P-select-body {
+          font-size: 16px;
+        }
+      }
+    }
   }
 }

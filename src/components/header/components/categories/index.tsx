@@ -5,15 +5,15 @@ import HelperComponent from 'platform/classes/helper-component';
 import { ICategoryListResponseModel } from 'platform/api/category/models/response';
 import CategoryController from 'platform/api/category';
 import DataCache from './services/data-cache';
-
-import './style.scss';
 import ROUTES from 'platform/constants/routes';
 import Storage from 'platform/services/storage';
 import DispatcherChannels from 'platform/constants/dispatcher-channels';
 
+import './style.scss';
+
+
 interface IProps {
   onClose(): void;
-  openPosition: number;
 }
 
 interface IState {
@@ -70,12 +70,12 @@ class Categories extends HelperComponent<IProps, {}> {
 
   public render() {
     const { lists } = this.state;
-    const { onClose, openPosition } = this.props;
+    const { onClose } = this.props;
 
     return (
       <ClickOutside onClickOutside={onClose}>
         <div className="P-header-categories-wrapper">
-          <div className="P-content" style={{ minWidth: window.innerWidth - openPosition }}>
+          <div className="P-content">
             {lists.map((item, index) => <div key={index} className="P-list">
               {item.map(sub => <div
                 key={sub.id}

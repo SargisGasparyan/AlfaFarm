@@ -3,6 +3,7 @@ import * as DateTime from 'react-datetime';
 import { Moment } from 'moment';
 import Autocomplete from 'react-google-autocomplete';
 import CheckBox from 'rc-checkbox';
+import { Link } from 'react-router-dom';
 
 import ROUTES from 'platform/constants/routes';
 import Settings from 'platform/services/settings';
@@ -420,7 +421,10 @@ class Checkout extends HelperComponent<{}, IState> {
           </div>
         </form> : <PaymentMethod callback={(e: React.SyntheticEvent) => this.finishCheckout(e)} />}
 
-        {successModalOpen && <SuccessModal text={Settings.translations.order_success} onClose={this.navigateToHome} />}
+        {successModalOpen && <SuccessModal onClose={this.navigateToHome}>
+          <h3>{Settings.translations.order_success}</h3>
+          <Link className="G-main-button G-normal-link G-mt-30" to={ROUTES.PROFILE.ORDERS.MAIN}>{Settings.translations.order_history}</Link>
+        </SuccessModal>}
 
         <form action="https://money.idram.am/payment.aspx" method="POST" target="blank">
           <input type="hidden" name="EDP_LANGUAGE" value="EN" />

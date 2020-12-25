@@ -19,7 +19,7 @@ const ListItem = React.memo(({ data }: IProps) => (
       <h2>{data.title}</h2>
       <p className="P-description">{data.shortDescription}</p>
       <div className="G-flex G-flex-justify-between">
-        <h3 className="G-fs-normal">{Settings.translations.end_date}: <span className="G-ml-20">{formatDate(data.endDate)}</span></h3>
+        <h3>{Settings.translations.end_date}: <span className="G-ml-10">{formatDate(data.endDate)}</span></h3>
         <Link to={ROUTES.TENDERS.DETAILS.replace(':id', data.id)} className="G-main-button">{Settings.translations.read_more}</Link>
       </div>
     </div>

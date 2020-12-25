@@ -9,17 +9,17 @@ import { Link } from 'react-router-dom';
 
 interface IProps {
   onClose(): void;
-  text: string;
+  children: string | React.ReactNode;
   link?: {
     path: string;
     name: string;
   };
 };
 
-const SuccessModal = React.memo(({ onClose, text, link }: IProps) => (
+const SuccessModal = React.memo(({ onClose, children, link }: IProps) => (
   <Modal onClose={onClose} className="P-success-modal">
     <i className="icon-Group-5535" />
-    <h2>{text}</h2>
+    {children}
     {!!link && <Link to={link.path} className="G-main-button P-link-item G-full-width G-no-text-decoration G-text-center">{link.name}</Link>}
   </Modal>
 ));

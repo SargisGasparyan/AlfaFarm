@@ -3,11 +3,13 @@ import { IProductFilterRequestModel } from 'platform/api/product/models/request'
 import ROUTES from 'platform/constants/routes';
 import Settings from 'platform/services/settings';
 import CheckBox from 'rc-checkbox';
-import { infinityScrollMax } from 'platform/constants';
+import { infinityScrollPageLimit } from 'platform/constants';
 import BrandController from 'platform/api/brand';
 import { IBrandListResponseModel } from 'platform/api/brand/models/response';
 import useSubscriber from 'platform/hooks/use-subcriber';
 import DispatcherChannels from 'platform/constants/dispatcher-channels';
+import { IPagingResponse } from 'platform/constants/interfaces';
+import { scrolledToBottomOfElement } from 'platform/services/helper';
 
 interface IProps {
   body: IProductFilterRequestModel;
@@ -15,19 +17,17 @@ interface IProps {
   close?: () => void;
 }
 
-const Brands = ({ body, onChange, close }: IProps) => {
+const Brands = ({ body, onChange }: IProps) => {
   const prevCategoryIdRef = React.useRef<number>();
+  const [pageNumber, setPageNumber] = React.useState(1);
   const [open, setOpen] = React.useState(!!body.brandIds?.length);
-  const [data, setData] = React.useState<IBrandListResponseModel[]>([]);
+  const [loading, setLoading] = React.useState(false);
+  const [data, setData] = React.useState<IPagingResponse<IBrandListResponseModel>>();
 
   React.useEffect(() => {
     const categoryId = body.categoryIds && body.categoryIds[0];
 
-    categoryId !== prevCategoryIdRef.current && BrandController.GetList({
-      pageNumber: 1,
-      pageSize: infinityScrollMax,
-      categoryId: body.categoryIds && body.categoryIds[0],
-    }).then(result => setData(result.data.list));
+    categoryId !== prevCategoryIdRef.current && fetchData();
 
     prevCategoryIdRef.current = categoryId;
   });
@@ -52,15 +52,35 @@ const Brands = ({ body, onChange, close }: IProps) => {
     }
   }
 
-  return <>
+  const fetchData = async () => {
+    setLoading(true);
+    const result = await BrandController.GetList({
+      pageNumber,
+      pageSize: infinityScrollPageLimit,
+      categoryId: body.categoryIds && body.categoryIds[0],
+    });
+
+    if (data) setData({ ...data, list: [...data.list, ...result.data.list] });
+    else setData(result.data);
+    setLoading(false);
+  }
+
+  const scrolled = (e: React.SyntheticEvent) => {
+    if (scrolledToBottomOfElement(e.currentTarget as HTMLElement) && !loading && data && pageNumber < data.totalCount) {
+      setPageNumber(pageNumber + 1);
+      fetchData();
+    }
+  }
+
+  return  <>
     <h3 className="P-row-title" onClick={() => setOpen(!open)}>
       {Settings.translations.brand}
       <span className="G-orange-color">{open ? '-' : '+'}</span>
     </h3>
 
-    {open ?
-      <div className="P-row-content">
-        {data.map(item => <label className="P-checkbox-row" onChange={() => toggleItem(item.id)} key={item.id}>
+    {open && data ?
+      <div className="P-row-content" onScroll={scrolled}>
+        {data.list.map((item, index) => <label className="P-checkbox-row" onChange={() => toggleItem(item.id)} key={index}>
           <CheckBox checked={body.brandIds?.includes(item.id)} />
           <span className="P-name" title={item.name}>{item.name}</span>
         </label>)}

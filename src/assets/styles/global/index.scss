@@ -316,16 +316,20 @@
 // #region Positioning
 
 .G-position-relative { position: relative; }
-.G-ml-auto { margin-left: auto; }
-.G-mr-auto { margin-right: auto; }
 
 .G-mt-5 { margin-top: 5px; }
 .G-mt-10 { margin-top: 10px; }
 .G-mt-20 { margin-top: 20px; }
+.G-mt-30 { margin-top: 30px; }
 .G-mt-40 { margin-top: 40px; }
 
+.G-ml-auto { margin-left: auto; }
+.G-ml-10 { margin-left: 10px; }
 .G-ml-20 { margin-left: 20px; }
+.G-ml-40 { margin-left: 40px; }
 
+.G-mr-auto { margin-right: auto; }
+.G-mr-10 { margin-right: 10px; }
 .G-mr-20 { margin-right: 20px; }
 .G-mr-40 { margin-right: 40px; }
 
@@ -359,11 +363,14 @@
 // #region Colors
 
 .G-main-color { color: $main-color !important; }
+.G-red-color { color: $red !important; }
+.G-yellow-color { color: $yellow !important; }
 .G-black-color { color: black; }
 .G-white-color { color: white; }
 .G-orange-color { color: $orange; }
 .G-light-gray-color { color: $light-gray; }
 .G-text-gray-color { color: $text-gray; }
+.G-text-gray-light-color { color: $text-gray-light; }
 .G-main-background-color { background-color: $main-color; }
 
 // #endregion Colors

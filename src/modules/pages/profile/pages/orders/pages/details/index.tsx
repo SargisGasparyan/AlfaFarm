@@ -18,6 +18,7 @@ import { OrderStatusEnum } from 'platform/api/order/constants/enums';
 import { Shared } from 'modules';
 
 import './style.scss';
+import { statusColorClassNames } from '../../constants';
 
 interface IState {
   data?: IOrderDetailsResponseModel;
@@ -86,16 +87,11 @@ class Details extends HelperComponent<RouteComponentProps<IRouteParams>, IState>
         {data ? <div className="G-flex G-flex-wrap P-profile-order-details">
           {window.routerHistory.length > 2 && <i className="G-back-icon icon-Group-5529" onClick={this.goBack} />}
           <div className="P-main-info-block G-mr-20">
-            <h2 className="G-mb-40 G-orange-color">{Settings.translations.order}</h2>
+            <h2 className="G-mb-40 G-orange-color">{Settings.translations.order} <span className="G-ml-10">#{data.id}</span></h2>
 
             <h3 className="G-flex G-mb-30 G-flex-justify-between">
               {Settings.translations.date}
               <span>{formatDate(data.createdDate)}</span>
-            </h3>
-
-            <h3 className="G-flex G-mb-30 G-flex-justify-between">
-              {Settings.translations.quantity}
-              <span>{data.productQuantity}</span>
             </h3>
 
             {data.deliveryDate && <h3 className="G-flex G-mb-30 G-flex-justify-between">
@@ -110,7 +106,7 @@ class Details extends HelperComponent<RouteComponentProps<IRouteParams>, IState>
 
             <h3 className="G-flex G-mb-30 G-flex-justify-between">
               {Settings.translations.status}
-              <span>{Settings.translations[this.statusViewEnum[data.status]]}</span>
+              <span className={statusColorClassNames[data.status]}>{Settings.translations[this.statusViewEnum[data.status]]}</span>
             </h3>
 
             <h3 className="G-flex G-mb-30 G-flex-justify-between">

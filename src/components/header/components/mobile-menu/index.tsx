@@ -1,18 +1,26 @@
+import * as React from 'react';
+import { NavLink } from 'react-router-dom';
+
 import SearchInput from 'components/search-input';
 import HelperComponent from 'platform/classes/helper-component';
 import ROUTES from 'platform/constants/routes';
 import Settings from 'platform/services/settings';
-import * as React from 'react';
-import { NavLink } from 'react-router-dom';
-import './index.scss';
 import DispatcherChannels from 'platform/constants/dispatcher-channels';
+
+import './index.scss';
+import LanguageSwitcher from '../language-switcher';
+
 interface IState {
   search: string;
 }
+
 interface IProps {
   onClose(): void;
+  onAuthOpen(): void;
 }
+
 class MobileMenu extends HelperComponent<IProps, IState> {
+
   public state: IState = {
     search: ''
   };
@@ -50,7 +58,7 @@ class MobileMenu extends HelperComponent<IProps, IState> {
   private change = (value: string) => this.safeSetState({ search: value });
 
   public render() {
-    const { onClose } = this.props;
+    const { onClose, onAuthOpen } = this.props;
 
     return (
       <div className="P-mobile-menu">
@@ -63,10 +71,13 @@ class MobileMenu extends HelperComponent<IProps, IState> {
               withSubmit={true}
             />
           </div>
-          
+
+          <a className="P-link" onClick={onAuthOpen}>{Settings.translations.log_in}</a>
+
           <NavLink {...this.navLinkProps} to={ROUTES.PHARMACIES} onClick={onClose}>{Settings.translations.pharmacies}</NavLink>
           <NavLink {...this.navLinkProps} to={ROUTES.CLINIC.MAIN} onClick={onClose}>{Settings.translations.clinic}</NavLink>
           <NavLink {...this.navLinkProps} to={ROUTES.BLOG.MAIN} onClick={onClose}>{Settings.translations.blog}</NavLink>
+          <LanguageSwitcher />
         </div>
         <div className="P-mobile-menu-layer" onClick={onClose} />
       </div>);

@@ -115,6 +115,13 @@ class Info extends HelperComponent<IProps, IState> {
     window.routerHistory.push(`${ROUTES.PRODUCTS.MAIN}?${query.toString()}`);
   }
 
+  private navigateToProducer = () => {
+    const { id } = this.props.data.producer;
+    const query = new URLSearchParams(window.location.search);
+    query.set('producerIds', `${id}`);
+    window.routerHistory.push(`${ROUTES.PRODUCTS.MAIN}?${query.toString()}`);
+  }
+
   private navigateToActiveIngredients = () => {
     const { activeIngredients } = this.props.data;
     const query = new URLSearchParams(window.location.search);
@@ -148,6 +155,10 @@ class Info extends HelperComponent<IProps, IState> {
         {data.category && <h3 className="P-row">
           {Settings.translations.category}
           <span className="P-value G-cursor-pointer" onClick={this.navigateToCategory}>{data.category.name}</span>
+        </h3>}
+        {data.producer && <h3 className="P-row">
+          {Settings.translations.producer}
+          <span className="P-value G-cursor-pointer" onClick={this.navigateToProducer}>{data.producer.name}</span>
         </h3>}
         {data.brand && <h3 className="P-row">
           {Settings.translations.brand}

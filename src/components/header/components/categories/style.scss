@@ -2,8 +2,7 @@
 @import 'src/assets/styles/variables';
 
 .P-header-categories-wrapper {
-  top             : $header-size;
-  left            : 0;
+  top             : 100%;
   width           : 100%;
   display         : flex;
   position        : absolute;
@@ -37,10 +36,7 @@
         border-radius : $small-radius;
   
         &:last-child { margin-bottom: 0; }
-        &:hover, &.P-category-choosed {
-        
-          background : #F1FFF1;
-        }
+        &:hover, &.P-category-choosed { background: #F1FFF1; }
   
         > img {
   

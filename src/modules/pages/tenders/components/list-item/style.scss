@@ -6,7 +6,7 @@
   border          : 1px solid $light-gray;
   display         : flex;
   overflow        : hidden;
-  min-height      : 280px;
+  min-height      : 220px;
   background      : white;
   align-items     : center;
   margin-bottom   : 50px;
@@ -14,9 +14,11 @@
   justify-content : space-between;
 
   > .P-image {
-    width      : 450px;
-    height     : 100%;
-    border-radius: 12px;
+    width                     : 450px;
+    height                    : 100%;
+    background-color          : red !important;
+    border-top-left-radius    : 12px;
+    border-bottom-left-radius : 12px;
   }
 
   > .P-main-info {
@@ -30,12 +32,12 @@
     text-decoration : none;
   
     > h2 {
-      font-size     : 24px;
+      font-size     : 20px;
       margin-bottom : 20px;
     }
 
     > .P-description {
-      font-size     : $normal-fs;
+      font-size     : 15px;
       margin-bottom : 20px;
     }
 
@@ -48,6 +50,7 @@
       > h3 {
         @include normal-font;
         display     : flex;
+        font-size   : 16px;
         align-items : center;
       }
 

@@ -1,7 +1,8 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
+
 import ROUTES from 'platform/constants/routes';
 import { byRoute } from 'platform/decorators/routes';
-
 import HelperComponent from 'platform/classes/helper-component';
 import Options from '../../components/options';
 import Settings from 'platform/services/settings';
@@ -18,10 +19,9 @@ import { infinityScrollPageLimit } from 'platform/constants';
 import DoctorController from 'platform/api/doctor';
 import { scrolledToBottom, getMediaPath, formatPrice } from 'platform/services/helper';
 import { IDoctorListResponseModel } from 'platform/api/doctor/models/response';
+import SearchInput from 'components/search-input';
 
 import './style.scss';
-import SearchInput from 'components/search-input';
-import Loader from 'components/loader';
 
 
 
@@ -185,7 +185,10 @@ class Doctors extends HelperComponent<{}, {}> {
             />
           </div>) : <PageLoader />}
           {loading && <PageLoader />}
-          {showSuccess && <SuccessModal text={Settings.translations.success_book} onClose={this.toggleSuccessModal} link={{ path: `${ROUTES.PROFILE.MY_REGISTRATIONS.MAIN}`, name: `${Settings.translations.my_registrations}` }} />}
+          {showSuccess && <SuccessModal onClose={this.toggleSuccessModal}>
+            <h3>{Settings.translations.appointment_success}</h3>
+            <Link className="G-main-button G-normal-link G-mt-30" to={ROUTES.PROFILE.MY_REGISTRATIONS.MAIN}>{Settings.translations.my_registrations}</Link>
+          </SuccessModal>}
         </div>
       </section>
     );
