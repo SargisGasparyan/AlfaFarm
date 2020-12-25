@@ -18,6 +18,7 @@ import { IPagingResponse } from 'platform/constants/interfaces';
 import EmptyState from 'components/empty-state';
 
 import './style.scss';
+import { statusColorClassNames } from './constants';
 
 interface IState {
   data?: IPagingResponse<IOrderListResponseModel>;
@@ -31,6 +32,10 @@ class Orders extends HelperComponent<IState, {}> {
   private statusViewEnum = getViewEnum(OrderStatusEnum);
 
   private columnConfig = [
+    {
+      name: Settings.translations.order_number,
+      cell: (row: IOrderListResponseModel) => `#${row.id}`,
+    },
     {
       name: Settings.translations.date,
       cell: (row: IOrderListResponseModel) => formatDate(row.createdDate),
@@ -49,7 +54,7 @@ class Orders extends HelperComponent<IState, {}> {
     },
     {
       name: Settings.translations.status,
-      cell: (row: IOrderListResponseModel) => Settings.translations[this.statusViewEnum[row.status]],
+      cell: (row: IOrderListResponseModel) => <span className={statusColorClassNames[row.status]}>{Settings.translations[this.statusViewEnum[row.status]]}</span>,
     },
   ];
 

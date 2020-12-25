@@ -26,9 +26,8 @@ class OrderACall extends HelperComponent<{}, IState> {
   public Content = () => {
     const { success, submitted, content } = this.state;
     return success ? <SuccessModal
-      text="Շնորհակալություն, զանգի հայտն ընդունված է։ Մեր օպերատորը շուտով կապ կհաստատի Ձեզ հետ։"
       onClose={() => this.safeSetState({ isOpen: false, success: false })}
-    /> : <Modal className="P-footer-order-a-call-modal" onClose={() => this.safeSetState({ open: false, success: false })}>
+    ><h2>Շնորհակալություն, զանգի հայտն ընդունված է։ Մեր օպերատորը շուտով կապ կհաստատի Ձեզ հետ։</h2></SuccessModal> : <Modal className="P-footer-order-a-call-modal" onClose={() => this.safeSetState({ open: false, success: false })}>
         <h3 className="G-main-color G-text-center">{Settings.translations.enter_your_phone_number}</h3>
         <form className="G-main-form">
           <div className="G-phone-input-wrapper G-main-form-field">

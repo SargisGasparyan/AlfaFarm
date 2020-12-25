@@ -54,7 +54,7 @@ class Images extends HelperPureComponent<IProps, IState> {
             onClick={() => this.setActiveImage(item.id)}
           />)}
         </div>}
-        <div className="P-current-image" style={{ background: `url("${getMediaPath(this.activeImage)}") center/cover` }} />
+        <div className="P-current-image" style={{ background: `url("${getMediaPath(this.activeImage)}") center/contain no-repeat` }} />
       </div>
     );
   }

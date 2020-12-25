@@ -135,7 +135,8 @@ class Modify extends HelperComponent<RouteComponentProps<IRouteParams>, IState> 
                 className={`G-main-input ${this.formValidation.errors.address ? 'G-invalid-field' : ''}`}
                 onChange={this.onAddressChange}
                 onPlaceSelected={this.onAddressSelect}
-                componentRestrictions={{ country: 'am' }}
+                types={['geocode']}
+                componentRestrictions={{ country: 'am'  }}
               />
             </div>
             <div className="G-main-form-field">

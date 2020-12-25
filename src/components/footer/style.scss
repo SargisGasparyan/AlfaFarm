@@ -10,7 +10,7 @@ footer {
   flex-direction : column;
 
   > .P-logo {
-    width         : 170px;
+    width         : 140px;
     margin-bottom : 15px;
   }
 
@@ -25,23 +25,15 @@ footer {
       flex-direction : column;
 
       > p {
+        font-size     : 14px;
         line-height   : 32px;
         margin-bottom : 20px;
-      }
-
-      > h3 {
-        font-size : $normal-fs;
-        @include bold-font();
-      }
-
-      > a {
-        color           : initial;
-        text-decoration : none;
       }
 
       > h3, a {
         display         : flex;
         align-items     : center;
+        font-size       : 14px;
         line-height     : 24px;
         margin-bottom   : 12px;
 
@@ -57,6 +49,16 @@ footer {
         }
       }
 
+      > h3 {
+        font-size : 16px;
+        @include bold-font();
+      }
+
+      > a {
+        color           : initial;
+        text-decoration : none;
+      }
+
       > .P-social-links {
         display    : flex;
 
@@ -66,22 +68,22 @@ footer {
           > i { font-size: 28px; }
         }
       }
-    }
-  }
 
-  > .P-mobile-app {
-    margin-top : 13px;
-
-    > img {
-      width        : 150px;
-      height       : 54px;
-      margin-right : 20px;
+      > .P-mobile-app {
+        margin-top : 13px;
+    
+        > img {
+          width        : 150px;
+          height       : 54px;
+          margin-right : 20px;
+        }
+      }
     }
   }
 
   > .P-copyright {
     color       : $text-gray;
-    padding     : 20px 0 0;
+    padding     : 10px 0 0;
     font-size   : 14px;
     text-align  : center;
     border-top  : 1px solid $light-gray;

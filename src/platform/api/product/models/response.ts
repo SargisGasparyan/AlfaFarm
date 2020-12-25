@@ -32,7 +32,8 @@ export interface IProductDetailsResponseModel {
   havePackage: boolean;
   images: IFile[];
   category: IProductDetailsCategoryResponseModel;
-  brand: IProductDetailsCategoryResponseModel;
+  producer: IProductDetailsProducerResponseModel;
+  brand: IProductDetailsBrandResponseModel;
   activeIngredients: IProductDetailsActiveIngredientResponseModel[];
 }
 export interface IPromotionModel {
@@ -41,6 +42,11 @@ export interface IPromotionModel {
   result: number;
 }
 export interface IProductDetailsCategoryResponseModel {
+  id: number;
+  name: string;
+};
+
+export interface IProductDetailsProducerResponseModel {
   id: number;
   name: string;
 };

@@ -30,7 +30,6 @@ import './responsive.scss';
 interface IState {
   authOpen: boolean;
   categoryOpen: boolean;
-  categoryOpenPosition: number;
   notificationOpen: boolean;
   notificationIconNumber: number;
   cartIconNumber: number;
@@ -42,7 +41,6 @@ class Header extends HelperPureComponent<{}, IState> {
   public state: IState = {
     authOpen: false,
     categoryOpen: false,
-    categoryOpenPosition: 0,
     notificationOpen: false,
     notificationIconNumber: 0,
     cartIconNumber: 0,
@@ -60,9 +58,6 @@ class Header extends HelperPureComponent<{}, IState> {
 
   public componentDidMount() {
     this.fetchCart();
-    setTimeout(this.checkWindow, 500); // Wait for assets load to get the right position of category wrapper link
-    // window.routerHistory.push(`${ROUTES.PRODUCTS.MAIN}`);
-    window.addEventListener('resize', this.checkWindow); // TODO code refactor checkWindow
     window.addEventListener(DispatcherChannels.CartItemsUpdate, this.fetchCart);
     Broadcast.subscribe(DispatcherChannels.StorageUpdate, this.storageUpdate);
 
@@ -71,7 +66,6 @@ class Header extends HelperPureComponent<{}, IState> {
 
   public componentWillUnmount() {
     super.componentWillUnmount();
-    window.removeEventListener('resize', this.checkWindow);
     window.removeEventListener(DispatcherChannels.CartItemsUpdate, this.fetchCart);
     Broadcast.unsubscribe(DispatcherChannels.StorageUpdate, this.storageUpdate);
   }
@@ -97,17 +91,12 @@ class Header extends HelperPureComponent<{}, IState> {
     this.safeSetState({ cartIconNumber: result.data });
   }
 
-  private checkWindow = () => {
-    const { categoryOpenPosition } = this.state;
-    if (this.categoryOpenLink.current) {
-      const openPosition = this.categoryOpenLink.current.getBoundingClientRect().left;
-      openPosition !== categoryOpenPosition && this.safeSetState({ categoryOpenPosition: openPosition })
-    }
-  }
-
   private toggleAuth = () => {
-    const { authOpen } = this.state;
-    this.safeSetState({ authOpen: !authOpen });
+    const { authOpen, mobileMenuOpen } = this.state;
+    this.safeSetState({
+      authOpen: !authOpen,
+      mobileMenuOpen: !mobileMenuOpen || false, // Close if from mobile
+    });
   }
 
   private openCategories = () => {
@@ -157,7 +146,7 @@ class Header extends HelperPureComponent<{}, IState> {
   private openProducts = () => window.dispatchEvent(new Event(DispatcherChannels.ProductFilterChange));
 
   public render() {
-    const { authOpen, categoryOpenPosition, categoryOpen, cartIconNumber, notificationIconNumber, notificationOpen } = this.state;
+    const { authOpen, categoryOpen, cartIconNumber, notificationIconNumber, notificationOpen } = this.state;
 
     return (
       <header ref={this.header} className="G-flex G-flex-align-center G-flex-justify-center">
@@ -181,7 +170,7 @@ class Header extends HelperPureComponent<{}, IState> {
                 className={`P-link ${categoryOpen ? 'P-active' : ''}`}
               >
                 {Settings.translations.online_pharmacy}
-                {!!categoryOpenPosition && categoryOpen && <Categories openPosition={categoryOpenPosition} onClose={this.closeCategories} />}
+                {categoryOpen && <Categories onClose={this.closeCategories} />}
               </Link>
 
               <NavLink {...this.navLinkProps} to={ROUTES.PHARMACIES}>{Settings.translations.pharmacies}</NavLink>
@@ -233,13 +222,10 @@ class Header extends HelperPureComponent<{}, IState> {
       </Link>
 
       <div className="P-mobile-header-icons">
-        {Storage.profile ? <a onClick={this.toggleNotifications} className="P-link P-icon G-normal-link P-notification">
+        {Storage.profile && <a onClick={this.toggleNotifications} className="P-link P-icon G-normal-link P-notification">
           <i className="icon-Group-5515" />
           {!!notificationIconNumber && <span>{notificationIconNumber > 99 ? '99+' : notificationIconNumber}</span>}
-        </a> : <a className="P-link P-icon G-normal-link P-notification">
-            <i className="icon-Group-5515" />
-            {!!notificationIconNumber && <span>{notificationIconNumber > 99 ? '99+' : notificationIconNumber}</span>}
-          </a>}
+        </a>}
         <Link to={ROUTES.CART} className="P-link P-icon G-normal-link P-cart">
           <i className="icon-Group-5503" />
           {!!cartIconNumber && <span>{cartIconNumber > 99 ? '99+' : cartIconNumber}</span>}
@@ -248,7 +234,7 @@ class Header extends HelperPureComponent<{}, IState> {
 
       {authOpen && <Shared.Auth onClose={this.toggleAuth} />}
       {notificationOpen && <Notifications onClose={this.toggleNotifications} />}
-      {mobileMenuOpen && <MobileMenu onClose={this.toggleMobileMenu} />}
+      {mobileMenuOpen && <MobileMenu onClose={this.toggleMobileMenu} onAuthOpen={this.toggleAuth} />}
     </div>
   }
 }

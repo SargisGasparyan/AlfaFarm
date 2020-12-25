@@ -2,13 +2,13 @@
 
 .P-blog-first-item {
   width         : 100%;
-  display       : flex;
-  flex-wrap     : wrap;
   border        : 1px solid $light-gray;
-  padding       : 15px;
-  border-radius: 12px;
+  display       : flex;
+  overflow      : hidden;
+  flex-wrap     : wrap;
+  border-radius : 12px;
+
   > div {
-    // margin-bottom : 40px;
     
     &.P-image {
       flex      : 1;
@@ -19,7 +19,7 @@
   
     &.P-content {
       flex      : 1;
-      padding   : 10px 40px;
+      padding   : 20px 40px;
       min-width : 270px;
       max-width : 100%;
   

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 
 import Layout from '../../../../components/layout';
 import Settings from 'platform/services/settings';
@@ -170,7 +171,10 @@ class Create extends HelperComponent<{}, IState> {
           </form>
         </div>
 
-        {showSuccess && <SuccessModal text="Շնորհակալություն, դեղատոմսի դիտարկման հայտն ընդունված է։ Դեղատոմսը կուսումնասիրվի, և դեղերի ցանկը կուղարկվի ձեզ հնարավորինս կարճ ժամանակահատվածում։" onClose={this.toggleSuccessModal} />}
+        {showSuccess && <SuccessModal onClose={this.toggleSuccessModal}>
+          <h3>{Settings.translations.prescription_success}</h3>
+          <Link className="G-main-button G-normal-link G-mt-30" to={ROUTES.PROFILE.PRESCRIPTIONS.MAIN}>{Settings.translations.prescriptions}</Link>
+        </SuccessModal>}
       </Layout>
     );
   }

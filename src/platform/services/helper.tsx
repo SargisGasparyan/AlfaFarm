@@ -6,6 +6,8 @@ import { IDropdownOption } from '../constants/interfaces';
 import { IUserResponseModel } from '../api/user/models/response';
 
 export const scrolledToBottom = () => (window.innerHeight + window.scrollY) >= document.body.scrollHeight - 1500;
+export const scrolledToBottomOfElement = (element: HTMLElement) => (element.clientHeight + element.scrollTop) >= element.scrollHeight - 200;
+
 export const configedMoment = (date: string | number | Date) => moment.utc(date);
 
 export const preventFieldSubmit = (e: KeyboardEvent) => {

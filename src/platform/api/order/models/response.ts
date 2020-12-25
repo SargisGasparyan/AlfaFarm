@@ -24,6 +24,7 @@ export interface IOrderDetailsResponseModel {
   phone: string;
   regionName: string;
   cityName: string;
+  comment: string;
   baskets: IBasketListResponseModel[];
 };
 
