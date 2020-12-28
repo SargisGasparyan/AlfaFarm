@@ -36,6 +36,7 @@ const ListItem = React.memo((props: IProps) => {
     await BasketController.Change({
       productId: data.id,
       productQuantity: count,
+      isPackage: true,
     });
 
     window.dispatchEvent(new CustomEvent(DispatcherChannels.CartItemsUpdate));
