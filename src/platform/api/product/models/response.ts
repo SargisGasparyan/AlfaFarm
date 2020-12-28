@@ -22,6 +22,7 @@ export interface IProductDetailsResponseModel {
   packagePrice: number;
   description: string;
   price: number;
+  stockQuantity: boolean;
   discountedPrice?: number;
   discount?: number;
   promotion: IPromotionModel;

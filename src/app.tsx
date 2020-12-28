@@ -13,6 +13,7 @@ import Footer from './components/footer';
 import ConfirmModal from './components/confirm-modal';
 import Socket from './platform/services/socket';
 import HelperComponent from './platform/classes/helper-component';
+import DispatcherChannels from 'platform/constants/dispatcher-channels';
 
 import './modules';
 
@@ -21,8 +22,6 @@ import 'moment/locale/ru';
 import 'moment/locale/en-gb';
 
 import './assets/styles/index.scss';
-import DispatcherChannels from 'platform/constants/dispatcher-channels';
-import BonusCardController from 'platform/api/bonusCard';
 
 interface IState {
   confirmOpen: boolean;

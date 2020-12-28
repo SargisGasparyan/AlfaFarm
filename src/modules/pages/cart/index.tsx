@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import CheckBox from 'rc-checkbox';
 
 import ROUTES from 'platform/constants/routes';
 import Settings from 'platform/services/settings';
@@ -16,22 +15,22 @@ import Connection from 'platform/services/connection';
 import DispatcherChannels from 'platform/constants/dispatcher-channels';
 import Storage from 'platform/services/storage';
 import PageLoader from 'components/page-loader';
-
-import './style.scss';
 import { IResponse } from 'platform/constants/interfaces';
 import { PromotionTypeEnum } from 'platform/constants/enums';
-import { format } from 'path';
+import ConfirmModal from 'components/confirm-modal';
+
+import './style.scss';
 
 interface IState {
   data?: IBasketResponseModel;
-  cartSaved: boolean;
+  outOfStockConfirm: boolean;
 };
 
 @byRoute(ROUTES.CART)
 class Cart extends HelperComponent<{}, IState> {
 
   public state: IState = {
-    cartSaved: false
+    outOfStockConfirm: false,
   };
   private columnConfig = [
     {
@@ -44,6 +43,7 @@ class Cart extends HelperComponent<{}, IState> {
 
         <div className="P-main-info">
           <h2 title={row.productTitle}>{row.productTitle}</h2>
+          {!row.productStockQuantity && <h5 className="G-red-color G-mt-5">{Settings.translations.out_of_stock}</h5>}
           <span>{row.unitQuantity} {row.unitName}</span>
         </div>
       </Link>,
@@ -105,6 +105,7 @@ class Cart extends HelperComponent<{}, IState> {
       modifyResult = await BasketController.Change({
         productId: row.productId,
         productQuantity: count,
+        isPackage: row.isPackage,
       });
       row.productQuantity = count;
     } else {
@@ -120,22 +121,49 @@ class Cart extends HelperComponent<{}, IState> {
     }
   }
 
-  private toggleCartSave = () => {
-    const { cartSaved } = this.state;
-    this.safeSetState({ cartSaved: !cartSaved });
-  }
-
   private goToCheckout = async () => {
-    const { data, cartSaved } = this.state;
-    if (cartSaved && data) {
-      const basketIds = data.items.map(item => item.id);
-      await BasketController.Save(basketIds);
-    }
+    const { data } = this.state;
 
-    window.routerHistory.push(`${ROUTES.CHECKOUT}?total=${data?.totalDiscountedPrice || data?.totalPrice}`);
+    if (data?.items.some(item => !item.productStockQuantity)) this.safeSetState({ outOfStockConfirm: true });
+    else window.routerHistory.push(`${ROUTES.CHECKOUT}?total=${data?.totalDiscountedPrice || data?.totalPrice}`);
+    // if (cartSaved && data) {
+    //   const basketIds = data.items.map(item => item.id);
+    //   await BasketController.Save(basketIds);
+    // }
   }
+
+  private closeOutOfStockConfirm = () => this.safeSetState({ outOfStockConfirm: false });
+  private deleteOutOfStock = async () => {
+    const { data } = this.state;
+
+    if (data) {
+      const updatingItems = data.items.filter(item => !item.productStockQuantity).map(item => ({
+        productId: item.productId,
+        productQuantity: 0,
+        isPackage: item.isPackage,
+      }));
+
+      const result = await BasketController.ChangeList(updatingItems);
+      result.success && this.safeSetState({ outOfStockConfirm: false }, () => {
+        this.updateBasketCount();
+        this.fetchData();
+      });
+    }
+  }
+
+  private saveCart = async () => {
+    const { data } = this.state;
+
+    if (data) {
+       const alertify = await import('alertifyjs');
+       const basketIds = data.items.map(item => item.id);
+       const result = await BasketController.Save(basketIds);
+       result.success && alertify.success(Settings.translations.basket_save_success);
+    }
+  }
+
   public render() {
-    const { data, cartSaved } = this.state;
+    const { data, outOfStockConfirm } = this.state;
 
     return (
       <section className="G-page P-cart-page">
@@ -151,11 +179,11 @@ class Cart extends HelperComponent<{}, IState> {
             <Table<IBasketListResponseModel>
               className="P-table G-full-width"
               columnConfig={this.columnConfig}
+              rowClassname={row => !row.productStockQuantity ? 'P-out-of-stock-product' : ''}
               data={data.items}
             />
 
             <div className="P-data-block">
-
               <div className="G-mr-40">
                 <span className="G-fs-normal">{Settings.translations.bonus_count}</span>
                 <h1 className="G-main-color G-fs-24 G-mt-5">{data.totalBonus}</h1>
@@ -172,16 +200,22 @@ class Cart extends HelperComponent<{}, IState> {
             </div>
 
             {Storage.profile && <div className="P-data-block">
-              <div className="P-checkbox-row" onClick={this.toggleCartSave}>
-                <CheckBox checked={cartSaved} />
+              <span className="P-save-cart" onClick={this.saveCart}>
                 {Settings.translations.save_cart}
-              </div>
+              </span>
             </div>}
 
             <button
               className="G-main-button G-ml-auto G-fs-normal P-pay-button"
               onClick={this.goToCheckout}
             >{Settings.translations.pay}</button>
+
+            {outOfStockConfirm && <ConfirmModal
+              title={Settings.translations.out_of_stock}
+              text={Settings.translations.out_of_stock_delete_confirm}
+              onConfirm={this.deleteOutOfStock}
+              onClose={this.closeOutOfStockConfirm}
+            />}
           </> : <EmptyState
               text={Settings.translations.no_products}
             />}
