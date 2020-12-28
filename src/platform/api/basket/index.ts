@@ -36,6 +36,16 @@ class BasketController {
     return result;
   };
 
+  public static ChangeList = (body: IBasketChangeRequestModel[]): Promise<IResponse<IBasketChangeResponseModel>> => {
+    const result = Connection.PUT({
+      body,
+      action: 'UpdateFromRepeatList',
+      controller: BasketController.controller,
+    });
+
+    return result;
+  };
+
   public static Save = (body: number[]): Promise<IResponse<boolean>> => {
     const result = Connection.POST({
       body,

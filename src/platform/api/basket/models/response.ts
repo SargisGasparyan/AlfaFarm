@@ -18,6 +18,7 @@ export interface IBasketListResponseModel {
   unitQuantity: number;
   productTitle: string;
   productQuantity: number;
+  productStockQuantity: boolean:
   promotion: IPromotionModel;
   isPackage: boolean,
 };

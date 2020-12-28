@@ -5,7 +5,7 @@
 
   > .P-name {
     display       : flex;
-    margin-bottom : 60px;
+    margin-bottom : 20px;
   }
 
   > h3 {
@@ -13,6 +13,7 @@
     margin-bottom : 20px;
 
     &.P-unit {
+      margin-top     : 40px;
       border-bottom  : 2px solid $dark-gray;
       padding-bottom : 20px;
     }

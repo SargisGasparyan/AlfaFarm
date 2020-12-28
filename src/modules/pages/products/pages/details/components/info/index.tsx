@@ -68,11 +68,12 @@ class Info extends HelperComponent<IProps, IState> {
   }
   private changeCart = () => this.safeSetState({ cartLoading: true }, async () => {
     const { data } = this.props;
-    const { count } = this.state;
+    const { count, isSelectedPackage } = this.state;
 
     await BasketController.Change({
       productId: data.id,
       productQuantity: count || 1,
+      isPackage: isSelectedPackage,
     });
 
     window.dispatchEvent(new CustomEvent(DispatcherChannels.CartItemsUpdate));
@@ -151,6 +152,7 @@ class Info extends HelperComponent<IProps, IState> {
         <h2 className="P-name">
           {data.title}
         </h2>
+        {!data.stockQuantity && <h3 className="G-red-color">{Settings.translations.out_of_stock}</h3>}
         <h3 className="P-unit">{data.unitQuantity} {data.unitName}</h3>
         {data.category && <h3 className="P-row">
           {Settings.translations.category}
@@ -178,18 +180,20 @@ class Info extends HelperComponent<IProps, IState> {
         <p className="P-description">{data.description}</p>
         <div className="P-count-info"><this.UnitCount /></div>
         <div className="P-cart-actions">
-          <CountInput
-            min={0}
-            step={1}
-            value={count}
-            onChange={this.onCountChange}
-          />
+          {data.stockQuantity && <>
+            <CountInput
+              min={0}
+              step={1}
+              value={count}
+              onChange={this.onCountChange}
+            />
 
-          <LoaderContent
-            loading={cartLoading}
-            className="G-main-button"
-            onClick={this.changeCart}
-          >{Settings.translations.add_to_cart}</LoaderContent>
+            <LoaderContent
+              loading={cartLoading}
+              className="G-main-button"
+              onClick={this.changeCart}
+            >{Settings.translations.add_to_cart}</LoaderContent>
+          </>}
 
           {pharmaciesAvailablityOpen && <PharmaciesAvailablity onClose={this.togglePharmaciesAvailablity} data={data} />}
           <span className="G-orange-color G-ml-auto P-price">
