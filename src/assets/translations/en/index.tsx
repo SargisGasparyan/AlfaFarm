@@ -1010,7 +1010,7 @@ export default {
   how_we_work: "How we work",
   the_advantages_of_cooperation: "The advantages of cooperation",
   city: "City",
-  region: "Region",
+  region: "State",
   delivery: "Delivery",
   delivery_fee: "Delivery fee",
   bonus_card: "Bonus card",
