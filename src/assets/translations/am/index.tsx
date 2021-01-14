@@ -1051,7 +1051,7 @@ export default {
   how_we_work: "Ինչպես ենք աշխատում",
   the_advantages_of_cooperation: "Համագործակցության առավելությունները",
   city: "Քաղաք",
-  region: "Շրջան",
+  region: "Մարզ",
   delivery: "Առաքում",
   delivery_fee: "Առաքման վճար",
   bonus_card: "Բոնուս քարտ",

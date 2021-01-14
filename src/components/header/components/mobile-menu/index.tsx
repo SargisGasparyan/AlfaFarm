@@ -72,7 +72,7 @@ class MobileMenu extends HelperComponent<IProps, IState> {
             />
           </div>
 
-          <a className="P-link" onClick={onAuthOpen}>{Settings.translations.log_in}</a>
+          {!Settings.token && <a className="P-link" onClick={onAuthOpen}>{Settings.translations.log_in}</a>}
 
           <NavLink {...this.navLinkProps} to={ROUTES.PHARMACIES} onClick={onClose}>{Settings.translations.pharmacies}</NavLink>
           <NavLink {...this.navLinkProps} to={ROUTES.CLINIC.MAIN} onClick={onClose}>{Settings.translations.clinic}</NavLink>

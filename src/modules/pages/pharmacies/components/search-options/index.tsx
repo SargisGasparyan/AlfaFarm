@@ -87,7 +87,7 @@ class SearchOptions extends HelperPureComponent<IProps, IState> {
               clear={true}
               value={cityId}
               onChange={this.changeCity}
-              placeholder={Settings.translations.city}
+              placeholder={Settings.translations.region}
               options={cities}
             />
           </div>
@@ -98,7 +98,7 @@ class SearchOptions extends HelperPureComponent<IProps, IState> {
               disabled={!cityId}
               value={regionId}
               onChange={this.changeRegion}
-              placeholder={Settings.translations.region}
+              placeholder={Settings.translations.city}
               options={regions}
             />
           </div>
