@@ -65,9 +65,7 @@ class ContactUs extends HelperComponent<{}, IState> {
   }
 
   public render() {
-    const { branches, hoveredMarkerIndex } = this.state;
-    console.log(branches, 'branches');
-    console.log(hoveredMarkerIndex, 'hoveredMarkerIndex');
+    const { hoveredMarkerIndex } = this.state;
 
     return (
       <section className="G-page P-home-contact-us">
