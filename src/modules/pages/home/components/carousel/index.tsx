@@ -43,8 +43,6 @@ class Carousel extends HelperPureComponent<{}, IState> {
   public render() {
     const { data } = this.state;
 
-    console.log(data);
-
     return (
       <Slider
         dots={true}

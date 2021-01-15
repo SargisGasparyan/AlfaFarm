@@ -46,8 +46,6 @@ class OrderACall extends HelperComponent<{}, IState> {
   };
   public confirm = (e: React.SyntheticEvent) => {
     e.preventDefault(); this.safeSetState({ submitted: true }, () => {
-    console.log(this.state);
-
       const { submitted, content } = this.state;
       if (submitted && content.length === 8 && Number(content)) {
         this.safeSetState({ open: false });

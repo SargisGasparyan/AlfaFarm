@@ -58,7 +58,6 @@ class Create extends HelperComponent<{}, IState> {
 
     if (files && files[0]) {
       images.push(files[0]);
-      console.log(files[0]);
       this.safeSetState({ images: Array.from(images) });
     }
   }
