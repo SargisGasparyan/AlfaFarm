@@ -14,7 +14,7 @@ import { formatDate, formatPrice, getViewEnum } from 'platform/services/helper';
 import { PaymentTypeEnum } from 'platform/constants/enums';
 import enviroment from 'platform/services/enviroment';
 import DispatcherChannels from 'platform/constants/dispatcher-channels';
-import { OrderStatusEnum } from 'platform/api/order/constants/enums';
+import { OrderStatusEnum, OrderDeliveryTypeEnum } from 'platform/api/order/constants/enums';
 import { Shared } from 'modules';
 
 import './style.scss';
@@ -94,9 +94,9 @@ class Details extends HelperComponent<RouteComponentProps<IRouteParams>, IState>
               <span>{formatDate(data.createdDate)}</span>
             </h3>
 
-            {data.deliveryDate && <h3 className="G-flex G-mb-30 G-flex-justify-between">
+            {data.deliveryType == OrderDeliveryTypeEnum.Delivery && <h3 className="G-flex G-mb-30 G-flex-justify-between">
               {Settings.translations.delivery_date}
-              <span>{formatDate(data.deliveryDate)}</span>
+              <span>{data.deliveryDate ? formatDate(data.deliveryDate) : Settings.translations.as_soon_as_possible}</span>
             </h3>}
 
             <h3 className="G-flex G-mb-30 G-flex-justify-between">
