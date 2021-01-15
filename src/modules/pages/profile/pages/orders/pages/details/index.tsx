@@ -94,7 +94,7 @@ class Details extends HelperComponent<RouteComponentProps<IRouteParams>, IState>
               <span>{formatDate(data.createdDate)}</span>
             </h3>
 
-            {data.deliveryType == OrderDeliveryTypeEnum.Delivery && <h3 className="G-flex G-mb-30 G-flex-justify-between">
+            {data.deliveryType === OrderDeliveryTypeEnum.Delivery && <h3 className="G-flex G-mb-30 G-flex-justify-between">
               {Settings.translations.delivery_date}
               <span>{data.deliveryDate ? formatDate(data.deliveryDate) : Settings.translations.as_soon_as_possible}</span>
             </h3>}
