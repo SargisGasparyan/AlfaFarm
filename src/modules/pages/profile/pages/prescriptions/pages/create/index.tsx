@@ -94,7 +94,7 @@ class Create extends HelperComponent<{}, IState> {
 
   private toggleSuccessModal = () => {
     const { showSuccess } = this.state;
-    showSuccess ? window.routerHistory.push(ROUTES.PROFILE.PRESCRIPTIONS.MAIN) : this.safeSetState({ showSuccess: true });
+    showSuccess ? window.routerHistory.push(ROUTES.HOME) : this.safeSetState({ showSuccess: true });
   }
 
   public render() {

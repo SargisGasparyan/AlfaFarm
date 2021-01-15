@@ -1,4 +1,4 @@
-import { OrderStatusEnum } from '../constants/enums';
+import { OrderStatusEnum, OrderDeliveryTypeEnum } from '../constants/enums';
 import { IBasketListResponseModel } from 'platform/api/basket/models/response';
 import { PaymentTypeEnum } from 'platform/constants/enums';
 
@@ -15,6 +15,7 @@ export interface IOrderDetailsResponseModel {
   id: number;
   status: OrderStatusEnum;
   createdDate: string;
+  deliveryType: OrderDeliveryTypeEnum;
   deliveryDate: string;
   paymentType: PaymentTypeEnum;
   productQuantity: number;

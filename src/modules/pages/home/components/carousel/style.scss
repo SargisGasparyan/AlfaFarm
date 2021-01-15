@@ -1,4 +1,5 @@
 @import "src/assets/styles/variables";
+
 .P-home-carousel-slide {
   display         : flex !important;
   flex-direction  : column;
@@ -7,6 +8,7 @@
   @media(max-width: $tablet-screen){
     min-height: 400px !important;
   }
+  
   > .P-shadow-text { margin-bottom: 60px; }
 
   > img {
@@ -18,7 +20,8 @@
   > p {
     width         : 50%;
     font-size     : 24px;
-    margin-bottom : 60px;
+    margin-bottom : 80px;
+
     @media(max-width: $tablet-screen){
       width: 100%;
       font-size: 20px;
@@ -35,7 +38,8 @@
 }
 
 @media(max-width: 1400px){
-  .P-home-carousel-slide{
+
+  .P-home-carousel-slide {
     background-size: cover !important;
   }
 }
