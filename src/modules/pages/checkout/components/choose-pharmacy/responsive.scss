@@ -1,0 +1,7 @@
+@media (max-width: $small-screen) {
+  div.P-product-pharmacies-availablity-modal .P-modal-content > div > .P-content {
+    flex-wrap: wrap;
+
+    > .P-maps-wrapper { width : 100%; }
+  }
+}
