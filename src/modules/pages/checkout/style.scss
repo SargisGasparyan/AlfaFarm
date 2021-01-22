@@ -22,9 +22,6 @@
     .P-date {
       display: flex;
       justify-content: space-between;
-      > .G-main-form-half-field {
-
-      }
     }
 
     > .P-main-info, > .P-delivery-form {
@@ -36,11 +33,14 @@
       .rc-checkbox { margin-right: 10px; }
 
       > .P-delivery-date {
-        flex        : 1;
-        width       : 100%;
-        display     : flex;
-        min-width   : 400px;
-        align-items: center;
+        flex          : 1;
+        width         : 100%;
+        height        : 55px;
+        display       : flex;
+        min-width     : 400px;
+        align-items   : center;
+        margin-bottom : 15px;
+
         > h4 {
           color          : $text-gray;
           white-space    : nowrap;

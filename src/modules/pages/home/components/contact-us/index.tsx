@@ -33,7 +33,7 @@ class ContactUs extends HelperComponent<{}, IState> {
 
   private fetchData = async () => {
     const result = await PharmacyBranchController.GetList({
-      pageSize: 200,
+      pageSize: 20000,
       pageNumber: 1,
     });
 

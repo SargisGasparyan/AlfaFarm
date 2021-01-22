@@ -24,16 +24,18 @@ import { IUserAddressListResponseModel } from 'platform/api/userAddress/models/r
 import OrderController from 'platform/api/order';
 import SuccessModal from 'components/success-modal';
 import { PaymentTypeEnum } from 'platform/constants/enums';
-import PaymentController from 'platform/api/payment';
 import DispatcherChannels from 'platform/constants/dispatcher-channels';
 import PaymentMethod from './components/payment';
 import { IBonusCardDetailsWithHistoryResponseModel } from 'platform/api/bonusCard/models/response';
 import BonusCardController from 'platform/api/bonusCard';
 import NumberInput from 'components/number-input';
 import { IOrderResultResponseModel } from 'platform/api/order/models/response';
+import Connection from 'platform/services/connection';
+import ChoosePharmacy from './components/choose-pharmacy';
+import { IPharmacyBranchListResponseModel } from 'platform/api/pharmacyBranch/models/response';
 
 import './style.scss';
-import Connection from 'platform/services/connection';
+
 
 interface IState {
   bonusDetails?: IBonusCardDetailsWithHistoryResponseModel;
@@ -41,8 +43,10 @@ interface IState {
   form: IOrderModifyRequestModel;
   submited: boolean;
   submitLoading: boolean;
+  choosePharmacyOpen: boolean;
   chooseAddressOpen: boolean;
   successModalOpen: boolean;
+  chosenBranch?: IPharmacyBranchListResponseModel;
   initialTotalDiscountedPrice: number;
   isUsingBonus: boolean;
   isPayment: boolean;
@@ -56,6 +60,7 @@ class Checkout extends HelperComponent<{}, IState> {
   public state: IState = {
     submited: false,
     submitLoading: false,
+    choosePharmacyOpen: false,
     chooseAddressOpen: false,
     successModalOpen: false,
     isUsingBonus: false,
@@ -66,7 +71,6 @@ class Checkout extends HelperComponent<{}, IState> {
       phoneNumber: '',
       deliveryType: OrderDeliveryTypeEnum.Delivery,
       paymentType: PaymentTypeEnum.Cash,
-      branchId: 1,
     },
     isPayment: false,
     idramAmount: null,
@@ -168,6 +172,8 @@ class Checkout extends HelperComponent<{}, IState> {
     this.safeSetState({ chooseAddressOpen: true });
   }
 
+  private openPharmacyChoose = () => this.safeSetState({ choosePharmacyOpen: true });
+
   private closeAddressChoose = (chosen?: IUserAddressListResponseModel) => {
     const { form } = this.state;
 
@@ -185,6 +191,15 @@ class Checkout extends HelperComponent<{}, IState> {
     } else this.safeSetState({ chooseAddressOpen: false });
   }
 
+  private choosePharmacy = (pharmacy: IPharmacyBranchListResponseModel) => {
+    const { form } = this.state;
+    form.branchId = pharmacy.id;
+    form.addressText = pharmacy.addressText;
+    form.addressLat = pharmacy.addressLat;
+    form.addressLng = pharmacy.addressLng;
+    this.safeSetState({ form, chosenBranch: pharmacy, choosePharmacyOpen: false });
+  }
+
   private changeDeliveryType = (chosen: IDropdownOption<OrderDeliveryTypeEnum>) => {
     const { form } = this.state;
     form.deliveryType = chosen.value;
@@ -200,18 +215,6 @@ class Checkout extends HelperComponent<{}, IState> {
     dateItem.milliseconds(currentDayStarting.getMilliseconds());
 
     return dateItem.isSameOrAfter(currentDayStarting);
-  }
-
-  private choosePaymentTypeEnum = async (type: PaymentTypeEnum) => {
-    const { form } = this.state;
-    if (type === PaymentTypeEnum.IPay) {
-      const res = await PaymentController.getUserCards();
-      if (res && res.success) {
-        //
-      }
-    }
-    form.paymentType = type;
-    this.safeSetState({ form });
   }
 
   private toggleUsingBonus = async () => {
@@ -243,6 +246,8 @@ class Checkout extends HelperComponent<{}, IState> {
       submitLoading,
       resultInfo,
       bonusDetails,
+      chosenBranch,
+      choosePharmacyOpen,
       chooseAddressOpen,
       successModalOpen,
       initialTotalDiscountedPrice,
@@ -368,11 +373,21 @@ class Checkout extends HelperComponent<{}, IState> {
                     value: form.deliveryDateFrom ? formatDate(form.deliveryDateFrom, true) : '',
                     readOnly: true,
                     className: `G-main-input ${this.formValidation.errors.deliveryDateFrom ? 'G-invalid-field' : ''}`,
-                    placeholder: Settings.translations.delivery_date,
+                    placeholder: Settings.translations.choose_date,
                   }}
                 />
               </div>
             </div>
+
+            {form.deliveryType === OrderDeliveryTypeEnum.Pickup && <div className="G-main-form-field">
+              <input
+                value={chosenBranch ? chosenBranch.name : ''}
+                readOnly={true}
+                className={`G-main-input ${this.formValidation.errors.branchId ? 'G-invalid-field' : ''}`}
+                placeholder={Settings.translations.choose_pharmacy}
+                onClick={this.openPharmacyChoose}
+              />
+            </div>}
 
             <div className="G-main-form-field P-comment-field">
               <textarea
@@ -429,6 +444,8 @@ class Checkout extends HelperComponent<{}, IState> {
           <h3>{Settings.translations.order_success}</h3>
           <Link className="G-main-button G-normal-link G-mt-30" to={ROUTES.PROFILE.ORDERS.MAIN}>{Settings.translations.order_history}</Link>
         </SuccessModal>}
+
+        {choosePharmacyOpen && <ChoosePharmacy onClose={this.choosePharmacy} />}
 
         <form action="https://money.idram.am/payment.aspx" method="POST" target="blank">
           <input type="hidden" name="EDP_LANGUAGE" value="EN" />

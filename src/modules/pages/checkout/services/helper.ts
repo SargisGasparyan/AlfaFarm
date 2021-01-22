@@ -13,6 +13,7 @@ export function validateForm(this: IOrderModifyRequestModel, submited?: boolean)
     address: false,
     deliveryDateFrom: false,
     deliveryDateTo: false,
+    branchId: false,
   };
 
   if (submited && !this.firstName) {
@@ -47,6 +48,11 @@ export function validateForm(this: IOrderModifyRequestModel, submited?: boolean)
 
   if (submited && this.deliveryType === OrderDeliveryTypeEnum.Delivery && (!this.deliveryDateFrom || !isValidDateRange(this.deliveryDateFrom, this.deliveryDateTo))) {
     errors.deliveryDateTo = true;
+    valid = false;
+  }
+
+  if (submited && this.deliveryType === OrderDeliveryTypeEnum.Pickup && !this.branchId) {
+    errors.branchId = true;
     valid = false;
   }
 
