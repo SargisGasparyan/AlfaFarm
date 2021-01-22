@@ -33,6 +33,7 @@ import NumberInput from 'components/number-input';
 import { IOrderResultResponseModel } from 'platform/api/order/models/response';
 
 import './style.scss';
+import Connection from 'platform/services/connection';
 
 interface IState {
   bonusDetails?: IBonusCardDetailsWithHistoryResponseModel;
@@ -64,7 +65,8 @@ class Checkout extends HelperComponent<{}, IState> {
       lastName: '',
       phoneNumber: '',
       deliveryType: OrderDeliveryTypeEnum.Delivery,
-      paymentType: PaymentTypeEnum.Cash
+      paymentType: PaymentTypeEnum.Cash,
+      branchId: 1,
     },
     isPayment: false,
     idramAmount: null,
@@ -127,6 +129,8 @@ class Checkout extends HelperComponent<{}, IState> {
   private bonusChange = (e: React.SyntheticEvent<HTMLInputElement>) => {
     const { form } = this.state;
     form.usedBonus = +e.currentTarget.value;
+
+    Connection.AbortAll();
     this.safeSetState({ form }, () => this.getResultInfo(form.usedBonus));
   }
 

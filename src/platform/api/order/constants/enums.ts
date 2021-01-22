@@ -11,6 +11,6 @@ export enum OrderStatusEnum {
 };
 
 export enum OrderDeliveryTypeEnum {
-  Pickup = 1,
-  Delivery,
+  Delivery = 1,
+  Pickup,
 };

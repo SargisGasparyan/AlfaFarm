@@ -16,6 +16,7 @@ export interface IOrderModifyRequestModel {
   addressFloor?: string;
   addressApartment?: string;
   addressComment?: string;
+  branchId?: number;
   firstName: string;
   lastName: string;
   phoneNumber: string;
