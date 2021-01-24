@@ -11,14 +11,14 @@ import OrderController from 'platform/api/order';
 import { IOrderListResponseModel } from 'platform/api/order/models/response';
 import { OrderStatusEnum } from 'platform/api/order/constants/enums';
 import { getViewEnum, formatDate } from 'platform/services/helper';
-import SavedBaskets from './components/saved-baskets';
-import SavedBasketItems from './pages/saved-basket-items';
 import Details from './pages/details';
 import Pagination from 'components/pagination';
 import { paginationPageLimit } from 'platform/constants';
 import { IPagingResponse } from 'platform/constants/interfaces';
+import EmptyState from 'components/empty-state';
 
 import './style.scss';
+import { statusColorClassNames } from './constants';
 
 interface IState {
   data?: IPagingResponse<IOrderListResponseModel>;
@@ -32,6 +32,10 @@ class Orders extends HelperComponent<IState, {}> {
   private statusViewEnum = getViewEnum(OrderStatusEnum);
 
   private columnConfig = [
+    {
+      name: Settings.translations.order_number,
+      cell: (row: IOrderListResponseModel) => `#${row.id}`,
+    },
     {
       name: Settings.translations.date,
       cell: (row: IOrderListResponseModel) => formatDate(row.createdDate),
@@ -50,7 +54,7 @@ class Orders extends HelperComponent<IState, {}> {
     },
     {
       name: Settings.translations.status,
-      cell: (row: IOrderListResponseModel) => Settings.translations[this.statusViewEnum[row.status]],
+      cell: (row: IOrderListResponseModel) => <span className={statusColorClassNames[row.status]}>{Settings.translations[this.statusViewEnum[row.status]]}</span>,
     },
   ];
 
@@ -68,17 +72,16 @@ class Orders extends HelperComponent<IState, {}> {
 
   public render() {
     const { data } = this.state;
-
+    
     return (
       <Layout>
-        <SavedBaskets />
         <h2 className="G-main-color G-mb-30">{Settings.translations.order_history}</h2>
         <div className="G-flex P-profile-orders">
-          {data && <Table<IOrderListResponseModel>
+          {data && data.list.length ? <Table<IOrderListResponseModel>
             redirectUrl={row => ROUTES.PROFILE.ORDERS.DETAILS.replace(':id', row.id)}
             columnConfig={this.columnConfig}
             data={data.list}
-          />}
+          /> : <EmptyState text={Settings.translations.empty_orders_list} />}
         </div>
         <Pagination<IOrderListResponseModel> fetchData={this.fetchData} />
       </Layout>
@@ -86,4 +89,4 @@ class Orders extends HelperComponent<IState, {}> {
   }
 }
 
-export default { Orders, Details, SavedBasketItems };
+export default { Orders, Details };

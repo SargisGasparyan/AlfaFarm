@@ -6,6 +6,7 @@ import Settings from 'platform/services/settings';
 import { contactPhoneNumber, contactEmail, contactAddress } from 'platform/constants/contact-info';
 import OrderACall from './components/order_a_call';
 import enviroment from 'platform/services/enviroment';
+import Invite from './components/invite';
 
 import LogoImage from 'assets/images/logo.png';
 import AppStoreImage from 'assets/images/app_store.png';
@@ -14,7 +15,6 @@ import FacebookImage from 'assets/images/facebook.png';
 import InstagramImage from 'assets/images/instagram.png';
 
 import './style.scss';
-import Invite from './components/invite';
 
 const currentYear = new Date().getFullYear();
 
@@ -32,11 +32,15 @@ const Footer = React.memo(() => (
             <img src={InstagramImage} alt="instagram" />
           </a>
         </div>
+        <div className="P-mobile-app">
+          <img src={AppStoreImage} />
+          <img src={GooglePlayImage} />
+        </div>
       </div>
       {!enviroment.WHOLESALE && <>
         <div className="P-column">
           <h3 className="G-main-color">{Settings.translations.wholesale_sale}</h3>
-          <a href={Settings.wholesaleURL + ROUTES.SERVICES}>{Settings.translations.services}</a>
+          <a href={Settings.wholesaleURL + ROUTES.SERVICES} target="blank">{Settings.translations.services}</a>
         </div>
         <div className="P-column">
           <h3 className="G-main-color">{Settings.translations.retail_sale}</h3>
@@ -61,10 +65,6 @@ const Footer = React.memo(() => (
         <OrderACall />
         {!!Settings.token && !Settings.guest && <Invite />}
       </div>
-    </div>
-    <div className="P-mobile-app">
-      <img src={AppStoreImage} />
-      <img src={GooglePlayImage} />
     </div>
     <h4 className="P-copyright">
       {Settings.translations.copyright} &copy; {currentYear} Alfa Pharm

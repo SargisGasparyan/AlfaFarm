@@ -18,7 +18,11 @@ const Invite = React.memo(() => {
       setLink(result.data);
     });
   }, []);
-
+  const copyLink = async () => {
+    copy(link);
+    const alertify = await import('alertifyjs');
+    alertify.success(Settings.translations.copied_to_clipboard)
+  }
   const Content = () => link ? <Modal className="P-footer-order-a-call-modal" onClose={() => setOpen(false)}>
     <h3 className="G-main-color G-text-center">{Settings.translations.use_the_link}</h3>
     <div className="G-main-form">
@@ -30,7 +34,7 @@ const Invite = React.memo(() => {
           placeholder={Settings.translations.phone_number}
         />
       </div>
-      <button className="G-main-button" onClick={() => copy(link)}>{Settings.translations.copy}</button>
+      <button className="G-main-button" onClick={() => copyLink()}>{Settings.translations.copy}</button>
     </div>
   </Modal> : null;
 

@@ -7,7 +7,7 @@ class BlogController {
   private static controller = 'blog';
 
   public static GetList = (body: IPagingRequest): Promise<IResponse<IPagingResponse<IBlogListResponseModel>>> => {
-    const result = Connection.POST<IPagingRequest>({
+    const result = Connection.POST({
       body,
       action: 'list',
       controller: BlogController.controller,

@@ -17,20 +17,24 @@ $small-radius         : 5px;
 $default-block-shadow : 0 0 10px transparentize(#000, .92);
 
 //? Screens
-$max-screen    : 1650px;
-$medium-screen : 1440px;
-$small-screen  : 1220px;
-$tablet-screen : 992px;
-$mobile-screen : 664px;
+
+$max-screen          : 1650px;
+$medium-screen       : 1440px;
+$small-screen        : 1220px;
+$tablet-screen       : 992px;
+$mobile-screen       : 664px;
+$small-mobile-screen : 520px;
 
 //? Colors
 
 $orange           : #F26D26;
+$red              : #DE0404;
 $gray             : #EEEEEE;
 $white            : #ffffff;
 $blue             : #4267B2;
 $pink             : #F85061;
 $text-gray        : #8D8D8D;
+$yellow           : #F1D02C;
 $dark-gray        : #EFF0F1;
 $light-gray       : #CFCFCF;
 $very-light-gray  : #F9F9F9;

@@ -1,0 +1,64 @@
+@import 'src/assets/styles/helper';
+@import 'src/assets/styles/variables';
+
+.P-tenders-list-item {
+  width           : 100%;
+  border          : 1px solid $light-gray;
+  display         : flex;
+  overflow        : hidden;
+  min-height      : 220px;
+  background      : white;
+  align-items     : center;
+  margin-bottom   : 50px;
+  border-radius   : $big-radius;
+  justify-content : space-between;
+
+  > .P-image {
+    width                     : 450px;
+    height                    : 100%;
+    background-color          : red !important;
+    border-top-left-radius    : 12px;
+    border-bottom-left-radius : 12px;
+  }
+
+  > .P-main-info {
+    flex            : 1;
+    color           : black;
+    height          : 100%;
+    margin          : 10px 0;
+    padding         : 30px 50px;
+    display         : flex;
+    flex-direction  : column;
+    text-decoration : none;
+  
+    > h2 {
+      font-size     : 20px;
+      margin-bottom : 20px;
+    }
+
+    > .P-description {
+      font-size     : 15px;
+      margin-bottom : 20px;
+    }
+
+    > div {
+      display         : flex;
+      margin-top      : auto;
+      flex-wrap       : wrap;
+      justify-content : space-between;
+
+      > h3 {
+        @include normal-font;
+        display     : flex;
+        font-size   : 16px;
+        align-items : center;
+      }
+
+      > .G-main-button {
+        margin          : 10px 0;
+        padding         : 7px 30px;
+        text-decoration : none;
+      }
+    }
+  }
+}

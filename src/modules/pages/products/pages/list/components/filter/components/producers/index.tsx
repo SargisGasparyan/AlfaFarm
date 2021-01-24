@@ -7,6 +7,8 @@ import CheckBox from 'rc-checkbox';
 import { IProducerListResponseModel } from 'platform/api/producer/models/response';
 import ProducerController from 'platform/api/producer';
 import { infinityScrollMax } from 'platform/constants';
+import useSubscriber from 'platform/hooks/use-subcriber';
+import DispatcherChannels from 'platform/constants/dispatcher-channels';
 
 interface IProps {
   body: IProductFilterRequestModel;
@@ -30,6 +32,8 @@ const Producers = ({ body, onChange }: IProps) => {
     prevCategoryIdRef.current = categoryId;
   });
 
+  useSubscriber(DispatcherChannels.ProductFilterClear, () => setOpen(false));
+
   const toggleItem = (id: number) => {
     const bodyCopy = {...body};
 
@@ -49,10 +53,10 @@ const Producers = ({ body, onChange }: IProps) => {
   }
 
   return <>
-    <h2 className="P-row-title" onClick={() => setOpen(!open)}>
+    <h3 className="P-row-title" onClick={() => setOpen(!open)}>
       {Settings.translations.producer}
       <span className="G-orange-color">{open ? '-' : '+'}</span>
-    </h2>
+    </h3>
 
     {open ?
       <div className="P-row-content">

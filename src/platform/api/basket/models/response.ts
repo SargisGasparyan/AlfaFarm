@@ -1,5 +1,9 @@
+import { IPromotionModel } from 'platform/api/product/models/response';
+
 export interface IBasketResponseModel {
   totalPrice: number;
+  totalDiscountedPrice: number;
+  totalBonus: number;
   bonus: number;
   items: IBasketListResponseModel[];
 };
@@ -9,10 +13,14 @@ export interface IBasketListResponseModel {
   productId: number;
   productPhoto: string;
   price: number;
+  packagePrice: number;
   unitName: string;
+  totalPrice: number;
   unitQuantity: number;
   productTitle: string;
   productQuantity: number;
+  productStockQuantity: boolean;
+  promotion: IPromotionModel;
   isPackage: boolean,
 };
 
@@ -21,7 +29,7 @@ export interface ISavedBasketListResponseModel {
   itemsCount: number;
 };
 
-export interface IBasketChangeResponseModel {
+export interface IBasketChangeResponseModel extends IBasketResponseModel {
   bonus: number;
   totalPrice: number;
 };

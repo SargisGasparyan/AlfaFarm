@@ -81,13 +81,13 @@ class SearchOptions extends HelperPureComponent<IProps, IState> {
     return (
       <div className="G-page P-pharmacies-search-options">
         <ShadowText>{Settings.translations.pharmacies}</ShadowText>
-        <form className="G-main-form P-form">
+        <form className="G-main-form P-form P-">
           <div className="G-main-form-half-field">
             <Select<number>
               clear={true}
               value={cityId}
               onChange={this.changeCity}
-              placeholder={Settings.translations.city}
+              placeholder={Settings.translations.region}
               options={cities}
             />
           </div>
@@ -98,12 +98,12 @@ class SearchOptions extends HelperPureComponent<IProps, IState> {
               disabled={!cityId}
               value={regionId}
               onChange={this.changeRegion}
-              placeholder={Settings.translations.region}
+              placeholder={Settings.translations.city}
               options={regions}
             />
           </div>
 
-          <button className="G-main-button" onClick={this.submit}>{Settings.translations.search}</button>
+          <button className="G-main-button G-mt-20" onClick={this.submit}>{Settings.translations.search}</button>
         </form>
       </div>
     );

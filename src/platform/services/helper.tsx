@@ -6,6 +6,8 @@ import { IDropdownOption } from '../constants/interfaces';
 import { IUserResponseModel } from '../api/user/models/response';
 
 export const scrolledToBottom = () => (window.innerHeight + window.scrollY) >= document.body.scrollHeight - 1500;
+export const scrolledToBottomOfElement = (element: HTMLElement) => (element.clientHeight + element.scrollTop) >= element.scrollHeight - 200;
+
 export const configedMoment = (date: string | number | Date) => moment.utc(date);
 
 export const preventFieldSubmit = (e: KeyboardEvent) => {
@@ -147,4 +149,15 @@ export const getMediaPath = (path?: string | null) => {
 }
 
 export const truncateText = (value: string, limit: number = 38) =>
-  value.length > limit ? value.substring(0, limit) + '...' : value;
+  value && (value.length > limit) ? value.substring(0, limit) + '...' : value;
+
+export const trimForm = <Type extends { [key: string]: any }>(value: Type) => {
+  const result: Partial<Type> = {};
+
+  for (const key in value) {
+    if (value.hasOwnProperty(key) && typeof value[key] === 'string') 
+      result[key] = value[key].trim();
+  }
+
+  return result as Type;
+}

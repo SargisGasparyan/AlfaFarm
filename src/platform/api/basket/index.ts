@@ -2,6 +2,7 @@ import Connection from '../../services/connection';
 import { IResponse } from '../../constants/interfaces';
 import { IBasketChangeRequestModel } from './models/request';
 import { IBasketListResponseModel, ISavedBasketListResponseModel, IBasketResponseModel, IBasketChangeResponseModel } from './models/response';
+import Settings from 'platform/services/settings';
 
 class BasketController {
 
@@ -26,7 +27,7 @@ class BasketController {
   };
 
   public static Change = (body: IBasketChangeRequestModel): Promise<IResponse<IBasketChangeResponseModel>> => {
-    const result = Connection.PUT<IBasketChangeRequestModel>({
+    const result = Connection.PUT({
       body,
       action: '',
       controller: BasketController.controller,
@@ -35,8 +36,18 @@ class BasketController {
     return result;
   };
 
+  public static ChangeList = (body: IBasketChangeRequestModel[]): Promise<IResponse<IBasketChangeResponseModel>> => {
+    const result = Connection.PUT({
+      body,
+      action: 'UpdateFromRepeatList',
+      controller: BasketController.controller,
+    });
+
+    return result;
+  };
+
   public static Save = (body: number[]): Promise<IResponse<boolean>> => {
-    const result = Connection.POST<number[]>({
+    const result = Connection.POST({
       body,
       action: 'save',
       controller: BasketController.controller,
@@ -64,22 +75,22 @@ class BasketController {
   };
 
   public static DeleteSaved = (id: number): Promise<IResponse<boolean>> => {
-    const result = Connection.DELETE<{}>({
+    const result = Connection.DELETE({
       body: {},
       action: `saved/${id}`,
       controller: BasketController.controller,
-    });
+    }, Settings.translations.delete_saved_product_basket);
 
     return result;
   };
 
   public static Delete = (productId: number, isPackage?: boolean): Promise<IResponse<IBasketChangeResponseModel>> => {
-    const result = Connection.DELETE<{}>({
+    const result = Connection.DELETE({
       body: {},
       action: `${productId}/${isPackage}`,
       controller: BasketController.controller,
       withoutConfirmModal: true,
-    });
+    }, Settings.translations.delete_product_from_basket);
 
     return result;
   };

@@ -1,0 +1,13 @@
+@media (max-width: $tablet-screen) {
+  div.P-products-sort-box {
+    margin-top      : 40px;
+    align-items     : initial;
+    flex-direction  : column;
+    justify-content : initial;
+
+    > h3 {
+      font-size     : 24px;
+      margin-bottom : 20px;
+    }
+  }
+}

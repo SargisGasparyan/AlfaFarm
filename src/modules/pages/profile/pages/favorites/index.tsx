@@ -9,6 +9,9 @@ import FavoriteController from 'platform/api/favorite';
 import Settings from 'platform/services/settings';
 import { getMediaPath, formatPrice } from 'platform/services/helper';
 import { IFavoriteListResponseModel } from 'platform/api/favorite/models/response';
+import SavedBaskets from './components/saved-baskets';
+import SavedBasketItems from './pages/saved-basket-items';
+import EmptyState from 'components/empty-state';
 
 import './style.scss';
 
@@ -16,7 +19,7 @@ interface IState {
   data: IFavoriteListResponseModel[];
 };
 
-@byPrivateRoute(ROUTES.PROFILE.FAVORITES)
+@byPrivateRoute(ROUTES.PROFILE.FAVORITES.MAIN)
 class Favorites extends HelperComponent<IState, {}> {
 
   public state: IState = {
@@ -43,11 +46,11 @@ class Favorites extends HelperComponent<IState, {}> {
 
   public render() {
     const { data } = this.state;
-
     return (
       <Layout>
+        <SavedBaskets />
         <div className="G-flex P-profile-favorites">
-          {data.map((item, index) => <Link
+          {data.length ? data.map((item, index) => <Link
             to={ROUTES.PRODUCTS.DETAILS.replace(':id', item.id)}
             key={item.id}
             className="P-list-item"
@@ -68,11 +71,11 @@ class Favorites extends HelperComponent<IState, {}> {
             </div>
 
             <h2 className="P-price">{formatPrice(item.price)}</h2>
-          </Link>)}
+          </Link>) : <EmptyState text={Settings.translations.empty_favorites_list} />}
         </div>
       </Layout>
     );
   }
 }
 
-export default Favorites;
+export default { Favorites, SavedBasketItems };

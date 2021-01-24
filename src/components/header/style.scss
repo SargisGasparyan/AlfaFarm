@@ -55,6 +55,7 @@ header {
     height          : 100%;
     display         : flex;
     padding         : 10px 15px;
+    position        : relative;
     text-align      : center;
     align-items     : center;
     white-space     : nowrap;
@@ -72,7 +73,7 @@ header {
       background    : $main-color;
       border-radius : 20px;
     }
-  
+
     &.P-icon {
       color        : $orange;
       height       : auto;
@@ -95,11 +96,28 @@ header {
         position       : absolute;
         font-size      : 12px;
         min-width      : 18px;
-        animation      : cart-icon-animation .2s;
         background     : red;
         border-radius  : 9px;
         letter-spacing : -1px;
       }
     }
   }
+}
+
+
+.P-profile-header {
+  text-overflow : ellipsis;
+  overflow      : hidden;
+  white-space   : nowrap;
+}
+
+
+.P-mobile-menu-block {
+  position         : fixed;
+  background-color : $white;
+  padding          : 20px;
+  right            : 0;
+  width            : 250px;
+  height           : 100vh;
+  top              : 0;
 }

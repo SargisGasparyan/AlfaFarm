@@ -9,6 +9,7 @@ import { IBasketListResponseModel } from 'platform/api/basket/models/response';
 import './style.scss';
 import CountInput from 'components/count-input';
 import { Link } from 'react-router-dom';
+import { PromotionTypeEnum } from 'platform/constants/enums';
 
 
 interface IProps {
@@ -47,7 +48,11 @@ const TableList = ({ list, onQuantityChange }: IProps) => {
     {
       name: Settings.translations.price,
       style: { minWidth: 150, maxWidth: 150 },
-      cell: (row: IBasketListResponseModel) => <h3 className="G-fs-24">{formatPrice(row.price)}</h3>,
+      cell: (row: IBasketListResponseModel) => <h3 className="G-fs-24">
+        {row.promotion.promotionType === PromotionTypeEnum.Discount && row.promotion.result ?
+          formatPrice(row.promotion.result) :
+          formatPrice(row.productQuantity * row.price)}
+      </h3>,
     },
   ];
 

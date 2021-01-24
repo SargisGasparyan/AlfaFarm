@@ -1,0 +1,29 @@
+@media (max-width: $max-screen) {
+  a.P-products-list-item {
+    width : calc(100% / 3 - 40px);
+  }
+}
+
+@media (max-width: $medium-screen) {
+  a.P-products-list-item {
+    width : calc(50% - 40px);
+  }
+}
+
+@media (max-width: $mobile-screen) {
+  a.P-products-list-item {
+    width : calc(100% - 40px);
+
+    > h3 {
+      height    : 40px;
+      margin    : 10px 0;
+      font-size : 16px;
+    }
+  }
+}
+
+@media (max-width: $tablet-screen) {
+  a.P-products-list-item > .P-image {
+    height : 170px;
+  }
+}

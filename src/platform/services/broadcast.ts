@@ -1,4 +1,4 @@
-type IChannelCallback = (data?: any) => void;
+export type IChannelCallback = (data?: any) => void;
 
 interface IChannel {
   name: string;

@@ -13,6 +13,7 @@ import Footer from './components/footer';
 import ConfirmModal from './components/confirm-modal';
 import Socket from './platform/services/socket';
 import HelperComponent from './platform/classes/helper-component';
+import DispatcherChannels from 'platform/constants/dispatcher-channels';
 
 import './modules';
 
@@ -21,7 +22,6 @@ import 'moment/locale/ru';
 import 'moment/locale/en-gb';
 
 import './assets/styles/index.scss';
-import DispatcherChannels from 'platform/constants/dispatcher-channels';
 
 interface IState {
   confirmOpen: boolean;
@@ -39,7 +39,7 @@ class App extends HelperComponent<{}, IState> {
     confirmText: '',
   };
 
-  public async componentDidMount() {    
+  public async componentDidMount() {
     //? Library config
 
     const alertify = await import('alertifyjs');
@@ -58,6 +58,7 @@ class App extends HelperComponent<{}, IState> {
         })
       }
     });
+
     window.addEventListener(DispatcherChannels.ToggleConfirm, this.toggleConfirm);
 
     this.safeSetState({ generalAPILoaded: true });
@@ -72,7 +73,7 @@ class App extends HelperComponent<{}, IState> {
     const success = await Storage.fetchDefault();
     if (success) this.safeSetState({ initialLoading: true });
     else window.location.reload();
-    
+
     //? Check for invitation
 
     const query = new URLSearchParams(window.location.search);
@@ -84,10 +85,10 @@ class App extends HelperComponent<{}, IState> {
     const { confirmOpen } = this.state;
     this.safeSetState({ confirmOpen: !confirmOpen, confirmText: e.detail || '' });
   }
- 
+
   public render() {
     const { generalAPILoaded, initialLoading, confirmOpen, confirmText } = this.state;
-    
+
     return generalAPILoaded ? (
       <Router history={window.routerHistory}>
         {initialLoading ? <>
@@ -107,12 +108,12 @@ class App extends HelperComponent<{}, IState> {
                 path={item.path}
                 component={item.component}
               />))}
-              
+
               <Redirect to={ROUTES.HOME} />
             </Switch>
           </section>
           {confirmOpen && <ConfirmModal text={confirmText} />}
-          <Footer /> 
+          <Footer />
         </> : <PageLoader />}
       </Router>
     ) : null;

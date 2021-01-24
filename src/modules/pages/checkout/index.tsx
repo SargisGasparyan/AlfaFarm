@@ -2,44 +2,56 @@ import * as React from 'react';
 import * as DateTime from 'react-datetime';
 import { Moment } from 'moment';
 import Autocomplete from 'react-google-autocomplete';
+import CheckBox from 'rc-checkbox';
+import { Link } from 'react-router-dom';
 
 import ROUTES from 'platform/constants/routes';
 import Settings from 'platform/services/settings';
 import { byRoute } from 'platform/decorators/routes';
 import HelperComponent from 'platform/classes/helper-component';
 import LoaderContent from 'components/loader-content';
-import { countryCode, currency } from 'platform/constants';
+import { countryCode } from 'platform/constants';
 import { OrderDeliveryTypeEnum } from 'platform/api/order/constants/enums';
 import Select from 'components/select';
 import { OrderDeliveryTypeDropdown } from 'platform/constants/dropdowns';
 import { IOrderModifyRequestModel } from 'platform/api/order/models/request';
 import Storage from 'platform/services/storage';
-import PlaceController from 'platform/api/place';
 import { IDropdownOption, IGooglePlace } from 'platform/constants/interfaces';
 import { validateForm } from './services/helper';
-
-import { formatDate } from 'platform/services/helper';
+import { formatDate, formatPrice } from 'platform/services/helper';
 import ChooseAddress from './components/choose-address';
 import { IUserAddressListResponseModel } from 'platform/api/userAddress/models/response';
 import OrderController from 'platform/api/order';
 import SuccessModal from 'components/success-modal';
+import { PaymentTypeEnum } from 'platform/constants/enums';
+import DispatcherChannels from 'platform/constants/dispatcher-channels';
+import PaymentMethod from './components/payment';
+import { IBonusCardDetailsWithHistoryResponseModel } from 'platform/api/bonusCard/models/response';
+import BonusCardController from 'platform/api/bonusCard';
+import NumberInput from 'components/number-input';
+import { IOrderResultResponseModel } from 'platform/api/order/models/response';
+import Connection from 'platform/services/connection';
+import ChoosePharmacy from './components/choose-pharmacy';
+import { IPharmacyBranchListResponseModel } from 'platform/api/pharmacyBranch/models/response';
 
 import './style.scss';
-import Radio from 'components/radio';
-import { PaymentType } from 'platform/constants/enums';
-import PaymentController from 'platform/api/payment';
 
-import arca from 'assets/images/Arca.png';
-import master from 'assets/images/master.png';
-import visa from 'assets/images/visaImage.svg';
-import DispatcherChannels from 'platform/constants/dispatcher-channels';
+
 interface IState {
+  bonusDetails?: IBonusCardDetailsWithHistoryResponseModel;
+  resultInfo?: IOrderResultResponseModel;
   form: IOrderModifyRequestModel;
   submited: boolean;
   submitLoading: boolean;
+  choosePharmacyOpen: boolean;
   chooseAddressOpen: boolean;
   successModalOpen: boolean;
+  chosenBranch?: IPharmacyBranchListResponseModel;
+  initialTotalDiscountedPrice: number;
+  isUsingBonus: boolean;
   isPayment: boolean;
+  idramAmount: number | null;
+  idramNId: number | null;
 };
 
 @byRoute(ROUTES.CHECKOUT)
@@ -48,16 +60,21 @@ class Checkout extends HelperComponent<{}, IState> {
   public state: IState = {
     submited: false,
     submitLoading: false,
+    choosePharmacyOpen: false,
     chooseAddressOpen: false,
     successModalOpen: false,
+    isUsingBonus: false,
+    initialTotalDiscountedPrice: 0,
     form: {
       firstName: '',
       lastName: '',
       phoneNumber: '',
       deliveryType: OrderDeliveryTypeEnum.Delivery,
-      paymentType: PaymentType.Cash
+      paymentType: PaymentTypeEnum.Cash,
     },
-    isPayment: false
+    isPayment: false,
+    idramAmount: null,
+    idramNId: null
   };
 
   private get formValidation() {
@@ -72,14 +89,53 @@ class Checkout extends HelperComponent<{}, IState> {
       form.lastName = Storage.profile.lastName;
       form.phoneNumber = Storage.profile.phoneNumber.substring(`+${countryCode}`.length);
       form.email = Storage.profile.email;
+      this.getTotalPrice();
+      this.getBonusDetails();
+      this.getResultInfo();
       this.safeSetState({ form });
     }
   }
 
-  private changeField = (e: React.SyntheticEvent<HTMLInputElement>) => {
+  private getTotalPrice = () => {
+    const query = new URLSearchParams(window.location.search);
+    const price = query.get('total');
+    this.safeSetState({ idramAmount: price });
+  }
+
+  private getBonusDetails = async () => {
+    const result = await BonusCardController.GetDetailsWithHistory({
+      pageNumber: 1,
+      pageSize: 1,
+    });
+    
+    this.safeSetState({ bonusDetails: result.data });
+  }
+
+  private getResultInfo = async (bonus = 0) => {
+    const { form, initialTotalDiscountedPrice } = this.state;
+    const result = await OrderController.GetResult({
+      usingBonus: bonus,
+      deliveryType: form.deliveryType,
+    });
+    
+    result.data && this.safeSetState({
+      resultInfo: result.data,
+      initialTotalDiscountedPrice: initialTotalDiscountedPrice || result.data.totalDiscountedPrice,
+    });
+  }
+
+  private changeField = (e: React.SyntheticEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { form } = this.state;
     form[e.currentTarget.name] = e.currentTarget.value;
     this.safeSetState({ form });
+  }
+
+  private bonusChange = (e: React.SyntheticEvent<HTMLInputElement>) => {
+    const { form } = this.state;
+    form.usedBonus = +e.currentTarget.value;
+
+    Connection.AbortAll();
+    this.safeSetState({ form }, () => this.getResultInfo(form.usedBonus));
   }
 
   private addressChange = (e: React.SyntheticEvent<HTMLInputElement>) => {
@@ -105,12 +161,6 @@ class Checkout extends HelperComponent<{}, IState> {
     this.safeSetState({ form });
   }
 
-  private dateToChange = (chosen: Moment) => {
-    const { form } = this.state;
-    form.deliveryDateTo = chosen.toISOString();
-    this.safeSetState({ form });
-  }
-
   private submit = (e: React.SyntheticEvent) => {
     e.preventDefault();
     this.safeSetState({ submited: true }, () => {
@@ -121,6 +171,8 @@ class Checkout extends HelperComponent<{}, IState> {
     e.preventDefault();
     this.safeSetState({ chooseAddressOpen: true });
   }
+
+  private openPharmacyChoose = () => this.safeSetState({ choosePharmacyOpen: true });
 
   private closeAddressChoose = (chosen?: IUserAddressListResponseModel) => {
     const { form } = this.state;
@@ -139,6 +191,15 @@ class Checkout extends HelperComponent<{}, IState> {
     } else this.safeSetState({ chooseAddressOpen: false });
   }
 
+  private choosePharmacy = (pharmacy: IPharmacyBranchListResponseModel) => {
+    const { form } = this.state;
+    form.branchId = pharmacy.id;
+    form.addressText = pharmacy.addressText;
+    form.addressLat = pharmacy.addressLat;
+    form.addressLng = pharmacy.addressLng;
+    this.safeSetState({ form, chosenBranch: pharmacy, choosePharmacyOpen: false });
+  }
+
   private changeDeliveryType = (chosen: IDropdownOption<OrderDeliveryTypeEnum>) => {
     const { form } = this.state;
     form.deliveryType = chosen.value;
@@ -155,67 +216,44 @@ class Checkout extends HelperComponent<{}, IState> {
 
     return dateItem.isSameOrAfter(currentDayStarting);
   }
-  private choosePaymentType = async (type: PaymentType) => {
-    const { form } = this.state;
-    if (type === PaymentType.IPay) {
-      const res = await PaymentController.getUserCards();
-      if (res && res.success) {
-        console.log(res);
-      }
-    }
-    form.paymentType = type;
-    this.safeSetState({ form });
+
+  private toggleUsingBonus = async () => {
+    const { isUsingBonus } = this.state;
+    this.safeSetState({ isUsingBonus: !isUsingBonus });
   }
+
   private finishCheckout = (e: React.SyntheticEvent) => {
     e.preventDefault();
     const { form } = this.state;
-    form.paymentType = PaymentType.Cash;
+    const query = new URLSearchParams(window.location.search);
+    form.paymentType = Number(query.get('paymentType'));
+    form.creditCardId = Number(query.get('card'));
     this.safeSetState({ submitLoading: true, form }, async () => {
       const result = await OrderController.Create(form);
       if (result.success) {
-        // if (form.paymentType === PaymentType.IPay) {
-        //   const onlinePayRes = await PaymentController.registerCard();
-        //   if (onlinePayRes.success) {
-
-        //   }
-        // }
+        if (form.paymentType === PaymentTypeEnum.Idram) { document.getElementById('currentId')?.click(); }
         this.safeSetState({ successModalOpen: true }, () => window.dispatchEvent(new CustomEvent(DispatcherChannels.CartItemsUpdate)));
       }
       else this.safeSetState({ submitLoading: false });
     });
   }
-  private Payment = () => {
-    const { form, submitLoading } = this.state;
-    return <div className="P-choose-payment-type-section">
-      <div className="P-payment-types">
-        <div>
-          <Radio<PaymentType> callback={(data: PaymentType) => this.choosePaymentType(data)} value={PaymentType.Cash} isChecked={form.paymentType === PaymentType.Cash}>
-            {Settings.translations.cash}
-          </Radio>
-        </div>
-        <div>
-          <Radio<PaymentType> callback={(data: PaymentType) => this.choosePaymentType(data)} value={PaymentType.IPay} isChecked={form.paymentType === PaymentType.IPay}>
-            <span>{Settings.translations.card}</span>
-            <div className="P-online-pay-icons">
-              <div style={ { background: `url(${arca}) center/contain no-repeat` } } />
-              <div style={ { background: `url(${visa}) center/cover no-repeat` } } />
-              <div style={ { background: `url(${master}) center/contain no-repeat` } } />
-            </div>
-          </Radio>
-        </div>
-      </div>
-      <p>{Settings.translations.total} 15,000 {currency}</p>
-      <div className="P-choose-payment-buttons">
-        <LoaderContent
-          className="G-main-button"
-          loading={submitLoading}
-          onClick={this.finishCheckout}
-        >{Settings.translations.pay}</LoaderContent>
-      </div>
-    </div>
-  }
+
+  private navigateToHome = () => window.routerHistory.push(ROUTES.HOME);
+
   public render() {
-    const { form, submitLoading, chooseAddressOpen, successModalOpen, isPayment } = this.state;
+    const {
+      form,
+      submitLoading,
+      resultInfo,
+      bonusDetails,
+      chosenBranch,
+      choosePharmacyOpen,
+      chooseAddressOpen,
+      successModalOpen,
+      initialTotalDiscountedPrice,
+      isUsingBonus,
+      isPayment,
+    } = this.state;
 
     return (
       <section className="G-page P-checkout-page">
@@ -317,8 +355,42 @@ class Checkout extends HelperComponent<{}, IState> {
             </div>
           </div>
           <div className="P-delivery-form G-half-width">
-            <div className="G-main-form-field">
+            <div className="G-main-form-field G-phone-input-wrapper P-checkout-select">
+              <Select<OrderDeliveryTypeEnum>
+                options={OrderDeliveryTypeDropdown()}
+                className="G-main-select P-checkout-select-item"
+                value={form.deliveryType}
+                onChange={this.changeDeliveryType}
+              />
+            </div>
+
+            <div className="P-delivery-date G-flex G-align-center">
+              <div className="G-main-form-half-field">
+                <DateTime
+                  onChange={this.dateFromChange}
+                  isValidDate={this.validateDeliveryDate}
+                  inputProps={{
+                    value: form.deliveryDateFrom ? formatDate(form.deliveryDateFrom, true) : '',
+                    readOnly: true,
+                    className: `G-main-input ${this.formValidation.errors.deliveryDateFrom ? 'G-invalid-field' : ''}`,
+                    placeholder: Settings.translations.choose_date,
+                  }}
+                />
+              </div>
+            </div>
+
+            {form.deliveryType === OrderDeliveryTypeEnum.Pickup && <div className="G-main-form-field">
               <input
+                value={chosenBranch ? chosenBranch.name : ''}
+                readOnly={true}
+                className={`G-main-input ${this.formValidation.errors.branchId ? 'G-invalid-field' : ''}`}
+                placeholder={Settings.translations.choose_pharmacy}
+                onClick={this.openPharmacyChoose}
+              />
+            </div>}
+
+            <div className="G-main-form-field P-comment-field">
+              <textarea
                 name="comment"
                 value={form.comment || ''}
                 className="G-main-input"
@@ -326,42 +398,30 @@ class Checkout extends HelperComponent<{}, IState> {
                 onChange={this.changeField}
               />
             </div>
-            <div className="G-main-form-field G-phone-input-wrapper">
-              <Select<OrderDeliveryTypeEnum>
-                options={OrderDeliveryTypeDropdown()}
-                className="G-main-select"
-                value={form.deliveryType}
-                onChange={this.changeDeliveryType}
-              />
-            </div>
 
-            {form.deliveryType === OrderDeliveryTypeEnum.Delivery && <div className="P-delivery-date G-flex G-align-center">
-              <h4 className="G-fs-normal">{Settings.translations.delivery_date}</h4>
-                <div className="G-main-form-half-field">
-                  <DateTime
-                    onChange={this.dateFromChange}
-                    isValidDate={this.validateDeliveryDate}
-                    inputProps={{
-                      value: form.deliveryDateFrom ? formatDate(form.deliveryDateFrom, true) : '',
-                      readOnly: true,
-                      className: `G-main-input ${this.formValidation.errors.deliveryDateFrom ? 'G-invalid-field' : ''}`,
-                      placeholder: '00:00',
-                    }}
-                  />
-                </div>
-                {/* <div className="G-main-form-half-field">
-                  <DateTime
-                    onChange={this.dateToChange}
-                    isValidDate={this.validateDeliveryDate}
-                    inputProps={{
-                      value: form.deliveryDateTo ? formatDate(form.deliveryDateTo, true) : '',
-                      readOnly: true,
-                      className: `G-main-input ${this.formValidation.errors.deliveryDateTo ? 'G-invalid-field' : ''}`,
-                      placeholder: '00:00',
-                    }}
-                  />
-                </div> */}
+            {bonusDetails &&
+            !!initialTotalDiscountedPrice &&
+            !!bonusDetails.bonusCardDetails.amount && <div className="G-main-form-field G-flex G-flex-wrap">
+              <CheckBox checked={isUsingBonus}  onClick={this.toggleUsingBonus} />
+              {Settings.translations.use_bonus_points}
+              {isUsingBonus && <>
+                <span className="G-ml-auto G-text-bold G-orange-color">{bonusDetails.bonusCardDetails.amount}</span>
+                <NumberInput
+                  max={Math.min(initialTotalDiscountedPrice, bonusDetails.bonusCardDetails.amount)}
+                  value={form.usedBonus || ''}
+                  className="G-main-input G-full-width G-mt-20"
+                  placeholder={Settings.translations.bonus}
+                  onChange={this.bonusChange}
+                />
+              </>}
             </div>}
+
+            {resultInfo && <>
+              <h3 className="G-mt-40 G-flex G-flex-justify-between">{Settings.translations.price} <span>{formatPrice(resultInfo.totalDiscountedPrice)}</span></h3>
+              <h3 className="G-mt-10 G-flex G-flex-justify-between">{Settings.translations.bonus} <span>{resultInfo.receivedBonus}</span></h3>
+              <h3 className="G-mt-10 G-flex G-flex-justify-between">{Settings.translations.delivery_fee} <span>{formatPrice(resultInfo.deliveryFee)}</span></h3>
+              <h2 className="G-mt-10 G-flex G-flex-justify-between">{Settings.translations.total} <span className="G-orange-color">{formatPrice(resultInfo.totalPrice)}</span></h2>
+            </>}
           </div>
 
           <div className="G-flex G-flex-column">
@@ -378,8 +438,24 @@ class Checkout extends HelperComponent<{}, IState> {
             >{Settings.translations.choose_address}</LoaderContent>}
             {chooseAddressOpen && <ChooseAddress onClose={this.closeAddressChoose} />}
           </div>
-        </form> : <this.Payment />}
-        {successModalOpen && <SuccessModal text={Settings.translations.order_success} onClose={() => window.routerHistory.push(ROUTES.HOME)} />}
+        </form> : <PaymentMethod callback={(e: React.SyntheticEvent) => this.finishCheckout(e)} />}
+
+        {successModalOpen && <SuccessModal onClose={this.navigateToHome}>
+          <h3>{Settings.translations.order_success}</h3>
+          <Link className="G-main-button G-normal-link G-mt-30" to={ROUTES.PROFILE.ORDERS.MAIN}>{Settings.translations.order_history}</Link>
+        </SuccessModal>}
+
+        {choosePharmacyOpen && <ChoosePharmacy onClose={this.choosePharmacy} />}
+
+        <form action="https://money.idram.am/payment.aspx" method="POST" target="blank">
+          <input type="hidden" name="EDP_LANGUAGE" value="EN" />
+          <input type="hidden" name="EDP_REC_ACCOUNT" value="110000601" />
+          <input type="hidden" name="EDP_DESCRIPTION" value="Order description" />
+          <input type="hidden" name="EDP_AMOUNT" value={this.state.idramAmount || ''} />
+          <input type="hidden" name="EDP_BILL_NO" value={this.state.idramNId || ''} />
+          <input type="submit" value="submit" id="currentId" className="G-dn" />
+        </form>
+
       </section>
     );
   }

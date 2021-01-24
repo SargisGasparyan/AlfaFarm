@@ -6,7 +6,6 @@ import nodeFetch from 'node-fetch';
 import Enviroment from './enviroment';
 import Settings from './settings';
 import { OSTypeEnum, LanguageEnum } from '../constants/enums';
-import { NoneJSONRequestBody } from '../constants/types';
 import { IRequest, IBodyRequest, IResponse } from '../constants/interfaces';
 import DispatcherChannels from 'platform/constants/dispatcher-channels';
 
@@ -63,7 +62,7 @@ class Connection {
   public static AbortAll = (): void => window.abortableRequests.forEach(item => item.abort());
 
   // ? POST request
-  public static POST = async <Body extends object>(data: IBodyRequest<Body>): Promise<any> => {
+  public static POST = async <Body>(data: IBodyRequest<Body>): Promise<any> => {
     const abort = new AbortController();
     const { controller, action, body, query, noneJSONBody, dataAsSuccess, withoutError } = data;
     const onlyQuery: boolean = (!action && query) as boolean;
@@ -71,7 +70,7 @@ class Connection {
     !data.unabortable && window.abortableRequests.push(abort);
     try {
       const response: Response = await fetch(`${Enviroment.BASE_URL}api/${controller}${!onlyQuery ? '/' : ''}${action}${query ? `?${Connection.queryFromObject(query)}` : ''}`, {
-        body: noneJSONBody ? body as NoneJSONRequestBody : JSON.stringify(body),
+        body: noneJSONBody ? body as any : JSON.stringify(body),
         method: 'POST',
         headers: HEADERS,
         signal: abort.signal,
@@ -84,7 +83,7 @@ class Connection {
   }
 
   //? PUT request
-  public static PUT = async <Body extends object>(data: IBodyRequest<Body>): Promise<any> => {
+  public static PUT = async <Body>(data: IBodyRequest<Body>): Promise<any> => {
     const abort = new AbortController();
     const { controller, action, body, query, noneJSONBody } = data;
     const onlyQuery: boolean = (!action && query) as boolean;
@@ -92,7 +91,7 @@ class Connection {
     !data.unabortable && window.abortableRequests.push(abort);
     try {
       const response: Response = await fetch(`${Enviroment.BASE_URL}api/${controller}${!onlyQuery ? '/' : ''}${action}${query ? `?${Connection.queryFromObject(query)}` : ''}`, {
-        body: noneJSONBody ? body as NoneJSONRequestBody : JSON.stringify(body),
+        body: noneJSONBody ? body as any : JSON.stringify(body),
         method: 'PUT',
         headers: HEADERS,
         signal: abort.signal,
@@ -107,10 +106,9 @@ class Connection {
   }
 
   //? DELETE request
-  public static DELETE = async <Body extends object>(data: IBodyRequest<Body>): Promise<any> => {
+  public static DELETE = async <Body>(data: IBodyRequest<Body>, confirmQuestion?: string): Promise<any> => {
     const abort = new AbortController();
     const { controller, action, body, query, noneJSONBody, withoutConfirmModal } = data;
-
     return new Promise(resolve => {
       const userCanceled = async () => {
         resolve(false);
@@ -126,7 +124,7 @@ class Connection {
 
         try {
           const response: Response = await fetch(`${Enviroment.BASE_URL}api/${controller}${!onlyQuery ? '/' : ''}${action}${query ? `?${Connection.queryFromObject(query)}` : ''}`, {
-            body: noneJSONBody ? body as NoneJSONRequestBody : JSON.stringify(body),
+            body: noneJSONBody ? body as any : JSON.stringify(body),
             method: 'DELETE',
             headers: HEADERS,
             signal: abort.signal,
@@ -138,10 +136,16 @@ class Connection {
           !data.unabortable && window.abortableRequests.splice(window.abortableRequests.indexOf(abort), 1);
           resolve({ aborted: true });
         }
+
+        if (!withoutConfirmModal) {
+          window.dispatchEvent(new CustomEvent(DispatcherChannels.ToggleConfirm, { detail: confirmQuestion }));
+          window.removeEventListener(DispatcherChannels.UserCanceled, userCanceled);
+          window.removeEventListener(DispatcherChannels.UserConfirmed, userConfirmed);  
+        }
       }
 
       if (!withoutConfirmModal) {
-        window.dispatchEvent(new CustomEvent(DispatcherChannels.ToggleConfirm));
+        window.dispatchEvent(new CustomEvent(DispatcherChannels.ToggleConfirm, { detail: confirmQuestion }));
         window.addEventListener(DispatcherChannels.UserCanceled, userCanceled);
         window.addEventListener(DispatcherChannels.UserConfirmed, userConfirmed);
       } else userConfirmed();

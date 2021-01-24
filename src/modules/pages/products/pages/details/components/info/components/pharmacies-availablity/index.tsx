@@ -13,6 +13,7 @@ import { IProductDetailsResponseModel, IProductAvailablityResponseModel } from '
 import './style.scss';
 import PageLoader from 'components/page-loader';
 import ProductController from 'platform/api/product';
+import Screen from 'components/screen';
 
 interface IProps {
   data: IProductDetailsResponseModel;
@@ -75,15 +76,16 @@ class PharmaciesAvailablity extends HelperComponent<IProps, IState> {
     return data ? (
       <Modal className="P-product-pharmacies-availablity-modal" onClose={onClose}>
         <div className="P-content">
-          <div className="P-list">
-            <h2>{Settings.translations.availability_at_the_nearest_pharmacy}</h2>
-            {this.filteredData.map((item, index) => <h3
-              key={item.id}
-              onMouseOver={() => this.toggleMarker(index)}
-              onMouseOut={() => this.toggleMarker()}
-            >{item.name}</h3>)}
-          </div>
-          
+          <Screen.Desktop>
+            {(match: boolean) => match && <div className="P-list">
+              <h2>{Settings.translations.availability_at_the_nearest_pharmacy}</h2>
+              {this.filteredData.length ? this.filteredData.map((item, index) => <h3
+                key={item.id}
+                onMouseOver={() => this.toggleMarker(index)}
+                onMouseOut={() => this.toggleMarker()}
+              >{item.name}</h3>) : <h3>{Settings.translations.no_search_result}</h3>}
+            </div>}
+          </Screen.Desktop>
 
           <div className="P-maps-wrapper">
             <SearchInput onChange={this.onSearchChange} />

@@ -23,7 +23,14 @@ export enum WeekDaysEnum {
   Saturday,
   Sunday,
 };
-export enum PaymentType {
+export enum PaymentTypeEnum {
   Cash,
-  IPay
+  IPay,
+  PostTerminal,
+  Idram,
+  Telcell
+}
+export enum PromotionTypeEnum {
+  Bonus,
+  Discount
 }

@@ -1,0 +1,40 @@
+@import 'src/assets/styles/helper';
+@import 'src/assets/styles/variables';
+
+.P-favorites-saved-baskets {
+  margin    : -15px -15px 35px; // 35px = 50px - 15px
+  display   : flex;
+  flex-wrap : wrap;
+
+  > .P-list-item {
+    color                   : $main-color;
+    cursor                  : pointer;
+    margin                  : 15px;
+    display                 : flex;
+    padding                 : 15px;
+    display                 : flex;
+    position                : relative;
+    font-size               : 20px;
+    background              : $main-color-light;
+    align-items             : center;
+    text-decoration         : none;
+    border-top-left-radius  : $big-radius;
+    border-top-right-radius : $big-radius;
+    @include bold-font;
+
+    > .P-index {  
+      width           : 40px;
+      height          : 40px;
+      overflow        : hidden;
+      display         : flex;
+      cursor          : pointer;
+      font-size       : 30px;
+      background      : white;
+      align-items     : center;
+      margin-right    : 15px;
+      border-radius   : 50%;
+      text-overflow   : ellipsis;
+      justify-content : center;
+    }
+  }
+}

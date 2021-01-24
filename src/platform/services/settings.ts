@@ -92,5 +92,4 @@ class Settings {
     window.location.reload();
   }
 }
-
 export default Settings;

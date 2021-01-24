@@ -1,0 +1,12 @@
+@import 'assets/styles/variables.scss';
+
+.P-arca { background: url('../../../../../../../assets/images/Arca.png') center/contain no-repeat; }
+.P-visa { background: url('../../../../../../../assets/images/visaImage.svg') center/cover no-repeat; }
+.P-master { background: url('../../../../../../../assets/images/master.png') center/contain no-repeat; }
+
+.P-ipay-button {
+  width: 130px;
+  display: block;
+  text-align: center;
+  text-decoration: none;
+}

@@ -1,6 +1,6 @@
 import Connection from '../../services/connection';
 import { IResponse, IPagingResponse } from '../../constants/interfaces';
-import { IProductListRequestModel, IProductRelatedListRequestModel, IProductFilterRequestModel } from './models/request';
+import { IProductListRequestModel, IProductRelatedListRequestModel, IProductFilterRequestModel, IGetProductPromotionByQuantityModel } from './models/request';
 import { IProductListResponseModel, IProductDetailsResponseModel, IProductPriceRangeResponseModel, IProductAvailablityResponseModel } from './models/response';
 
 class ProductController {
@@ -8,7 +8,7 @@ class ProductController {
   private static controller = 'product';
 
   public static GetList = (body: IProductListRequestModel): Promise<IResponse<IPagingResponse<IProductListResponseModel>>> => {
-    const result = Connection.POST<IProductListRequestModel>({
+    const result = Connection.POST({
       body,
       action: 'list',
       controller: ProductController.controller,
@@ -18,7 +18,7 @@ class ProductController {
   };
 
   public static GetPriceRange = (body: IProductFilterRequestModel): Promise<IResponse<IProductPriceRangeResponseModel>> => {
-    const result = Connection.POST<IProductFilterRequestModel>({
+    const result = Connection.POST({
       body,
       action: 'priceRange',
       controller: ProductController.controller,
@@ -37,7 +37,7 @@ class ProductController {
   };
 
   public static GetRelated = (id: number, body: IProductRelatedListRequestModel): Promise<IResponse<IPagingResponse<IProductListResponseModel>>> => {
-    const result = Connection.POST<IProductRelatedListRequestModel>({
+    const result = Connection.POST({
       body,
       action: `related/${id}`,
       controller: ProductController.controller,
@@ -54,6 +54,16 @@ class ProductController {
 
     return result;
   };
+
+  public static GetProductPromotionByQuantity = (body: IGetProductPromotionByQuantityModel): Promise<IResponse<any>> => {
+    const result = Connection.POST({
+      body,
+      action: 'getProductByQuantity',
+      controller: ProductController.controller
+    });
+
+    return result;
+  } 
 
   // For SSR to Fill meta tags
   public static ServerDetails = (id: string): Promise<IResponse<IProductDetailsResponseModel>> => {

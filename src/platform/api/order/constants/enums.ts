@@ -1,10 +1,16 @@
 export enum OrderStatusEnum {
-  Pending = 1,
-  Success,
-  Canceled,
+  Failed,
+  Pending,
+  AttachedToCarrier,
+  ConfirmedByBranchAdmin,
+  NotCompleted,
+  ReadyToStart,
+  Started,
+  Delivered,
+  Canceled
 };
 
 export enum OrderDeliveryTypeEnum {
-  Pickup = 1,
-  Delivery,
+  Delivery = 1,
+  Pickup,
 };

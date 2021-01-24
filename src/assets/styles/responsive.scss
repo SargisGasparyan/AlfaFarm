@@ -1,8 +1,14 @@
+@media (max-width: $max-screen) {
+  .react-multi-carousel-list > ul > li {
+    width : 330px !important;
+  }
+}
+
 @media (max-width: $medium-screen) {
   $page-horizontal-offset : 40px;
 
-  header { padding: 25px $page-horizontal-offset; }
-  footer { padding: 25px $page-horizontal-offset; }
+  header { padding: 0 $page-horizontal-offset; }
+  footer { padding: 10px $page-horizontal-offset; }
 
   .G-page { padding: $page-vertical-offset $page-horizontal-offset; }
 }

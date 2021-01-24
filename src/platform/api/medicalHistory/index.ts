@@ -8,7 +8,7 @@ class MedicalHistoryController {
   private static controller = 'medicalHistory';
 
   public static GetList = (body: IMedicalHistoryListRequestModel): Promise<IResponse<IPagingResponse<IMedicalServiceListResponseModel>>> => {
-    const result = Connection.POST<IMedicalHistoryListRequestModel>({
+    const result = Connection.POST({
       body,
       action: 'list',
       controller: MedicalHistoryController.controller,

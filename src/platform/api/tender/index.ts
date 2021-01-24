@@ -7,7 +7,7 @@ class TenderController {
   private static controller = 'tender';
 
   public static GetList = (body: IPagingRequest): Promise<IResponse<IPagingResponse<ITenderListResponseModel>>> => {
-    const result = Connection.POST<IPagingRequest>({
+    const result = Connection.POST({
       action: 'list',
       controller: TenderController.controller,
       body,

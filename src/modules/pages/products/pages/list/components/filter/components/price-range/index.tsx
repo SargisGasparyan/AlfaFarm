@@ -1,5 +1,3 @@
-
-
 import * as React from 'react';
 import { IProductFilterRequestModel } from 'platform/api/product/models/request';
 import ROUTES from 'platform/constants/routes';
@@ -10,6 +8,11 @@ import { IProductPriceRangeResponseModel } from 'platform/api/product/models/res
 
 import { gray, mainColor } from 'assets/styles/variables.scss';
 import { formatPrice } from 'platform/services/helper';
+import useSubscriber from 'platform/hooks/use-subcriber';
+import DispatcherChannels from 'platform/constants/dispatcher-channels';
+
+import './style.scss';
+
 
 interface IProps {
   body: IProductFilterRequestModel;
@@ -33,6 +36,8 @@ const PriceRange = ({ body, onChange }: IProps) => {
     prevCategoryIdRef.current = categoryId;
   });
 
+  useSubscriber(DispatcherChannels.ProductFilterClear, () => priceRange && setValue([priceRange.min, priceRange.max]));
+
   const changePrice = ([minPrice, maxPrice]: [number, number]) => {
     const bodyCopy = {...body};
 
@@ -45,12 +50,12 @@ const PriceRange = ({ body, onChange }: IProps) => {
     bodyCopy.maxPrice = maxPrice;
     setValue([bodyCopy.minPrice, bodyCopy.maxPrice]);
     
-    onChange(body);
+    onChange(bodyCopy);
   }
 
 
   return priceRange && value ? <>
-    <h2>{Settings.translations.price} ({formatPrice(value[0])}-{formatPrice(value[1])})</h2>
+    <h2>{Settings.translations.price} ({formatPrice(value[0])} - {formatPrice(value[1])})</h2>
 
     <Range
       min={priceRange.min}
@@ -59,7 +64,7 @@ const PriceRange = ({ body, onChange }: IProps) => {
       onChange={changePrice}
       renderThumb={({ props }) => <div {...props} className="P-range-thumb" />}
       renderTrack={({ props, children }) => (
-        <div className="P-range-track">
+        <div className="P-products-filter-price-range P-range-track">
           <div
             className="P-range-track-active"
             ref={props.ref}

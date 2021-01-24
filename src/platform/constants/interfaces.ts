@@ -32,7 +32,7 @@ export interface IRequest {
   withoutConfirmModal?: boolean;
 };
 
-export interface IBodyRequest<Body extends object> extends IRequest { body: Body; };
+export interface IBodyRequest<Body> extends IRequest { body: Body; };
 
 export interface IDropdownOption<Value> {
   name: string | number | React.ReactNode | HTMLElement | DropdownNameFunctionType;

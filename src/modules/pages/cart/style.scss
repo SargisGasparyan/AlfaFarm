@@ -35,6 +35,10 @@
         align-items   : center;
 
         &:last-child { border-bottom: 1px solid $light-gray; }
+
+        &.P-out-of-stock-product {
+          opacity : .5;
+        }
       
         > li > div {
           position  : static;
@@ -53,6 +57,7 @@
               justify-content : center;
 
               > h2 {
+                font-size     : $normal-fs;
                 overflow      : hidden;
                 max-width     : 100%;
                 white-space   : nowrap;
@@ -77,7 +82,7 @@
     display         : flex;
     justify-content : flex-end;
 
-    > .P-checkbox-row {
+    > .P-save-cart {
       width           : 300px;
       color           : $text-gray;
       cursor          : pointer;
@@ -85,13 +90,17 @@
       font-size       : $normal-fs;
       align-items     : center;
       justify-content : center;
-
-      > span { margin-right: 10px; }
     }
   }
 
   > .P-pay-button {
     width        : 300px;
     margin-right : 14vh;
+  }
+}
+.P-discounted-item {
+  > del {
+    font-size: 22px;
+    color: rgba(0, 0, 0, .5);
   }
 }

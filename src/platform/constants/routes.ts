@@ -1,11 +1,5 @@
 import RouteService from '../services/routes';
 
-const HOME_ROUTES = RouteService.buildRouteContext('/', {
-  MAIN: '',
-  FAIL: 'fail',
-  SUCCESS: 'success',
-});
-
 const PROFILE_ROUTES = (() => {
   const ADDRESSES_ROUTES = RouteService.buildRouteContext('/profile/addresses', {
     MAIN: '',
@@ -16,6 +10,10 @@ const PROFILE_ROUTES = (() => {
   const ORDERS_ROUTES = RouteService.buildRouteContext('/profile/orders', {
     MAIN: '',
     DETAILS: '/details/:id',
+  });
+
+  const FAVORITES_ROUTES = RouteService.buildRouteContext('/profile/favorites', {
+    MAIN: '',
     SAVED_BASKET_ITEMS: '/saved-basket-items/:id',
   });
 
@@ -36,15 +34,16 @@ const PROFILE_ROUTES = (() => {
     ADDRESSES: ADDRESSES_ROUTES,
     SPECIAL_PRODUCTS: '/special-products',
     BONUS_CARD: '/bonus-card',
-    FAVORITES: '/favorites',
-    PRESCRIPTIONS: PRESCRIPTIONS_ROUTES,
-    MY_REGISTRATIONS: MY_REGISTRATIONS_ROUTES,
     MY_ORDERS: '/my-orders',
     MY_COMPANY: '/my-company',
     MY_REQUESTS: '/my-requests',
     MY_ADDRESSES: '/my-addresses',
     MY_WALLET: '/my-wallet',
     NOTIFICATIONS: "/notifications",
+
+    FAVORITES: FAVORITES_ROUTES,
+    PRESCRIPTIONS: PRESCRIPTIONS_ROUTES,
+    MY_REGISTRATIONS: MY_REGISTRATIONS_ROUTES,
   });
 })();
 

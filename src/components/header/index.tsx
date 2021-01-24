@@ -17,20 +17,23 @@ import Socket from 'platform/services/socket';
 import NotificationController from 'platform/api/notification';
 import Notifications from './components/notifications';
 import BasketController from 'platform/api/basket';
-
+import Screen from 'components/screen';
 import LogoImage from 'assets/images/logo.png';
 import PersonImage from 'assets/images/person.png';
+import burgerMenu from 'assets/images/menu.svg';
+import Broadcast from "../../platform/services/broadcast";
+import MobileMenu from './components/mobile-menu';
 
 import './style.scss';
-import Broadcast from "../../platform/services/broadcast";
+import './responsive.scss';
 
 interface IState {
   authOpen: boolean;
   categoryOpen: boolean;
-  categoryOpenPosition: number;
   notificationOpen: boolean;
   notificationIconNumber: number;
   cartIconNumber: number;
+  mobileMenuOpen: boolean;
 };
 
 class Header extends HelperPureComponent<{}, IState> {
@@ -38,10 +41,10 @@ class Header extends HelperPureComponent<{}, IState> {
   public state: IState = {
     authOpen: false,
     categoryOpen: false,
-    categoryOpenPosition: 0,
     notificationOpen: false,
     notificationIconNumber: 0,
     cartIconNumber: 0,
+    mobileMenuOpen: false
   };
 
   private header = React.createRef<HTMLDivElement>();
@@ -55,9 +58,6 @@ class Header extends HelperPureComponent<{}, IState> {
 
   public componentDidMount() {
     this.fetchCart();
-    setTimeout(this.checkWindow, 500); // Wait for assets load to get the right position of category wrapper link
-    // window.routerHistory.push(`${ROUTES.PRODUCTS.MAIN}`);
-    window.addEventListener('resize', this.checkWindow); // TODO code refactor checkWindow
     window.addEventListener(DispatcherChannels.CartItemsUpdate, this.fetchCart);
     Broadcast.subscribe(DispatcherChannels.StorageUpdate, this.storageUpdate);
 
@@ -66,7 +66,6 @@ class Header extends HelperPureComponent<{}, IState> {
 
   public componentWillUnmount() {
     super.componentWillUnmount();
-    window.removeEventListener('resize', this.checkWindow);
     window.removeEventListener(DispatcherChannels.CartItemsUpdate, this.fetchCart);
     Broadcast.unsubscribe(DispatcherChannels.StorageUpdate, this.storageUpdate);
   }
@@ -92,17 +91,12 @@ class Header extends HelperPureComponent<{}, IState> {
     this.safeSetState({ cartIconNumber: result.data });
   }
 
-  private checkWindow = () => {
-    const { categoryOpenPosition } = this.state;
-    if (this.categoryOpenLink.current) {
-      const openPosition = this.categoryOpenLink.current.getBoundingClientRect().left;
-      openPosition !== categoryOpenPosition && this.safeSetState({ categoryOpenPosition: openPosition })
-    }
-  }
-
   private toggleAuth = () => {
-    const { authOpen } = this.state;
-    this.safeSetState({ authOpen: !authOpen });
+    const { authOpen, mobileMenuOpen } = this.state;
+    this.safeSetState({
+      authOpen: !authOpen,
+      mobileMenuOpen: !mobileMenuOpen || false, // Close if from mobile
+    });
   }
 
   private openCategories = () => {
@@ -126,14 +120,19 @@ class Header extends HelperPureComponent<{}, IState> {
   private searchSubmit = (value: string) => {
     const query = new URLSearchParams(window.location.search);
     const oldValue = query.get('text');
-    if (value.length) {
-
-      if (oldValue !== value) {
-        query.set('text', value);
-        window.routerHistory.push(`${ROUTES.PRODUCTS.MAIN}?${query.toString()}`);
-        window.dispatchEvent(new Event(DispatcherChannels.ProductFilterChange));
-      }
+    
+    if (oldValue !== value) {
+      if (value.length) query.set('text', value);
+      else query.delete('text');
+  
+      window.routerHistory.push(`${ROUTES.PRODUCTS.MAIN}?${query.toString()}`);
+      window.dispatchEvent(new Event(DispatcherChannels.ProductFilterChange));
     }
+  }
+
+  private toggleMobileMenu = () => {
+    const { mobileMenuOpen } = this.state;
+    this.safeSetState({ mobileMenuOpen: !mobileMenuOpen });
   }
 
   private toggleNotifications = (e: Event | React.SyntheticEvent) => {
@@ -147,60 +146,96 @@ class Header extends HelperPureComponent<{}, IState> {
   private openProducts = () => window.dispatchEvent(new Event(DispatcherChannels.ProductFilterChange));
 
   public render() {
-    const { authOpen, categoryOpenPosition, categoryOpen, cartIconNumber, notificationIconNumber, notificationOpen } = this.state;
+    const { authOpen, categoryOpen, cartIconNumber, notificationIconNumber, notificationOpen } = this.state;
 
     return (
       <header ref={this.header} className="G-flex G-flex-align-center G-flex-justify-center">
-        <Link to={ROUTES.HOME} className="P-logo G-mr-auto">
-          <img src={LogoImage} className="G-full-width" />
-        </Link>
+        <Screen.SmallDesktop>
+          {((matches: boolean) => !matches ? <>
+            <Link to={ROUTES.HOME} className="P-logo G-mr-auto">
+              <img src={LogoImage} className="G-full-width" />
+            </Link>
 
-        {enviroment.WHOLESALE ? <WholesaleContent /> : <>
-          <SearchInput onChange={this.searchSubmit} />
+            {enviroment.WHOLESALE ? <WholesaleContent /> : <>
+              <SearchInput
+                onSubmit={this.searchSubmit}
+                withSubmit={true}
+              />
 
-          <Link
-            to={ROUTES.PRODUCTS.MAIN}
-            innerRef={this.categoryOpenLink}
-            onMouseOver={this.openCategories}
-            onClick={this.openProducts}
-            className={`P-link ${categoryOpen ? 'P-active' : ''}`}
-          >
-            {Settings.translations.online_pharmacy}
-            {!!categoryOpenPosition && categoryOpen && <Categories openPosition={categoryOpenPosition} onClose={this.closeCategories} />}
-          </Link>
+              <Link
+                to={ROUTES.PRODUCTS.MAIN}
+                innerRef={this.categoryOpenLink}
+                onMouseOver={this.openCategories}
+                onClick={this.openProducts}
+                className={`P-link ${categoryOpen ? 'P-active' : ''}`}
+              >
+                {Settings.translations.online_pharmacy}
+                {categoryOpen && <Categories onClose={this.closeCategories} />}
+              </Link>
 
-          <NavLink {...this.navLinkProps} to={ROUTES.PHARMACIES}>{Settings.translations.pharmacies}</NavLink>
-          <NavLink {...this.navLinkProps} to={ROUTES.CLINIC.MAIN}>{Settings.translations.clinic}</NavLink>
-          <NavLink {...this.navLinkProps} to={ROUTES.BLOG.MAIN}>{Settings.translations.blog}</NavLink>
-        </>}
+              <NavLink {...this.navLinkProps} to={ROUTES.PHARMACIES}>{Settings.translations.pharmacies}</NavLink>
+              {/* <NavLink {...this.navLinkProps} to={ROUTES.CLINIC.MAIN}>{Settings.translations.clinic}</NavLink> */}
+              <NavLink {...this.navLinkProps} to={ROUTES.BLOG.MAIN}>{Settings.translations.blog}</NavLink>
+            </>}
 
-        {Storage.profile ? <Link to={ROUTES.PROFILE.MAIN} className="P-profile">
-          <div
-            style={{ background: `url('${Storage.profile.photoPath ? getMediaPath(Storage.profile.photoPath) : PersonImage}') center/cover` }}
-            className="P-image"
-          />
-          <h4>{Storage.profile.firstName} {Storage.profile.lastName}</h4>
-        </Link> : <span
-          onClick={this.toggleAuth}
-          className="P-link P-login"
-        >{Settings.translations.log_in}</span>}
+            {Storage.profile ? <Link to={ROUTES.PROFILE.MAIN} className="P-profile">
+              <div
+                style={{ background: `url('${Storage.profile.photoPath ? getMediaPath(Storage.profile.photoPath) : PersonImage}') center/cover` }}
+                className="P-image"
+              />
+              <h4>{Storage.profile.firstName} {Storage.profile.lastName}</h4>
+            </Link> : <span
+              onClick={this.toggleAuth}
+              className="P-link P-login"
+            >{Settings.translations.log_in}</span>}
 
+            {Storage.profile && <a onClick={this.toggleNotifications} className="P-link P-icon G-normal-link P-notification">
+              <i className="icon-Group-5515" />
+              {!!notificationIconNumber && <span>{notificationIconNumber > 99 ? '99+' : notificationIconNumber}</span>}
+            </a>}
+
+            <Link to={ROUTES.CART} className="P-link P-icon G-normal-link P-cart">
+              <i className="icon-Group-5503" />
+              {!!cartIconNumber && <span>{cartIconNumber > 99 ? '99+' : cartIconNumber}</span>}
+            </Link>
+
+            <LanguageSwitcher />
+
+            {authOpen && <Shared.Auth onClose={this.toggleAuth} />}
+            {notificationOpen && <Notifications onClose={this.toggleNotifications} />}
+          </> : <this.Mobile />)}
+        </Screen.SmallDesktop>
+      </header>
+    );
+  }
+
+  private Mobile = () => {
+    const { authOpen, cartIconNumber, notificationIconNumber, notificationOpen, mobileMenuOpen } = this.state;
+
+    return <div className="P-mobile-header">
+      <div className="P-burger-menu">
+        <img src={burgerMenu} alt="menu" className="G-cursor" onClick={this.toggleMobileMenu} />
+      </div>
+
+      <Link to={ROUTES.HOME} className="P-logo P-logo-mobile">
+        <img src={LogoImage} className="G-full-width" />
+      </Link>
+
+      <div className="P-mobile-header-icons">
         {Storage.profile && <a onClick={this.toggleNotifications} className="P-link P-icon G-normal-link P-notification">
           <i className="icon-Group-5515" />
           {!!notificationIconNumber && <span>{notificationIconNumber > 99 ? '99+' : notificationIconNumber}</span>}
         </a>}
-
         <Link to={ROUTES.CART} className="P-link P-icon G-normal-link P-cart">
           <i className="icon-Group-5503" />
           {!!cartIconNumber && <span>{cartIconNumber > 99 ? '99+' : cartIconNumber}</span>}
         </Link>
+      </div>
 
-        <LanguageSwitcher />
-
-        {authOpen && <Shared.Auth onClose={this.toggleAuth} />}
-        {notificationOpen && <Notifications onClose={this.toggleNotifications} />}
-      </header>
-    );
+      {authOpen && <Shared.Auth onClose={this.toggleAuth} />}
+      {notificationOpen && <Notifications onClose={this.toggleNotifications} />}
+      {mobileMenuOpen && <MobileMenu onClose={this.toggleMobileMenu} onAuthOpen={this.toggleAuth} />}
+    </div>
   }
 }
 

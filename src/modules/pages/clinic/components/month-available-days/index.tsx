@@ -40,7 +40,7 @@ class MonthAvailableDays extends HelperPureComponent<IProps, {}> {
 
     if (activeDay && service) {
       const today = moment(activeDay).isSame(moment(), 'day');
-      return getRegistrationTimeRanges(service.duration, today);
+      return getRegistrationTimeRanges(service.duration, today).filter(item => !this.isDisabled(item));
     } else return [];
   }
 
@@ -179,7 +179,7 @@ class MonthAvailableDays extends HelperPureComponent<IProps, {}> {
 
         {this.availableTimes.map(item => <span
           key={item}
-          className={`P-time ${this.isDisabled(item) ? 'P-disabled' : ''} ${this.isActive(item) ? 'P-active' : ''}`}
+          className={`P-time ${this.isActive(item) ? 'P-active' : ''}`}
           onClick={() => this.chooseTime(item)}
         >{item}</span>)}
       </div>

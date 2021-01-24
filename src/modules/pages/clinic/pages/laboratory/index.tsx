@@ -18,6 +18,7 @@ import { onlyForUsers } from 'platform/guards/routes';
 
 import './style.scss';
 import { formatPrice } from 'platform/services/helper';
+import { Link } from 'react-router-dom';
 
 
 interface IState {
@@ -131,7 +132,10 @@ class Laboratory extends HelperComponent<{}, {}> {
             </div>
 
             <Dates chosen={chosenService ? data.find(item => item.id === chosenService) : undefined} />
-            {showSuccess && <SuccessModal text={Settings.translations.success_book} onClose={this.toggleSuccessModal} />}
+            {showSuccess && <SuccessModal onClose={this.toggleSuccessModal}>
+              <h3>{Settings.translations.appointment_success}</h3>
+              <Link className="G-main-button G-normal-link G-mt-30" to={ROUTES.PROFILE.MY_REGISTARTIONS.MAIN}>{Settings.translations.my_registrations}</Link>
+            </SuccessModal>}
           </> : <PageLoader />}
         </div>
       </section>

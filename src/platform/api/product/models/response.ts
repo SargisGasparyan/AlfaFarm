@@ -9,6 +9,7 @@ export interface IProductListResponseModel {
   isFavorite: boolean;
   discount?: number;
   imagePath?: string;
+  promotion: IPromotionModel;
   unitName: string;
   unitQuantity: number;
 };
@@ -21,19 +22,32 @@ export interface IProductDetailsResponseModel {
   packagePrice: number;
   description: string;
   price: number;
+  stockQuantity: boolean;
   discountedPrice?: number;
   discount?: number;
+  promotion: IPromotionModel;
+  packagePromotion: IPromotionModel;
   unitName: string;
   discountedPackagePrice: number;
   unitQuantity: number;
   havePackage: boolean;
   images: IFile[];
   category: IProductDetailsCategoryResponseModel;
-  brand: IProductDetailsCategoryResponseModel;
+  producer: IProductDetailsProducerResponseModel;
+  brand: IProductDetailsBrandResponseModel;
   activeIngredients: IProductDetailsActiveIngredientResponseModel[];
 }
-
+export interface IPromotionModel {
+  percent: number;
+  promotionType: number;
+  result: number;
+}
 export interface IProductDetailsCategoryResponseModel {
+  id: number;
+  name: string;
+};
+
+export interface IProductDetailsProducerResponseModel {
   id: number;
   name: string;
 };

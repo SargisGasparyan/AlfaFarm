@@ -2,13 +2,15 @@
 @import 'src/assets/styles/variables';
 
 .G-page.P-profile-page {
-  padding    : 0;
-  display    : flex;
-  background : $very-light-gray;
+  padding     : 0;
+  display     : flex;
+  background  : $very-light-gray;
+  align-items : flex-start;
 
   > .P-content {
-    width   : calc(100% - 350px); // Left side size
-    padding : 80px;
+    width      : calc(100% - 350px); // Left side size
+    padding    : 80px;
+    min-height : calc(100vh - #{$header-size});
 
     .P-form-block {
       padding       : 40px;
@@ -17,5 +19,7 @@
       border-radius : $big-radius;
       @include main-top-border;
     }
+
+    > .P-empty-state { min-height: inherit; }
   }
 }

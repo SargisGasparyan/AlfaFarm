@@ -1,7 +1,8 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
+
 import ROUTES from 'platform/constants/routes';
 import { byRoute } from 'platform/decorators/routes';
-
 import HelperComponent from 'platform/classes/helper-component';
 import Options from '../../components/options';
 import Settings from 'platform/services/settings';
@@ -18,10 +19,9 @@ import { infinityScrollPageLimit } from 'platform/constants';
 import DoctorController from 'platform/api/doctor';
 import { scrolledToBottom, getMediaPath, formatPrice } from 'platform/services/helper';
 import { IDoctorListResponseModel } from 'platform/api/doctor/models/response';
+import SearchInput from 'components/search-input';
 
 import './style.scss';
-import SearchInput from 'components/search-input';
-import Loader from 'components/loader';
 
 
 
@@ -99,7 +99,7 @@ class Doctors extends HelperComponent<{}, {}> {
     }
   }
 
-  private search = (value: string) => this.safeSetState({ searchValue: value }, () => {
+  private search = (value: string) => this.safeSetState({ searchValue: value, loading: true }, () => {
     this.pageNo = 1;
     this.lastPage = false;
     this.fetchData(true);
@@ -145,14 +145,14 @@ class Doctors extends HelperComponent<{}, {}> {
   });
 
   public render() {
-    const { data, chosenService, chosenDoctor, submitLoading, showSuccess } = this.state;
+    const { data, chosenService, chosenDoctor, submitLoading, showSuccess, loading } = this.state;
 
     return (
       <section className="G-page P-clinic-doctors-page">
         <Options />
         <h1 id="clinic-page-start" className="G-main-color G-page-title">
           {Settings.translations.doctors}
-          <SearchInput withSubmit={true} onSubmit={this.search} />
+          <SearchInput onChange={this.search} />
         </h1>
         <div className="P-content">
           {data ? data.map(item => <div key={item.id} className="P-item">
@@ -184,7 +184,11 @@ class Doctors extends HelperComponent<{}, {}> {
               chosen={chosenService && chosenDoctor === item.id ? item.services.find(sub => sub.id === chosenService) : undefined}
             />
           </div>) : <PageLoader />}
-          {showSuccess && <SuccessModal text={Settings.translations.success_book} onClose={this.toggleSuccessModal} />}
+          {loading && <PageLoader />}
+          {showSuccess && <SuccessModal onClose={this.toggleSuccessModal}>
+            <h3>{Settings.translations.appointment_success}</h3>
+            <Link className="G-main-button G-normal-link G-mt-30" to={ROUTES.PROFILE.MY_REGISTRATIONS.MAIN}>{Settings.translations.my_registrations}</Link>
+          </SuccessModal>}
         </div>
       </section>
     );

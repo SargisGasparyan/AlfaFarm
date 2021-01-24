@@ -8,7 +8,7 @@ class PharmacyBranchController {
   private static controller = 'pharmacyBranch';
 
   public static GetList = (body: IPharmacyBranchListRequestModel): Promise<IResponse<IPagingResponse<IPharmacyBranchListResponseModel>>> => {
-    const result = Connection.POST<IPharmacyBranchListRequestModel>({
+    const result = Connection.POST({
       body,
       action: `list`,
       controller: PharmacyBranchController.controller,

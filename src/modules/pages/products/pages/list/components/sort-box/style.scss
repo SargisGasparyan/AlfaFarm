@@ -1,3 +1,7 @@
+@import 'src/assets/styles/variables';
+
+@import './responsive';
+
 .P-products-sort-box {
   width           : 100%;
   padding         : 0 20px; // Cause Wrapper has margin -20px to save the grid view
@@ -5,9 +9,21 @@
   align-items     : center;
   margin-bottom   : 20px;
   justify-content : flex-end;
-  
+  @media(max-width : 1200px) {
+    justify-content : flex-start;
+    margin-top      : 20px;
+  }
+  @media(max-width : 766.98px) {
+    flex-direction : column;
+    align-items    : flex-start;
+  }
+
   > h3 {
     font-weight  : 300;
     margin-right : 20px;
+    @media(max-width : 766.98px) {
+      margin-bottom : 10px;
+      margin-right  : 0;
+    }
   }
 }

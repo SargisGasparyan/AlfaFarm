@@ -1,4 +1,5 @@
 import * as React from 'react';
+import CheckBox from 'rc-checkbox';
 
 import HelperComponent from "platform/classes/helper-component";
 
@@ -12,21 +13,25 @@ import Producers from './components/producers';
 import ActiveIngredients from './components/active-ingredients';
 import DispatcherChannels from 'platform/constants/dispatcher-channels';
 import PriceRange from './components/price-range';
-
-import './style.scss';
 import Settings from 'platform/services/settings';
+import Screen from 'components/screen';
+import './style.scss';
+import Broadcast from 'platform/services/broadcast';
+
 
 interface IProps {
   onChange(): void;
 };
 
 interface IState {
+  mobileOpen: boolean;
   body: IProductFilterRequestModel;
 };
 
 class Filter extends HelperComponent<IProps, IState> {
 
   public state: IState = {
+    mobileOpen: false,
     body: {
       brandIds: [],
       producerIds: [],
@@ -58,6 +63,7 @@ class Filter extends HelperComponent<IProps, IState> {
     body.brandIds = [];
     body.activeIngredientIds = [];
     body.producerIds = [];
+    body.hasDiscount = false;
     delete body.minPrice;
     delete body.maxPrice;
 
@@ -66,11 +72,13 @@ class Filter extends HelperComponent<IProps, IState> {
     query.delete('producerIds');
     query.delete('minPrice');
     query.delete('maxPrice');
+    query.delete('hasDiscount');
 
     window.routerHistory.replace(`${ROUTES.PRODUCTS.MAIN}?${query.toString()}`);
     window.scrollTo(0, 0);
     
-    this.bodyChange(body);
+    this.bodyChange({...body});
+    Broadcast.dispatch(DispatcherChannels.ProductFilterClear);
   }
 
   private chooseMainCategory = (id: number) => {
@@ -90,7 +98,39 @@ class Filter extends HelperComponent<IProps, IState> {
     this.safeSetState({ body }, onChange);
   }
 
+  private toggleMobile = () => {
+    const { mobileOpen } = this.state;
+    this.safeSetState({ mobileOpen: !mobileOpen });
+  }
+
+  private toggleDiscount = () => {
+    const { body } = this.state;
+    const { onChange } = this.props;
+
+    body.hasDiscount = !body.hasDiscount;
+    const query = new URLSearchParams(window.location.search);
+
+    if (body.hasDiscount) query.set('hasDiscount', 'true');
+    else query.delete('hasDiscount');
+
+    window.routerHistory.replace(`${ROUTES.PRODUCTS.MAIN}?${query.toString()}`);
+    this.safeSetState({ body }, onChange);
+  }
+
   public render() {
+    const { mobileOpen } = this.state;
+
+    return (
+      <Screen.Tablet>
+        {(match: boolean) => match ? <>
+          <h2 onClick={this.toggleMobile} className="P-products-filter-toggle">{Settings.translations.filter} <i className="icon-Group-5504" /></h2>
+          {mobileOpen && <this.Content />}
+        </> : <this.Content />}
+      </Screen.Tablet>
+    );
+  }
+
+  private Content = () => {
     const { body } = this.state;
 
     return (
@@ -101,6 +141,12 @@ class Filter extends HelperComponent<IProps, IState> {
           className="P-main-category"
         >{item.name}</h2>) : <>
           <PriceRange body={body} onChange={this.bodyChange} />
+
+          <label className="P-discount-label">
+            <CheckBox checked={body.hasDiscount} onChange={this.toggleDiscount} />
+            {Settings.translations.sale}
+          </label>
+
           <div className="P-row-wrap">
             <Brands body={body} onChange={this.bodyChange} />
           </div>

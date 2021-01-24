@@ -10,6 +10,15 @@ import './style.scss';
 @byRoute(ROUTES.HOW_TO_USE_APP)
 class HowToUseApp extends HelperPureComponent<{}, {}> {
 
+  private iframeProps = {
+    frameBorder: 0,
+    allowfullscreen: "allowfullscreen",
+    mozallowfullscreen: "mozallowfullscreen",
+    msallowfullscreen: "msallowfullscreen",
+    oallowfullscreen: "oallowfullscreen",
+    webkitallowfullscreen: "webkitallowfullscreen",
+  }
+
   public render() {
 
     return (
@@ -19,29 +28,32 @@ class HowToUseApp extends HelperPureComponent<{}, {}> {
         <iframe
           src="https://www.youtube.com/embed/d6x-3HjlfLk"
           className="P-big-video"
-          frameBorder={0}
+          {...this.iframeProps}
         />
 
         <div className="P-list">
           <iframe
             src="https://www.youtube.com/embed/a-EVxNQwp4g"
             className="P-item"
-            frameBorder={0}
+            {...this.iframeProps}
           />
+
           <iframe
             src="https://www.youtube.com/embed/VymiLo2jLqM"
             className="P-item"
-            frameBorder={0}
+            {...this.iframeProps}
           />
+
           <iframe
             src="https://www.youtube.com/embed/a-EVxNQwp4g"
             className="P-item"
-            frameBorder={0}
+            {...this.iframeProps}
           />
+          
           <iframe
             src="https://www.youtube.com/embed/VymiLo2jLqM"
             className="P-item"
-            frameBorder={0}
+            {...this.iframeProps}
           />
         </div>
       </section>

@@ -1,0 +1,10 @@
+@import 'assets/styles/variables.scss';
+
+@media (max-width: $tablet-screen) {
+  div.P-about-us-stuff {
+    > h1 {
+      width: 100%;
+      text-align: center;
+    }
+  }
+}

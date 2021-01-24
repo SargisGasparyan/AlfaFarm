@@ -1,8 +1,14 @@
+@import "src/assets/styles/variables";
+
 .P-home-carousel-slide {
   display         : flex !important;
   flex-direction  : column;
   justify-content : center;
 
+  @media(max-width: $tablet-screen){
+    min-height: 400px !important;
+  }
+  
   > .P-shadow-text { margin-bottom: 60px; }
 
   > img {
@@ -14,11 +20,26 @@
   > p {
     width         : 50%;
     font-size     : 24px;
-    margin-bottom : 60px;
+    margin-bottom : 80px;
+
+    @media(max-width: $tablet-screen){
+      width: 100%;
+      font-size: 20px;
+    }
+    @media(max-width: $mobile-screen){
+      font-size: 15px;
+    }
   }
 
   > .G-main-button {
     padding      : 10px 30px;
     margin-right : auto;
+  }
+}
+
+@media(max-width: 1400px){
+
+  .P-home-carousel-slide {
+    background-size: cover !important;
   }
 }

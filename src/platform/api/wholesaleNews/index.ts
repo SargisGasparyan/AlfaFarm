@@ -7,7 +7,7 @@ class WholesaleNewsController {
   private static controller = 'wholesaleNews';
 
   public static GetList = (body: IPagingRequest): Promise<IResponse<IPagingResponse<IWholesaleNewsListResponseModel>>> => {
-    const result = Connection.POST<IPagingRequest>({
+    const result = Connection.POST({
       action: 'list',
       controller: WholesaleNewsController.controller,
       body,

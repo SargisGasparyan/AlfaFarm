@@ -13,12 +13,14 @@
     
     > i { font-size: 70px; }
 
-    > h2 {
-      font-size  : 24px;
+    > h2, > h3 {
       margin-top : 20px;
       text-align : center;
       @include normal-font();
     }
+
+    > h2 { font-size : 24px; }
+    > h3 { font-size : 20px; }
 
     > p {
       color       : black;
@@ -39,3 +41,5 @@
     }
   }
 }
+
+.P-link-item { text-decoration: none !important; margin-top: 20px; }

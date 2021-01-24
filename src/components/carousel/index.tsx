@@ -8,11 +8,11 @@ const responsive = {
         items: 5
     },
     desktop: {
-        breakpoint: { max: 3000, min: 1024 },
-        items: 4
+        breakpoint: { max: 3000, min: 1200 },
+        items: 3
     },
     tablet: {
-        breakpoint: { max: 1024, min: 464 },
+        breakpoint: { max: 1200, min: 464 },
         items: 2
     },
     mobile: {
@@ -26,7 +26,7 @@ interface IProps {
     children: any;
 };
 const MultiCarousel = React.memo(({ children, text }: IProps) => (
-    <ReactCarousel slidesToSlide={2} responsive={responsive}>
+    <ReactCarousel slidesToSlide={1} responsive={responsive}>
         {children}
     </ReactCarousel>
 ));

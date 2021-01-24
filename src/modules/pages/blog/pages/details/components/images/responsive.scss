@@ -1,0 +1,26 @@
+@media (max-width: $tablet-screen) {
+  div.P-blog-details-images {
+    flex-wrap : wrap;
+
+    > .P-current-image {
+      height        : 350px;
+      min-height    : initial;
+      margin-bottom : 20px;
+    }
+
+    > .P-thumbs {
+      order          : 2;
+      width          : calc(100% + 20px);
+      height         : 100px;
+      margin         : 0 -10px;
+      max-width      : initial;
+      flex-direction : row;
+
+      > div {
+        height    : 100%;
+        margin    : 0 10px;
+        max-width : 100px;
+      }
+    }
+  }
+}

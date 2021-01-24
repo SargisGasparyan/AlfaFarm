@@ -2,14 +2,14 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 
 import HelperComponent from 'platform/classes/helper-component';
-import { byPrivateRoute } from 'platform/decorators/routes';
+// import { byPrivateRoute } from 'platform/decorators/routes';
+// import { onlyForUsers } from 'platform/guards/routes';
 import ROUTES from 'platform/constants/routes';
 import Layout from '../../components/layout';
 import Settings from 'platform/services/settings';
 import Table from 'components/table';
-import { formatDate } from 'platform/services/helper';
+import { formatDate, formatPrice } from 'platform/services/helper';
 import { IClinicRegistrationListResponseModel } from 'platform/api/clinicRegistration/models/response';
-import { onlyForUsers } from 'platform/guards/routes';
 import ClinicRegistrationController from 'platform/api/clinicRegistration';
 import { IPagingResponse } from 'platform/constants/interfaces';
 import { paginationPageLimit } from 'platform/constants';
@@ -17,12 +17,13 @@ import Pagination from 'components/pagination';
 import MedicalHistory from './pages/medical-history';
 
 import './style.scss';
+import EmptyState from 'components/empty-state';
 
 interface IState {
   data?: IPagingResponse<IClinicRegistrationListResponseModel>;
 };
 
-@byPrivateRoute(ROUTES.PROFILE.MY_REGISTRATIONS.MAIN, [onlyForUsers])
+// @byPrivateRoute(ROUTES.PROFILE.MY_REGISTRATIONS.MAIN, [onlyForUsers])
 class MyRegistrations extends HelperComponent<IState, {}> {
 
   public state: IState = {};
@@ -38,7 +39,7 @@ class MyRegistrations extends HelperComponent<IState, {}> {
     },
     {
       name: Settings.translations.price,
-      cell: (row: IClinicRegistrationListResponseModel) => <>{row.servicePrice} &#1423;</>,
+      cell: (row: IClinicRegistrationListResponseModel) => formatPrice(row.servicePrice),
     },
   ];
 
@@ -65,10 +66,10 @@ class MyRegistrations extends HelperComponent<IState, {}> {
             <Link to={ROUTES.PROFILE.MY_REGISTRATIONS.MEDICAL_HISTORY}>{Settings.translations.medical_history}</Link>
           </h2>
           <div className="G-flex P-list">
-            {data && <Table<IClinicRegistrationListResponseModel>
+            {data && data.list.length ? <Table<IClinicRegistrationListResponseModel>
               columnConfig={this.columnConfig}
               data={data.list}
-            />}
+            /> : <EmptyState text={Settings.translations.empty_registrations_list} />}
           </div>
           
           <Pagination<IClinicRegistrationListResponseModel> fetchData={this.fetchData} />

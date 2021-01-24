@@ -6,6 +6,13 @@
   flex-direction  : column;
   justify-content : center;
 
+  @media (max-width: 766.98px){
+    min-height: auto !important;
+    &.G-page{
+      padding: 120px 15px !important;
+    }
+  }
+
   > .P-shadow-text { margin-bottom: 60px; }
   > .P-form { width: 600px }
 
@@ -17,10 +24,22 @@
 
   > .G-main-form {
 
+    @media(max-width: 576.98px){
+      flex-direction: column;
+    }
+
     > .G-main-button {
       padding      : 10px 30px;
       font-size    : $normal-fs;
       margin-right : auto;
     }
+
+    @media(max-width: 576.98px){
+      .G-main-form-half-field{
+        width: 100%;
+      }
+    }
   }
 }
+
+

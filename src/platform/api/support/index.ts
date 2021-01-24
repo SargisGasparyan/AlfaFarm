@@ -7,7 +7,7 @@ class SupportController {
   private static controller = 'support';
 
   public static createRequest = (body: IContactUsBodyModel): Promise<IResponse<any>> => {
-    const result = Connection.POST<any>({
+    const result = Connection.POST({
       action: 'contact',
       controller: SupportController.controller,
       body,

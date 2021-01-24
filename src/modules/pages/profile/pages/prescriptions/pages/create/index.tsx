@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 
 import Layout from '../../../../components/layout';
 import Settings from 'platform/services/settings';
@@ -57,7 +58,6 @@ class Create extends HelperComponent<{}, IState> {
 
     if (files && files[0]) {
       images.push(files[0]);
-      console.log(files[0]);
       this.safeSetState({ images: Array.from(images) });
     }
   }
@@ -93,7 +93,7 @@ class Create extends HelperComponent<{}, IState> {
 
   private toggleSuccessModal = () => {
     const { showSuccess } = this.state;
-    showSuccess ? window.routerHistory.push(ROUTES.PROFILE.PRESCRIPTIONS.MAIN) : this.safeSetState({ showSuccess: true });
+    showSuccess ? window.routerHistory.push(ROUTES.HOME) : this.safeSetState({ showSuccess: true });
   }
 
   public render() {
@@ -170,7 +170,10 @@ class Create extends HelperComponent<{}, IState> {
           </form>
         </div>
 
-        {showSuccess && <SuccessModal text="Շնորհակալություն, դեղատոմսի դիտարկման հայտն ընդունված է։ Դեղատոմսը կուսումնասիրվի, և դեղերի ցանկը կուղարկվի ձեզ հնարավորինս կարճ ժամանակահատվածում։" onClose={this.toggleSuccessModal} />}
+        {showSuccess && <SuccessModal onClose={this.toggleSuccessModal}>
+          <h3>{Settings.translations.prescription_success}</h3>
+          <Link className="G-main-button G-normal-link G-mt-30" to={ROUTES.PROFILE.PRESCRIPTIONS.MAIN}>{Settings.translations.prescriptions}</Link>
+        </SuccessModal>}
       </Layout>
     );
   }

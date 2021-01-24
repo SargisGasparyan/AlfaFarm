@@ -38,21 +38,21 @@ class List extends HelperPureComponent<{}, IState> {
   }
 
   private fetchData = async (pageNumber: number) => {
+    this.safeSetState({ loading: true });
     const body = {
       ...buildFilters(),
       pageNumber,
-      pageSize: 8,
+      pageSize: 12,
     };
 
     const result = await ProductController.GetList(body);
 
-    !result.aborted && this.safeSetState({ data: result.data.list, total: result.data.totalCount });
+    !result.aborted && this.safeSetState({ data: result.data.list, total: result.data.totalCount, loading: false }, ()=> window.scrollTo(0, 0));
     return result.data;
   }
 
   public render() {
-    const { data, total } = this.state;
-
+    const { data, total,loading } = this.state;
     return (
       <section className="G-page P-products-list-page">
         <Filter onChange={this.filterChange} />
@@ -67,7 +67,7 @@ class List extends HelperPureComponent<{}, IState> {
           </div>}
           <Pagination<IProductListResponseModel> pageChangeListener={pageChangeListener} fetchData={this.fetchData} />
         </div>
-        {!data && <PageLoader />}
+        {loading && <PageLoader />}
       </section>
     );
   }

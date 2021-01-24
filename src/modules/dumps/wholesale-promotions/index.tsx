@@ -60,6 +60,7 @@ class WholesalePromotions extends HelperPureComponent<{}, IState> {
     const body = {
       productId: row.productId,
       productQuantity: row.fromCount,
+      isPackage: true,
     };
 
     const result = await BasketController.Change(body);

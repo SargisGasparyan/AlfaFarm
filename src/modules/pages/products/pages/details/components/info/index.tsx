@@ -8,12 +8,15 @@ import LoaderContent from 'components/loader-content';
 import BasketController from 'platform/api/basket';
 import DispatcherChannels from 'platform/constants/dispatcher-channels';
 import PharmaciesAvailablity from './components/pharmacies-availablity';
+import { formatPrice } from 'platform/services/helper';
+import ROUTES from 'platform/constants/routes';
+import { PromotionTypeEnum } from 'platform/constants/enums';
+import { IGetProductPromotionByQuantityModel } from 'platform/api/product/models/request';
+import ProductController from 'platform/api/product';
 
 import PinImage from 'assets/images/pin.png';
 
 import './style.scss';
-import { formatPrice } from 'platform/services/helper';
-import { currency } from 'platform/constants';
 
 interface IProps {
   data: IProductDetailsResponseModel;
@@ -22,22 +25,28 @@ interface IProps {
 interface IState {
   count: number;
   cartLoading: boolean;
-  havePackage: boolean;
+  isSelectedPackage: boolean;
+  promotionModel: IGetProductPromotionByQuantityModel;
   pharmaciesAvailablityOpen: boolean;
 };
 
 class Info extends HelperComponent<IProps, IState> {
 
   public state: IState = {
-    count: 0,
+    count: 1,
     cartLoading: false,
     pharmaciesAvailablityOpen: false,
-    havePackage: false
+    isSelectedPackage: true,
+    promotionModel: {
+      productId: null,
+      quantity: 1,
+      isPackage: false
+    }
   };
 
   public componentDidMount() {
     const { data } = this.props;
-    data.basketCount && this.safeSetState({ count: data.basketCount, havePackage: data.havePackage });
+    // data.basketCount && this.safeSetState({ count: data.basketCount });
   }
 
   private onCountChange = async (count: number) => {
@@ -50,14 +59,21 @@ class Info extends HelperComponent<IProps, IState> {
 
     this.safeSetState({ count });
   }
-
+  private getProductPromotionByQuantity = async () => {
+    const { promotionModel } = this.state;
+    const result = await ProductController.GetProductPromotionByQuantity(promotionModel);
+    if (result.success) {
+      //
+    }
+  }
   private changeCart = () => this.safeSetState({ cartLoading: true }, async () => {
     const { data } = this.props;
-    const { count } = this.state;
+    const { count, isSelectedPackage } = this.state;
 
     await BasketController.Change({
       productId: data.id,
       productQuantity: count || 1,
+      isPackage: isSelectedPackage,
     });
 
     window.dispatchEvent(new CustomEvent(DispatcherChannels.CartItemsUpdate));
@@ -69,47 +85,86 @@ class Info extends HelperComponent<IProps, IState> {
     this.safeSetState({ pharmaciesAvailablityOpen: !pharmaciesAvailablityOpen });
   }
 
+  private togglePackage = () => {
+    const { isSelectedPackage } = this.state;
+    this.safeSetState({ isSelectedPackage: !isSelectedPackage });
+  }
+
   private UnitCount = () => {
     const { data } = this.props;
-    const { havePackage } = this.state;
+    const { isSelectedPackage } = this.state;
     if (data.havePackage) {
-      return <span>
-        <span className={`${havePackage ? 'P-selected-count-type' : ''}`} onClick={() => this.safeSetState({ havePackage: true })}>{Settings.translations.package}</span> / 
-        <span className={`${!havePackage ? 'P-selected-count-type' : ''}`} onClick={() => this.safeSetState({ havePackage: false })}>{Settings.translations.item}</span>
+      return <span onClick={this.togglePackage}>
+        <span className={`${isSelectedPackage ? 'P-selected-count-type' : ''}`}>{Settings.translations.package}</span>
+        &nbsp; / &nbsp;
+        <span className={`${!isSelectedPackage ? 'P-selected-count-type' : ''}`}>{Settings.translations.item}</span>
       </span>
     } else return <span className="P-selected-count-type">{data.unitName}</span>
-  }  
+  }
+
+  private navigateToCategory = () => {
+    const { id } = this.props.data.category;
+    const query = new URLSearchParams(window.location.search);
+    query.set('categoryIds', `${id}`);
+    window.routerHistory.push(`${ROUTES.PRODUCTS.MAIN}?${query.toString()}`);
+  }
+
+  private navigateToBrand = () => {
+    const { id } = this.props.data.brand;
+    const query = new URLSearchParams(window.location.search);
+    query.set('brandIds', `${id}`);
+    window.routerHistory.push(`${ROUTES.PRODUCTS.MAIN}?${query.toString()}`);
+  }
+
+  private navigateToProducer = () => {
+    const { id } = this.props.data.producer;
+    const query = new URLSearchParams(window.location.search);
+    query.set('producerIds', `${id}`);
+    window.routerHistory.push(`${ROUTES.PRODUCTS.MAIN}?${query.toString()}`);
+  }
+
+  private navigateToActiveIngredients = () => {
+    const { activeIngredients } = this.props.data;
+    const query = new URLSearchParams(window.location.search);
+    query.set('activeIngredientIds', activeIngredients.map(item => item.id).join(','));
+    window.routerHistory.push(`${ROUTES.PRODUCTS.MAIN}?${query.toString()}`);
+  }
+
+  private get discountedPrice() {
+    const { data } = this.props;
+    const { isSelectedPackage } = this.state;
+
+    return Math.round((isSelectedPackage ? data.packagePromotion.result : data.promotion.result) * 10) / 10
+  };
 
   private get price() {
     const { data } = this.props;
-    const { havePackage } = this.state;
+    const { isSelectedPackage } = this.state;
 
-    if (havePackage) return data.discountedPackagePrice || data.packagePrice;
-    return data.discountedPrice || data.price;
-  }
-  private get defaultPrice() {
-    const { data } = this.props;
-    const { havePackage } = this.state;
-    if (havePackage) return data.packagePrice || null;
-    return data.price;
+    return isSelectedPackage ? data.packagePrice : data.price;
   }
   public render() {
     const { data } = this.props;
-    const { count, cartLoading, pharmaciesAvailablityOpen, havePackage } = this.state;
+    const { count, cartLoading, pharmaciesAvailablityOpen } = this.state;
 
     return (
       <div className="P-product-details-info">
         <h2 className="P-name">
           {data.title}
         </h2>
+        {!data.stockQuantity && <h3 className="G-red-color">{Settings.translations.out_of_stock}</h3>}
         <h3 className="P-unit">{data.unitQuantity} {data.unitName}</h3>
         {data.category && <h3 className="P-row">
           {Settings.translations.category}
-          <span className="P-value">{data.category.name}</span>
+          <span className="P-value G-cursor-pointer" onClick={this.navigateToCategory}>{data.category.name}</span>
+        </h3>}
+        {data.producer && <h3 className="P-row">
+          {Settings.translations.producer}
+          <span className="P-value G-cursor-pointer" onClick={this.navigateToProducer}>{data.producer.name}</span>
         </h3>}
         {data.brand && <h3 className="P-row">
           {Settings.translations.brand}
-          <span className="P-value">{data.brand.name}</span>
+          <span className="P-value G-cursor-pointer" onClick={this.navigateToBrand}>{data.brand.name}</span>
         </h3>}
         <h3 className="P-row">
           {Settings.translations.availability_at_the_nearest_pharmacy}
@@ -119,27 +174,33 @@ class Info extends HelperComponent<IProps, IState> {
         </h3>
         {data.activeIngredients && <h3 className="P-row">
           {Settings.translations.active_ingredients}
-          <span className="P-value">{data.activeIngredients.map(item => item.name).join(', ')}</span>
+          <span className="P-value G-cursor-pointer" onClick={this.navigateToActiveIngredients}>{data.activeIngredients.map(item => item.name).join(', ')}</span>
         </h3>}
         <h3>{Settings.translations.description}</h3>
         <p className="P-description">{data.description}</p>
         <div className="P-count-info"><this.UnitCount /></div>
         <div className="P-cart-actions">
-          {!!count && <CountInput
-            min={0}
-            step={1}
-            value={count}
-            onChange={this.onCountChange}
-          />}
+          {data.stockQuantity && <>
+            <CountInput
+              min={0}
+              step={1}
+              value={count}
+              onChange={this.onCountChange}
+            />
 
-          <LoaderContent
-            loading={cartLoading}
-            className="G-main-button"
-            onClick={this.changeCart}
-          >{Settings.translations.add_to_cart}</LoaderContent>
+            <LoaderContent
+              loading={cartLoading}
+              className="G-main-button"
+              onClick={this.changeCart}
+            >{Settings.translations.add_to_cart}</LoaderContent>
+          </>}
 
           {pharmaciesAvailablityOpen && <PharmaciesAvailablity onClose={this.togglePharmaciesAvailablity} data={data} />}
-          <span className="G-orange-color G-ml-auto P-price"><del>{!!this.defaultPrice && formatPrice(this.defaultPrice)}</del> {formatPrice(this.price)}</span>
+          <span className="G-orange-color G-ml-auto P-price">
+            <span />
+            {data.promotion.promotionType === PromotionTypeEnum.Discount ? 
+            <> <del>{formatPrice(this.price)}</del> {formatPrice(this.discountedPrice)} </> : <><span>Bonus: { this.discountedPrice }</span> {formatPrice(this.price)}</>}
+          </span>
         </div>
       </div>
     );

@@ -4,46 +4,61 @@ import Slider from 'react-slick';
 import HelperPureComponent from 'platform/classes/helper-pure-component';
 import ShadowText from 'components/shadow-text';
 import Settings from 'platform/services/settings';
+import BannerController from 'platform/api/banner';
+import { IBannerListResponseModel } from 'platform/api/banner/models/response';
 
-import HomeImage from 'assets/images/home_background.png';
-import HomeImage1 from 'assets/images/home_background_1.png';
-import HomeImage2 from 'assets/images/home_background_2.png';
-import HerbionImage from 'assets/images/herbion.jpg';
+import { BannerTypeEnum } from 'platform/api/banner/constants/enums';
+import ROUTES from 'platform/constants/routes';
 
 import './style.scss';
 
-class Carousel extends HelperPureComponent<{}, {}> {
+interface IState {
+  data: IBannerListResponseModel[];
+}
+
+class Carousel extends HelperPureComponent<{}, IState> {
+
+  public state: IState = {
+    data: [],
+  };
+
+  public componentDidMount() { this.fetchData(); }
+
+  private fetchData = async () => {
+    const result = await BannerController.GetList();
+    this.safeSetState({ data: result.data });
+  }
+
+  private onItemClick = (item: IBannerListResponseModel) => {
+    const urls = {
+      [BannerTypeEnum.Blog]: ROUTES.BLOG.DETAILS.replace(':id', item.dataId),
+      [BannerTypeEnum.News]: ROUTES.NEWS.DETAILS.replace(':id', item.dataId),
+      [BannerTypeEnum.Product]: ROUTES.PRODUCTS.DETAILS.replace(':id', item.dataId),
+      [BannerTypeEnum.Category]: `${ROUTES.PRODUCTS.MAIN}?categoryIds=${item.dataId}`,
+    };
+
+    window.routerHistory.push(urls[item.type]);
+  }
 
   public render() {
+    const { data } = this.state;
 
     return (
       <Slider
         dots={true}
-        autoplay={true}
+        autoplay={false}
         autoplaySpeed={5000}
         slidesToShow={1}
         slidesToScroll={1}
+        arrows={false}
       >
-        <div>
-          <div className="G-page P-home-carousel-slide" style={{ background: `url('${HomeImage}') center/cover` }}>
-            <ShadowText className="P-shadow-text-without-offset">Ապրենք առողջ</ShadowText>
-            <p>{Settings.translations.footer_text}</p>
-            <button className="G-main-button">{Settings.translations.see_more}</button>
+        {data.map(item => <div key={item.id}>
+          <div className="G-page P-home-carousel-slide" style={{ background: `url('${item.photoPath}') center/cover` }}>
+            <ShadowText className="P-shadow-text-without-offset">{item.title}</ShadowText>
+            <p>{item.description}</p>
+            {!!item.type && item.dataId && <button className="G-main-button" onClick={() => this.onItemClick(item)}>{Settings.translations.see_more}</button>}
           </div>
-        </div>
-        <div>
-          <div className="G-page P-home-carousel-slide" style={{ background: `url('${HomeImage1}') right/contain no-repeat` }}>
-            <img src={HerbionImage} alt="herbion" />
-            <button className="G-main-button">{Settings.translations.see_more}</button>
-          </div>
-        </div>
-        <div>
-          <div className="G-page P-home-carousel-slide" style={{ background: `url('${HomeImage2}') center/cover` }}>
-            <ShadowText className="P-shadow-text-without-offset">Ապրենք առողջ</ShadowText>
-            <p>{Settings.translations.footer_text}</p>
-            <button className="G-main-button">{Settings.translations.see_more}</button>
-          </div>
-        </div>
+        </div>)}
       </Slider>
     );
   };

@@ -1,15 +1,18 @@
 @import 'src/assets/styles/helper';
 @import 'src/assets/styles/variables';
 
-@import './responsive.scss';
+@import './responsive';
 
 .G-page.P-home-contact-us {
 
   display        : flex;
+  overflow       : hidden;
   padding-top    : 100px;
   flex-direction : column;
 
-  > .P-shadow-text { margin-bottom: 130px; }
+  > .P-shadow-text {
+    margin-bottom : 100px;
+  }
 
   > .P-maps {
     width  : calc(100% + #{2 * $page-horizontal-offset});
@@ -17,7 +20,7 @@
     margin : 130px 0 0 (-$page-horizontal-offset);
     border : 0;
   }
- 
+
   > .P-bottom {
     margin          : 0 10vw;
     display         : flex;
@@ -56,7 +59,7 @@
   display        : flex;
   align-items    : center;
   flex-direction : column;
-  
+
   > i { font-size: 70px; }
 
   > h3 {
