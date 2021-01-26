@@ -372,7 +372,7 @@ class Checkout extends HelperComponent<{}, IState> {
                   inputProps={{
                     value: form.deliveryDateFrom ? formatDate(form.deliveryDateFrom, true) : '',
                     readOnly: true,
-                    className: `G-main-input ${this.formValidation.errors.deliveryDateFrom ? 'G-invalid-field' : ''}`,
+                    className: 'G-main-input',
                     placeholder: Settings.translations.choose_date,
                   }}
                 />

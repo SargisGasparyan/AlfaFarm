@@ -11,8 +11,6 @@ export function validateForm(this: IOrderModifyRequestModel, submited?: boolean)
     email: false,
     phoneNumber: false,
     address: false,
-    deliveryDateFrom: false,
-    deliveryDateTo: false,
     branchId: false,
   };
 
@@ -38,16 +36,6 @@ export function validateForm(this: IOrderModifyRequestModel, submited?: boolean)
 
   if (submited && !this.userAddressId && (!this.addressText || !this.addressLat || !this.addressLng)) {
     errors.address = true;
-    valid = false;
-  }
-
-  if (submited && this.deliveryType === OrderDeliveryTypeEnum.Delivery && (!this.deliveryDateFrom || !isValidDateRange(this.deliveryDateFrom, this.deliveryDateTo))) {
-    errors.deliveryDateFrom = true;
-    valid = false;
-  }
-
-  if (submited && this.deliveryType === OrderDeliveryTypeEnum.Delivery && (!this.deliveryDateFrom || !isValidDateRange(this.deliveryDateFrom, this.deliveryDateTo))) {
-    errors.deliveryDateTo = true;
     valid = false;
   }
 
