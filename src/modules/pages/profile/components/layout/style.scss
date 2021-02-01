@@ -10,7 +10,7 @@
   > .P-content {
     width      : calc(100% - 350px); // Left side size
     padding    : 80px;
-    min-height : calc(100vh - #{$header-size});
+    min-height : calc(100vh - #{$header-size} - 160px); // Full Height - Header size - Block top, bottom paddings
 
     .P-form-block {
       padding       : 40px;

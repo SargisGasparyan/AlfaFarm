@@ -6,17 +6,16 @@
   border          : 1px solid $light-gray;
   display         : flex;
   overflow        : hidden;
-  min-height      : 220px;
+  min-height      : 200px;
   background      : white;
   align-items     : center;
-  margin-bottom   : 50px;
+  margin-bottom   : 40px;
   border-radius   : $big-radius;
   justify-content : space-between;
 
   > .P-image {
     width                     : 450px;
     height                    : 100%;
-    background-color          : red !important;
     border-top-left-radius    : 12px;
     border-bottom-left-radius : 12px;
   }
@@ -33,12 +32,12 @@
   
     > h2 {
       font-size     : 20px;
-      margin-bottom : 20px;
+      margin-bottom : 10px;
     }
 
     > .P-description {
       font-size     : 15px;
-      margin-bottom : 20px;
+      margin-bottom : 10px;
     }
 
     > div {

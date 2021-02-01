@@ -19,6 +19,7 @@ export interface IBonusCardHistoryResponseModel {
 
 export interface IBonusCardHistoryItemResponseModel {
   id: number;
+  orderId: number;
   amount: number;
   bonus: number;
   status: BonusStatusEnum;

@@ -32,32 +32,21 @@
     border-radius : $big-radius;
     @include main-top-border;
 
-    > div {
-      &.P-upload-part {
-        > .G-main-button {
-          width     : 260px;
-          max-width : 100%;
-        }
+    > .P-upload-part {
+      display     : flex;
+      flex-wrap   : wrap;
+      align-items : flex-start;
 
-        > .P-uploaded {
-          display         : flex;
-          padding         : 0 20px 15px;
-          overflow        : hidden;
-          white-space     : nowrap;
-          border-bottom   : 1px solid $light-gray;
-          margin-bottom   : 20px;
-          text-overflow   : ellipsis;
-          justify-content : space-between;
-
-          > i {
-            cursor      : pointer;
-            margin-left : 10px;
-          }
-        }
+      > .P-upload-button {
+        width       : 100%;
+        display     : flex;
 
         > .G-main-button {
+          width           : 260px;
           cursor          : pointer;
           display         : flex;
+          font-size       : 16px;
+          max-width       : 100%;
           align-items     : center;
           justify-content : center;
   
@@ -65,15 +54,33 @@
             font-size    : 28px;
             margin-right : 10px;
           }
-        }
+        }  
       }
 
-      > .P-submit {
-        width        : 425px;
-        max-width    : 100%;
-        margin-left  : auto;
-        margin-right : auto;
+      > .P-uploaded {
+        width       : 80px;
+        height      : 80px;
+        margin      : 0 10px 20px;
+        border      : 1px solid $light-gray;
+        cursor      : pointer;
+        display     : flex;
+        align-items : flex-start;
+
+        > i {
+          cursor      : pointer;
+          padding     : 5px;
+          font-size   : 12px;
+          background  : white;
+          margin-left : auto;
+        }
       }
+    }
+
+    > .P-submit {
+      width        : 425px;
+      max-width    : 100%;
+      margin-left  : auto;
+      margin-right : auto;
     }
   }
 }

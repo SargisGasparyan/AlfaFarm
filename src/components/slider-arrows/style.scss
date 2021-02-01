@@ -10,19 +10,16 @@
   display         : flex;
   position        : absolute;
   transform       : translateY(-50%);
-  font-size       : 16px;
-  background      : $dark-gray;
-  box-shadow      : $default-block-shadow;
+  background      : transparent !important;
   align-items     : center;
   border-radius   : $small-radius;
   justify-content : center;
 
-  &.P-slider-back { left: 10px; }
-  &.P-slider-next { right: 10px; }
-}
+  &.P-slider-back { left: -60px; }
+  &.P-slider-next { right: -60px; }
 
-.slick-slider {
-
-  .P-slider-back, .P-slider-next { display: none; }
-  &:hover .P-slider-back, &:hover .P-slider-next { display: flex; }
+  &::before {
+    color     : gray;
+    font-size : 30px;
+  }
 }

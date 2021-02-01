@@ -1,16 +1,16 @@
+@import 'src/assets/styles/variables';
 @import 'src/assets/styles/helper';
 
 .P-products-discount-label {
-  top        : 20px;
-  left       : -26px;
-  color      : white;
-  width      : 150px;
-  height     : 60px;
-  padding    : 4px 20px;
-  display    : flex;
-  z-index    : 1;
-  position   : absolute;
-  font-size  : 20px;
-  padding-bottom: 4px;
+  top       : 20px;
+  left      : -26px;
+  color     : white;
+  width     : 150px;
+  height    : 60px;
+  padding   : 8px 20px;
+  display   : flex;
+  z-index   : 1;
+  position  : absolute;
+  font-size : $normal-fs;
   @include bold-font();
 }
