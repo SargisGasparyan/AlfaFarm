@@ -950,6 +950,7 @@ export default {
   order: "Պատվեր",
   fill_your_information: "Լրացրեք Ձեր տվյալները",
   add: "Ավելացնել",
+  add_credit_card: "+Ավելացրեք նոր քարտ",
   what_do_you_need_today: "Ի՞նչ է Ձեզ անհրաժեշտ այսօր",
   today: "Այսօր",
   continue_with: (content: string) => `Շարունակել ${content}-ով`,

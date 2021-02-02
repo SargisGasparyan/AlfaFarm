@@ -37,7 +37,7 @@ const IPay = React.memo(() => {
       {list && list.map((item, index) => <Radio<number> callback={(value: number) => choose(value)} value={item.id} isChecked={card === item.id} key={index}>
         {item.pan}
       </Radio>)}
-      <Link to={ROUTES.PROFILE.MY_WALLET} className="G-main-button P-ipay-button">{Settings.translations.add}</Link>
+      <Link to={ROUTES.PROFILE.MY_WALLET} className="P-ipay-button">{Settings.translations.add_credit_card}</Link>
     </div>
   </>
 });

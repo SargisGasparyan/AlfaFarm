@@ -917,6 +917,7 @@ export default {
   order: "Заказ",
   fill_your_information: "Заполните вашу информацию",
   add: "Добавить",
+  add_credit_card: "+Добавить новую карту",
   what_do_you_need_today: "Что Вам необходимо сегодня?",
   today: "Сегодня",
   continue_with: (content: string) => `Продолжить с ${content}`,

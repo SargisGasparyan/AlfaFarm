@@ -12,6 +12,10 @@ export const PaymentTypeEnumItems = (): IPaymentTypeEnumItemModel[] => [
     type: PaymentTypeEnum.IPay
   },
   {
+    name: Settings.translations.post_terminal,
+    type: PaymentTypeEnum.PostTerminal
+  },
+  {
     name: 'IDram',
     type: PaymentTypeEnum.Idram
   }
