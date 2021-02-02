@@ -344,8 +344,8 @@ class Checkout extends HelperComponent<{}, IState> {
                 onChange={this.changeField}
               />
             </div>
-            <div className="G-main-form-field">
-              <input
+            <div className="G-main-form-field P-comment-field">
+              <textarea
                 name="addressComment"
                 value={form.addressComment || ''}
                 className="G-main-input"

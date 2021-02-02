@@ -53,7 +53,19 @@
     white-space     : nowrap;
     justify-content : space-between;
 
-    > span { margin-right: 20px; }
+    .P-product-price-container {
+      margin-right: 20px;
+      text-align: left;
+     
+      del {
+        color: #000;
+        display: block;
+      }
+
+      > span {
+        display: block;
+      }
+    }
   }
 
   > .G-main-button {

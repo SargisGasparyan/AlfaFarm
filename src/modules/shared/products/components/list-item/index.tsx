@@ -56,7 +56,10 @@ const ListItem = React.memo((props: IProps) => {
       <h3>{truncateText(data.title)}</h3>
       
       <div className="P-price" onClick={(e: React.SyntheticEvent) => e.preventDefault()}>
-        <span>{formatPrice(data.promotion.result ? data.price - data.promotion.result : data.price)}</span>
+        <div className="P-product-price-container">
+          {(!!data.promotion?.result) && <del className="P-without-discount-price">{formatPrice(data.price)}</del>}
+          <span>{formatPrice(data.promotion.result ? data.price - data.promotion.result : data.price)}</span>
+        </div>
         <CountInput
           step={1}
           min={1}

@@ -53,9 +53,19 @@ const PriceRange = ({ body, onChange }: IProps) => {
     onChange(bodyCopy);
   }
 
+  const changeInput = ([minPrice, maxPrice]: [number, number]) => {
+    if (minPrice < maxPrice && minPrice >= (priceRange?.min || 0) && maxPrice <= (priceRange?.max || 0)) {
+      changePrice([minPrice, maxPrice]);
+    }
+  }
+
 
   return priceRange && value ? <>
-    <h2>{Settings.translations.price} ({formatPrice(value[0])} - {formatPrice(value[1])})</h2>
+    <h2>{Settings.translations.price}</h2>
+    <div className="G-flex G-flex-justify-between P-price-range-inputs">
+      <input className="G-main-input" min={priceRange.min} max={priceRange.max} type="number" value={body.minPrice} onChange={(e) => changeInput([+e.target.value, body.maxPrice as number])} />
+      <input className="G-main-input" min={priceRange.min} max={priceRange.max} type="number" value={body.maxPrice} onChange={(e) => changeInput([body.minPrice as number, +e.target.value])} />
+    </div>
 
     <Range
       min={priceRange.min}

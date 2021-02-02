@@ -84,7 +84,8 @@
 
     > .P-save-cart {
       width           : 300px;
-      color           : $text-gray;
+      color           : $main-color;
+      text-decoration : underline;
       cursor          : pointer;
       display         : flex;
       font-size       : $normal-fs;

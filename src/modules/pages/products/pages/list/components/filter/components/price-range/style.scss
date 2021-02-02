@@ -5,3 +5,11 @@
   padding    : 0 14px;
   background : #EFEFEF;
 }
+
+.P-price-range-inputs {
+  margin-top: 20px;
+  input {
+    padding: 10px 15px;
+    width: calc(50% - 10px);
+  }
+}

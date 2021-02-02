@@ -93,6 +93,10 @@ class Filter extends HelperComponent<IProps, IState> {
     this.safeSetState({ body }, onChange);
   }
 
+  private reset = () => {
+    window.location.href = ROUTES.PRODUCTS.MAIN;
+  }
+
   private bodyChange = (body: IProductFilterRequestModel) => {
     const { onChange } = this.props;
     this.safeSetState({ body }, onChange);
@@ -139,7 +143,8 @@ class Filter extends HelperComponent<IProps, IState> {
           key={item.id}
           onClick={() => this.chooseMainCategory(item.id)}
           className="P-main-category"
-        >{item.name}</h2>) : <>
+        >{item.name} <i className="icon-Group-5513"/></h2>) : <>
+          <i className="G-back-icon icon-Group-5529" onClick={this.reset}/>
           <PriceRange body={body} onChange={this.bodyChange} />
 
           <label className="P-discount-label">

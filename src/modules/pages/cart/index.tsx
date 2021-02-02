@@ -66,7 +66,7 @@ class Cart extends HelperComponent<{}, IState> {
       cell: (row: IBasketListResponseModel) =>
         <div className="G-flex G-flex-column G-align-center G-justify-center">
           <div>{row.promotion.promotionType === PromotionTypeEnum.Discount && row.promotion.result > 0 ? <del>{formatPrice(row.totalPrice)}</del> : null}</div>
-          <h3 className="G-fs-24">
+          <h3 className={`G-fs-24 ${row.promotion.promotionType === PromotionTypeEnum.Discount && row.promotion.result > 0 ? 'G-orange-color' : ''}`}>
             {row.promotion.promotionType === PromotionTypeEnum.Discount ?
               formatPrice(row.promotion.result) :
               formatPrice(row.productQuantity * (row.isPackage ? row.packagePrice :  row.price))}

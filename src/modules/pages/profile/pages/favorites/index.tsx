@@ -76,7 +76,7 @@ class Favorites extends HelperComponent<IState, {}> {
 
             <div className="P-price">
               <div>{item.promotion.promotionType === PromotionTypeEnum.Discount && item.promotion.result > 0 ? <del>{formatPrice(item.price)}</del> : null}</div>
-              <h2>
+              <h2 className={`${item.promotion.promotionType === PromotionTypeEnum.Discount && item.promotion.result ? 'G-orange-color' : ''}`}>
                 {item.promotion.promotionType === PromotionTypeEnum.Discount ?
                 formatPrice(item.promotion.result) :
                 formatPrice(item.price)}

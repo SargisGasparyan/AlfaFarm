@@ -65,7 +65,7 @@ class BasketController {
     return result;
   };
 
-  public static GetSavedItemsList = (id: number): Promise<IResponse<IBasketListResponseModel[]>> => {
+  public static GetSavedItemsList = (id: number): Promise<IResponse<IBasketResponseModel>> => {
     const result = Connection.GET({
       action: `saved/${id}`,
       controller: BasketController.controller,

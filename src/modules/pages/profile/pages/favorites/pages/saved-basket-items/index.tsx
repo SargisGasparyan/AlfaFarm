@@ -35,7 +35,7 @@ class SavedBasketItems extends HelperComponent<RouteComponentProps<IRouteParams>
   private fetchData = async () => {
     const { id } = this.props.match.params;
     const result = await BasketController.GetSavedItemsList(+id);
-    this.safeSetState({ data: result.data });
+    this.safeSetState({ data: result.data.items });
   }
 
   private deleteSaved = async () => {
