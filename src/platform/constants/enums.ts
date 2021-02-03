@@ -14,6 +14,14 @@ export enum NotificationTypeEnum {
   PrescriptionDeciphered = 3,
 };
 
+export enum CardTypeEnum {
+  MasterCard = 1,
+  Visa,
+  AmericanExpress,
+  DinnersClub,
+  Unknown,
+};
+
 export enum WeekDaysEnum {
   Monday = 1,
   Tuesday,

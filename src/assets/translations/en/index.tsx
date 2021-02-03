@@ -1123,6 +1123,7 @@ export default {
   choose_address: "Choose address",
   choose_pharmacy: "Choose pharmacy",
   choose_time: "Choose time",
+  asap: "ASAP",
   choose_date: "Choose date",
   user_request_ask: "ask(s) to add the following item to this list",
   prescription: "Prescription",

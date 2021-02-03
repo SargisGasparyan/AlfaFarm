@@ -47,6 +47,7 @@ class Cart extends HelperComponent<{}, IState> {
           <span>{row.unitQuantity} {row.unitName}</span>
         </div>
       </Link>,
+      style: { minWidth: '450px' }
     },
     {
       name: Settings.translations.quantity,

@@ -1139,6 +1139,7 @@ export default {
   choose_address: "Выбрать адрес",
   choose_pharmacy: "Выберите аптеку",
   choose_time: "Выбрать время",
+  asap: "ASAP",
   choose_date: "Выберите дату",
   user_request_ask: "попросит добавить следующий элемент в этот список",
   prescription: "Рецепт",

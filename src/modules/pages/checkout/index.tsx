@@ -11,9 +11,9 @@ import { byRoute } from 'platform/decorators/routes';
 import HelperComponent from 'platform/classes/helper-component';
 import LoaderContent from 'components/loader-content';
 import { countryCode } from 'platform/constants';
-import { OrderDeliveryTypeEnum } from 'platform/api/order/constants/enums';
+import { OrderDeliveryTimeTypeEnum, OrderDeliveryTypeEnum } from 'platform/api/order/constants/enums';
 import Select from 'components/select';
-import { OrderDeliveryTypeDropdown } from 'platform/constants/dropdowns';
+import { OrderDeliveryTimeTypeDropdown, OrderDeliveryTypeDropdown } from 'platform/constants/dropdowns';
 import { IOrderModifyRequestModel } from 'platform/api/order/models/request';
 import Storage from 'platform/services/storage';
 import { IDropdownOption, IGooglePlace } from 'platform/constants/interfaces';
@@ -41,6 +41,7 @@ interface IState {
   bonusDetails?: IBonusCardDetailsWithHistoryResponseModel;
   resultInfo?: IOrderResultResponseModel;
   form: IOrderModifyRequestModel;
+  dateType: OrderDeliveryTimeTypeEnum;
   submited: boolean;
   submitLoading: boolean;
   choosePharmacyOpen: boolean;
@@ -65,6 +66,7 @@ class Checkout extends HelperComponent<{}, IState> {
     successModalOpen: false,
     isUsingBonus: false,
     initialTotalDiscountedPrice: 0,
+    dateType: OrderDeliveryTimeTypeEnum.Asap,
     form: {
       firstName: '',
       lastName: '',
@@ -107,7 +109,7 @@ class Checkout extends HelperComponent<{}, IState> {
       pageNumber: 1,
       pageSize: 1,
     });
-    
+
     this.safeSetState({ bonusDetails: result.data });
   }
 
@@ -117,7 +119,7 @@ class Checkout extends HelperComponent<{}, IState> {
       usingBonus: bonus,
       deliveryType: form.deliveryType,
     });
-    
+
     result.data && this.safeSetState({
       resultInfo: result.data,
       initialTotalDiscountedPrice: initialTotalDiscountedPrice || result.data.totalDiscountedPrice,
@@ -206,6 +208,14 @@ class Checkout extends HelperComponent<{}, IState> {
     this.safeSetState({ form });
   }
 
+  private changeDeliveryTimeType = (chosen: IDropdownOption<OrderDeliveryTimeTypeEnum>) => {
+    const { form } = this.state;
+    if (chosen.value === OrderDeliveryTimeTypeEnum.ASAP) {
+      form.deliveryDateFrom = undefined;
+    }
+    this.safeSetState({ dateType: chosen.value, form });
+  }
+
   private validateDeliveryDate = (dateItem: moment.Moment) => {
     const currentDayStarting = new Date();
 
@@ -243,6 +253,7 @@ class Checkout extends HelperComponent<{}, IState> {
   public render() {
     const {
       form,
+      dateType,
       submitLoading,
       resultInfo,
       bonusDetails,
@@ -364,7 +375,16 @@ class Checkout extends HelperComponent<{}, IState> {
               />
             </div>
 
-            <div className="P-delivery-date G-flex G-align-center">
+            <div className="G-main-form-field G-phone-input-wrapper P-checkout-select">
+              <Select<OrderDeliveryTimeTypeEnum>
+                options={OrderDeliveryTimeTypeDropdown()}
+                className="G-main-select P-checkout-select-item"
+                value={dateType}
+                onChange={this.changeDeliveryTimeType}
+              />
+            </div>
+
+            {dateType === OrderDeliveryTimeTypeEnum.Date && <div className="P-delivery-date G-flex G-align-center">
               <div className="G-main-form-half-field">
                 <DateTime
                   onChange={this.dateFromChange}
@@ -377,7 +397,7 @@ class Checkout extends HelperComponent<{}, IState> {
                   }}
                 />
               </div>
-            </div>
+            </div>}
 
             {form.deliveryType === OrderDeliveryTypeEnum.Pickup && <div className="G-main-form-field">
               <input
@@ -400,21 +420,21 @@ class Checkout extends HelperComponent<{}, IState> {
             </div>
 
             {bonusDetails &&
-            !!initialTotalDiscountedPrice &&
-            !!bonusDetails.bonusCardDetails.amount && <div className="G-main-form-field G-flex G-flex-wrap">
-              <CheckBox checked={isUsingBonus}  onClick={this.toggleUsingBonus} />
-              {Settings.translations.use_bonus_points}
-              {isUsingBonus && <>
-                <span className="G-ml-auto G-text-bold G-orange-color">{bonusDetails.bonusCardDetails.amount}</span>
-                <NumberInput
-                  max={Math.min(initialTotalDiscountedPrice, bonusDetails.bonusCardDetails.amount)}
-                  value={form.usedBonus || ''}
-                  className="G-main-input G-full-width G-mt-20"
-                  placeholder={Settings.translations.bonus}
-                  onChange={this.bonusChange}
-                />
-              </>}
-            </div>}
+              !!initialTotalDiscountedPrice &&
+              !!bonusDetails.bonusCardDetails.amount && <div className="G-main-form-field G-flex G-flex-wrap">
+                <CheckBox checked={isUsingBonus} onClick={this.toggleUsingBonus} />
+                {Settings.translations.use_bonus_points}
+                {isUsingBonus && <>
+                  <span className="G-ml-auto G-text-bold G-orange-color">{bonusDetails.bonusCardDetails.amount}</span>
+                  <NumberInput
+                    max={Math.min(initialTotalDiscountedPrice, bonusDetails.bonusCardDetails.amount)}
+                    value={form.usedBonus || ''}
+                    className="G-main-input G-full-width G-mt-20"
+                    placeholder={Settings.translations.bonus}
+                    onChange={this.bonusChange}
+                  />
+                </>}
+              </div>}
 
             {resultInfo && <>
               <h3 className="G-mt-40 G-flex G-flex-justify-between">{Settings.translations.price} <span>{formatPrice(resultInfo.totalDiscountedPrice)}</span></h3>
