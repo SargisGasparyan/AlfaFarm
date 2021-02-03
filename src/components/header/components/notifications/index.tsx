@@ -69,6 +69,14 @@ class Notifications extends HelperPureComponent<IProps, IState> {
         {item.description}
         <span>{formatDate(item.createdDate, true)}</span>
       </Link>,
+      [5]: <Link
+      to={ROUTES.PROFILE.PRESCRIPTIONS.DECIPHERED.replace(':id', item.dataId)}
+      className="P-list-item"
+      onClick={onClose}
+    >
+      {item.description}
+      <span>{formatDate(item.createdDate, true)}</span>
+    </Link>
     };
 
     return types[item.type] || null;

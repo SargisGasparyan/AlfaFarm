@@ -4,6 +4,7 @@ import Blog from './blog';
 import Home from './home';
 import News from './news';
 import Tenders from './tenders';
+import CardInfo from './card-info';
 import Products from './products';
 import Profile from './profile';
 import Pharmacies from './pharmacies';
@@ -20,4 +21,5 @@ export {
   Profile,
   Pharmacies,
   Clinic,
+  CardInfo,
 };

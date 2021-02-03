@@ -61,6 +61,7 @@ class SpecialProducts extends HelperComponent<IState, {}> {
             />
 
             <div className="P-main-info">
+              <p className="G-text-gray-color">{+item.expiredDate < Date.now() ? Settings.translations.expired_text : Settings.translations.expire_text} {formatDate(item.expiredDate, false)}</p>
               <h2>{item.title}</h2>
               <span>{item.unitQuantity} {item.unitName}</span>
             </div>

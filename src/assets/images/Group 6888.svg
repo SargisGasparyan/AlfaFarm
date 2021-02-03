@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="22.797" height="22.796" viewBox="0 0 22.797 22.796">
+  <g id="Group_6888" data-name="Group 6888" transform="translate(19281 12138)">
+    <g id="tick" transform="translate(-19281 -12138)">
+      <g id="Group_5366" data-name="Group 5366" transform="translate(5.413 2.864)">
+        <g id="Group_5365" data-name="Group 5365">
+          <path id="Path_1258" data-name="Path 1258" d="M138.3,64.58a.859.859,0,0,0-1.215,0l-10.307,10.28-3.719-4.039a.859.859,0,1,0-1.264,1.164l4.324,4.7a.858.858,0,0,0,.614.277h.018a.86.86,0,0,0,.607-.251L138.3,65.795A.859.859,0,0,0,138.3,64.58Z" transform="translate(-121.568 -64.327)" fill="#49b748"/>
+        </g>
+      </g>
+      <g id="Group_5368" data-name="Group 5368">
+        <g id="Group_5367" data-name="Group 5367">
+          <path id="Path_1259" data-name="Path 1259" d="M21.937,10.539a.859.859,0,0,0-.859.859,9.68,9.68,0,1,1-9.68-9.68A.859.859,0,1,0,11.4,0,11.4,11.4,0,1,0,22.8,11.4.859.859,0,0,0,21.937,10.539Z" fill="#49b748"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

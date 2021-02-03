@@ -1,6 +1,6 @@
 @import 'src/assets/styles/variables';
 
-.G-page.P-tenders-page {
+.G-page.P-card-info-page {
   flex-wrap       : wrap;
   align-items     : flex-start;
   justify-content : center;
@@ -8,15 +8,13 @@
   > .P-content {
     width     : 100%;
     padding   : 0 200px 50px;
-    display   : flex;
-    flex-wrap : wrap;
 
-    @media(max-width : $tablet-screen) {
-      padding : 40px;
+    p {
+      margin-bottom: 10px;
     }
 
-    @media(max-width : $mobile-screen) {
-      padding : 40px 0;
+    h4, ul {
+      margin-bottom: 30px;
     }
   }
 }

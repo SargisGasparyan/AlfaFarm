@@ -15,6 +15,7 @@ import { ITenderListResponseModel } from 'platform/api/tender/models/response';
 import Details from './pages/details';
 
 import './style.scss';
+import EmptyState from 'components/empty-state';
 
 interface IState {
   data?: ITenderListResponseModel[];
@@ -72,9 +73,11 @@ class Tenders extends HelperComponent<{}, IState> {
       <section className="G-page P-tenders-page">
         {data ? <>
           <h2 className="G-page-title">{Settings.translations.tenders.toUpperCase()}</h2>
-          <div className="P-content">
+          
+
+          {!!data.length ? <div className="P-content">
             {data.map(item => <ListItem key={item.id} data={item} />)}
-          </div>
+          </div> : <EmptyState text={Settings.translations.empty_tenders_list} />}
         </> : <PageLoader />}
       </section>
     );
