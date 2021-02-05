@@ -17,6 +17,7 @@ import Socket from 'platform/services/socket';
 import NotificationController from 'platform/api/notification';
 import Notifications from './components/notifications';
 import BasketController from 'platform/api/basket';
+import ProductController from 'platform/api/product';
 import Screen from 'components/screen';
 import LogoImage from 'assets/images/logo.png';
 import PersonImage from 'assets/images/person.png';
@@ -117,17 +118,21 @@ class Header extends HelperPureComponent<{}, IState> {
     }
   }
 
-  private searchSubmit = (value: string) => {
-    const query = new URLSearchParams(window.location.search);
-    const oldValue = query.get('text');
+  private searchSubmit = async (value: string) => {
+    // const query = new URLSearchParams(window.location.search);
+    // const oldValue = query.get('text');
     
-    if (oldValue !== value) {
-      if (value.length) query.set('text', value);
-      else query.delete('text');
+    // if (oldValue !== value) {
+    //   if (value.length) query.set('text', value);
+    //   else query.delete('text');
   
-      window.routerHistory.push(`${ROUTES.PRODUCTS.MAIN}?${query.toString()}`);
-      window.dispatchEvent(new Event(DispatcherChannels.ProductFilterChange));
+    //   window.routerHistory.push(`${ROUTES.PRODUCTS.MAIN}?${query.toString()}`);
+    //   window.dispatchEvent(new Event(DispatcherChannels.ProductFilterChange));
+    // }
+    if (value) {
+      const asd = await ProductController.Search(value);
     }
+
   }
 
   private toggleMobileMenu = () => {
