@@ -1242,6 +1242,7 @@ export default {
   idram: "Idram",
   talcell: "Telcell",
   card: "Карта",
+  answer_text: "Вы ответили",
   bank_transfer: "Банковский перевод",
   delivery_date: "Дата доставки",
   footer_text: "«Ալֆա Ֆարմ» դեղատների ցանցը հասնդիսանում է հանրապետությունում ամենամեծ և աշխարհագրորեն սփռված ցանցը:",

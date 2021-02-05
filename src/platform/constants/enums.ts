@@ -12,6 +12,18 @@ export enum OSTypeEnum {
 
 export enum NotificationTypeEnum {
   PrescriptionDeciphered = 3,
+  PrescriptionCanceled,
+  NewReminder,
+  NewCustom,
+  OrderCollected,
+  OrderStarted,
+  OrderFinished,
+  OrderCanceled,
+};
+
+export enum NotificationChoiceTypeEnum {
+  UserConfirmed = 1,
+  UserCanceled,
 };
 
 export enum CardTypeEnum {

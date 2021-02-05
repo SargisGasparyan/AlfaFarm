@@ -135,8 +135,10 @@ class Header extends HelperPureComponent<{}, IState> {
     this.safeSetState({ mobileMenuOpen: !mobileMenuOpen });
   }
 
-  private toggleNotifications = (e: Event | React.SyntheticEvent) => {
-    e.stopPropagation();
+  private toggleNotifications = (e?: Event | React.SyntheticEvent) => {
+    if (e) {
+      e.stopPropagation();
+    }
     const { notificationOpen } = this.state;
 
     if (!notificationOpen) this.safeSetState({ notificationOpen: true, notificationIconNumber: 0 });

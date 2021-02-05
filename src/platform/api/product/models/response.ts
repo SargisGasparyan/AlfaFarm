@@ -1,5 +1,6 @@
 import { IFile } from 'platform/constants/interfaces';
 import { IPharmacyBranchListResponseModel } from 'platform/api/pharmacyBranch/models/response';
+import { ICategoryListResponseModel } from 'platform/api/category/models/response';
 
 export interface IProductListResponseModel {
   id: number;
@@ -12,6 +13,11 @@ export interface IProductListResponseModel {
   promotion: IPromotionModel;
   unitName: string;
   unitQuantity: number;
+};
+
+export interface IProductSearcResponseModel {
+  products: IProductListResponseModel[];
+  categories: ICategoryListResponseModel[];
 };
 
 export interface IProductDetailsResponseModel {

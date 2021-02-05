@@ -1234,6 +1234,7 @@ export default {
   idram: "Idram",
   talcell: "Telcell",
   card: "Credit Card",
+  answer_text: "You answered",
   bank_transfer: "Bank transfer",
   delivery_date: "Delivery date",
   pickup_date: "Pickup date",
