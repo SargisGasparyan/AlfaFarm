@@ -27,8 +27,12 @@ header {
     margin-bottom : 10px;
   }
 
-  > .P-search-input {
-    margin: 0 20px 0 40px;
+  > .P-search-wrapper {
+    position: relative;
+
+    > .P-search-input {
+      margin: 0 20px 0 40px;
+    }
   }
 
   > .P-profile {

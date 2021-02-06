@@ -7,6 +7,15 @@
   box-shadow     : $default-block-shadow;
   border-radius  : $big-radius;
   flex-direction : column;
+  position       : relative;
+
+  .P-help-icon {
+    position : absolute;
+    top      : -50px;
+    right    : 0;
+    width    : 30px;
+    cursor   : pointer;
+  }
 
   > .P-list-item {
     color           : black;

@@ -923,7 +923,16 @@ const faqTexts = [{
   </>,
 }];
 
+const specialProductsHelp = <>
+  <p>"Alfa Pharm" gives opportunity to his customers to accumulate bonuses purchasing drugs, cosmetics or the other medical products.</p>
+  <p>You can have maximum 2 special products and accumulation for it will be 6%.</p>
+  <p>Special products can be changed once 3 months, and for children's products - once a month.</p>
+  <p>Some products are exceptions and cannot be selected as special products.</p>
+</>
+
 export default {
+  special_product_confirm: 'Are you sure you want to update your special product?',
+  special_products_help: specialProductsHelp,
   expired_text: "Expired",
   expire_text: "Expires",
   price_offer: "ineed price offer",

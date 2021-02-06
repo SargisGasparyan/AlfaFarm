@@ -11,6 +11,8 @@ import FavoriteController from 'platform/api/favorite';
 
 import './style.scss';
 import Settings from 'platform/services/settings';
+import UserController from 'platform/api/user';
+import ConfirmModal from 'components/confirm-modal';
 
 interface IProps {
   data: IProductDetailsResponseModel;
@@ -20,6 +22,7 @@ interface IProps {
 interface IState {
   activeId: number;
   photosPackIndex: number;
+  confirmModal: boolean;
 }
 
 class Images extends HelperPureComponent<IProps, IState> {
@@ -27,6 +30,7 @@ class Images extends HelperPureComponent<IProps, IState> {
   public state: IState = {
     activeId: 0,
     photosPackIndex: 0,
+    confirmModal: false,
   };
 
   public componentDidMount() {
@@ -60,6 +64,26 @@ class Images extends HelperPureComponent<IProps, IState> {
       isFavorite: !data.isFavorite,
     });
   }
+
+  private addSpecialProduct = async () => {
+    const { data, onChange } = this.props;
+    const result = await UserController.UpdatePreferredProductList({ newProductId: data.id });
+    result && result.success && onChange({
+      ...data,
+      isSpecial: !data.isSpecial,
+    });
+    this.closeConfirmModal();
+  }
+
+  private openConfirmModal = (e: React.SyntheticEvent) => {
+    e.preventDefault();
+    this.safeSetState({ confirmModal: true });
+  }
+  
+  private closeConfirmModal = () => {
+    this.safeSetState({ confirmModal: false });
+  }
+
   private zoom = (e: React.MouseEvent) => {
     const zoomer = e.currentTarget as HTMLElement;
     const offsetX = e.nativeEvent.offsetX;
@@ -71,7 +95,7 @@ class Images extends HelperPureComponent<IProps, IState> {
   }
   public render() {
     const { data } = this.props;
-    const { activeId } = this.state;
+    const { activeId, confirmModal } = this.state;
 
     const thumbImages = data.images.filter(item => item.id !== activeId);
 
@@ -87,6 +111,12 @@ class Images extends HelperPureComponent<IProps, IState> {
             onClick={e => this.toggleFavorite(e, data)}
             className={`P-favorite ${data.isFavorite ? 'P-active icon-Group-5520' : 'icon-Group-5518'}`}
           />}
+
+          {!Settings.guest && !data.isSpecial && <i
+            onClick={e => this.openConfirmModal(e)}
+            className={`P-special-add icon-Group-5532`}
+          />}
+
         </div>
         {!!thumbImages.length && <div className="P-thumbs">
           {thumbImages.map(item => <div
@@ -97,6 +127,12 @@ class Images extends HelperPureComponent<IProps, IState> {
             <div style={{ background: `url("${getMediaPath(item.path)}") center/contain no-repeat` }} />
           </div>)}
         </div>}
+
+        {confirmModal && <ConfirmModal
+          text={Settings.translations.special_product_confirm}
+          onConfirm={this.addSpecialProduct}
+          onClose={this.closeConfirmModal}
+        />}
       </div>
     );
   }

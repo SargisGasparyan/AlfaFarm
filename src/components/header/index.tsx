@@ -27,11 +27,16 @@ import MobileMenu from './components/mobile-menu';
 
 import './style.scss';
 import './responsive.scss';
+import { IProductSearcResponseModel } from 'platform/api/product/models/response';
+import SearchPopup from './components/search';
 
 interface IState {
   authOpen: boolean;
   categoryOpen: boolean;
   notificationOpen: boolean;
+  searchOpen: boolean;
+  searchLoader: boolean;
+  searchResult: IProductSearcResponseModel | null;
   notificationIconNumber: number;
   cartIconNumber: number;
   mobileMenuOpen: boolean;
@@ -43,6 +48,9 @@ class Header extends HelperPureComponent<{}, IState> {
     authOpen: false,
     categoryOpen: false,
     notificationOpen: false,
+    searchLoader: false,
+    searchOpen: false,
+    searchResult: null,
     notificationIconNumber: 0,
     cartIconNumber: 0,
     mobileMenuOpen: false
@@ -130,9 +138,24 @@ class Header extends HelperPureComponent<{}, IState> {
     //   window.dispatchEvent(new Event(DispatcherChannels.ProductFilterChange));
     // }
     if (value) {
-      const asd = await ProductController.Search(value);
-    }
+      this.safeSetState({ searchLoader: true }, async () => {
+        const data = await ProductController.Search(value);
+        if (data?.data?.products.length) {
+          this.safeSetState({ searchResult: data.data, searchOpen: true })
+        } else {
+          this.closeSearch();
+        }
+        this.safeSetState({ searchLoader: false })
+      })
 
+      
+    } else {
+      this.closeSearch();
+    }
+  }
+
+  private closeSearch = () => {
+    this.safeSetState({ searchResult: null, searchOpen: false })
   }
 
   private toggleMobileMenu = () => {
@@ -153,7 +176,7 @@ class Header extends HelperPureComponent<{}, IState> {
   private openProducts = () => window.dispatchEvent(new Event(DispatcherChannels.ProductFilterChange));
 
   public render() {
-    const { authOpen, categoryOpen, cartIconNumber, notificationIconNumber, notificationOpen } = this.state;
+    const { authOpen, categoryOpen, cartIconNumber, notificationIconNumber, notificationOpen, searchOpen, searchResult, searchLoader } = this.state;
 
     return (
       <header ref={this.header} className="G-flex G-flex-align-center G-flex-justify-center">
@@ -164,10 +187,15 @@ class Header extends HelperPureComponent<{}, IState> {
             </Link>
 
             {enviroment.WHOLESALE ? <WholesaleContent /> : <>
-              <SearchInput
-                onSubmit={this.searchSubmit}
-                withSubmit={true}
-              />
+              <div className="P-search-wrapper">
+                <SearchInput
+                  onSubmit={this.searchSubmit}
+                  loading={searchLoader}
+                  withSubmit={true}
+                />
+
+                {searchOpen && <SearchPopup onClose={this.closeSearch} data={searchResult} />}
+              </div>
 
               <Link
                 to={ROUTES.PRODUCTS.MAIN}

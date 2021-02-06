@@ -16,14 +16,26 @@ export interface IProductListResponseModel {
 };
 
 export interface IProductSearcResponseModel {
-  products: IProductListResponseModel[];
+  products: IProductSearchProductResponseModel[];
   categories: ICategoryListResponseModel[];
 };
+
+export interface IProductSearchProductResponseModel {
+  id: number;
+  title: string;
+  price: number;
+  imagePath?: string;
+  cartLoading?: boolean;
+  producer: IProductDetailsProducerResponseModel;
+  brand: IProductDetailsBrandResponseModel;
+  activeIngredients: IProductDetailsActiveIngredientResponseModel[];
+}
 
 export interface IProductDetailsResponseModel {
   id: number;
   title: string;
   isFavorite: boolean;
+  isSpecial: boolean;
   basketCount: number;
   packagePrice: number;
   description: string;
