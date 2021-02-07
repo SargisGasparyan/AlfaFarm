@@ -6,10 +6,15 @@
   > .G-page-title {
     color         : black;
     margin-bottom : 20px;
+
+    @media (max-width: $tablet-screen) {
+      font-size: 24px;
+      margin-bottom: 0;
+    }
   }
 
   > .G-main-form {
-    width         : 1200px;
+    width         : 100%;
     margin        : 0 auto;
     padding       : 20px 60px;
     display       : flex;
@@ -18,9 +23,13 @@
     box-shadow    : $default-block-shadow;
     border-radius : $big-radius;
 
+    @media (max-width : $tablet-screen) {
+      padding : 20px 0;
+    }
+
     .P-date {
-      display: flex;
-      justify-content: space-between;
+      display         : flex;
+      justify-content : space-between;
     }
 
     > .P-main-info, > .P-delivery-form {
@@ -31,7 +40,9 @@
       flex-wrap      : wrap;
       flex-direction : column;
 
-      .rc-checkbox { margin-right: 10px; }
+      .rc-checkbox {
+        margin-right : 10px;
+      }
 
       > .P-delivery-date {
         flex          : 1;
@@ -43,29 +54,34 @@
         margin-bottom : 15px;
 
         > h4 {
-          color          : $text-gray;
-          white-space    : nowrap;
-          margin-right   : 20px;
+          color        : $text-gray;
+          white-space  : nowrap;
+          margin-right : 20px;
           @include normal-font;
         }
+
         > div {
           display     : flex;
           align-items : center;
           margin-top  : 20px;
-          width: 100% !important;
+          width       : 100% !important;
+
           > div {
-            width: 100%;
+            width : 100%;
           }
+
           > span {
             color  : $text-gray;
             margin : 0 10px;
           }
-    
+
           > .G-main-form-half-field {
             margin-bottom : 0;
           }
         }
-      } //
+      }
+
+      //
     }
 
     .G-main-button {
@@ -74,6 +90,7 @@
     }
   }
 }
+
 .P-choose-payment-type-section {
   width         : 800px;
   margin        : 0 auto;
@@ -82,43 +99,90 @@
   box-shadow    : $default-block-shadow;
   align-items   : flex-start;
   border-radius : $big-radius;
-  > p {
-    display: block;
-    width: 100%;
-    margin: 20px 0;
-    text-align: center;
-    font-size: 24px;
-    color: #F36E26;
-    font-weight: 700;
+
+  @media (max-width: $tablet-screen) {
+    padding: 20px;
   }
+
+  > p {
+    display     : block;
+    width       : 100%;
+    margin      : 20px 0;
+    text-align  : center;
+    font-size   : 24px;
+    color       : #F36E26;
+    font-weight : 700;
+  }
+
   .P-choose-payment-buttons {
-    width: fit-content;
-    margin: 40px auto 0;
+    width  : fit-content;
+    margin : 40px auto 0;
+
     > .G-main-button {
       width  : 350px;
       margin : 0 auto 20px;
+      @media (max-width: $mobile-screen) {
+        width: 100%;
+        padding: 7px 15px;
+      }
     }
   }
+
   .P-payment-types {
+    .P-radio-content{
+      width: calc(100% - 35px);
+    }
     > div {
-      margin-bottom: 30px;
+      margin-bottom : 30px;
 
     }
   }
 }
+
 .P-online-pay-icons {
-  margin-top: 20px;
-  display: flex;
+  margin-top : 20px;
+  display    : flex;
+
   > div {
-    width: 60px;
-    height: 20px;
-    margin-right: 15px;
+    width        : 60px;
+    height       : 20px;
+    margin-right : 15px;
   }
 }
+
 .P-checkout-select {
   > .P-checkout-select-item > .P-select > ul {
-    width: 100%;
-    margin-top: 5px;
-    border-radius: 25px !important;
+    width         : 100%;
+    margin-top    : 5px;
+    border-radius : 25px !important;
+  }
+}
+
+.P-checkout-form {
+  @media (max-width: $tablet-screen) {
+    flex-direction: column;
+  }
+  .P-main-info, .P-delivery-form {
+    min-width : auto !important;
+    margin: 0 !important;
+    padding: 0 15px;
+  }
+
+  .G-main-button {
+    @media (max-width : $tablet-screen) {
+      width : 100% !important;
+      padding: 7px 15px;
+    }
+  }
+}
+
+.P-checkout-btn{
+  padding: 15px;
+}
+
+.P-choose-payment-buttons{
+  @media (max-width : $tablet-screen) {
+    width : 100% !important;
+    padding: 7px 15px;
   }
 }

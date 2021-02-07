@@ -9,37 +9,52 @@
   align-content : flex-start;
 
   .P-table {
-    width : 100%;
+    width      : 100%;
+    overflow-x : auto;
 
     .P-data-table-header {
-      height        : 80px;
-      padding       : 0 14vh;
-      background    : none;
-      border-top    : 1px solid $light-gray;
-      border-bottom : 1px solid $light-gray;
+      height     : 80px;
+      padding    : 0 14vh;
+      background : none;
+
 
       > li {
-        color     : $text-gray;
-        font-size : 22px;
+        color         : $text-gray;
+        font-size     : 22px;
+        height        : 100%;
+        border-top    : 1px solid $light-gray;
+        border-bottom : 1px solid $light-gray;
+        display       : flex;
+        align-items   : center;
         @include normal-font();
       }
     }
-  
+
     .P-data-table-body {
-      
+
       > ul {
         margin        : 40px 14vh 0;
         height        : auto;
         padding       : 0 0 40px;
         display       : flex;
         align-items   : center;
+        border-bottom : none;
 
-        &:last-child { border-bottom: 1px solid $light-gray; }
+        &:last-child {
+          border-bottom : 1px solid $light-gray;
+        }
 
         &.P-out-of-stock-product {
           opacity : .5;
         }
-      
+
+        > li {
+          border-bottom : 1px solid $light-gray !important;
+          min-height    : 155px;
+          display       : flex;
+          align-items   : center;
+        }
+
         > li > div {
           position  : static;
           transform : initial;
@@ -61,7 +76,7 @@
                 word-break  : initial;
                 white-space : initial;
               }
-      
+
               > span {
                 margin-top : 20px;
                 @include normal-font;
@@ -80,6 +95,10 @@
     display         : flex;
     justify-content : flex-end;
 
+    @media (max-width: $mobile-screen){
+      padding: 0;
+    }
+
     > .P-save-cart {
       width           : 300px;
       color           : $main-color;
@@ -95,11 +114,46 @@
   > .P-pay-button {
     width        : 300px;
     margin-right : 14vh;
+    @media (max-width : $mobile-screen) {
+      padding : 7px 15px;
+    };
   }
 }
+
 .P-discounted-item {
   > del {
-    font-size: 22px;
-    color: rgba(0, 0, 0, .5);
+    font-size : 22px;
+    color     : rgba(0, 0, 0, .5);
   }
+}
+
+.P-card-table {
+  .P-data-table-header {
+    padding       : 0 !important;
+    border-bottom : none !important;
+
+    li {
+      padding : 0 15px;
+    }
+  }
+
+  .P-data-table-body {
+    min-height : auto !important;
+    overflow   : unset;
+
+    ul {
+      margin         : 0 !important;
+      border-bottom  : none !important;
+      padding-bottom : 0 !important;
+
+      li {
+        padding : 15px;
+      }
+    }
+
+    .P-data-table-actions {
+      display : none !important;
+    }
+  }
+
 }
