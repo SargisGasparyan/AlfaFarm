@@ -66,10 +66,10 @@ class MyRegistrations extends HelperComponent<IState, {}> {
             <Link to={ROUTES.PROFILE.MY_REGISTRATIONS.MEDICAL_HISTORY}>{Settings.translations.medical_history}</Link>
           </h2>
           <div className="G-flex P-list">
-            {data && data.list.length ? <Table<IClinicRegistrationListResponseModel>
+            {data ? (data.list.length ? <Table<IClinicRegistrationListResponseModel>
               columnConfig={this.columnConfig}
               data={data.list}
-            /> : <EmptyState text={Settings.translations.empty_registrations_list} />}
+            /> : <EmptyState text={Settings.translations.empty_registrations_list} />) : null}
           </div>
           
           <Pagination<IClinicRegistrationListResponseModel> fetchData={this.fetchData} />
