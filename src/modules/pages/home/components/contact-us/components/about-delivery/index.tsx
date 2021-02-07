@@ -15,6 +15,7 @@ const AboutDelivery = React.memo(() => {
         <i className="icon-Group-5507" />
         <h3>{Settings.translations.delivery}</h3>
         <p>{Settings.translations.about_delivery_text}</p>
+        <p>{Settings.translations.about_delivery_text_2}</p>
       </Modal>}
     </div>
   );
