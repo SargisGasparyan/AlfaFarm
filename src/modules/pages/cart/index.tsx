@@ -6,7 +6,11 @@ import Settings from 'platform/services/settings';
 import { byRoute } from 'platform/decorators/routes';
 import HelperComponent from 'platform/classes/helper-component';
 import BasketController from 'platform/api/basket';
-import { IBasketListResponseModel, IBasketResponseModel, IBasketChangeResponseModel } from 'platform/api/basket/models/response';
+import {
+  IBasketListResponseModel,
+  IBasketResponseModel,
+  IBasketChangeResponseModel
+} from 'platform/api/basket/models/response';
 import Table from 'components/table';
 import EmptyState from 'components/empty-state';
 import { getMediaPath, formatPrice } from 'platform/services/helper';
@@ -38,7 +42,7 @@ class Cart extends HelperComponent<{}, IState> {
       cell: (row: IBasketListResponseModel) => <Link to={ROUTES.PRODUCTS.DETAILS.replace(':id', row.productId)}>
         <div
           className="P-image G-square-image-block"
-          style={{ background: `url('${getMediaPath(row.productPhoto)}') center/cover` }}
+          style={{background: `url('${getMediaPath(row.productPhoto)}') center/cover`}}
         />
 
         <div className="P-main-info">
@@ -47,10 +51,12 @@ class Cart extends HelperComponent<{}, IState> {
           <span>{row.unitQuantity} {row.unitName}</span>
         </div>
       </Link>,
-      style: { minWidth: '450px' }
+      style: {minWidth: '450px'}
     },
     {
       name: Settings.translations.quantity,
+      style: {minWidth: '140px'},
+
       cell: (row: IBasketListResponseModel, index: number) => <CountInput
         min={0}
         step={1}
@@ -60,32 +66,42 @@ class Cart extends HelperComponent<{}, IState> {
     },
     {
       name: 'Bonus',
-      cell: (row: IBasketListResponseModel) => <h3 className="G-fs-24">{row.promotion.promotionType === PromotionTypeEnum.Bonus ? row.promotion.result : 0}</h3>,
+      style: {minWidth: '140px'},
+
+      cell: (row: IBasketListResponseModel) => <h3
+        className="G-fs-24">{row.promotion.promotionType === PromotionTypeEnum.Bonus ? row.promotion.result : 0}</h3>,
     },
     {
       name: Settings.translations.price,
+      style: {minWidth: '140px'},
+
       cell: (row: IBasketListResponseModel) =>
         <div className="G-flex G-flex-column G-align-center G-justify-center">
-          <div>{row.promotion.promotionType === PromotionTypeEnum.Discount && row.promotion.result > 0 ? <del>{formatPrice(row.totalPrice)}</del> : null}</div>
-          <h3 className={`G-fs-24 ${row.promotion.promotionType === PromotionTypeEnum.Discount && row.promotion.result > 0 ? 'G-orange-color' : ''}`}>
+          <div>{row.promotion.promotionType === PromotionTypeEnum.Discount && row.promotion.result > 0 ?
+            <del>{formatPrice(row.totalPrice)}</del> : null}</div>
+          <h3
+            className={`G-fs-24 ${row.promotion.promotionType === PromotionTypeEnum.Discount && row.promotion.result > 0 ? 'G-orange-color' : ''}`}>
             {row.promotion.promotionType === PromotionTypeEnum.Discount ?
               formatPrice(row.promotion.result) :
-              formatPrice(row.productQuantity * (row.isPackage ? row.packagePrice :  row.price))}
+              formatPrice(row.productQuantity * (row.isPackage ? row.packagePrice : row.price))}
           </h3>
         </div>,
     },
     {
       name: '',
-      style: { maxWidth: 70 },
+      style: {maxWidth: 70, minWidth: 60},
       cell: (row: IBasketListResponseModel) => <div className="P-basket-remove-item">
-        <i className="icon-Group-5032 G-orange-color G-cursor-pointer G-fs-18" onClick={() => this.deleteBasketItem(row)} />
+        <i className="icon-Group-5032 G-orange-color G-cursor-pointer G-fs-18"
+           onClick={() => this.deleteBasketItem(row)}/>
       </div>
     }
   ];
+
   public componentDidMount() {
     this.fetchData();
     this.updateBasketCount();
   }
+
   private deleteBasketItem = async (item: IBasketListResponseModel) => {
     const result = await BasketController.Delete(item.productId, item.isPackage);
     if (result.success) {
@@ -96,11 +112,11 @@ class Cart extends HelperComponent<{}, IState> {
   private updateBasketCount = () => window.dispatchEvent(new CustomEvent(DispatcherChannels.CartItemsUpdate));
   private fetchData = async () => {
     const result = await BasketController.GetList();
-    this.safeSetState({ data: result.data });
+    this.safeSetState({data: result.data});
   }
 
   private changeCount = async (row: IBasketListResponseModel, index: number, count: number) => {
-    const { data } = this.state;
+    const {data} = this.state;
     let modifyResult: IResponse<IBasketChangeResponseModel>;
 
     if (count) {
@@ -119,15 +135,15 @@ class Cart extends HelperComponent<{}, IState> {
 
     if (data && modifyResult.data) {
 
-      this.safeSetState({ data: modifyResult.data });
+      this.safeSetState({data: modifyResult.data});
       window.dispatchEvent(new CustomEvent(DispatcherChannels.CartItemsUpdate));
     }
   }
 
   private goToCheckout = async () => {
-    const { data } = this.state;
+    const {data} = this.state;
 
-    if (data?.items.some(item => !item.productStockQuantity)) this.safeSetState({ outOfStockConfirm: true });
+    if (data?.items.some(item => !item.productStockQuantity)) this.safeSetState({outOfStockConfirm: true});
     else window.routerHistory.push(`${ROUTES.CHECKOUT}?total=${data?.totalDiscountedPrice || data?.totalPrice}`);
     // if (cartSaved && data) {
     //   const basketIds = data.items.map(item => item.id);
@@ -135,9 +151,9 @@ class Cart extends HelperComponent<{}, IState> {
     // }
   }
 
-  private closeOutOfStockConfirm = () => this.safeSetState({ outOfStockConfirm: false });
+  private closeOutOfStockConfirm = () => this.safeSetState({outOfStockConfirm: false});
   private deleteOutOfStock = async () => {
-    const { data } = this.state;
+    const {data} = this.state;
 
     if (data) {
       const updatingItems = data.items.filter(item => !item.productStockQuantity).map(item => ({
@@ -147,7 +163,7 @@ class Cart extends HelperComponent<{}, IState> {
       }));
 
       const result = await BasketController.ChangeList(updatingItems);
-      result.success && this.safeSetState({ outOfStockConfirm: false }, () => {
+      result.success && this.safeSetState({outOfStockConfirm: false}, () => {
         this.updateBasketCount();
         this.fetchData();
       });
@@ -155,18 +171,18 @@ class Cart extends HelperComponent<{}, IState> {
   }
 
   private saveCart = async () => {
-    const { data } = this.state;
+    const {data} = this.state;
 
     if (data) {
-       const alertify = await import('alertifyjs');
-       const basketIds = data.items.map(item => item.id);
-       const result = await BasketController.Save(basketIds);
-       result.success && alertify.success(Settings.translations.basket_save_success);
+      const alertify = await import('alertifyjs');
+      const basketIds = data.items.map(item => item.id);
+      const result = await BasketController.Save(basketIds);
+      result.success && alertify.success(Settings.translations.basket_save_success);
     }
   }
 
   public render() {
-    const { data, outOfStockConfirm } = this.state;
+    const {data, outOfStockConfirm} = this.state;
 
     return (
       <section className="G-page P-cart-page">
@@ -180,7 +196,7 @@ class Cart extends HelperComponent<{}, IState> {
               >{Settings.translations.clear_basket}</button> */}
             </div>
             <Table<IBasketListResponseModel>
-              className="P-table G-full-width"
+              className="P-table G-full-width P-card-table"
               columnConfig={this.columnConfig}
               rowClassname={row => !row.productStockQuantity ? 'P-out-of-stock-product' : ''}
               data={data.items}
@@ -195,8 +211,10 @@ class Cart extends HelperComponent<{}, IState> {
               <div>
                 <span className="G-fs-normal">{Settings.translations.total}</span>
                 <div className="G-flex G-flex-column G-align-center G-justify-center P-discounted-item">
-                  {!!data.totalDiscountedPrice && data.totalDiscountedPrice !== data.totalPrice && <del>{formatPrice(data.totalPrice)}</del>}
-                  <h1 className="G-orange-color G-fs-24 G-mt-5">{formatPrice(data.totalDiscountedPrice || data.totalPrice)}</h1>
+                  {!!data.totalDiscountedPrice && data.totalDiscountedPrice !== data.totalPrice &&
+                  <del>{formatPrice(data.totalPrice)}</del>}
+                  <h1
+                    className="G-orange-color G-fs-24 G-mt-5">{formatPrice(data.totalDiscountedPrice || data.totalPrice)}</h1>
                 </div>
               </div>
 
@@ -214,15 +232,15 @@ class Cart extends HelperComponent<{}, IState> {
             >{Settings.translations.pay}</button>
 
             {outOfStockConfirm && <ConfirmModal
-              title={Settings.translations.out_of_stock}
-              text={Settings.translations.out_of_stock_delete_confirm}
-              onConfirm={this.deleteOutOfStock}
-              onClose={this.closeOutOfStockConfirm}
+                title={Settings.translations.out_of_stock}
+                text={Settings.translations.out_of_stock_delete_confirm}
+                onConfirm={this.deleteOutOfStock}
+                onClose={this.closeOutOfStockConfirm}
             />}
           </> : <EmptyState
-              text={Settings.translations.no_products}
-            />}
-        </> : <PageLoader />}
+            text={Settings.translations.no_products}
+          />}
+        </> : <PageLoader/>}
       </section>
     );
   }

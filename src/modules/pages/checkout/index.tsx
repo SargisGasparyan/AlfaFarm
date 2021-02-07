@@ -268,7 +268,7 @@ class Checkout extends HelperComponent<{}, IState> {
     return (
       <section className="G-page P-checkout-page">
         <h1 className="G-page-title">{!isPayment ? Settings.translations.fill_your_information : Settings.translations.payment_method}</h1>
-        {!isPayment ? <form className="G-main-form">
+        {!isPayment ? <form className="G-main-form P-checkout-form">
           <div className="P-main-info G-half-width">
             <div className="G-main-form-field">
               <input
@@ -434,7 +434,7 @@ class Checkout extends HelperComponent<{}, IState> {
             </>}
           </div>
 
-          <div className="G-flex G-flex-column">
+          <div className="G-flex G-flex-column P-checkout-btn">
             <LoaderContent
               className="G-main-button"
               loading={submitLoading}
