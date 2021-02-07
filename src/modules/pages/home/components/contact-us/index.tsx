@@ -13,6 +13,8 @@ import { Marker, InfoWindow } from 'react-google-maps';
 import { formatTime, getViewEnum } from 'platform/services/helper';
 import { WeekDaysEnum } from 'platform/constants/enums';
 import { IPharmacyBranchListResponseModel } from 'platform/api/pharmacyBranch/models/response';
+import MapIconGreen from 'assets/images/map-icon-green.svg';
+import MapIconOrange from 'assets/images/map-icon-orange.svg';
 
 import './style.scss';
 
@@ -46,6 +48,10 @@ class ContactUs extends HelperComponent<{}, IState> {
       position: { lat: item.addressLat, lng: item.addressLng },
       onMouseOver: () => this.toggleMarker(index),
       onMouseOut: () => this.toggleMarker(),
+      icon: {
+        url:  item.isOpen ? MapIconGreen : MapIconOrange,
+        scaledSize:  new google.maps.Size(30, 30)
+      },
     }));
   }
   private get hoveredMarkerData() {

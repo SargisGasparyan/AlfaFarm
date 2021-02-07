@@ -2,8 +2,8 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 
 import HelperComponent from 'platform/classes/helper-component';
-// import { byPrivateRoute } from 'platform/decorators/routes';
-// import { onlyForUsers } from 'platform/guards/routes';
+import { byPrivateRoute } from 'platform/decorators/routes';
+import { onlyForUsers } from 'platform/guards/routes';
 import ROUTES from 'platform/constants/routes';
 import Layout from '../../components/layout';
 import Settings from 'platform/services/settings';
@@ -23,7 +23,7 @@ interface IState {
   data?: IPagingResponse<IClinicRegistrationListResponseModel>;
 };
 
-// @byPrivateRoute(ROUTES.PROFILE.MY_REGISTRATIONS.MAIN, [onlyForUsers])
+@byPrivateRoute(ROUTES.PROFILE.MY_REGISTRATIONS.MAIN, [onlyForUsers])
 class MyRegistrations extends HelperComponent<IState, {}> {
 
   public state: IState = {};
