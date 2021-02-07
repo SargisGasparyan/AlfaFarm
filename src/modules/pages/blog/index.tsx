@@ -75,10 +75,10 @@ class Blog extends HelperComponent<{}, IState> {
     return (
       <section className="G-page P-blog-page">
         {sortedData ? <>
-          {!!sortedData.length && <ShadowText className="G-page-title">{Settings.translations.blog}</ShadowText>}
+          {!!sortedData.length && firstItem && <ShadowText className="G-page-title">{Settings.translations.blog}</ShadowText>}
           {firstItem && <FirstItem data={firstItem} />}
           
-          {!!sortedData.length ? <div className="P-list-wrapper">
+          {!!sortedData.length && firstItem ? <div className="P-list-wrapper">
             {sortedData.map(item => <ListItem key={item.id} data={item} />)}
           </div> : <EmptyState text={Settings.translations.empty_blogs_list} />}
         </> : <PageLoader />}

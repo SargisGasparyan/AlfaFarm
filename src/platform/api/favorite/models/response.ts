@@ -1,3 +1,5 @@
+import { IPromotionModel } from 'platform/api/product/models/response';
+
 export interface IFavoriteListResponseModel {
   id: number;
   title: string;
@@ -7,4 +9,5 @@ export interface IFavoriteListResponseModel {
   imagePath?: string;
   unitName: string;
   unitQuantity: number;
+  promotion: IPromotionModel;
 };

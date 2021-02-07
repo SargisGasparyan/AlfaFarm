@@ -5,8 +5,7 @@
 .P-master { background: url('../../../../../../../assets/images/master.png') center/contain no-repeat; }
 
 .P-ipay-button {
-  width: 130px;
-  display: block;
-  text-align: center;
-  text-decoration: none;
+  display: inline-block;
+  text-decoration: underline;
+  color: $main-color;
 }

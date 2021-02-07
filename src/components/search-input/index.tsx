@@ -6,6 +6,7 @@ import HelperComponent from 'platform/classes/helper-component';
 
 import './style.scss';
 import HelperPureComponent from 'platform/classes/helper-pure-component';
+import LoaderContent from 'components/loader-content';
 
 interface IState {
   search: string;
@@ -13,6 +14,7 @@ interface IState {
 
 interface IProps {
   withSubmit?: boolean;
+  loading?: boolean;
   onChange?(value: string): void;
   onSubmit?(value: string): void;
 };
@@ -39,7 +41,7 @@ class SearchInput extends HelperPureComponent<IProps, IState> {
   }
 
   public render() {
-    const { withSubmit } = this.props;
+    const { withSubmit, loading } = this.props;
 
     return (
       <form  className={`P-search-input ${withSubmit ? 'P-search-input-submit' : ''}`}>
@@ -50,7 +52,7 @@ class SearchInput extends HelperPureComponent<IProps, IState> {
         />
         
         {withSubmit && <button onClick={this.submit}>
-          <i className="icon-Group-5502" />
+          <LoaderContent color="#F26D26" loading={loading} className="G-form-button"><i className="icon-Group-5502" /></LoaderContent>
         </button>}
       </form>
     );

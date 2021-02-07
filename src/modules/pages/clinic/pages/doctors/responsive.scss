@@ -1,0 +1,33 @@
+@import 'assets/styles/variables.scss';
+
+@media(max-width: $tablet-screen) {
+  .G-page.P-clinic-doctors-page {
+
+    > .G-page-title {
+      padding-left: 20px;
+      padding-right: 20px;
+      white-space: nowrap;
+    }
+
+    > .P-content {
+      margin: 0 20px;
+
+      > .P-item {
+        display : block;
+  
+        > .P-main-info {
+          margin: 0 auto;
+          border-right : 0;
+        }
+  
+        > .P-services {
+          border-right : 0;
+        }
+
+        .P-clinic-doctors-dates {
+          width: 100%;
+        }
+      }
+    }
+  }
+}

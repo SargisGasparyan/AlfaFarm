@@ -21,6 +21,13 @@ const IPay = React.memo(() => {
 
   const choose = (id: number) => { setCard(id); apply(id); };
 
+  const createCard = async () => {
+    const res = await PaymentController.registerCard();
+    if (res && res.success) {
+      window.location.href = res.data.formUrl;
+    }
+  }
+
   React.useEffect(() => {
     PaymentController.getUserCards().then(result => {
       setList(result.data);
@@ -37,7 +44,7 @@ const IPay = React.memo(() => {
       {list && list.map((item, index) => <Radio<number> callback={(value: number) => choose(value)} value={item.id} isChecked={card === item.id} key={index}>
         {item.pan}
       </Radio>)}
-      <Link to={ROUTES.PROFILE.MY_WALLET} className="G-main-button P-ipay-button">{Settings.translations.add}</Link>
+      <a className="P-ipay-button" onClick={createCard}>{Settings.translations.add_credit_card}</a>
     </div>
   </>
 });

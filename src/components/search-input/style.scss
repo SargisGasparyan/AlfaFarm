@@ -21,5 +21,15 @@
     background   : none;
     line-height  : 40px;
     border-left  : 1px solid $light-gray;
+
+    >.ladda-button {
+      background : white !important;
+      padding    : 5px !important;
+      border     : 0;
+    }
+
+    .icon-Group-5502 {
+      color : $orange;
+    }
   }
 }

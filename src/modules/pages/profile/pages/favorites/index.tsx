@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 
+import { Shared } from 'modules';
 import HelperComponent from 'platform/classes/helper-component';
 import { byPrivateRoute } from 'platform/decorators/routes';
 import ROUTES from 'platform/constants/routes';
@@ -14,6 +15,7 @@ import SavedBasketItems from './pages/saved-basket-items';
 import EmptyState from 'components/empty-state';
 
 import './style.scss';
+import { PromotionTypeEnum } from 'platform/constants/enums';
 
 interface IState {
   data: IFavoriteListResponseModel[];
@@ -46,6 +48,7 @@ class Favorites extends HelperComponent<IState, {}> {
 
   public render() {
     const { data } = this.state;
+
     return (
       <Layout>
         <SavedBaskets />
@@ -55,6 +58,7 @@ class Favorites extends HelperComponent<IState, {}> {
             key={item.id}
             className="P-list-item"
           >
+            {!!item.promotion.percent && <Shared.Products.DiscountLabel percent={item.promotion.percent} type={item.promotion.promotionType} />}
             <div
               className="P-image G-square-image-block"
               style={{ background: `url('${getMediaPath(item.imagePath)}') center/cover` }}
@@ -70,7 +74,14 @@ class Favorites extends HelperComponent<IState, {}> {
               <span>{item.unitQuantity} {item.unitName}</span>
             </div>
 
-            <h2 className="P-price">{formatPrice(item.price)}</h2>
+            <div className="P-price">
+              <div>{item.promotion.promotionType === PromotionTypeEnum.Discount && item.promotion.result > 0 ? <del>{formatPrice(item.price)}</del> : null}</div>
+              <h2 className={`${item.promotion.promotionType === PromotionTypeEnum.Discount && item.promotion.result ? 'G-orange-color' : ''}`}>
+                {item.promotion.promotionType === PromotionTypeEnum.Discount ?
+                formatPrice(item.promotion.result) :
+                formatPrice(item.price)}
+              </h2>
+            </div>
           </Link>) : <EmptyState text={Settings.translations.empty_favorites_list} />}
         </div>
       </Layout>

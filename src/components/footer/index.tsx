@@ -33,8 +33,8 @@ const Footer = React.memo(() => (
           </a>
         </div>
         <div className="P-mobile-app">
-          <img src={AppStoreImage} />
-          <img src={GooglePlayImage} />
+          <img src={AppStoreImage} onClick={() => window.open('https://apps.apple.com/ru/app/alfa-pharm-drugstore-chain/id1453737637', '_blank')} />
+          <img src={GooglePlayImage} onClick={() => window.open('https://play.google.com/store/apps/details?id=am.gtest.alfapharm&hl=ru&gl=US', '_blank')} />
         </div>
       </div>
       {!enviroment.WHOLESALE && <>
@@ -44,7 +44,7 @@ const Footer = React.memo(() => (
         </div>
         <div className="P-column">
           <h3 className="G-main-color">{Settings.translations.retail_sale}</h3>
-          <a>{Settings.translations.what_is_alfa_card}</a>
+          <Link to={ROUTES.CARD_INFO}>{Settings.translations.what_is_alfa_card}</Link>
           <Link to={ROUTES.VACANCIES}>{Settings.translations.vacancies}</Link>
           <Link to={ROUTES.ABOUT_US}>{Settings.translations.about_us}</Link>
           <Link to={ROUTES.NEWS.MAIN}>{Settings.translations.news}</Link>

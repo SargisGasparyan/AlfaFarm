@@ -1,0 +1,38 @@
+@import 'src/assets/styles/helper';
+@import 'src/assets/styles/variables';
+
+.P-cards-page {
+  box-shadow    : $default-block-shadow;
+  background    : white;
+  border-radius : 12px;
+  border-top    : 12px solid rgba(73, 183, 72, 0.1);
+  width         : 400px;
+  padding       : 10px;
+
+  .G-main-button {
+    display: block;
+  }
+
+  .P-radio-wrap {
+    display     : flex;
+    align-items : center;
+    padding     : 10px 20px;
+    border-bottom: 1px solid $light-gray;
+
+    .P-radio-content {
+      width: 100%;
+    }
+  }
+  
+  .P-card-number {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    div {
+      margin-left : 30px;
+      width       : 40px;
+      height      : 30px;
+    }
+  }
+}

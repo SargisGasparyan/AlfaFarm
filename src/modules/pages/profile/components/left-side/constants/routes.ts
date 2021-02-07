@@ -19,10 +19,10 @@ export const leftSideOptions = () => !enviroment.WHOLESALE ? [
     name: Settings.translations.special_products,
     path: ROUTES.PROFILE.SPECIAL_PRODUCTS,
   },
-  // {
-  //   name: Settings.translations.my_registrations,
-  //   path: ROUTES.PROFILE.MY_REGISTRATIONS.MAIN,
-  // },
+  {
+    name: Settings.translations.my_registrations,
+    path: ROUTES.PROFILE.MY_REGISTRATIONS.MAIN,
+  },
   {
     name: Settings.translations.addresses,
     path: ROUTES.PROFILE.ADDRESSES.MAIN,

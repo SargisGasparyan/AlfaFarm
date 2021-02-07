@@ -9,6 +9,7 @@ import ProducerController from 'platform/api/producer';
 import { infinityScrollMax } from 'platform/constants';
 import useSubscriber from 'platform/hooks/use-subcriber';
 import DispatcherChannels from 'platform/constants/dispatcher-channels';
+import { buildFilters } from '../../../../services/helper';
 
 interface IProps {
   body: IProductFilterRequestModel;
@@ -17,19 +18,30 @@ interface IProps {
 
 const Producers = ({ body, onChange }: IProps) => {
   const prevCategoryIdRef = React.useRef<number>();
+  const prevDataRef = React.useRef<any>();
   const [open, setOpen] = React.useState(!!body.producerIds?.length);
   const [data, setData] = React.useState<IProducerListResponseModel[]>([]);
 
   React.useEffect(() => {
     const categoryId = body.categoryIds && body.categoryIds[0];
 
-    categoryId !== prevCategoryIdRef.current && ProducerController.GetList({
-      pageNumber: 1,
-      pageSize: infinityScrollMax,
-      categoryId: body.categoryIds && body.categoryIds[0],
-    }).then(result => setData(result.data.list));
+    if (categoryId !== prevCategoryIdRef.current || prevDataRef.current !== JSON.stringify(buildFilters())) {
+      setTimeout(async () => {
+        ProducerController.GetList({
+          ...buildFilters(),
+          pageNumber: 1,
+          pageSize: infinityScrollMax,
+          categoryId: body.categoryIds && body.categoryIds[0],
+        }).then(result => {
+          if (!result.aborted) {
+            setData(result.data.list);
+          }
+        })
+      });
+    }
 
     prevCategoryIdRef.current = categoryId;
+    prevDataRef.current = JSON.stringify(buildFilters());
   });
 
   useSubscriber(DispatcherChannels.ProductFilterClear, () => setOpen(false));

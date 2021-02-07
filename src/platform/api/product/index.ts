@@ -1,11 +1,21 @@
 import Connection from '../../services/connection';
 import { IResponse, IPagingResponse } from '../../constants/interfaces';
 import { IProductListRequestModel, IProductRelatedListRequestModel, IProductFilterRequestModel, IGetProductPromotionByQuantityModel } from './models/request';
-import { IProductListResponseModel, IProductDetailsResponseModel, IProductPriceRangeResponseModel, IProductAvailablityResponseModel } from './models/response';
+import { IProductListResponseModel, IProductDetailsResponseModel, IProductPriceRangeResponseModel, IProductAvailablityResponseModel, IProductSearcResponseModel } from './models/response';
 
 class ProductController {
 
   private static controller = 'product';
+
+  public static Search = (search: string): Promise<IResponse<IProductSearcResponseModel>> => {
+    const result = Connection.POST({
+      body: { search },
+      action: 'search',
+      controller: ProductController.controller,
+    });
+
+    return result;
+  };
 
   public static GetList = (body: IProductListRequestModel): Promise<IResponse<IPagingResponse<IProductListResponseModel>>> => {
     const result = Connection.POST({

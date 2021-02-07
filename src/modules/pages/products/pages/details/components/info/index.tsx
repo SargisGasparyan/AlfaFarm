@@ -70,7 +70,7 @@ class Info extends HelperComponent<IProps, IState> {
     const { data } = this.props;
     const { count, isSelectedPackage } = this.state;
 
-    await BasketController.Change({
+    await BasketController.ChangeWithAdd({
       productId: data.id,
       productQuantity: count || 1,
       isPackage: isSelectedPackage,

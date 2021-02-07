@@ -57,11 +57,9 @@
               justify-content : center;
 
               > h2 {
-                font-size     : $normal-fs;
-                overflow      : hidden;
-                max-width     : 100%;
-                white-space   : nowrap;
-                text-overflow : ellipsis;
+                font-size   : $normal-fs;
+                word-break  : initial;
+                white-space : initial;
               }
       
               > span {
@@ -84,7 +82,8 @@
 
     > .P-save-cart {
       width           : 300px;
-      color           : $text-gray;
+      color           : $main-color;
+      text-decoration : underline;
       cursor          : pointer;
       display         : flex;
       font-size       : $normal-fs;

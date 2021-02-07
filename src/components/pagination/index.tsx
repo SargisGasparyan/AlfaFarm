@@ -92,19 +92,18 @@ class Pagination<Data> extends HelperComponent<IProps<Data>, IState> {
     e.key === 'Enter' && pageCount >= numberValue && numberValue >= 1 && this.selectPage(numberValue);
   }
 
-  private get ranges() {
-    const arr = [];
-    const { selectedPage, pageCount } = this.state;
+  // private get ranges() {
+    // const arr = [];
+    // const { selectedPage, pageCount } = this.state;
 
-    for (let i = 1; i <= pageCount; i++) {
-      const cond1 = i === selectedPage || ((i > selectedPage - this.interval) && (i < selectedPage + this.interval));
-      const cond2 = selectedPage < this.interval && i <= 5;
-      const cond3 = (selectedPage > pageCount - this.interval) && i > pageCount - 5;
-      (cond1 || cond2 || cond3) && arr.push(i);
-    }
-
-    return arr;
-  }
+    // for (let i = 1; i <= pageCount; i++) {
+    //   const cond1 = i === selectedPage || ((i > selectedPage - this.interval) && (i < selectedPage + this.interval));
+    //   const cond2 = selectedPage < this.interval && i <= 5;
+    //   const cond3 = (selectedPage > pageCount - this.interval) && i > pageCount - 5;
+    //   (cond1 || cond2 || cond3) && arr.push(i);
+    // }
+    // return arr;
+  // }
 
   public render() {
     const { selectedPage, pageCount } = this.state;
@@ -113,11 +112,37 @@ class Pagination<Data> extends HelperComponent<IProps<Data>, IState> {
     return (
       <div className="ABM-pagination-wrap">
         {pageCount > 1 && <div className="ABM-pages-wrap">
-          {this.ranges.map((item, index) => <div
+          {/* {this.ranges.map((item, index) => <div
             key={index}
             className={`ABM-page ${selectedPage === item ? 'ABM-selected' : ''}`}
             onClick={() => this.selectPage(item)}
-          >{item}</div>)}
+          >{item}</div>)} */}
+          
+          {(selectedPage === 1 || selectedPage - 1 === 1 || selectedPage - 2 === 1) ? null :
+            <div className="ABM-page" onClick={() => this.selectPage(1)}>{1}</div>
+          }
+          {selectedPage - 3 > 1 ? <span>...</span> : null}
+          {selectedPage - 2 >= 1 ? 
+            <div className="ABM-page" onClick={() => this.selectPage(selectedPage - 2)}>{selectedPage - 2}</div>
+           : null}
+          {selectedPage - 1 >= 1 ? 
+            <div className="ABM-page" onClick={() => this.selectPage(selectedPage - 1)}>{selectedPage - 1}</div>
+           : null}
+
+          <div className={`ABM-page ABM-selected`} onClick={() => this.selectPage(selectedPage)}>{selectedPage}</div>
+
+          {selectedPage + 1 <= pageCount ? 
+            <div className="ABM-page" onClick={() => this.selectPage(selectedPage + 1)}>{selectedPage + 1}</div>
+           : null}
+          {selectedPage + 2 <= pageCount ? 
+            <div className="ABM-page" onClick={() => this.selectPage(selectedPage + 2)}>{selectedPage + 2}</div>
+           : null}
+          {selectedPage + 3 < pageCount ? <span>...</span> : null}
+
+          {(selectedPage === pageCount || selectedPage + 1 === pageCount || selectedPage + 2 === pageCount) ? null :
+            <div className="ABM-page" onClick={() => this.selectPage(pageCount)}>{pageCount}</div>
+          }
+          
 
           {!!count && <input
             type="number"

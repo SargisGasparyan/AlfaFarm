@@ -21,6 +21,7 @@ const pageChangeListener = 'productlistpage';
 interface IState {
   loading: boolean;
   total: null;
+  preferredProductId: number | null,
   data?: IProductListResponseModel[];
 };
 
@@ -30,6 +31,7 @@ class List extends HelperPureComponent<{}, IState> {
   public state: IState = {
     loading: false,
     total: null,
+    preferredProductId: null,
   };
 
   private filterChange = () => {
@@ -47,19 +49,22 @@ class List extends HelperPureComponent<{}, IState> {
 
     const result = await ProductController.GetList(body);
 
-    !result.aborted && this.safeSetState({ data: result.data.list, total: result.data.totalCount, loading: false }, ()=> window.scrollTo(0, 0));
+    const query = new URLSearchParams(window.location.search);
+    const preferredProductId = query.get('preferredProductId');
+
+    !result.aborted && this.safeSetState({ data: result.data.list, total: result.data.totalCount, preferredProductId, loading: false }, ()=> window.scrollTo(0, 0));
     return result.data;
   }
 
   public render() {
-    const { data, total,loading } = this.state;
+    const { data, total,loading, preferredProductId } = this.state;
     return (
       <section className="G-page P-products-list-page">
         <Filter onChange={this.filterChange} />
         <div className="P-list-wrapper">
           {data && !!total && <>
             <SortBox onChange={this.filterChange} />
-            {data.map(item => <Shared.Products.ListItem key={item.id} data={item} />)}
+            {data.map(item => <Shared.Products.ListItem key={item.id} specialProductId={preferredProductId} data={item} />)}
           </>}
           {total === 0 && <div className='P-no-data'>
             <img src={EmptyViewSvg} alt="empty"/>

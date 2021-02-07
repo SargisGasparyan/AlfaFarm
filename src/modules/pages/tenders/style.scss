@@ -7,8 +7,16 @@
 
   > .P-content {
     width     : 100%;
-    padding   : 0 100px 50px;
+    padding   : 0 200px 50px;
     display   : flex;
     flex-wrap : wrap;
+
+    @media(max-width : $tablet-screen) {
+      padding : 40px;
+    }
+
+    @media(max-width : $mobile-screen) {
+      padding : 40px 0;
+    }
   }
 }

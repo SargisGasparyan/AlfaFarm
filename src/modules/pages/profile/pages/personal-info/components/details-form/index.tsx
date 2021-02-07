@@ -1,10 +1,10 @@
 import * as React from 'react';
 import * as DateTime from 'react-datetime';
+import { Moment } from 'moment';
 
 import HelperComponent from 'platform/classes/helper-component';
 import LoaderContent from 'components/loader-content';
 import Settings from 'platform/services/settings';
-import { countryCode } from 'platform/constants';
 import { IUserModifyRequestModel } from 'platform/api/user/models/request';
 import Storage from 'platform/services/storage';
 import { validateForm } from './services/helper';
@@ -14,7 +14,8 @@ import Select from 'components/select';
 import { GenderDropdown } from 'platform/constants/dropdowns';
 import { IDropdownOption } from 'platform/constants/interfaces';
 import { formatDate } from 'platform/services/helper';
-import { Moment } from 'moment';
+
+import './style.scss';
 
 interface IState {
   form: IUserModifyRequestModel;
@@ -83,7 +84,7 @@ class DetailsForm extends HelperComponent<{}, IState> {
     const { form, edited, submitLoading } = this.state;
 
     return (
-      <form className="G-main-form P-form-block G-mr-20">
+      <form className="P-profile-details-form G-main-form P-form-block G-mr-20">
         <div className="G-main-form-field">
           <p className="G-input-top-label">{Settings.translations.first_name}</p>
           <input

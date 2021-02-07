@@ -95,6 +95,7 @@ const ROUTES = {
   SERVICES: '/services',
   CLINIC: CLINIC_ROUTES,
   PHARMACIES: '/pharmacies',
+  CARD_INFO: '/card-info',
   EXCHANGE_RETURN: '/exchange-return',
   WHOLESALE_NEWS: '/wholesale-news',
   WHOLESALE_PROMOTIONS: '/wholesale-promotions',

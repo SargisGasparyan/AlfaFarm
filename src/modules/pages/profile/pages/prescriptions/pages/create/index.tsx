@@ -14,10 +14,12 @@ import PrescriptionController from 'platform/api/prescription';
 import SuccessModal from 'components/success-modal';
 
 import './style.scss';
+import ImageCarouselModal from 'components/image-carousel-modal';
 
 interface IState {
   form: IPrescriptionModifyRequestModel;
-  images: File[];
+  images: { file: File, url: string }[];
+  imageModalOpen: boolean;
   submited: boolean;
   submitLoading: boolean;
   showSuccess: boolean;
@@ -31,6 +33,7 @@ class Create extends HelperComponent<{}, IState> {
     submitLoading: false,
     showSuccess: false,
     images: [],
+    imageModalOpen: false,
     form: {
       name: '',
       description: '',
@@ -57,12 +60,22 @@ class Create extends HelperComponent<{}, IState> {
     const { files } = e.currentTarget;
 
     if (files && files[0]) {
-      images.push(files[0]);
-      this.safeSetState({ images: Array.from(images) });
+      images.push({
+        file: files[0],
+        url: URL.createObjectURL(files[0]),
+      });
+
+      this.safeSetState({ images });
     }
   }
 
-  private deleteImage = (index: number) => {
+  private toggleImageModal = () => {
+    const { imageModalOpen } = this.state;
+    this.safeSetState({ imageModalOpen: !imageModalOpen });
+  }
+
+  private deleteImage = (e: React.SyntheticEvent, index: number) => {
+    e.stopPropagation();
     const { images } = this.state;
     images.splice(index, 1);
     this.safeSetState({ images });
@@ -84,7 +97,7 @@ class Create extends HelperComponent<{}, IState> {
     const { images } = this.state;
     if (images.length) {
       const form = new FormData();
-      images.forEach(item => form.append('files', item));
+      images.forEach(item => form.append('files', item.file));
 
       const result = await PrescriptionController.UploadFile(id, form);
       result.success && this.toggleSuccessModal();
@@ -97,7 +110,7 @@ class Create extends HelperComponent<{}, IState> {
   }
 
   public render() {
-    const { images, showSuccess } = this.state;
+    const { images, imageModalOpen, showSuccess } = this.state;
     
     return (
       <Layout>
@@ -136,20 +149,26 @@ class Create extends HelperComponent<{}, IState> {
             </div>
 
             <div className="G-main-form-half-field P-upload-part">
-              {images.map((item, index) => <span key={index} className="P-uploaded">
-                {item.name}
-                <i className="icon-Group-5032" onClick={() => this.deleteImage(index)} />
+              {images.map((item, index) => <span
+                key={index}
+                className="P-uploaded"
+                style={{ background: `url('${item.url}') center/cover` }}
+                onClick={this.toggleImageModal}
+              >
+                <i className="icon-Group-5032" onClick={e => this.deleteImage(e, index)} />
               </span>)}
 
-              <label className="G-main-button">
-                <i className="icon-Group-5543 G-mr-0" />
-                {Settings.translations.upload_image}
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={this.uploadImage}
-                />
-              </label>
+              <div className="P-upload-button">
+                <label className="G-main-button">
+                  <i className="icon-Group-5543 G-mr-0" />
+                  {Settings.translations.upload_image}
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={this.uploadImage}
+                  />
+                </label>
+              </div>
             </div>
 
             <div className="G-main-form-half-field">
@@ -169,6 +188,8 @@ class Create extends HelperComponent<{}, IState> {
             </div>
           </form>
         </div>
+
+        {imageModalOpen && <ImageCarouselModal images={images.map(item => item.url)} onClose={this.toggleImageModal} />}        
 
         {showSuccess && <SuccessModal onClose={this.toggleSuccessModal}>
           <h3>{Settings.translations.prescription_success}</h3>

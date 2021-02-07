@@ -14,7 +14,7 @@ interface IProps {
 };
 
 const ListItem = React.memo(({ data }: IProps) => (
-  <div className="P-home-news-list-item">
+  <Link to={ROUTES.NEWS.DETAILS.replace(':id', data.id)} className="P-home-news-list-item">
     <div className="P-image" style={{ background: `url('${getMediaPath(data.imagePath)}') center/cover` }} />
     <div className="P-content">
       <h3>{data.title}</h3>
@@ -22,7 +22,7 @@ const ListItem = React.memo(({ data }: IProps) => (
         {Settings.translations.see_more} <i className="icon-Group-5513" />
       </Link>
     </div>
-  </div>
+  </Link>
 ));
 
 export default ListItem;

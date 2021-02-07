@@ -47,6 +47,7 @@ class Cart extends HelperComponent<{}, IState> {
           <span>{row.unitQuantity} {row.unitName}</span>
         </div>
       </Link>,
+      style: { minWidth: '450px' }
     },
     {
       name: Settings.translations.quantity,
@@ -66,7 +67,7 @@ class Cart extends HelperComponent<{}, IState> {
       cell: (row: IBasketListResponseModel) =>
         <div className="G-flex G-flex-column G-align-center G-justify-center">
           <div>{row.promotion.promotionType === PromotionTypeEnum.Discount && row.promotion.result > 0 ? <del>{formatPrice(row.totalPrice)}</del> : null}</div>
-          <h3 className="G-fs-24">
+          <h3 className={`G-fs-24 ${row.promotion.promotionType === PromotionTypeEnum.Discount && row.promotion.result > 0 ? 'G-orange-color' : ''}`}>
             {row.promotion.promotionType === PromotionTypeEnum.Discount ?
               formatPrice(row.promotion.result) :
               formatPrice(row.productQuantity * (row.isPackage ? row.packagePrice :  row.price))}
@@ -194,7 +195,7 @@ class Cart extends HelperComponent<{}, IState> {
               <div>
                 <span className="G-fs-normal">{Settings.translations.total}</span>
                 <div className="G-flex G-flex-column G-align-center G-justify-center P-discounted-item">
-                  {!!data.totalDiscountedPrice && <del>{formatPrice(data.totalPrice)}</del>}
+                  {!!data.totalDiscountedPrice && data.totalDiscountedPrice !== data.totalPrice && <del>{formatPrice(data.totalPrice)}</del>}
                   <h1 className="G-orange-color G-fs-24 G-mt-5">{formatPrice(data.totalDiscountedPrice || data.totalPrice)}</h1>
                 </div>
               </div>

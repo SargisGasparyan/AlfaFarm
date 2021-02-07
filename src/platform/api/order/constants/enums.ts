@@ -14,3 +14,8 @@ export enum OrderDeliveryTypeEnum {
   Delivery = 1,
   Pickup,
 };
+
+export enum OrderDeliveryTimeTypeEnum {
+  Asap = 1,
+  Date,
+};

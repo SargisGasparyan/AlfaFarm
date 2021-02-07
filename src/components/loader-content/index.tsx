@@ -6,6 +6,7 @@ import HelperPureComponent from 'platform/classes/helper-pure-component';
 interface IProps {
   type?: string;
   className: string;
+  color?: string;
   disabled: boolean;
   loading?: boolean;
   children?: React.ReactNode;
@@ -50,7 +51,7 @@ class LoaderContent extends HelperPureComponent<IProps, IState> {
   }
 
   public render() {
-    const { children, className, imageContent } = this.props;
+    const { children, className, imageContent, color } = this.props;
     const filteredProps = {...this.props};
     delete filteredProps.imageContent;
     delete filteredProps.className;
@@ -60,6 +61,7 @@ class LoaderContent extends HelperPureComponent<IProps, IState> {
     return <LaddaButton
       data-spinner-size={30}
       data-spinner-lines={40}
+      data-spinner-color={ color || '#FFF'}
       {...filteredProps}
     >{children}</LaddaButton>;
   };

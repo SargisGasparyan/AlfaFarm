@@ -12,13 +12,19 @@ import { formatDate } from 'platform/services/helper';
 
 import './style.scss';
 import ClickOutside from 'components/click-outside';
+import NotificationImage1 from 'assets/images/sale.svg';
+import NotificationImage2 from 'assets/images/not.svg';
+import NotificationImage3 from 'assets/images/help.svg';
+import Settings from 'platform/services/settings';
+import NotificationAnswer from '../notification-answer';
 
 interface IState {
   data?: IPagingResponse<INotificationListResponseModel>;
+  selectedItem?: INotificationListResponseModel;
 };
 
 interface IProps {
-  onClose(e: Event | React.SyntheticEvent): void;
+  onClose(e?: Event | React.SyntheticEvent): void;
 }
 
 class Notifications extends HelperPureComponent<IProps, IState> {
@@ -44,34 +50,94 @@ class Notifications extends HelperPureComponent<IProps, IState> {
     this.safeSetState({ data: result.data });
   }
 
-  public render() {
-    const { onClose } = this.props;
-    const { data } = this.state;
+  private clickOnItem = async (e: Event | React.SyntheticEvent, item: INotificationListResponseModel) => {
+    if (!item.seen) {
+      await NotificationController.Seen(item.id);
+    }
 
-    return (
-      <ClickOutside onClickOutside={onClose}>
-        <aside className="P-header-notifications">
-          {data && data.list.map(item => <this.ListItem key={item.id} item={item} />)}
-        </aside>
-      </ClickOutside>
-    );
+    if (item.hasChoice) {
+      this.safeSetState({ selectedItem: item });
+    } else {
+      this.props.onClose(e);
+    }
+  }
+
+  private closeModal = async () => {
+    this.safeSetState({ selectedItem: null });
+    this.props.onClose();
   }
 
   private ListItem = ({ item }: { item: INotificationListResponseModel }) => {
+
+    const isOrder = item.type === NotificationTypeEnum.OrderCanceled || item.type === NotificationTypeEnum.OrderCollected || item.type === NotificationTypeEnum.OrderFinished || item.type === NotificationTypeEnum.OrderStarted;
+
+    if (item.type === NotificationTypeEnum.PrescriptionDeciphered) {
+      return (
+        <Link
+          to={ROUTES.PROFILE.PRESCRIPTIONS.DECIPHERED.replace(':id', item.dataId)}
+          className={`P-list-item ${!item.seen ? 'P-unseen' : ''}`}
+          onClick={(e) => this.clickOnItem(e, item)}
+        >
+          <img src={NotificationImage2} alt=""/>
+          {item.description}
+        </Link>
+      );
+    } else if (isOrder) {
+      return (
+        <Link
+          to={ROUTES.PROFILE.ORDERS.DETAILS.replace(':id', item.dataId)}
+          className={`P-list-item ${!item.seen ? 'P-unseen' : ''}`}
+          onClick={(e) => this.clickOnItem(e, item)}
+        >
+          <img src={NotificationImage2} alt=""/>
+          {item.description}
+        </Link>
+      );
+    } else if (item.type === NotificationTypeEnum.NewCustom) {
+      return (
+        <div
+          className={`P-list-item ${!item.seen ? 'P-unseen' : ''}`}
+          onClick={(e) => this.clickOnItem(e, item)}
+        >
+          <img src={item.hasChoice ? NotificationImage3 : NotificationImage1} alt=""/>
+          <div>
+            <h5>{item.title}</h5>
+            <span>{item.description}</span>
+          </div>
+        </div>
+      );
+    } else if (item.type === NotificationTypeEnum.NewReminder) {
+      return (
+        <div
+          className={`P-list-item ${!item.seen ? 'P-unseen' : ''}`}
+          onClick={(e) => this.clickOnItem(e, item)}
+        >
+          <img src={NotificationImage2} alt=""/>
+          <div>
+            <h5>{item.title}</h5>
+            <span>{item.description}</span>
+          </div>
+        </div>
+      );
+    }
+
+    return null;
+  }
+
+  public render() {
     const { onClose } = this.props;
+    const { data, selectedItem } = this.state;
 
-    const types = {
-      [NotificationTypeEnum.PrescriptionDeciphered]: <Link
-        to={ROUTES.PROFILE.PRESCRIPTIONS.DECIPHERED.replace(':id', item.dataId)}
-        className="P-list-item"
-        onClick={onClose}
-      >
-        {item.description}
-        <span>{formatDate(item.createdDate, true)}</span>
-      </Link>,
-    };
-
-    return types[item.type] || null;
+    return (
+      <ClickOutside onClickOutside={!selectedItem ? onClose : () => { console.log('') }}>
+        <aside className="P-header-notifications">
+          <h6>{Settings.translations.notifications}</h6>
+          {data && data.list.map(item => <this.ListItem key={item.id} item={item} />)}
+        </aside>
+      
+        {this.state.selectedItem ? <NotificationAnswer selectedItem={this.state.selectedItem} onClose={this.closeModal} /> : null}
+      </ClickOutside>
+    );
   }
 }
 

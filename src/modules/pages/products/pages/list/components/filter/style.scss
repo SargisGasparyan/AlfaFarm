@@ -20,11 +20,22 @@
   margin-right  : 40px;
   border-right  : 2px solid $light-gray;
   padding-right : 40px;
+  position: relative;
+
+  .G-back-icon {
+    position: absolute;
+    top: -40px;
+    left: 0;
+  }
 
   .P-main-category {
     cursor        : pointer;
     font-weight   : 300;
     margin-bottom : 40px;
+
+    i {
+      font-size: 18px;
+    }
   }
 
   > .P-discount-label {
