@@ -16,14 +16,14 @@ import EmptyState from 'components/empty-state';
 import './style.scss';
 
 interface IState {
-  data: IUserAddressListResponseModel[];
+  data: IUserAddressListResponseModel[] | null;
 };
 
 @byPrivateRoute(ROUTES.PROFILE.ADDRESSES.MAIN, [onlyForUsers])
 class Addresses extends HelperComponent<IState, {}> {
 
   public state: IState = {
-    data: [],
+    data: null,
   };
 
   private columnConfig = [
@@ -75,12 +75,12 @@ class Addresses extends HelperComponent<IState, {}> {
             className="G-normal-link G-main-button G-ml-auto G-fs-16"
           >{Settings.translations.add_address}</Link>
         </div>
-        {data.length ? <div className="G-flex P-profile-addresses">
+        {data ? (data.length ? <div className="G-flex P-profile-addresses">
           <Table<IUserAddressListResponseModel>
             columnConfig={this.columnConfig}
             data={data}
           />
-        </div> : <EmptyState text={Settings.translations.empty_address_list} />}
+        </div> : <EmptyState text={Settings.translations.empty_address_list} />) : null}
       </Layout>
     );
   }
