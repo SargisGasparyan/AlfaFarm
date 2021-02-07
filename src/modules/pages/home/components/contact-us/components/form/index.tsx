@@ -28,7 +28,7 @@ class Form extends HelperComponent<{}, IState> {
     const { submited, body } = this.state;
     return validateForm.call(body, submited);
   }
-  
+
   private change = (e: React.SyntheticEvent<any>) => {
     const { body } = this.state;
     body[e.currentTarget.name] = e.currentTarget.value;
@@ -88,7 +88,7 @@ class Form extends HelperComponent<{}, IState> {
         <LoaderContent
           onClick={this.apply}
           loading={submitLoading}
-          className="G-main-button"
+          className="G-main-button P-form-button"
         >{Settings.translations.send}</LoaderContent>
       </form>
     );

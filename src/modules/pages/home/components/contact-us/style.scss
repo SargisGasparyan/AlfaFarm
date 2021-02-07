@@ -4,7 +4,7 @@
 @import './responsive';
 
 .G-page.P-home-news + .G-page.P-home-contact-us {
-  padding-top: 100px;
+  padding-top : 100px;
 }
 
 .G-page.P-home-contact-us {
@@ -33,17 +33,21 @@
     justify-content : space-between;
 
     > div {
-      flex            : 1;
-      color           : $text-gray;
-      margin          : 20px;
-      cursor          : pointer;
-      display         : flex;
-      align-items     : center;
-      flex-direction  : column;
+      flex           : 1;
+      color          : $text-gray;
+      margin         : 20px;
+      cursor         : pointer;
+      display        : flex;
+      align-items    : center;
+      flex-direction : column;
 
-      &:hover { color: $main-color; }
+      &:hover {
+        color : $main-color;
+      }
 
-      > i { font-size: 70px; }
+      > i {
+        font-size : 70px;
+      }
 
       > h3 {
         font-size      : $normal-fs;
@@ -64,7 +68,9 @@
   align-items    : center;
   flex-direction : column;
 
-  > i { font-size: 70px; }
+  > i {
+    font-size : 70px;
+  }
 
   > h3 {
     font-size      : 20px;
@@ -89,7 +95,32 @@
       width  : 150px;
       height : 54px;
       margin : 0 20px;
-      cursor: pointer;
+      cursor : pointer;
+    }
+  }
+}
+
+.G-main-form {
+  @media (max-width : $mobile-screen) {
+    input {
+      padding   : 7px 15px;
+      font-size : 16px;
+    }
+    textarea {
+      padding   : 7px 15px;
+      font-size : 16px;
+    }
+  }
+}
+
+.P-form-button {
+  padding : 7px 15px !important;
+}
+
+.P-bottom {
+  > div {
+    @media (max-width : $mobile-screen) {
+      margin : 10px !important;
     }
   }
 }

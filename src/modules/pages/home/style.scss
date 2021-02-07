@@ -1,0 +1,9 @@
+@import "src/assets/styles/variables";
+
+.P-home-page {
+  .slick-dots {
+    @media (max-width : $mobile-screen) {
+      bottom : 10px !important;
+    }
+  }
+}
