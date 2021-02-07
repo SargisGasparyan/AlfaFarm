@@ -3,11 +3,11 @@
 
 @keyframes cart-icon-animation {
   from {
-    transform: scale(1.5);
+    transform : scale(1.5);
   }
 
   to {
-    transform: scale(1);
+    transform : scale(1);
   }
 }
 
@@ -22,16 +22,21 @@ header {
   background : white;
   box-shadow : $default-block-shadow;
 
+  @media (max-width : $small-screen) {
+    height : $page-title-size;
+
+  }
+
   > .P-logo {
     width         : 170px;
     margin-bottom : 10px;
   }
 
   > .P-search-wrapper {
-    position: relative;
+    position : relative;
 
     > .P-search-input {
-      margin: 0 20px 0 40px;
+      margin : 0 20px 0 40px;
     }
   }
 
@@ -50,7 +55,9 @@ header {
       border-radius : 50%;
     }
 
-    > h4 { @include normal-font(); }
+    > h4 {
+      @include normal-font();
+    }
   }
 
   .P-link, .P-wholesale-link {
@@ -65,9 +72,13 @@ header {
     white-space     : nowrap;
     text-decoration : none;
 
-    &.P-wholesale-link { padding: 10px 30px; }
+    &.P-wholesale-link {
+      padding : 10px 30px;
+    }
 
-    &.P-active { color: $orange; }
+    &.P-active {
+      color : $orange;
+    }
 
     &.P-login {
       color         : white;

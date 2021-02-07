@@ -2,4 +2,7 @@
 
 .G-page-content {
   padding-top : 122px;
+  @media (max-width : $small-screen) {
+    padding-top : 70px;
+  }
 }

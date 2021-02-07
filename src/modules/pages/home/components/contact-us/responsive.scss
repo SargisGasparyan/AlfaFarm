@@ -1,24 +1,37 @@
-@media (max-width: $tablet-screen) {
+@media (max-width : $tablet-screen) {
   .G-page.P-home-contact-us {
     .P-shadow-text {
       font-size : 24px;
     }
 
     > div.P-bottom > div {
-      > i { font-size: 50px; }
-      > h3 { font-size: 14px; }
+      > i {
+        font-size : 50px;
+      }
+
+      > h3 {
+        font-size : 14px;
+      }
     }
   }
 }
 
-@media (max-width: $medium-screen) {
+@media (max-width : $medium-screen) {
   .G-page.P-home-contact-us .P-maps {
     width  : 100% !important;
     margin : 130px auto 0 !important;
   }
 }
 
-@media (max-width: $mobile-screen) {
+@media (max-width : $mobile-screen) {
+  .G-page.P-home-contact-us .P-maps {
+    width  : 100% !important;
+    margin : 70px auto 0 !important;
+    height : 250px !important;
+  }
+}
+
+@media (max-width : $mobile-screen) {
   .G-page.P-home-contact-us > div.P-bottom {
     padding-bottom : 0;
   }
