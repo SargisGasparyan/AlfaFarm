@@ -195,7 +195,7 @@ class Cart extends HelperComponent<{}, IState> {
               <div>
                 <span className="G-fs-normal">{Settings.translations.total}</span>
                 <div className="G-flex G-flex-column G-align-center G-justify-center P-discounted-item">
-                  {!!data.totalDiscountedPrice && <del>{formatPrice(data.totalPrice)}</del>}
+                  {!!data.totalDiscountedPrice && data.totalDiscountedPrice !== data.totalPrice && <del>{formatPrice(data.totalPrice)}</del>}
                   <h1 className="G-orange-color G-fs-24 G-mt-5">{formatPrice(data.totalDiscountedPrice || data.totalPrice)}</h1>
                 </div>
               </div>
