@@ -1,5 +1,6 @@
 import { IFile } from 'platform/constants/interfaces';
 import { IPharmacyBranchListResponseModel } from 'platform/api/pharmacyBranch/models/response';
+import { ICategoryListResponseModel } from 'platform/api/category/models/response';
 
 export interface IProductListResponseModel {
   id: number;
@@ -14,10 +15,27 @@ export interface IProductListResponseModel {
   unitQuantity: number;
 };
 
+export interface IProductSearcResponseModel {
+  products: IProductSearchProductResponseModel[];
+  categories: ICategoryListResponseModel[];
+};
+
+export interface IProductSearchProductResponseModel {
+  id: number;
+  title: string;
+  price: number;
+  imagePath?: string;
+  cartLoading?: boolean;
+  producer: IProductDetailsProducerResponseModel;
+  brand: IProductDetailsBrandResponseModel;
+  activeIngredients: IProductDetailsActiveIngredientResponseModel[];
+}
+
 export interface IProductDetailsResponseModel {
   id: number;
   title: string;
   isFavorite: boolean;
+  isSpecial: boolean;
   basketCount: number;
   packagePrice: number;
   description: string;

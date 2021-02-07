@@ -36,6 +36,16 @@ class BasketController {
     return result;
   };
 
+  public static ChangeWithAdd = (body: IBasketChangeRequestModel): Promise<IResponse<IBasketChangeResponseModel>> => {
+    const result = Connection.PUT({
+      body,
+      action: 'Update',
+      controller: BasketController.controller,
+    });
+
+    return result;
+  };
+
   public static ChangeList = (body: IBasketChangeRequestModel[]): Promise<IResponse<IBasketChangeResponseModel>> => {
     const result = Connection.PUT({
       body,

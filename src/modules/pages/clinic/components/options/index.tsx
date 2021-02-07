@@ -29,7 +29,7 @@ class Options extends HelperPureComponent<{}, {}> {
       <div className="G-page P-clinic-options" style={{ background: `url('${ClinicImage}') center/cover` }}>
         <ShadowText className="P-shadow-text-without-offset">{Settings.translations.clinic}</ShadowText>
         <Link to={ROUTES.CLINIC.DOCTORS} onClick={this.linkClicked} className="G-main-ghost-button">{Settings.translations.doctors}</Link>
-        <Link to={ROUTES.CLINIC.LABORATORY} onClick={this.linkClicked} className="G-main-ghost-button">{Settings.translations.laboratory}</Link>
+        {/* <Link to={ROUTES.CLINIC.LABORATORY} onClick={this.linkClicked} className="G-main-ghost-button">{Settings.translations.laboratory}</Link> */}
         <Link to={ROUTES.CLINIC.PRICE_LIST} onClick={this.linkClicked} className="G-main-ghost-button">{Settings.translations.price_list}</Link>
         <Link to={ROUTES.CLINIC.ABOUT_US} onClick={this.linkClicked} className="G-main-ghost-button">{Settings.translations.about_clinic}</Link>
 

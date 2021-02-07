@@ -2,24 +2,46 @@
 
 .P-header-notifications {
   top        : 80px;
-  width      : 380px;
+  width      : 360px;
   right      : 50px;
   padding    : 15px;
   position   : absolute;
   box-shadow : $default-block-shadow;
   background : white;
   overflow-y : auto;
-  max-height : 250px;
+  max-height : 300px;
 
-  > .P-list-item {
+  > h6 {
+    font-weight   : 100;
+    padding       : 20px 0;
+    font-size     : 18px;
+    border-bottom : 1px solid $light-gray;
+  }
+
+  .P-list-item {
     color           : black;
     display         : flex;
-    padding         : 15px 0;
+    padding         : 5px 0;
     font-size       : 16px;
-    border-top      : 1px solid $light-gray;
     text-decoration : none;
-    justify-content : space-between;
+    cursor: pointer;
 
-    &:first-child { border-top: 0; }
+    &.P-unseen {
+      background-color: #49B7480F;
+    }
+    
+    img {
+      width: 20px;
+      margin-right: 20px;
+    }
+
+    h5 {
+      font-size: 16px;
+    }
+
+    span {
+      color: #A1A1A1;
+      font-size: 14px;
+    }
   }
 }

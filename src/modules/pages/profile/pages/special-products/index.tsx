@@ -10,12 +10,15 @@ import { IPreferredProductListResponseModel } from 'platform/api/user/models/res
 import { onlyForUsers } from 'platform/guards/routes';
 import UserController from 'platform/api/user';
 import Settings from 'platform/services/settings';
+import HelpIcon from 'assets/images/help-icon.svg';
 
 import './style.scss';
 import EmptyState from 'components/empty-state';
+import SpecialProductHelp from './components/help';
 
 interface IState {
   data: IPreferredProductListResponseModel[];
+  helpIsOpen: boolean;
 };
 
 @byPrivateRoute(ROUTES.PROFILE.SPECIAL_PRODUCTS, [onlyForUsers])
@@ -23,6 +26,7 @@ class SpecialProducts extends HelperComponent<IState, {}> {
 
   public state: IState = {
     data: [],
+    helpIsOpen: false,
   };
 
   public componentDidMount() { this.fetchData(); }
@@ -35,6 +39,14 @@ class SpecialProducts extends HelperComponent<IState, {}> {
     })) });
   }
 
+  private openHelp = () => {
+    this.safeSetState({ helpIsOpen: true });
+  }
+  
+  private closeHelp = () => {
+    this.safeSetState({ helpIsOpen: false });
+  }
+
   private changeProduct = async (e: React.SyntheticEvent, item: IPreferredProductListResponseModel) => {
     e.preventDefault();
     if (Date.now() >= +item.expiredDate) window.routerHistory.push(`${ROUTES.PRODUCTS.MAIN}?preferredProductId=${item.id}`);
@@ -45,11 +57,13 @@ class SpecialProducts extends HelperComponent<IState, {}> {
   }
 
   public render() {
-    const { data } = this.state;
+    const { data, helpIsOpen } = this.state;
 
     return (
       <Layout>
         <div className="G-flex P-profile-special-products">
+          <img src={HelpIcon} className="P-help-icon" onClick={this.openHelp} alt=""/>
+
           {data.length ? data.map(item => <Link
             to={ROUTES.PRODUCTS.DETAILS.replace(':id', item.id)}
             key={item.id}
@@ -75,6 +89,8 @@ class SpecialProducts extends HelperComponent<IState, {}> {
             </span>
           </Link>) : <EmptyState text={Settings.translations.empty_special_products} />}
         </div>
+
+        {helpIsOpen ? <SpecialProductHelp onClose={this.closeHelp} /> : null}
       </Layout>
     );
   }

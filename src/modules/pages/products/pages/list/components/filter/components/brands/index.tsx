@@ -10,6 +10,7 @@ import useSubscriber from 'platform/hooks/use-subcriber';
 import DispatcherChannels from 'platform/constants/dispatcher-channels';
 import { IPagingResponse } from 'platform/constants/interfaces';
 import { scrolledToBottomOfElement } from 'platform/services/helper';
+import { buildFilters } from '../../../../services/helper';
 
 interface IProps {
   body: IProductFilterRequestModel;
@@ -19,6 +20,7 @@ interface IProps {
 
 const Brands = ({ body, onChange }: IProps) => {
   const prevCategoryIdRef = React.useRef<number>();
+  const prevDataRef = React.useRef<any>();
   const [pageNumber, setPageNumber] = React.useState(1);
   const [open, setOpen] = React.useState(!!body.brandIds?.length);
   const [loading, setLoading] = React.useState(false);
@@ -27,9 +29,13 @@ const Brands = ({ body, onChange }: IProps) => {
   React.useEffect(() => {
     const categoryId = body.categoryIds && body.categoryIds[0];
 
-    categoryId !== prevCategoryIdRef.current && fetchData();
+    if (categoryId !== prevCategoryIdRef.current || prevDataRef.current !== JSON.stringify(buildFilters())) {
+      setPageNumber(1);
+      fetchData();
+    }
 
     prevCategoryIdRef.current = categoryId;
+    prevDataRef.current = JSON.stringify(buildFilters());
   });
 
   useSubscriber(DispatcherChannels.ProductFilterClear, () => setOpen(false));
@@ -54,15 +60,21 @@ const Brands = ({ body, onChange }: IProps) => {
 
   const fetchData = async () => {
     setLoading(true);
-    const result = await BrandController.GetList({
-      pageNumber,
-      pageSize: infinityScrollPageLimit,
-      categoryId: body.categoryIds && body.categoryIds[0],
+    setTimeout(async () => {
+      const result = await BrandController.GetList({
+        ...buildFilters(),
+        pageNumber,
+        pageSize: infinityScrollPageLimit,
+        categoryId: body.categoryIds && body.categoryIds[0],
+      });
+  
+      if (!result.aborted) {
+        if (data) setData({ ...data, list: pageNumber === 1 ? result.data.list : [...data.list, ...result.data.list] });
+        else setData(result.data);
+      }
+  
+      setLoading(false);
     });
-
-    if (data) setData({ ...data, list: [...data.list, ...result.data.list] });
-    else setData(result.data);
-    setLoading(false);
   }
 
   const scrolled = (e: React.SyntheticEvent) => {

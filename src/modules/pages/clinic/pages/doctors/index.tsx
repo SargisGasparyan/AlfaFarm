@@ -22,6 +22,7 @@ import { IDoctorListResponseModel } from 'platform/api/doctor/models/response';
 import SearchInput from 'components/search-input';
 
 import './style.scss';
+import './responsive.scss';
 
 
 

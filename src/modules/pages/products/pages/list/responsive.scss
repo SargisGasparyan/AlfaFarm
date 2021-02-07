@@ -1,5 +1,12 @@
 @media (max-width: $tablet-screen) {
   .G-page.P-products-list-page {
     flex-wrap : wrap;
+
+    > .P-list-wrapper {
+  
+      > .P-no-data {
+        position: initial !important;
+      }
+    }
   }
 }

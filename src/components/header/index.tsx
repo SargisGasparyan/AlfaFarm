@@ -17,6 +17,7 @@ import Socket from 'platform/services/socket';
 import NotificationController from 'platform/api/notification';
 import Notifications from './components/notifications';
 import BasketController from 'platform/api/basket';
+import ProductController from 'platform/api/product';
 import Screen from 'components/screen';
 import LogoImage from 'assets/images/logo.png';
 import PersonImage from 'assets/images/person.png';
@@ -26,11 +27,16 @@ import MobileMenu from './components/mobile-menu';
 
 import './style.scss';
 import './responsive.scss';
+import { IProductSearcResponseModel } from 'platform/api/product/models/response';
+import SearchPopup from './components/search';
 
 interface IState {
   authOpen: boolean;
   categoryOpen: boolean;
   notificationOpen: boolean;
+  searchOpen: boolean;
+  searchLoader: boolean;
+  searchResult: IProductSearcResponseModel | null;
   notificationIconNumber: number;
   cartIconNumber: number;
   mobileMenuOpen: boolean;
@@ -42,6 +48,9 @@ class Header extends HelperPureComponent<{}, IState> {
     authOpen: false,
     categoryOpen: false,
     notificationOpen: false,
+    searchLoader: false,
+    searchOpen: false,
+    searchResult: null,
     notificationIconNumber: 0,
     cartIconNumber: 0,
     mobileMenuOpen: false
@@ -117,17 +126,36 @@ class Header extends HelperPureComponent<{}, IState> {
     }
   }
 
-  private searchSubmit = (value: string) => {
-    const query = new URLSearchParams(window.location.search);
-    const oldValue = query.get('text');
+  private searchSubmit = async (value: string) => {
+    // const query = new URLSearchParams(window.location.search);
+    // const oldValue = query.get('text');
     
-    if (oldValue !== value) {
-      if (value.length) query.set('text', value);
-      else query.delete('text');
+    // if (oldValue !== value) {
+    //   if (value.length) query.set('text', value);
+    //   else query.delete('text');
   
-      window.routerHistory.push(`${ROUTES.PRODUCTS.MAIN}?${query.toString()}`);
-      window.dispatchEvent(new Event(DispatcherChannels.ProductFilterChange));
+    //   window.routerHistory.push(`${ROUTES.PRODUCTS.MAIN}?${query.toString()}`);
+    //   window.dispatchEvent(new Event(DispatcherChannels.ProductFilterChange));
+    // }
+    if (value) {
+      this.safeSetState({ searchLoader: true }, async () => {
+        const data = await ProductController.Search(value);
+        if (data?.data?.products.length) {
+          this.safeSetState({ searchResult: data.data, searchOpen: true })
+        } else {
+          this.closeSearch();
+        }
+        this.safeSetState({ searchLoader: false })
+      })
+
+      
+    } else {
+      this.closeSearch();
     }
+  }
+
+  private closeSearch = () => {
+    this.safeSetState({ searchResult: null, searchOpen: false })
   }
 
   private toggleMobileMenu = () => {
@@ -135,8 +163,10 @@ class Header extends HelperPureComponent<{}, IState> {
     this.safeSetState({ mobileMenuOpen: !mobileMenuOpen });
   }
 
-  private toggleNotifications = (e: Event | React.SyntheticEvent) => {
-    e.stopPropagation();
+  private toggleNotifications = (e?: Event | React.SyntheticEvent) => {
+    if (e) {
+      e.stopPropagation();
+    }
     const { notificationOpen } = this.state;
 
     if (!notificationOpen) this.safeSetState({ notificationOpen: true, notificationIconNumber: 0 });
@@ -146,7 +176,7 @@ class Header extends HelperPureComponent<{}, IState> {
   private openProducts = () => window.dispatchEvent(new Event(DispatcherChannels.ProductFilterChange));
 
   public render() {
-    const { authOpen, categoryOpen, cartIconNumber, notificationIconNumber, notificationOpen } = this.state;
+    const { authOpen, categoryOpen, cartIconNumber, notificationIconNumber, notificationOpen, searchOpen, searchResult, searchLoader } = this.state;
 
     return (
       <header ref={this.header} className="G-flex G-flex-align-center G-flex-justify-center">
@@ -157,10 +187,15 @@ class Header extends HelperPureComponent<{}, IState> {
             </Link>
 
             {enviroment.WHOLESALE ? <WholesaleContent /> : <>
-              <SearchInput
-                onSubmit={this.searchSubmit}
-                withSubmit={true}
-              />
+              <div className="P-search-wrapper">
+                <SearchInput
+                  onSubmit={this.searchSubmit}
+                  loading={searchLoader}
+                  withSubmit={true}
+                />
+
+                {searchOpen && <SearchPopup onClose={this.closeSearch} data={searchResult} />}
+              </div>
 
               <Link
                 to={ROUTES.PRODUCTS.MAIN}
@@ -174,7 +209,7 @@ class Header extends HelperPureComponent<{}, IState> {
               </Link>
 
               <NavLink {...this.navLinkProps} to={ROUTES.PHARMACIES}>{Settings.translations.pharmacies}</NavLink>
-              {/* <NavLink {...this.navLinkProps} to={ROUTES.CLINIC.MAIN}>{Settings.translations.clinic}</NavLink> */}
+              <NavLink {...this.navLinkProps} to={ROUTES.CLINIC.MAIN}>{Settings.translations.clinic}</NavLink>
               <NavLink {...this.navLinkProps} to={ROUTES.BLOG.MAIN}>{Settings.translations.blog}</NavLink>
             </>}
 

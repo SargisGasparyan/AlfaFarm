@@ -1,0 +1,11 @@
+@import 'src/assets/styles/variables';
+
+.P-answer-text {
+  color      : $main-color;
+  margin-top : 30px;
+}
+
+.P-answer-main-btn {
+  display     : flex !important;
+  align-items : center;
+}

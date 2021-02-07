@@ -1,0 +1,68 @@
+@import 'src/assets/styles/variables';
+
+.P-header-search-result {
+  top        : 80px;
+  width      : 550px;
+  left       : 60px;
+  padding    : 15px 15px 0;
+  position   : absolute;
+  box-shadow : $default-block-shadow;
+  background : white;
+  max-height: calc(100vh - 140px);
+  overflow-y: auto;
+
+  > h6 {
+    font-weight    : 100;
+    padding-bottom : 30px;
+    font-size      : 18px;
+  }
+
+  .P-list-item {
+    color           : black;
+    display         : flex;
+    padding         : 20px 0;
+    font-size       : 16px;
+    text-decoration : none;
+    cursor          : pointer;
+    border-bottom   : 1px solid $light-gray;
+
+    > .P-image {
+      width     : 100px;
+      min-width : 100px;
+      height    : 100px;
+    }
+
+    .P-middle {
+      width  : 100%;
+      margin : 0 20px;
+
+      h5 {
+        font-size: 16px;
+      }
+  
+      span {
+        color     : #A1A1A1;
+        display   : block;
+        font-size : 14px;
+      }
+    }
+
+    .P-right {
+      display         : flex;
+      flex-direction  : column;
+      justify-content : space-between;
+
+      span {
+        width      : 100%;
+        text-align : center;
+        font-weight: bold;
+      }
+
+      .G-main-button {
+        font-size   : 14px;
+        white-space : nowrap;
+        padding     : 10px 20px;
+      }
+    }
+  }
+}

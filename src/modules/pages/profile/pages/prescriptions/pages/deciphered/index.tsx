@@ -8,7 +8,7 @@ import { onlyForUsers } from 'platform/guards/routes';
 import ROUTES from 'platform/constants/routes';
 import HelperComponent from 'platform/classes/helper-component';
 import PrescriptionController from 'platform/api/prescription';
-import { IBasketListResponseModel } from 'platform/api/basket/models/response';
+import { IBasketListResponseModel, IBasketResponseModel } from 'platform/api/basket/models/response';
 import { Shared } from 'modules';
 
 import './style.scss';
@@ -17,7 +17,7 @@ import BasketController from 'platform/api/basket';
 
 
 interface IState {
-  data?: IBasketListResponseModel[];
+  data?: IBasketResponseModel;
 };
 
 interface IRouteParams { id: string; }
@@ -41,7 +41,7 @@ class Deciphered extends HelperComponent<RouteComponentProps<IRouteParams>, ISta
     const { data } = this.state;
 
     if (data) {
-      await Promise.all(data.map(item => BasketController.Change({
+      await Promise.all(data.items.map(item => BasketController.Change({
         productId: item.productId,
         productQuantity: item.productQuantity,
         isPackage: item.isPackage,
@@ -62,6 +62,7 @@ class Deciphered extends HelperComponent<RouteComponentProps<IRouteParams>, ISta
 
   public render() {
     const { data } = this.state;
+    console.log(data)
 
     return (
       <Layout>
@@ -72,7 +73,7 @@ class Deciphered extends HelperComponent<RouteComponentProps<IRouteParams>, ISta
           </h3>
 
           {data ? <>
-            <Shared.Products.TableList list={data} onQuantityChange={this.changeQuantity} />
+            <Shared.Products.TableList list={data.items} onQuantityChange={this.changeQuantity} />
             <button className="G-main-button G-ml-auto" onClick={this.buy}>{Settings.translations.buy}</button>
           </> : <PageLoader />}
         </div>

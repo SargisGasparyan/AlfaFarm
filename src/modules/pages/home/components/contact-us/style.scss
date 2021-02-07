@@ -3,11 +3,15 @@
 
 @import './responsive';
 
+.G-page.P-home-news + .G-page.P-home-contact-us {
+  padding-top: 100px;
+}
+
 .G-page.P-home-contact-us {
 
   display        : flex;
   overflow       : hidden;
-  padding-top    : 100px;
+  padding-top    : 0;
   flex-direction : column;
 
   > .P-shadow-text {
@@ -85,6 +89,7 @@
       width  : 150px;
       height : 54px;
       margin : 0 20px;
+      cursor: pointer;
     }
   }
 }
