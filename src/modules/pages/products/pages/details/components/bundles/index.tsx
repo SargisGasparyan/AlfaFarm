@@ -30,7 +30,7 @@ class Bundles extends HelperComponent<IProps, IState> {
 
   private navigateToProduct = (id: number) => {
     const { data } = this.props;
-    data.id != id && window.routerHistory.push(ROUTES.PRODUCTS.DETAILS.replace(':id', id));
+    data.id !== id && window.routerHistory.push(ROUTES.PRODUCTS.DETAILS.replace(':id', id));
   }
 
   private addToCart = (bundle: IPromotionGroupProductPromotionModel) => this.safeSetState({ cartLoadingId: bundle.boundleId }, async () => {
