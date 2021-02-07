@@ -6,7 +6,11 @@ import Settings from 'platform/services/settings';
 import { byRoute } from 'platform/decorators/routes';
 import HelperComponent from 'platform/classes/helper-component';
 import BasketController from 'platform/api/basket';
-import { IBasketListResponseModel, IBasketResponseModel, IBasketChangeResponseModel } from 'platform/api/basket/models/response';
+import {
+  IBasketListResponseModel,
+  IBasketResponseModel,
+  IBasketChangeResponseModel
+} from 'platform/api/basket/models/response';
 import Table from 'components/table';
 import EmptyState from 'components/empty-state';
 import { getMediaPath, formatPrice } from 'platform/services/helper';
@@ -18,9 +22,9 @@ import PageLoader from 'components/page-loader';
 import { IResponse } from 'platform/constants/interfaces';
 import { PromotionTypeEnum } from 'platform/constants/enums';
 import ConfirmModal from 'components/confirm-modal';
+import { getBasketItemPriceInfo } from 'platform/services/basket';
 
 import './style.scss';
-import { getBasketItemPriceInfo } from 'platform/services/basket';
 
 interface IState {
   data?: IBasketResponseModel;
@@ -52,6 +56,8 @@ class Cart extends HelperComponent<{}, IState> {
     },
     {
       name: Settings.translations.quantity,
+      style: { minWidth: '140px' },
+
       cell: (row: IBasketListResponseModel, index: number) => <CountInput
         min={0}
         step={1}
@@ -65,6 +71,7 @@ class Cart extends HelperComponent<{}, IState> {
     },
     {
       name: Settings.translations.price,
+      style: { minWidth: '140px' },
       cell: (row: IBasketListResponseModel) => {
         const priceInfo = getBasketItemPriceInfo(row);
 
@@ -76,20 +83,38 @@ class Cart extends HelperComponent<{}, IState> {
               formatPrice(priceInfo.price)}
           </h3>
         </div>;
-      },
+      }
+    },
+    {
+      name: Settings.translations.price,
+      style: { minWidth: '140px' },
+      cell: (row: IBasketListResponseModel) =>
+        <div className="G-flex G-flex-column G-align-center G-justify-center">
+          <div>{row.promotion.promotionType === PromotionTypeEnum.Discount && row.promotion.result > 0 ?
+            <del>{formatPrice(row.totalPrice)}</del> : null}</div>
+          <h3
+            className={`G-fs-24 ${row.promotion.promotionType === PromotionTypeEnum.Discount && row.promotion.result > 0 ? 'G-orange-color' : ''}`}>
+            {row.promotion.promotionType === PromotionTypeEnum.Discount ?
+              formatPrice(row.promotion.result) :
+              formatPrice(row.productQuantity * (row.isPackage ? row.packagePrice : row.price))}
+          </h3>
+        </div>,
     },
     {
       name: '',
-      style: { maxWidth: 70 },
+      style: { maxWidth: 70, minWidth: 60 },
       cell: (row: IBasketListResponseModel) => <div className="P-basket-remove-item">
-        <i className="icon-Group-5032 G-orange-color G-cursor-pointer G-fs-18" onClick={() => this.deleteBasketItem(row)} />
+        <i className="icon-Group-5032 G-orange-color G-cursor-pointer G-fs-18"
+          onClick={() => this.deleteBasketItem(row)} />
       </div>
     }
   ];
+
   public componentDidMount() {
-    this.fetchData();
-    this.updateBasketCount();
-  }
+  this.fetchData();
+  this.updateBasketCount();
+}
+
   private deleteBasketItem = async (item: IBasketListResponseModel) => {
     const result = await BasketController.Delete(item.productId, item.isPackage);
     if (result.success) {
@@ -97,8 +122,8 @@ class Cart extends HelperComponent<{}, IState> {
       this.fetchData();
     }
   }
-  private updateBasketCount = () => window.dispatchEvent(new CustomEvent(DispatcherChannels.CartItemsUpdate));
-  private fetchData = async () => {
+    private updateBasketCount = () => window.dispatchEvent(new CustomEvent(DispatcherChannels.CartItemsUpdate));
+    private fetchData = async () => {
     const result = await BasketController.GetList();
     this.safeSetState({ data: result.data });
   }
@@ -162,10 +187,10 @@ class Cart extends HelperComponent<{}, IState> {
     const { data } = this.state;
 
     if (data) {
-       const alertify = await import('alertifyjs');
-       const basketIds = data.items.map(item => item.id);
-       const result = await BasketController.Save(basketIds);
-       result.success && alertify.success(Settings.translations.basket_save_success);
+      const alertify = await import('alertifyjs');
+      const basketIds = data.items.map(item => item.id);
+      const result = await BasketController.Save(basketIds);
+      result.success && alertify.success(Settings.translations.basket_save_success);
     }
   }
 
@@ -179,12 +204,12 @@ class Cart extends HelperComponent<{}, IState> {
             <div className="G-flex G-flex-justify-between G-flex-align-center G-mb-40 G-full-width">
               <h1 className="G-fs-26 G-full-width">{Settings.translations.cart}</h1>
               {/* <button
-                className="G-main-button G-ml-auto G-fs-normal P-pay-button"
-                onClick={this.clearAllConfirm}
-              >{Settings.translations.clear_basket}</button> */}
+                  className="G-main-button G-ml-auto G-fs-normal P-pay-button"
+                  onClick={this.clearAllConfirm}
+                >{Settings.translations.clear_basket}</button> */}
             </div>
             <Table<IBasketListResponseModel>
-              className="P-table G-full-width"
+              className="P-table G-full-width P-card-table"
               columnConfig={this.columnConfig}
               rowClassname={row => !row.productStockQuantity ? 'P-out-of-stock-product' : ''}
               data={data.items}
@@ -199,8 +224,10 @@ class Cart extends HelperComponent<{}, IState> {
               <div>
                 <span className="G-fs-normal">{Settings.translations.total}</span>
                 <div className="G-flex G-flex-column G-align-center G-justify-center P-discounted-item">
-                  {!!data.totalDiscountedPrice && data.totalDiscountedPrice !== data.totalPrice && <del>{formatPrice(data.totalPrice)}</del>}
-                  <h1 className="G-orange-color G-fs-24 G-mt-5">{formatPrice(data.totalDiscountedPrice || data.totalPrice)}</h1>
+                  {!!data.totalDiscountedPrice && data.totalDiscountedPrice !== data.totalPrice &&
+                    <del>{formatPrice(data.totalPrice)}</del>}
+                  <h1
+                    className="G-orange-color G-fs-24 G-mt-5">{formatPrice(data.totalDiscountedPrice || data.totalPrice)}</h1>
                 </div>
               </div>
 

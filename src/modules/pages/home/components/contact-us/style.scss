@@ -61,6 +61,13 @@
   }
 }
 
+.P-contact-us-about-modal .P-modal-content {
+  min-width  : 45vw;
+  max-height : 90vh;
+  overflow   : auto;
+}
+
+
 .P-contact-us-about-modal .P-modal-content > div {
   color          : $main-color;
   padding        : 30px;

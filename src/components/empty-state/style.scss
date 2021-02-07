@@ -2,26 +2,32 @@
 
 .P-empty-state {
 
-  width      : 100%;
-  margin-left: auto;
-  height     : 100%;
-  display    : flex;
-  min-height : 500px;
+  width       : 100%;
+  margin-left : auto;
+  height      : 100%;
+  display     : flex;
+  min-height  : 500px;
+
+  img {
+    width         : 100%;
+    margin-bottom : 15px;
+  }
 
   > div {
-    width  : 500px;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin : auto;
+    width           : 500px;
+    height          : 100%;
+    display         : flex;
+    justify-content : center;
+    align-items     : center;
+    margin          : auto;
 
 
     .P-empty-list {
-      text-align: center;
+      text-align : center;
+
       > p {
-        font-size: 18px;
-        color: $text-gray;
+        font-size : 18px;
+        color     : $text-gray;
       }
     }
   }

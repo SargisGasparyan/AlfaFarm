@@ -8,7 +8,7 @@ export function getBasketItemPriceInfo(item: IBasketListResponseModel) {
     bonus: 0,
   };
 
-  if (item.promotion.promotionType == PromotionTypeEnum.Discount) {
+  if (item.promotion.promotionType === PromotionTypeEnum.Discount) {
     result.discountedPrice = item.promotion.groupPromotion ? item.promotion.result - item.promotion.groupPromotion.result : item.promotion.result;
     return result;
   }

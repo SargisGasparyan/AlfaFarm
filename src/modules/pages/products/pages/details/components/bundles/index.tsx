@@ -31,7 +31,7 @@ class Bundles extends HelperComponent<IProps, IState> {
 
   private navigateToProduct = (id: number) => {
     const { data } = this.props;
-    data.id != id && window.routerHistory.push(ROUTES.PRODUCTS.DETAILS.replace(':id', id));
+    data.id !== id && window.routerHistory.push(ROUTES.PRODUCTS.DETAILS.replace(':id', id));
   }
 
   private addToCart = (bundle: IPromotionGroupProductPromotionModel) => this.safeSetState({ cartLoadingId: bundle.boundleId }, async () => {
@@ -62,7 +62,7 @@ class Bundles extends HelperComponent<IProps, IState> {
                   <div className="P-image" style={{ background: `url('${product.imagePath}') center/contain no-repeat` }} />
                 </div>
               </div>
-              {index != item.products.length - 1 && <span className="P-plus-symbol">+</span>}
+              {index !== item.products.length - 1 && <span className="P-plus-symbol">+</span>}
             </>)}
           </div>
           <LoaderContent

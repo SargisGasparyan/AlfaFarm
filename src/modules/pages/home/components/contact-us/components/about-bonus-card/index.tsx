@@ -15,6 +15,7 @@ const AboutBonusCard = React.memo(() => {
         <i className="icon-Group-5510" />
         <h3>{Settings.translations.bonus_card}</h3>
         <p>{Settings.translations.about_bonus_card_text}</p>
+        <p>{Settings.translations.about_bonus_card_text_2}</p>
       </Modal>}
     </div>
   );

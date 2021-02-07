@@ -5,8 +5,10 @@
   flex-direction  : column;
   justify-content : center;
   position        : relative;
-  min-height      : 450px!important;
+  @media (max-width: $mobile-screen) {
+    min-height      : 450px!important;
 
+  }
   &:before {
     position         : absolute;
     content          : '';
