@@ -976,6 +976,7 @@ export default {
   empty_favorites_list: 'Հավանած ապրանքների ցանկը դատարկ է',
   empty_registrations_list: 'Գրանցումների ցանկը դատարկ է',
   empty_medical_history: 'Բժշկական պատմության ցանկը դատարկ է',
+  buy_bundle_promotion: "Գնեք նշված ապրանքները միասին և ստացեք համապատասխան կուտակումները:",
   empty_orders_list: 'Պատվերների ցանկը դատարկ է',
   empty_special_products: 'Հատուկ ապրանքների ցանկը դատարկ է',
   empty_address_list: 'Հասցեների ցանկը դատարկ է',

@@ -2,9 +2,85 @@
 
 .P-product-details-bundles {
   width         : calc(55% - 50px);
-  padding       : 20px;
-  background    : black;
   margin-left   : auto;
-  border-radius : $big-radius;
   margin-bottom : 20px;
+
+  > div {
+    width          : 100%;
+    padding        : 20px 40px;
+    display        : flex;
+    box-shadow     : $default-block-shadow;
+    border-radius  : $big-radius;
+    margin-bottom  : 40px;
+    flex-direction : column;
+
+    > h4 { text-align: center; }
+
+    > .P-products {
+      display         : flex;
+      padding         : 15px 0;
+      margin-top      : 30px; 
+      overflow-x      : auto;
+      justify-content : center;
+
+      > .P-content {
+        height    : 150px;
+        min-width : 150px;
+        
+        &:first-child {
+          min-width    : 160px;
+          padding-left : 10px;
+        }
+
+        &:last-child {
+          min-width     : 160px;
+          padding-right : 10px;
+        }
+
+        > div {
+          width         : 100%;
+          height        : 100%;
+          cursor        : pointer;
+          display       : flex;
+          position      : relative;
+          box-shadow    : $default-block-shadow;
+          border-radius : $big-radius;
+  
+          > .P-discount {
+            top           : -10px;
+            left          : -10px;
+            color         : white;
+            width         : 35px;
+            height        : 35px;
+            position      : absolute;
+            font-size     : 12px;
+            text-align    : center;
+            background    : $orange;
+            line-height   : 35px;
+            border-radius : 50%;
+          }
+  
+          > .P-quantity {
+            margin  : auto 0;
+            padding : 0 10px 0 20px;  
+          }
+  
+          > .P-image {
+            width  : 100%;
+            height : 100%;
+          }
+        }
+      }
+
+      > .P-plus-symbol {
+        color       : $orange;
+        margin      : auto 0;
+        padding     : 0 20px;
+        font-size   : 30px;
+        font-weight : bold;
+      }
+    }
+
+    > button { margin: 20px auto 0; }
+  }
 }

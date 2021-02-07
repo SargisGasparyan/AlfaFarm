@@ -68,7 +68,7 @@ export interface IPromotionAvailablePromotionsModel {
 }
 
 export interface IPromotionGroupProductPromotionModel {
-  bundleId: number;
+  boundleId: number;
   isLocked: boolean;
   totalBonus: number;
   products: IPromotionProductModel[];

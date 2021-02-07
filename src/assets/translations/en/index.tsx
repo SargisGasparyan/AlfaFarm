@@ -1228,6 +1228,7 @@ export default {
   empty_favorites_list: 'Favorites list is empty',
   empty_registrations_list: 'Registrations list is empty',
   empty_medical_history: 'Medical history list is empty',
+  buy_bundle_promotion: "Buy attached products together and get bonuses.",
   see_more: "See more",
   pickup: "Pickup",
   sale: "Sale",

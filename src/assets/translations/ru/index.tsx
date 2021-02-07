@@ -1104,6 +1104,7 @@ export default {
   empty_favorites_list: 'Список избранных пуст',
   empty_registrations_list: 'Список регистраций пуст',
   empty_medical_history: 'Список истории болезней пуст',
+  buy_bundle_promotion: "Покупайте прилагаемые товары вместе и получайте бонусы.",
   empty_orders_list: 'Список заказов пуст',
   empty_special_products: 'Список специальних продуктов пуст',
   empty_address_list: 'Список адресов пуст',
