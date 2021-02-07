@@ -9,6 +9,8 @@ import Maps from 'components/maps';
 import { getViewEnum, formatTime } from 'platform/services/helper';
 import { WeekDaysEnum } from 'platform/constants/enums';
 import SearchInput from 'components/search-input';
+import MapIconGreen from 'assets/images/map-icon-green.svg';
+import MapIconOrange from 'assets/images/map-icon-orange.svg';
 
 import './style.scss';
 import ClickOutside from 'components/click-outside';
@@ -34,17 +36,26 @@ class SearchResults extends HelperComponent<IProps, IState> {
     const { data} = this.props;
     const { searchValue } = this.state;
 
-    if (!searchValue) return data;
-    return data.filter(item => item.name
-      .toLowerCase()
-      .includes(searchValue.toLowerCase())
-    );
+    if (!searchValue || !searchValue.trim()) return data;
+
+    const searchParams = searchValue.split(' ').filter(x => !!x);
+    
+    return data.filter(item => {
+
+      return !searchParams.some(x => !item.name
+        .toLowerCase()
+        .includes(x.toLowerCase()));
+    });
   }
 
   private get markers() {
     return this.data.map((item, index) => ({
       position: { lat: item.addressLat, lng: item.addressLng },
       onClick: () => this.toggleMarker(index),
+      icon: {
+        url:  item.isOpen ? MapIconGreen : MapIconOrange,
+        scaledSize:  new google.maps.Size(30, 30)
+      },
     }));
   }
 
