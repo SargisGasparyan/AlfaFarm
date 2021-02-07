@@ -185,7 +185,6 @@ class Checkout extends HelperComponent<{}, IState> {
       form.addressBuilding = chosen.building;
       form.addressEntrance = chosen.entrance;
       form.addressFloor = chosen.floor;
-      form.addressComment = chosen.comment;
       form.addressText = chosen.addressText;
       form.addressLat = chosen.addressLat;
       form.addressLng = chosen.addressLng;
@@ -308,7 +307,7 @@ class Checkout extends HelperComponent<{}, IState> {
                 onChange={this.changeField}
               />
             </div>
-            <div className="G-main-form-field">
+            <div className="G-main-form-field G-main-form-field-closer">
               <Autocomplete
                 placeholder={Settings.translations.address}
                 value={form.addressText || '' || ''}
@@ -319,7 +318,7 @@ class Checkout extends HelperComponent<{}, IState> {
                 types={[]}
               />
             </div>
-            <div className="G-main-form-field">
+            <div className="G-main-form-field G-main-form-field-closer">
               <input
                 name="addressBuilding"
                 value={form.addressBuilding || ''}
@@ -328,7 +327,7 @@ class Checkout extends HelperComponent<{}, IState> {
                 onChange={this.changeField}
               />
             </div>
-            <div className="G-main-form-field">
+            <div className="G-main-form-field G-main-form-field-closer">
               <input
                 name="addressEntrance"
                 value={form.addressEntrance || ''}
@@ -337,7 +336,7 @@ class Checkout extends HelperComponent<{}, IState> {
                 onChange={this.changeField}
               />
             </div>
-            <div className="G-main-form-field">
+            <div className="G-main-form-field G-main-form-field-closer">
               <input
                 name="addressApartment"
                 value={form.addressApartment || ''}
@@ -346,21 +345,12 @@ class Checkout extends HelperComponent<{}, IState> {
                 onChange={this.changeField}
               />
             </div>
-            <div className="G-main-form-field">
+            <div className="G-main-form-field G-main-form-field-closer">
               <input
                 name="addressFloor"
                 value={form.addressFloor || ''}
                 className="G-main-input"
                 placeholder={Settings.translations.floor}
-                onChange={this.changeField}
-              />
-            </div>
-            <div className="G-main-form-field P-comment-field">
-              <textarea
-                name="addressComment"
-                value={form.addressComment || ''}
-                className="G-main-input"
-                placeholder={Settings.translations.address_comment}
                 onChange={this.changeField}
               />
             </div>
@@ -437,10 +427,10 @@ class Checkout extends HelperComponent<{}, IState> {
               </div>}
 
             {resultInfo && <>
-              <h3 className="G-mt-40 G-flex G-flex-justify-between">{Settings.translations.price} <span>{formatPrice(resultInfo.totalDiscountedPrice)}</span></h3>
+              <h3 className="G-mt-auto G-flex G-flex-justify-between">{Settings.translations.price} <span>{formatPrice(resultInfo.totalDiscountedPrice)}</span></h3>
               <h3 className="G-mt-10 G-flex G-flex-justify-between">{Settings.translations.bonus} <span>{resultInfo.receivedBonus}</span></h3>
               <h3 className="G-mt-10 G-flex G-flex-justify-between">{Settings.translations.delivery_fee} <span>{formatPrice(resultInfo.deliveryFee)}</span></h3>
-              <h2 className="G-mt-10 G-flex G-flex-justify-between">{Settings.translations.total} <span className="G-orange-color">{formatPrice(resultInfo.totalPrice)}</span></h2>
+              <h2 className="G-mt-10 G-mb-20 G-flex G-flex-justify-between">{Settings.translations.total} <span className="G-orange-color">{formatPrice(resultInfo.totalPrice)}</span></h2>
             </>}
           </div>
 

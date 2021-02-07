@@ -12,7 +12,7 @@ export const buildFilters = () => {
   const hasDiscount = query.get('hasDiscount');
 
   const body: IProductFilterRequestModel = {
-    text: query.get('text') || '',
+    productText: query.get('text') || '',
     categoryIds: categoryIds ? categoryIds.split(',').map(item => +item) : [],
     brandIds: brandIds ? brandIds.split(',').map(item => +item) : [],
     producerIds: producerIds ? producerIds.split(',').map(item => +item) : [],

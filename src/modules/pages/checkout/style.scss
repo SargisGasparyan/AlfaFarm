@@ -16,7 +16,6 @@
     flex-wrap     : wrap;
     max-width     : 100%;
     box-shadow    : $default-block-shadow;
-    align-items   : flex-start;
     border-radius : $big-radius;
 
     .P-date {
@@ -25,10 +24,12 @@
     }
 
     > .P-main-info, > .P-delivery-form {
-      flex      : 1;
-      margin    : 20px;
-      min-width : 400px;
-      flex-wrap : wrap;
+      flex           : 1;
+      margin         : 20px;
+      display        : flex;
+      min-width      : 400px;
+      flex-wrap      : wrap;
+      flex-direction : column;
 
       .rc-checkbox { margin-right: 10px; }
 

@@ -317,6 +317,7 @@
 
 .G-position-relative { position: relative; }
 
+.G-mt-auto { margin-top: auto; }
 .G-mt-5 { margin-top: 5px; }
 .G-mt-10 { margin-top: 10px; }
 .G-mt-20 { margin-top: 20px; }
@@ -389,6 +390,10 @@
   .G-main-form-field, .G-main-form-half-field {
     width         : 100%;
     margin-bottom : 20px;
+
+    &.G-main-form-field-closer, &.G-main-form-half-field-closer {
+      margin-bottom : 10px;
+    }
   }
 
   .G-main-form-half-field {
