@@ -1,6 +1,7 @@
 import { IFile } from 'platform/constants/interfaces';
 import { IPharmacyBranchListResponseModel } from 'platform/api/pharmacyBranch/models/response';
 import { ICategoryListResponseModel } from 'platform/api/category/models/response';
+import { PromotionTypeEnum } from 'platform/constants/enums';
 
 export interface IProductListResponseModel {
   id: number;
@@ -58,10 +59,18 @@ export interface IProductDetailsResponseModel {
 
 export interface IPromotionModel {
   availablePromotions: IPromotionAvailablePromotionsModel;
+  groupPromotion: IPromotionGroupPromotionModel;
   percent: number;
   promotionType: number;
   result: number;
 }
+
+export interface IPromotionGroupPromotionModel {
+  count: number;
+  percent: number;
+  promotionType: PromotionTypeEnum;
+  result: number;
+};
 
 export interface IPromotionAvailablePromotionsModel {
   groupProductPromotions: IPromotionGroupProductPromotionModel[];

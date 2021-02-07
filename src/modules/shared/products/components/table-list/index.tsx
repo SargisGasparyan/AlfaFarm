@@ -10,6 +10,7 @@ import './style.scss';
 import CountInput from 'components/count-input';
 import { Link } from 'react-router-dom';
 import { PromotionTypeEnum } from 'platform/constants/enums';
+import { getBasketItemPriceInfo } from 'platform/services/basket';
 
 
 interface IProps {
@@ -48,15 +49,18 @@ const TableList = ({ list, onQuantityChange }: IProps) => {
     {
       name: Settings.translations.price,
       style: { minWidth: 150, maxWidth: 150 },
-      cell: (row: IBasketListResponseModel) => 
-      <>
-      <div>{row.promotion.promotionType === PromotionTypeEnum.Discount && row.promotion.result > 0 ? <del>{formatPrice(row.totalPrice)}</del> : null}</div>
-      <h3 className={`G-fs-24 ${row.promotion.promotionType === PromotionTypeEnum.Discount && row.promotion.result ? 'G-orange-color' : ''}`}>
-        {row.promotion.promotionType === PromotionTypeEnum.Discount && row.promotion.result ?
-          formatPrice(row.promotion.result) :
-          formatPrice(row.productQuantity * row.price)}
-      </h3>
-      </>,
+      cell: (row: IBasketListResponseModel) => {
+        const priceInfo = getBasketItemPriceInfo(row);
+
+        return <>
+          <div>{priceInfo.discountedPrice ? <del>{formatPrice(row.totalPrice)}</del> : null}</div>
+          <h3 className={`G-fs-24 ${priceInfo.discountedPrice ? 'G-orange-color' : ''}`}>
+            {priceInfo.discountedPrice ?
+              formatPrice(priceInfo.discountedPrice) :
+              formatPrice(priceInfo.price)}
+          </h3>
+        </>;
+      },
     },
   ];
 

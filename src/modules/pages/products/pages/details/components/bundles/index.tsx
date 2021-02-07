@@ -4,11 +4,12 @@ import { IProductDetailsResponseModel, IPromotionGroupProductPromotionModel } fr
 import HelperComponent from 'platform/classes/helper-component';
 import Settings from 'platform/services/settings';
 
-import './style.scss';
-
 import ROUTES from 'platform/constants/routes';
 import LoaderContent from 'components/loader-content';
 import BasketController from 'platform/api/basket';
+import DispatcherChannels from 'platform/constants/dispatcher-channels';
+
+import './style.scss';
 
 interface IProps {
   data: IProductDetailsResponseModel;
@@ -41,6 +42,7 @@ class Bundles extends HelperComponent<IProps, IState> {
     }));
 
     await BasketController.ChangeList(body);
+    window.dispatchEvent(new CustomEvent(DispatcherChannels.CartItemsUpdate));
     this.safeSetState({ cartLoadingId: undefined });
   });
 

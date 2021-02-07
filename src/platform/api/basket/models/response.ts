@@ -21,7 +21,12 @@ export interface IBasketListResponseModel {
   productQuantity: number;
   productStockQuantity: boolean;
   promotion: IPromotionModel;
-  isPackage: boolean,
+  isPackage: boolean;
+  priceInfo: {
+    price: number;
+    discountedPrice: number;
+    bonus: number;
+  }; // Will be set using basket logic
 };
 
 export interface ISavedBasketListResponseModel {

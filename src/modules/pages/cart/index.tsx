@@ -20,6 +20,7 @@ import { PromotionTypeEnum } from 'platform/constants/enums';
 import ConfirmModal from 'components/confirm-modal';
 
 import './style.scss';
+import { getBasketItemPriceInfo } from 'platform/services/basket';
 
 interface IState {
   data?: IBasketResponseModel;
@@ -60,19 +61,22 @@ class Cart extends HelperComponent<{}, IState> {
     },
     {
       name: 'Bonus',
-      cell: (row: IBasketListResponseModel) => <h3 className="G-fs-24">{row.promotion.promotionType === PromotionTypeEnum.Bonus ? row.promotion.result : 0}</h3>,
+      cell: (row: IBasketListResponseModel) => <h3 className="G-fs-24">{getBasketItemPriceInfo(row).bonus}</h3>,
     },
     {
       name: Settings.translations.price,
-      cell: (row: IBasketListResponseModel) =>
-        <div className="G-flex G-flex-column G-align-center G-justify-center">
-          <div>{row.promotion.promotionType === PromotionTypeEnum.Discount && row.promotion.result > 0 ? <del>{formatPrice(row.totalPrice)}</del> : null}</div>
-          <h3 className={`G-fs-24 ${row.promotion.promotionType === PromotionTypeEnum.Discount && row.promotion.result > 0 ? 'G-orange-color' : ''}`}>
-            {row.promotion.promotionType === PromotionTypeEnum.Discount ?
-              formatPrice(row.promotion.result) :
-              formatPrice(row.productQuantity * (row.isPackage ? row.packagePrice :  row.price))}
+      cell: (row: IBasketListResponseModel) => {
+        const priceInfo = getBasketItemPriceInfo(row);
+
+        return <div className="G-flex G-flex-column G-align-center G-justify-center">
+          <div>{priceInfo.discountedPrice ? <del>{formatPrice(row.totalPrice)}</del> : null}</div>
+          <h3 className={`G-fs-24 ${priceInfo.discountedPrice ? 'G-orange-color' : ''}`}>
+            {priceInfo.discountedPrice ?
+              formatPrice(priceInfo.discountedPrice) :
+              formatPrice(priceInfo.price)}
           </h3>
-        </div>,
+        </div>;
+      },
     },
     {
       name: '',
