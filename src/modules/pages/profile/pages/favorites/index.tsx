@@ -18,14 +18,14 @@ import './style.scss';
 import { PromotionTypeEnum } from 'platform/constants/enums';
 
 interface IState {
-  data: IFavoriteListResponseModel[];
+  data: IFavoriteListResponseModel[] | null;
 };
 
 @byPrivateRoute(ROUTES.PROFILE.FAVORITES.MAIN)
 class Favorites extends HelperComponent<IState, {}> {
 
   public state: IState = {
-    data: [],
+    data: null,
   };
 
   public componentDidMount() { this.fetchData(); }
@@ -37,7 +37,7 @@ class Favorites extends HelperComponent<IState, {}> {
 
   private toggleFavorite = async (e: React.SyntheticEvent, index: number) => {
     e.preventDefault();
-    const { data } = this.state;
+    const data = this.state.data as IFavoriteListResponseModel[];
     const result = await FavoriteController.AddOrRemove(data[index].id);
 
     if (result.success) {
@@ -53,7 +53,7 @@ class Favorites extends HelperComponent<IState, {}> {
       <Layout>
         <SavedBaskets />
         <div className="G-flex P-profile-favorites">
-          {data.length ? data.map((item, index) => <Link
+          {data ? (data.length ? data.map((item, index) => <Link
             to={ROUTES.PRODUCTS.DETAILS.replace(':id', item.id)}
             key={item.id}
             className="P-list-item"
@@ -82,7 +82,7 @@ class Favorites extends HelperComponent<IState, {}> {
                 formatPrice(item.price)}
               </h2>
             </div>
-          </Link>) : <EmptyState text={Settings.translations.empty_favorites_list} />}
+          </Link>) : <EmptyState text={Settings.translations.empty_favorites_list} />) : null}
         </div>
       </Layout>
     );

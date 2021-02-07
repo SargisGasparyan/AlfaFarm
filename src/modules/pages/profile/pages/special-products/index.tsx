@@ -17,7 +17,7 @@ import EmptyState from 'components/empty-state';
 import SpecialProductHelp from './components/help';
 
 interface IState {
-  data: IPreferredProductListResponseModel[];
+  data: IPreferredProductListResponseModel[] | null;
   helpIsOpen: boolean;
 };
 
@@ -25,7 +25,7 @@ interface IState {
 class SpecialProducts extends HelperComponent<IState, {}> {
 
   public state: IState = {
-    data: [],
+    data: null,
     helpIsOpen: false,
   };
 
@@ -64,7 +64,7 @@ class SpecialProducts extends HelperComponent<IState, {}> {
         <div className="G-flex P-profile-special-products">
           <img src={HelpIcon} className="P-help-icon" onClick={this.openHelp} alt=""/>
 
-          {data.length ? data.map(item => <Link
+          {data ? (data.length ? data.map(item => <Link
             to={ROUTES.PRODUCTS.DETAILS.replace(':id', item.id)}
             key={item.id}
             className="P-list-item"
@@ -87,7 +87,7 @@ class SpecialProducts extends HelperComponent<IState, {}> {
             >
               <i className="icon-Group-5545" />
             </span>
-          </Link>) : <EmptyState text={Settings.translations.empty_special_products} />}
+          </Link>) : <EmptyState text={Settings.translations.empty_special_products} />) : null}
         </div>
 
         {helpIsOpen ? <SpecialProductHelp onClose={this.closeHelp} /> : null}
