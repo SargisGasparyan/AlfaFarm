@@ -8,9 +8,9 @@
   flex-direction : column;
 
   .P-error-message {
-    color: red;
-    font-size: 13px;
-    margin-left: 10px;
+    color       : red;
+    font-size   : 13px;
+    margin-left : 10px;
   }
 
   > h3 {
@@ -36,5 +36,42 @@
     width         : 100%;
     padding       : 15px;
     border-radius : 30px;
+  }
+}
+
+@media (max-height : 700px) {
+  .P-auth-modal {
+    align-items : flex-start;
+
+    .P-modal-content {
+      margin : 30px 0;
+    }
+  }
+}
+
+@media (max-width : $mobile-screen) {
+  .P-auth-modal {
+    .P-modal-content {
+      > div {
+        padding : 0;
+      }
+
+      .G-main-button {
+        padding : 7px 15px;
+      }
+      .P-close{
+        font-size: 18px;
+      }
+    }
+    .P-sign-in-register{
+      padding: 7px 15px !important;
+    }
+    .P-auth-social-button{
+      height: 40px;
+      font-size: 15px;
+      img{
+        width: 20px;
+      }
+    }
   }
 }
