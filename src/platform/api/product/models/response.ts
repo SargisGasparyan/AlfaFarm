@@ -37,11 +37,35 @@ export interface IProductDetailsResponseModel {
   brand: IProductDetailsBrandResponseModel;
   activeIngredients: IProductDetailsActiveIngredientResponseModel[];
 }
+
 export interface IPromotionModel {
+  availablePromotions: IPromotionAvailablePromotionsModel;
   percent: number;
   promotionType: number;
   result: number;
 }
+
+export interface IPromotionAvailablePromotionsModel {
+  groupProductPromotions: IPromotionGroupProductPromotionModel[];
+}
+
+export interface IPromotionGroupProductPromotionModel {
+  bundleId: number;
+  isLocked: boolean;
+  totalBonus: number;
+  products: IPromotionProductModel[];
+}
+
+export interface IPromotionProductModel {
+  bonus: number;
+  imagePath: string;
+  isPackage: boolean;
+  percent: number;
+  productId: number;
+  productTitle: string;
+  quantity: number;
+}
+
 export interface IProductDetailsCategoryResponseModel {
   id: number;
   name: string;

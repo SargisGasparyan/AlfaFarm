@@ -7,6 +7,7 @@ import ProductController from 'platform/api/product';
 import { IProductDetailsResponseModel } from 'platform/api/product/models/response';
 import Info from './components/info';
 import Images from './components/images';
+import Bundles from './components/bundles';
 import Similar from './components/similar';
 import HelperComponent from 'platform/classes/helper-component';
 import PageLoader from 'components/page-loader';
@@ -56,6 +57,7 @@ class Details extends HelperComponent<IProps, {}> {
           <div className="P-content">
             {!!data.images.length && <Images data={data} onChange={this.changeDetails} />}
             <Info data={data} />
+            <Bundles data={data} />
           </div>
           <Similar data={data} />
         </> : <PageLoader />}

@@ -1,0 +1,10 @@
+@import 'src/assets/styles/variables';
+
+.P-product-details-bundles {
+  width         : calc(55% - 50px);
+  padding       : 20px;
+  background    : black;
+  margin-left   : auto;
+  border-radius : $big-radius;
+  margin-bottom : 20px;
+}
