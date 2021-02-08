@@ -72,22 +72,6 @@ class Cart extends HelperComponent<{}, IState> {
     {
       name: Settings.translations.price,
       style: { minWidth: '140px' },
-      cell: (row: IBasketListResponseModel) => {
-        const priceInfo = getBasketItemPriceInfo(row);
-
-        return <div className="G-flex G-flex-column G-align-center G-justify-center">
-          <div>{priceInfo.discountedPrice ? <del>{formatPrice(row.totalPrice)}</del> : null}</div>
-          <h3 className={`G-fs-24 ${priceInfo.discountedPrice ? 'G-orange-color' : ''}`}>
-            {priceInfo.discountedPrice ?
-              formatPrice(priceInfo.discountedPrice) :
-              formatPrice(priceInfo.price)}
-          </h3>
-        </div>;
-      }
-    },
-    {
-      name: Settings.translations.price,
-      style: { minWidth: '140px' },
       cell: (row: IBasketListResponseModel) =>
         <div className="G-flex G-flex-column G-align-center G-justify-center">
           <div>{row.promotion.promotionType === PromotionTypeEnum.Discount && row.promotion.result > 0 ?
