@@ -133,14 +133,17 @@
 
   .P-data-table-body {
     min-height : auto !important;
-    overflow   : unset;
+    // overflow   : unset;
 
     ul {
       margin         : 0 !important;
       padding-bottom : 0 !important;
 
       li {
-        padding : 15px;
+
+        &:not(.P-data-table-actions) {
+          padding : 15px;
+        }
       }
     }
 
