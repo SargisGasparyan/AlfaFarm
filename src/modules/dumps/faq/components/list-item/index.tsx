@@ -18,7 +18,7 @@ const ListItem = React.memo(({ data }: IProps) => {
     </div>
 
     {open && <div className="P-faq-list-item-content">
-      <p className="P-description">{data.description}</p>
+      <p className="P-description" dangerouslySetInnerHTML={{ __html: data.description }} />
     </div>}
   </>
 });
