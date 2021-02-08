@@ -19,7 +19,7 @@ class Options extends HelperPureComponent<{}, {}> {
     setTimeout(() => scrollToElement('#clinic-page-start', {
       duration: 400,
       align: 'top',
-      offset: -160,
+      offset: 20,
     }), 0)
   }
 

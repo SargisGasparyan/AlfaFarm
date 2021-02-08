@@ -42,7 +42,7 @@ class MyWallet extends HelperComponent<{}, IState> {
     const { list } = this.state;
     return (
       <Layout>
-        <div className="P-cards-page">
+        <div className={`P-cards-page ${list && list.length ? 'P-cards-page-has-card' : ''}`}>
           {list && list.map((item, index) => <Radio<number> callback={(value: number) => { console.log(value) }} value={item.id} isChecked={false} key={index}>
             <div className="P-card-number">
               {item.pan}

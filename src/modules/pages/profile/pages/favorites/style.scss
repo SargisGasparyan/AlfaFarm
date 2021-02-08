@@ -37,7 +37,10 @@
     > .P-main-info {
       margin : 0 auto 0 40px;
 
-      > h2 { margin-bottom: 20px; }
+      > h2 {
+        font-size     : $normal-fs;
+        margin-bottom : 20px;
+      }
     }
 
     .P-price {
