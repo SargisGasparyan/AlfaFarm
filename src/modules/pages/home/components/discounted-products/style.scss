@@ -61,15 +61,23 @@
 
 .P-home-discounted-products {
   .slick-prev, .slick-next {
+    z-index : 1;
+
     &:before {
       color   : $text-gray;
       z-index : 5;
     }
+
+    &.slick-disabled { display : none; }
   }
   .slick-prev{
-    left: 0;
+    left: -10px;
   }
   .slick-next{
-    right: 0;
+    right: -10px;
+  }
+
+  .slick-slide {
+    padding: 15px;
   }
 }

@@ -11,6 +11,7 @@ import { BannerTypeEnum } from 'platform/api/banner/constants/enums';
 import ROUTES from 'platform/constants/routes';
 
 import './style.scss';
+import { BackArrow, NextArrow } from 'components/slider-arrows';
 
 interface IState {
   data: IBannerListResponseModel[];
@@ -50,7 +51,8 @@ class Carousel extends HelperPureComponent<{}, IState> {
         autoplaySpeed={5000}
         slidesToShow={1}
         slidesToScroll={1}
-        arrows={false}
+        arrows={true}
+        className="P-home-carousel-slider"
       >
         {data.map(item => <div key={item.id}>
           <div className="G-page P-home-carousel-slide" style={{ background: `url('${item.photoPath}') center/cover` }}>

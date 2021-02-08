@@ -35,7 +35,7 @@ class News extends HelperComponent<{}, IState> {
 
     return data.length ? (
       <section className="G-page P-home-news">
-        <ShadowText className="G-text-center">{Settings.translations.news}</ShadowText>
+        <h2 className="G-page-title">{Settings.translations.news}</h2>
 
         <div className="P-list-wrapper">
           {data.map(item => <ListItem key={item.id} data={item} />)}

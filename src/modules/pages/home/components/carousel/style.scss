@@ -1,10 +1,59 @@
 @import "src/assets/styles/variables";
 
+.P-home-carousel-slider {
+
+  &:hover .slick-arrow { opacity: 1 !important; }
+
+  .slick-arrow {
+    z-index       : 1;
+    transition    : .4s;
+    background    : white !important;
+    width         : 29px;
+    height        : 29px;
+    opacity       : 0;
+    border-radius : 50%;
+
+    &.slick-prev {
+      left : 25px;
+    }
+
+    &.slick-next {
+      right : 25px;
+    }
+
+    &::before {
+      top       : 0;
+      left      : -3px;
+      position  : absolute;
+      font-size : 35px;
+      color     : transparentize(black, .2);
+    }
+  }
+
+  .slick-dots > li {
+    width  : 15px;
+    height : 15px;
+
+    &.slick-active > button {
+      border     : 1px solid $main-color;
+      background : white;
+    }
+
+    > button {
+      width      : 12px;
+      height     : 12px;
+      border     : 0;
+      background : transparentize(white, .6);
+    }
+  }
+}
+
 .P-home-carousel-slide {
   display         : flex !important;
   flex-direction  : column;
   justify-content : center;
   position        : relative;
+
   @media (max-width: $mobile-screen) {
     min-height      : 450px!important;
 
@@ -17,7 +66,7 @@
     top              : 0;
     width            : 100%;
     height           : 100%;
-    background-color : rgba(0, 0, 0, 0.4);
+    background-color : transparentize(#000, .9);
   }
 
   @media(max-width : $tablet-screen) {
@@ -27,9 +76,10 @@
     min-height : 220px !important;
   }
   > .P-shadow-text {
-    margin-bottom : 60px;
-    position      : relative;
+    color         : white;
     z-index       : 10;
+    position      : relative;
+    margin-bottom : 20px;
   }
 
   > img {
@@ -39,13 +89,14 @@
   }
 
   > p {
-    width         : 50%;
-    font-size     : 24px;
-    margin-bottom : 80px;
-    font-weight   : bold;
-    color         : $white;
-    position      : relative;
-    z-index       : 10;
+    width          : 50%;
+    font-size      : 28px;
+    letter-spacing : 5px;
+    margin-bottom  : 80px;
+    font-weight    : bold;
+    color          : $white;
+    position       : relative;
+    z-index        : 10;
 
     @media(max-width : $tablet-screen) {
       width     : 100%;

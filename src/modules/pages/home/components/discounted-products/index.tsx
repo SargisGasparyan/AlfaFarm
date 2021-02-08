@@ -73,6 +73,7 @@ class DiscountedProducts extends HelperComponent<{}, IState> {
         <div className="P-list-wrapper">
           <Slider
             {...this.settings}
+            arrows={true}
           >
             {data.map(item => <div key={item.id}>
               <ListItem data={item}/>

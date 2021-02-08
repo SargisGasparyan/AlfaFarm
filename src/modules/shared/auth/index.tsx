@@ -57,18 +57,13 @@ class Auth extends HelperComponent<IProps, IState> {
 
   private onTypeChange = <ActiveData extends object>(contentType: ModalContentEnum, activeData?: ActiveData) => this.safeSetState({ contentType, activeData: activeData || {} });
 
-  private onClose = () => {
-    const { onClose } = this.props
-    this.closable && onClose();
-  }
-
   public render() {
+    const { onClose } = this.props;
 
     return (
       <Modal
         className="P-auth-modal"
-        unclosable={!this.closable}
-        onClose={this.onClose}
+        onClose={onClose}
       >
         <this.ActiveContent />
       </Modal>

@@ -75,7 +75,7 @@ class ContactUs extends HelperComponent<{}, IState> {
 
     return (
       <section className="G-page P-home-contact-us">
-        <ShadowText className="G-text-center">{Settings.translations.contact_us}</ShadowText>
+        <h2 className="G-page-title">{Settings.translations.contact_us}</h2>
         <Form />
 
         <Maps className="P-maps P-home-map">
