@@ -1,7 +1,7 @@
 @import 'src/assets/styles/variables';
 
-.P-tender-details-page {
-
+.G-page.P-tender-details-page {
+  padding        : $page-vertical-offset $page-horizontal-offset + 40px;
   display        : flex;
   flex-direction : column;
 

@@ -1,7 +1,7 @@
 @import './variables';
 
 .G-page-content {
-  padding-top : 122px;
+  padding-top : $header-size;
   @media (max-width : $small-screen) {
     padding-top : 70px;
   }

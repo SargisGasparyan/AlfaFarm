@@ -7,7 +7,6 @@
   .slick-arrow {
     z-index       : 1;
     transition    : .4s;
-    background    : white !important;
     width         : 29px;
     height        : 29px;
     opacity       : 0;
@@ -26,7 +25,7 @@
       left      : -3px;
       position  : absolute;
       font-size : 35px;
-      color     : transparentize(black, .2);
+      color     : transparentize(black, .7);
     }
   }
 
