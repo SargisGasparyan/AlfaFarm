@@ -74,6 +74,7 @@ class DiscountedProducts extends HelperComponent<{}, IState> {
           <Slider
             {...this.settings}
             arrows={true}
+            swipe={false}
           >
             {data.map(item => <div key={item.id}>
               <ListItem data={item}/>

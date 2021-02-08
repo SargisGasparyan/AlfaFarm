@@ -20,6 +20,10 @@ export interface IOrderDetailsResponseModel {
   paymentType: PaymentTypeEnum;
   productQuantity: number;
   address: string;
+  building?: string;
+  entrance?: string;
+  appartment?: string;
+  floor?: string;
   totalPrice: number;
   fullName: string;
   phone: string;

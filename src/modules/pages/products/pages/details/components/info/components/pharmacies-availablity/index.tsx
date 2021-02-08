@@ -39,8 +39,15 @@ class PharmaciesAvailablity extends HelperComponent<IProps, IState> {
 
     if (!data) return [];
 
-    if (!searchValue) return data.branches;
-    return data.branches.filter(item => item.name.includes(searchValue));
+    if (!searchValue || !searchValue.trim()) return data.branches;
+
+    const searchParams = searchValue.split(' ').filter(x => !!x);
+    
+    return data.branches.filter(item => (
+      searchParams.every(x => item.name
+        .toLowerCase()
+        .includes(x.toLowerCase()))
+    )); 
   }
 
   private get markers() {

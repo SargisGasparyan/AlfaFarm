@@ -1,10 +1,26 @@
 @import 'assets/styles/variables.scss';
 
+@media (max-width: $medium-screen) {
+  $page-horizontal-offset: 40px;
+  
+  div.P-about-us-stuff > .P-maps {
+    width : calc(100% + #{2 * $page-horizontal-offset});
+    margin : 100px (-$page-horizontal-offset) 0 0;
+  }
+}
+
 @media (max-width: $tablet-screen) {
+  $page-horizontal-offset: 15px;
+  
   div.P-about-us-stuff {
     > h1 {
       width: 100%;
       text-align: center;
+    }
+
+    > .P-maps {
+      width : calc(100% + #{2 * $page-horizontal-offset});
+      margin : 100px (-$page-horizontal-offset) 0 0;
     }
   }
 }

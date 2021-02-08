@@ -135,6 +135,26 @@ class Details extends HelperComponent<RouteComponentProps<IRouteParams>, IState>
               {Settings.translations.address}
               <span>{data.address}</span>
             </h3>
+
+            {data.building && <h3 className="G-flex G-mb-30 G-flex-justify-between">
+              {Settings.translations.building}
+              <span>{data.building}</span>
+            </h3>}
+
+            {data.entrance && <h3 className="G-flex G-mb-30 G-flex-justify-between">
+              {Settings.translations.entrance}
+              <span>{data.entrance}</span>
+            </h3>}
+            
+            {data.appartment && <h3 className="G-flex G-mb-30 G-flex-justify-between">
+              {Settings.translations.apartment}
+              <span>{data.appartment}</span>
+            </h3>}
+
+            {data.floor && <h3 className="G-flex G-mb-30 G-flex-justify-between">
+              {Settings.translations.floor}
+              <span>{data.floor}</span>
+            </h3>}
           </div>}
 
           <Shared.Products.TableList list={data.baskets} />

@@ -1236,7 +1236,7 @@ export default {
   choose_pharmacy: "Ընտրեք դեղատուն",
   choose_time: "Ընտրել ժամը",
   choose_date: "Ընտրեք ամսաթիվը",
-  asap: "ASAP",
+  asap: "Հնարավորինս շուտ",
   user_request_ask: "խնդրում է ավելացնել այս ապրանքը",
   prescription: "Դեղատոմս",
   prescriptions: "Դեղատոմսեր",

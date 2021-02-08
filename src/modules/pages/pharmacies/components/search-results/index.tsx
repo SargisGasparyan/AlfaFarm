@@ -40,12 +40,11 @@ class SearchResults extends HelperComponent<IProps, IState> {
 
     const searchParams = searchValue.split(' ').filter(x => !!x);
     
-    return data.filter(item => {
-
-      return !searchParams.some(x => !item.name
+    return data.filter(item => (
+      !searchParams.some(x => !item.name
         .toLowerCase()
-        .includes(x.toLowerCase()));
-    });
+        .includes(x.toLowerCase()))
+    ));
   }
 
   private get markers() {
