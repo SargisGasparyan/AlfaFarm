@@ -156,25 +156,38 @@ class Info extends HelperComponent<IProps, IState> {
         <h3 className="P-unit">{data.unitQuantity} {data.unitName}</h3>
         {data.category && <h3 className="P-row">
           {Settings.translations.category}
-          <span className="P-value G-cursor-pointer" onClick={this.navigateToCategory}>{data.category.name}</span>
+          <span className="P-value G-cursor-pointer" onClick={this.navigateToCategory}>
+            {data.category.name}
+            <i className="icon-Group-5513 P-arrow-icon" />
+          </span>
         </h3>}
         {data.producer && <h3 className="P-row">
           {Settings.translations.producer}
-          <span className="P-value G-cursor-pointer" onClick={this.navigateToProducer}>{data.producer.name}</span>
+          <span className="P-value G-cursor-pointer" onClick={this.navigateToProducer}>
+            {data.producer.name}
+            <i className="icon-Group-5513 P-arrow-icon" />
+          </span>
         </h3>}
         {data.brand && <h3 className="P-row">
           {Settings.translations.brand}
-          <span className="P-value G-cursor-pointer" onClick={this.navigateToBrand}>{data.brand.name}</span>
+          <span className="P-value G-cursor-pointer" onClick={this.navigateToBrand}>
+            {data.brand.name}
+            <i className="icon-Group-5513 P-arrow-icon" />
+          </span>
         </h3>}
         <h3 className="P-row">
           {Settings.translations.availability_at_the_nearest_pharmacy}
-          <span className="P-value G-cursor-pointer" onClick={this.togglePharmaciesAvailablity}>
+          <span className="P-value P-pin G-cursor-pointer" onClick={this.togglePharmaciesAvailablity}>
             <img src={PinImage} alt="pin" />
+            <i className="icon-Group-5513 P-arrow-icon" />
           </span>
         </h3>
         {data.activeIngredients && <h3 className="P-row">
           {Settings.translations.active_ingredients}
-          <span className="P-value G-cursor-pointer" onClick={this.navigateToActiveIngredients}>{data.activeIngredients.map(item => item.name).join(', ')}</span>
+          <span className="P-value G-cursor-pointer" onClick={this.navigateToActiveIngredients}>
+            {data.activeIngredients.map(item => item.name).join(', ')}
+            <i className="icon-Group-5513 P-arrow-icon" />
+          </span>
         </h3>}
         <h3>{Settings.translations.description}</h3>
         <p className="P-description">{data.description}</p>

@@ -29,6 +29,11 @@
         color       : black;
         width       : 50%;
         margin-left : auto;
+
+        &.P-pin {
+          display     : flex;
+          align-items : center;
+        }
       }
     }
   }
@@ -62,6 +67,7 @@
         display      : block;
         margin-right : 30px;
       }
+
       > span {
         color: $main-color;
         display: block;
@@ -89,5 +95,11 @@
     .P-selected-count-type {
       color : #000 !important;
     }
+  }
+
+  .P-arrow-icon {
+    color        : $text-gray-light;
+    font-size    : 14px;
+    padding-left : 5px;
   }
 }

@@ -29,6 +29,7 @@ import './style.scss';
 import './responsive.scss';
 import { IProductSearcResponseModel } from 'platform/api/product/models/response';
 import SearchPopup from './components/search';
+import Connection from 'platform/services/connection';
 
 interface IState {
   authOpen: boolean;
@@ -139,19 +140,13 @@ class Header extends HelperPureComponent<{}, IState> {
     // }
     if (value) {
       this.safeSetState({ searchLoader: true }, async () => {
+        Connection.AbortAll();
         const data = await ProductController.Search(value);
-        if (data?.data?.products.length) {
-          this.safeSetState({ searchResult: data.data, searchOpen: true })
-        } else {
-          this.closeSearch();
-        }
+        if (data?.data?.products.length) this.safeSetState({ searchResult: data.data, searchOpen: true })
+        else this.closeSearch();
         this.safeSetState({ searchLoader: false })
-      })
-
-      
-    } else {
-      this.closeSearch();
-    }
+      });
+    } else this.closeSearch();
   }
 
   private closeSearch = () => {
@@ -189,7 +184,7 @@ class Header extends HelperPureComponent<{}, IState> {
             {enviroment.WHOLESALE ? <WholesaleContent /> : <>
               <div className="P-search-wrapper">
                 <SearchInput
-                  onSubmit={this.searchSubmit}
+                  onChange={this.searchSubmit}
                   loading={searchLoader}
                   withSubmit={true}
                 />
