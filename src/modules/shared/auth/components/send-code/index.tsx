@@ -45,9 +45,9 @@ class SendCode extends HelperComponent<IProps, IState> {
 
   private submit = (e: React.SyntheticEvent) => {
     e.preventDefault();
+    
     this.safeSetState({ submited: true }, async () => {
       this.formValidation.valid && this.safeSetState({ submitLoading: true }, async () => {
-        const alertify = await import('alertifyjs');
         const { onTypeChange } = this.props;
         const form = {...this.state.form};
         const activeData = this.props.activeData as { signUp: boolean, fromSocial: boolean } || null;
@@ -57,10 +57,9 @@ class SendCode extends HelperComponent<IProps, IState> {
 
         const result = await AuthController.SendCode(form);
         
-        if (result.data) {
-          alertify.success(`${result.data}`);
+        if (result.data)
           onTypeChange(ModalContentEnum.Verify, { form, fromSocial: activeData.fromSocial, signUp: activeData ? activeData.signUp : false });
-        } else this.safeSetState({ submitLoading: false });
+        else this.safeSetState({ submitLoading: false });
       });
     });
   }

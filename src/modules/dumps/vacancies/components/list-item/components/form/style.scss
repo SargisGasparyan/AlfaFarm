@@ -1,0 +1,49 @@
+@import 'src/assets/styles/variables';
+
+.P-vacancies-apply-form {
+  margin : 0 auto;
+
+  > .P-upload-part {
+    display     : flex;
+    margin-top  : 20px;
+    align-items : center;
+
+    > .P-upload-button {
+      display      : flex;
+      margin-right : 20px;
+
+      > .G-main-button {
+        width           : 200px;
+        cursor          : pointer;
+        display         : flex;
+        font-size       : 16px;
+        max-width       : 100%;
+        align-items     : center;
+        justify-content : center;
+
+        > i {
+          font-size    : 24px;
+          margin-right : 10px;
+        }
+      }  
+    }
+
+    > span {
+      width       : 100%;
+      display     : flex;
+      align-items : center;
+
+      > i {
+        color       : $orange;
+        cursor      : pointer;
+        margin      : 7px 0 0 10px;
+        font-size   : 14px;
+        font-weight : bold;
+      }
+    }
+  }
+
+  > .G-main-button {
+    margin-top : 20px;
+  }
+}

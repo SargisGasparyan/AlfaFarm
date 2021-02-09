@@ -1,6 +1,6 @@
 import Connection from '../../services/connection';
 import { IResponse } from '../../constants/interfaces';
-import { ILoginResponseModel } from './models/response';
+import { ILoginResponseModel, ISendCodeResponseModel } from './models/response';
 import { ILoginRequestModel, ISendCodeRequestModel, IVerifyRequestModel, IRecoveryRequestModel, ISocialLoginRequestModel } from './models/request';
 
 const controller = 'auth';
@@ -27,7 +27,7 @@ class AuthController {
     return result;
   };
 
-  public static SendCode = (form: ISendCodeRequestModel): Promise<IResponse<number>> => {
+  public static SendCode = (form: ISendCodeRequestModel): Promise<IResponse<ISendCodeResponseModel>> => {
     const result = Connection.POST({
       body: form,
       action: 'code',

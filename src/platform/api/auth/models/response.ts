@@ -3,3 +3,7 @@ export interface ILoginResponseModel {
   expireDate: string;
   isVerified: boolean;
 }
+
+export interface ISendCodeResponseModel {
+  phoneNumber: string;
+}

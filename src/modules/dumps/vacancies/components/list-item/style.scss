@@ -1,12 +1,6 @@
 @import 'src/assets/styles/helper';
 @import 'src/assets/styles/variables';
 
-.P-vacancies-list-item, .P-vacancies-list-item-content {
-  width     : 1000px;
-  margin    : 0 auto 40px;
-  max-width : 100%;
-}
-
 .P-vacancies-list-item {
   cursor          : pointer;
   display         : flex;
@@ -41,11 +35,23 @@
   }
 }
 
+.P-vacancies-list-item, .P-vacancies-list-item-content {
+  width     : 1000px;
+  margin    : 0 auto 40px;
+  max-width : 100%;
+}
+
 .P-vacancies-list-item-content {
   padding : 0 35px;
   
   > .P-description {
     font-size   : $normal-fs;
     line-height : 42px;
+  }
+
+  > .P-apply-online {
+    width      : 100%;
+    margin     : 40px 0 60px;
+    text-align : center;
   }
 }
