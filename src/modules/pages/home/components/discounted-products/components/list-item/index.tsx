@@ -39,7 +39,7 @@ const ListItem = React.memo(({ data }: IProps) => {
     data.imagePath && PhotoStorage.getURL(data.imagePath).then(url => setLoadingImage(url));
   }, []);
 
-  const isDiscount = data?.promotion?.result && data.promotion.promotionType == PromotionTypeEnum.Discount;
+  const isDiscount = data?.promotion?.result && data.promotion.promotionType === PromotionTypeEnum.Discount;
 
   return (
     <Link to={ROUTES.PRODUCTS.DETAILS.replace(':id', data.id)} className="P-home-discounted-products-list-item">
