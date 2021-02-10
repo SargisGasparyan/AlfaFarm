@@ -3,13 +3,13 @@
 .P-home-news-list-item {
   flex            : 1;
   margin          : 15px;
-  border          : 1px solid $light-gray;
+  display         : block;
   overflow        : hidden;
   min-width       : 280px;
   max-width       : 350px;
+  box-shadow      : $default-block-shadow;
   background      : white;
   border-radius   : 10px;
-  display         : block;
   text-decoration : none;
 
   > .P-image {

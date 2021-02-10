@@ -6,12 +6,12 @@ import { getMediaPath, formatPrice } from 'platform/services/helper';
 import ROUTES from 'platform/constants/routes';
 import { IBasketListResponseModel } from 'platform/api/basket/models/response';
 
-import './style.scss';
 import CountInput from 'components/count-input';
 import { Link } from 'react-router-dom';
-import { PromotionTypeEnum } from 'platform/constants/enums';
 import { getBasketItemPriceInfo } from 'platform/services/basket';
+import PhotoStorage from 'platform/services/photoStorage';
 
+import './style.scss';
 
 interface IProps {
   list: IBasketListResponseModel[];
@@ -19,13 +19,15 @@ interface IProps {
 };
 
 const TableList = ({ list, onQuantityChange }: IProps) => {
+  const [tableList, setTableList] = React.useState<IBasketListResponseModel[]>([]);
+
   const columnConfig = [
     {
       name: Settings.translations.product,
       cell: (row: IBasketListResponseModel) => <Link to={ROUTES.PRODUCTS.DETAILS.replace(':id', row.productId)}>
         <div
           className="P-image G-square-image-block"
-          style={{ background: `url('${getMediaPath(row.productPhoto)}') center/cover` }}
+          style={{ background: `url('${getMediaPath(row.productPhoto)}') center/contain no-repeat` }}
         />
 
         <div className="P-main-info">
@@ -64,10 +66,18 @@ const TableList = ({ list, onQuantityChange }: IProps) => {
     },
   ];
 
+  React.useEffect(() => {
+    setTableList(list.map(item => ({...item})));
+    Promise.all(list.map(item => PhotoStorage.getURL(item.productPhoto).then(url => ({
+      ...item,
+      productPhoto: url,
+    })))).then(result => setTableList(result));
+  }, [JSON.stringify(list)]);
+
   return <Table<IBasketListResponseModel>
     className="P-products-table-list"
     columnConfig={columnConfig}
-    data={list}
+    data={tableList}
   />;
 };
 

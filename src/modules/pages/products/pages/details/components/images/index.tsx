@@ -8,11 +8,12 @@ import { getMediaPath } from 'platform/services/helper';
 
 import { IFavoriteListResponseModel } from 'platform/api/favorite/models/response';
 import FavoriteController from 'platform/api/favorite';
-
-import './style.scss';
 import Settings from 'platform/services/settings';
 import UserController from 'platform/api/user';
 import ConfirmModal from 'components/confirm-modal';
+
+import './style.scss';
+import PhotoStorage from 'platform/services/photoStorage';
 
 interface IProps {
   data: IProductDetailsResponseModel;
@@ -35,7 +36,18 @@ class Images extends HelperPureComponent<IProps, IState> {
 
   public componentDidMount() {
     const { data } = this.props;
-    this.safeSetState({ activeId: data.images[0].id });
+    this.safeSetState({ activeId: data.images[0].id }, async () => {
+      const { data, onChange } = this.props;
+      const result = await Promise.all(data.images.map(item => PhotoStorage.getURL(item.path).then(url => ({
+        ...item,
+        path: url,
+      }))));
+
+      onChange({
+        ...data,
+        images: result,
+      });
+    });
   }
 
   private get activeImage() {

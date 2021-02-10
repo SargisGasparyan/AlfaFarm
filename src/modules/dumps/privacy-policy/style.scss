@@ -1,0 +1,20 @@
+@import 'src/assets/styles/variables';
+
+.G-page.P-card-info-page {
+  flex-wrap       : wrap;
+  align-items     : flex-start;
+  justify-content : center;
+
+  > .P-content {
+    width     : 100%;
+    padding   : 0 200px 50px;
+
+    p {
+      margin-bottom: 10px;
+    }
+
+    h4, ul {
+      margin-bottom: 30px;
+    }
+  }
+}

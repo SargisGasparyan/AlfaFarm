@@ -315,12 +315,12 @@
 }
 
 .G-square-image-block {
+  padding    : 5px;
   min-width  : 120px;
   max-width  : 120px;
   min-height : 120px;
   max-height : 120px;
-  border     : 1px solid $light-gray;
-  padding    : 5px;
+  box-shadow : $default-block-shadow;
 }
 
 // #region Sizes

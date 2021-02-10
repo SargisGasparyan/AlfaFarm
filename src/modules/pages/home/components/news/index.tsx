@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 
 import Settings from 'platform/services/settings';
 import ROUTES from 'platform/constants/routes';
-import ShadowText from 'components/shadow-text';
 import ListItem from './components/list-item';
 import { INewsListResponseModel } from 'platform/api/news/models/response';
 import NewsController from 'platform/api/news';

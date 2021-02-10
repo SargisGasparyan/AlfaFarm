@@ -1,11 +1,7 @@
 @import 'src/assets/styles/variables';
 
 .P-profile-special-products {
-  padding        : 0 20px;
   display        : flex;
-  background     : white;
-  box-shadow     : $default-block-shadow;
-  border-radius  : $big-radius;
   flex-direction : column;
   position       : relative;
 
@@ -19,15 +15,19 @@
 
   > .P-list-item {
     color           : black;
-    padding         : 20px 0;
+    padding         : 20px;
     display         : flex;
+    box-shadow      : $default-block-shadow;
+    background      : white;
     align-items     : center;
-    border-bottom   : 1px solid $light-gray;
+    border-radius   : $big-radius;
+    margin-bottom   : 20px;
     justify-content : space-between;
     text-decoration : none;
 
     > .P-image {
       display         : flex;
+      box-shadow      : none;
       align-items     : flex-start;
       justify-content : flex-end;
     }

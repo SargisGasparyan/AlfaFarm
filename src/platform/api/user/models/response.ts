@@ -20,7 +20,7 @@ export interface IPreferredProductListResponseModel {
   expiredDate: string;
   isFavorite: boolean;
   discount?: number;
-  imagePath?: string;
+  imagePath: string;
   unitName: string;
   unitQuantity: number;
 };

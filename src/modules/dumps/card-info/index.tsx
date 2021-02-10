@@ -4,13 +4,6 @@ import ROUTES from 'platform/constants/routes';
 import { byRoute } from 'platform/decorators/routes';
 import HelperComponent from 'platform/classes/helper-component';
 import Settings from 'platform/services/settings';
-import ShadowText from 'components/shadow-text';
-import { infinityScrollPageLimit } from 'platform/constants';
-import { scrolledToBottom } from 'platform/services/helper';
-import PageLoader from 'components/page-loader';
-import { onlyForUsers } from 'platform/guards/routes';
-import TenderController from 'platform/api/tender';
-import { ITenderListResponseModel } from 'platform/api/tender/models/response';
 
 import './style.scss';
 
@@ -31,4 +24,4 @@ class CardInfo extends HelperComponent<{}, {}> {
   }
 }
 
-export default { CardInfo };
+export default CardInfo;

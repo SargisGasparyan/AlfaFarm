@@ -10,6 +10,7 @@ export interface IBasketResponseModel {
 
 export interface IBasketListResponseModel {
   id: number;
+  havePackage: boolean;
   productId: number;
   productPhoto: string;
   price: number;

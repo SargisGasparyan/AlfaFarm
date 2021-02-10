@@ -7,12 +7,12 @@
   width           : calc(25% - 40px);
   color           : black;
   margin          : 20px;
-  border          : 1px solid $light-gray;
   display         : flex;
   padding         : 10px 30px 30px;
   position        : relative;
   min-width       : 150px;
   background      : white;
+  box-shadow      : $default-block-shadow;
   border-radius   : $big-radius;
   flex-direction  : column;
   text-decoration : none;

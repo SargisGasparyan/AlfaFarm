@@ -38,23 +38,28 @@ const Footer = React.memo(() => (
         </div>
       </div>
       {!enviroment.WHOLESALE && <>
-        <div className="P-column">
+        {/* <div className="P-column">
           <h3 className="G-main-color">{Settings.translations.wholesale_sale}</h3>
-          <a href={Settings.wholesaleURL + ROUTES.SERVICES} target="blank">{Settings.translations.services}</a>
-        </div>
+        </div> */}
         <div className="P-column">
-          <h3 className="G-main-color">{Settings.translations.retail_sale}</h3>
-          <Link to={ROUTES.CARD_INFO}>{Settings.translations.what_is_alfa_card}</Link>
-          <Link to={ROUTES.VACANCIES}>{Settings.translations.vacancies}</Link>
+          <h3 className="G-main-color">{Settings.translations.about_company}</h3>
           <Link to={ROUTES.ABOUT_US}>{Settings.translations.about_us}</Link>
           <Link to={ROUTES.NEWS.MAIN}>{Settings.translations.news}</Link>
+          <Link to={ROUTES.VACANCIES}>{Settings.translations.vacancies}</Link>          
+        </div>
+        <div className="P-column">
+          <h3 className="G-main-color">{Settings.translations.information}</h3>
+          <Link to={ROUTES.FAQ}>{Settings.translations.faq}</Link>
+          <Link to={ROUTES.CARD_INFO}>{Settings.translations.what_is_alfa_card}</Link>
+          <Link to={ROUTES.TENDERS.MAIN}>{Settings.translations.tenders}</Link>
+          <a href={Settings.wholesaleURL + ROUTES.SERVICES} target="blank">{Settings.translations.wholesale_sale}</a>
+          <Link to={ROUTES.PRIVACY_POLICY}>{Settings.translations.privacy_policy}</Link>
+          <Link to={ROUTES.TERMS_OF_USE}>{Settings.translations.terms_of_use}</Link>
         </div>
       </>}
       <div className="P-column">
         <h3 className="G-main-color">{Settings.translations.useful_links}</h3>
-        {!enviroment.WHOLESALE && <Link to={ROUTES.HOW_TO_USE_APP}>{Settings.translations.how_to_use_app}</Link>}
-        <Link to={ROUTES.FAQ}>{Settings.translations.faq}</Link>
-        {!enviroment.WHOLESALE && <Link to={ROUTES.TENDERS.MAIN}>{Settings.translations.tenders}</Link>}
+        {!enviroment.WHOLESALE && <Link to={ROUTES.HOW_TO_ORDER_ONLINE}>{Settings.translations.how_to_order_online}</Link>}
       </div>
       <div className="P-column">
         <h3 className="G-main-color">{Settings.translations.contact}</h3>

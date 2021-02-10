@@ -88,7 +88,7 @@ const ROUTES = {
   CHECKOUT: '/checkout',
   ABOUT_US: '/about-us',
   VACANCIES: '/vacancies',
-  HOW_TO_USE_APP: '/how-to-use-app',
+  HOW_TO_ORDER_ONLINE: '/how-to-order-online',
   CONTACT: '/contact',
   BUSINESS: '/business',
   CONTRACT: '/contract',
@@ -100,6 +100,8 @@ const ROUTES = {
   WHOLESALE_NEWS: '/wholesale-news',
   WHOLESALE_PROMOTIONS: '/wholesale-promotions',
   CONFIDENTIALITY_CONDITIONS: '/conditions',
+  PRIVACY_POLICY: '/privacy-policy',
+  TERMS_OF_USE: '/terms-of-use',
 
   BLOG: BLOG_ROUTES,
   NEWS: NEWS_ROUTES,

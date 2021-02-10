@@ -3,7 +3,7 @@ import { PromotionTypeEnum } from 'platform/constants/enums';
 
 export function getBasketItemPriceInfo(item: IBasketListResponseModel) {
   const result = {
-    price: item.productQuantity * (item.isPackage ? item.packagePrice : item.price),
+    price: item.productQuantity * (item.isPackage && item.havePackage ? item.packagePrice : item.price),
     discountedPrice: 0,
     bonus: 0,
   };

@@ -20,6 +20,7 @@
       > a {
         color           : black;
         display         : flex;
+        padding         : 5px;
         text-decoration : none;
         @include bold-font;
 

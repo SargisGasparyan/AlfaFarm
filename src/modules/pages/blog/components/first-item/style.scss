@@ -2,10 +2,10 @@
 
 .P-blog-first-item {
   width         : 100%;
-  border        : 1px solid $light-gray;
   display       : flex;
   overflow      : hidden;
   flex-wrap     : wrap;
+  box-shadow    : $default-block-shadow;
   border-radius : 12px;
 
   > div {
@@ -24,7 +24,7 @@
       max-width : 100%;
   
       > h2 { margin-bottom: 20px; }
-      
+
       > p {
         font-size     : 20px;
         margin-bottom : 30px;

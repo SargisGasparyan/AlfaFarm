@@ -7,7 +7,7 @@ import HelperPureComponent from 'platform/classes/helper-pure-component';
 
 import './style.scss';
 
-@byRoute(ROUTES.HOW_TO_USE_APP)
+@byRoute(ROUTES.HOW_TO_ORDER_ONLINE)
 class HowToUseApp extends HelperPureComponent<{}, {}> {
 
   private iframeProps = {
@@ -23,7 +23,7 @@ class HowToUseApp extends HelperPureComponent<{}, {}> {
 
     return (
       <section className="G-page P-how-to-use-page">
-        <h1 className="G-page-title">{Settings.translations.how_to_use_app}</h1>
+        <h1 className="G-page-title">{Settings.translations.how_to_order_online}</h1>
 
         <iframe
           src="https://www.youtube.com/embed/d6x-3HjlfLk"

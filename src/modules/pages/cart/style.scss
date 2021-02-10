@@ -17,7 +17,6 @@
       padding    : 0 14vh;
       background : none;
 
-
       > li {
         color         : $text-gray;
         font-size     : 22px;
@@ -55,6 +54,7 @@
 
           > a {
             color   : black;
+            padding : 5px;
             display : flex;
             @include bold-font;
 

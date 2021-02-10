@@ -11,13 +11,16 @@ import DispatcherChannels from 'platform/constants/dispatcher-channels';
 import './style.scss';
 import ROUTES from 'platform/constants/routes';
 import { Link } from 'react-router-dom';
+import PhotoStorage from 'platform/services/photoStorage';
+import { PromotionTypeEnum } from 'platform/constants/enums';
 
 interface IProps {
   data: IProductListResponseModel;
 };
 
 const ListItem = React.memo(({ data }: IProps) => {
-  const [cartLoading, setCartLoading] = React.useState<boolean>(false);
+  const [loadingImage, setLoadingImage] = React.useState('');
+  const [cartLoading, setCartLoading] = React.useState(false);
   const addToCart = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     setCartLoading(true);
@@ -32,13 +35,19 @@ const ListItem = React.memo(({ data }: IProps) => {
     setCartLoading(false);
   }
 
+  React.useEffect(() => {
+    data.imagePath && PhotoStorage.getURL(data.imagePath).then(url => setLoadingImage(url));
+  }, []);
+
+  const isDiscount = data?.promotion?.result && data.promotion.promotionType == PromotionTypeEnum.Discount;
+
   return (
     <Link to={ROUTES.PRODUCTS.DETAILS.replace(':id', data.id)} className="P-home-discounted-products-list-item">
       {!!data.promotion.percent && <Shared.Products.DiscountLabel percent={data.promotion.percent} type={data.promotion.promotionType} />}
-      <div className="P-image" style={{ background: `url('${getMediaPath(data.imagePath)}') center/contain no-repeat` }} />
+      <div className="P-image" style={{ background: `url('${loadingImage}') center/contain no-repeat` }} />
       <h3>{truncateText(data.title)}</h3>
-      {(!!data.discount || !!data.promotion?.result) && <del className="P-without-discount-price">{formatPrice(data.price)}</del>}
-      <span className="P-price">{formatPrice(data.promotion?.result || data.discountedPrice || data.price)}</span>
+      {isDiscount && <del className="P-without-discount-price">{formatPrice(data.price)}</del>}
+      <span className="P-price">{formatPrice(isDiscount ? data.promotion.result : data.price)}</span>
       <LoaderContent
         loading={cartLoading}
         className="G-main-button"

@@ -8,19 +8,20 @@ import { infinityScrollPageLimit } from 'platform/constants';
 import { NotificationTypeEnum } from 'platform/constants/enums';
 import { Link } from 'react-router-dom';
 import ROUTES from 'platform/constants/routes';
-import { formatDate } from 'platform/services/helper';
-
-import './style.scss';
 import ClickOutside from 'components/click-outside';
 import NotificationImage1 from 'assets/images/sale.svg';
 import NotificationImage2 from 'assets/images/not.svg';
 import NotificationImage3 from 'assets/images/help.svg';
 import Settings from 'platform/services/settings';
 import NotificationAnswer from '../notification-answer';
+import { scrolledToBottomOfElement } from 'platform/services/helper';
+
+import './style.scss';
 
 interface IState {
   data?: IPagingResponse<INotificationListResponseModel>;
   selectedItem?: INotificationListResponseModel;
+  loading: boolean;
 };
 
 interface IProps {
@@ -29,24 +30,21 @@ interface IProps {
 
 class Notifications extends HelperPureComponent<IProps, IState> {
 
-  public state: IState = {};
+  public state: IState = { loading: false };
 
-  public componentDidMount() {
-    this.fetchData();
-    // document.body.style.overflowY = 'hidden';
-  }
-  public componentWillUnmount() {
-    // document.body.style.overflowY = 'initial';
-  }
+  private pageNumber = 1;
+
+  public componentDidMount() { this.fetchData(); }
 
   private fetchData = async () => {
+    const { data } = this.state;
     const body = {
       pageSize: infinityScrollPageLimit,
-      pageNumber: 1,
-      onlyUnseen: undefined,
+      pageNumber: this.pageNumber,
     };
 
     const result = await NotificationController.GetList(body);
+    if (data) result.data.list = [...data.list, ...result.data.list];
     this.safeSetState({ data: result.data });
   }
 
@@ -124,13 +122,21 @@ class Notifications extends HelperPureComponent<IProps, IState> {
     return null;
   }
 
+  scrolled = (e: React.SyntheticEvent) => {
+    const { loading, data } = this.state;
+    if (scrolledToBottomOfElement(e.currentTarget as HTMLElement) && !loading && data && this.pageNumber < data.pageCount) {
+      this.pageNumber += 1;
+      this.fetchData();
+    }
+  }
+
   public render() {
     const { onClose } = this.props;
     const { data, selectedItem } = this.state;
 
     return (
       <ClickOutside onClickOutside={!selectedItem ? onClose : () => { console.log('') }}>
-        <aside className="P-header-notifications">
+        <aside className="P-header-notifications" onScroll={this.scrolled}>
           <h6>{Settings.translations.notifications}</h6>
           {data && data.list.map(item => <this.ListItem key={item.id} item={item} />)}
         </aside>

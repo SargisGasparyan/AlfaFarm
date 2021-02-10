@@ -25,6 +25,7 @@ import ConfirmModal from 'components/confirm-modal';
 import { getBasketItemPriceInfo } from 'platform/services/basket';
 
 import './style.scss';
+import PhotoStorage from 'platform/services/photoStorage';
 
 interface IState {
   data?: IBasketResponseModel;
@@ -43,7 +44,7 @@ class Cart extends HelperComponent<{}, IState> {
       cell: (row: IBasketListResponseModel) => <Link to={ROUTES.PRODUCTS.DETAILS.replace(':id', row.productId)}>
         <div
           className="P-image G-square-image-block"
-          style={{ background: `url('${getMediaPath(row.productPhoto)}') center/cover` }}
+          style={{ background: `url('${getMediaPath(row.productPhoto)}') center/contain no-repeat` }}
         />
 
         <div className="P-main-info">
@@ -95,9 +96,9 @@ class Cart extends HelperComponent<{}, IState> {
   ];
 
   public componentDidMount() {
-  this.fetchData();
-  this.updateBasketCount();
-}
+    this.fetchData();
+    this.updateBasketCount();
+  }
 
   private deleteBasketItem = async (item: IBasketListResponseModel) => {
     const result = await BasketController.Delete(item.productId, item.isPackage);
@@ -109,7 +110,20 @@ class Cart extends HelperComponent<{}, IState> {
     private updateBasketCount = () => window.dispatchEvent(new CustomEvent(DispatcherChannels.CartItemsUpdate));
     private fetchData = async () => {
     const result = await BasketController.GetList();
-    this.safeSetState({ data: result.data });
+
+    this.safeSetState({ data: result.data }, async () => {
+      const { data } = this.state;
+
+      if (data) {
+        const result = await Promise.all(data.items.map(item => PhotoStorage.getURL(item.productPhoto).then(url => ({
+          ...item,
+          productPhoto: url,
+        }))));
+
+        data.items = result;
+        this.safeSetState({ data });
+      }
+    });
   }
 
   private changeCount = async (row: IBasketListResponseModel, index: number, count: number) => {

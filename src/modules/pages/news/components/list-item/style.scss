@@ -4,10 +4,10 @@
 
 .P-news-list-item {
   width         : calc(100% / 3 - 40px);
-  border        : 1px solid $light-gray;
   margin        : 20px;
   display       : flex;
   overflow      : hidden;
+  box-shadow    : $default-block-shadow;
   border-radius : $big-radius;
 
   > .P-image {
@@ -30,7 +30,6 @@
     }
 
     > p {
-      color         : $text-gray;
       font-size     : $normal-fs;
       margin-bottom : 30px;
     }

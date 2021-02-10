@@ -11,10 +11,13 @@ import FavoriteController from 'platform/api/favorite';
 import BasketController from 'platform/api/basket';
 import LoaderContent from 'components/loader-content';
 import DispatcherChannels from 'platform/constants/dispatcher-channels';
-
-import './style.scss';
 import UserController from 'platform/api/user';
 import ConfirmModal from 'components/confirm-modal';
+import LogoGray from 'assets/images/logo_gray.png';
+
+import './style.scss';
+import PhotoStorage from 'platform/services/photoStorage';
+import { PromotionTypeEnum } from 'platform/constants/enums';
 
 interface IProps {
   data: IProductListResponseModel;
@@ -22,10 +25,15 @@ interface IProps {
 };
 
 const ListItem = React.memo((props: IProps) => {
+  const [loadingImage, setLoadingImage] = React.useState('');
   const [data, setData] = React.useState(props.data);
   const [cartLoading, setCartLoading] = React.useState<boolean>(false);
   const [confirmModal, setConfirmModal] = React.useState<boolean>(false);
   const [count, setCount] = React.useState<number>(1);
+
+  React.useEffect(() => {
+    data.imagePath && PhotoStorage.getURL(data.imagePath).then(url => setLoadingImage(url));
+  }, []);
 
   const toggleFavorite = async (e: React.SyntheticEvent) => {
     e.preventDefault();
@@ -58,11 +66,13 @@ const ListItem = React.memo((props: IProps) => {
     }
   }
 
+  const isDiscount = data?.promotion?.result && data.promotion.promotionType == PromotionTypeEnum.Discount;
+
   return (
     <>
       <Link className="P-products-list-item" to={ROUTES.PRODUCTS.DETAILS.replace(':id', data.id)}>
         {!!data.promotion.percent && <DiscountLabel percent={data.promotion.percent} type={data.promotion.promotionType} />}
-        <div className="P-image" style={{ background: `url('${getMediaPath(data.imagePath)}') center/contain no-repeat` }} />
+        <div className="P-image" style={{ background: `url('${getMediaPath(loadingImage)}') center/contain no-repeat` }} />
         
         {!Settings.guest && <i
           onClick={toggleFavorite}
@@ -78,8 +88,8 @@ const ListItem = React.memo((props: IProps) => {
         
         <div className="P-price" onClick={(e: React.SyntheticEvent) => e.preventDefault()}>
           <div className="P-product-price-container">
-            {(!!data.promotion?.result) && <del className="P-without-discount-price">{formatPrice(data.price)}</del>}
-            <span>{formatPrice(data.promotion.result ? data.price - data.promotion.result : data.price)}</span>
+            {isDiscount && <del className="P-without-discount-price">{formatPrice(data.price)}</del>}
+            <span>{formatPrice(isDiscount ? data.promotion.result : data.price)}</span>
           </div>
           <CountInput
             step={1}

@@ -15,6 +15,7 @@ import HelpIcon from 'assets/images/help-icon.svg';
 import './style.scss';
 import EmptyState from 'components/empty-state';
 import SpecialProductHelp from './components/help';
+import PhotoStorage from 'platform/services/photoStorage';
 
 interface IState {
   data: IPreferredProductListResponseModel[] | null;
@@ -33,10 +34,22 @@ class SpecialProducts extends HelperComponent<IState, {}> {
 
   private fetchData = async () => {
     const result = await UserController.GetPreferredProductList();
-    this.safeSetState({ data: result.data.map(item => ({
-      ...item,
-      expiredDate: new Date(item.expiredDate).getTime(),
-    })) });
+    this.safeSetState({
+      data: result.data.map(item => ({
+        ...item,
+        expiredDate: new Date(item.expiredDate).getTime(),
+      }))
+    }, async () => {
+      const { data } = this.state;
+      if (data) {
+        const result = await Promise.all(data.map(item => PhotoStorage.getURL(item.imagePath).then(url => ({
+          ...item,
+          imagePath: url,
+        }))));
+
+        this.safeSetState({ data: result });
+      }
+    });
   }
 
   private openHelp = () => {
@@ -71,7 +84,7 @@ class SpecialProducts extends HelperComponent<IState, {}> {
           >
             <div
               className="P-image G-square-image-block"
-              style={{ background: `url('${getMediaPath(item.imagePath)}') center/cover` }}
+              style={{ background: `url('${getMediaPath(item.imagePath)}') center/contain no-repeat` }}
             />
 
             <div className="P-main-info">

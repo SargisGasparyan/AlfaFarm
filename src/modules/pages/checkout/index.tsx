@@ -33,6 +33,7 @@ import { IOrderResultResponseModel } from 'platform/api/order/models/response';
 import Connection from 'platform/services/connection';
 import ChoosePharmacy from './components/choose-pharmacy';
 import { IPharmacyBranchListResponseModel } from 'platform/api/pharmacyBranch/models/response';
+import { Shared } from 'modules';
 
 import './style.scss';
 
@@ -46,6 +47,7 @@ interface IState {
   submitLoading: boolean;
   choosePharmacyOpen: boolean;
   chooseAddressOpen: boolean;
+  authModalOpen: boolean;
   successModalOpen: boolean;
   chosenBranch?: IPharmacyBranchListResponseModel;
   initialTotalDiscountedPrice: number;
@@ -64,6 +66,7 @@ class Checkout extends HelperComponent<{}, IState> {
     choosePharmacyOpen: false,
     chooseAddressOpen: false,
     successModalOpen: false,
+    authModalOpen: false,
     isUsingBonus: false,
     initialTotalDiscountedPrice: 0,
     dateType: OrderDeliveryTimeTypeEnum.Asap,
@@ -240,11 +243,15 @@ class Checkout extends HelperComponent<{}, IState> {
     this.safeSetState({ submitLoading: true, form }, async () => {
       const result = await OrderController.Create(form);
       if (result.success) {
-        if (form.paymentType === PaymentTypeEnum.Idram) { document.getElementById('currentId')?.click(); }
-        this.safeSetState({ successModalOpen: true }, () => window.dispatchEvent(new CustomEvent(DispatcherChannels.CartItemsUpdate)));
-      }
-      else this.safeSetState({ submitLoading: false });
+        form.paymentType === PaymentTypeEnum.Idram && document.getElementById('currentId')?.click();
+        this.safeSetState({ successModalOpen: true, submitLoading: false }, () => window.dispatchEvent(new CustomEvent(DispatcherChannels.CartItemsUpdate)));
+      } else this.safeSetState({ submitLoading: false });
     });
+  }
+
+  private toggleAuthModal = () => {
+    const { authModalOpen } = this.state;
+    this.safeSetState({ successModalOpen: false, authModalOpen: !authModalOpen });
   }
 
   private navigateToHome = () => window.routerHistory.push(ROUTES.HOME);
@@ -259,6 +266,7 @@ class Checkout extends HelperComponent<{}, IState> {
       chosenBranch,
       choosePharmacyOpen,
       chooseAddressOpen,
+      authModalOpen,
       successModalOpen,
       initialTotalDiscountedPrice,
       isUsingBonus,
@@ -451,9 +459,16 @@ class Checkout extends HelperComponent<{}, IState> {
         </form> : <PaymentMethod callback={(e: React.SyntheticEvent) => this.finishCheckout(e)} />}
 
         {successModalOpen && <SuccessModal onClose={this.navigateToHome}>
-          <h3>{Settings.translations.order_success}</h3>
-          <Link className="G-main-button G-normal-link G-mt-30" to={ROUTES.PROFILE.ORDERS.MAIN}>{Settings.translations.order_history}</Link>
+          {Settings.guest ? <>
+            <h3>{Settings.translations.guest_order_success}</h3>
+            <button className="G-main-button G-normal-link G-mt-30 P-register-button" onClick={this.toggleAuthModal}>{Settings.translations.sign_up}</button>
+          </>: <>
+            <h3>{Settings.translations.order_success}</h3>
+            <Link className="G-main-button G-normal-link G-mt-30" to={ROUTES.PROFILE.ORDERS.MAIN}>{Settings.translations.order_history}</Link>
+          </>}
         </SuccessModal>}
+
+        {authModalOpen && <Shared.Auth onClose={this.toggleAuthModal} />}
 
         {choosePharmacyOpen && <ChoosePharmacy onClose={this.choosePharmacy} />}
 

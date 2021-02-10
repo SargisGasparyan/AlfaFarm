@@ -78,7 +78,7 @@ const Brands = ({ body, onChange }: IProps) => {
   }
 
   const scrolled = (e: React.SyntheticEvent) => {
-    if (scrolledToBottomOfElement(e.currentTarget as HTMLElement) && !loading && data && pageNumber < data.totalCount) {
+    if (scrolledToBottomOfElement(e.currentTarget as HTMLElement) && !loading && data && pageNumber < data.pageCount) {
       setPageNumber(pageNumber + 1);
       fetchData();
     }
