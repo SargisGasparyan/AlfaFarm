@@ -115,12 +115,12 @@ class Cart extends HelperComponent<{}, IState> {
       const { data } = this.state;
 
       if (data) {
-        const result = await Promise.all(data.items.map(item => PhotoStorage.getURL(item.productPhoto).then(url => ({
+        const results = await Promise.all(data.items.map(item => PhotoStorage.getURL(item.productPhoto).then(url => ({
           ...item,
           productPhoto: url,
         }))));
 
-        data.items = result;
+        data.items = results;
         this.safeSetState({ data });
       }
     });

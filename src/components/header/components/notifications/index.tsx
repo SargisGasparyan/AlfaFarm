@@ -122,7 +122,7 @@ class Notifications extends HelperPureComponent<IProps, IState> {
     return null;
   }
 
-  scrolled = (e: React.SyntheticEvent) => {
+  private scrolled = (e: React.SyntheticEvent) => {
     const { loading, data } = this.state;
     if (scrolledToBottomOfElement(e.currentTarget as HTMLElement) && !loading && data && this.pageNumber < data.pageCount) {
       this.pageNumber += 1;

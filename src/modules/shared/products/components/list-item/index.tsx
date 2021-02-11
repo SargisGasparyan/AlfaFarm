@@ -66,6 +66,7 @@ const ListItem = React.memo((props: IProps) => {
     }
   }
 
+  // tslint:disable-next-line: triple-equals
   const isDiscount = data?.promotion?.result && data.promotion.promotionType == PromotionTypeEnum.Discount;
 
   return (
