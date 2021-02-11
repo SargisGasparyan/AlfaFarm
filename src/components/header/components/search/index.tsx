@@ -12,8 +12,11 @@ import { formatPrice, getMediaPath } from 'platform/services/helper';
 import BasketController from 'platform/api/basket';
 import DispatcherChannels from 'platform/constants/dispatcher-channels';
 import LoaderContent from 'components/loader-content';
+import PhotoStorage from 'platform/services/photoStorage';
+import { PromotionTypeEnum } from 'platform/constants/enums';
 
 interface IProps {
+  searchText: string;
   data: IProductSearcResponseModel | null;
   onClose(): void;
 }
@@ -29,7 +32,18 @@ class SearchPopup extends HelperPureComponent<IProps, IState> {
   }
 
   public componentDidMount() {
-    this.safeSetState({ data: this.props.data });
+    const { data } = this.props;
+    this.safeSetState({ data }, async () => {
+      if (data) {
+        const photoResult = await Promise.all(data.products.map(item => PhotoStorage.getURL(item.imagePath).then(url => ({
+          ...item,
+          productPhoto: url,
+        }))));
+  
+        data.products = photoResult;
+        this.safeSetState({ data });  
+      }
+    });
   }
 
   private changeCart = (e: Event | React.SyntheticEvent, item: IProductSearchProductResponseModel) => {
@@ -67,13 +81,16 @@ class SearchPopup extends HelperPureComponent<IProps, IState> {
   }
 
   public render() {
-    const { onClose } = this.props;
+    const { searchText, onClose } = this.props;
     const { data } = this.state;
 
     return (
       <ClickOutside onClickOutside={onClose}>
         <aside className="P-header-search-result">
-          <h6>{Settings.translations.products}</h6>
+          <h6 className="G-flex">
+            {Settings.translations.products}
+            <Link to={`${ROUTES.PRODUCTS.MAIN}?text=${searchText}`} className="G-ml-auto G-orange-color" onClick={() => onClose()}>{Settings.translations.see_more}</Link>
+          </h6>
           {data && data.products.map(item => (
             <div className="P-list-item" key={item.id} onClick={() => this.clickOnItem(item)}>
               <div className="P-image" style={{ background: `url('${getMediaPath(item.imagePath)}') center/contain no-repeat` }} />
@@ -86,7 +103,10 @@ class SearchPopup extends HelperPureComponent<IProps, IState> {
               </div>
 
               <div className="P-right">
-                <span className="G-orange-color G-ml-auto P-price">{formatPrice(item.price)}</span>
+                {!!item.promotion.result && item.promotion.promotionType === PromotionTypeEnum.Discount ? <>
+                  <del className="G-ml-auto P-price">{formatPrice(item.price)}</del>
+                  <span className="G-orange-color G-ml-auto P-price">{formatPrice(item.promotion.result)}</span>
+                </>: <span className="G-orange-color G-ml-auto P-price">{formatPrice(item.price)}</span>}
 
                 <LoaderContent
                   loading={item.cartLoading}

@@ -3,16 +3,16 @@ import * as React from 'react';
 import { Shared } from 'modules';
 import Settings from 'platform/services/settings';
 import { IProductListResponseModel } from 'platform/api/product/models/response';
-import { getMediaPath, truncateText, formatPrice } from 'platform/services/helper';
+import { truncateText, formatPrice } from 'platform/services/helper';
 import BasketController from 'platform/api/basket';
 import LoaderContent from 'components/loader-content';
 import DispatcherChannels from 'platform/constants/dispatcher-channels';
-
-import './style.scss';
 import ROUTES from 'platform/constants/routes';
 import { Link } from 'react-router-dom';
 import PhotoStorage from 'platform/services/photoStorage';
 import { PromotionTypeEnum } from 'platform/constants/enums';
+
+import './style.scss';
 
 interface IProps {
   data: IProductListResponseModel;
@@ -39,7 +39,7 @@ const ListItem = React.memo(({ data }: IProps) => {
     data.imagePath && PhotoStorage.getURL(data.imagePath).then(url => setLoadingImage(url));
   }, []);
 
-  const isDiscount = data?.promotion?.result && data.promotion.promotionType === PromotionTypeEnum.Discount;
+  const isDiscount = !!data?.promotion?.result && data.promotion.promotionType === PromotionTypeEnum.Discount;
 
   return (
     <Link to={ROUTES.PRODUCTS.DETAILS.replace(':id', data.id)} className="P-home-discounted-products-list-item">

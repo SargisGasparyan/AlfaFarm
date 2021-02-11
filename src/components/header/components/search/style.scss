@@ -52,11 +52,14 @@
       flex-direction  : column;
       justify-content : space-between;
 
-      span {
-        width      : 100%;
-        text-align : center;
-        font-weight: bold;
+      span, del {
+        width         : 100%;
+        text-align    : center;
+        font-weight   : bold;
+        margin-bottom : 5px;
       }
+
+      span { margin-bottom : 20px; }
 
       .G-main-button {
         font-size   : 14px;

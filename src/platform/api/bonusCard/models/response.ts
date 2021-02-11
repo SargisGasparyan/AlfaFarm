@@ -12,6 +12,12 @@ export interface IBonusCardDetailsResponseModel {
   cardNumber: string;
 };
 
+export interface IReferralLinkResponseModel {
+  bonusCount: number;
+  inviteCount: number;
+  link: string;
+}
+
 export interface IBonusCardHistoryResponseModel {
   date: string;
   bonusHistory: IBonusCardHistoryItemResponseModel[];

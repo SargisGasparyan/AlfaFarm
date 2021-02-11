@@ -66,7 +66,7 @@ const ListItem = React.memo((props: IProps) => {
     }
   }
 
-  const isDiscount = data?.promotion?.result && data.promotion.promotionType == PromotionTypeEnum.Discount;
+  const isDiscount = !!data?.promotion?.result && data.promotion.promotionType === PromotionTypeEnum.Discount;
 
   return (
     <>

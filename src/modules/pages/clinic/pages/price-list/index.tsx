@@ -15,6 +15,7 @@ import { onlyForUsers } from 'platform/guards/routes';
 import './style.scss';
 import { formatPrice } from 'platform/services/helper';
 import EmptyState from 'components/empty-state';
+import Connection from 'platform/services/connection';
 
 interface IState {
   data?: IMedicalServicePriceListResponseModel[];
@@ -32,8 +33,9 @@ class PriceList extends HelperComponent<{}, {}> {
 
   private fetchData = async () => {
     const { searchValue } = this.state;
+    Connection.AbortAll();
     const result = await MedicalServiceController.GetPriceList(searchValue);
-    this.safeSetState({ data: result.data });
+    !result.aborted && this.safeSetState({ data: result.data });  
   }
 
   private onSearchChange = (searchValue: string) => {

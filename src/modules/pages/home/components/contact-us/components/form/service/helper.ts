@@ -1,4 +1,3 @@
-import { ILoginRequestModel } from "platform/api/auth/models/request";
 import { IContactUsBodyModel } from 'platform/api/support/models';
 import { isValidEmail } from 'platform/services/validator';
 
@@ -21,7 +20,7 @@ export function validateForm(this: IContactUsBodyModel, submited?: boolean) {
     valid = false;
   }
 
-  if (submited && !this.content) {
+  if (submited && !this.content.trim()) {
     errors.content = true;
     valid = false;
   }

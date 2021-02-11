@@ -3,9 +3,7 @@ import * as copy from 'copy-to-clipboard';
 
 import Settings from 'platform/services/settings';
 import Modal from 'components/modal';
-import LoaderContent from 'components/loader-content';
 import BonusCardController from 'platform/api/bonusCard';
-
 
 import './style.scss';
 
@@ -15,14 +13,16 @@ const Invite = React.memo(() => {
 
   React.useEffect(() => {
     BonusCardController.GetReferralLink().then(result => {
-      setLink(result.data);
+      result.data && setLink(result.data.link);
     });
   }, []);
+
   const copyLink = async () => {
     copy(link);
     const alertify = await import('alertifyjs');
     alertify.success(Settings.translations.copied_to_clipboard)
   }
+
   const Content = () => link ? <Modal className="P-footer-order-a-call-modal" onClose={() => setOpen(false)}>
     <h3 className="G-main-color G-text-center">{Settings.translations.use_the_link}</h3>
     <div className="G-main-form">

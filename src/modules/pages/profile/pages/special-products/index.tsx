@@ -42,12 +42,12 @@ class SpecialProducts extends HelperComponent<IState, {}> {
     }, async () => {
       const { data } = this.state;
       if (data) {
-        const result = await Promise.all(data.map(item => PhotoStorage.getURL(item.imagePath).then(url => ({
+        const photoResult = await Promise.all(data.map(item => PhotoStorage.getURL(item.imagePath).then(url => ({
           ...item,
           imagePath: url,
         }))));
 
-        this.safeSetState({ data: result });
+        this.safeSetState({ data: photoResult });
       }
     });
   }

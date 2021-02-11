@@ -8,6 +8,41 @@
   border-radius  : $big-radius;
   flex-direction : column;
 
+  .P-data-table-header {
+    padding : 0 40px 0 60px;
+  }
+
+  .P-data-table-body > ul {
+
+    padding : 0 40px 0 20px;
+
+    > li:first-child {
+      margin-right: 40px;
+
+      > div {
+        padding-left : 40px;
+      }
+    }
+
+    .P-done-icon {
+      left        : 0px;
+      width       : 25px;
+      position    : absolute;
+    }
+
+    .P-make-default {
+      opacity        : 0;
+      padding        : 6px 15px;
+      transition     : .2s;
+      pointer-events : none;
+    }
+
+    &:hover .P-make-default {
+      opacity        : 1;
+      pointer-events : initial;
+    }
+  }
+
   > .P-list-item {
     color           : black;
     padding         : 20px 0;

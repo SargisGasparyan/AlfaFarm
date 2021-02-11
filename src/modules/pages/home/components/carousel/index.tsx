@@ -52,7 +52,7 @@ class Carousel extends HelperPureComponent<{}, IState> {
         slidesToShow={1}
         slidesToScroll={1}
         arrows={true}
-        className="P-home-carousel-slider"
+        className="G-page P-home-carousel-slider"
       >
         {data.map(item => <div key={item.id}>
           <div className="G-page P-home-carousel-slide" style={{ background: `url('${item.photoPath}') center/cover` }}>

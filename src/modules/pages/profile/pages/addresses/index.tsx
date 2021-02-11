@@ -12,6 +12,7 @@ import UserAddressController from 'platform/api/userAddress';
 import Modify from './pages/modify';
 import { onlyForUsers } from 'platform/guards/routes';
 import EmptyState from 'components/empty-state';
+import DoneImage from 'assets/images/done.svg';
 
 import './style.scss';
 
@@ -29,7 +30,10 @@ class Addresses extends HelperComponent<IState, {}> {
   private columnConfig = [
     {
       name: Settings.translations.name,
-      cell: (row: IUserAddressListResponseModel) => row.name,
+      cell: (row: IUserAddressListResponseModel) => <>
+        {row.isDefault && <img className="P-done-icon" src={DoneImage} />}
+        {row.name}
+      </>,
     },
     {
       name: Settings.translations.address,
@@ -37,7 +41,14 @@ class Addresses extends HelperComponent<IState, {}> {
     },
     {
       name: '',
-      style: { minWidth: 120, maxWidth: 120 },
+      cell: (row: IUserAddressListResponseModel) => !row.isDefault && <button
+        className="G-main-button P-make-default"
+        onClick={() => this.makeDefault(row.id)}
+      >{Settings.translations.make_default}</button>,
+    },
+    {
+      name: '',
+      style: { minWidth: 150, maxWidth: 150 },
       cell: (row: IUserAddressListResponseModel) => <>
         <Link to={ROUTES.PROFILE.ADDRESSES.UPDATE.replace(':id', row.id)}>
           <i
@@ -60,10 +71,17 @@ class Addresses extends HelperComponent<IState, {}> {
     this.safeSetState({ data: result.data });
   }
 
+  private makeDefault = async (id: number) => {
+    const result = await UserAddressController.MakeDefault(id);
+    result.data && this.fetchData();
+  }
+
   private deleteRow = async (id: number) => {
     const result = await UserAddressController.Delete(id);
     result.data && this.fetchData();
   }
+
+
   public render() {
     const { data } = this.state;
 

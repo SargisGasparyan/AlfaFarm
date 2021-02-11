@@ -11,8 +11,8 @@ import Filter from './components/filter';
 import Connection from 'platform/services/connection';
 import SortBox from './components/sort-box';
 import Pagination from 'components/pagination';
-import HelperPureComponent from 'platform/classes/helper-pure-component';
 import EmptyViewSvg from 'assets/images/emptyView.svg';
+import HelperComponent from 'platform/classes/helper-component';
 
 import './style.scss';
 
@@ -26,7 +26,7 @@ interface IState {
 };
 
 @byRoute([ROUTES.PRODUCTS.MAIN])
-class List extends HelperPureComponent<{}, IState> {
+class List extends HelperComponent<{}, IState> {
 
   public state: IState = {
     loading: false,
@@ -35,8 +35,8 @@ class List extends HelperPureComponent<{}, IState> {
   };
 
   private filterChange = () => {
-    window.dispatchEvent(new CustomEvent(pageChangeListener, { detail: 1 }));
     Connection.AbortAll();
+    window.dispatchEvent(new CustomEvent(pageChangeListener, { detail: 1 }));
   }
 
   private fetchData = async (pageNumber: number) => {
@@ -48,7 +48,6 @@ class List extends HelperPureComponent<{}, IState> {
     };
 
     const result = await ProductController.GetList(body);
-
     const query = new URLSearchParams(window.location.search);
     const preferredProductId = query.get('preferredProductId');
 
@@ -58,6 +57,9 @@ class List extends HelperPureComponent<{}, IState> {
 
   public render() {
     const { data, total,loading, preferredProductId } = this.state;
+
+    console.log(data?.map(item => item.id));
+
     return (
       <section className="G-page P-products-list-page">
         <Filter onChange={this.filterChange} />

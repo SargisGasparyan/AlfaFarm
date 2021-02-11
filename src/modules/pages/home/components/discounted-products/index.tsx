@@ -12,6 +12,7 @@ import ProductController from 'platform/api/product';
 import MultiCarousel from "../../../../../components/carousel";
 import ShadowText from "../../../../../components/shadow-text";
 import Slider from "react-slick";
+import { ProductSortEnum } from 'platform/api/product/constants/enums';
 
 interface IState {
   data: IProductListResponseModel[];
@@ -28,7 +29,7 @@ class DiscountedProducts extends HelperComponent<{}, IState> {
   }
 
   private fetchData = async () => {
-    const result = await ProductController.GetList({pageNumber: 1, pageSize: 10, hasDiscount: true});
+    const result = await ProductController.GetList({pageNumber: 1, pageSize: 10, hasDiscount: true, sortBy: ProductSortEnum.DiscountHighToLow });
     this.safeSetState({data: result.data.list});
   }
 

@@ -11,11 +11,9 @@ import { onlyForUsers } from 'platform/guards/routes';
 import { infinityScrollPageLimit } from 'platform/constants';
 import MedicalHistoryController from 'platform/api/medicalHistory';
 import { IMedicalServiceListResponseModel } from 'platform/api/medicalHistory/models/response';
-
-import './style.scss';
-import PageLoader from 'components/page-loader';
 import EmptyState from 'components/empty-state';
 
+import './style.scss';
 
 interface IState {
   data?: IMedicalServiceListResponseModel[];

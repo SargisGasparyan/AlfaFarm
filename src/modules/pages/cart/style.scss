@@ -8,6 +8,14 @@
   align-items   : flex-start;
   align-content : flex-start;
 
+  .P-clear-all {
+    color           : $orange;
+    cursor          : pointer;
+    font-size       : 18px;
+    white-space     : nowrap;
+    text-decoration : underline;
+  }
+
   .P-table {
     width      : 100%;
     overflow-x : auto;

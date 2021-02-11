@@ -21,6 +21,7 @@
       @include normal-font;
 
       > span {
+        max-width   : 50%;
         word-break  : break-all;
         white-space : normal;
         margin-left : 20px;

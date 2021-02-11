@@ -67,7 +67,7 @@ class Cart extends HelperComponent<{}, IState> {
       />,
     },
     {
-      name: 'Bonus',
+      name: Settings.translations.bonus,
       cell: (row: IBasketListResponseModel) => <h3 className="G-fs-24">{getBasketItemPriceInfo(row).bonus}</h3>,
     },
     {
@@ -115,12 +115,12 @@ class Cart extends HelperComponent<{}, IState> {
       const { data } = this.state;
 
       if (data) {
-        const result = await Promise.all(data.items.map(item => PhotoStorage.getURL(item.productPhoto).then(url => ({
+        const photoResult = await Promise.all(data.items.map(item => PhotoStorage.getURL(item.productPhoto).then(url => ({
           ...item,
           productPhoto: url,
         }))));
 
-        data.items = result;
+        data.items = photoResult;
         this.safeSetState({ data });
       }
     });
@@ -181,6 +181,14 @@ class Cart extends HelperComponent<{}, IState> {
     }
   }
 
+  private deleteAll = async () => {
+    const result = await BasketController.DeleteAll();
+    if (result.data) {
+      this.safeSetState({ data: result.data });
+      window.dispatchEvent(new CustomEvent(DispatcherChannels.CartItemsUpdate));
+    }
+  }
+
   private saveCart = async () => {
     const { data } = this.state;
 
@@ -201,10 +209,7 @@ class Cart extends HelperComponent<{}, IState> {
           {data.items.length ? <>
             <div className="G-flex G-flex-justify-between G-flex-align-center G-mb-40 G-full-width">
               <h1 className="G-fs-26 G-full-width">{Settings.translations.cart}</h1>
-              {/* <button
-                  className="G-main-button G-ml-auto G-fs-normal P-pay-button"
-                  onClick={this.clearAllConfirm}
-                >{Settings.translations.clear_basket}</button> */}
+              <a className="G-ml-auto P-clear-all" onClick={this.deleteAll}>{Settings.translations.clear_basket}</a>
             </div>
             <Table<IBasketListResponseModel>
               className="P-table G-full-width P-card-table"

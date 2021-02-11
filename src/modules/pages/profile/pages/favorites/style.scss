@@ -26,6 +26,8 @@
       > .P-favorite {
         color     : $text-gray;
         cursor    : pointer;
+        z-index   : 1;
+        position  : relative;
         font-size : 20px;
     
         &.P-active {

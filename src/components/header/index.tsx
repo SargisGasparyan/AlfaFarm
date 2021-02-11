@@ -34,6 +34,7 @@ import Connection from 'platform/services/connection';
 interface IState {
   authOpen: boolean;
   categoryOpen: boolean;
+  searchValue: string;
   notificationOpen: boolean;
   searchOpen: boolean;
   searchLoader: boolean;
@@ -48,6 +49,7 @@ class Header extends HelperPureComponent<{}, IState> {
   public state: IState = {
     authOpen: false,
     categoryOpen: false,
+    searchValue: '',
     notificationOpen: false,
     searchLoader: false,
     searchOpen: false,
@@ -127,30 +129,27 @@ class Header extends HelperPureComponent<{}, IState> {
     }
   }
 
-  private searchSubmit = async (value: string) => {
-    // const query = new URLSearchParams(window.location.search);
-    // const oldValue = query.get('text');
-    
-    // if (oldValue !== value) {
-    //   if (value.length) query.set('text', value);
-    //   else query.delete('text');
-  
-    //   window.routerHistory.push(`${ROUTES.PRODUCTS.MAIN}?${query.toString()}`);
-    //   window.dispatchEvent(new Event(DispatcherChannels.ProductFilterChange));
-    // }
+  private searchChange = async (value: string) => {
     if (value) {
-      this.safeSetState({ searchLoader: true }, async () => {
+      this.safeSetState({ searchLoader: true, searchValue: value }, async () => {
         Connection.AbortAll();
         const data = await ProductController.Search(value);
-        if (data?.data?.products.length) this.safeSetState({ searchResult: data.data, searchOpen: true })
+        const { searchLoader } = this.state;
+
+        // If searchLoader has changed, don't show the result
+        if (data?.data?.products.length && searchLoader) this.safeSetState({ searchResult: data.data, searchOpen: true })
         else this.closeSearch();
+
         this.safeSetState({ searchLoader: false })
       });
-    } else this.closeSearch();
+    } else {
+      this.safeSetState({ searchValue: '' });
+      this.closeSearch();
+    }
   }
 
   private closeSearch = () => {
-    this.safeSetState({ searchResult: null, searchOpen: false })
+    this.safeSetState({ searchResult: null, searchOpen: false });
   }
 
   private toggleMobileMenu = () => {
@@ -168,10 +167,23 @@ class Header extends HelperPureComponent<{}, IState> {
     else this.safeSetState({ notificationOpen: false });
   }
 
+  private searchSubmit = () => {
+    const { searchValue } = this.state;
+
+    if (searchValue) {
+      this.safeSetState({ searchResult: null, searchOpen: false, searchLoader: false });
+      window.routerHistory.push(`${ROUTES.PRODUCTS.MAIN}?text=${searchValue}`);
+      window.dispatchEvent(new Event(DispatcherChannels.ProductFilterChange));
+    } else {
+      window.routerHistory.push(ROUTES.PRODUCTS.MAIN);
+      window.dispatchEvent(new Event(DispatcherChannels.ProductFilterChange));
+    }
+  }
+
   private openProducts = () => window.dispatchEvent(new Event(DispatcherChannels.ProductFilterChange));
 
   public render() {
-    const { authOpen, categoryOpen, cartIconNumber, notificationIconNumber, notificationOpen, searchOpen, searchResult, searchLoader } = this.state;
+    const { authOpen, categoryOpen, cartIconNumber, notificationIconNumber, notificationOpen, searchOpen, searchValue, searchResult, searchLoader } = this.state;
 
     return (
       <header ref={this.header} className="G-flex G-flex-align-center G-flex-justify-center">
@@ -184,12 +196,13 @@ class Header extends HelperPureComponent<{}, IState> {
             {enviroment.WHOLESALE ? <WholesaleContent /> : <>
               <div className="P-search-wrapper">
                 <SearchInput
-                  onChange={this.searchSubmit}
+                  onChange={this.searchChange}
+                  onSubmit={this.searchSubmit}
                   loading={searchLoader}
                   withSubmit={true}
                 />
 
-                {searchOpen && <SearchPopup onClose={this.closeSearch} data={searchResult} />}
+                {searchOpen && <SearchPopup onClose={this.closeSearch} data={searchResult} searchText={searchValue} />}
               </div>
 
               <Link

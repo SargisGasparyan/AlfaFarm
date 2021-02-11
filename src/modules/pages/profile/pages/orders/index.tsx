@@ -10,7 +10,7 @@ import Table from 'components/table';
 import OrderController from 'platform/api/order';
 import { IOrderListResponseModel } from 'platform/api/order/models/response';
 import { OrderStatusEnum } from 'platform/api/order/constants/enums';
-import { getViewEnum, formatDate } from 'platform/services/helper';
+import { getViewEnum, formatDate, formatPrice } from 'platform/services/helper';
 import Details from './pages/details';
 import Pagination from 'components/pagination';
 import { paginationPageLimit } from 'platform/constants';
@@ -50,7 +50,7 @@ class Orders extends HelperComponent<IState, {}> {
     },
     {
       name: Settings.translations.price,
-      cell: (row: IOrderListResponseModel) => <>{row.totalPrice} &#1423;</>,
+      cell: (row: IOrderListResponseModel) => formatPrice(row.totalPrice),
     },
     {
       name: Settings.translations.status,

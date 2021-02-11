@@ -25,7 +25,8 @@ export interface IProductSearchProductResponseModel {
   id: number;
   title: string;
   price: number;
-  imagePath?: string;
+  promotion: IPromotionModel;
+  imagePath: string;
   cartLoading?: boolean;
   producer: IProductDetailsProducerResponseModel;
   brand: IProductDetailsBrandResponseModel;

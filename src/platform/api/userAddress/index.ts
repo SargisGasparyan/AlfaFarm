@@ -54,6 +54,16 @@ class UserAddressController {
 
     return result;
   };
+
+  public static MakeDefault = (id: number): Promise<IResponse<boolean>> => {
+    const result = Connection.PUT({
+      body: {},
+      action: `Default/${id}`,
+      controller: UserAddressController.controller,
+    });
+
+    return result;
+  };
 };
 
 export default UserAddressController;

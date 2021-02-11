@@ -37,7 +37,7 @@ class SearchInput extends HelperPureComponent<IProps, IState> {
     const { onSubmit } = this.props;
 
     e.preventDefault();
-    onSubmit && search && onSubmit(search);
+    onSubmit && onSubmit(search);
   }
 
   public render() {

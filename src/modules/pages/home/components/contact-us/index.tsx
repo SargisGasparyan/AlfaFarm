@@ -61,7 +61,7 @@ class ContactUs extends HelperComponent<{}, IState> {
   private WorkingPlan = () => {
     if (!this.hoveredMarkerData) return null;
     return <div>
-      {this.hoveredMarkerData.workingPlan.map((item, index, arr) => <span key={index}>
+      {this.hoveredMarkerData.workingPlan.map((item, index) => <span key={index}>
         {Settings.translations[this.weeksViewEnum[item.startDay]]}
         {item.endDay ? '-' + Settings.translations[this.weeksViewEnum[item.endDay]] : ''}
         &nbsp;&nbsp;

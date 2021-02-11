@@ -46,6 +46,17 @@ class BasketController {
     return result;
   };
 
+  
+  public static DeleteAll = (): Promise<IResponse<IBasketChangeResponseModel>> => {
+    const result = Connection.DELETE({
+      body: {},
+      action: 'All',
+      controller: BasketController.controller,
+    });
+
+    return result;
+  };
+
   public static ChangeList = (body: IBasketChangeRequestModel[]): Promise<IResponse<IBasketChangeResponseModel>> => {
     const result = Connection.PUT({
       body,

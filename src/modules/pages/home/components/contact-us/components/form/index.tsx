@@ -78,7 +78,7 @@ class Form extends HelperComponent<{}, IState> {
         </div>
         <div className="G-main-form-field">
           <textarea
-            placeholder={Settings.translations.message}
+            placeholder={Settings.translations.write_a_message}
             name="content"
             value={body.content}
             className={`G-main-textarea ${this.formValidation.errors.content ? 'G-invalid-field' : ''}`}
