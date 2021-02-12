@@ -1,9 +1,6 @@
 import * as React from 'react';
 
-import HelperPureComponent from 'platform/classes/helper-pure-component';
 import ROUTES from 'platform/constants/routes';
-
-import './style.scss';
 import ClickOutside from 'components/click-outside';
 import Settings from 'platform/services/settings';
 import { IProductSearchProductResponseModel, IProductSearcResponseModel } from 'platform/api/product/models/response';
@@ -14,6 +11,10 @@ import DispatcherChannels from 'platform/constants/dispatcher-channels';
 import LoaderContent from 'components/loader-content';
 import PhotoStorage from 'platform/services/photoStorage';
 import { PromotionTypeEnum } from 'platform/constants/enums';
+import HelperComponent from 'platform/classes/helper-component';
+
+import './style.scss';
+
 
 interface IProps {
   searchText: string;
@@ -25,7 +26,7 @@ interface IState {
   data: IProductSearcResponseModel | null;
 }
 
-class SearchPopup extends HelperPureComponent<IProps, IState> {
+class SearchPopup extends HelperComponent<IProps, IState> {
 
   public state: IState = {
     data: null,

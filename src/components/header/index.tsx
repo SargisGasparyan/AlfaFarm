@@ -131,7 +131,7 @@ class Header extends HelperPureComponent<{}, IState> {
 
   private searchChange = async (value: string) => {
     if (value) {
-      this.safeSetState({ searchLoader: true, searchValue: value, searchResult: null }, async () => {
+      this.safeSetState({ searchLoader: true, searchOpen: false, searchValue: value, searchResult: null }, async () => {
         Connection.AbortAll();
         const data = await ProductController.Search(value);
         const { searchLoader } = this.state;
