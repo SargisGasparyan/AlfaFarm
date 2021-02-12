@@ -26,10 +26,12 @@ import { getBasketItemPriceInfo } from 'platform/services/basket';
 
 import './style.scss';
 import PhotoStorage from 'platform/services/photoStorage';
+import { PriceNotEnoughModal } from './components/priceNotEnoughModal';
 
 interface IState {
   data?: IBasketResponseModel;
   outOfStockConfirm: boolean;
+  priceNotEnoughModalOpen: boolean;
 };
 
 @byRoute(ROUTES.CART)
@@ -37,7 +39,9 @@ class Cart extends HelperComponent<{}, IState> {
 
   public state: IState = {
     outOfStockConfirm: false,
+    priceNotEnoughModalOpen: false,
   };
+
   private columnConfig = [
     {
       name: Settings.translations.product,
@@ -154,12 +158,13 @@ class Cart extends HelperComponent<{}, IState> {
   private goToCheckout = async () => {
     const { data } = this.state;
 
-    if (data?.items.some(item => !item.productStockQuantity)) this.safeSetState({ outOfStockConfirm: true });
-    else window.routerHistory.push(`${ROUTES.CHECKOUT}?total=${data?.totalDiscountedPrice || data?.totalPrice}`);
-    // if (cartSaved && data) {
-    //   const basketIds = data.items.map(item => item.id);
-    //   await BasketController.Save(basketIds);
-    // }
+    if (data) {
+      const price = data && (data.totalDiscountedPrice || data?.totalPrice);
+
+      if (data.items.some(item => !item.productStockQuantity)) this.safeSetState({ outOfStockConfirm: true });
+      else if (data && price < 2000) this.safeSetState({ priceNotEnoughModalOpen: true });
+      else window.routerHistory.push(`${ROUTES.CHECKOUT}?total=${price}`);
+    }
   }
 
   private closeOutOfStockConfirm = () => this.safeSetState({ outOfStockConfirm: false });
@@ -200,8 +205,13 @@ class Cart extends HelperComponent<{}, IState> {
     }
   }
 
+  private togglePriceNotEnoughModal = () => {
+    const { priceNotEnoughModalOpen } = this.state;
+    this.safeSetState({ priceNotEnoughModalOpen: !priceNotEnoughModalOpen });
+  }
+
   public render() {
-    const { data, outOfStockConfirm } = this.state;
+    const { data, priceNotEnoughModalOpen, outOfStockConfirm } = this.state;
 
     return (
       <section className="G-page P-cart-page">
@@ -246,6 +256,8 @@ class Cart extends HelperComponent<{}, IState> {
               className="G-main-button G-ml-auto G-fs-normal P-pay-button"
               onClick={this.goToCheckout}
             >{Settings.translations.pay}</button>
+
+            {priceNotEnoughModalOpen && <PriceNotEnoughModal onClose={this.togglePriceNotEnoughModal} />}
 
             {outOfStockConfirm && <ConfirmModal
               title={Settings.translations.out_of_stock}

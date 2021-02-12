@@ -1308,6 +1308,7 @@ export default {
   item: 'item',
   order_canceled: 'Order was canceled successfully',
   cancel_order: 'Do you want to cancel this order?',
+  basket_at_least_2000: "The cost of online order should be more than 2000 AMD.",
   delete_product_from_basket: 'Do you want to delete product from basket?',
   delete_saved_product_basket: 'Do you want to delete the saved basket?',
   price_list: "Price list",

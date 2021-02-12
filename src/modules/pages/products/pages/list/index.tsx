@@ -13,6 +13,7 @@ import SortBox from './components/sort-box';
 import Pagination from 'components/pagination';
 import EmptyViewSvg from 'assets/images/emptyView.svg';
 import HelperComponent from 'platform/classes/helper-component';
+import Settings from 'platform/services/settings';
 
 import './style.scss';
 
@@ -70,7 +71,7 @@ class List extends HelperComponent<{}, IState> {
           </>}
           {total === 0 && <div className='P-no-data'>
             <img src={EmptyViewSvg} alt="empty"/>
-            <p className='P-desc'>No search result</p>
+            <p className='P-desc'>{Settings.translations.no_search_result}</p>
           </div>}
           <Pagination<IProductListResponseModel> pageChangeListener={pageChangeListener} fetchData={this.fetchData} />
         </div>

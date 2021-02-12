@@ -1,0 +1,15 @@
+@import 'src/assets/styles/variables';
+
+.P-cart-price-not-enough-modal .P-modal-content {
+
+  padding       : 40px 30px 30px;
+  max-width     : 380px;
+  border-radius : $radius;
+
+  > div > .G-fields-form > p {
+  
+    width      : 100%;
+    font-size  : $normal-fs;
+    margin-top : 5px;
+  }
+}

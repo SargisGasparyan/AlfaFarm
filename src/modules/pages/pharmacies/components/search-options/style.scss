@@ -24,6 +24,10 @@
 
   > .G-main-form {
 
+    .P-select-body {
+      width : 100%;
+    }
+
     @media(max-width: 576.98px){
       flex-direction: column;
     }

@@ -437,6 +437,7 @@ class Checkout extends HelperComponent<{}, IState> {
             {resultInfo && <>
               <h3 className="G-mt-auto G-flex G-flex-justify-between">{Settings.translations.price} <span>{formatPrice(resultInfo.totalDiscountedPrice)}</span></h3>
               <h3 className="G-mt-10 G-flex G-flex-justify-between">{Settings.translations.bonus} <span>{resultInfo.receivedBonus}</span></h3>
+              {!!form.usedBonus && <h3 className="G-mt-10 G-flex G-flex-justify-between">{Settings.translations.used_bonus} <span>{form.usedBonus}</span></h3>}
               <h3 className="G-mt-10 G-flex G-flex-justify-between">{Settings.translations.delivery_fee} <span>{formatPrice(resultInfo.deliveryFee)}</span></h3>
               <h2 className="G-mt-10 G-mb-20 G-flex G-flex-justify-between">{Settings.translations.total} <span className="G-orange-color">{formatPrice(resultInfo.totalPrice)}</span></h2>
             </>}
