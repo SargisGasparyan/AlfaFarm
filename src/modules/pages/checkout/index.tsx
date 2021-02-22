@@ -390,7 +390,7 @@ class Checkout extends HelperComponent<{}, IState> {
                   inputProps={{
                     value: form.deliveryDateFrom ? formatDate(form.deliveryDateFrom, true) : '',
                     readOnly: true,
-                    className: 'G-main-input',
+                    className: `G-main-input ${this.formValidation.errors.deliveryDateFrom ? 'G-invalid-field' : ''}`,
                     placeholder: Settings.translations.choose_date,
                   }}
                 />
@@ -401,7 +401,7 @@ class Checkout extends HelperComponent<{}, IState> {
               <input
                 value={chosenBranch ? chosenBranch.name : ''}
                 readOnly={true}
-                className={`G-main-input ${this.formValidation.errors.branchId ? 'G-invalid-field' : ''}`}
+                className={`G-main-input G-cursor-pointer ${this.formValidation.errors.branchId ? 'G-invalid-field' : ''}`}
                 placeholder={Settings.translations.choose_pharmacy}
                 onClick={this.openPharmacyChoose}
               />

@@ -12,10 +12,19 @@
   max-height : 300px;
 
   > h6 {
-    font-weight   : 100;
-    padding       : 20px 0;
-    font-size     : 18px;
-    border-bottom : 1px solid $light-gray;
+    display         : flex;
+    justify-content : space-between;
+    align-items     : center;
+    font-weight     : 100;
+    padding         : 10px 0 20px;
+    font-size       : 18px;
+    border-bottom   : 1px solid $light-gray;
+
+    > a {
+      cursor          : pointer;
+      font-size       : 12px;
+      text-decoration : underline;
+    }
   }
 
   .P-list-item {

@@ -6,9 +6,10 @@ import Modal from 'components/modal';
 import Settings from 'platform/services/settings';
 import UserAddressController from 'platform/api/userAddress';
 import Table from 'components/table';
+import ROUTES from "../../../../../platform/constants/routes";
+import DoneImage from 'assets/images/done.svg';
 
 import './style.scss';
-import ROUTES from "../../../../../platform/constants/routes";
 
 interface IProps {
   onClose(chosen?: IUserAddressListResponseModel): void; 
@@ -34,6 +35,11 @@ class ChooseAddress extends HelperPureComponent<IProps, IState> {
     {
       name: Settings.translations.address,
       cell: (row: IUserAddressListResponseModel) => row.addressText,
+    },
+    {
+      name: '',
+      cell: (row: IUserAddressListResponseModel) => row.isDefault && <img className="P-done-icon" src={DoneImage} alt="done" />,
+      style: { minWidth: 46, maxWidth: 46 },
     },
   ];
 

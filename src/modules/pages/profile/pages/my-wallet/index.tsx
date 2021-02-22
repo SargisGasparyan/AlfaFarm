@@ -52,6 +52,8 @@ class MyWallet extends HelperComponent<{}, IState> {
           </Radio>)}
           <button onClick={this.createCard} className="G-main-button G-ml-auto G-mr-auto G-mt-30">{Settings.translations.add_credit_card}</button>
 
+          {(!list || !list.length) && <EmptyState text={Settings.translations.empty_carts_list} />}
+
           {/* <div>
             {list && list.map((item, index) => <Radio<number> callback={(value: number) => {}} value={item.id} isChecked={false} key={index}>
               <div className="P-card-number">

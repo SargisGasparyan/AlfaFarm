@@ -26,7 +26,7 @@ const Invite = React.memo(() => {
   const Content = () => link ? <Modal className="P-footer-order-a-call-modal" onClose={() => setOpen(false)}>
     <h3 className="G-main-color G-text-center">{Settings.translations.use_the_link}</h3>
     <div className="G-main-form">
-      <div className="G-main-form-field">
+      <div className="G-main-form-field" pointer>
         <input
           readOnly={true}
           defaultValue={link}

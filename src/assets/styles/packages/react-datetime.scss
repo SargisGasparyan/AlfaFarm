@@ -10,7 +10,7 @@
 
   display       : none;
   position      : absolute;
-  width         : 350px;
+  width         : 300px;
   padding       : 4px;
   margin-top    : 1px;
   z-index       : 99 !important;
@@ -99,6 +99,7 @@
 }
 .rdtPicker .dow {
   width: 14.2857%;
+  font-size: 14px;
   border-bottom: none;
   cursor: default;
 }

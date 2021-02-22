@@ -16,7 +16,7 @@ const ListItem = React.memo(({ data }: IProps) => (
   <div className="P-news-list-item">
     <div className="P-image" style={{ background: `url('${getMediaPath(data.imagePath)}') center/cover` }} />
     <div className="P-content">
-      <h3>{truncateText(data.title, 60)}</h3>
+      <h3>{truncateText(data.title, 45)}</h3>
       <Link
         to={ROUTES.NEWS.DETAILS.replace(':id', data.id)}
         className="G-orange-color G-normal-link"

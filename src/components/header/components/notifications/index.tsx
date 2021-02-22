@@ -26,6 +26,7 @@ interface IState {
 
 interface IProps {
   onClose(e?: Event | React.SyntheticEvent): void;
+  onSeenChange(all: boolean): void;
 }
 
 class Notifications extends HelperPureComponent<IProps, IState> {
@@ -51,6 +52,7 @@ class Notifications extends HelperPureComponent<IProps, IState> {
   private clickOnItem = async (e: Event | React.SyntheticEvent, item: INotificationListResponseModel) => {
     if (!item.seen) {
       await NotificationController.Seen(item.id);
+      this.props.onSeenChange(false);
     }
 
     if (item.hasChoice) {
@@ -65,8 +67,49 @@ class Notifications extends HelperPureComponent<IProps, IState> {
     this.props.onClose();
   }
 
-  private ListItem = ({ item }: { item: INotificationListResponseModel }) => {
+  private scrolled = (e: React.SyntheticEvent) => {
+    const { loading, data } = this.state;
+    if (scrolledToBottomOfElement(e.currentTarget as HTMLElement) && !loading && data && this.pageNumber < data.pageCount) {
+      this.pageNumber += 1;
+      this.fetchData();
+    }
+  }
 
+  private markAsRead = async () => {
+    await NotificationController.Seen();
+    this.props.onSeenChange(true);
+
+    const { data } = this.state;
+
+    if (data) {
+      data.list.forEach(item => {
+        item.seen = true;
+      });
+      
+      this.safeSetState({ data });
+    }
+  }
+
+  public render() {
+    const { onClose } = this.props;
+    const { data, selectedItem } = this.state;
+
+    return (
+      <ClickOutside onClickOutside={!selectedItem ? onClose : () => { console.log('') }}>
+        <aside className="P-header-notifications" onScroll={this.scrolled}>
+          <h6>
+            {Settings.translations.notifications}
+            <a className="G-orange-color" onClick={this.markAsRead}>{Settings.translations.mark_as_read}</a>
+          </h6>
+          {data && data.list.map(item => <this.ListItem key={item.id} item={item} />)}
+        </aside>
+      
+        {this.state.selectedItem ? <NotificationAnswer selectedItem={this.state.selectedItem} onClose={this.closeModal} /> : null}
+      </ClickOutside>
+    );
+  }
+
+  private ListItem = ({ item }: { item: INotificationListResponseModel }) => {
     const isOrder = item.type === NotificationTypeEnum.OrderCanceled || item.type === NotificationTypeEnum.OrderCollected || item.type === NotificationTypeEnum.OrderFinished || item.type === NotificationTypeEnum.OrderStarted;
 
     if (item.type === NotificationTypeEnum.PrescriptionDeciphered) {
@@ -120,30 +163,6 @@ class Notifications extends HelperPureComponent<IProps, IState> {
     }
 
     return null;
-  }
-
-  private scrolled = (e: React.SyntheticEvent) => {
-    const { loading, data } = this.state;
-    if (scrolledToBottomOfElement(e.currentTarget as HTMLElement) && !loading && data && this.pageNumber < data.pageCount) {
-      this.pageNumber += 1;
-      this.fetchData();
-    }
-  }
-
-  public render() {
-    const { onClose } = this.props;
-    const { data, selectedItem } = this.state;
-
-    return (
-      <ClickOutside onClickOutside={!selectedItem ? onClose : () => { console.log('') }}>
-        <aside className="P-header-notifications" onScroll={this.scrolled}>
-          <h6>{Settings.translations.notifications}</h6>
-          {data && data.list.map(item => <this.ListItem key={item.id} item={item} />)}
-        </aside>
-      
-        {this.state.selectedItem ? <NotificationAnswer selectedItem={this.state.selectedItem} onClose={this.closeModal} /> : null}
-      </ClickOutside>
-    );
   }
 }
 

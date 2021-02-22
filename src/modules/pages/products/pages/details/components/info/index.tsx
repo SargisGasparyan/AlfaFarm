@@ -175,22 +175,24 @@ class Info extends HelperComponent<IProps, IState> {
             <i className="icon-Group-5513 P-arrow-icon" />
           </span>
         </h3>}
-        <h3 className="P-row">
+        {!!data.stockQuantity && <h3 className="P-row">
           {Settings.translations.availability_at_the_nearest_pharmacy}
           <span className="P-value P-pin G-cursor-pointer" onClick={this.togglePharmaciesAvailablity}>
             <img src={PinImage} alt="pin" />
             <i className="icon-Group-5513 P-arrow-icon" />
           </span>
-        </h3>
-        {data.activeIngredients && <h3 className="P-row">
+        </h3>}
+        {data.activeIngredients && !!data.activeIngredients.length && <h3 className="P-row">
           {Settings.translations.active_ingredients}
           <span className="P-value G-cursor-pointer" onClick={this.navigateToActiveIngredients}>
             {data.activeIngredients.map(item => item.name).join(', ')}
             <i className="icon-Group-5513 P-arrow-icon" />
           </span>
         </h3>}
-        <h3>{Settings.translations.description}</h3>
-        <p className="P-description">{data.description}</p>
+        {data.description && <>
+          <h3>{Settings.translations.description}</h3>
+          <p className="P-description">{data.description}</p>
+        </>}
         <div className="P-count-info"><this.UnitCount /></div>
         <div className="P-cart-actions">
           {data.stockQuantity && <>

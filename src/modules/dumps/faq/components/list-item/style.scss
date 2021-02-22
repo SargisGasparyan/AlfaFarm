@@ -4,6 +4,8 @@
 .P-faq-list-item, .P-faq-list-item-content {
   margin    : 0 auto 15px;
   max-width : 100%;
+
+  > .P-description { padding: 0 30px; }
 }
 
 .P-faq-list-item {

@@ -46,10 +46,11 @@ class NotificationController {
     return result;
   };
 
-  public static Seen = (id: number): Promise<IResponse<number>> => {
+  public static Seen = (id?: number): Promise<IResponse<number>> => {
     const result = Connection.POST({
-      action: `seen?id=${id}`,
+      action: 'seen',
       controller: NotificationController.controller,
+      query: { id },
       body: {},
     });
 

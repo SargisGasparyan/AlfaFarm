@@ -41,15 +41,14 @@
 }
 
 .P-clinic-days-tooltip {
-  width           : 270px;
-  display         : flex;
-  padding         : 15px 10px; // 10px = 15px - 5px
-  flex-wrap       : wrap;
-  max-height      : 230px;
-  overflow-y      : auto;
-  background      : white;
-  box-shadow      : $default-block-shadow;
-  justify-content : center;
+  width      : 270px;
+  display    : flex;
+  padding    : 15px 10px; // 10px = 15px - 5px
+  flex-wrap  : wrap;
+  max-height : 230px;
+  overflow-y : auto;
+  background : white;
+  box-shadow : $default-block-shadow;
 
   > h3 {
     width         : 100%;

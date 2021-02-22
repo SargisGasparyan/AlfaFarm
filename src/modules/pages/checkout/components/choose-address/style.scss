@@ -8,7 +8,15 @@
     overflow-y : auto;
     max-height : 600px;
 
-    .P-data-table > .P-data-table-body > ul:hover { background: $dark-gray; }
+    .P-data-table > .P-data-table-body > ul{
+
+      &:hover { background: $dark-gray; }
+
+      .P-done-icon {
+        width       : 30px;
+        padding-top : 5px;
+      }
+    }
 
     .G-main-button {
       margin    : 40px 20px 0 auto;

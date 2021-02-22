@@ -158,13 +158,14 @@ class Header extends HelperPureComponent<{}, IState> {
   }
 
   private toggleNotifications = (e?: Event | React.SyntheticEvent) => {
-    if (e) {
-      e.stopPropagation();
-    }
+    e && e.stopPropagation();
     const { notificationOpen } = this.state;
+    this.safeSetState({ notificationOpen: !notificationOpen });
+  }
 
-    if (!notificationOpen) this.safeSetState({ notificationOpen: true, notificationIconNumber: 0 });
-    else this.safeSetState({ notificationOpen: false });
+  private onNotificationSeenChange = (all: boolean) => {
+    const { notificationIconNumber } = this.state;
+    this.safeSetState({ notificationIconNumber: all ? 0 : notificationIconNumber - 1 });
   }
 
   private searchSubmit = () => {
@@ -245,7 +246,7 @@ class Header extends HelperPureComponent<{}, IState> {
             <LanguageSwitcher />
 
             {authOpen && <Shared.Auth onClose={this.toggleAuth} />}
-            {notificationOpen && <Notifications onClose={this.toggleNotifications} />}
+            {notificationOpen && <Notifications onClose={this.toggleNotifications} onSeenChange={this.onNotificationSeenChange} />}
           </> : <this.Mobile />)}
         </Screen.SmallDesktop>
       </header>

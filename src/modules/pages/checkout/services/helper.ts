@@ -1,4 +1,4 @@
-import { isValidPhone, isValidEmail, isValidDateRange } from 'platform/services/validator';
+import { isValidPhone, isValidEmail } from 'platform/services/validator';
 import { IOrderModifyRequestModel } from 'platform/api/order/models/request';
 import { OrderDeliveryTypeEnum } from 'platform/api/order/constants/enums';
 
@@ -11,6 +11,7 @@ export function validateForm(this: IOrderModifyRequestModel, submited?: boolean)
     email: false,
     phoneNumber: false,
     address: false,
+    deliveryDateFrom: false,
     branchId: false,
   };
 
@@ -21,6 +22,11 @@ export function validateForm(this: IOrderModifyRequestModel, submited?: boolean)
 
   if (submited && !this.lastName) {
     errors.lastName = true;
+    valid = false;
+  }
+
+  if (submited && this.deliveryDateFrom && new Date(this.deliveryDateFrom) < new Date()) {
+    errors.deliveryDateFrom = true;
     valid = false;
   }
 

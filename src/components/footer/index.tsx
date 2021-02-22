@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import ROUTES from 'platform/constants/routes';
 import Settings from 'platform/services/settings';
-import { contactPhoneNumber, contactEmail, contactAddress } from 'platform/constants/contact-info';
+import { contactPhoneNumber, contactEmail } from 'platform/constants/contact-info';
 import OrderACall from './components/order_a_call';
 import enviroment from 'platform/services/enviroment';
 import Invite from './components/invite';
@@ -65,7 +65,7 @@ const Footer = React.memo(() => (
         <h3 className="G-main-color">{Settings.translations.contact}</h3>
         <a><i className="G-orange-color icon-Group-5522" /> {contactPhoneNumber}</a>
         <a><i className="G-orange-color icon-Group-5524" /> {contactEmail}</a>
-        <a><i className="G-orange-color icon-Group-5527" /> {contactAddress}</a>
+        <a><i className="G-orange-color icon-Group-5527" /> {Settings.translations.contact_address}</a>
 
         <OrderACall />
         {!!Settings.token && !Settings.guest && <Invite />}

@@ -15,17 +15,21 @@ interface IProps {
 };
 
 const SortBox = ({ onChange }: IProps) => {
+  const filter = buildFilters();
   const [sortBy, setSortBy] = React.useState(ProductSortEnum.AlphabeticalAZ);
 
   React.useEffect(() => {
-    const filter = buildFilters();
-    filter.sortBy && setSortBy(filter.sortBy);
-  }, []);
+    const sortBy = !filter.hasDiscount &&
+      (filter.sortBy === ProductSortEnum.DiscountLowToHigh ||
+        filter.sortBy === ProductSortEnum.DiscountHighToLow) ? ProductSortEnum.AlphabeticalAZ : filter.sortBy;
 
-  const changeSortBy = (chosen: IDropdownOption<ProductSortEnum>) => {
-    setSortBy(chosen.value);
+    sortBy && changeSortBy(sortBy);
+  }, [JSON.stringify(filter)]);
+
+  const changeSortBy = (chosen: ProductSortEnum) => {
+    setSortBy(chosen);
     const query = new URLSearchParams(window.location.search);
-    query.set('sortBy', chosen.value.toString());
+    query.set('sortBy', chosen.toString());
     window.routerHistory.replace(`${ROUTES.PRODUCTS.MAIN}?${query.toString()}`);
     onChange();
   }
@@ -35,8 +39,8 @@ const SortBox = ({ onChange }: IProps) => {
       <h3>{Settings.translations.sort_by}</h3>
       <Select<ProductSortEnum>
         value={sortBy}
-        options={SortByDropdown()}
-        onChange={changeSortBy}
+        options={SortByDropdown(!filter.hasDiscount ? [ProductSortEnum.DiscountLowToHigh, ProductSortEnum.DiscountHighToLow] : [])}
+        onChange={chosen => chosen && changeSortBy(chosen.value)}
       />
     </div>
   );

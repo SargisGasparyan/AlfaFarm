@@ -14,14 +14,16 @@ import { formatDate, formatPrice, getViewEnum } from 'platform/services/helper';
 import { PaymentTypeEnum } from 'platform/constants/enums';
 import enviroment from 'platform/services/enviroment';
 import DispatcherChannels from 'platform/constants/dispatcher-channels';
-import { OrderStatusEnum, OrderDeliveryTypeEnum } from 'platform/api/order/constants/enums';
+import { OrderStatusEnum } from 'platform/api/order/constants/enums';
 import { Shared } from 'modules';
+import { statusColorClassNames } from '../../constants';
 
 import './style.scss';
-import { statusColorClassNames } from '../../constants';
+import ConfirmModal from 'components/confirm-modal';
 
 interface IState {
   data?: IOrderDetailsResponseModel;
+  cancelConfirmOpen: boolean;
 };
 
 interface IRouteParams {
@@ -32,19 +34,12 @@ interface IRouteParams {
 @byPrivateRoute(ROUTES.PROFILE.ORDERS.DETAILS)
 class Details extends HelperComponent<RouteComponentProps<IRouteParams>, IState> {
 
-  public state: IState = {};
+  public state: IState = {
+    cancelConfirmOpen: false,
+  };
 
-  public componentDidMount() {
-    this.fetchData();
-    window.addEventListener(DispatcherChannels.UserConfirmed, this.cancel);
-    window.addEventListener(DispatcherChannels.UserCanceled, this.toggleConfirm);
-  }
-  public componentWillUnmount() {
-    super.componentWillUnmount();
-    window.removeEventListener(DispatcherChannels.UserConfirmed, this.cancel);
-    window.removeEventListener(DispatcherChannels.UserCanceled, this.toggleConfirm);
+  public componentDidMount() { this.fetchData(); }
 
-  }
   private statusViewEnum = getViewEnum(OrderStatusEnum);
   private paymentViewEnum = getViewEnum(PaymentTypeEnum);
 
@@ -64,7 +59,12 @@ class Details extends HelperComponent<RouteComponentProps<IRouteParams>, IState>
       result.data && window.routerHistory.push(ROUTES.CART);
     }
   }
-  private toggleConfirm = () => window.dispatchEvent(new CustomEvent(DispatcherChannels.ToggleConfirm, { detail: Settings.translations.cancel_order }));
+
+  private toggleConfirm = () => {
+    const { cancelConfirmOpen } = this.state;
+    this.safeSetState({ cancelConfirmOpen: !cancelConfirmOpen });
+  }
+
   private cancel = async () => {
     const { data } = this.state;
     const alertify = await import('alertifyjs');
@@ -79,8 +79,9 @@ class Details extends HelperComponent<RouteComponentProps<IRouteParams>, IState>
       } else alertify.error(res.message)
     }
   }
+
   public render() {
-    const { data } = this.state;
+    const { data, cancelConfirmOpen } = this.state;
 
     return (
       <Layout>
@@ -167,6 +168,13 @@ class Details extends HelperComponent<RouteComponentProps<IRouteParams>, IState>
               {Settings.translations.buy_again}
             </button>
           </div>
+
+          {cancelConfirmOpen && <ConfirmModal
+            text={Settings.translations.are_you_sure_cancel_order}
+            withoutTitle={true}
+            onConfirm={this.cancel}
+            onClose={this.toggleConfirm}
+          />}
         </div> : <PageLoader />}
       </Layout>
     );
