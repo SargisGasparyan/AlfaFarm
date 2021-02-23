@@ -10,10 +10,11 @@ import ROUTES from './platform/constants/routes';
 import Storage from './platform/services/storage';
 import Settings from './platform/services/settings';
 import Footer from './components/footer';
-import ConfirmModal from './components/confirm-modal';
+import ConfirmModal, { IProps as IConfirmModalProps } from './components/confirm-modal';
 import Socket from './platform/services/socket';
 import HelperComponent from './platform/classes/helper-component';
 import DispatcherChannels from 'platform/constants/dispatcher-channels';
+import { fetchYandexPlaces } from 'platform/services/yandex';
 
 import './modules';
 
@@ -25,7 +26,7 @@ import './assets/styles/index.scss';
 
 interface IState {
   confirmOpen: boolean;
-  confirmText: string;
+  confirmProps: IConfirmModalProps;
   initialLoading: boolean;
   generalAPILoaded: boolean;
 };
@@ -36,7 +37,7 @@ class App extends HelperComponent<{}, IState> {
     generalAPILoaded: false,
     initialLoading: false,
     confirmOpen: false,
-    confirmText: '',
+    confirmProps: {},
   };
 
   public async componentDidMount() {
@@ -79,15 +80,17 @@ class App extends HelperComponent<{}, IState> {
     const query = new URLSearchParams(window.location.search);
     const referralCode = query.get('referral');
     if (referralCode) Settings.referralCode = referralCode;
+
+    console.log(await fetchYandexPlaces('A'));
   }
 
   private toggleConfirm = (e: CustomEvent) => {
     const { confirmOpen } = this.state;
-    this.safeSetState({ confirmOpen: !confirmOpen, confirmText: e.detail || '' });
+    this.safeSetState({ confirmOpen: !confirmOpen, confirmProps: e.detail || {} });
   }
 
   public render() {
-    const { generalAPILoaded, initialLoading, confirmOpen, confirmText } = this.state;
+    const { generalAPILoaded, initialLoading, confirmOpen, confirmProps } = this.state;
 
     return generalAPILoaded ? (
       <Router history={window.routerHistory}>
@@ -112,7 +115,7 @@ class App extends HelperComponent<{}, IState> {
               <Redirect to={ROUTES.HOME} />
             </Switch>
           </section>
-          {confirmOpen && <ConfirmModal text={confirmText} />}
+          {confirmOpen && <ConfirmModal {...confirmProps} />}
           <Footer />
         </> : <PageLoader />}
       </Router>

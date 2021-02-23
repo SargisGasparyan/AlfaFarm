@@ -52,6 +52,9 @@ class BasketController {
       body: {},
       action: 'All',
       controller: BasketController.controller,
+    }, {
+      title: Settings.translations.delete_basket,
+      text: Settings.translations.delete_all_baskets,
     });
 
     return result;
@@ -100,7 +103,7 @@ class BasketController {
       body: {},
       action: `saved/${id}`,
       controller: BasketController.controller,
-    }, Settings.translations.delete_saved_product_basket);
+    }, { text: Settings.translations.delete_saved_product_basket });
 
     return result;
   };
@@ -110,8 +113,10 @@ class BasketController {
       body: {},
       action: `${productId}/${isPackage}`,
       controller: BasketController.controller,
-      withoutConfirmModal: true,
-    }, Settings.translations.delete_product_from_basket);
+    }, {
+      title: Settings.translations.delete_product,
+      text: Settings.translations.delete_product_from_basket,
+    });
 
     return result;
   };

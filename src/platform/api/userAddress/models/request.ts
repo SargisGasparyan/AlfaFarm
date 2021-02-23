@@ -7,5 +7,4 @@ export interface IUserAddressModifyRequestModel {
   entrance?: string;
   floor?: string;
   apartment?: string;
-  comment?: string;
 }

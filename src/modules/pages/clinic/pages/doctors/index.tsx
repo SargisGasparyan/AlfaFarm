@@ -23,8 +23,7 @@ import SearchInput from 'components/search-input';
 
 import './style.scss';
 import './responsive.scss';
-
-
+import EmptyState from 'components/empty-state';
 
 interface IState {
   data?: IDoctorListResponseModel[];
@@ -156,7 +155,7 @@ class Doctors extends HelperComponent<{}, {}> {
           <SearchInput onChange={this.search} />
         </h1>
         <div className="P-content">
-          {data ? data.map(item => <div key={item.id} className="P-item">
+          {data ? data.length ? data.map(item => <div key={item.id} className="P-item">
             <div className="P-main-info">
               <div className="P-image" style={{ background: `url('${getMediaPath(item.photoPath)}') center/cover` }} />
               <h3>{item.fullName}</h3>
@@ -178,13 +177,13 @@ class Doctors extends HelperComponent<{}, {}> {
                 onClick={this.submit}
               >
                 {Settings.translations.book}
-              </LoaderContent>: null }
+              </LoaderContent> : null}
             </div>
             <Dates
               doctorId={chosenDoctor}
               chosen={chosenService && chosenDoctor === item.id ? item.services.find(sub => sub.id === chosenService) : undefined}
             />
-          </div>) : <PageLoader />}
+          </div>) : <EmptyState text={Settings.translations.empty_doctors_list} /> : <PageLoader />}
           {loading && <PageLoader />}
           {showSuccess && <SuccessModal onClose={this.toggleSuccessModal}>
             <h3>{Settings.translations.appointment_success}</h3>

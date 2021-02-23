@@ -7,7 +7,7 @@ import DispatcherChannels from 'platform/constants/dispatcher-channels';
 
 import './style.scss';
 
-interface IProps {
+export interface IProps {
   text?: string;
   title?: string;
   withoutTitle?: boolean;

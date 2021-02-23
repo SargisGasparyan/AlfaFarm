@@ -1,0 +1,97 @@
+@import 'src/assets/styles/helper';
+@import 'src/assets/styles/variables';
+
+.P-yandex-autocomplete {
+
+  height    : 50px;
+  position  : relative;
+  font-size : 16px;
+  @include normal-font;
+
+  &.P-disabled {
+    opacity : .5;
+
+    > .P-yandex-autocomplete-header { cursor: initial; }
+  }
+
+  > .P-yandex-autocomplete-header {
+
+    cursor          : pointer;
+    border          : 1px solid $light-gray;
+    height          : 100%;
+    display         : flex;
+    padding         : 0px 20px;
+    font-size       : $normal-fs;
+    background      : #ffffff;
+    user-select     : none;
+    align-items     : center;
+    border-radius   : 30px;
+    justify-content : space-between;
+
+    > span {
+
+      width         : 100%;
+      overflow      : hidden;
+      white-space   : nowrap;
+      text-overflow : ellipsis;
+
+      &.P-yandex-autocomplete-remove { 
+        width : 14px;
+      }
+    }
+
+    > i {
+
+      padding   : 4px 0 0 10px;
+      font-size : 12px;
+      @include bold-font;
+    }
+
+    > .P-yandex-autocomplete-placeholder { opacity: .3; }
+  }
+
+  > .P-yandex-autocomplete-body {
+
+    top             : 55px;
+    left            : 0;
+    min-width       : 50%;
+    border          : 1px solid #D6D6D6;
+    margin          : 0;
+    z-index         : 19999;
+    position        : absolute;
+    max-height      : 250px;
+    box-shadow      : $default-block-shadow;
+    background      : white;
+    overflow-y      : auto;
+    border-radius   : $small-radius;
+    list-style-type : none;
+
+    > li {
+
+      width         : 100%;
+      max-width     : 100%;
+      cursor        : pointer;
+      height        : 35px;
+      display       : inline-block;
+      overflow      : hidden;
+      line-height   : 35px;
+      padding       : 0px 20px;
+      white-space   : nowrap;
+      text-overflow : ellipsis;
+
+      &:hover { background : transparentize(#DEDEDE, 0.78); }
+
+      > img { vertical-align: middle; }
+
+      &.P-yandex-autocomplete-empty-label {
+        
+        color  : transparentize(#000000, .6);
+        cursor : default;
+
+        &:hover { background: inherit; }
+      }
+
+      &.P-yandex-autocomplete-new-label { color: $main-color; }
+    }
+  }
+}

@@ -145,7 +145,7 @@ class Info extends HelperComponent<IProps, IState> {
   }
   public render() {
     const { data } = this.props;
-    const { count, cartLoading, pharmaciesAvailablityOpen } = this.state;
+    const { count, cartLoading, pharmaciesAvailablityOpen, isSelectedPackage } = this.state;
 
     return (
       <div className="P-product-details-info">
@@ -213,7 +213,7 @@ class Info extends HelperComponent<IProps, IState> {
           {pharmaciesAvailablityOpen && <PharmaciesAvailablity onClose={this.togglePharmaciesAvailablity} data={data} />}
           <span className="G-orange-color G-ml-auto P-price">
             <span />
-            {data.promotion.promotionType === PromotionTypeEnum.Discount ? 
+            {(isSelectedPackage ? data.packagePromotion : data.promotion).promotionType === PromotionTypeEnum.Discount ? 
             <> <del>{formatPrice(this.price)}</del> {formatPrice(this.discountedPrice)} </> : <><span>Bonus: { this.discountedPrice }</span> {formatPrice(this.price)}</>}
           </span>
         </div>

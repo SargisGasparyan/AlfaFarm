@@ -57,7 +57,7 @@ class PasswordForm extends HelperComponent<{}, IState> {
           }
           this.safeSetState({ submitLoading: false });
         });
-      } else alertify.error(`Passwords don’t match`);
+      } else alertify.error(Settings.translations.passwords_do_not_match);
     });
   }
 

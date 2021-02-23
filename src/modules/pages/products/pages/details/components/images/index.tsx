@@ -141,6 +141,7 @@ class Images extends HelperPureComponent<IProps, IState> {
         </div>}
 
         {confirmModal && <ConfirmModal
+          title={Settings.translations.special_product}
           text={Settings.translations.special_product_confirm}
           onConfirm={this.addSpecialProduct}
           onClose={this.closeConfirmModal}

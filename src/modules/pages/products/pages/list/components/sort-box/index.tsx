@@ -19,11 +19,11 @@ const SortBox = ({ onChange }: IProps) => {
   const [sortBy, setSortBy] = React.useState(ProductSortEnum.AlphabeticalAZ);
 
   React.useEffect(() => {
-    const sortBy = !filter.hasDiscount &&
+    const changedSortBy = !filter.hasDiscount &&
       (filter.sortBy === ProductSortEnum.DiscountLowToHigh ||
         filter.sortBy === ProductSortEnum.DiscountHighToLow) ? ProductSortEnum.AlphabeticalAZ : filter.sortBy;
 
-    sortBy && changeSortBy(sortBy);
+        changedSortBy && changeSortBy(changedSortBy);
   }, [JSON.stringify(filter)]);
 
   const changeSortBy = (chosen: ProductSortEnum) => {

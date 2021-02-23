@@ -8,6 +8,7 @@ import Settings from './settings';
 import { OSTypeEnum, LanguageEnum } from '../constants/enums';
 import { IRequest, IBodyRequest, IResponse } from '../constants/interfaces';
 import DispatcherChannels from 'platform/constants/dispatcher-channels';
+import { IProps as IConfirmModalProps } from 'components/confirm-modal';
 
 class Connection {
 
@@ -106,7 +107,7 @@ class Connection {
   }
 
   //? DELETE request
-  public static DELETE = async <Body>(data: IBodyRequest<Body>, confirmQuestion?: string): Promise<any> => {
+  public static DELETE = async <Body>(data: IBodyRequest<Body>, confirmProps?: IConfirmModalProps): Promise<any> => {
     const abort = new AbortController();
     const { controller, action, body, query, noneJSONBody, withoutConfirmModal } = data;
     return new Promise(resolve => {
@@ -138,14 +139,14 @@ class Connection {
         }
 
         if (!withoutConfirmModal) {
-          window.dispatchEvent(new CustomEvent(DispatcherChannels.ToggleConfirm, { detail: confirmQuestion }));
+          window.dispatchEvent(new CustomEvent(DispatcherChannels.ToggleConfirm, { detail: confirmProps }));
           window.removeEventListener(DispatcherChannels.UserCanceled, userCanceled);
           window.removeEventListener(DispatcherChannels.UserConfirmed, userConfirmed);  
         }
       }
 
       if (!withoutConfirmModal) {
-        window.dispatchEvent(new CustomEvent(DispatcherChannels.ToggleConfirm, { detail: confirmQuestion }));
+        window.dispatchEvent(new CustomEvent(DispatcherChannels.ToggleConfirm, { detail: confirmProps }));
         window.addEventListener(DispatcherChannels.UserCanceled, userCanceled);
         window.addEventListener(DispatcherChannels.UserConfirmed, userConfirmed);
       } else userConfirmed();

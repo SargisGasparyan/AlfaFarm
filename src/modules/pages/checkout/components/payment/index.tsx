@@ -7,17 +7,21 @@ import Settings from 'platform/services/settings';
 
 import { PaymentTypeEnumItems } from '../../constants';
 import IPay from './components/i-pay';
+import { IOrderResultResponseModel } from 'platform/api/order/models/response';
+
 export interface IPaymentMethod {
+  resultInfo?: IOrderResultResponseModel;
   callback: (e: React.SyntheticEvent) => void;
 }
-const PaymentMethod = React.memo(({ callback }: IPaymentMethod) => {
+
+const PaymentMethod = React.memo(({ resultInfo, callback }: IPaymentMethod) => {
   const [type, setType] = React.useState(PaymentTypeEnum.Cash);
   const [loading, setLoading] = React.useState(false);
 
   const total = () => {
     const query = new URLSearchParams(window.location.search);
     const item = query.get('total');
-    return Number(item);
+    return resultInfo ? Number(item) + resultInfo.deliveryFee : Number(item);
   }
 
   const pay = (e: React.SyntheticEvent) => { setLoading(true); callback(e); };
@@ -56,4 +60,5 @@ const PaymentMethod = React.memo(({ callback }: IPaymentMethod) => {
     </div>
   </div>
 });
+
 export default PaymentMethod;

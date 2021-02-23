@@ -277,7 +277,7 @@ class Header extends HelperPureComponent<{}, IState> {
       </div>
 
       {authOpen && <Shared.Auth onClose={this.toggleAuth} />}
-      {notificationOpen && <Notifications onClose={this.toggleNotifications} />}
+      {notificationOpen && <Notifications onClose={this.toggleNotifications} onSeenChange={this.onNotificationSeenChange} />}
       {mobileMenuOpen && <MobileMenu onClose={this.toggleMobileMenu} onAuthOpen={this.toggleAuth} />}
     </div>
   }

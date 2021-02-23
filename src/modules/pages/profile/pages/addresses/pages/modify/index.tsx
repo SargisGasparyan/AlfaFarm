@@ -57,7 +57,6 @@ class Modify extends HelperComponent<RouteComponentProps<IRouteParams>, IState> 
       form.apartment = result.data.apartment;
       form.entrance = result.data.entrance;
       form.floor = result.data.floor;
-      form.comment = result.data.comment;
       form.addressText = result.data.addressText;
       form.addressLat = result.data.addressLat;
       form.addressLng = result.data.addressLng;
@@ -171,15 +170,6 @@ class Modify extends HelperComponent<RouteComponentProps<IRouteParams>, IState> 
               <input
                 name="apartment"
                 value={form.apartment}
-                className="G-main-input"
-                onChange={this.changeField}
-              />
-            </div>
-            <div className="G-main-form-field">
-              <p className="G-input-top-label">{Settings.translations.comment}</p>
-              <input
-                name="comment"
-                value={form.comment}
                 className="G-main-input"
                 onChange={this.changeField}
               />

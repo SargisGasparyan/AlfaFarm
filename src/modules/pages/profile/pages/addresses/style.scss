@@ -31,10 +31,14 @@
     }
 
     .P-make-default {
-      opacity        : 0;
-      padding        : 6px 15px;
-      transition     : .2s;
-      pointer-events : none;
+      color           : $main-color;
+      border          : 0;
+      opacity         : 0;
+      font-size       : 16px;
+      transition      : .2s;
+      background      : none;
+      pointer-events  : none;
+      text-decoration : underline;
     }
 
     &:hover .P-make-default {

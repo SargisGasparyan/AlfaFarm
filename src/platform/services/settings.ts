@@ -15,6 +15,7 @@ class Settings {
   public static linkedinId = '77ji7ohk6dxaxv';
 
   public static googleAPIKey = 'AIzaSyDVSjKMr1sGNq7dlzGm3YBskX9GYeZJ5Uk';
+  public static yandexAPIKey = 'ebc3e314-c6d0-4b01-bf80-8c94524707d8';
   // AIzaSyDqd5WM8hmgmjB-7DozGaJ38M1fjIWrStY
 
   public static googlePlayURL = 'https://play.google.com/store/apps/details?id=am.armboldmind.ineed';

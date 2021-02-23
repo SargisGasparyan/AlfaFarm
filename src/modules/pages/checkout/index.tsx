@@ -309,7 +309,7 @@ class Checkout extends HelperComponent<{}, IState> {
             <div className="G-main-form-field">
               <input
                 name="email"
-                value={form.email || '' || ''}
+                value={form.email || ''}
                 className={`G-main-input ${this.formValidation.errors.email ? 'G-invalid-field' : ''}`}
                 placeholder={Settings.translations.email}
                 onChange={this.changeField}
@@ -318,7 +318,7 @@ class Checkout extends HelperComponent<{}, IState> {
             <div className="G-main-form-field G-main-form-field-closer">
               <Autocomplete
                 placeholder={Settings.translations.address}
-                value={form.addressText || '' || ''}
+                value={form.addressText || ''}
                 className={`G-main-input ${this.formValidation.errors.address ? 'G-invalid-field' : ''}`}
                 onChange={this.addressChange}
                 onPlaceSelected={this.addressSelect}
@@ -457,7 +457,7 @@ class Checkout extends HelperComponent<{}, IState> {
             >{Settings.translations.choose_address}</LoaderContent>}
             {chooseAddressOpen && <ChooseAddress onClose={this.closeAddressChoose} />}
           </div>
-        </form> : <PaymentMethod callback={(e: React.SyntheticEvent) => this.finishCheckout(e)} />}
+        </form> : <PaymentMethod resultInfo={resultInfo} callback={(e: React.SyntheticEvent) => this.finishCheckout(e)} />}
 
         {successModalOpen && <SuccessModal onClose={this.navigateToHome}>
           {Settings.guest ? <>

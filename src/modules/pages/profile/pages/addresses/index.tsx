@@ -41,10 +41,13 @@ class Addresses extends HelperComponent<IState, {}> {
     },
     {
       name: '',
-      cell: (row: IUserAddressListResponseModel) => !row.isDefault && <button
-        className="G-main-button P-make-default"
-        onClick={() => this.makeDefault(row.id)}
-      >{Settings.translations.make_default}</button>,
+      cell: (row: IUserAddressListResponseModel) => <>
+        {row.isDefault && <span className="G-main-color">{Settings.translations.default}</span>}
+        {!row.isDefault && <button
+          className="P-make-default"
+          onClick={() => this.makeDefault(row.id)}
+        >{Settings.translations.make_default}</button>}
+      </>,
     },
     {
       name: '',
