@@ -1,7 +1,6 @@
 import * as React from 'react';
 import * as DateTime from 'react-datetime';
 import { Moment } from 'moment';
-import Autocomplete from 'react-google-autocomplete';
 import CheckBox from 'rc-checkbox';
 import { Link } from 'react-router-dom';
 
@@ -16,7 +15,7 @@ import Select from 'components/select';
 import { OrderDeliveryTimeTypeDropdown, OrderDeliveryTypeDropdown } from 'platform/constants/dropdowns';
 import { IOrderModifyRequestModel } from 'platform/api/order/models/request';
 import Storage from 'platform/services/storage';
-import { IDropdownOption, IGooglePlace } from 'platform/constants/interfaces';
+import { IDropdownOption, IYandexPlace } from 'platform/constants/interfaces';
 import { validateForm } from './services/helper';
 import { formatDate, formatPrice } from 'platform/services/helper';
 import ChooseAddress from './components/choose-address';
@@ -33,6 +32,7 @@ import { IOrderResultResponseModel } from 'platform/api/order/models/response';
 import Connection from 'platform/services/connection';
 import ChoosePharmacy from './components/choose-pharmacy';
 import { IPharmacyBranchListResponseModel } from 'platform/api/pharmacyBranch/models/response';
+import YandexAutocomplete from 'components/yandex-autocomplete';
 import { Shared } from 'modules';
 
 import './style.scss';
@@ -151,12 +151,12 @@ class Checkout extends HelperComponent<{}, IState> {
     this.safeSetState({ form })
   }
 
-  private addressSelect = (place: IGooglePlace) => {
+  private addressSelect = (place: IYandexPlace) => {
     const { form } = this.state;
     delete form.userAddressId;
-    form.addressText = place.formatted_address;
-    form.addressLat = place.geometry.location.lat();
-    form.addressLng = place.geometry.location.lng();
+    form.addressText = place.name;
+    form.addressLat = place.position[0];
+    form.addressLng = place.position[1];
     this.safeSetState({ form });
   }
 
@@ -195,26 +195,40 @@ class Checkout extends HelperComponent<{}, IState> {
     } else this.safeSetState({ chooseAddressOpen: false });
   }
 
-  private choosePharmacy = (pharmacy: IPharmacyBranchListResponseModel) => {
+  private clearAddress = () => {
     const { form } = this.state;
-    form.branchId = pharmacy.id;
-    form.addressText = pharmacy.addressText;
-    form.addressLat = pharmacy.addressLat;
-    form.addressLng = pharmacy.addressLng;
-    this.safeSetState({ form, chosenBranch: pharmacy, choosePharmacyOpen: false });
+    form.branchId = undefined;
+    form.userAddressId = undefined;
+    form.addressApartment = '';
+    form.addressBuilding = '';
+    form.addressEntrance = '';
+    form.addressFloor = '';
+    form.addressText = '';
+    form.addressLat = 0;
+    form.addressLng = 0;
+    this.safeSetState({ form, chosenBranch: null });
+  }
+
+  private choosePharmacy = (pharmacy: IPharmacyBranchListResponseModel) => {
+    if (pharmacy) {
+      const { form } = this.state;
+      form.branchId = pharmacy.id;
+      form.addressText = pharmacy.addressText;
+      form.addressLat = pharmacy.addressLat;
+      form.addressLng = pharmacy.addressLng;
+      this.safeSetState({ form, chosenBranch: pharmacy, choosePharmacyOpen: false });
+    } else this.safeSetState({ choosePharmacyOpen: false });
   }
 
   private changeDeliveryType = (chosen: IDropdownOption<OrderDeliveryTypeEnum>) => {
     const { form } = this.state;
     form.deliveryType = chosen.value;
-    this.safeSetState({ form });
+    this.safeSetState({ form }, this.clearAddress);
   }
 
   private changeDeliveryTimeType = (chosen: IDropdownOption<OrderDeliveryTimeTypeEnum>) => {
     const { form } = this.state;
-    if (chosen.value === OrderDeliveryTimeTypeEnum.Asap) {
-      form.deliveryDateFrom = undefined;
-    }
+    if (chosen.value === OrderDeliveryTimeTypeEnum.Asap) form.deliveryDateFrom = undefined;
     this.safeSetState({ dateType: chosen.value, form });
   }
 
@@ -316,14 +330,12 @@ class Checkout extends HelperComponent<{}, IState> {
               />
             </div>
             <div className="G-main-form-field G-main-form-field-closer">
-              <Autocomplete
+              <YandexAutocomplete
                 placeholder={Settings.translations.address}
                 value={form.addressText || ''}
                 className={`G-main-input ${this.formValidation.errors.address ? 'G-invalid-field' : ''}`}
                 onChange={this.addressChange}
-                onPlaceSelected={this.addressSelect}
-                componentRestrictions={{ country: 'am' }}
-                types={[]}
+                onPlaceSelect={this.addressSelect}
               />
             </div>
             <div className="G-main-form-field G-main-form-field-closer">

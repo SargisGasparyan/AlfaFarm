@@ -14,7 +14,7 @@ import { formatDate, formatPrice, getViewEnum } from 'platform/services/helper';
 import { PaymentTypeEnum } from 'platform/constants/enums';
 import enviroment from 'platform/services/enviroment';
 import DispatcherChannels from 'platform/constants/dispatcher-channels';
-import { OrderStatusEnum } from 'platform/api/order/constants/enums';
+import { OrderStatusEnum, OrderDeliveryTypeEnum } from 'platform/api/order/constants/enums';
 import { Shared } from 'modules';
 import { statusColorClassNames } from '../../constants';
 
@@ -42,6 +42,7 @@ class Details extends HelperComponent<RouteComponentProps<IRouteParams>, IState>
 
   private statusViewEnum = getViewEnum(OrderStatusEnum);
   private paymentViewEnum = getViewEnum(PaymentTypeEnum);
+  private deliveryTypeViewEnum = getViewEnum(OrderDeliveryTypeEnum);
 
   private fetchData = async () => {
     const { id } = this.props.match.params;
@@ -96,6 +97,11 @@ class Details extends HelperComponent<RouteComponentProps<IRouteParams>, IState>
             </h3>
 
             <h3 className="G-flex G-mb-30 G-flex-justify-between">
+              {Settings.translations.type}
+              <span>{Settings.translations[this.deliveryTypeViewEnum[data.deliveryType]]}</span>
+            </h3>
+
+            <h3 className="G-flex G-mb-30 G-flex-justify-between">
               {Settings.translations.delivery_date}
               <span>{data.deliveryDate ? formatDate(data.deliveryDate) : Settings.translations.as_soon_as_possible}</span>
             </h3>
@@ -104,6 +110,16 @@ class Details extends HelperComponent<RouteComponentProps<IRouteParams>, IState>
               {Settings.translations.price}
               <span>{formatPrice(data.totalPrice)}</span>
             </h3>
+
+            {!!data.totalBonus && <h3 className="G-flex G-mb-30 G-flex-justify-between">
+              {Settings.translations.gained_bonus}
+              <span>{data.totalBonus}</span>
+            </h3>}
+
+            {!!data.usedBonus && <h3 className="G-flex G-mb-30 G-flex-justify-between">
+              {Settings.translations.used_bonus}
+              <span>{data.usedBonus}</span>
+            </h3>}
 
             <h3 className="G-flex G-mb-30 G-flex-justify-between">
               {Settings.translations.status}

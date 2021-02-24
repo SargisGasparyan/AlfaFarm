@@ -23,7 +23,6 @@ declare module 'gulp-shell';
 declare module 'rc-checkbox';
 declare module 'react-ladda';
 declare module 'react-social-login';
-declare module 'react-google-autocomplete';
 declare module 'signalr-client';
 declare module 'alertifyjs';
 declare module 'scroll-into-view';

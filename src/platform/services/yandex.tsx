@@ -1,10 +1,9 @@
 import Settings from './settings';
+import { getFullLanguageCode } from './helper';
 
-export async function fetchYandexPlaces(text: string) {
-  const response = await fetch(`https://search-maps.yandex.ru/v1/?apikey=${Settings.yandexAPIKey}&text=${text}&results=20`);
-  const result = await response.json();
-
-  console.log(result);
-
-  return result;
-};
+export const initYMapsScript = () => {
+  const script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src = `//api-maps.yandex.ru/2.1/?apikey=${Settings.yandexAPIKey}&lang=${getFullLanguageCode(Settings.language)}&load=SuggestView,geocode&onload=onYandexMapsLoad`;
+  document.head.appendChild(script);
+}

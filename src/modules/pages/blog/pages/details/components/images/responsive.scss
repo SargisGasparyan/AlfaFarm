@@ -9,17 +9,23 @@
     }
 
     > .P-thumbs {
+      width          : 100%;
       order          : 2;
-      width          : calc(100% + 20px);
-      height         : 100px;
-      margin         : 0 -10px;
+      margin         : 0;
+      padding        : 0 0 10px 0;
       max-width      : initial;
+      overflow-y     : hidden;
+      overflow-x     : auto;
       flex-direction : row;
 
       > div {
-        height    : 100%;
-        margin    : 0 10px;
-        max-width : 100px;
+        margin       : 0 15px 0 0;
+        max-width    : 100px;
+        min-width    : 100px;
+        max-height   : 100px;
+        min-height   : 100px;
+
+        &:last-child { margin-right: 0; }
       }
     }
   }

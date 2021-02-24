@@ -39,14 +39,9 @@ export interface IDropdownOption<Value> {
   value: Value;
 };
 
-export interface IGooglePlace {
-  formatted_address: string;
-  geometry: {
-    location: {
-      lat(): number;
-      lng(): number;
-    };
-  };
+export interface IYandexPlace {
+  name: string;
+  position: [number, number];
 };
 
 export interface IPagingResponse<Data> {

@@ -49,7 +49,7 @@ class ContactUs extends HelperComponent<{}, IState> {
       onMouseOver: () => this.toggleMarker(index),
       onMouseOut: () => this.toggleMarker(),
       icon: {
-        url:  item.isOpen ? MapIconGreen : MapIconOrange,
+        url: item.isOpen ? MapIconGreen : MapIconOrange,
         scaledSize:  new google.maps.Size(30, 30)
       },
     }));

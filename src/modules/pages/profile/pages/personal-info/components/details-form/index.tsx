@@ -74,6 +74,7 @@ class DetailsForm extends HelperComponent<{}, IState> {
       });
     });
   }
+  
   private isValidDate = (date: moment.Moment) => {
     const invalidDate = new Date();
     const minDate = new Date();

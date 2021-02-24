@@ -42,7 +42,7 @@ class Details extends HelperComponent<RouteComponentProps<IRouteParams>, IState>
       <section className="G-page P-blog-details-page">
         {window.routerHistory.length > 2 && <i className="G-back-icon icon-Group-5529" onClick={this.goBack} />}
         <div className="P-content">
-          {data.images.length && <Images data={data} />}
+          {!!data.images.length && <Images data={data} />}
           <Info data={data} />
           <p className="P-description" dangerouslySetInnerHTML={{ __html: data.description }} />
         </div>

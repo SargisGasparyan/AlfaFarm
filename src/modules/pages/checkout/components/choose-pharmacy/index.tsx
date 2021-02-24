@@ -79,7 +79,7 @@ class ChoosePharmacy extends HelperComponent<IProps, IState> {
     const { hoveredMarkerIndex } = this.state;
 
     return data ? (
-      <Modal className="P-checkout-choose-pharmacy-modal" onClose={onClose}>
+      <Modal className="P-checkout-choose-pharmacy-modal" onClose={() => onClose()}>
         <div className="P-content">
           <Screen.Desktop>
             {(match: boolean) => match && <div className="P-list">

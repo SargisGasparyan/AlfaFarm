@@ -1,5 +1,4 @@
 import * as React from 'react';
-import Autocomplete from 'react-google-autocomplete';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 
 import HelperComponent from 'platform/classes/helper-component';
@@ -12,8 +11,9 @@ import { validateForm } from './services/helper';
 import { IUserAddressModifyRequestModel } from 'platform/api/userAddress/models/request';
 import UserAddressController from 'platform/api/userAddress';
 import generic from 'platform/decorators/generic';
-import { IGooglePlace } from 'platform/constants/interfaces';
+import { IYandexPlace } from 'platform/constants/interfaces';
 import { trimForm } from 'platform/services/helper';
+import YandexAutocomplete from 'components/yandex-autocomplete';
 
 import './style.scss';
 
@@ -94,17 +94,18 @@ class Modify extends HelperComponent<RouteComponentProps<IRouteParams>, IState> 
 
   private onAddressChange = (e: React.SyntheticEvent<HTMLInputElement>) => {
     const { form } = this.state;
+    console.log('mtav');
     form.addressText = e.currentTarget.value;
     form.addressLat = 0;
     form.addressLng = 0;
     this.safeSetState({ form })
   }
 
-  private onAddressSelect = (place: IGooglePlace) => {
+  private onAddressSelect = (place: IYandexPlace) => {
     const { form } = this.state;
-    form.addressText = place.formatted_address;
-    form.addressLat = place.geometry.location.lat();
-    form.addressLng = place.geometry.location.lng();
+    form.addressText = place.name;
+    form.addressLat = place.position[0];
+    form.addressLng = place.position[1];
     this.safeSetState({ form });
   }
 
@@ -128,21 +129,18 @@ class Modify extends HelperComponent<RouteComponentProps<IRouteParams>, IState> 
             </div>
             <div className="G-main-form-field">
               <p className="G-input-top-label">{Settings.translations.address}</p>
-              <Autocomplete
-                placeholder=""
+              <YandexAutocomplete
                 value={form.addressText || ''}
-                className={`G-main-input ${this.formValidation.errors.address ? 'G-invalid-field' : ''}`}
                 onChange={this.onAddressChange}
-                onPlaceSelected={this.onAddressSelect}
-                types={['geocode']}
-                componentRestrictions={{ country: 'am'  }}
+                className={`G-main-input ${this.formValidation.errors.address ? 'G-invalid-field' : ''}`}
+                onPlaceSelect={this.onAddressSelect}
               />
             </div>
             <div className="G-main-form-field">
               <p className="G-input-top-label">{Settings.translations.building}</p>
               <input
                 name="building"
-                value={form.building}
+                value={form.building || ''}
                 className="G-main-input"
                 onChange={this.changeField}
               />
@@ -151,7 +149,7 @@ class Modify extends HelperComponent<RouteComponentProps<IRouteParams>, IState> 
               <p className="G-input-top-label">{Settings.translations.entrance}</p>
               <input
                 name="entrance"
-                value={form.entrance}
+                value={form.entrance || ''}
                 className="G-main-input"
                 onChange={this.changeField}
               />
@@ -160,7 +158,7 @@ class Modify extends HelperComponent<RouteComponentProps<IRouteParams>, IState> 
               <p className="G-input-top-label">{Settings.translations.floor}</p>
               <input
                 name="floor"
-                value={form.floor}
+                value={form.floor || ''}
                 className="G-main-input"
                 onChange={this.changeField}
               />
@@ -169,7 +167,7 @@ class Modify extends HelperComponent<RouteComponentProps<IRouteParams>, IState> 
               <p className="G-input-top-label">{Settings.translations.apartment}</p>
               <input
                 name="apartment"
-                value={form.apartment}
+                value={form.apartment || ''}
                 className="G-main-input"
                 onChange={this.changeField}
               />

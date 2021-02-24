@@ -18,6 +18,10 @@ const DispatcherChannels = {
   // Storage
 
   StorageUpdate: 'storageupdate',
+
+  // Resources
+
+  YMapsSDKLoad: 'ymapsskdload',
 };
 
 export default DispatcherChannels;

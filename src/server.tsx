@@ -8,6 +8,8 @@ import App from './app';
 import InitialHeaders from './platform/constants/initial-headers';
 import ProductController from './platform/api/product';
 import Settings from 'platform/services/settings';
+import DispatcherChannels from 'platform/constants/dispatcher-channels';
+import { getFullLanguageCode } from 'platform/services/helper';
 
 const assets = require(process.env.RAZZLE_ASSETS_MANIFEST || '');
 const server = express();
@@ -30,6 +32,11 @@ function buildHTML(markup: string, title: string, description: string, keywords:
       <head>
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src=“https://www.googletagmanager.com/gtag/js?id=G-7MQ4TT60JC”></script>
+        <script>
+          function onYandexMapsLoad(ymaps) {
+            window.dispatchEvent(new CustomEvent('${DispatcherChannels.YMapsSDKLoad}'));
+          }
+        </script>
         <script>
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}

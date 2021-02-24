@@ -70,7 +70,7 @@ class DiscountedProducts extends HelperComponent<{}, IState> {
 
     return data.length ? (
       <section className="G-page P-home-discounted-products">
-        <h2 className="G-page-title">{Settings.translations.discounted_products}</h2>
+        <h2 className="G-page-title">{Settings.translations.special_offers}</h2>
         <div className="P-list-wrapper">
           <Slider
             {...this.settings}

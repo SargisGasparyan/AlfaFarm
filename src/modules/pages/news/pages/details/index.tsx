@@ -10,7 +10,7 @@ import HelperComponent from 'platform/classes/helper-component';
 import PageLoader from 'components/page-loader';
 import { INewsDetailsResponseModel } from 'platform/api/news/models/response';
 import NewsController from 'platform/api/news';
-import { onlyForWholesaleUsers, onlyForUsers } from 'platform/guards/routes';
+import { onlyForUsers } from 'platform/guards/routes';
 
 import './style.scss';
 

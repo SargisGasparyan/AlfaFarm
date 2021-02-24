@@ -14,7 +14,7 @@ import ConfirmModal, { IProps as IConfirmModalProps } from './components/confirm
 import Socket from './platform/services/socket';
 import HelperComponent from './platform/classes/helper-component';
 import DispatcherChannels from 'platform/constants/dispatcher-channels';
-import { fetchYandexPlaces } from 'platform/services/yandex';
+import { fetchYandexPlaces, initYMapsScript } from 'platform/services/yandex';
 
 import './modules';
 
@@ -66,8 +66,10 @@ class App extends HelperComponent<{}, IState> {
 
     //? Seed
 
-    try { await Socket.connect(); }
-    catch { /* */ }
+    try {
+      initYMapsScript();
+      await Socket.connect();
+    } catch { /* */ }
 
     //? Backend initial data fetch
 
@@ -80,8 +82,6 @@ class App extends HelperComponent<{}, IState> {
     const query = new URLSearchParams(window.location.search);
     const referralCode = query.get('referral');
     if (referralCode) Settings.referralCode = referralCode;
-
-    console.log(await fetchYandexPlaces('A'));
   }
 
   private toggleConfirm = (e: CustomEvent) => {

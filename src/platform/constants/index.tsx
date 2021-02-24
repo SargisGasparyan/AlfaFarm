@@ -6,9 +6,8 @@ export const infinityScrollPageLimit = 30;
 export const infinityScrollMax = 200;
 export const googlePlacesTypes = ['geocode', 'establishment', 'street_address', 'street_number', 'city_hall'];
 export const geolocation = { lat: 40.1792, lng: 44.4991 };
-export const googlePlacesRestrictions = { country: ['am', 'az'] };
-//* az - only for choosing places in Arcakh.
-//! Remove it after by official data Arcakh will be part of Armenia
+export const southWestArmenia = [39.272890, 43.709522];
+export const northEastArmenia = [41.306283, 46.151220];
 
 export const countryCode = '374';
 export const months = [

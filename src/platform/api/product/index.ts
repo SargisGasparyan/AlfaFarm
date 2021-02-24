@@ -32,6 +32,7 @@ class ProductController {
       body,
       action: 'priceRange',
       controller: ProductController.controller,
+      unabortable: true,
     });
 
     return result;

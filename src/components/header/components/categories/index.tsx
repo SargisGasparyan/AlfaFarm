@@ -10,6 +10,8 @@ import Storage from 'platform/services/storage';
 import DispatcherChannels from 'platform/constants/dispatcher-channels';
 
 import './style.scss';
+import Settings from 'platform/services/settings';
+import { ProductSortEnum } from 'platform/api/product/constants/enums';
 
 
 interface IProps {
@@ -23,7 +25,12 @@ interface IState {
 class Categories extends HelperComponent<IProps, {}> {
 
   public state: IState = {
-    lists: [Storage.categories],
+    lists: [
+      [{
+        id: 0,
+        name: Settings.translations.special_offers,
+      }, ...Storage.categories]
+    ],
   };
 
   private fetchData = async (index: number, parentId?: number) => {
@@ -62,8 +69,10 @@ class Categories extends HelperComponent<IProps, {}> {
 
   private clickItem = (e: React.SyntheticEvent, category: ICategoryListResponseModel) => {
     e.preventDefault();
+
     const { onClose } = this.props;
-    window.routerHistory.push(`${ROUTES.PRODUCTS.MAIN}?categoryIds=${category.id}`);
+    if (!category.id) window.routerHistory.push(`${ROUTES.PRODUCTS.MAIN}?sortBy=${ProductSortEnum.DiscountHighToLow}&hasDiscount=true`);
+    else window.routerHistory.push(`${ROUTES.PRODUCTS.MAIN}?categoryIds=${category.id}`);
     window.dispatchEvent(new Event(DispatcherChannels.ProductFilterChange));
     onClose();
   }

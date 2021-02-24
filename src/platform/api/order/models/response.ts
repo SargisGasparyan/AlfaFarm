@@ -24,7 +24,9 @@ export interface IOrderDetailsResponseModel {
   entrance?: string;
   appartment?: string;
   floor?: string;
+  usedBonus?: number;
   totalPrice: number;
+  totalBonus: number;
   fullName: string;
   phone: string;
   regionName: string;
