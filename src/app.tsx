@@ -14,7 +14,7 @@ import ConfirmModal, { IProps as IConfirmModalProps } from './components/confirm
 import Socket from './platform/services/socket';
 import HelperComponent from './platform/classes/helper-component';
 import DispatcherChannels from 'platform/constants/dispatcher-channels';
-import { fetchYandexPlaces, initYMapsScript } from 'platform/services/yandex';
+import { initYMapsScript } from 'platform/services/yandex';
 
 import './modules';
 
