@@ -15,6 +15,9 @@ interface IState {
 interface IProps {
   withSubmit?: boolean;
   loading?: boolean;
+  onClick?(e: React.SyntheticEvent<HTMLInputElement>): void;
+  onFocus?(e: React.SyntheticEvent<HTMLInputElement>): void;
+  onBlur?(e: React.SyntheticEvent<HTMLInputElement>): void;
   onChange?(value: string): void;
   onSubmit?(value: string): void;
 };
@@ -41,13 +44,16 @@ class SearchInput extends HelperPureComponent<IProps, IState> {
   }
 
   public render() {
-    const { withSubmit, loading } = this.props;
+    const { withSubmit, loading, onClick, onFocus, onBlur } = this.props;
 
     return (
       <form  className={`P-search-input ${withSubmit ? 'P-search-input-submit' : ''}`}>
         <input
           className="G-main-input"
           placeholder={Settings.translations.search}
+          onClick={onClick}
+          onFocus={onFocus}
+          onBlur={onBlur}
           onChange={this.change}
         />
         

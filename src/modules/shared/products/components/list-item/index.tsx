@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Settings from 'platform/services/settings';
 import ROUTES from 'platform/constants/routes';
 import CountInput from 'components/count-input';
-import { IProductListResponseModel } from 'platform/api/product/models/response';
+import { IProductListResponseModel, IProductSearchProductResponseModel } from 'platform/api/product/models/response';
 import { getMediaPath, truncateText, formatPrice } from 'platform/services/helper';
 import DiscountLabel from '../discount-label';
 import FavoriteController from 'platform/api/favorite';
@@ -18,6 +18,7 @@ import LogoGray from 'assets/images/logo_gray.png';
 import './style.scss';
 import PhotoStorage from 'platform/services/photoStorage';
 import { PromotionTypeEnum } from 'platform/constants/enums';
+import SearchHistory from 'platform/services/searchHistory';
 
 interface IProps {
   data: IProductListResponseModel;
@@ -66,11 +67,24 @@ const ListItem = React.memo((props: IProps) => {
     }
   }
 
+  const checkForSearch = () => {
+    const query = new URLSearchParams(window.location.search);
+    const productSearchData = {
+      ...data,
+      producer: {
+        id: data.productId,
+        name: data.productName
+      },
+    };
+
+    query.has('text') && SearchHistory.add(productSearchData);
+  }
+
   const isDiscount = !!data?.promotion?.result && data.promotion.promotionType === PromotionTypeEnum.Discount;
 
   return (
     <>
-      <Link className="P-products-list-item" to={ROUTES.PRODUCTS.DETAILS.replace(':id', data.id)}>
+      <Link className="P-products-list-item" to={ROUTES.PRODUCTS.DETAILS.replace(':id', data.id)} onClick={checkForSearch}>
         {!!data.promotion.percent && <DiscountLabel percent={data.promotion.percent} type={data.promotion.promotionType} />}
         <div className="P-image" style={{ background: `url('${getMediaPath(loadingImage)}') center/contain no-repeat` }} />
         

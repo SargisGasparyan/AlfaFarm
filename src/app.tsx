@@ -23,6 +23,7 @@ import 'moment/locale/ru';
 import 'moment/locale/en-gb';
 
 import './assets/styles/index.scss';
+import SearchHistory from 'platform/services/searchHistory';
 
 interface IState {
   confirmOpen: boolean;

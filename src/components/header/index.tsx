@@ -4,7 +4,6 @@ import { Link, NavLink } from 'react-router-dom';
 import LanguageSwitcher from './components/language-switcher';
 import ROUTES from 'platform/constants/routes';
 import Settings from 'platform/services/settings';
-import HelperPureComponent from 'platform/classes/helper-pure-component';
 import SearchInput from 'components/search-input';
 import { Shared } from 'modules';
 import Categories from './components/categories';
@@ -24,12 +23,14 @@ import PersonImage from 'assets/images/person.png';
 import burgerMenu from 'assets/images/menu.svg';
 import Broadcast from "../../platform/services/broadcast";
 import MobileMenu from './components/mobile-menu';
-
-import './style.scss';
-import './responsive.scss';
 import { IProductSearcResponseModel } from 'platform/api/product/models/response';
 import SearchPopup from './components/search';
 import Connection from 'platform/services/connection';
+import SearchHistory from 'platform/services/searchHistory';
+
+import './style.scss';
+import './responsive.scss';
+import HelperComponent from 'platform/classes/helper-component';
 
 interface IState {
   authOpen: boolean;
@@ -39,12 +40,13 @@ interface IState {
   searchOpen: boolean;
   searchLoader: boolean;
   searchResult: IProductSearcResponseModel | null;
+  searchHistoryShown: boolean;
   notificationIconNumber: number;
   cartIconNumber: number;
   mobileMenuOpen: boolean;
 };
 
-class Header extends HelperPureComponent<{}, IState> {
+class Header extends HelperComponent<{}, IState> {
 
   public state: IState = {
     authOpen: false,
@@ -54,6 +56,7 @@ class Header extends HelperPureComponent<{}, IState> {
     searchLoader: false,
     searchOpen: false,
     searchResult: null,
+    searchHistoryShown: false,
     notificationIconNumber: 0,
     cartIconNumber: 0,
     mobileMenuOpen: false
@@ -130,27 +133,30 @@ class Header extends HelperPureComponent<{}, IState> {
   }
 
   private searchChange = async (value: string) => {
-    if (value) {
+    if (value.trim()) {
       this.safeSetState({ searchLoader: true, searchOpen: false, searchValue: value, searchResult: null }, async () => {
         Connection.AbortAll();
         const data = await ProductController.Search(value);
         const { searchLoader } = this.state;
 
         // If searchLoader has changed, don't show the result
-        if (data?.data?.products.length && searchLoader) this.safeSetState({ searchResult: data.data, searchOpen: true })
+        if (data?.data?.products.length && searchLoader) this.safeSetState({ searchResult: data.data, searchHistoryShown: false, searchOpen: true })
         else this.closeSearch();
 
         this.safeSetState({ searchLoader: false })
       });
-    } else {
-      this.safeSetState({ searchValue: '' });
-      this.closeSearch();
-    }
+    } else this.safeSetState({
+      searchValue: '',
+      searchOpen: false,
+      searchResult: {
+        products: SearchHistory.items,
+        categories: [],
+      },
+      searchHistoryShown: true,
+    });
   }
 
-  private closeSearch = () => {
-    this.safeSetState({ searchResult: null, searchOpen: false });
-  }
+  private closeSearch = () => this.safeSetState({ searchOpen: false, searchHistoryShown: false });
 
   private toggleMobileMenu = () => {
     const { mobileMenuOpen } = this.state;
@@ -166,6 +172,19 @@ class Header extends HelperPureComponent<{}, IState> {
   private onNotificationSeenChange = (all: boolean) => {
     const { notificationIconNumber } = this.state;
     this.safeSetState({ notificationIconNumber: all ? 0 : notificationIconNumber - 1 });
+  }
+
+  private searchFocus = (e: React.SyntheticEvent) => {
+    e.stopPropagation();
+    const { searchValue } = this.state;
+    if (!searchValue) SearchHistory.items.length && this.safeSetState({
+      searchOpen: true,
+      searchHistoryShown: true,
+      searchResult: {
+        products: SearchHistory.items,
+        categories: [],
+      },
+    }); else this.safeSetState({ searchOpen: true, searchHistoryShown: false });
   }
 
   private searchSubmit = () => {
@@ -184,7 +203,18 @@ class Header extends HelperPureComponent<{}, IState> {
   private openProducts = () => window.dispatchEvent(new Event(DispatcherChannels.ProductFilterChange));
 
   public render() {
-    const { authOpen, categoryOpen, cartIconNumber, notificationIconNumber, notificationOpen, searchOpen, searchValue, searchResult, searchLoader } = this.state;
+    const {
+      authOpen,
+      categoryOpen,
+      cartIconNumber,
+      notificationIconNumber,
+      notificationOpen,
+      searchOpen,
+      searchValue,
+      searchResult,
+      searchLoader,
+      searchHistoryShown,
+    } = this.state;
 
     return (
       <header ref={this.header} className="G-flex G-flex-align-center G-flex-justify-center">
@@ -197,13 +227,20 @@ class Header extends HelperPureComponent<{}, IState> {
             {enviroment.WHOLESALE ? <WholesaleContent /> : <>
               <div className="P-search-wrapper">
                 <SearchInput
+                  onClick={this.searchFocus}
+                  onFocus={this.searchFocus}
                   onChange={this.searchChange}
                   onSubmit={this.searchSubmit}
                   loading={searchLoader}
                   withSubmit={true}
                 />
 
-                {searchOpen && <SearchPopup onClose={this.closeSearch} data={searchResult} searchText={searchValue} />}
+                {searchOpen && <SearchPopup
+                  onClose={this.closeSearch}
+                  data={searchResult}
+                  searchText={searchValue}
+                  historyShown={searchHistoryShown}
+                />}
               </div>
 
               <Link

@@ -12,11 +12,11 @@ import DoneImage from 'assets/images/done.svg';
 import './style.scss';
 
 interface IProps {
+  data: IUserAddressListResponseModel[];
   onClose(chosen?: IUserAddressListResponseModel): void; 
 };
 
 interface IState {
-  data: IUserAddressListResponseModel[];
 };
 
 class ChooseAddress extends HelperPureComponent<IProps, IState> {
@@ -24,8 +24,6 @@ class ChooseAddress extends HelperPureComponent<IProps, IState> {
   public state: IState ={
     data: [],
   };
-
-  public componentDidMount() { this.fetchData(); }
 
   private columnConfig = [
     {
@@ -43,15 +41,13 @@ class ChooseAddress extends HelperPureComponent<IProps, IState> {
     },
   ];
 
-  private fetchData = async () => {
-    const result = await UserAddressController.GetList();
-    if (result.data.length) this.safeSetState({ data: result.data });
-    else window.routerHistory.push(ROUTES.PROFILE.ADDRESSES.CREATE)
+  public componentDidMount() {
+    const { data } = this.props;
+    !data.length && window.routerHistory.push(ROUTES.PROFILE.ADDRESSES.CREATE);
   }
 
   public render() {
-    const { data } = this.state;
-    const { onClose } = this.props;
+    const { data, onClose } = this.props;
 
     return !!data.length && (
       <Modal className="P-checkout-choose-address-modal" onClose={() => onClose()}>

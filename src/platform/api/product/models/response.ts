@@ -10,10 +10,12 @@ export interface IProductListResponseModel {
   discountedPrice?: number;
   isFavorite: boolean;
   discount?: number;
-  imagePath?: string;
+  imagePath: string;
   promotion: IPromotionModel;
   unitName: string;
   unitQuantity: number;
+  productId: number;
+  productName: string;
 };
 
 export interface IProductSearcResponseModel {
@@ -29,8 +31,6 @@ export interface IProductSearchProductResponseModel {
   imagePath: string;
   cartLoading?: boolean;
   producer: IProductDetailsProducerResponseModel;
-  brand: IProductDetailsBrandResponseModel;
-  activeIngredients: IProductDetailsActiveIngredientResponseModel[];
 }
 
 export interface IProductDetailsResponseModel {

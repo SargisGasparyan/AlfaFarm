@@ -33,6 +33,7 @@ import Connection from 'platform/services/connection';
 import ChoosePharmacy from './components/choose-pharmacy';
 import { IPharmacyBranchListResponseModel } from 'platform/api/pharmacyBranch/models/response';
 import YandexAutocomplete from 'components/yandex-autocomplete';
+import UserAddressController from 'platform/api/userAddress';
 import { Shared } from 'modules';
 
 import './style.scss';
@@ -50,6 +51,7 @@ interface IState {
   authModalOpen: boolean;
   successModalOpen: boolean;
   chosenBranch?: IPharmacyBranchListResponseModel;
+  addressList: IUserAddressListResponseModel[];
   initialTotalDiscountedPrice: number;
   isUsingBonus: boolean;
   isPayment: boolean;
@@ -68,6 +70,7 @@ class Checkout extends HelperComponent<{}, IState> {
     successModalOpen: false,
     authModalOpen: false,
     isUsingBonus: false,
+    addressList: [],
     initialTotalDiscountedPrice: 0,
     dateType: OrderDeliveryTimeTypeEnum.Asap,
     form: {
@@ -97,6 +100,7 @@ class Checkout extends HelperComponent<{}, IState> {
       this.getTotalPrice();
       this.getBonusDetails();
       this.getResultInfo();
+      this.fetchAddressesList();
       this.safeSetState({ form });
     }
   }
@@ -141,6 +145,28 @@ class Checkout extends HelperComponent<{}, IState> {
 
     Connection.AbortAll();
     this.safeSetState({ form }, () => this.getResultInfo(form.usedBonus));
+  }
+
+  
+  private fetchAddressesList = async () => {
+    const result = await UserAddressController.GetList();
+    result.data.length && this.safeSetState({ addressList: result.data }, this.checkForDefaultAddress);
+  }
+
+  private checkForDefaultAddress = () => {
+    const { form, addressList } = this.state;
+    const defaultAddress = addressList.find(item => item.isDefault === true);
+
+    if (defaultAddress) {
+      form.addressText = defaultAddress.addressText;
+      form.addressLat = defaultAddress.addressLat;
+      form.addressLng = defaultAddress.addressLng;
+      form.addressBuilding = defaultAddress.building;
+      form.addressEntrance = defaultAddress.entrance;
+      form.addressApartment = defaultAddress.apartment;
+      form.addressFloor = defaultAddress.floor;
+      this.safeSetState({ form });
+    }
   }
 
   private addressChange = (e: React.SyntheticEvent<HTMLInputElement>) => {
@@ -274,6 +300,7 @@ class Checkout extends HelperComponent<{}, IState> {
     const {
       form,
       dateType,
+      addressList,
       submitLoading,
       resultInfo,
       bonusDetails,
@@ -331,6 +358,7 @@ class Checkout extends HelperComponent<{}, IState> {
             </div>
             <div className="G-main-form-field G-main-form-field-closer">
               <YandexAutocomplete
+                suggestDisabled={chooseAddressOpen || choosePharmacyOpen}
                 placeholder={Settings.translations.address}
                 value={form.addressText || ''}
                 className={`G-main-input ${this.formValidation.errors.address ? 'G-invalid-field' : ''}`}
@@ -467,7 +495,7 @@ class Checkout extends HelperComponent<{}, IState> {
               loading={false}
               onClick={this.openAddressChoose}
             >{Settings.translations.choose_address}</LoaderContent>}
-            {chooseAddressOpen && <ChooseAddress onClose={this.closeAddressChoose} />}
+            {chooseAddressOpen && <ChooseAddress data={addressList} onClose={this.closeAddressChoose} />}
           </div>
         </form> : <PaymentMethod resultInfo={resultInfo} callback={(e: React.SyntheticEvent) => this.finishCheckout(e)} />}
 

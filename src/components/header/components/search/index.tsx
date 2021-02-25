@@ -14,11 +14,13 @@ import { PromotionTypeEnum } from 'platform/constants/enums';
 import HelperComponent from 'platform/classes/helper-component';
 
 import './style.scss';
+import SearchHistory from 'platform/services/searchHistory';
 
 
 interface IProps {
   searchText: string;
   data: IProductSearcResponseModel | null;
+  historyShown: boolean;
   onClose(): void;
 }
 
@@ -38,7 +40,7 @@ class SearchPopup extends HelperComponent<IProps, IState> {
       if (data) {
         const photoResult = await Promise.all(data.products.map(item => PhotoStorage.getURL(item.imagePath).then(url => ({
           ...item,
-          productPhoto: url,
+          imagePath: url,
         }))));
   
         data.products = photoResult;
@@ -77,30 +79,37 @@ class SearchPopup extends HelperComponent<IProps, IState> {
   }
 
   private clickOnItem = (item: IProductSearchProductResponseModel) => {
+    SearchHistory.add(item);
     window.routerHistory.replace(ROUTES.PRODUCTS.DETAILS.replace(':id', item.id));
     this.props.onClose();
   }
 
+  private clearAll = () => {
+    SearchHistory.clear();
+    this.props.onClose();
+  }
+
   public render() {
-    const { searchText, onClose } = this.props;
     const { data } = this.state;
+    const { searchText, onClose, historyShown } = this.props;
 
     return (
       <ClickOutside onClickOutside={onClose}>
         <aside className="P-header-search-result">
-          <h6 className="G-flex">
+          {historyShown ? <h6 className="G-flex">
+            {Settings.translations.last_search_results}
+            <a className="G-ml-auto G-orange-color" onClick={this.clearAll}>{Settings.translations.clear_all}</a>
+          </h6> : <h6 className="G-flex">
             {Settings.translations.products}
             <Link to={`${ROUTES.PRODUCTS.MAIN}?text=${searchText}`} className="G-ml-auto G-orange-color" onClick={() => onClose()}>{Settings.translations.see_more}</Link>
-          </h6>
+          </h6>}
           {data && data.products.map(item => (
             <div className="P-list-item" key={item.id} onClick={() => this.clickOnItem(item)}>
               <div className="P-image" style={{ background: `url('${getMediaPath(item.imagePath)}') center/contain no-repeat` }} />
 
               <div className="P-middle">
                 <h5>{item.title}</h5>
-                {item.activeIngredients?.length && <span className="P-value">{item.activeIngredients.map(x => x.name).join(', ')}</span>}
                 {item.producer && <span className="P-value">{item.producer.name}</span>}
-                {item.brand && <span className="P-value">{item.brand.name}</span>}
               </div>
 
               <div className="P-right">

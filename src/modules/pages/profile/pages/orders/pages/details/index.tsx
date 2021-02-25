@@ -92,7 +92,7 @@ class Details extends HelperComponent<RouteComponentProps<IRouteParams>, IState>
             <h2 className="G-mb-40 G-orange-color">{Settings.translations.order} <span className="G-ml-10">#{data.id}</span></h2>
 
             <h3 className="G-flex G-mb-30 G-flex-justify-between">
-              {Settings.translations.date}
+              {Settings.translations.created_date}
               <span>{formatDate(data.createdDate)}</span>
             </h3>
 
@@ -101,10 +101,10 @@ class Details extends HelperComponent<RouteComponentProps<IRouteParams>, IState>
               <span>{Settings.translations[this.deliveryTypeViewEnum[data.deliveryType]]}</span>
             </h3>
 
-            <h3 className="G-flex G-mb-30 G-flex-justify-between">
+            {data.deliveryType === OrderDeliveryTypeEnum.Delivery && <h3 className="G-flex G-mb-30 G-flex-justify-between">
               {Settings.translations.delivery_date}
               <span>{data.deliveryDate ? formatDate(data.deliveryDate) : Settings.translations.as_soon_as_possible}</span>
-            </h3>
+            </h3>}
 
             <h3 className="G-flex G-mb-30 G-flex-justify-between">
               {Settings.translations.price}
