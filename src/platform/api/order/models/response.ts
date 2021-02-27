@@ -35,6 +35,11 @@ export interface IOrderDetailsResponseModel {
   baskets: IBasketListResponseModel[];
 };
 
+export interface IOrderCreateResponeModel {
+  id: number;
+  vposUrl: string;
+};
+
 export interface IOrderResultResponseModel {
   totalPrice: number;
   deliveryFee: number;

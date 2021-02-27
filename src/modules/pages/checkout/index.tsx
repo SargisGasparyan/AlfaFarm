@@ -13,7 +13,7 @@ import { countryCode } from 'platform/constants';
 import { OrderDeliveryTimeTypeEnum, OrderDeliveryTypeEnum } from 'platform/api/order/constants/enums';
 import Select from 'components/select';
 import { OrderDeliveryTimeTypeDropdown, OrderDeliveryTypeDropdown } from 'platform/constants/dropdowns';
-import { IOrderModifyRequestModel } from 'platform/api/order/models/request';
+import { IOrderCreateRequestModel } from 'platform/api/order/models/request';
 import Storage from 'platform/services/storage';
 import { IDropdownOption, IYandexPlace } from 'platform/constants/interfaces';
 import { validateForm } from './services/helper';
@@ -42,7 +42,7 @@ import './style.scss';
 interface IState {
   bonusDetails?: IBonusCardDetailsWithHistoryResponseModel;
   resultInfo?: IOrderResultResponseModel;
-  form: IOrderModifyRequestModel;
+  form: IOrderCreateRequestModel;
   dateType: OrderDeliveryTimeTypeEnum;
   submited: boolean;
   submitLoading: boolean;
@@ -278,13 +278,19 @@ class Checkout extends HelperComponent<{}, IState> {
     e.preventDefault();
     const { form } = this.state;
     const query = new URLSearchParams(window.location.search);
+    const card = query.get('card');
     form.paymentType = Number(query.get('paymentType'));
-    form.creditCardId = Number(query.get('card'));
+    form.creditCardId = card ? Number(card) : undefined;
     this.safeSetState({ submitLoading: true, form }, async () => {
       const result = await OrderController.Create(form);
       if (result.success) {
-        form.paymentType === PaymentTypeEnum.Idram && document.getElementById('currentId')?.click();
-        this.safeSetState({ successModalOpen: true, submitLoading: false }, () => window.dispatchEvent(new CustomEvent(DispatcherChannels.CartItemsUpdate)));
+        const finishState: Partial<IState> = { submitLoading: false };
+    
+        if (form.paymentType === PaymentTypeEnum.Idram) document.getElementById('currentId')?.click();
+        if (form.paymentType === PaymentTypeEnum.IPay && result.data.vposUrl) window.open(result.data.vposUrl, '_top');
+        else finishState.successModalOpen = true;
+
+        this.safeSetState(finishState, () => window.dispatchEvent(new CustomEvent(DispatcherChannels.CartItemsUpdate)));
       } else this.safeSetState({ submitLoading: false });
     });
   }

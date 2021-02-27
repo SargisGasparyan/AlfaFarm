@@ -1,7 +1,7 @@
 import Connection from '../../services/connection';
 import { IResponse, IPagingResponse } from '../../constants/interfaces';
-import { IOrderListResponseModel, IOrderDetailsResponseModel, IOrderResultResponseModel } from './models/response';
-import { IOrderModifyRequestModel, IOrderListRequestModel, IOrderResultRequestModel } from './models/request';
+import { IOrderListResponseModel, IOrderDetailsResponseModel, IOrderResultResponseModel, IOrderCreateResponeModel } from './models/response';
+import { IOrderCreateRequestModel, IOrderListRequestModel, IOrderResultRequestModel } from './models/request';
 
 class OrderController {
 
@@ -37,7 +37,7 @@ class OrderController {
     return result;
   };
 
-  public static Create = (body: IOrderModifyRequestModel): Promise<IResponse<boolean>> => {
+  public static Create = (body: IOrderCreateRequestModel): Promise<IResponse<IOrderCreateResponeModel>> => {
     const result = Connection.POST({
       body,
       action: '',

@@ -1,8 +1,8 @@
 import { isValidPhone, isValidEmail } from 'platform/services/validator';
-import { IOrderModifyRequestModel } from 'platform/api/order/models/request';
+import { IOrderCreateRequestModel } from 'platform/api/order/models/request';
 import { OrderDeliveryTypeEnum } from 'platform/api/order/constants/enums';
 
-export function validateForm(this: IOrderModifyRequestModel, submited?: boolean) {
+export function validateForm(this: IOrderCreateRequestModel, submited?: boolean) {
   let valid = true;
 
   const errors = {

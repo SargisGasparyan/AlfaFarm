@@ -1384,6 +1384,7 @@ export default {
   please_check_correctness_of_email_or_phone_number: 'Խնդրում ենք ստուգել էլ. փոստի կամ հեռախոսի համարը',
   gender: 'Սեռ',
   date_of_birth: 'Ծննդյան ամսաթիվ',
+  pay_with_credit_card: "Վճարել կրեդիտ քարտով",
   male: 'Արական',
   female: 'Իգական',
   not_filled: 'Լրացված չէ',

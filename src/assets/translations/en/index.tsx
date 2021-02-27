@@ -1362,6 +1362,7 @@ export default {
   please_check_correctness_of_email_or_phone_number: 'Please check correctness of email or phone number',
   gender: 'Gender',
   date_of_birth: 'Date of birth',
+  pay_with_credit_card: "Pay with credit card",
   male: 'Male',
   female: 'Female',
   not_filled: 'Not filled',

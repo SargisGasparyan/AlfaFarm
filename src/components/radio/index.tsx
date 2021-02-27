@@ -9,7 +9,7 @@ interface IProps<T> {
   value: T;
   callback: (data: T) => void;
 }
-class Radio<T extends number | string | HTMLAllCollection> extends HelperComponent<IProps<T>, IState> {
+class Radio<T extends number | string | HTMLAllCollection | null> extends HelperComponent<IProps<T>, IState> {
   public state: IState = {
     isChecked: false
   }

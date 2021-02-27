@@ -16,16 +16,16 @@ import Pagination from 'components/pagination';
 import { paginationPageLimit } from 'platform/constants';
 import { IPagingResponse } from 'platform/constants/interfaces';
 import EmptyState from 'components/empty-state';
+import { statusColorClassNames } from './constants';
 
 import './style.scss';
-import { statusColorClassNames } from './constants';
 
 interface IState {
   data?: IPagingResponse<IOrderListResponseModel>;
 };
 
 @byPrivateRoute(ROUTES.PROFILE.ORDERS.MAIN)
-class Orders extends HelperComponent<IState, {}> {
+class Orders extends HelperComponent<{}, IState> {
 
   public state: IState = {};
 
@@ -77,7 +77,6 @@ class Orders extends HelperComponent<IState, {}> {
       <Layout>
         <h2 className="G-main-color G-mb-30">{Settings.translations.order_history}</h2>
         <div className="G-flex P-profile-orders">
-          
           {data ? (data.list.length ? <Table<IOrderListResponseModel>
             redirectUrl={row => ROUTES.PROFILE.ORDERS.DETAILS.replace(':id', row.id)}
             columnConfig={this.columnConfig}

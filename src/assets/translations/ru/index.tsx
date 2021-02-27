@@ -1360,6 +1360,7 @@ export default {
   please_check_correctness_of_email_or_phone_number: 'Пожалуйста, проверьте правильность адреса электронной почты или номера телефона',
   gender: 'Пол',
   date_of_birth: 'Дата рождения',
+  pay_with_credit_card: "Оплатить кредитной картой",
   male: 'Мужской',
   female: 'Женский',
   not_filled: 'Не заполненный',

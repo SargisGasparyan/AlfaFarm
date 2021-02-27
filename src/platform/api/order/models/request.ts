@@ -4,7 +4,7 @@ import { PaymentTypeEnum } from 'platform/constants/enums';
 
 export interface IOrderListRequestModel extends IPagingRequest {};
 
-export interface IOrderModifyRequestModel {
+export interface IOrderCreateRequestModel {
   userAddressId?: number;
   addressText?: string;
   addressLat?: number;
