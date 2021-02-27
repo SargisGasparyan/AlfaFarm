@@ -68,7 +68,6 @@ function buildHTML(markup: string, title: string, description: string, keywords:
         })(window,document,'script','dataLayer','GTM-XXXX');</script>
         <!-- End Google Tag Manager -->
 
-        Copy the following snippet and paste it immediately after the opening <body> tag on every page of your website, replacing GTM-XXXX with your container ID:
         <!-- Google Tag Manager (noscript) -->
         <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXX"
         height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
