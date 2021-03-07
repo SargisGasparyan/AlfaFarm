@@ -21,7 +21,8 @@
     "no-empty-interface": false,
     "max-classes-per-file": [false],
     "object-literal-sort-keys": false,
-    "array-type": [false]
+    "array-type": [false],
+    "interface-name":[ false]
   },
   "jsRules": {
     "curly": false,

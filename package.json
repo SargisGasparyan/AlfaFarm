@@ -8,7 +8,9 @@
     "build:staging": "RAZZLE_ENV=staging razzle build",
     "test": "razzle test --env=jsdom",
     "start:prod": "NODE_ENV=production node build/server.js",
-    "start:staging": "NODE_ENV=production node build/server.js"
+    "start:staging": "NODE_ENV=production node build/server.js",
+    "lint": "tslint -c tslint.json 'src/**/*.{ts,tsx}'",
+    "lint:fix": "tslint -c tslint.json 'src/**/*.{ts,tsx}' --fix --format verbose"
   },
   "dependencies": {
     "@aspnet/signalr": "^1.1.4",

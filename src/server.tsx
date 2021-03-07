@@ -84,10 +84,10 @@ function buildHTML(markup: string, title: string, description: string, keywords:
       ? `<meta name="og:image" content="${image}" />`
       : ''
     }
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         ${
     assets.client.css
-      ? `<link rel="stylesheet" type="text/css" href="${assets.client.css}">`
+      ? `<link rel="stylesheet" type="text/css" href="${assets.client.css}" />`
       : ''
     }
         ${
