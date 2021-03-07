@@ -270,7 +270,14 @@ class Checkout extends HelperComponent<{}, IState> {
   }
 
   private toggleUsingBonus = async () => {
-    const { isUsingBonus } = this.state;
+    const { isUsingBonus, form } = this.state;
+    
+    if (isUsingBonus) {
+      form.usedBonus = 0;
+      Connection.AbortAll();
+      this.safeSetState({ form }, () => this.getResultInfo(form.usedBonus));
+    }
+
     this.safeSetState({ isUsingBonus: !isUsingBonus });
   }
 
