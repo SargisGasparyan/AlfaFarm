@@ -1364,6 +1364,8 @@ export default {
   male: 'Мужской',
   female: 'Женский',
   not_filled: 'Не заполненный',
+  open: 'Открыто',
+  closed: 'Закрыто',
 
   notification_texts: {
     request_failed: {

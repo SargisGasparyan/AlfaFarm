@@ -1388,6 +1388,8 @@ export default {
   male: 'Արական',
   female: 'Իգական',
   not_filled: 'Լրացված չէ',
+  open: 'Բաց է',
+  closed: 'Փակ է',
 
   notification_texts: {
     request_failed: {
