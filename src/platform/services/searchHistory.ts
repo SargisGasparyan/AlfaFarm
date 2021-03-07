@@ -3,7 +3,6 @@ import { IProductSearchProductResponseModel } from 'platform/api/product/models/
 class SearchHistory {
 
   public static get items(): IProductSearchProductResponseModel[] {
-    console.log('mtav geter');
     try {
       const storedItems = window.localStorage.getItem('searchHistory');
       return storedItems ? JSON.parse(storedItems) : [];
