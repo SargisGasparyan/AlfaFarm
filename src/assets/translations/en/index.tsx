@@ -1366,6 +1366,8 @@ export default {
   male: 'Male',
   female: 'Female',
   not_filled: 'Not filled',
+  open: 'Open',
+  closed: 'Closed',
 
   notification_texts: {
     request_failed: {

@@ -97,6 +97,11 @@ class ContactUs extends HelperComponent<{}, IState> {
           )}
         </Maps>
 
+        <div className="P-icons-info">
+          <p><img src={MapIconGreen} alt="" /> <b> { Settings.translations.open}</b></p>
+          <p><img src={MapIconOrange} alt=""/> <b> { Settings.translations.closed}</b></p>
+        </div>
+
         <div className="P-bottom">
           <AboutDelivery />
           <AboutBonusCard />
