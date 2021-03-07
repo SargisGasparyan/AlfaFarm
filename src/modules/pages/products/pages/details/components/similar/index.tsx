@@ -18,7 +18,7 @@ const Similar = React.memo(({ data }: IProps) => {
 
   React.useEffect(() => {
     ProductController.GetRelated(data.id, { pageNumber: 1, pageSize: 4 }).then(result => {
-      setList(result.data.list);
+      setList((result.data && result.data.list) || []);
     })
   }, []);
 

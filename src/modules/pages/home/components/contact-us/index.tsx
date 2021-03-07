@@ -40,7 +40,7 @@ class ContactUs extends HelperComponent<{}, IState> {
     });
 
     this.safeSetState({
-      branches: result.data.list
+      branches: result && result.data && result.data.list || []
     });
   }
   private get markers() {

@@ -32,4 +32,14 @@
       color : $orange;
     }
   }
+
+  .P-remove-text {
+    position: absolute;
+    cursor: pointer;
+    align-content: center;
+    align-self: center;
+    display: flex;
+    margin-left: 300px;
+    font-size: x-small;
+  }
 }
