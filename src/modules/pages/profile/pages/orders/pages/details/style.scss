@@ -5,6 +5,13 @@
   display         : flex;
   flex-wrap       : wrap;
   justify-content : space-between;
+  background      :  #F9F9F9;
+
+  > .P-main-info-block {
+    @media (min-width : $small-screen) {
+      margin-right : 20px;
+    }
+  }
 
   > .P-main-info-block, > .P-address-block {
     flex          : 1;

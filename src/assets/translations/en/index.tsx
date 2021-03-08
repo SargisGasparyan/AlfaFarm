@@ -1207,6 +1207,7 @@ export default {
   add_prescription: "Add prescription",
   medical_institution: "Medical institution",
   upload_image: "Upload an image",
+  upload_prescription_image: "Upload prescription",
   upload: "Upload",
   cancel: "Cancel",
   total: "Total",

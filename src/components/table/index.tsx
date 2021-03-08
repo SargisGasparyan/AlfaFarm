@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Link }   from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import CheckBox from 'rc-checkbox';
 
 import { ITableColumnConfig } from './constants/interfaces';
@@ -29,7 +29,7 @@ class Table<Data extends { id: number }> extends React.Component<IProps<Data>, {
   private getRowTitle = (column: ITableColumnConfig<Data>, item: Data, index: number) => {
     const value = column.cell(item, index);
     if (typeof value === 'string' ||
-        typeof value === 'number') return value.toString();
+      typeof value === 'number') return value.toString();
 
     return;
   }
@@ -42,7 +42,7 @@ class Table<Data extends { id: number }> extends React.Component<IProps<Data>, {
       <div className={`P-data-table ${className || ''}`}>
         <this.Header />
         {!!data && <div className="P-data-table-body">
-          {data.map((item, rowIndex) => 
+          {data.map((item, rowIndex) =>
             <Row
               to={redirectUrl ? redirectUrl(item, rowIndex) : ''}
               onClick={() => onRowClick && onRowClick(item, rowIndex)}
@@ -56,15 +56,17 @@ class Table<Data extends { id: number }> extends React.Component<IProps<Data>, {
                 <CheckBox className={checkBoxClass || ''} checked={checkBoxState ? checkBoxState(item, rowIndex) : false} />
               </span>}
 
-              {columnConfig.map((childItem, index) => <li
-                key={index}
-                title={this.getRowTitle(childItem, item, rowIndex)}
-                style={childItem.style || {}}
-              >
-                <div className={childItem.wrapperClass && childItem.wrapperClass(item, rowIndex)}>
-                  {childItem.cell(item, rowIndex)}
-                </div>
-              </li>)}
+              {columnConfig.map((childItem, index) => {
+                return <li
+                  key={index}
+                  title={this.getRowTitle(childItem, item, rowIndex)}
+                  style={childItem.style || {}}
+                >
+                  <div className={childItem.wrapperClass && childItem.wrapperClass(item, rowIndex)}>
+                    {childItem.cell(item, rowIndex)}
+                  </div>
+                </li>
+              })}
 
               <li className="P-data-table-actions">{hoverButtons && hoverButtons(item, rowIndex)}</li>
             </Row>

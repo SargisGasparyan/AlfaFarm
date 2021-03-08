@@ -55,7 +55,7 @@ class OrderACall extends HelperComponent<{}, IState> {
     return success ? <SuccessModal onClose={this.closeModal}>
       <h2>{Settings.translations.order_a_call_success}</h2>
     </SuccessModal> : <Modal className="P-footer-order-a-call-modal" onClose={this.closeModal}>
-        <h3 className="G-main-color G-text-center">{Settings.translations.enter_your_phone_number}</h3>
+        <h3 className="G-clr-main G-text-center">{Settings.translations.enter_your_phone_number}</h3>
         <form className="G-main-form">
           <div className="G-phone-input-wrapper G-main-form-field">
             <p className="G-input-country-code">+{countryCode}</p>

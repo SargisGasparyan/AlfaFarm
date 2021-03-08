@@ -68,7 +68,7 @@ class SendCode extends HelperComponent<IProps, IState> {
     const { form, submitLoading } = this.state;
 
     return <>
-      <h3 className="G-main-color G-text-center">{Settings.translations.phone_number}</h3>
+      <h3 className="G-clr-main G-text-center">{Settings.translations.phone_number}</h3>
       <form className="G-main-form">
         <div className="G-main-form-field G-phone-input-wrapper">
           <p className="G-input-country-code">+{countryCode}</p>

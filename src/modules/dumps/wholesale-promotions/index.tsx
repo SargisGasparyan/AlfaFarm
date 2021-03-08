@@ -34,7 +34,7 @@ class WholesalePromotions extends HelperPureComponent<{}, IState> {
       name: Settings.translations.product,
       cell: (row: IWholesalePromotionListResponseModel) => <Link
         to={ROUTES.PRODUCTS.DETAILS.replace(':id', row.productId)}
-        className="G-normal-link G-black-color"
+        className="G-normal-link G-clr-black"
       >{row.productTitle}</Link>,
     },
     {

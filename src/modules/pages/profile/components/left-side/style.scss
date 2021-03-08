@@ -6,8 +6,9 @@
   height         : calc(100vh - #{$header-size});
   display        : flex;
   position       : sticky;
-  min-width      : 350px;
-  max-width      : 350px;
+  width          : 34vw;
+  min-width      : 250px;
+  max-width      : 520px;
   overflow-y     : auto;
   background     : white;
   flex-direction : column;

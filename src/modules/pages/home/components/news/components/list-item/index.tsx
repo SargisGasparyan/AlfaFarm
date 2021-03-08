@@ -18,7 +18,7 @@ const ListItem = React.memo(({ data }: IProps) => (
     <div className="P-image" style={{ background: `url('${getMediaPath(data.imagePath)}') center/cover` }} />
     <div className="P-content">
       <h3>{data.title}</h3>
-      <Link to={ROUTES.NEWS.DETAILS.replace(':id', data.id)} className="G-orange-color G-normal-link">
+      <Link to={ROUTES.NEWS.DETAILS.replace(':id', data.id)} className="G-clr-orange G-normal-link">
         {Settings.translations.see_more} <i className="icon-Group-5513" />
       </Link>
     </div>

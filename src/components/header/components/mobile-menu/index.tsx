@@ -62,7 +62,7 @@ class MobileMenu extends HelperComponent<IProps, IState> {
 
     return (
       <div className="P-mobile-menu">
-        <span className="P-mobile-menu-close"><i className="icon-Group-5032 G-orange-color G-cursor-pointer" onClick={onClose} /></span>
+        <span className="P-mobile-menu-close"><i className="icon-Group-5032 G-clr-orange G-cursor-pointer" onClick={onClose} /></span>
         <div className="P-mobile-menu-content">
           <div className="G-mb-20">
             <SearchInput

@@ -1,13 +1,13 @@
 import { OrderStatusEnum } from 'platform/api/order/constants/enums';
 
 export const statusColorClassNames = {
-  [OrderStatusEnum.Pending]: 'G-text-gray-light-color',
-  [OrderStatusEnum.AttachedToCarrier]: 'G-text-gray-light-color',
-  [OrderStatusEnum.ConfirmedByBranchAdmin]: 'G-text-gray-light-color',
-  [OrderStatusEnum.NotCompleted]: 'G-text-gray-light-color',
-  [OrderStatusEnum.ReadyToStart]: 'G-yellow-color',
-  [OrderStatusEnum.Started]: 'G-orange-color',
-  [OrderStatusEnum.Delivered]: 'G-main-color',
-  [OrderStatusEnum.Canceled]: 'G-red-color',
-  [OrderStatusEnum.Failed]: 'G-red-color',
+  [OrderStatusEnum.Pending]: 'G-clr-light-gray',
+  [OrderStatusEnum.AttachedToCarrier]: 'G-clr-light-gray',
+  [OrderStatusEnum.ConfirmedByBranchAdmin]: 'G-clr-light-gray',
+  [OrderStatusEnum.NotCompleted]: 'G-clr-light-gray',
+  [OrderStatusEnum.ReadyToStart]: 'G-clr-yellow',
+  [OrderStatusEnum.Started]: 'G-clr-orange',
+  [OrderStatusEnum.Delivered]: 'G-clr-main',
+  [OrderStatusEnum.Canceled]: 'G-clr-red',
+  [OrderStatusEnum.Failed]: 'G-clr-red',
 };

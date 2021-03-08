@@ -1,0 +1,45 @@
+.G-flex {
+    display : flex;
+}
+
+.G-inline-flex {
+    display : inline-flex;
+}
+
+.G-flex-1 {
+    flex : 1;
+}
+
+.G-flex-wrap {
+    flex-wrap : wrap;
+}
+
+.G-flex-justify-center {
+    justify-content : center;
+}
+
+.G-flex-justify-between {
+    justify-content : space-between;
+}
+
+.G-flex-justify-end {
+    justify-content : flex-end;
+}
+
+.G-flex-align-center {
+    align-items : center;
+}
+
+.G-flex-align-start {
+    align-items : flex-start;
+}
+
+.G-flex-column {
+    flex-direction : column;
+}
+
+.G-center {
+    justify-content : center;
+    align-items     : center;
+}
+  

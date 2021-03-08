@@ -100,12 +100,12 @@ class PharmaciesAvailablity extends HelperComponent<IProps, IState> {
               {this.markers.map((item, index) => <Marker key={index} {...item}>
                 {hoveredMarkerIndex === index && this.hoveredMarkerData && <InfoWindow>
                   <div className="P-info-window">
-                    <h3 className="G-orange-color G-text-center P-name">{this.hoveredMarkerData.name}</h3>
+                    <h3 className="G-clr-orange G-text-center P-name">{this.hoveredMarkerData.name}</h3>
                     <h4 className="P-info-row G-flex-center">
-                      <i className="icon-Group-5522 G-orange-color" /> <span>{this.hoveredMarkerData.contactPhoneNumber}</span>
+                      <i className="icon-Group-5522 G-clr-orange" /> <span>{this.hoveredMarkerData.contactPhoneNumber}</span>
                     </h4>
                     <h4 className="P-info-row">
-                      <i className="icon-Group-5554 G-orange-color" />
+                      <i className="icon-Group-5554 G-clr-orange" />
                       <this.WorkingPlan />
                     </h4>
                   </div>

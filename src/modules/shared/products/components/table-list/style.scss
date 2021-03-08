@@ -7,7 +7,7 @@
   .P-data-table-body > ul {
     height        : auto;
     display       : flex;
-    padding       : 40px;
+    padding       : 16px;
     align-items   : center;
 
     > li > div {
@@ -34,7 +34,20 @@
           padding         : 0 30px;
           flex-direction  : column;
           justify-content : center;
-  
+          white-space     : normal;
+          width           : 100vw;
+          
+          > h1,h2,h3,h4,h5,h6 {
+            overflow          : hidden;
+            text-overflow     : ellipsis;
+            display           : -webkit-box;
+            -webkit-line-clamp: 3;
+            -moz-line-clamp   : 3;
+            -moz-box-orient   : vertical;
+            -webkit-box-orient: vertical;
+            /* autoprefixer: off */
+          }
+
           > span {
             margin-top : 20px;
             @include normal-font;

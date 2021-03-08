@@ -85,7 +85,7 @@ class Prescriptions extends HelperComponent<IState, {}> {
           <div className="P-content">
             <h3>
               <span className="G-mr-auto">{Settings.translations.prescriptions}</span>
-              <Link to={ROUTES.PROFILE.PRESCRIPTIONS.CREATE} className="G-normal-link G-main-color G-fs-48">
+              <Link to={ROUTES.PROFILE.PRESCRIPTIONS.CREATE} className="G-normal-link G-clr-main G-fs-48">
                 <i className="icon-Group-5532" />
               </Link>
             </h3>

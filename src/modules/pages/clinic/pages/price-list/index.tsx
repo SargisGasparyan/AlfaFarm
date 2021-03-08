@@ -52,7 +52,7 @@ class PriceList extends HelperComponent<{}, {}> {
     {
       name: Settings.translations.price,
       style: { minWidth: 200, maxWidth: 200 },
-      cell: (row: IMedicalServiceListResponseModel) => <b className="G-orange-color">{formatPrice(row.price)}</b>,
+      cell: (row: IMedicalServiceListResponseModel) => <b className="G-clr-orange">{formatPrice(row.price)}</b>,
     },
   ];
 
@@ -63,7 +63,7 @@ class PriceList extends HelperComponent<{}, {}> {
       <section className="G-page P-clinic-price-list-page">
         <Options />
         <div id="clinic-page-start" className="P-content">
-          <h1 className="G-main-color P-title">
+          <h1 className="G-clr-main P-title">
             {Settings.translations.price_list}
             <SearchInput
               withSubmit={true}

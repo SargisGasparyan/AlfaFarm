@@ -1253,6 +1253,7 @@ export default {
   add_prescription: "Ավելացնել դեղատոմս",
   medical_institution: "Բուժ. հաստատություն",
   upload_image: "Վերբեռնել լուսանկար",
+  upload_prescription_image: "Վերբեռնել դեղատոմս",
   upload: "Վերբեռնել",
   cancel: "Չեղարկել",
   total: "Ընդամենը",

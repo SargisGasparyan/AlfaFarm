@@ -8,8 +8,8 @@
   align-items : flex-start;
 
   > .P-content {
-    width      : calc(100% - 350px); // Left side size
-    padding    : 80px;
+    width      : calc(100% - 300px);
+    padding    : 20px;
     min-height : calc(100vh - #{$header-size} - 160px); // Full Height - Header size - Block top, bottom paddings
 
     .P-form-block {

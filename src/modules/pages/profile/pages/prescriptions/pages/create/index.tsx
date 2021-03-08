@@ -49,7 +49,7 @@ class Create extends HelperComponent<{}, IState> {
 
   private goBack = () => window.routerHistory.goBack();
 
-  private changeField = (e: React.SyntheticEvent<HTMLInputElement>) => {
+  private changeField = (e: React.SyntheticEvent<HTMLTextAreaElement | HTMLInputElement>) => {
     const { form } = this.state;
     form[e.currentTarget.name] = e.currentTarget.value; 
     this.safeSetState({ form });
@@ -161,7 +161,7 @@ class Create extends HelperComponent<{}, IState> {
               <div className="P-upload-button">
                 <label className="G-main-button">
                   <i className="icon-Group-5543 G-mr-0" />
-                  {Settings.translations.upload_image}
+                  {Settings.translations.upload_prescription_image}
                   <input
                     type="file"
                     accept="image/*"
@@ -173,7 +173,7 @@ class Create extends HelperComponent<{}, IState> {
 
             <div className="G-main-form-half-field">
               <p className="G-input-top-label">{Settings.translations.description}</p>
-              <input
+              <textarea
                 name="description"
                 className={`G-main-input ${this.formValidation.errors.description ? 'G-invalid-field' : ''}`}
                 onChange={this.changeField}

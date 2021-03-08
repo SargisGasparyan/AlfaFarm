@@ -31,14 +31,14 @@ const TableList = ({ list, onQuantityChange }: IProps) => {
         />
 
         <div className="P-main-info">
-          <h2>{row.productTitle}</h2>
+          <h4>{row.productTitle}</h4>
           <span>{row.unitQuantity} {row.unitName}</span>
         </div>
       </Link>,
     },
     {
       name: Settings.translations.quantity,
-      style: { minWidth: 150, maxWidth: 150 },
+      style: { minWidth: 140, maxWidth: 140 },
       cell: (row: IBasketListResponseModel, index: number) => onQuantityChange ?
       <CountInput
         value={row.productQuantity}
@@ -46,21 +46,21 @@ const TableList = ({ list, onQuantityChange }: IProps) => {
         min={1}
         onChange={value => onQuantityChange(index, value)}
       /> :
-      <h3 className="G-fs-24">{row.productQuantity}</h3>,
+      <h4 className="G-fs-18">{row.productQuantity}</h4>,
     },
     {
       name: Settings.translations.price,
-      style: { minWidth: 150, maxWidth: 150 },
+      style: { minWidth: 150, maxWidth: 140 },
       cell: (row: IBasketListResponseModel) => {
         const priceInfo = getBasketItemPriceInfo(row);
 
         return <>
           <div>{priceInfo.discountedPrice ? <del>{formatPrice(row.totalPrice)}</del> : null}</div>
-          <h3 className={`G-fs-24 ${priceInfo.discountedPrice ? 'G-orange-color' : ''}`}>
+          <h4 className={`G-fs-18 ${priceInfo.discountedPrice ? 'G-clr-orange' : ''}`}>
             {priceInfo.discountedPrice ?
               formatPrice(priceInfo.discountedPrice) :
               formatPrice(priceInfo.price)}
-          </h3>
+          </h4>
         </>;
       },
     },

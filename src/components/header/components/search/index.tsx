@@ -98,10 +98,10 @@ class SearchPopup extends HelperComponent<IProps, IState> {
         <aside className="P-header-search-result">
           {historyShown ? <h6 className="G-flex">
             {Settings.translations.last_search_results}
-            <a className="G-ml-auto G-orange-color" onClick={this.clearAll}>{Settings.translations.clear_all}</a>
+            <a className="G-ml-auto G-clr-orange" onClick={this.clearAll}>{Settings.translations.clear_all}</a>
           </h6> : <h6 className="G-flex">
             {Settings.translations.products}
-            <Link to={`${ROUTES.PRODUCTS.MAIN}?text=${searchText}`} className="G-ml-auto G-orange-color" onClick={() => onClose()}>{Settings.translations.see_more}</Link>
+            <Link to={`${ROUTES.PRODUCTS.MAIN}?text=${searchText}`} className="G-ml-auto G-clr-orange" onClick={() => onClose()}>{Settings.translations.see_more}</Link>
           </h6>}
           {data && data.products.map(item => (
             <div className="P-list-item" key={item.id} onClick={() => this.clickOnItem(item)}>
@@ -115,8 +115,8 @@ class SearchPopup extends HelperComponent<IProps, IState> {
               <div className="P-right">
                 {!!item.promotion.result && item.promotion.promotionType === PromotionTypeEnum.Discount ? <>
                   <del className="G-ml-auto P-price">{formatPrice(item.price)}</del>
-                  <span className="G-orange-color G-ml-auto P-price">{formatPrice(item.promotion.result)}</span>
-                </>: <span className="G-orange-color G-ml-auto P-price">{formatPrice(item.price)}</span>}
+                  <span className="G-clr-orange G-ml-auto P-price">{formatPrice(item.promotion.result)}</span>
+                </>: <span className="G-clr-orange G-ml-auto P-price">{formatPrice(item.price)}</span>}
 
                 <LoaderContent
                   loading={item.cartLoading}
