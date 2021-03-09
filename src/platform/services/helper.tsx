@@ -73,7 +73,7 @@ export const getUserName = (profile: IUserResponseModel) => `${profile.firstName
 export const formatDate = (date?: string | number, withHours = true) => {
   if (!date) return '';
   const momentDate = moment(formatISOString(date));
-  return momentDate.format(withHours ? 'YYYY MMM DD | HH:mm' : 'YYYY MMM DD');
+  return momentDate.format(withHours ? 'DD MMM YYYY | HH:mm' : 'DD MMM YYYY');
 }
 
 export const formatTime = (time?: string) => {
