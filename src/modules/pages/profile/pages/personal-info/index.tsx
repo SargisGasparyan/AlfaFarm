@@ -16,9 +16,9 @@ class PersonalInfo extends HelperComponent<{}, {}> {
     return (
       <Layout>
         <div className="G-flex G-flex-wrap G-flex-align-start">
-          <h2 className="G-main-color G-mb-30 G-full-width">{Settings.translations.personal_data}</h2>
+          <h2 className="G-clr-main G-mb-30 G-full-width">{Settings.translations.personal_data}</h2>
           <DetailsForm />
-          <h2 className="G-main-color G-mb-30 G-mt-30 G-full-width">{Settings.translations.change_password}</h2>
+          <h2 className="G-clr-main G-mb-30 G-mt-30 G-full-width">{Settings.translations.change_password}</h2>
           <PasswordForm />
         </div>
       </Layout>

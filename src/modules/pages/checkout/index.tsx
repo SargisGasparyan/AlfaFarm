@@ -476,7 +476,7 @@ class Checkout extends HelperComponent<{}, IState> {
                 <CheckBox checked={isUsingBonus} onClick={this.toggleUsingBonus} />
                 {Settings.translations.use_bonus_points}
                 {isUsingBonus && <>
-                  <span className="G-ml-auto G-text-bold G-orange-color">{bonusDetails.bonusCardDetails.amount}</span>
+                  <span className="G-ml-auto G-text-bold G-clr-orange">{bonusDetails.bonusCardDetails.amount}</span>
                   <NumberInput
                     max={Math.min(initialTotalDiscountedPrice, bonusDetails.bonusCardDetails.amount)}
                     value={form.usedBonus || ''}
@@ -492,7 +492,7 @@ class Checkout extends HelperComponent<{}, IState> {
               <h3 className="G-mt-10 G-flex G-flex-justify-between">{Settings.translations.bonus} <span>{resultInfo.receivedBonus}</span></h3>
               {!!form.usedBonus && <h3 className="G-mt-10 G-flex G-flex-justify-between">{Settings.translations.used_bonus} <span>{form.usedBonus}</span></h3>}
               <h3 className="G-mt-10 G-flex G-flex-justify-between">{Settings.translations.delivery_fee} <span>{formatPrice(resultInfo.deliveryFee)}</span></h3>
-              <h2 className="G-mt-10 G-mb-20 G-flex G-flex-justify-between">{Settings.translations.total} <span className="G-orange-color">{formatPrice(resultInfo.totalPrice)}</span></h2>
+              <h2 className="G-mt-10 G-mb-20 G-flex G-flex-justify-between">{Settings.translations.total} <span className="G-clr-orange">{formatPrice(resultInfo.totalPrice)}</span></h2>
             </>}
           </div>
 

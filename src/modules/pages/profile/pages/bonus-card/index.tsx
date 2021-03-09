@@ -44,8 +44,8 @@ class BonusCard extends HelperComponent<IState, {}> {
     {
       name: Settings.translations.bonus,
       cell: (row: IBonusCardHistoryItemResponseModel) => row.status === BonusStatusEnum.Recieved
-        ? <span className="G-main-color">+{row.bonus}</span>
-        : <span className="G-orange-color">-{row.bonus}</span>,
+        ? <span className="G-clr-main">+{row.bonus}</span>
+        : <span className="G-clr-orange">-{row.bonus}</span>,
     },
   ];
 
@@ -73,7 +73,7 @@ class BonusCard extends HelperComponent<IState, {}> {
           <div className="P-card-details G-flex">
             <div>
               <img src={CardImage} alt="card" />
-              <h4 className="G-orange-color P-bonus-amount">{data.bonusCardDetails.amount}</h4>
+              <h4 className="G-clr-orange P-bonus-amount">{data.bonusCardDetails.amount}</h4>
             </div>
             <div className="P-barcode">
               <h3>{data.bonusCardDetails.fullName}</h3>

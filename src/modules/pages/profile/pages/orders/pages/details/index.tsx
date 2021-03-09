@@ -88,8 +88,8 @@ class Details extends HelperComponent<RouteComponentProps<IRouteParams>, IState>
       <Layout>
         {data ? <div className="G-flex G-flex-wrap P-profile-order-details">
           {window.routerHistory.length > 2 && <i className="G-back-icon icon-Group-5529" onClick={this.goBack} />}
-          <div className="P-main-info-block G-mr-20">
-            <h2 className="G-mb-40 G-orange-color">{Settings.translations.order} <span className="G-ml-10">#{data.id}</span></h2>
+          <div className="P-main-info-block">
+            <h2 className="G-mb-40 G-clr-orange">{Settings.translations.order} <span className="G-ml-10">#{data.id}</span></h2>
 
             <h3 className="G-flex G-mb-30 G-flex-justify-between">
               {Settings.translations.created_date}
@@ -136,7 +136,7 @@ class Details extends HelperComponent<RouteComponentProps<IRouteParams>, IState>
             </h3>
           </div>
           {!enviroment.WHOLESALE && <div className="P-address-block">
-            <h2 className="G-mb-40 G-orange-color">{Settings.translations.address}</h2>
+            <h2 className="G-mb-40 G-clr-orange">{Settings.translations.address}</h2>
 
             <h3 className="G-flex G-mb-30 G-flex-justify-between">
               {Settings.translations.full_name}
@@ -177,10 +177,10 @@ class Details extends HelperComponent<RouteComponentProps<IRouteParams>, IState>
           <Shared.Products.TableList list={data.baskets} />
 
           <div className="P-actions-block">
-            {data.status === OrderStatusEnum.Pending && <button className="G-main-button" onClick={this.toggleConfirm}>
+            {data.status === OrderStatusEnum.Pending && <button className="G-btn G-clr-green" onClick={this.toggleConfirm}>
               {Settings.translations.cancel}
             </button>}
-            <button className="G-main-button G-ml-20" onClick={this.repeatOrder}>
+            <button className="G-btn G-clr-green G-ml-20" onClick={this.repeatOrder}>
               {Settings.translations.buy_again}
             </button>
           </div>

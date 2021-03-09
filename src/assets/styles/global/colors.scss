@@ -1,0 +1,66 @@
+@import './helper';
+@import './variables';
+
+.G-bg-clr-main {
+    background-color : $main-color;
+}
+
+.G-clr-main {
+    color : $main-color !important;
+}
+
+.G-clr-black {
+    color: $black;
+}
+
+.G-clr-white {
+    color: $white;
+}
+
+.G-clr-gray {
+    color: $text-gray;
+}
+
+// .G-clr-light {
+//     color: $light;
+// }
+
+.G-clr-light-gray {
+    color: $text-gray-light;
+}
+
+.G-clr-green {
+    color: $green;
+}
+
+// .G-clr-light-green {
+//     color: $light-green;
+// }
+
+.G-clr-red {
+    color: $red !important;
+}
+
+// .G-clr-light-red {
+//     color: $light-red;
+// }
+
+.G-clr-yellow {
+    color: $yellow !important;
+}
+
+// .G-clr-gold {
+//     color: $gold
+// }
+
+// .G-clr-light-yellow {
+//     color: $light-yellow;
+// }
+
+.G-clr-orange {
+    color: $orange;
+}
+
+.G-clr-blue {
+    color: $blue;
+}

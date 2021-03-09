@@ -1229,6 +1229,7 @@ export default {
   add_prescription: "Создать рецептуру",
   medical_institution: "Медицинское учреждение",
   upload_image: "Загрузить фото",
+  upload_prescription_image: "Загрузить рецепт",
   upload: "Загрузить",
   cancel: "Отменить",
   total: "Итого",

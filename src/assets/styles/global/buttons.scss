@@ -1,0 +1,157 @@
+@import './helper';
+@import './variables';
+
+.G-btn-light {
+    height          : $button-height;
+    padding         : calc(.5em - 1px) 1em;
+    border-radius   : $radius;
+    text-transform  : uppercase;
+    white-space     : nowrap;
+    display         : flex;
+    align-items     : center;
+    justify-content : center;
+    border          : 6px solid $orange;
+    color           : $orange;
+    background-color: transparent;
+    position        : relative;
+}
+  
+.G-btn {
+    height          : $button-height;
+    padding         : calc(.5em - 1px) 2em;
+    font-size       : 16px;
+    border-radius   : $btn-radius;
+    text-transform  : uppercase;
+    white-space     : nowrap;
+    display         : flex;
+    align-items     : center;
+    justify-content : center;
+    color           : $black;
+    position        : relative;
+    border-width    : 0;
+  
+    &.loading {
+      overflow   : hidden;
+      color      : transparent !important;
+  
+      > *:not(:last-child) {
+        visibility : hidden;
+        opacity: 0;
+        // display    : none;
+      }
+    }
+
+    &.G-clr-main {
+      color           : $white;
+      background-color: $main-color;
+    }
+  
+    &.G-clr-black {
+      color           : $white;
+      background-color: $black;
+    }
+  
+    &.G-clr-white {
+      color           : $black;
+      background-color: $white;
+    }
+  
+    &.G-clr-gray {
+      color           : $black;
+      background-color: $gray;
+    }
+  
+    &.G-clr-light {
+      color           : $black;
+      background-color: $light;
+    }
+  
+    &.G-clr-light-gray {
+      color           : $black;
+      background-color: $light-gray;
+    }
+  
+    &.G-clr-green {
+      color           : $white;
+      background-color: $green;
+    }
+    
+    &.G-clr-light-green {
+      color           : $white;
+      background-color: $light-green;
+    }
+  
+    &.G-clr-red {
+        color           : $white;
+        background-color: $red;
+    }
+  
+    &.G-clr-light-red {
+        color           : $white;
+        background-color: $light-red;
+    }
+  
+    &.G-clr-yellow {
+        color           : $white;
+        background-color: $yellow;
+    }
+  
+    &.G-clr-light-yellow {
+        color           : $white;
+        background-color: $light-yellow;
+    }
+  
+    &.G-clr-orange {
+        color           : $white;
+        background-color: $orange;
+    }
+  
+    &.G-clr-blue {
+        color           : $white;
+        background-color: $blue;
+    }
+  
+    /* ***** Hover  ***** */
+  
+    &.G-clr-black:hover {
+      background-color: $black-hover;
+      border-color    : transparent;
+    }
+  
+    &.G-clr-orange:hover {
+      background-color: $orange-hover;
+      border-color    : transparent;
+    }
+  
+    // &.G-clr-orange.G-btn-light:hover {
+    //   color: $white;
+    //   background-color: $orange-hover;
+    //   border-color    : transparent;
+    // }
+  
+    &.G-clr-blue:hover {
+      background-color: $blue-hover;
+      border-color    : transparent;
+    }
+  
+    /* ***** Active  ***** */
+  
+  
+    &.G-clr-black:active {
+      background-color: $black-active;
+      border-color    : transparent;
+    }
+  
+    &.G-clr-orange:active {
+      background-color: $orange-active;
+      border-color    : transparent;
+    }
+  
+    &.G-clr-blue:active {
+      background-color: $blue-active;
+      border-color    : transparent;
+    }
+    
+    
+}
+  

@@ -99,7 +99,7 @@ class Notifications extends HelperPureComponent<IProps, IState> {
         <aside className="P-header-notifications" onScroll={this.scrolled}>
           <h6>
             {Settings.translations.notifications}
-            <a className="G-orange-color" onClick={this.markAsRead}>{Settings.translations.mark_as_read}</a>
+            <a className="G-clr-orange" onClick={this.markAsRead}>{Settings.translations.mark_as_read}</a>
           </h6>
           {data && data.list.map(item => <this.ListItem key={item.id} item={item} />)}
         </aside>

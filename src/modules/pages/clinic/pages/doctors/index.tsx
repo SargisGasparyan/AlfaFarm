@@ -150,7 +150,7 @@ class Doctors extends HelperComponent<{}, {}> {
     return (
       <section className="G-page P-clinic-doctors-page">
         <Options />
-        <h1 id="clinic-page-start" className="G-main-color G-page-title">
+        <h1 id="clinic-page-start" className="G-clr-main G-page-title">
           {Settings.translations.doctors}
           <SearchInput onChange={this.search} />
         </h1>

@@ -53,7 +53,7 @@ class Cart extends HelperComponent<{}, IState> {
 
         <div className="P-main-info">
           <h2 title={row.productTitle}>{row.productTitle}</h2>
-          {!row.productStockQuantity && <h5 className="G-red-color G-mt-5">{Settings.translations.out_of_stock}</h5>}
+          {!row.productStockQuantity && <h5 className="G-clr-red G-mt-5">{Settings.translations.out_of_stock}</h5>}
           <span>{row.unitQuantity} {row.unitName}</span>
         </div>
       </Link>,
@@ -82,7 +82,7 @@ class Cart extends HelperComponent<{}, IState> {
           <div>{row.promotion.promotionType === PromotionTypeEnum.Discount && row.promotion.result > 0 ?
             <del>{formatPrice(row.totalPrice)}</del> : null}</div>
           <h3
-            className={`G-fs-24 ${row.promotion.promotionType === PromotionTypeEnum.Discount && row.promotion.result > 0 ? 'G-orange-color' : ''}`}>
+            className={`G-fs-24 ${row.promotion.promotionType === PromotionTypeEnum.Discount && row.promotion.result > 0 ? 'G-clr-orange' : ''}`}>
             {row.promotion.promotionType === PromotionTypeEnum.Discount ?
               formatPrice(row.promotion.result) :
               formatPrice(row.productQuantity * (row.isPackage ? row.packagePrice : row.price))}
@@ -93,7 +93,7 @@ class Cart extends HelperComponent<{}, IState> {
       name: '',
       style: { maxWidth: 70, minWidth: 60 },
       cell: (row: IBasketListResponseModel) => <div className="P-basket-remove-item">
-        <i className="icon-Group-5032 G-orange-color G-cursor-pointer G-fs-18"
+        <i className="icon-Group-5032 G-clr-orange G-cursor-pointer G-fs-18"
           onClick={() => this.deleteBasketItem(row)} />
       </div>
     }
@@ -231,7 +231,7 @@ class Cart extends HelperComponent<{}, IState> {
             <div className="P-data-block">
               <div className="G-mr-40">
                 <span className="G-fs-normal">{Settings.translations.bonus_count}</span>
-                <h1 className="G-main-color G-fs-24 G-mt-5">{data.totalBonus}</h1>
+                <h1 className="G-clr-main G-fs-24 G-mt-5">{data.totalBonus}</h1>
               </div>
 
               <div>
@@ -240,7 +240,7 @@ class Cart extends HelperComponent<{}, IState> {
                   {!!data.totalDiscountedPrice && data.totalDiscountedPrice !== data.totalPrice &&
                     <del>{formatPrice(data.totalPrice)}</del>}
                   <h1
-                    className="G-orange-color G-fs-24 G-mt-5">{formatPrice(data.totalDiscountedPrice || data.totalPrice)}</h1>
+                    className="G-clr-orange G-fs-24 G-mt-5">{formatPrice(data.totalDiscountedPrice || data.totalPrice)}</h1>
                 </div>
               </div>
 

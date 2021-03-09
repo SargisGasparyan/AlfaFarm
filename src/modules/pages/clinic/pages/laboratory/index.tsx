@@ -104,7 +104,7 @@ class Laboratory extends HelperComponent<{}, {}> {
     return (
       <section className="G-page P-clinic-laboratory-page">
         <Options />
-        <h1 id="clinic-page-start" className="G-main-color G-page-title">
+        <h1 id="clinic-page-start" className="G-clr-main G-page-title">
           {Settings.translations.laboratory}
         </h1>
         <div className="P-content">

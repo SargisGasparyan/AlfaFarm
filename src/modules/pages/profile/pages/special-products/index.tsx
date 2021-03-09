@@ -88,14 +88,14 @@ class SpecialProducts extends HelperComponent<IState, {}> {
             />
 
             <div className="P-main-info">
-              <p className="G-text-gray-color">{+item.expiredDate < Date.now() ? Settings.translations.expired_text : Settings.translations.expire_text} {formatDate(item.expiredDate, false)}</p>
+              <p className="G-clr-gray">{+item.expiredDate < Date.now() ? Settings.translations.expired_text : Settings.translations.expire_text} {formatDate(item.expiredDate, false)}</p>
               <h2>{item.title}</h2>
               <span>{item.unitQuantity} {item.unitName}</span>
             </div>
 
             <h2 className="P-price">{formatPrice(item.price)}</h2>
             <span
-              className={`G-main-color P-edit-icon ${Date.now() < +item.expiredDate ? 'P-disabled' : ''}`}
+              className={`G-clr-main P-edit-icon ${Date.now() < +item.expiredDate ? 'P-disabled' : ''}`}
               onClick={e => this.changeProduct(e, item)}
             >
               <i className="icon-Group-5545" />

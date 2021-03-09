@@ -39,16 +39,16 @@ const Footer = React.memo(() => (
       </div>
       {!enviroment.WHOLESALE && <>
         {/* <div className="P-column">
-          <h3 className="G-main-color">{Settings.translations.wholesale_sale}</h3>
+          <h3 className="G-clr-main">{Settings.translations.wholesale_sale}</h3>
         </div> */}
         <div className="P-column">
-          <h3 className="G-main-color">{Settings.translations.about_company}</h3>
+          <h3 className="G-clr-main">{Settings.translations.about_company}</h3>
           <Link to={ROUTES.ABOUT_US}>{Settings.translations.about_us}</Link>
           <Link to={ROUTES.NEWS.MAIN}>{Settings.translations.news}</Link>
           <Link to={ROUTES.VACANCIES}>{Settings.translations.vacancies}</Link>          
         </div>
         <div className="P-column">
-          <h3 className="G-main-color">{Settings.translations.information}</h3>
+          <h3 className="G-clr-main">{Settings.translations.information}</h3>
           <Link to={ROUTES.FAQ}>{Settings.translations.faq}</Link>
           <Link to={ROUTES.CARD_INFO}>{Settings.translations.what_is_alfa_card}</Link>
           <Link to={ROUTES.TENDERS.MAIN}>{Settings.translations.tenders}</Link>
@@ -58,14 +58,14 @@ const Footer = React.memo(() => (
         </div>
       </>}
       <div className="P-column">
-        <h3 className="G-main-color">{Settings.translations.useful_links}</h3>
+        <h3 className="G-clr-main">{Settings.translations.useful_links}</h3>
         {!enviroment.WHOLESALE && <Link to={ROUTES.HOW_TO_ORDER_ONLINE}>{Settings.translations.how_to_order_online}</Link>}
       </div>
       <div className="P-column">
-        <h3 className="G-main-color">{Settings.translations.contact}</h3>
-        <a><i className="G-orange-color icon-Group-5522" /> {contactPhoneNumber}</a>
-        <a><i className="G-orange-color icon-Group-5524" /> {contactEmail}</a>
-        <a><i className="G-orange-color icon-Group-5527" /> {Settings.translations.contact_address}</a>
+        <h3 className="G-clr-main">{Settings.translations.contact}</h3>
+        <a><i className="G-clr-orange icon-Group-5522" /> {contactPhoneNumber}</a>
+        <a><i className="G-clr-orange icon-Group-5524" /> {contactEmail}</a>
+        <a><i className="G-clr-orange icon-Group-5527" /> {Settings.translations.contact_address}</a>
 
         <OrderACall />
         {!!Settings.token && !Settings.guest && <Invite />}

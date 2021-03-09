@@ -42,7 +42,7 @@ class Addresses extends HelperComponent<IState, {}> {
     {
       name: '',
       cell: (row: IUserAddressListResponseModel) => <>
-        {row.isDefault && <span className="G-main-color">{Settings.translations.default}</span>}
+        {row.isDefault && <span className="G-clr-main">{Settings.translations.default}</span>}
         {!row.isDefault && <button
           className="P-make-default"
           onClick={() => this.makeDefault(row.id)}
@@ -55,12 +55,12 @@ class Addresses extends HelperComponent<IState, {}> {
       cell: (row: IUserAddressListResponseModel) => <>
         <Link to={ROUTES.PROFILE.ADDRESSES.UPDATE.replace(':id', row.id)}>
           <i
-            className="icon-Group-5545 G-back-icon G-main-color G-mr-40 G-fs-26"
+            className="icon-Group-5545 G-back-icon G-clr-main G-mr-40 G-fs-26"
           />
         </Link>
 
         <i
-          className="icon-Group-5032 G-orange-color G-cursor-pointer G-fs-24"
+          className="icon-Group-5032 G-clr-orange G-cursor-pointer G-fs-24"
           onClick={() => this.deleteRow(row.id)}
         />
       </>,

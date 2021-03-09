@@ -16,7 +16,7 @@ const SavedBaskets = React.memo(() => {
   }, []);
 
   return data && data.length ? <>
-    <h2 className="G-main-color G-mb-30">{Settings.translations.saved_carts}</h2>
+    <h2 className="G-clr-main G-mb-30">{Settings.translations.saved_carts}</h2>
     <div className="P-favorites-saved-baskets">
       {data.map((item, index) => <Link
         key={item.id}

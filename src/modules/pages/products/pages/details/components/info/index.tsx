@@ -152,7 +152,7 @@ class Info extends HelperComponent<IProps, IState> {
         <h2 className="P-name">
           {data.title}
         </h2>
-        {!data.stockQuantity && <h3 className="G-red-color">{Settings.translations.out_of_stock}</h3>}
+        {!data.stockQuantity && <h3 className="G-clr-red">{Settings.translations.out_of_stock}</h3>}
         <h3 className="P-unit">{data.unitQuantity} {data.unitName}</h3>
         {data.category && <h3 className="P-row">
           {Settings.translations.category}
@@ -211,7 +211,7 @@ class Info extends HelperComponent<IProps, IState> {
           </>}
 
           {pharmaciesAvailablityOpen && <PharmaciesAvailablity onClose={this.togglePharmaciesAvailablity} data={data} />}
-          <span className="G-orange-color G-ml-auto P-price">
+          <span className="G-clr-orange G-ml-auto P-price">
             <span />
             {(isSelectedPackage ? data.packagePromotion : data.promotion).promotionType === PromotionTypeEnum.Discount ? 
             <> <del>{formatPrice(this.price)}</del> {formatPrice(this.discountedPrice)} </> : <><span>Bonus: { this.discountedPrice }</span> {formatPrice(this.price)}</>}
