@@ -9,7 +9,6 @@
 
   &.P-cards-page-has-card {
     width           : 400px;
-    display         : initial;
     padding         : 10px;
     border-top      : 12px solid rgba(73, 183, 72, 0.1);
     box-shadow      : $default-block-shadow;
@@ -28,6 +27,7 @@
   }
 
   .P-radio-wrap {
+    width       : 100%;
     display     : flex;
     align-items : center;
     padding     : 10px 20px;
@@ -37,16 +37,26 @@
       width: 100%;
     }
   }
-  
-  .P-card-number {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
 
-    div {
-      margin-left : 30px;
-      width       : 40px;
-      height      : 30px;
+  .P-card-wrap {
+    width       : 100%;
+    display     : flex;
+    align-items : center;
+    padding     : 10px 20px;
+    border-bottom: 1px solid $light-gray;
+
+    .P-card-number {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+  
+      div {
+        margin-left : 30px;
+        width       : 40px;
+        height      : 30px;
+      }
     }
   }
+  
 }
