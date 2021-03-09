@@ -19,8 +19,8 @@
   max-width     : 340px;
   margin-right  : 40px;
   border-right  : 2px solid $light-gray;
-  padding-right : 40px;
-  position: relative;
+  position      : sticky;
+  top           : 150px;
 
   .G-back-icon {
     position: absolute;

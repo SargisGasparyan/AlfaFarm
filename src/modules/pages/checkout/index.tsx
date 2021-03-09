@@ -249,7 +249,7 @@ class Checkout extends HelperComponent<{}, IState> {
   private changeDeliveryType = (chosen: IDropdownOption<OrderDeliveryTypeEnum>) => {
     const { form } = this.state;
     form.deliveryType = chosen.value;
-    this.safeSetState({ form }, this.clearAddress);
+    this.safeSetState({ form });
   }
 
   private changeDeliveryTimeType = (chosen: IDropdownOption<OrderDeliveryTimeTypeEnum>) => {
@@ -374,54 +374,7 @@ class Checkout extends HelperComponent<{}, IState> {
                 onChange={this.changeField}
               />
             </div>
-            <div className="G-main-form-field G-main-form-field-closer">
-              <YandexAutocomplete
-                suggestDisabled={chooseAddressOpen || choosePharmacyOpen}
-                placeholder={Settings.translations.address}
-                value={form.addressText || ''}
-                className={`G-main-input ${this.formValidation.errors.address ? 'G-invalid-field' : ''}`}
-                onChange={this.addressChange}
-                onPlaceSelect={this.addressSelect}
-              />
-            </div>
-            <div className="G-main-form-field G-main-form-field-closer">
-              <input
-                name="addressBuilding"
-                value={form.addressBuilding || ''}
-                className="G-main-input"
-                placeholder={Settings.translations.building}
-                onChange={this.changeField}
-              />
-            </div>
-            <div className="G-main-form-field G-main-form-field-closer">
-              <input
-                name="addressEntrance"
-                value={form.addressEntrance || ''}
-                className="G-main-input"
-                placeholder={Settings.translations.entrance}
-                onChange={this.changeField}
-              />
-            </div>
-            <div className="G-main-form-field G-main-form-field-closer">
-              <input
-                name="addressApartment"
-                value={form.addressApartment || ''}
-                className="G-main-input"
-                placeholder={Settings.translations.apartment}
-                onChange={this.changeField}
-              />
-            </div>
-            <div className="G-main-form-field G-main-form-field-closer">
-              <input
-                name="addressFloor"
-                value={form.addressFloor || ''}
-                className="G-main-input"
-                placeholder={Settings.translations.floor}
-                onChange={this.changeField}
-              />
-            </div>
-          </div>
-          <div className="P-delivery-form G-half-width">
+
             <div className="G-main-form-field G-phone-input-wrapper P-checkout-select">
               <Select<OrderDeliveryTypeEnum>
                 options={OrderDeliveryTypeDropdown()}
@@ -430,7 +383,6 @@ class Checkout extends HelperComponent<{}, IState> {
                 onChange={this.changeDeliveryType}
               />
             </div>
-
             <div className="G-main-form-field G-phone-input-wrapper P-checkout-select">
               <Select<OrderDeliveryTimeTypeEnum>
                 options={OrderDeliveryTimeTypeDropdown()}
@@ -439,6 +391,64 @@ class Checkout extends HelperComponent<{}, IState> {
                 onChange={this.changeDeliveryTimeType}
               />
             </div>
+
+
+          </div>
+
+
+          <div className="P-delivery-form G-half-width">
+
+            {form.deliveryType === OrderDeliveryTypeEnum.Delivery &&
+              <>
+                <div className="G-main-form-field G-main-form-field-closer">
+                  <YandexAutocomplete
+                    suggestDisabled={chooseAddressOpen || choosePharmacyOpen}
+                    placeholder={Settings.translations.address}
+                    value={form.addressText || ''}
+                    className={`G-main-input ${this.formValidation.errors.address ? 'G-invalid-field' : ''}`}
+                    onChange={this.addressChange}
+                    onPlaceSelect={this.addressSelect}
+                  />
+                </div>
+                <div className="G-main-form-field G-main-form-field-closer">
+                  <input
+                    name="addressBuilding"
+                    value={form.addressBuilding || ''}
+                    className="G-main-input"
+                    placeholder={Settings.translations.building}
+                    onChange={this.changeField}
+                  />
+                </div>
+                <div className="G-main-form-field G-main-form-field-closer">
+                  <input
+                    name="addressEntrance"
+                    value={form.addressEntrance || ''}
+                    className="G-main-input"
+                    placeholder={Settings.translations.entrance}
+                    onChange={this.changeField}
+                  />
+                </div>
+                <div className="G-main-form-field G-main-form-field-closer">
+                  <input
+                    name="addressApartment"
+                    value={form.addressApartment || ''}
+                    className="G-main-input"
+                    placeholder={Settings.translations.apartment}
+                    onChange={this.changeField}
+                  />
+                </div>
+                <div className="G-main-form-field G-main-form-field-closer">
+                  <input
+                    name="addressFloor"
+                    value={form.addressFloor || ''}
+                    className="G-main-input"
+                    placeholder={Settings.translations.floor}
+                    onChange={this.changeField}
+                  />
+                </div>
+              </>
+            }
+
 
             {dateType === OrderDeliveryTimeTypeEnum.Date && <div className="P-delivery-date G-flex G-align-center">
               <div className="G-main-form-half-field">

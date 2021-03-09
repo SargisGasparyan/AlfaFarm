@@ -111,8 +111,8 @@ class Cart extends HelperComponent<{}, IState> {
       this.fetchData();
     }
   }
-    private updateBasketCount = () => window.dispatchEvent(new CustomEvent(DispatcherChannels.CartItemsUpdate));
-    private fetchData = async () => {
+  private updateBasketCount = () => window.dispatchEvent(new CustomEvent(DispatcherChannels.CartItemsUpdate));
+  private fetchData = async () => {
     const result = await BasketController.GetList();
 
     this.safeSetState({ data: result.data }, async () => {
@@ -228,34 +228,38 @@ class Cart extends HelperComponent<{}, IState> {
               data={data.items}
             />
 
-            <div className="P-data-block">
-              <div className="G-mr-40">
-                <span className="G-fs-normal">{Settings.translations.bonus_count}</span>
-                <h1 className="G-clr-main G-fs-24 G-mt-5">{data.totalBonus}</h1>
-              </div>
+            <div className="P-data-block-wrapper">
 
-              <div>
-                <span className="G-fs-normal">{Settings.translations.total}</span>
-                <div className="G-flex G-flex-column G-align-center G-justify-center P-discounted-item">
-                  {!!data.totalDiscountedPrice && data.totalDiscountedPrice !== data.totalPrice &&
-                    <del>{formatPrice(data.totalPrice)}</del>}
-                  <h1
-                    className="G-clr-orange G-fs-24 G-mt-5">{formatPrice(data.totalDiscountedPrice || data.totalPrice)}</h1>
+              <div className="P-data-block">
+                <div className="G-mr-40">
+                  <span className="G-fs-normal">{Settings.translations.bonus_count}</span>
+                  <h1 className="G-clr-main G-fs-24 G-mt-5">{data.totalBonus}</h1>
                 </div>
+
+                <div>
+                  <span className="G-fs-normal">{Settings.translations.total}</span>
+                  <div className="G-flex G-flex-column G-align-center G-justify-center P-discounted-item">
+                    {!!data.totalDiscountedPrice && data.totalDiscountedPrice !== data.totalPrice &&
+                      <del>{formatPrice(data.totalPrice)}</del>}
+                    <h1
+                      className="G-clr-orange G-fs-24 G-mt-5">{formatPrice(data.totalDiscountedPrice || data.totalPrice)}</h1>
+                  </div>
+                </div>
+
               </div>
 
+              {Storage.profile && <div className="P-data-block-cart">
+                <span className="P-save-cart" onClick={this.saveCart}>
+                  {Settings.translations.save_cart}
+                </span>
+              </div>}
+
+              <button
+                className="G-main-button G-ml-auto G-fs-normal P-pay-button"
+                onClick={this.goToCheckout}
+              >{Settings.translations.pay}</button>
             </div>
 
-            {Storage.profile && <div className="P-data-block">
-              <span className="P-save-cart" onClick={this.saveCart}>
-                {Settings.translations.save_cart}
-              </span>
-            </div>}
-
-            <button
-              className="G-main-button G-ml-auto G-fs-normal P-pay-button"
-              onClick={this.goToCheckout}
-            >{Settings.translations.pay}</button>
 
             {priceNotEnoughModalOpen && <PriceNotEnoughModal onClose={this.togglePriceNotEnoughModal} />}
 
@@ -266,8 +270,8 @@ class Cart extends HelperComponent<{}, IState> {
               onClose={this.closeOutOfStockConfirm}
             />}
           </> : <EmptyState
-              text={Settings.translations.no_products}
-            />}
+            text={Settings.translations.no_products}
+          />}
         </> : <PageLoader />}
       </section>
     );
