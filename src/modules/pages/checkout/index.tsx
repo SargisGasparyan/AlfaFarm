@@ -147,7 +147,7 @@ class Checkout extends HelperComponent<{}, IState> {
     this.safeSetState({ form }, () => this.getResultInfo(form.usedBonus));
   }
 
-  
+
   private fetchAddressesList = async () => {
     const result = await UserAddressController.GetList();
     result.data.length && this.safeSetState({ addressList: result.data }, this.checkForDefaultAddress);
@@ -249,7 +249,7 @@ class Checkout extends HelperComponent<{}, IState> {
   private changeDeliveryType = (chosen: IDropdownOption<OrderDeliveryTypeEnum>) => {
     const { form } = this.state;
     form.deliveryType = chosen.value;
-    this.safeSetState({ form }, this.clearAddress);
+    this.safeSetState({ form });
   }
 
   private changeDeliveryTimeType = (chosen: IDropdownOption<OrderDeliveryTimeTypeEnum>) => {
@@ -271,7 +271,7 @@ class Checkout extends HelperComponent<{}, IState> {
 
   private toggleUsingBonus = async () => {
     const { isUsingBonus, form } = this.state;
-    
+
     if (isUsingBonus) {
       form.usedBonus = 0;
       Connection.AbortAll();
@@ -292,10 +292,15 @@ class Checkout extends HelperComponent<{}, IState> {
       const result = await OrderController.Create(form);
       if (result.success) {
         const finishState: Partial<IState> = { submitLoading: false };
-    
-        if (form.paymentType === PaymentTypeEnum.Idram) document.getElementById('currentId')?.click();
-        if (form.paymentType === PaymentTypeEnum.IPay && result.data.vposUrl) window.open(result.data.vposUrl, '_top');
-        else finishState.successModalOpen = true;
+
+        if (form.paymentType === PaymentTypeEnum.Idram) {
+          document.getElementById('currentId')?.click();
+        }
+        if (form.paymentType === PaymentTypeEnum.IPay && result.data.vposUrl) {
+          window.open(result.data.vposUrl, '_top');
+        } else {
+          finishState.successModalOpen = true;
+        }
 
         this.safeSetState(finishState, () => window.dispatchEvent(new CustomEvent(DispatcherChannels.CartItemsUpdate)));
       } else this.safeSetState({ submitLoading: false });
@@ -369,54 +374,7 @@ class Checkout extends HelperComponent<{}, IState> {
                 onChange={this.changeField}
               />
             </div>
-            <div className="G-main-form-field G-main-form-field-closer">
-              <YandexAutocomplete
-                suggestDisabled={chooseAddressOpen || choosePharmacyOpen}
-                placeholder={Settings.translations.address}
-                value={form.addressText || ''}
-                className={`G-main-input ${this.formValidation.errors.address ? 'G-invalid-field' : ''}`}
-                onChange={this.addressChange}
-                onPlaceSelect={this.addressSelect}
-              />
-            </div>
-            <div className="G-main-form-field G-main-form-field-closer">
-              <input
-                name="addressBuilding"
-                value={form.addressBuilding || ''}
-                className="G-main-input"
-                placeholder={Settings.translations.building}
-                onChange={this.changeField}
-              />
-            </div>
-            <div className="G-main-form-field G-main-form-field-closer">
-              <input
-                name="addressEntrance"
-                value={form.addressEntrance || ''}
-                className="G-main-input"
-                placeholder={Settings.translations.entrance}
-                onChange={this.changeField}
-              />
-            </div>
-            <div className="G-main-form-field G-main-form-field-closer">
-              <input
-                name="addressApartment"
-                value={form.addressApartment || ''}
-                className="G-main-input"
-                placeholder={Settings.translations.apartment}
-                onChange={this.changeField}
-              />
-            </div>
-            <div className="G-main-form-field G-main-form-field-closer">
-              <input
-                name="addressFloor"
-                value={form.addressFloor || ''}
-                className="G-main-input"
-                placeholder={Settings.translations.floor}
-                onChange={this.changeField}
-              />
-            </div>
-          </div>
-          <div className="P-delivery-form G-half-width">
+
             <div className="G-main-form-field G-phone-input-wrapper P-checkout-select">
               <Select<OrderDeliveryTypeEnum>
                 options={OrderDeliveryTypeDropdown()}
@@ -425,7 +383,6 @@ class Checkout extends HelperComponent<{}, IState> {
                 onChange={this.changeDeliveryType}
               />
             </div>
-
             <div className="G-main-form-field G-phone-input-wrapper P-checkout-select">
               <Select<OrderDeliveryTimeTypeEnum>
                 options={OrderDeliveryTimeTypeDropdown()}
@@ -434,6 +391,64 @@ class Checkout extends HelperComponent<{}, IState> {
                 onChange={this.changeDeliveryTimeType}
               />
             </div>
+
+
+          </div>
+
+
+          <div className="P-delivery-form G-half-width">
+
+            {form.deliveryType === OrderDeliveryTypeEnum.Delivery &&
+              <>
+                <div className="G-main-form-field G-main-form-field-closer">
+                  <YandexAutocomplete
+                    suggestDisabled={chooseAddressOpen || choosePharmacyOpen}
+                    placeholder={Settings.translations.address}
+                    value={form.addressText || ''}
+                    className={`G-main-input ${this.formValidation.errors.address ? 'G-invalid-field' : ''}`}
+                    onChange={this.addressChange}
+                    onPlaceSelect={this.addressSelect}
+                  />
+                </div>
+                <div className="G-main-form-field G-main-form-field-closer">
+                  <input
+                    name="addressBuilding"
+                    value={form.addressBuilding || ''}
+                    className="G-main-input"
+                    placeholder={Settings.translations.building}
+                    onChange={this.changeField}
+                  />
+                </div>
+                <div className="G-main-form-field G-main-form-field-closer">
+                  <input
+                    name="addressEntrance"
+                    value={form.addressEntrance || ''}
+                    className="G-main-input"
+                    placeholder={Settings.translations.entrance}
+                    onChange={this.changeField}
+                  />
+                </div>
+                <div className="G-main-form-field G-main-form-field-closer">
+                  <input
+                    name="addressApartment"
+                    value={form.addressApartment || ''}
+                    className="G-main-input"
+                    placeholder={Settings.translations.apartment}
+                    onChange={this.changeField}
+                  />
+                </div>
+                <div className="G-main-form-field G-main-form-field-closer">
+                  <input
+                    name="addressFloor"
+                    value={form.addressFloor || ''}
+                    className="G-main-input"
+                    placeholder={Settings.translations.floor}
+                    onChange={this.changeField}
+                  />
+                </div>
+              </>
+            }
+
 
             {dateType === OrderDeliveryTimeTypeEnum.Date && <div className="P-delivery-date G-flex G-align-center">
               <div className="G-main-form-half-field">
@@ -516,7 +531,7 @@ class Checkout extends HelperComponent<{}, IState> {
           {Settings.guest ? <>
             <h3>{Settings.translations.guest_order_success}</h3>
             <button className="G-main-button G-normal-link G-mt-30 P-register-button" onClick={this.toggleAuthModal}>{Settings.translations.sign_up}</button>
-          </>: <>
+          </> : <>
             <h3>{Settings.translations.order_success}</h3>
             <Link className="G-main-button G-normal-link G-mt-30" to={ROUTES.PROFILE.ORDERS.MAIN}>{Settings.translations.order_history}</Link>
           </>}
