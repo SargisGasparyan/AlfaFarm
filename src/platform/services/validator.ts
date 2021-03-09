@@ -9,7 +9,7 @@
 
 export const onlyNumbersWithoutCode = (str: string) => {
   const reg = /^\+?[0-9]*$/;
-  
+
   return reg.test(str) && str.length >= 8;
 }
 
@@ -37,7 +37,7 @@ export const isValidDateRange = (from?: string | Date, to?: string | Date, optio
   if (from && to) {
     const fromDate = new Date(from);
     const toDate = new Date(to);
-  
+
     return fromDate <= toDate;
   }
 
@@ -57,9 +57,11 @@ export const isValidPhone = (value?: string | null): boolean => {
   const beeline = '91|99|96|43|33';
   const ucom = '55|95|41|44|45';
   const mts = '93|94|77|49|98';
+  const home = '10|11';
+  const KT = '97';
 
   if (!value && value !== '') return false
-  const regex = new RegExp(`^(374)?((?:${mts}|${beeline}|${ucom})([0-9]{6}))$`);
+  const regex = new RegExp(`^(374)?((?:${mts}|${beeline}|${ucom}|${home}|${KT})([0-9]{6}))$`);
   return regex.test(value);
 };
 

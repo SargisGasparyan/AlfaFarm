@@ -52,7 +52,7 @@ class List extends HelperComponent<{}, IState> {
     const query = new URLSearchParams(window.location.search);
     const preferredProductId = query.get('preferredProductId');
 
-    !result.aborted && this.safeSetState({ data: result.data.list, total: result.data.totalCount, preferredProductId, loading: false }, ()=> window.scrollTo(0, 0));
+    !result.aborted && result.data && this.safeSetState({ data: result.data.list, total: result.data.totalCount, preferredProductId, loading: false }, ()=> window.scrollTo(0, 0));
     return result.data;
   }
 

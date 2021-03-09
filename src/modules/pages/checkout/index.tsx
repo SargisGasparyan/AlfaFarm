@@ -147,7 +147,7 @@ class Checkout extends HelperComponent<{}, IState> {
     this.safeSetState({ form }, () => this.getResultInfo(form.usedBonus));
   }
 
-  
+
   private fetchAddressesList = async () => {
     const result = await UserAddressController.GetList();
     result.data.length && this.safeSetState({ addressList: result.data }, this.checkForDefaultAddress);
@@ -271,7 +271,7 @@ class Checkout extends HelperComponent<{}, IState> {
 
   private toggleUsingBonus = async () => {
     const { isUsingBonus, form } = this.state;
-    
+
     if (isUsingBonus) {
       form.usedBonus = 0;
       Connection.AbortAll();
@@ -292,10 +292,15 @@ class Checkout extends HelperComponent<{}, IState> {
       const result = await OrderController.Create(form);
       if (result.success) {
         const finishState: Partial<IState> = { submitLoading: false };
-    
-        if (form.paymentType === PaymentTypeEnum.Idram) document.getElementById('currentId')?.click();
-        if (form.paymentType === PaymentTypeEnum.IPay && result.data.vposUrl) window.open(result.data.vposUrl, '_top');
-        else finishState.successModalOpen = true;
+
+        if (form.paymentType === PaymentTypeEnum.Idram) {
+          document.getElementById('currentId')?.click();
+        }
+        if (form.paymentType === PaymentTypeEnum.IPay && result.data.vposUrl) {
+          window.open(result.data.vposUrl, '_top');
+        } else {
+          finishState.successModalOpen = true;
+        }
 
         this.safeSetState(finishState, () => window.dispatchEvent(new CustomEvent(DispatcherChannels.CartItemsUpdate)));
       } else this.safeSetState({ submitLoading: false });
@@ -516,7 +521,7 @@ class Checkout extends HelperComponent<{}, IState> {
           {Settings.guest ? <>
             <h3>{Settings.translations.guest_order_success}</h3>
             <button className="G-main-button G-normal-link G-mt-30 P-register-button" onClick={this.toggleAuthModal}>{Settings.translations.sign_up}</button>
-          </>: <>
+          </> : <>
             <h3>{Settings.translations.order_success}</h3>
             <Link className="G-main-button G-normal-link G-mt-30" to={ROUTES.PROFILE.ORDERS.MAIN}>{Settings.translations.order_history}</Link>
           </>}
