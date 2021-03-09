@@ -44,7 +44,7 @@ class MyWallet extends HelperComponent<{}, IState> {
       <Layout>
         <div className={`P-cards-page ${list && list.length ? 'P-cards-page-has-card' : ''}`}>
           {list && list.map((item, index) => /* <Radio<number> callback={(value: number) => {}} value={item.id} isChecked={false} key={index}> */
-            <div className="P-card-wrap">
+            <div className="P-card-wrap" key={index}>
               <div className="P-card-number">
                 {item.pan}
                 {item.type === CardTypeEnum.Visa ? <div className="P-visa" /> : null}
