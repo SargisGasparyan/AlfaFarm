@@ -77,6 +77,7 @@ class Header extends HelperComponent<{}, IState> {
     Broadcast.subscribe(DispatcherChannels.StorageUpdate, this.storageUpdate);
 
     Storage.profile && this.configureNotifications();
+    this.connectNotificationsSocket();
   }
 
   public componentWillUnmount() {
@@ -94,11 +95,13 @@ class Header extends HelperComponent<{}, IState> {
 
     if (result && result.success) {
       this.safeSetState({ notificationIconNumber: result.data });
-      Socket.connection && Socket.connection.on('newMessage', () => {
-        const { notificationIconNumber } = this.state;
-        this.safeSetState({ notificationIconNumber: notificationIconNumber + 1 });
-      });
     }
+  }
+  private connectNotificationsSocket() {
+    Socket.connection && Socket.connection.on('newMessage', () => {
+      const { notificationIconNumber } = this.state;
+      this.safeSetState({ notificationIconNumber: notificationIconNumber + 1 });
+    });
   }
 
   private fetchCart = async () => {
@@ -166,12 +169,17 @@ class Header extends HelperComponent<{}, IState> {
   private toggleNotifications = (e?: Event | React.SyntheticEvent) => {
     e && e.stopPropagation();
     const { notificationOpen } = this.state;
+    if (!notificationOpen) {
+      this.configureNotifications();
+    }
     this.safeSetState({ notificationOpen: !notificationOpen });
   }
 
   private onNotificationSeenChange = (all: boolean) => {
     const { notificationIconNumber } = this.state;
-    this.safeSetState({ notificationIconNumber: all ? 0 : notificationIconNumber - 1 });
+    if (notificationIconNumber && notificationIconNumber > 0) {
+      this.safeSetState({ notificationIconNumber: all ? 0 : notificationIconNumber - 1 });
+    }
   }
 
   private searchFocus = (e: React.SyntheticEvent) => {
