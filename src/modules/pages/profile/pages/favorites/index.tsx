@@ -19,6 +19,7 @@ import { PromotionTypeEnum } from 'platform/constants/enums';
 
 interface IState {
   data: IFavoriteListResponseModel[] | null;
+  inProgress: boolean;
 };
 
 @byPrivateRoute(ROUTES.PROFILE.FAVORITES.MAIN)
@@ -26,6 +27,7 @@ class Favorites extends HelperComponent<IState, {}> {
 
   public state: IState = {
     data: null,
+    inProgress: false
   };
 
   public componentDidMount() { this.fetchData(); }
@@ -36,13 +38,16 @@ class Favorites extends HelperComponent<IState, {}> {
   }
 
   private toggleFavorite = async (e: React.SyntheticEvent, index: number) => {
-    e.preventDefault();
-    const data = this.state.data as IFavoriteListResponseModel[];
-    const result = await FavoriteController.AddOrRemove(data[index].id);
+    if (!this.state.inProgress) {
+      this.safeSetState({ inProgress: true });
+      e.preventDefault();
+      const data = this.state.data as IFavoriteListResponseModel[];
+      const result = await FavoriteController.AddOrRemove(data[index].id);
 
-    if (result.success) {
-      data.splice(index, 1);
-      this.safeSetState({ data });
+      if (result.success) {
+        data.splice(index, 1);
+        this.safeSetState({ data, inProgress: false });
+      }
     }
   }
 
@@ -78,8 +83,8 @@ class Favorites extends HelperComponent<IState, {}> {
               <div>{item.promotion.promotionType === PromotionTypeEnum.Discount && item.promotion.result > 0 ? <del>{formatPrice(item.price)}</del> : null}</div>
               <h2 className={`${item.promotion.promotionType === PromotionTypeEnum.Discount && item.promotion.result ? 'G-clr-orange' : ''}`}>
                 {item.promotion.promotionType === PromotionTypeEnum.Discount ?
-                formatPrice(item.promotion.result) :
-                formatPrice(item.price)}
+                  formatPrice(item.promotion.result) :
+                  formatPrice(item.price)}
               </h2>
             </div>
           </Link>) : <EmptyState text={Settings.translations.empty_favorites_list} />) : null}
