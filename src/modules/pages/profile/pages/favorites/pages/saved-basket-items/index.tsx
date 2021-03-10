@@ -16,6 +16,7 @@ import './style.scss';
 
 interface IState {
   data?: IBasketListResponseModel[];
+  inProgress: boolean;
 };
 
 interface IRouteParams {
@@ -26,7 +27,9 @@ interface IRouteParams {
 @byPrivateRoute(ROUTES.PROFILE.FAVORITES.SAVED_BASKET_ITEMS)
 class SavedBasketItems extends HelperComponent<RouteComponentProps<IRouteParams>, IState> {
 
-  public state: IState = { };
+  public state: IState = {
+    inProgress: false,
+  };
 
   public componentDidMount() {
     this.fetchData();
@@ -39,10 +42,14 @@ class SavedBasketItems extends HelperComponent<RouteComponentProps<IRouteParams>
   }
 
   private deleteSaved = async () => {
-    const { id } = this.props.match.params;
-    const result = await BasketController.DeleteSaved(+id);
-    if (result && result.success) {
-      this.goBack();
+    if (!this.state.inProgress) {
+      this.safeSetState({ inProgress: true });
+      const { id } = this.props.match.params;
+      const result = await BasketController.DeleteSaved(+id);
+      if (result && result.success) {
+        this.safeSetState({ inProgress: false });
+        this.goBack();
+      }
     }
   }
 

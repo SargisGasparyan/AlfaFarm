@@ -1065,7 +1065,7 @@ export default {
   my_orders: "Իմ պատվերները",
   my_requests: "Իմ հարցումները",
   my_companies: "Իմ ընկերությունները",
-  my_registrations: "Իմ գրանցումները",
+  my_registrations: "Գրանցումներ",
   medical_history: "Բժշկական պատմություն",
   special_products: "Հատուկ ապրանքներ",
   special_products_replace_fail: (date: string) => `Ապրանքը կարող եք փոխարինել ոչ շուտ քան ${date}`,
