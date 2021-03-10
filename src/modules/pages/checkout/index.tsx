@@ -254,7 +254,9 @@ class Checkout extends HelperComponent<{}, IState> {
 
   private changeDeliveryTimeType = (chosen: IDropdownOption<OrderDeliveryTimeTypeEnum>) => {
     const { form } = this.state;
-    if (chosen.value === OrderDeliveryTimeTypeEnum.Asap) form.deliveryDateFrom = undefined;
+    if (chosen.value === OrderDeliveryTimeTypeEnum.Asap) {
+      form.deliveryDateFrom = undefined;
+    }
     this.safeSetState({ dateType: chosen.value, form });
   }
 
@@ -450,7 +452,7 @@ class Checkout extends HelperComponent<{}, IState> {
             }
 
 
-            {dateType === OrderDeliveryTimeTypeEnum.Date && <div className="P-delivery-date G-flex G-align-center">
+            {dateType === OrderDeliveryTimeTypeEnum.DeliveryDate && <div className="P-delivery-date G-flex G-align-center">
               <div className="G-main-form-half-field">
                 <DateTime
                   onChange={this.dateFromChange}

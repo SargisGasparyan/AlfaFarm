@@ -17,5 +17,5 @@ export enum OrderDeliveryTypeEnum {
 
 export enum OrderDeliveryTimeTypeEnum {
   Asap = 1,
-  Date,
+  DeliveryDate,
 };

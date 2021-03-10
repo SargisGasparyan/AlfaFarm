@@ -43,9 +43,13 @@ export const getViewEnum = (obj: {}, withTranslations = true) => {
 export const getTranslationLabel = (value: string) => {
   const arrayValue = value.split('');
   return arrayValue.map((letter, index) => {
-    if (!index) return letter.toLowerCase();
-    else if (letter === letter.toUpperCase()) return `_${letter.toLowerCase()}`;
-    else return letter;
+    if (!index) {
+      return letter.toLowerCase();
+    } else if (letter === letter.toUpperCase()) {
+      return `_${letter.toLowerCase()}`;
+    } else {
+      return letter;
+    }
   }).join('');
 }
 
@@ -57,10 +61,12 @@ export const formatPrice = (price: number, includeSymbol = true) => {
 export const enumToSelectOptions = <Value extends number>(obj: object, withTranslations: boolean = true, notIncludeValues: Value[] = []) => {
   const options: Array<IDropdownOption<Value>> = [];
   Object.keys(obj).map(item => {
-    if (!isNaN(+item) && notIncludeValues.indexOf(+item as Value) === -1) options.push({
-      name: withTranslations ? Settings.translations[getTranslationLabel(obj[item])] : obj[item],
-      value: +item as Value,
-    });
+    if (!isNaN(+item) && notIncludeValues.indexOf(+item as Value) === -1) {
+      options.push({
+        name: withTranslations ? Settings.translations[getTranslationLabel(obj[item])] : obj[item],
+        value: +item as Value,
+      });
+    }
 
     return true;
   });
@@ -103,13 +109,13 @@ export const getUpcomingMonths = (() => {
   return (count: number) => {
     const date = moment();
     const months = [getMonth(date)];
-  
+
     for (let i = 1; i <= count - 1; i++) {
       date.add(1, 'months');
       date.set("date", 1);
       months.push(getMonth(date));
     }
-  
+
     return months;
   };
 })();
@@ -122,14 +128,14 @@ export const getMonthDays = (() => {
       name: isToday ? Settings.translations.today : date.date(),
     }
   };
-  
+
   return (startDate: Date, pushToday = true) => {
     const date = moment(startDate);
     const endDate = moment(date).endOf('month');
     endDate.add(1, 'days');
     const days = [];
 
-    while(date.diff(endDate, 'days') < 0) {
+    while (date.diff(endDate, 'days') < 0) {
       const isToday = moment(date).isSame(new Date(), 'day');
       (!isToday || pushToday) && days.push(getDay(date));
       date.add(1, 'days');
@@ -154,7 +160,7 @@ export const getHoverDirection = (e: React.MouseEvent, element?: HTMLElement) =>
   return null
 };
 
-export const getMediaPath = (path?: string | null) => {  
+export const getMediaPath = (path?: string | null) => {
   // This function is for making some changes on image path before render...
   return path || '';
 }
@@ -166,7 +172,7 @@ export const trimForm = <Type extends { [key: string]: any }>(value: Type) => {
   const result: Partial<Type> = value;
 
   for (const key in value) {
-    if (value.hasOwnProperty(key) && typeof value[key] === 'string') 
+    if (value.hasOwnProperty(key) && typeof value[key] === 'string')
       result[key] = value[key].trim();
   }
 

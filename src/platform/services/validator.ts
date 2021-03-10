@@ -49,7 +49,9 @@ export const isValidNonCityPhone = (value?: string | null): boolean => {
   const beeline = '91|99|96|43|33';
   const ucom = '55|95|41|44|45';
   const mts = '93|94|77|49|98';
-  const regex = new RegExp(`^(374)((?:${mts}|${beeline}|${ucom})([0-9]{6}))$`);
+  const KT = '97';
+
+  const regex = new RegExp(`^(374)((?:${mts}|${beeline}|${ucom}|${KT})([0-9]{6}))$`);
   return regex.test(value);
 };
 
