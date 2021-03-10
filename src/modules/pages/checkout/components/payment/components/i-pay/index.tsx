@@ -31,7 +31,7 @@ const IPay = React.memo(() => {
       if (!!result.data.length) {
         setCard(result.data[0].id);
         apply(result.data[0].id);
-      } 
+      }
     });
   }, []);
 
@@ -41,9 +41,9 @@ const IPay = React.memo(() => {
       {list && list.map((item, index) => <Radio<number> callback={(value: number) => choose(value)} value={item.id} isChecked={card === item.id} key={index}>
         {item.pan}
       </Radio>)}
-      <Radio<number | null> callback={() => choose()} value={card || null} isChecked={card == null}>
+      {/* <Radio<number | null> callback={() => choose()} value={card || null} isChecked={card == null}>
         {Settings.translations.pay_with_credit_card}
-      </Radio>
+      </Radio> */}
       <a className="P-ipay-button G-mt-20" onClick={createCard}>{Settings.translations.add_credit_card}</a>
     </div>
   </>
