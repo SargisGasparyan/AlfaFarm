@@ -5,8 +5,6 @@
   margin          : 15px;
   display         : block;
   overflow        : hidden;
-  min-width       : 280px;
-  max-width       : 350px;
   box-shadow      : $default-block-shadow;
   background      : white;
   border-radius   : 10px;
@@ -19,6 +17,8 @@
 
   > .P-content {
     padding : 10px 30px 30px;
+    height: 180px;
+    text-align: center;
 
     > h3 {
       line-height   : 24px;

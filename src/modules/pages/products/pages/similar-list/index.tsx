@@ -1,87 +1,127 @@
-import * as React from 'react';
+// import * as React from 'react';
 
-import HelperComponent from 'platform/classes/helper-component';
-import { Shared } from 'modules';
-import ROUTES from 'platform/constants/routes';
-import { byRoute } from 'platform/decorators/routes';
-import { IProductListResponseModel } from 'platform/api/product/models/response';
-import { infinityScrollPageLimit } from 'platform/constants';
-import { scrolledToBottom } from 'platform/services/helper';
-import ProductController from 'platform/api/product';
-import PageLoader from 'components/page-loader';
-import DispatcherChannels from 'platform/constants/dispatcher-channels';
-import Connection from 'platform/services/connection';
-import { RouteComponentProps } from 'react-router-dom';
+// import HelperComponent from 'platform/classes/helper-component';
+// import { Shared } from 'modules';
+// import ROUTES from 'platform/constants/routes';
+// import { byRoute } from 'platform/decorators/routes';
+// import { IProductListResponseModel } from 'platform/api/product/models/response';
+// import { infinityScrollPageLimit } from 'platform/constants';
+// import { scrolledToBottom } from 'platform/services/helper';
+// import ProductController from 'platform/api/product';
+// import PageLoader from 'components/page-loader';
+// import Slider from "react-slick";
+// import { RouteComponentProps } from 'react-router-dom';
 
-import './style.scss';
-import Settings from 'platform/services/settings';
+// import './style.scss';
+// import Settings from 'platform/services/settings';
 
-interface IState {
-  loading: boolean;
-  data?: IProductListResponseModel[];
-};
+// interface IState {
+//   loading: boolean;
+//   data?: IProductListResponseModel[];
+// };
 
-interface IRouteParams { id: string; }
+// interface IRouteParams { id: string; }
 
-@byRoute([ROUTES.PRODUCTS.SIMILAR])
-class SimilarList extends HelperComponent<RouteComponentProps<IRouteParams>, IState> {
+// @byRoute([ROUTES.PRODUCTS.SIMILAR])
+// class SimilarList extends HelperComponent<RouteComponentProps<IRouteParams>, IState> {
 
-  public state: IState = {
-    loading: false,
-  };
+//   public state: IState = {
+//     loading: false,
+//   };
 
-  private pageNo = 1;
-  private lastPage = false;
+//   public settings = {
+//     dots: false,
+//     infinite: true,
+//     speed: 300,
+//     slidesToShow: 4,
+//     slidesToScroll: 1,
+//     responsive: [
+//       {
+//         breakpoint: 1200,
+//         settings: {
+//           slidesToShow: 3,
+//           slidesToScroll: 1,
+//         }
+//       },
+//       {
+//         breakpoint: 766,
+//         settings: {
+//           slidesToShow: 2,
+//           slidesToScroll: 1
+//         }
+//       },
+//       {
+//         breakpoint: 576,
+//         settings: {
+//           slidesToShow: 1,
+//           slidesToScroll: 1
+//         }
+//       }
 
-  private goBack = () => window.routerHistory.goBack();
+//     ]
+//   }
 
-  public componentDidMount() {
-    this.fetchData();
-    window.addEventListener('scroll', this.scroll);
-  }
+//   private pageNo = 1;
+//   private lastPage = false;
 
-  public componentWillUnmount() {
-    super.componentWillUnmount();
-    window.removeEventListener('scroll', this.scroll);
-  }
+//   private goBack = () => window.routerHistory.goBack();
 
-  private fetchData = (overwrite?: boolean) => this.safeSetState({ loading: true }, async () => {
-    if (!this.lastPage) {
-      const { id } = this.props.match.params;
-      const body = {
-        pageNumber: this.pageNo,
-        pageSize: infinityScrollPageLimit,
-      };
+//   public componentDidMount() {
+//     this.fetchData();
+//     window.addEventListener('scroll', this.scroll);
+//   }
 
-      const result = await ProductController.GetRelated(+id, body);
-      const data = this.state.data || [];
+//   public componentWillUnmount() {
+//     super.componentWillUnmount();
+//     window.removeEventListener('scroll', this.scroll);
+//   }
 
-      this.safeSetState({ data: overwrite ? result.data.list : [...data, ...result.data.list], loading: false });
-      this.lastPage = result.data.pageCount === this.pageNo;
-    } else this.safeSetState({ loading: false });
-  });
+//   private fetchData = (overwrite?: boolean) => this.safeSetState({ loading: true }, async () => {
+//     if (!this.lastPage) {
+//       const { id } = this.props.match.params;
+//       const body = {
+//         pageNumber: this.pageNo,
+//         pageSize: infinityScrollPageLimit,
+//       };
 
-  private scroll = () => {
-    const { loading } = this.state;
+//       const result = await ProductController.GetRelated(+id, body);
+//       const data = this.state.data || [];
 
-    if (!this.lastPage && scrolledToBottom() && !loading) {
-      this.pageNo += 1;
-      this.fetchData();
-    }
-  }
+//       this.safeSetState({ data: overwrite ? result.data.list : [...data, ...result.data.list], loading: false });
+//       this.lastPage = result.data.pageCount === this.pageNo;
+//     } else this.safeSetState({ loading: false });
+//   });
 
-  public render() {
-    const { data } = this.state;
+//   private scroll = () => {
+//     const { loading } = this.state;
 
-    return data ? (
-      <section className="G-page P-products-similar-list-page">
-        <h2 className="G-page-title">{Settings.translations.similar_products}</h2>
-        <div className="P-list-wrapper">
-          {data.map(item => <Shared.Products.ListItem key={item.id} data={item} />)}
-        </div>
-      </section>
-    ) : <PageLoader />;
-  }
-};
+//     if (!this.lastPage && scrolledToBottom() && !loading) {
+//       this.pageNo += 1;
+//       this.fetchData();
+//     }
+//   }
 
-export default SimilarList;
+//   public render() {
+//     const { data } = this.state;
+
+//     return data ? (
+//       <section className="G-page P-products-similar-list-page">
+//         <h2 className="G-page-title">{Settings.translations.similar_products}</h2>
+//         <div className="P-list-wrapper">
+//           <Slider
+//             {...this.settings}
+//             arrows={true}
+//             swipe={false}
+//           >
+//             {data.map(item => <div key={item.id}>
+//               <Shared.Products.ListItem data={item} />
+//             </div>)}
+//           </Slider>
+//           {/* {data.map(item => <Shared.Products.ListItem key={item.id} data={item} />)} */}
+//         </div>
+//       </section>
+//     ) : <PageLoader />;
+//   }
+// };
+
+// export default SimilarList;

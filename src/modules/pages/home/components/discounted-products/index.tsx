@@ -9,8 +9,6 @@ import { IProductListResponseModel } from 'platform/api/product/models/response'
 
 import './style.scss';
 import ProductController from 'platform/api/product';
-import MultiCarousel from "../../../../../components/carousel";
-import ShadowText from "../../../../../components/shadow-text";
 import Slider from "react-slick";
 import { ProductSortEnum } from 'platform/api/product/constants/enums';
 
@@ -29,8 +27,8 @@ class DiscountedProducts extends HelperComponent<{}, IState> {
   }
 
   private fetchData = async () => {
-    const result = await ProductController.GetList({pageNumber: 1, pageSize: 10, hasDiscount: true, sortBy: ProductSortEnum.DiscountHighToLow });
-    this.safeSetState({data: result && result.data && result.data.list || []});
+    const result = await ProductController.GetList({ pageNumber: 1, pageSize: 10, hasDiscount: true, sortBy: ProductSortEnum.DiscountHighToLow });
+    this.safeSetState({ data: result && result.data && result.data.list || [] });
   }
 
   public settings = {
@@ -66,7 +64,7 @@ class DiscountedProducts extends HelperComponent<{}, IState> {
   }
 
   public render() {
-    const {data} = this.state;
+    const { data } = this.state;
 
     return data.length ? (
       <section className="G-page P-home-discounted-products">
@@ -78,7 +76,7 @@ class DiscountedProducts extends HelperComponent<{}, IState> {
             swipe={false}
           >
             {data.map(item => <div key={item.id}>
-              <ListItem data={item}/>
+              <ListItem data={item} />
             </div>)}
           </Slider>
         </div>
