@@ -1038,7 +1038,7 @@ export default {
   delete_product_from_basket: 'Вы уверены, что хотите удалить этот продукт?',
   delete_basket: 'Удалить корзину',
   delete_all_baskets: 'Вы уверены, что хотите удалить всю корзину?',
-  my_registrations: "Мои регистрации",
+  my_registrations: "Записи",
   medical_history: "История болезни",
   special_products: "Специальные продукты",
   special_products_replace_fail: (date: string) => `Заменить товар можно только после ${date}`,

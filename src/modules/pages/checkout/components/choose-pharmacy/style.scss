@@ -59,6 +59,14 @@
           z-index   : 1;
           position  : absolute;
           max-width : calc(100vw - 100px);
+
+          > input {
+            padding: 15px 40px 15px 25px;
+          }
+  
+          .P-remove-text {
+            margin-left: 370px;
+          }
         }
 
         > .P-google-maps {

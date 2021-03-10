@@ -1031,7 +1031,7 @@ export default {
   my_orders: "My orders",
   my_requests: "My requests",
   my_companies: "My companies",
-  my_registrations: "My registrations",
+  my_registrations: "Appointements",
   medical_history: "Medical history",
   special_products: "Special products",
   special_products_replace_fail: (date: string) => `You can replace the product only after ${date}`,
