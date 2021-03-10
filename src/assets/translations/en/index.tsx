@@ -988,6 +988,7 @@ export default {
   next: "Next",
   order: "Order",
   fill_your_information: "Fill your information",
+  order_checkout: "Check out",
   add: "Add",
   add_credit_card: "+Add a new credit card",
   what_do_you_need_today: "What do you need today?",

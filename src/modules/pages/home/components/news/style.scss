@@ -21,10 +21,29 @@
   }
 
   > .P-list-wrapper {
-    margin          : -15px;
-    display         : flex;
-    flex-wrap       : wrap;
-    justify-content : center;
+    width           : 95%;
+    margin          : 0 auto;
+
+    .slick-prev, .slick-next {
+      z-index : 1;
+  
+      &:before {
+        color   : $text-gray;
+        z-index : 5;
+      }
+  
+      &.slick-disabled { display : none; }
+    }
+    .slick-prev{
+      left: -10px;
+    }
+    .slick-next{
+      right: -10px;
+    }
+  
+    .slick-slide {
+      padding: 15px;
+    }
   }
 }
 .P-home-news {
