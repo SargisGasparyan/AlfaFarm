@@ -54,7 +54,7 @@ export const getTranslationLabel = (value: string) => {
 }
 
 export const formatPrice = (price: number, includeSymbol = true) => {
-  const formated = price.toLocaleString();
+  const formated = Math.round(price).toLocaleString();
   return includeSymbol ? <>{formated} &#1423;</> : formated;
 };
 
