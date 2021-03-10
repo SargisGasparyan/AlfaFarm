@@ -986,6 +986,7 @@ export default {
   next: "Следующий",
   order: "Заказ",
   fill_your_information: "Заполните вашу информацию",
+  order_checkout: "Оформления заказа",
   add: "Добавить",
   add_credit_card: "+Добавить новую карту",
   what_do_you_need_today: "Что Вам необходимо сегодня?",

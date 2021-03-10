@@ -1022,6 +1022,7 @@ export default {
   next: "Հաջորդ",
   order: "Պատվեր",
   fill_your_information: "Լրացրեք Ձեր տվյալները",
+  order_checkout: "Պատվերի ձևակերպում",
   add: "Ավելացնել",
   add_credit_card: "+Ավելացրեք նոր քարտ",
   what_do_you_need_today: "Ի՞նչ է Ձեզ անհրաժեշտ այսօր",

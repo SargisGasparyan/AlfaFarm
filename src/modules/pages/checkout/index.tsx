@@ -336,7 +336,7 @@ class Checkout extends HelperComponent<{}, IState> {
 
     return (
       <section className="G-page P-checkout-page">
-        <h1 className="G-page-title">{!isPayment ? Settings.translations.fill_your_information : Settings.translations.payment_method}</h1>
+        <h1 className="G-page-title">{!isPayment ? Settings.translations.order_checkout : Settings.translations.payment_method}</h1>
         {!isPayment ? <form className="G-main-form P-checkout-form">
           <div className="P-main-info G-half-width">
             <div className="G-main-form-field">
@@ -508,8 +508,8 @@ class Checkout extends HelperComponent<{}, IState> {
               <h3 className="G-mt-auto G-flex G-flex-justify-between">{Settings.translations.price} <span>{formatPrice(resultInfo.totalDiscountedPrice)}</span></h3>
               <h3 className="G-mt-10 G-flex G-flex-justify-between">{Settings.translations.bonus} <span>{resultInfo.receivedBonus}</span></h3>
               {!!form.usedBonus && <h3 className="G-mt-10 G-flex G-flex-justify-between">{Settings.translations.used_bonus} <span>{form.usedBonus}</span></h3>}
-              <h3 className="G-mt-10 G-flex G-flex-justify-between">{Settings.translations.delivery_fee} <span>{formatPrice(resultInfo.deliveryFee)}</span></h3>
-              <h2 className="G-mt-10 G-mb-20 G-flex G-flex-justify-between">{Settings.translations.total} <span className="G-clr-orange">{formatPrice(resultInfo.totalPrice)}</span></h2>
+              <h3 className="G-mt-10 G-flex G-flex-justify-between">{Settings.translations.delivery} <span>{formatPrice(resultInfo.deliveryFee)}</span></h3>
+              <h2 className="G-mt-10 G-mb-20 G-flex G-flex-justify-between G-clr-orange">{Settings.translations.total} <span>{formatPrice(resultInfo.totalPrice)}</span></h2>
             </>}
           </div>
 
@@ -518,7 +518,7 @@ class Checkout extends HelperComponent<{}, IState> {
               className="G-main-button"
               loading={submitLoading}
               onClick={this.submit}
-            >{Settings.translations.confirm}</LoaderContent>
+            >{Settings.translations.order}</LoaderContent>
 
             {!Settings.guest && <LoaderContent
               className="G-main-button"
