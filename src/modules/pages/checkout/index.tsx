@@ -108,7 +108,8 @@ class Checkout extends HelperComponent<{}, IState> {
   private getTotalPrice = () => {
     const query = new URLSearchParams(window.location.search);
     const price = query.get('total');
-    this.safeSetState({ idramAmount: price });
+
+    this.safeSetState({ idramAmount: `${price ? Math.round(+price) : price}` });
   }
 
   private getBonusDetails = async () => {
@@ -129,7 +130,7 @@ class Checkout extends HelperComponent<{}, IState> {
 
     result.data && this.safeSetState({
       resultInfo: result.data,
-      initialTotalDiscountedPrice: initialTotalDiscountedPrice || result.data.totalDiscountedPrice,
+      initialTotalDiscountedPrice: Math.round(initialTotalDiscountedPrice || result.data.totalDiscountedPrice),
     });
   }
 
