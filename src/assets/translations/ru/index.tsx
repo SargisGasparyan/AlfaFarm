@@ -1259,7 +1259,7 @@ export default {
   products: "Товары",
   product: "Товар",
   see_more: "Показать больше",
-  pickup: "Подобрать",
+  pickup: "Забрать из аптеки",
   sale: "Распродажа",
   sort_by: "Сортировать по",
   show_all: "Показать все",

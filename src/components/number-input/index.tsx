@@ -24,20 +24,28 @@ class NumberInput extends HelperComponent<IProps, {}> {
   private onChange = (e: React.SyntheticEvent<HTMLInputElement>) => {
     if (e.currentTarget.validity.valid) {
       const { onChange, max } = this.props;
-      e.currentTarget.value = max && +e.currentTarget.value > max ? max.toString() : e.currentTarget.value;
-      onChange && onChange(e);
+      if (e.currentTarget.value.match(/^[0-9]+$/)) {
+        e.currentTarget.value = max && +e.currentTarget.value > max ? max.toString() : e.currentTarget.value;
+        onChange && onChange(e);
+      } else {
+        e.currentTarget.value = '';
+        onChange && onChange(e);
+      }
     }
   }
 
 
   private get pattern() {
     const { int } = this.props;
-    if (int) return '([0-9]*)';
-    else return '((.*?)\s*(\d+(?:[/-]\d+)?)?$)';
+    if (int) {
+      return '([0-9]*)';
+    } else {
+      return '((.*?)\s*(\d+(?:[/-]\d+)?)?$)';
+    }
   }
 
   public render() {
-    const props = {...this.props};
+    const props = { ...this.props };
     props.value = props.value ? props.value.toString() : '';
     delete props.onChange;
     delete props.pattern;
