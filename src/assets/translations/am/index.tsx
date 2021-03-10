@@ -1288,7 +1288,7 @@ export default {
   popular_categories: "Լավագույն բաժիններ",
   cash: "Կանխիկ",
   i_pay: "IPay",
-  post_terminal: "POS-terminal",
+  post_terminal: "POS-տերմինալ",
   idram: "Idram",
   talcell: "Telcell",
   card: "Քարտ",
