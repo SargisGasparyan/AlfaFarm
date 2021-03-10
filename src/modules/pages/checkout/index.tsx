@@ -440,12 +440,13 @@ class Checkout extends HelperComponent<{}, IState> {
                   />
                 </div>
                 <div className="G-main-form-field G-main-form-field-closer">
-                  <input
-                    name="addressFloor"
+                  <NumberInput
+                    max={50}
                     value={form.addressFloor || ''}
                     className="G-main-input"
                     placeholder={Settings.translations.floor}
                     onChange={this.changeField}
+                    name="addressFloor"
                   />
                 </div>
               </>
