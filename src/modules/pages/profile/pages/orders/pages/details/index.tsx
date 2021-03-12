@@ -69,7 +69,7 @@ class Details extends HelperComponent<RouteComponentProps<IRouteParams>, IState>
   private cancel = async () => {
     const { data } = this.state;
     const alertify = await import('alertifyjs');
-    
+
     if (data) {
       const res = await OrderController.Cancel(data?.id);
       if (res && res.data) {
@@ -86,93 +86,97 @@ class Details extends HelperComponent<RouteComponentProps<IRouteParams>, IState>
 
     return (
       <Layout>
-        {data ? <div className="G-flex G-flex-wrap P-profile-order-details">
+        {data ? <div className="P-profile-order-details">
           {window.routerHistory.length > 2 && <i className="G-back-icon icon-Group-5529" onClick={this.goBack} />}
-          <div className="P-main-info-block">
-            <h2 className="G-mb-40 G-clr-orange">{Settings.translations.order} <span className="G-ml-10">#{data.id}</span></h2>
+          <div className="P-info-wraper">
+            <div className="P-main-info-block">
+              <h2 className="G-mb-40 G-clr-orange">{Settings.translations.order} <span className="G-ml-10">#{data.id}</span></h2>
 
-            <h3 className="G-flex G-mb-30 G-flex-justify-between">
-              {Settings.translations.created_date}
-              <span>{formatDate(data.createdDate)}</span>
-            </h3>
+              <p className="G-flex G-mb-30 G-flex-justify-between G-fs-20">
+                {Settings.translations.created_date}
+                <span>{formatDate(data.createdDate)}</span>
+              </p>
 
-            <h3 className="G-flex G-mb-30 G-flex-justify-between">
-              {Settings.translations.type}
-              <span>{Settings.translations[this.deliveryTypeViewEnum[data.deliveryType]]}</span>
-            </h3>
+              <p className="G-flex G-mb-30 G-flex-justify-between G-fs-20">
+                {Settings.translations.type}
+                <span>{Settings.translations[this.deliveryTypeViewEnum[data.deliveryType]]}</span>
+              </p>
 
-            {data.deliveryType === OrderDeliveryTypeEnum.Delivery && <h3 className="G-flex G-mb-30 G-flex-justify-between">
-              {Settings.translations.delivery_date}
-              <span>{data.deliveryDate ? formatDate(data.deliveryDate) : Settings.translations.as_soon_as_possible}</span>
-            </h3>}
+              {data.deliveryType === OrderDeliveryTypeEnum.Delivery && <p className="G-flex G-mb-30 G-flex-justify-between G-fs-20">
+                {Settings.translations.delivery_date}
+                <span>{data.deliveryDate ? formatDate(data.deliveryDate) : Settings.translations.as_soon_as_possible}</span>
+              </p>}
 
-            <h3 className="G-flex G-mb-30 G-flex-justify-between">
-              {Settings.translations.price}
-              <span>{formatPrice(data.totalPrice)}</span>
-            </h3>
+              <p className="G-flex G-mb-30 G-flex-justify-between G-fs-20">
+                {Settings.translations.price}
+                <span>{formatPrice(data.totalPrice)}</span>
+              </p>
 
-            {!!data.totalBonus && <h3 className="G-flex G-mb-30 G-flex-justify-between">
-              {Settings.translations.gained_bonus}
-              <span>{data.totalBonus}</span>
-            </h3>}
+              {!!data.totalBonus && <p className="G-flex G-mb-30 G-flex-justify-between G-fs-20">
+                {Settings.translations.gained_bonus}
+                <span>{data.totalBonus}</span>
+              </p>}
 
-            {!!data.usedBonus && <h3 className="G-flex G-mb-30 G-flex-justify-between">
-              {Settings.translations.used_bonus}
-              <span>{data.usedBonus}</span>
-            </h3>}
+              {!!data.usedBonus && <p className="G-flex G-mb-30 G-flex-justify-between G-fs-20">
+                {Settings.translations.used_bonus}
+                <span>{data.usedBonus}</span>
+              </p>}
 
-            <h3 className="G-flex G-mb-30 G-flex-justify-between">
-              {Settings.translations.status}
-              <span className={statusColorClassNames[data.status]}>{Settings.translations[this.statusViewEnum[data.status]]}</span>
-            </h3>
+              <p className="G-flex G-mb-30 G-flex-justify-between G-fs-20">
+                {Settings.translations.status}
+                <span className={statusColorClassNames[data.status]}>{Settings.translations[this.statusViewEnum[data.status]]}</span>
+              </p>
 
-            <h3 className="G-flex G-mb-30 G-flex-justify-between">
-              {Settings.translations.payment_method}
-              <span>{Settings.translations[this.paymentViewEnum[data.paymentType]]}</span>
-            </h3>
-            <h3 className="G-flex G-mb-30 G-flex-justify-between">
-              {Settings.translations.comment}
-              <span>{data.comment || '-'}</span>
-            </h3>
+              <p className="G-flex G-mb-30 G-flex-justify-between G-fs-20">
+                {Settings.translations.payment_method}
+                <span>{Settings.translations[this.paymentViewEnum[data.paymentType]]}</span>
+              </p>
+              <p className="G-flex G-mb-30 G-flex-justify-between G-fs-20">
+                {Settings.translations.comment}
+                <span>{data.comment || '-'}</span>
+              </p>
+            </div>
+
+            {!enviroment.WHOLESALE && <div className="P-address-block">
+              <h2 className="G-mb-40 G-clr-orange">{Settings.translations.address}</h2>
+
+              <p className="G-flex G-mb-30 G-flex-justify-between G-fs-20">
+                {Settings.translations.full_name}
+                <span>{data.fullName}</span>
+              </p>
+
+              <p className="G-flex G-mb-30 G-flex-justify-between G-fs-20">
+                {Settings.translations.phone_number}
+                <span>{data.phone}</span>
+              </p>
+
+              <p className="G-flex G-mb-30 G-flex-justify-between G-fs-20">
+                {Settings.translations.address}
+                <span>{data.address}</span>
+              </p>
+
+              {data.building && <p className="G-flex G-mb-30 G-flex-justify-between G-fs-20">
+                {Settings.translations.building}
+                <span>{data.building}</span>
+              </p>}
+
+              {data.entrance && <p className="G-flex G-mb-30 G-flex-justify-between G-fs-20">
+                {Settings.translations.entrance}
+                <span>{data.entrance}</span>
+              </p>}
+
+              {data.appartment && <p className="G-flex G-mb-30 G-flex-justify-between G-fs-20">
+                {Settings.translations.apartment}
+                <span>{data.appartment}</span>
+              </p>}
+
+              {data.floor && <p className="G-flex G-mb-30 G-flex-justify-between G-fs-20">
+                {Settings.translations.floor}
+                <span>{data.floor}</span>
+              </p>}
+            </div>}
+
           </div>
-          {!enviroment.WHOLESALE && <div className="P-address-block">
-            <h2 className="G-mb-40 G-clr-orange">{Settings.translations.address}</h2>
-
-            <h3 className="G-flex G-mb-30 G-flex-justify-between">
-              {Settings.translations.full_name}
-              <span>{data.fullName}</span>
-            </h3>
-
-            <h3 className="G-flex G-mb-30 G-flex-justify-between">
-              {Settings.translations.phone_number}
-              <span>{data.phone}</span>
-            </h3>
-
-            <h3 className="G-flex G-mb-30 G-flex-justify-between">
-              {Settings.translations.address}
-              <span>{data.address}</span>
-            </h3>
-
-            {data.building && <h3 className="G-flex G-mb-30 G-flex-justify-between">
-              {Settings.translations.building}
-              <span>{data.building}</span>
-            </h3>}
-
-            {data.entrance && <h3 className="G-flex G-mb-30 G-flex-justify-between">
-              {Settings.translations.entrance}
-              <span>{data.entrance}</span>
-            </h3>}
-            
-            {data.appartment && <h3 className="G-flex G-mb-30 G-flex-justify-between">
-              {Settings.translations.apartment}
-              <span>{data.appartment}</span>
-            </h3>}
-
-            {data.floor && <h3 className="G-flex G-mb-30 G-flex-justify-between">
-              {Settings.translations.floor}
-              <span>{data.floor}</span>
-            </h3>}
-          </div>}
 
           <Shared.Products.TableList list={data.baskets} />
 

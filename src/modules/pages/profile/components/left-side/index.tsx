@@ -15,8 +15,8 @@ import CameraImage from 'assets/images/camera.png';
 import './style.scss';
 import DispatcherChannels from 'platform/constants/dispatcher-channels';
 import Broadcast from 'platform/services/broadcast';
-import {IPagingResponse} from "../../../../../platform/constants/interfaces";
-import {IPrescriptionListResponseModel} from "../../../../../platform/api/prescription/models/response";
+// import {IPagingResponse} from "../../../../../platform/constants/interfaces";
+// import {IPrescriptionListResponseModel} from "../../../../../platform/api/prescription/models/response";
 
 interface IState {
   photoPath?: string;

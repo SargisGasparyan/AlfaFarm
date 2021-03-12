@@ -13,14 +13,24 @@
     margin-left : 10px;
   }
 }
+.P-back-icon-mini {
+  position: absolute;
+  left: 0;
+  margin-left: 15px;
+  width: 10px !important;
+}
 
 .P-products-filter {
-  min-width     : 340px;
-  max-width     : 340px;
+  min-width     : 250px;
+  max-width     : 250px;
   margin-right  : 40px;
   border-right  : 2px solid $light-gray;
   position      : sticky;
   top           : 150px;
+
+  @media (max-width: $tablet-screen) {
+    position: unset;
+  }
 
   .G-back-icon {
     position: absolute;

@@ -5,12 +5,17 @@
   padding     : 0;
   display     : flex;
   background  : $very-light-gray;
-  align-items : flex-start;
+  justify-content: space-between;
 
   > .P-content {
-    width      : calc(100% - 300px);
+    width: 75vw;
+    max-width: calc(100vw - 250px);
     padding    : 20px;
     min-height : calc(100vh - #{$header-size} - 160px); // Full Height - Header size - Block top, bottom paddings
+    @media (max-width: $tablet-screen) {
+      width: 100%;
+      max-width: none;
+    }
 
     .P-form-block {
       padding       : 40px;

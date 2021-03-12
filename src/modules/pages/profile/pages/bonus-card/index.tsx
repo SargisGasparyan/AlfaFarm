@@ -60,7 +60,7 @@ class BonusCard extends HelperComponent<IState, {}> {
     this.safeSetState({ data: result.data }, () => {
       JsBarcode('#barcode', result.data.bonusCardDetails.cardNumber, { format: 'code128', displayValue: false });
     });
-    return result.data.bonusHistoryGroupedByDate;
+    return result.data && result.data.bonusHistoryGroupedByDate;
   }
 
   public render() {

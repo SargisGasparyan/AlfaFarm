@@ -311,6 +311,15 @@ class Header extends HelperComponent<{}, IState> {
       </Link>
 
       <div className="P-mobile-header-icons">
+        {Storage.profile ? <Link to={ROUTES.PROFILE.MAIN} className="P-profile P-link P-icon G-normal-link">
+          <div
+            style={{ background: `url('${Storage.profile.photoPath ? getMediaPath(Storage.profile.photoPath) : PersonImage}') center/cover` }}
+            className="P-image"
+          />
+        </Link> : <span
+          onClick={this.toggleAuth}
+          className="P-link P-login"
+        >{Settings.translations.log_in}</span>}
         {Storage.profile && <a onClick={this.toggleNotifications} className="P-link P-icon G-normal-link P-notification">
           <i className="icon-Group-5515" />
           {!!notificationIconNumber && <span>{notificationIconNumber > 99 ? '99+' : notificationIconNumber}</span>}
