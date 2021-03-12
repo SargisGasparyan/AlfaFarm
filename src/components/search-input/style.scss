@@ -6,7 +6,7 @@
   position  : relative;
   max-width : 100%;
 
-  &.P-search-input-submit > input { padding-right: 110px; }
+  &.P-search-input-submit > input { padding-right: 5.7vw; }
 
   > button {
     top          : 50%;
@@ -14,7 +14,7 @@
     color        : $orange;
     border       : none;
     height       : calc(100% - 14px);
-    padding      : 0 30px 0 20px;
+    padding      : 0 1.3vw 0 1vw;
     position     : absolute;
     transform    : translateY(-50%);
     font-size    : 20px;
@@ -39,7 +39,8 @@
     align-content: center;
     align-self: center;
     display: flex;
-    margin-left: 300px;
+    left: 72%;
+    //margin-left: 300px;
     font-size: x-small;
   }
 }
