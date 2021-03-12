@@ -19,7 +19,7 @@
     .P-address-block {
       width: 100%;
       padding: 20px 40px;
-      min-width: $extra-small-mobile-screen;
+      min-width: calc($extra-small-mobile-screen - 20px);
       background: white;
       box-shadow: $default-block-shadow;
       margin-bottom: 40px;
@@ -27,8 +27,10 @@
       @include main-top-border;
 
       @media (max-width: $small-mobile-screen) {
+        padding: 20px 20px;
         * {
           font-size: 13px;
+          padding: 0;
         }
       }
 

@@ -109,6 +109,7 @@ class MobileMenu extends HelperComponent<IProps, IState> {
                 to={item.path}
                 key={item.path}
                 className="P-link"
+                onClick={onClose}
               >
                 {item.name}
               </NavLink>)}
