@@ -59,7 +59,7 @@ class Filter extends HelperComponent<IProps, IState> {
   private cancel = () => {
     const query = new URLSearchParams(window.location.search);
     const { body } = this.state;
-    
+
     body.brandIds = [];
     body.activeIngredientIds = [];
     body.producerIds = [];
@@ -76,8 +76,8 @@ class Filter extends HelperComponent<IProps, IState> {
 
     window.routerHistory.replace(`${ROUTES.PRODUCTS.MAIN}?${query.toString()}`);
     window.scrollTo(0, 0);
-    
-    this.bodyChange({...body});
+
+    this.bodyChange({ ...body });
     Broadcast.dispatch(DispatcherChannels.ProductFilterClear);
   }
 
@@ -122,11 +122,12 @@ class Filter extends HelperComponent<IProps, IState> {
   }
 
   public render() {
-    const { mobileOpen } = this.state;
+    const { body, mobileOpen } = this.state;
 
     return (
       <Screen.Tablet>
         {(match: boolean) => match ? <>
+          {!!body.categoryIds?.length && <i className="P-back-icon-mini G-back-icon icon-Group-5529" onClick={this.reset} />}
           <h2 onClick={this.toggleMobile} className="P-products-filter-toggle">{Settings.translations.filter} <i className="icon-Group-5504" /></h2>
           {mobileOpen && <this.Content />}
         </> : <this.Content />}
@@ -143,8 +144,8 @@ class Filter extends HelperComponent<IProps, IState> {
           key={item.id}
           onClick={() => this.chooseMainCategory(item.id)}
           className="P-main-category"
-        >{item.name} <i className="icon-Group-5513"/></h2>) : <>
-          <i className="G-back-icon icon-Group-5529" onClick={this.reset}/>
+        >{item.name} <i className="icon-Group-5513" /></h2>) : <>
+          <i className="G-back-icon icon-Group-5529" onClick={this.reset} />
           <PriceRange body={body} onChange={this.bodyChange} />
 
           <label className="P-discount-label">
@@ -161,7 +162,7 @@ class Filter extends HelperComponent<IProps, IState> {
           <div className="P-row-wrap">
             <ActiveIngredients body={body} onChange={this.bodyChange} />
           </div>
-          
+
           <button
             className="G-main-ghost-button P-cancel-button"
             onClick={this.cancel}

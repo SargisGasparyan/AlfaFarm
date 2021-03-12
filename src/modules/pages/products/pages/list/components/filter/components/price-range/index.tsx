@@ -29,8 +29,8 @@ const PriceRange = ({ body, onChange }: IProps) => {
 
     categoryId !== prevCategoryIdRef.current && ProductController.GetPriceRange(categoryId ? { categoryIds: body.categoryIds } : {})
       .then(result => {
-        setPriceRange(result.data.max ? result.data : undefined);
-        setValue([body.minPrice || result.data.min, body.maxPrice || result.data.max]);
+        setPriceRange(result.data && result.data.max ? result.data : undefined);
+        setValue([body.minPrice || (result.data && result.data.min), body.maxPrice || (result.data && result.data.max)]);
       });
 
     prevCategoryIdRef.current = categoryId;
@@ -39,7 +39,7 @@ const PriceRange = ({ body, onChange }: IProps) => {
   useSubscriber(DispatcherChannels.ProductFilterClear, () => priceRange && setValue([priceRange.min, priceRange.max]));
 
   const changePrice = ([minPrice, maxPrice]: [number, number]) => {
-    const bodyCopy = {...body};
+    const bodyCopy = { ...body };
 
     const query = new URLSearchParams(window.location.search);
     query.set('minPrice', `${minPrice}`);
@@ -49,7 +49,7 @@ const PriceRange = ({ body, onChange }: IProps) => {
     bodyCopy.minPrice = minPrice;
     bodyCopy.maxPrice = maxPrice;
     setValue([bodyCopy.minPrice, bodyCopy.maxPrice]);
-    
+
     onChange(bodyCopy);
   }
 

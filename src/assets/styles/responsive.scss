@@ -5,7 +5,7 @@
 }
 
 @media (max-width: $medium-screen) {
-  $page-horizontal-offset : 40px;
+  $page-horizontal-offset : 20px;
 
   header { padding: 0 $page-horizontal-offset; }
   footer { padding: 10px $page-horizontal-offset; }

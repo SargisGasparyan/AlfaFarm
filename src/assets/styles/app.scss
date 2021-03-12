@@ -2,8 +2,6 @@
 
 .G-page-content {
   padding-top : $header-size;
-  width: 100%;
-  min-width   : 900px;
   @media (max-width : $small-screen) {
     padding-top : 70px;
   }
