@@ -24,6 +24,7 @@
     background: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
     overflow-y: scroll;
+    scrollbar-color: rgba(0, 0, 0, 0.01);
 
     @media (max-width: $tablet-screen) {
       width: 45vw;
@@ -62,16 +63,20 @@
 
       .P-search-input {
         .G-main-input {
-          padding: 8px 110px 8px 30px;
+          padding: 8px 65px 8px 30px;
         }
         button {
           height: calc(100% - 5px);
           font-size: 15px;
         }
+        .P-remove-text {
+          margin-right: 50px;
+        }
       }
       
 
       .P-link {
+        margin-top: 20px;
         &:hover, &.P-active {
           background : $main-color-light;
         }

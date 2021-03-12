@@ -17,6 +17,7 @@ import DispatcherChannels from 'platform/constants/dispatcher-channels';
 import { OrderStatusEnum, OrderDeliveryTypeEnum } from 'platform/api/order/constants/enums';
 import { Shared } from 'modules';
 import { statusColorClassNames } from '../../constants';
+import OrderListItem from '../components/list-item';
 
 import './style.scss';
 import ConfirmModal from 'components/confirm-modal';
@@ -83,6 +84,7 @@ class Details extends HelperComponent<RouteComponentProps<IRouteParams>, IState>
 
   public render() {
     const { data, cancelConfirmOpen } = this.state;
+    console.log(data && data.baskets);
 
     return (
       <Layout>
@@ -178,7 +180,8 @@ class Details extends HelperComponent<RouteComponentProps<IRouteParams>, IState>
 
           </div>
 
-          <Shared.Products.TableList list={data.baskets} />
+          {/* <Shared.Products.TableList list={data.baskets} /> */}
+          <OrderListItem data={data.baskets} />
 
           <div className="P-actions-block">
             {data.status === OrderStatusEnum.Pending && <button className="G-btn G-clr-green" onClick={this.toggleConfirm}>
