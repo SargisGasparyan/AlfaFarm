@@ -17,7 +17,7 @@ header {
   width      : 100%;
   height     : $header-size;
   z-index    : 100;
-  padding    : 0 $page-horizontal-offset;
+  padding    : 0 4.2vw; // $page-horizontal-offset;
   position   : fixed;
   background : white;
   box-shadow : $default-block-shadow;
@@ -29,14 +29,16 @@ header {
   > .P-logo {
     width         : 170px;
     min-width     : 100px;
-    margin-bottom : 10px;
+    margin-bottom : 0.52vw;
   }
 
   > .P-search-wrapper {
     position : relative;
+    width     : 21vw;
+    margin : 0 1.05vw 0 2.1vw;
 
     > .P-search-input {
-      margin : 0 20px 0 40px;
+
     }
   }
 
@@ -65,7 +67,7 @@ header {
     cursor          : pointer;
     height          : 100%;
     display         : flex;
-    padding         : 10px 15px;
+    padding         : 0.52vw 0.8vw;
     position        : relative;
     text-align      : center;
     align-items     : center;
@@ -83,8 +85,8 @@ header {
     &.P-login {
       color         : white;
       height        : auto;
-      margin        : 0 25px;
-      padding       : 10px 40px;
+      margin        : 0 1.3vw;
+      padding       : 0.52vw 2.1vw;
       background    : $main-color;
       border-radius : 20px;
     }
@@ -95,7 +97,7 @@ header {
       padding      : 0;
       position     : relative;
       font-size    : 24px;
-      margin-right : 25px;
+      margin-right : 1.3vw;
 
       &.P-notification > span {
         top   : -5px;
