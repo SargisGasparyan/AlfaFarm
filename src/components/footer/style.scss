@@ -30,7 +30,24 @@ footer {
         margin-bottom : 20px;
       }
 
-      > h3, a {
+      > div.P-mobile-drop {
+        pointer-events: none;
+
+        h3 {
+          display         : flex;
+          align-items     : center;
+          font-size       : 14px;
+          line-height     : 24px;
+          margin-bottom   : 12px;
+        }
+
+        .P-icons {
+          display: none;
+        }
+
+      }
+
+      a {
         display         : flex;
         align-items     : center;
         font-size       : 14px;
