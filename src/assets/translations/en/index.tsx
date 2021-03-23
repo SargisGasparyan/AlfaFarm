@@ -1270,7 +1270,7 @@ export default {
   invite: "Invite",
   use_the_link: "Use the link",
   done: "Done",
-  order_number: "Order number",
+  order_number: "Order ID",
   status: "Status",
   repeat: "Repeat",
   payment_method: "Payment type",

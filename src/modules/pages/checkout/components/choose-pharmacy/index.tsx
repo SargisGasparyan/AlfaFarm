@@ -70,7 +70,7 @@ class ChoosePharmacy extends HelperComponent<IProps, IState> {
     };
 
     const result = await PharmacyBranchController.GetList(body);
-    !result.aborted && this.safeSetState({ data: result.data.list });
+    result.data && !result.aborted && this.safeSetState({ data: result.data.list });
   }
 
   public render() {

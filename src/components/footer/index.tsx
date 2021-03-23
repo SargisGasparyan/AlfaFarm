@@ -95,7 +95,7 @@ function  Footer() {
 								<Link className={informationItems.join(' ')} to={ROUTES.FAQ}>{Settings.translations.faq}</Link>
 								<Link className={informationItems.join(' ')} to={ROUTES.CARD_INFO}>{Settings.translations.what_is_alfa_card}</Link>
 								<Link className={informationItems.join(' ')} to={ROUTES.TENDERS.MAIN}>{Settings.translations.tenders}</Link>
-								<a className={informationItems.join(' ')} href={Settings.wholesaleURL + ROUTES.SERVICES} target="blank">{Settings.translations.wholesale_sale}</a>
+								<a className={informationItems.join(' ')} href={Settings.wholesaleURL + ROUTES.HOME} target="blank">{Settings.translations.wholesale_sale}</a>
 								<Link className={informationItems.join(' ')} to={ROUTES.PRIVACY_POLICY}>{Settings.translations.privacy_policy}</Link>
 								<Link className={informationItems.join(' ')} to={ROUTES.TERMS_OF_USE}>{Settings.translations.terms_of_use}</Link>
 						</div>

@@ -1302,7 +1302,7 @@ export default {
   invite: "Հրավիրել",
   use_the_link: "Օգտագործեք հղումը",
   done: "Հաստատել",
-  order_number: "Պատվերի համար",
+  order_number: "Պատվերի ID",
   status: "Կարգավիճակ",
   repeat: "Կրկնել",
   payment_method: "Վճարման եղանակ",
