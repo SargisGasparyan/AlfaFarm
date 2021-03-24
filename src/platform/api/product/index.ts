@@ -38,6 +38,15 @@ class ProductController {
     return result;
   };
 
+  public static GetSpecialProducts = (): Promise<IResponse<IProductListResponseModel>> => {
+    const result = Connection.GET({
+      action: `specialOffers`,
+      controller: ProductController.controller,
+    });
+
+    return result;
+  };
+
   public static GetAvailablity = (id: number): Promise<IResponse<IProductAvailablityResponseModel>> => {
     const result = Connection.GET({
       action: `availablity/${id}`,
