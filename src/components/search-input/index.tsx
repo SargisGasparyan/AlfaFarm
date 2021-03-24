@@ -15,6 +15,7 @@ interface IState {
 
 interface IProps extends RouteComponentProps<any> {
   withSubmit?: boolean;
+  disableRemoveOnNavigate?: boolean;
   loading?: boolean;
   onClick?(e: React.SyntheticEvent<HTMLInputElement>): void;
   onFocus?(e: React.SyntheticEvent<HTMLInputElement>): void;
@@ -29,8 +30,10 @@ class SearchInput extends HelperPureComponent<IProps, IState> {
     search: '',
   };
   public componentDidUpdate = (prevProps: any) => {
-    if (prevProps.location.pathname !== this.props.location.pathname || prevProps.location.search !== this.props.location.search) {
-      this.removeText()
+    if (!prevProps.disableRemoveOnNavigate) {
+      if (prevProps.location.pathname !== this.props.location.pathname || prevProps.location.search !== this.props.location.search) {
+        this.removeText()
+      }
     }
   }
 
@@ -75,7 +78,7 @@ class SearchInput extends HelperPureComponent<IProps, IState> {
           <i className="icon-Group-5032" />
         </span>}
         
-        {withSubmit && <button onClick={this.submit}>
+        {withSubmit && <button type="button" onClick={this.submit}>
           <LoaderContent color="#F26D26" loading={loading} className="G-form-button"><i className="icon-Group-5502" /></LoaderContent>
         </button>}
       </form>

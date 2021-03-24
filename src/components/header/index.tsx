@@ -144,14 +144,19 @@ class Header extends HelperComponent<{}, IState> {
         const { searchLoader } = this.state;
 
         // If searchLoader has changed, don't show the result
-        if (data?.data?.products.length && searchLoader) this.safeSetState({
-          searchResult: data.data,
-          searchHistoryShown: false,
-          searchOpen: true
-        });
+        if (data?.data?.products.length && searchLoader){
+          
+          this.safeSetState({
+            searchResult: data.data,
+            searchHistoryShown: false,
+            searchOpen: true
+          });
+        }
         else this.closeSearch();
 
-        this.safeSetState({ searchLoader: false });
+        if (!data?.aborted) {
+          this.safeSetState({ searchLoader: false });
+        }
       });
     } else this.safeSetState({
       searchValue: '',
@@ -204,7 +209,7 @@ class Header extends HelperComponent<{}, IState> {
     const { searchValue } = this.state;
 
     if (searchValue) {
-      this.safeSetState({ searchResult: null, searchOpen: false, searchLoader: false });
+      this.safeSetState({ searchOpen: false, searchLoader: false });
       window.routerHistory.push(`${ROUTES.PRODUCTS.MAIN}?text=${searchValue}`);
       window.dispatchEvent(new Event(DispatcherChannels.ProductFilterChange));
     } else {
@@ -245,6 +250,7 @@ class Header extends HelperComponent<{}, IState> {
                   onChange={this.searchChange}
                   onSubmit={this.searchSubmit}
                   loading={searchLoader}
+                  disableRemoveOnNavigate={true}
                   withSubmit={true}
                 />
 
