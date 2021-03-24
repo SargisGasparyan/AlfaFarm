@@ -18,7 +18,7 @@ a {
 
   @media (max-width: $small-mobile-screen) {
     * {
-      font-size: 13px;
+      font-size: $small-fs;
     }
   }
 

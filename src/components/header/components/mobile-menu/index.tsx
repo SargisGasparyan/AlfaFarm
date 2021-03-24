@@ -113,10 +113,12 @@ class MobileMenu extends HelperComponent<IProps, IState> {
             <LanguageSwitcher/>
             {Storage.profile && <hr className="G-my-15"/>}
             {Storage.profile && <div className="P-menu-profile">
+              <NavLink {...this.navLinkProps} to={ROUTES.PROFILE.PRESCRIPTIONS.MAIN}
+                       onClick={onClose}>{Settings.translations.prescription}</NavLink>
               {this.options.map(item => <NavLink
                 to={item.path}
                 key={item.path}
-                className="P-link"
+                {...this.navLinkProps}
                 onClick={onClose}
               >
                 {item.name}

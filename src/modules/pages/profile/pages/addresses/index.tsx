@@ -7,6 +7,7 @@ import ROUTES from 'platform/constants/routes';
 import Layout from '../../components/layout';
 import Settings from 'platform/services/settings';
 import Table from 'components/table';
+import List from './components/list';
 import { IUserAddressListResponseModel } from 'platform/api/userAddress/models/response';
 import UserAddressController from 'platform/api/userAddress';
 import Modify from './pages/modify';
@@ -27,45 +28,7 @@ class Addresses extends HelperComponent<IState, {}> {
     data: null,
   };
 
-  private columnConfig = [
-    {
-      name: Settings.translations.name,
-      cell: (row: IUserAddressListResponseModel) => <>
-        {row.isDefault && <img className="P-done-icon" src={DoneImage} />}
-        {row.name}
-      </>,
-    },
-    {
-      name: Settings.translations.address,
-      cell: (row: IUserAddressListResponseModel) => row.addressText,
-    },
-    {
-      name: '',
-      cell: (row: IUserAddressListResponseModel) => <>
-        {row.isDefault && <span className="G-clr-main">{Settings.translations.default}</span>}
-        {!row.isDefault && <button
-          className="P-make-default"
-          onClick={() => this.makeDefault(row.id)}
-        >{Settings.translations.make_default}</button>}
-      </>,
-    },
-    {
-      name: '',
-      style: { minWidth: 150, maxWidth: 150 },
-      cell: (row: IUserAddressListResponseModel) => <>
-        <Link to={ROUTES.PROFILE.ADDRESSES.UPDATE.replace(':id', row.id)}>
-          <i
-            className="icon-Group-5545 G-back-icon G-clr-main G-mr-40 G-fs-26"
-          />
-        </Link>
 
-        <i
-          className="icon-Group-5032 G-clr-orange G-cursor-pointer G-fs-24"
-          onClick={() => this.deleteRow(row.id)}
-        />
-      </>,
-    },
-  ];
 
   public componentDidMount() { this.fetchData(); }
 
@@ -97,8 +60,9 @@ class Addresses extends HelperComponent<IState, {}> {
           >{Settings.translations.add_address}</Link>
         </div>
         {data ? (data.length ? <div className="G-flex P-profile-addresses">
-          <Table<IUserAddressListResponseModel>
-            columnConfig={this.columnConfig}
+          <List
+            onEditDefault={(id: number) => this.makeDefault(id)}
+            onRemove={(id: number) => this.deleteRow(id)}
             data={data}
           />
         </div> : <EmptyState text={Settings.translations.empty_address_list} />) : null}

@@ -29,7 +29,7 @@ class LeftSide extends HelperPureComponent<{}, {}> {
   private options = leftSideOptions();
 
   public state: IState = {
-    photoPath: Storage.profile.photoPath
+    photoPath: (Storage.profile && Storage.profile.photoPath) || PersonImage
   };
 
   private openUpload = () => {

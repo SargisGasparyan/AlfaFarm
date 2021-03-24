@@ -1,4 +1,4 @@
-@import 'assets/styles/variables.scss';
+@import 'src/assets/styles/variables.scss';
 @import "src/assets/styles/helper";
 
 .P-mobile-menu-wrapper {
@@ -45,7 +45,7 @@
       right: 0;
       margin-right: 10px;
 
-      >i {
+      > i {
         font-size: 20px;
       }
     }
@@ -65,20 +65,23 @@
         .G-main-input {
           padding: 8px 65px 8px 30px;
         }
+
         button {
           height: calc(100% - 5px);
           font-size: 15px;
         }
+
         .P-remove-text {
           margin-right: 50px;
         }
       }
-      
+
 
       .P-link {
         margin-top: 20px;
+
         &:hover, &.P-active {
-          background : $main-color-light;
+          background: $main-color-light;
         }
       }
 
@@ -88,14 +91,21 @@
 
       .P-header-language-switcher {
         width: 80px;
-        padding: 0 15px 10px;
+        margin-top: 20px;
 
-        >.P-select {
+        span {
+          text-overflow: unset;
+          overflow: unset;
+        }
+
+        > .P-select {
           height: 40px;
+          padding: 0.52vh 0.8vw;
 
-          >.P-select-header,
+          > .P-select-header,
           .P-select-body {
             font-size: 16px;
+            padding: 0 !important;
           }
         }
       }
