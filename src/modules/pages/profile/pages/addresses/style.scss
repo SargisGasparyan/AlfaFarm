@@ -1,91 +1,11 @@
 @import 'src/assets/styles/variables';
 
+
+.G-main-button {
+  padding: 10px;
+}
+
 .P-profile-addresses {
-  display        : flex;
-  overflow       : hidden;
-  background     : white;
-  box-shadow     : $default-block-shadow;
-  border-radius  : $big-radius;
-  flex-direction : column;
-
-  .P-data-table-header {
-    padding : 0 40px 0 60px;
-  }
-
-  .P-data-table-body > ul {
-
-    padding : 0 40px 0 20px;
-
-    > li:first-child {
-      margin-right: 40px;
-
-      > div {
-        padding-left : 40px;
-      }
-    }
-
-    .P-done-icon {
-      left        : 0px;
-      width       : 25px;
-      position    : absolute;
-    }
-
-    .P-make-default {
-      color           : $main-color;
-      border          : 0;
-      opacity         : 0;
-      font-size       : 16px;
-      transition      : .2s;
-      background      : none;
-      pointer-events  : none;
-      text-decoration : underline;
-    }
-
-    &:hover .P-make-default {
-      opacity        : 1;
-      pointer-events : initial;
-    }
-  }
-
-  > .P-list-item {
-    color           : black;
-    padding         : 20px 0;
-    display         : flex;
-    align-items     : center;
-    border-bottom   : 1px solid $light-gray;
-    justify-content : space-between;
-    text-decoration : none;
-
-    > .P-image {
-      width           : 120px;
-      height          : 120px;
-      border          : 1px solid $light-gray;
-      padding         : 5px;
-      display         : flex;
-      align-items     : flex-start;
-      justify-content : flex-end;
-
-      > .P-favorite {
-        color     : $text-gray;
-        cursor    : pointer;
-        font-size : 20px;
-    
-        &.P-active {
-          color: $pink;
-        }
-      }
-    }
-
-    > .P-main-info {
-      margin : 0 auto 0 40px;
-
-      > h2 { margin-bottom: 20px; }
-    }
-
-    .P-price {
-      margin-right : 40px;
-    }    
-
-    &:last-child { border-bottom: 0; }
-  }
+  display: flex;
+  flex-direction: column;
 }

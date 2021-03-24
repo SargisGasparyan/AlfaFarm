@@ -1,0 +1,9 @@
+@import 'src/assets/styles/variables';
+
+.P-form-block {
+  @media (max-width: $mobile-screen) {
+    * {
+      font-size: $small-fs !important;
+    }
+  }
+}
