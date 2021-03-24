@@ -27,6 +27,7 @@
   border-right  : 2px solid $light-gray;
   position      : sticky;
   top           : 150px;
+  padding-right : 10px;
 
   @media (max-width: $tablet-screen) {
     position: unset;

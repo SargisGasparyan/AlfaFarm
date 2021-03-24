@@ -62,6 +62,7 @@ class Header extends HelperComponent<{}, IState> {
     mobileMenuOpen: false
   };
 
+  private timer: any;
   private header = React.createRef<HTMLDivElement>();
   private categoryOpenLink = React.createRef<HTMLAnchorElement>();
 
@@ -84,6 +85,9 @@ class Header extends HelperComponent<{}, IState> {
     super.componentWillUnmount();
     window.removeEventListener(DispatcherChannels.CartItemsUpdate, this.fetchCart);
     Broadcast.unsubscribe(DispatcherChannels.StorageUpdate, this.storageUpdate);
+    if (this.timer) {
+      clearInterval(this.timer);
+    }
   }
 
   private storageUpdate = () => {
@@ -91,15 +95,17 @@ class Header extends HelperComponent<{}, IState> {
   };
 
   public async configureNotifications() {
-    const result = await NotificationController.GetUnseenList();
-
-    if (result && result.success) {
-      this.safeSetState({ notificationIconNumber: result.data });
-    }
+    this.timer = setInterval(async() => { // Temporary TODO -> change to socket
+      const result = await NotificationController.GetUnseenList();
+  
+      if (result && result.success) {
+        this.safeSetState({ notificationIconNumber: result.data });
+      }
+    }, 10000)
   }
 
   private connectNotificationsSocket() {
-    Socket.connection && Socket.connection.on('newMessage', () => {
+    Socket.connection && Socket.connection.on('NewMessage', () => {
       const { notificationIconNumber } = this.state;
       this.safeSetState({ notificationIconNumber: notificationIconNumber + 1 });
     });
