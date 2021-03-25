@@ -95,8 +95,8 @@ class Notifications extends HelperPureComponent<IProps, IState> {
     const { data, selectedItem } = this.state;
 
     return (
-      <ClickOutside onClickOutside={!selectedItem ? onClose : () => { console.log('') }}>
-        <aside className="P-header-notifications" onScroll={this.scrolled}>
+      <ClickOutside className="P-header-notifications" onClickOutside={!selectedItem ? onClose : () => { console.log('') }}>
+        <aside onScroll={this.scrolled}>
           <h6>
             {Settings.translations.notifications}
             <a className="G-clr-orange" onClick={this.markAsRead}>{Settings.translations.mark_as_read}</a>

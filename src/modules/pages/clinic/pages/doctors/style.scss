@@ -11,6 +11,21 @@
     text-align      : left;
     justify-content : space-between;
 
+    >p {
+      word-break: keep-all;
+      margin-right: 5px;
+    }
+
+    @media (max-width: $mobile-screen) {
+      flex-direction: column;
+      >p {
+        margin-bottom: 10px;
+        text-align: center;
+      }
+    }
+
+
+
     > .G-main-button {
       color           : white;
       width           : 260px;

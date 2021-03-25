@@ -150,10 +150,10 @@ class Doctors extends HelperComponent<{}, {}> {
     return (
       <section className="G-page P-clinic-doctors-page">
         <Options />
-        <h1 id="clinic-page-start" className="G-clr-main G-page-title">
-          {Settings.translations.doctors}
+        <p id="clinic-page-start" className="G-clr-main G-page-title">
+          <p>{Settings.translations.doctors } </p>
           <SearchInput onChange={this.search} />
-        </h1>
+        </p>
         <div className="P-content">
           {data ? data.length ? data.map(item => <div key={item.id} className="P-item">
             <div className="P-main-info">
