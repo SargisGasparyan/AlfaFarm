@@ -124,7 +124,7 @@ class SearchResults extends HelperComponent<IProps, IState> {
     return <div>
       {this.hoveredMarkerData.workingPlan.map((item, index, arr) => <span key={index}>
         {Settings.translations[this.weeksViewEnum[item.startDay]]}
-        {item.endDay ? '-' + Settings.translations[this.weeksViewEnum[item.endDay]] : ''}
+        {item.endDay && item.startDay !== item.endDay ? '-' + Settings.translations[this.weeksViewEnum[item.endDay]] : ''}
         &nbsp;&nbsp;
         {item.isDayOff ? Settings.translations.day_off : `${formatTime(item.startTime)}-${formatTime(item.endTime)}`}
       </span>)}

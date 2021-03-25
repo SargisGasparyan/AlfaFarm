@@ -1,58 +1,122 @@
 @import 'src/assets/styles/variables';
 
 .P-profile-special-products {
-  display        : flex;
-  flex-direction : column;
-  position       : relative;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin-top: 20px;
 
   .P-help-icon {
-    position : absolute;
-    top      : -50px;
-    right    : 0;
-    width    : 30px;
-    cursor   : pointer;
+    position: absolute;
+    top: 0px;
+    right: 0;
+    width: 30px;
+    cursor: pointer;
+    margin-top: -35px;
+    @media (max-width: $mobile-screen) {
+      width: 25px
+    }
   }
 
   > .P-list-item {
-    color           : black;
-    padding         : 20px;
-    display         : flex;
-    box-shadow      : $default-block-shadow;
-    background      : white;
-    align-items     : center;
-    border-radius   : $big-radius;
-    margin-bottom   : 20px;
-    justify-content : space-between;
-    text-decoration : none;
+    color: black;
+    padding: 20px;
+    display: flex;
+    box-shadow: $default-block-shadow;
+    background: white;
+    align-items: center;
+    border-radius: $big-radius;
+    margin-bottom: 20px;
+    justify-content: flex-start;
+    text-decoration: none;
+    position: relative;
 
-    > .P-image {
-      display         : flex;
-      box-shadow      : none;
-      align-items     : flex-start;
-      justify-content : flex-end;
-    }
-
-    > .P-main-info {
-      margin : 0 auto 0 40px;
-
-      > h2 { margin-bottom: 20px; }
-    }
-
-    .P-price {
-      margin-right : 40px;
-    }
-
-    > .P-edit-icon {
-      font-size : 26px;
-
-      &.P-disabled {
-        cursor  : not-allowed;
-        opacity : .3;
-
-        > i { color: black; }
+    @media (max-width: $mobile-screen) {
+      * {
+        font-size: $small-fs !important;
       }
     }
 
-    &:last-child { border-bottom: 0; }
+    > .P-image {
+      display: flex;
+      box-shadow: none;
+      align-items: flex-start;
+      justify-content: flex-end;
+
+      &.G-square-image-block {
+        @media (max-width: $mobile-screen) {
+          min-width: 50px;
+          max-width: 50px;
+          min-height: 90px;
+          max-height: 90px;
+        }
+      }
+    }
+
+    > .P-main-info {
+      margin: 0 185px 0 20px;
+
+      @media (max-width: $mobile-screen) {
+        margin-right: 50px;
+      }
+
+      .P-prod-date {
+        @media (max-width: $small-mobile-screen) {
+          display: flex;
+          flex-direction: column;
+        }
+      }
+
+      .P-prod-title {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: $normal-fs;
+        font-weight: bold;
+        margin-bottom: 20px;
+        /* autoprefixer: off */
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        display: -webkit-box;
+        /* autoprefixer: off */
+      }
+    }
+
+
+    .P-price {
+      font-size: $normal-fs;
+      font-weight: bold;
+      position: absolute;
+      right: 0;
+      margin-right: 70px;
+      @media (max-width: $mobile-screen) {
+        bottom: 0;
+        margin-right: 25px;
+        margin-bottom: 10px;
+      }
+    }
+
+    .P-edit-icon {
+      position: absolute;
+      right: 0;
+      margin-right: 30px;
+      font-size: 26px;
+      @media (max-width: $mobile-screen) {
+        top: 0;
+        margin-right: 25px;
+        margin-top: 10px;
+        * {
+          font-size: $normal-fs !important;
+        }
+      }
+
+      &.P-disabled {
+        cursor: not-allowed;
+        opacity: .3;
+
+        > i {
+          color: black;
+        }
+      }
+    }
   }
 }

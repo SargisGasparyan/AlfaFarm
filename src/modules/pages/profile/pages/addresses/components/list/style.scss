@@ -1,0 +1,65 @@
+@import 'src/assets/styles/helper';
+@import 'src/assets/styles/variables';
+
+a {
+  text-decoration: none;
+}
+
+.P-list-item {
+  color: black;
+  padding: 20px;
+  align-items: center;
+  border-bottom: 1px solid $light-gray;
+  text-decoration: none;
+  border-radius: $big-radius;
+  box-shadow: $default-block-shadow;
+  display: unset;
+
+  @media (max-width: $small-mobile-screen) {
+    * {
+      font-size: $small-fs !important;
+    }
+  }
+
+  .P-address-action {
+    .P-done-icon {
+      width: 25px;
+    }
+
+    .P-make-default {
+      color: $main-color;
+      border: 0;
+      font-size: 16px;
+      transition: .2s;
+      background: none;
+      pointer-events: none;
+      text-decoration: underline;
+    }
+
+    &:hover .P-make-default {
+      pointer-events: initial;
+    }
+
+    .P-edit-del {
+      .P-edit {
+       width: 40px;
+      }
+
+      @media (max-width: $small-mobile-screen) {
+        * {
+          font-size: $normal-fs !important;
+        }
+      }
+    }
+  }
+
+  .P-address-det {
+    font-size: $normal-fs;
+
+    @media (max-width: $small-mobile-screen) {
+      * {
+        font-size: $small-fs;
+      }
+    }
+  }
+}

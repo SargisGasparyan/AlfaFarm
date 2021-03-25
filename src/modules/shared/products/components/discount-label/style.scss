@@ -2,15 +2,15 @@
 @import 'src/assets/styles/helper';
 
 .P-products-discount-label {
-  top       : 20px;
-  left      : -26px;
-  color     : white;
-  width     : 150px;
-  height    : 60px;
-  padding   : 8px 20px;
-  display   : flex;
-  z-index   : 1;
-  position  : absolute;
-  font-size : $normal-fs;
+  top: 23px;
+  left: -3px;
+  color: white;
+  width: 120px;
+  height: 50px;
+  padding: 8px 20px;
+  display: flex;
+  z-index: 1;
+  position: absolute;
+  font-size : $small-fs;
   @include bold-font();
 }

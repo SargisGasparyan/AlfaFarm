@@ -27,38 +27,40 @@ class SpecialProducts extends HelperComponent<IState, {}> {
 
   public state: IState = {
     data: null,
-    helpIsOpen: false,
+    helpIsOpen: false
   };
 
-  public componentDidMount() { this.fetchData(); }
+  public componentDidMount() {
+    this.fetchData();
+  }
 
   private fetchData = async () => {
     const result = await UserController.GetPreferredProductList();
     this.safeSetState({
       data: result.data.map(item => ({
         ...item,
-        expiredDate: new Date(item.expiredDate).getTime(),
+        expiredDate: new Date(item.expiredDate).getTime()
       }))
     }, async () => {
       const { data } = this.state;
       if (data) {
         const photoResult = await Promise.all(data.map(item => PhotoStorage.getURL(item.imagePath).then(url => ({
           ...item,
-          imagePath: url,
+          imagePath: url
         }))));
 
         this.safeSetState({ data: photoResult });
       }
     });
-  }
+  };
 
   private openHelp = () => {
     this.safeSetState({ helpIsOpen: true });
-  }
-  
+  };
+
   private closeHelp = () => {
     this.safeSetState({ helpIsOpen: false });
-  }
+  };
 
   private changeProduct = async (e: React.SyntheticEvent, item: IPreferredProductListResponseModel) => {
     e.preventDefault();
@@ -67,7 +69,7 @@ class SpecialProducts extends HelperComponent<IState, {}> {
       const alertify = await import('alertifyjs');
       alertify.error(Settings.translations.special_products_replace_fail(formatDate(item.expiredDate, false)));
     }
-  }
+  };
 
   public render() {
     const { data, helpIsOpen } = this.state;
@@ -88,22 +90,26 @@ class SpecialProducts extends HelperComponent<IState, {}> {
             />
 
             <div className="P-main-info">
-              <p className="G-clr-gray">{+item.expiredDate < Date.now() ? Settings.translations.expired_text : Settings.translations.expire_text} {formatDate(item.expiredDate, false)}</p>
-              <h2>{item.title}</h2>
-              <span>{item.unitQuantity} {item.unitName}</span>
+              <p
+                className="G-clr-gray P-prod-date">
+                <span>{+item.expiredDate < Date.now() ? Settings.translations.expired_text : Settings.translations.expire_text } </span>
+                <span> { formatDate(item.expiredDate, false)}</span></p>
+              <p className="P-prod-title">{item.title}</p>
+              <p>{item.unitQuantity} {item.unitName}</p>
             </div>
 
-            <h2 className="P-price">{formatPrice(item.price)}</h2>
-            <span
+
+            <div className="P-price G-mr-10 G-clr-orange">{formatPrice(item.price)}</div>
+            <div
               className={`G-clr-main P-edit-icon ${Date.now() < +item.expiredDate ? 'P-disabled' : ''}`}
-              onClick={e => this.changeProduct(e, item)}
-            >
-              <i className="icon-Group-5545" />
-            </span>
-          </Link>) : <EmptyState text={Settings.translations.empty_special_products} />) : null}
+              onClick={e => this.changeProduct(e, item)}><i className="icon-Group-5545"/>
+            </div>
+
+
+          </Link>) : <EmptyState text={Settings.translations.empty_special_products}/>) : null}
         </div>
 
-        {helpIsOpen ? <SpecialProductHelp onClose={this.closeHelp} /> : null}
+        {helpIsOpen ? <SpecialProductHelp onClose={this.closeHelp}/> : null}
       </Layout>
     );
   }

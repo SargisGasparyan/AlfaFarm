@@ -20,6 +20,7 @@ interface IState {
 
 interface IProps {
   onClose(): void;
+
   onAuthOpen(): void;
 }
 
@@ -32,7 +33,7 @@ class MobileMenu extends HelperComponent<IProps, IState> {
   private navLinkProps = {
     className: 'P-link',
     activeClassName: 'P-active',
-    exact: true,
+    exact: true
   };
 
   public componentDidMount() {
@@ -59,7 +60,7 @@ class MobileMenu extends HelperComponent<IProps, IState> {
       window.dispatchEvent(new Event(DispatcherChannels.ProductFilterChange));
       onClose();
     }
-  }
+  };
 
   private change = (value: string) => this.safeSetState({ search: value });
 
@@ -67,13 +68,13 @@ class MobileMenu extends HelperComponent<IProps, IState> {
     window.dispatchEvent(new CustomEvent(DispatcherChannels.ToggleConfirm, { detail: { text: Settings.translations.log_out_question } }));
     window.addEventListener(DispatcherChannels.UserConfirmed, Settings.logout);
     window.addEventListener(DispatcherChannels.UserCanceled, this.logoutCanceled);
-  }
+  };
 
   private logoutCanceled = () => {
     window.dispatchEvent(new CustomEvent(DispatcherChannels.ToggleConfirm));
     window.removeEventListener(DispatcherChannels.UserConfirmed, Settings.logout);
     window.removeEventListener(DispatcherChannels.UserCanceled, this.logoutCanceled);
-  }
+  };
 
   public render() {
     const { onClose, onAuthOpen } = this.props;
@@ -81,13 +82,15 @@ class MobileMenu extends HelperComponent<IProps, IState> {
     return (
       <div className="P-mobile-menu-wrapper">
         <div className="P-mobile-menu">
-          <span className="P-mobile-menu-close"><i className="icon-Group-5032 G-clr-orange G-cursor-pointer" onClick={onClose} /></span>
+          <span className="P-mobile-menu-close"><i className="icon-Group-5032 G-clr-orange G-cursor-pointer"
+                                                   onClick={onClose}/></span>
           {Storage.profile && <div className="P-menu-profile-name G-text-center">
             <div
               style={{ background: `url('${Storage.profile.photoPath ? getMediaPath(Storage.profile.photoPath) : PersonImage}') center/cover` }}
               className="P-image"
             />
-            <span className="G-fs-18">{Storage.profile.firstName} </span><span className="G-fs-18"> {Storage.profile.lastName}</span></div>}
+            <span className="G-fs-18">{Storage.profile.firstName} </span><span
+            className="G-fs-18"> {Storage.profile.lastName}</span></div>}
           <div className="P-mobile-menu-content">
             <div className="G-mb-20">
               <SearchInput
@@ -99,30 +102,38 @@ class MobileMenu extends HelperComponent<IProps, IState> {
 
             {!Settings.token && <a className="P-link" onClick={onAuthOpen}>{Settings.translations.log_in}</a>}
 
-            <NavLink {...this.navLinkProps} to={ROUTES.PHARMACIES} onClick={onClose}>{Settings.translations.pharmacies}</NavLink>
-            <NavLink {...this.navLinkProps} to={ROUTES.CLINIC.MAIN} onClick={onClose}>{Settings.translations.clinic}</NavLink>
-            <NavLink {...this.navLinkProps} to={ROUTES.BLOG.MAIN} onClick={onClose}>{Settings.translations.blog}</NavLink>
-            <LanguageSwitcher />
-            {Storage.profile && <hr className="G-my-15" />}
+            <NavLink {...this.navLinkProps} to={ROUTES.PHARMACIES}
+                     onClick={onClose}>{Settings.translations.pharmacies}</NavLink>
+            <NavLink {...this.navLinkProps} to={ROUTES.PRODUCTS.MAIN}
+                     onClick={onClose}>{Settings.translations.online_pharmacy}</NavLink>
+            <NavLink {...this.navLinkProps} to={ROUTES.CLINIC.MAIN}
+                     onClick={onClose}>{Settings.translations.clinic}</NavLink>
+            <NavLink {...this.navLinkProps} to={ROUTES.BLOG.MAIN}
+                     onClick={onClose}>{Settings.translations.blog}</NavLink>
+            <LanguageSwitcher/>
+            {Storage.profile && <hr className="G-my-15"/>}
             {Storage.profile && <div className="P-menu-profile">
+              <NavLink {...this.navLinkProps} to={ROUTES.PROFILE.PRESCRIPTIONS.MAIN}
+                       onClick={onClose}>{Settings.translations.prescription}</NavLink>
               {this.options.map(item => <NavLink
                 to={item.path}
                 key={item.path}
-                className="P-link"
+                {...this.navLinkProps}
                 onClick={onClose}
               >
                 {item.name}
               </NavLink>)}
             </div>}
 
-            <div onClick={this.logout} className="P-link">
+            {Storage.profile && <div onClick={this.logout} className="P-link">
               {Settings.translations.log_out}
-            </div>
+            </div>}
           </div>
-          <div className="P-mobile-menu-layer" onClick={onClose} />
+          <div className="P-mobile-menu-layer" onClick={onClose}/>
         </div>
       </div>
     );
   }
 }
+
 export default MobileMenu;

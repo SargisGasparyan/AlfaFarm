@@ -34,8 +34,8 @@ class OrderListItem extends HelperComponent<IProps, {}> {
           />
 
           <div className="P-main-info">
-            <h2>{item.productTitle}</h2>
-            <span>{item.unitQuantity} {item.unitName}</span>
+            <p className="P-prod-title">{item.productTitle}</p>
+            <p>{item.unitQuantity} {item.unitName}</p>
           </div>
 
           <div className="P-quantity">
@@ -44,7 +44,7 @@ class OrderListItem extends HelperComponent<IProps, {}> {
 
           <div className="P-price">
             <div>{item.promotion.promotionType === PromotionTypeEnum.Discount && item.promotion.result > 0 ? <del>{formatPrice(item.totalPrice)}</del> : null}</div>
-            <h2 className={`${item.promotion.promotionType === PromotionTypeEnum.Discount && item.promotion.result ? 'G-clr-orange' : ''}`}>
+            <h2 className="G-clr-orange">
               {item.promotion.promotionType === PromotionTypeEnum.Discount ?
                 formatPrice(item.promotion.result) :
                 formatPrice(item.totalPrice)}

@@ -1,22 +1,18 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
 
 import HelperComponent from 'platform/classes/helper-component';
 import { byPrivateRoute } from 'platform/decorators/routes';
 import ROUTES from 'platform/constants/routes';
 import Layout from '../../components/layout';
 import Settings from 'platform/services/settings';
-import Table from 'components/table';
 import OrderController from 'platform/api/order';
-import { IOrderListResponseModel } from 'platform/api/order/models/response';
-import { OrderStatusEnum } from 'platform/api/order/constants/enums';
-import { getViewEnum, formatDate, formatPrice } from 'platform/services/helper';
+import { IOrderListResponseModel, IOrderDetailsResponseModel } from 'platform/api/order/models/response';
+import List  from './components/list';
 import Details from './pages/details';
 import Pagination from 'components/pagination';
 import { paginationPageLimit } from 'platform/constants';
 import { IPagingResponse } from 'platform/constants/interfaces';
 import EmptyState from 'components/empty-state';
-import { statusColorClassNames } from './constants';
 
 import './style.scss';
 
@@ -28,35 +24,6 @@ interface IState {
 class Orders extends HelperComponent<{}, IState> {
 
   public state: IState = {};
-
-  private statusViewEnum = getViewEnum(OrderStatusEnum);
-
-  private columnConfig = [
-    {
-      name: Settings.translations.order_number,
-      cell: (row: IOrderListResponseModel) => `#${row.id}`,
-    },
-    {
-      name: Settings.translations.date,
-      cell: (row: IOrderListResponseModel) => formatDate(row.createdDate),
-    },
-    {
-      name: Settings.translations.quantity,
-      cell: (row: IOrderListResponseModel) => row.productQuantity,
-    },
-    {
-      name: Settings.translations.address,
-      cell: (row: IOrderListResponseModel) => row.address,
-    },
-    {
-      name: Settings.translations.price,
-      cell: (row: IOrderListResponseModel) => formatPrice(row.totalPrice),
-    },
-    {
-      name: Settings.translations.status,
-      cell: (row: IOrderListResponseModel) => <span className={statusColorClassNames[row.status]}>{Settings.translations[this.statusViewEnum[row.status]]}</span>,
-    },
-  ];
 
   private fetchData = async (pageNumber: number) => {
     const body = {
@@ -72,14 +39,13 @@ class Orders extends HelperComponent<{}, IState> {
 
   public render() {
     const { data } = this.state;
-    
+
     return (
       <Layout>
         <h2 className="G-clr-main G-mb-30">{Settings.translations.order_history}</h2>
         <div className="G-flex P-profile-orders">
-          {data ? (data.list.length ? <Table<IOrderListResponseModel>
-            redirectUrl={row => ROUTES.PROFILE.ORDERS.DETAILS.replace(':id', row.id)}
-            columnConfig={this.columnConfig}
+          {data ? (data.list.length ? <List
+            redirectUrl={(row: IOrderDetailsResponseModel) => ROUTES.PROFILE.ORDERS.DETAILS.replace(':id', row.id)}
             data={data.list}
           /> : <EmptyState text={Settings.translations.empty_orders_list} />) : null}
         </div>

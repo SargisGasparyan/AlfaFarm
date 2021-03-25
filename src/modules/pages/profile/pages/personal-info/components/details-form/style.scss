@@ -1,3 +1,13 @@
+@import 'src/assets/styles/variables';
+
 .P-profile-details-form .P-select > .P-select-body {
   width : 100%;
+}
+
+.P-profile-details-form {
+  @media (max-width: $mobile-screen) {
+    * {
+      font-size: $small-fs !important;
+    }
+  }
 }

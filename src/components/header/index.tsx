@@ -21,7 +21,7 @@ import Screen from 'components/screen';
 import LogoImage from 'assets/images/logo.png';
 import PersonImage from 'assets/images/person.png';
 import burgerMenu from 'assets/images/menu.svg';
-import Broadcast from "../../platform/services/broadcast";
+import Broadcast from '../../platform/services/broadcast';
 import MobileMenu from './components/mobile-menu';
 import { IProductSearcResponseModel } from 'platform/api/product/models/response';
 import SearchPopup from './components/search';
@@ -62,13 +62,14 @@ class Header extends HelperComponent<{}, IState> {
     mobileMenuOpen: false
   };
 
+  private timer: any;
   private header = React.createRef<HTMLDivElement>();
   private categoryOpenLink = React.createRef<HTMLAnchorElement>();
 
   private navLinkProps = {
     className: 'P-link',
     activeClassName: 'P-active',
-    exact: true,
+    exact: true
   };
 
   public componentDidMount() {
@@ -84,21 +85,27 @@ class Header extends HelperComponent<{}, IState> {
     super.componentWillUnmount();
     window.removeEventListener(DispatcherChannels.CartItemsUpdate, this.fetchCart);
     Broadcast.unsubscribe(DispatcherChannels.StorageUpdate, this.storageUpdate);
+    if (this.timer) {
+      clearInterval(this.timer);
+    }
   }
 
   private storageUpdate = () => {
     this.forceUpdate();
-  }
+  };
 
   public async configureNotifications() {
-    const result = await NotificationController.GetUnseenList();
-
-    if (result && result.success) {
-      this.safeSetState({ notificationIconNumber: result.data });
-    }
+    this.timer = setInterval(async() => { // Temporary TODO -> change to socket
+      const result = await NotificationController.GetUnseenList();
+  
+      if (result && result.success) {
+        this.safeSetState({ notificationIconNumber: result.data });
+      }
+    }, 10000)
   }
+
   private connectNotificationsSocket() {
-    Socket.connection && Socket.connection.on('newMessage', () => {
+    Socket.connection && Socket.connection.on('NewMessage', () => {
       const { notificationIconNumber } = this.state;
       this.safeSetState({ notificationIconNumber: notificationIconNumber + 1 });
     });
@@ -107,20 +114,20 @@ class Header extends HelperComponent<{}, IState> {
   private fetchCart = async () => {
     const result = await BasketController.GetCount();
     this.safeSetState({ cartIconNumber: result.data });
-  }
+  };
 
   private toggleAuth = () => {
     const { authOpen, mobileMenuOpen } = this.state;
     this.safeSetState({
       authOpen: !authOpen,
-      mobileMenuOpen: !mobileMenuOpen || false, // Close if from mobile
+      mobileMenuOpen: !mobileMenuOpen || false // Close if from mobile
     });
-  }
+  };
 
   private openCategories = () => {
     this.safeSetState({ categoryOpen: true });
     document.addEventListener('mousemove', this.closeCategories);
-  }
+  };
 
   private closeCategories = (e?: MouseEvent) => {
     const { categoryOpen } = this.state;
@@ -133,7 +140,7 @@ class Header extends HelperComponent<{}, IState> {
       this.safeSetState({ categoryOpen: false });
       document.removeEventListener('mousemove', this.closeCategories);
     }
-  }
+  };
 
   private searchChange = async (value: string) => {
     if (value.trim()) {
@@ -143,28 +150,37 @@ class Header extends HelperComponent<{}, IState> {
         const { searchLoader } = this.state;
 
         // If searchLoader has changed, don't show the result
-        if (data?.data?.products.length && searchLoader) this.safeSetState({ searchResult: data.data, searchHistoryShown: false, searchOpen: true })
+        if (data?.data?.products.length && searchLoader){
+          
+          this.safeSetState({
+            searchResult: data.data,
+            searchHistoryShown: false,
+            searchOpen: true
+          });
+        }
         else this.closeSearch();
 
-        this.safeSetState({ searchLoader: false })
+        if (!data?.aborted) {
+          this.safeSetState({ searchLoader: false });
+        }
       });
     } else this.safeSetState({
       searchValue: '',
       searchOpen: false,
       searchResult: {
         products: SearchHistory.items,
-        categories: [],
+        categories: []
       },
-      searchHistoryShown: true,
+      searchHistoryShown: true
     });
-  }
+  };
 
   private closeSearch = () => this.safeSetState({ searchOpen: false, searchHistoryShown: false });
 
   private toggleMobileMenu = () => {
     const { mobileMenuOpen } = this.state;
     this.safeSetState({ mobileMenuOpen: !mobileMenuOpen });
-  }
+  };
 
   private toggleNotifications = (e?: Event | React.SyntheticEvent) => {
     e && e.stopPropagation();
@@ -173,14 +189,14 @@ class Header extends HelperComponent<{}, IState> {
       this.configureNotifications();
     }
     this.safeSetState({ notificationOpen: !notificationOpen });
-  }
+  };
 
   private onNotificationSeenChange = (all: boolean) => {
     const { notificationIconNumber } = this.state;
     if (notificationIconNumber && notificationIconNumber > 0) {
       this.safeSetState({ notificationIconNumber: all ? 0 : notificationIconNumber - 1 });
     }
-  }
+  };
 
   private searchFocus = (e: React.SyntheticEvent) => {
     e.stopPropagation();
@@ -190,23 +206,23 @@ class Header extends HelperComponent<{}, IState> {
       searchHistoryShown: true,
       searchResult: {
         products: SearchHistory.items,
-        categories: [],
-      },
+        categories: []
+      }
     }); else this.safeSetState({ searchOpen: true, searchHistoryShown: false });
-  }
+  };
 
   private searchSubmit = () => {
     const { searchValue } = this.state;
 
     if (searchValue) {
-      this.safeSetState({ searchResult: null, searchOpen: false, searchLoader: false });
+      this.safeSetState({ searchOpen: false, searchLoader: false });
       window.routerHistory.push(`${ROUTES.PRODUCTS.MAIN}?text=${searchValue}`);
       window.dispatchEvent(new Event(DispatcherChannels.ProductFilterChange));
     } else {
       window.routerHistory.push(ROUTES.PRODUCTS.MAIN);
       window.dispatchEvent(new Event(DispatcherChannels.ProductFilterChange));
     }
-  }
+  };
 
   private openProducts = () => window.dispatchEvent(new Event(DispatcherChannels.ProductFilterChange));
 
@@ -221,7 +237,7 @@ class Header extends HelperComponent<{}, IState> {
       searchValue,
       searchResult,
       searchLoader,
-      searchHistoryShown,
+      searchHistoryShown
     } = this.state;
 
     return (
@@ -229,10 +245,10 @@ class Header extends HelperComponent<{}, IState> {
         <Screen.SmallDesktop>
           {((matches: boolean) => !matches ? <>
             <Link to={ROUTES.HOME} className="P-logo G-mr-auto">
-              <img src={LogoImage} className="G-full-width" />
+              <img src={LogoImage} className="G-full-width"/>
             </Link>
 
-            {enviroment.WHOLESALE ? <WholesaleContent /> : <>
+            {enviroment.WHOLESALE ? <WholesaleContent/> : <>
               <div className="P-search-wrapper">
                 <SearchInput
                   onClick={this.searchFocus}
@@ -240,6 +256,7 @@ class Header extends HelperComponent<{}, IState> {
                   onChange={this.searchChange}
                   onSubmit={this.searchSubmit}
                   loading={searchLoader}
+                  disableRemoveOnNavigate={true}
                   withSubmit={true}
                 />
 
@@ -259,7 +276,7 @@ class Header extends HelperComponent<{}, IState> {
                 className={`P-link ${categoryOpen ? 'P-active' : ''}`}
               >
                 {Settings.translations.online_pharmacy}
-                {categoryOpen && <Categories onClose={this.closeCategories} />}
+                {categoryOpen && <Categories onClose={this.closeCategories}/>}
               </Link>
 
               <NavLink {...this.navLinkProps} to={ROUTES.PHARMACIES}>{Settings.translations.pharmacies}</NavLink>
@@ -278,21 +295,23 @@ class Header extends HelperComponent<{}, IState> {
               className="P-link P-login"
             >{Settings.translations.log_in}</span>}
 
-            {Storage.profile && <a onClick={this.toggleNotifications} className="P-link P-icon G-normal-link P-notification">
-              <i className="icon-Group-5515" />
+            {Storage.profile &&
+            <a onClick={this.toggleNotifications} className="P-link P-icon G-normal-link P-notification">
+              <i className="icon-Group-5515"/>
               {!!notificationIconNumber && <span>{notificationIconNumber > 99 ? '99+' : notificationIconNumber}</span>}
             </a>}
 
             <Link to={ROUTES.CART} className="P-link P-icon G-normal-link P-cart">
-              <i className="icon-Group-5503" />
+              <i className="icon-Group-5503"/>
               {!!cartIconNumber && <span>{cartIconNumber > 99 ? '99+' : cartIconNumber}</span>}
             </Link>
 
-            <LanguageSwitcher />
+            <LanguageSwitcher/>
 
-            {authOpen && <Shared.Auth onClose={this.toggleAuth} />}
-            {notificationOpen && <Notifications onClose={this.toggleNotifications} onSeenChange={this.onNotificationSeenChange} />}
-          </> : <this.Mobile />)}
+            {authOpen && <Shared.Auth onClose={this.toggleAuth}/>}
+            {notificationOpen &&
+            <Notifications onClose={this.toggleNotifications} onSeenChange={this.onNotificationSeenChange}/>}
+          </> : <this.Mobile/>)}
         </Screen.SmallDesktop>
       </header>
     );
@@ -303,11 +322,11 @@ class Header extends HelperComponent<{}, IState> {
 
     return <div className="P-mobile-header">
       <div className="P-burger-menu">
-        <img src={burgerMenu} alt="menu" className="G-cursor" onClick={this.toggleMobileMenu} />
+        <img src={burgerMenu} alt="menu" className="G-cursor" onClick={this.toggleMobileMenu}/>
       </div>
 
       <Link to={ROUTES.HOME} className="P-logo P-logo-mobile">
-        <img src={LogoImage} className="G-full-width" />
+        <img src={LogoImage} className="G-full-width"/>
       </Link>
 
       <div className="P-mobile-header-icons">
@@ -320,21 +339,23 @@ class Header extends HelperComponent<{}, IState> {
           onClick={this.toggleAuth}
           className="P-link P-login"
         >{Settings.translations.log_in}</span>}
-        {Storage.profile && <a onClick={this.toggleNotifications} className="P-link P-icon G-normal-link P-notification">
-          <i className="icon-Group-5515" />
+        {Storage.profile &&
+        <a onClick={this.toggleNotifications} className="P-link P-icon G-normal-link P-notification">
+          <i className="icon-Group-5515"/>
           {!!notificationIconNumber && <span>{notificationIconNumber > 99 ? '99+' : notificationIconNumber}</span>}
         </a>}
         <Link to={ROUTES.CART} className="P-link P-icon G-normal-link P-cart">
-          <i className="icon-Group-5503" />
+          <i className="icon-Group-5503"/>
           {!!cartIconNumber && <span>{cartIconNumber > 99 ? '99+' : cartIconNumber}</span>}
         </Link>
       </div>
 
-      {authOpen && <Shared.Auth onClose={this.toggleAuth} />}
-      {notificationOpen && <Notifications onClose={this.toggleNotifications} onSeenChange={this.onNotificationSeenChange} />}
-      {mobileMenuOpen && <MobileMenu onClose={this.toggleMobileMenu} onAuthOpen={this.toggleAuth} />}
-    </div>
-  }
+      {authOpen && <Shared.Auth onClose={this.toggleAuth}/>}
+      {notificationOpen &&
+      <Notifications onClose={this.toggleNotifications} onSeenChange={this.onNotificationSeenChange}/>}
+      {mobileMenuOpen && <MobileMenu onClose={this.toggleMobileMenu} onAuthOpen={this.toggleAuth}/>}
+    </div>;
+  };
 }
 
 export default Header;

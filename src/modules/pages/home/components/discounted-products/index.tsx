@@ -27,8 +27,8 @@ class DiscountedProducts extends HelperComponent<{}, IState> {
   }
 
   private fetchData = async () => {
-    const result = await ProductController.GetList({ pageNumber: 1, pageSize: 10, hasDiscount: true, sortBy: ProductSortEnum.DiscountHighToLow });
-    this.safeSetState({ data: result && result.data && result.data.list || [] });
+    const result = await ProductController.GetSpecialProducts();
+    this.safeSetState({ data: result && result.data && result.data || [] });
   }
 
   public settings = {

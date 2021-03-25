@@ -75,8 +75,8 @@ class Favorites extends HelperComponent<IState, {}> {
             </div>
 
             <div className="P-main-info">
-              <h2>{item.title}</h2>
-              <span>{item.unitQuantity} {item.unitName}</span>
+              <p className="P-prod-title">{item.title}</p>
+              <p>{item.unitQuantity} {item.unitName}</p>
             </div>
 
             <div className="P-price">

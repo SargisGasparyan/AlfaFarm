@@ -70,10 +70,10 @@ class BonusCard extends HelperComponent<IState, {}> {
     return (
       <Layout>
         {data && <div className="G-flex P-profile-bonus-card">
-          <div className="P-card-details G-flex">
-            <div>
+          <div className="P-card-details">
+            <div className="P-card">
               <img src={CardImage} alt="card" />
-              <h4 className="G-clr-orange P-bonus-amount">{data.bonusCardDetails.amount}</h4>
+              <span className="G-clr-orange P-bonus-amount">{data.bonusCardDetails.amount}</span>
             </div>
             <div className="P-barcode">
               <h3>{data.bonusCardDetails.fullName}</h3>
