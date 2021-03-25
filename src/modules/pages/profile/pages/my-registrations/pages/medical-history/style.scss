@@ -7,17 +7,32 @@
     cursor        : pointer;
     margin-bottom : 60px;
     @include normal-font;
-  
-    > a {
+
+    @media (max-width: $small-mobile-screen) {
+      * {
+        font-size: $small-fs !important;
+      }
+    }
+
+    @media (min-width: $small-mobile-screen) {
+      justify-content: unset;
+      .P-registrations-title {
+        margin-left: 20px;
+      }
+    }
+
+    a {
       color           : black;
       text-decoration : none;
     }
-    
-    > span {
-      color          : $orange;
-      margin-left    : 80px;
-      border-bottom  : 1px solid $orange;
+
+    p {
       padding-bottom : 10px;
+    }
+
+    .P-registrations-title {
+      color          : $orange;
+      border-bottom  : 1px solid $orange;
     }
   }
 
