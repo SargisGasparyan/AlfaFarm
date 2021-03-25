@@ -57,18 +57,18 @@ class Cart extends HelperComponent<{}, IState> {
           <span>{row.unitQuantity} {row.unitName}</span>
         </div>
       </Link>,
-      style: { minWidth: '450px' }
+      style: { minWidth: '25.6%' } // 450px
     },
     {
       name: Settings.translations.quantity,
-      style: { minWidth: '140px' },
+      style: { minWidth: '8%' }, // 140px
 
-      cell: (row: IBasketListResponseModel, index: number) => <CountInput
+      cell: (row: IBasketListResponseModel, index: number) => <div className="P-count"> <CountInput
         min={0}
         step={1}
         value={row.productQuantity}
         onChange={count => this.changeCount(row, index, count)}
-      />,
+      /> </div>,
     },
     {
       name: Settings.translations.bonus,
@@ -76,7 +76,7 @@ class Cart extends HelperComponent<{}, IState> {
     },
     {
       name: Settings.translations.price,
-      style: { minWidth: '140px' },
+      style: { minWidth: '8%' }, // 140px
       cell: (row: IBasketListResponseModel) =>
         <div className="G-flex G-flex-column G-align-center G-justify-center">
           <div>{row.promotion.promotionType === PromotionTypeEnum.Discount && row.promotion.result > 0 ?

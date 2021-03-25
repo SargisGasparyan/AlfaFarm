@@ -1,7 +1,7 @@
 @import 'src/assets/styles/variables';
 
 .P-count-input {
-  width           : 100px;
+  width           : 100%; // 100px;
   height          : 40px;
   display         : flex;
   position        : relative;

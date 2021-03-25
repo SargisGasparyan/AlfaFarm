@@ -1,6 +1,8 @@
 @import 'src/assets/styles/helper';
 @import 'src/assets/styles/variables';
 
+@import './responsive';
+
 .P-cart-page {
 
   display       : flex;
@@ -67,9 +69,9 @@
             @include bold-font;
 
             > .P-main-info {
-              width           : calc(100% - 120px);
+              //width           : calc(100% - 120px);
               display         : flex;
-              padding         : 0 30px;
+              padding         : 0 0 0 30px;  // 0 30px;
               flex-direction  : column;
               justify-content : center;
 
@@ -150,6 +152,10 @@
     ul {
       margin         : 0 !important;
       padding-bottom : 0 !important;
+
+      .P-count {
+        width: 100px;
+      }
 
       li {
 
