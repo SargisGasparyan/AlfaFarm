@@ -5,6 +5,7 @@ export interface IClinicRegistrationListResponseModel {
   servicePrice: number;
   startDate: string;
   endDate: number;
+  status: number;
 };
 
 export interface IClinicRegistrationBusyHourResponseModel {

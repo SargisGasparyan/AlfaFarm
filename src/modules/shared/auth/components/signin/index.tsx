@@ -10,7 +10,7 @@ import { validateForm } from './services/helper';
 import AuthController from 'platform/api/auth';
 import SocialButton from '../social-button';
 import { SocialProvider } from 'platform/api/auth/constants/enums';
-import enviroment from 'platform/services/enviroment';
+import environment from 'platform/services/environment';
 
 interface IProps {
   onTypeChange<ActiveData extends object>(type: ModalContentEnum, activeData?: ActiveData): void;
@@ -122,7 +122,7 @@ class SignIn extends HelperComponent<IProps, IState> {
         >{Settings.translations.log_in}</LoaderContent>
       </form>
       
-      {!enviroment.WHOLESALE && <>
+      {!environment.WHOLESALE && <>
         <span className="P-sign-in-restore-password" onClick={this.restorePassword}>{Settings.translations.restore_password}</span>
 
         <SocialButton

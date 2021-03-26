@@ -13,6 +13,10 @@
     }
   }
 
+  @media(max-width : $small-mobile-screen) {
+    padding : 5px !important;
+  }
+
   .G-no-text-decoration {
     text-decoration : none !important;
   }

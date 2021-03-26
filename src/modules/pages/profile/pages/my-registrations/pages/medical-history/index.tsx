@@ -70,9 +70,9 @@ class MedicalHistory extends HelperComponent<IState, {}> {
     return (
       <Layout>
         <section className="P-profile-my-registrations-medical-history-page">
-          <h2 className="P-title G-mb-30">
-            <Link to={ROUTES.PROFILE.MY_REGISTRATIONS.MAIN}>{Settings.translations.my_registrations}</Link>
-            <span>{Settings.translations.medical_history}</span>
+          <h2 className="P-title G-mb-30 G-flex G-flex-justify-between">
+            <p><Link to={ROUTES.PROFILE.MY_REGISTRATIONS.MAIN}>{Settings.translations.my_registrations}</Link></p>
+            <p className="P-registrations-title">{Settings.translations.medical_history}</p>
           </h2>
           {data ? (data.length ? data.map(item => <div key={item.id} className="P-list-item">
             <div className="P-main-info">

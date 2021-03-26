@@ -12,12 +12,10 @@ import PageLoader from 'components/page-loader';
 import Settings from 'platform/services/settings';
 import { formatDate, formatPrice, getViewEnum } from 'platform/services/helper';
 import { PaymentTypeEnum } from 'platform/constants/enums';
-import enviroment from 'platform/services/enviroment';
-import DispatcherChannels from 'platform/constants/dispatcher-channels';
+import environment from 'platform/services/environment';
 import { OrderStatusEnum, OrderDeliveryTypeEnum } from 'platform/api/order/constants/enums';
-import { Shared } from 'modules';
 import { statusColorClassNames } from '../../constants';
-import OrderListItem from '../components/list-item';
+import List from '../components/list';
 
 import './style.scss';
 import ConfirmModal from 'components/confirm-modal';
@@ -36,10 +34,12 @@ interface IRouteParams {
 class Details extends HelperComponent<RouteComponentProps<IRouteParams>, IState> {
 
   public state: IState = {
-    cancelConfirmOpen: false,
+    cancelConfirmOpen: false
   };
 
-  public componentDidMount() { this.fetchData(); }
+  public componentDidMount() {
+    this.fetchData();
+  }
 
   private statusViewEnum = getViewEnum(OrderStatusEnum);
   private paymentViewEnum = getViewEnum(PaymentTypeEnum);
@@ -49,7 +49,7 @@ class Details extends HelperComponent<RouteComponentProps<IRouteParams>, IState>
     const { id } = this.props.match.params;
     const result = await OrderController.GetDetails(+id);
     this.safeSetState({ data: result.data });
-  }
+  };
 
   private goBack = () => window.routerHistory.goBack();
 
@@ -60,12 +60,12 @@ class Details extends HelperComponent<RouteComponentProps<IRouteParams>, IState>
       const result = await OrderController.Repeat(data.id);
       result.data && window.routerHistory.push(ROUTES.CART);
     }
-  }
+  };
 
   private toggleConfirm = () => {
     const { cancelConfirmOpen } = this.state;
     this.safeSetState({ cancelConfirmOpen: !cancelConfirmOpen });
-  }
+  };
 
   private cancel = async () => {
     const { data } = this.state;
@@ -78,9 +78,9 @@ class Details extends HelperComponent<RouteComponentProps<IRouteParams>, IState>
         this.toggleConfirm();
         this.fetchData();
         window.routerHistory.goBack();
-      } else alertify.error(res.message)
+      } else alertify.error(res.message);
     }
-  }
+  };
 
   public render() {
     const { data, cancelConfirmOpen } = this.state;
@@ -89,10 +89,11 @@ class Details extends HelperComponent<RouteComponentProps<IRouteParams>, IState>
     return (
       <Layout>
         {data ? <div className="P-profile-order-details">
-          {window.routerHistory.length > 2 && <i className="G-back-icon icon-Group-5529" onClick={this.goBack} />}
+          {window.routerHistory.length > 2 && <i className="G-back-icon icon-Group-5529" onClick={this.goBack}/>}
           <div className="P-info-wraper">
             <div className="P-main-info-block">
-              <h2 className="G-mb-40 G-clr-orange">{Settings.translations.order} <span className="G-ml-10">#{data.id}</span></h2>
+              <h2 className="G-mb-40 G-clr-orange">{Settings.translations.order} <span
+                className="G-ml-10">#{data.id}</span></h2>
 
               <p className="G-flex G-mb-30 G-flex-justify-between G-fs-20">
                 {Settings.translations.created_date}
@@ -104,7 +105,8 @@ class Details extends HelperComponent<RouteComponentProps<IRouteParams>, IState>
                 <span>{Settings.translations[this.deliveryTypeViewEnum[data.deliveryType]]}</span>
               </p>
 
-              {data.deliveryType === OrderDeliveryTypeEnum.Delivery && <p className="G-flex G-mb-30 G-flex-justify-between G-fs-20">
+              {data.deliveryType === OrderDeliveryTypeEnum.Delivery &&
+              <p className="G-flex G-mb-30 G-flex-justify-between G-fs-20">
                 {Settings.translations.delivery_date}
                 <span>{data.deliveryDate ? formatDate(data.deliveryDate) : Settings.translations.as_soon_as_possible}</span>
               </p>}
@@ -126,7 +128,8 @@ class Details extends HelperComponent<RouteComponentProps<IRouteParams>, IState>
 
               <p className="G-flex G-mb-30 G-flex-justify-between G-fs-20">
                 {Settings.translations.status}
-                <span className={statusColorClassNames[data.status]}>{Settings.translations[this.statusViewEnum[data.status]]}</span>
+                <span
+                  className={statusColorClassNames[data.status]}>{Settings.translations[this.statusViewEnum[data.status]]}</span>
               </p>
 
               <p className="G-flex G-mb-30 G-flex-justify-between G-fs-20">
@@ -139,7 +142,7 @@ class Details extends HelperComponent<RouteComponentProps<IRouteParams>, IState>
               </p>
             </div>
 
-            {!enviroment.WHOLESALE && <div className="P-address-block">
+            {!environment.WHOLESALE && <div className="P-address-block">
               <h2 className="G-mb-40 G-clr-orange">{Settings.translations.address}</h2>
 
               <p className="G-flex G-mb-30 G-flex-justify-between G-fs-20">
@@ -180,11 +183,11 @@ class Details extends HelperComponent<RouteComponentProps<IRouteParams>, IState>
 
           </div>
 
-          {/* <Shared.Products.TableList list={data.baskets} /> */}
-          <OrderListItem data={data.baskets} />
+          <List data={data.baskets}/>
 
           <div className="P-actions-block">
-            {data.status === OrderStatusEnum.Pending && <button className="G-btn G-clr-green" onClick={this.toggleConfirm}>
+            {data.status === OrderStatusEnum.Pending &&
+            <button className="G-btn G-clr-green" onClick={this.toggleConfirm}>
               {Settings.translations.cancel}
             </button>}
             <button className="G-btn G-clr-green G-ml-20" onClick={this.repeatOrder}>
@@ -198,7 +201,7 @@ class Details extends HelperComponent<RouteComponentProps<IRouteParams>, IState>
             onConfirm={this.cancel}
             onClose={this.toggleConfirm}
           />}
-        </div> : <PageLoader />}
+        </div> : <PageLoader/>}
       </Layout>
     );
   }

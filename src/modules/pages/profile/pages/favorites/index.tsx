@@ -30,12 +30,14 @@ class Favorites extends HelperComponent<IState, {}> {
     inProgress: false
   };
 
-  public componentDidMount() { this.fetchData(); }
+  public componentDidMount() {
+    this.fetchData();
+  }
 
   private fetchData = async () => {
     const result = await FavoriteController.GetList();
     this.safeSetState({ data: result.data.map(item => ({ ...item, isFavorite: true })) });
-  }
+  };
 
   private toggleFavorite = async (e: React.SyntheticEvent, index: number) => {
     if (!this.state.inProgress) {
@@ -49,21 +51,22 @@ class Favorites extends HelperComponent<IState, {}> {
         this.safeSetState({ data, inProgress: false });
       }
     }
-  }
+  };
 
   public render() {
     const { data } = this.state;
 
     return (
       <Layout>
-        <SavedBaskets />
+        <SavedBaskets/>
         <div className="G-flex P-profile-favorites">
           {data ? (data.length ? data.map((item, index) => <Link
             to={ROUTES.PRODUCTS.DETAILS.replace(':id', item.id)}
             key={item.id}
-            className="P-list-item"
+            className="P-list-item G-mb-20"
           >
-            {!!item.promotion.percent && <Shared.Products.DiscountLabel percent={item.promotion.percent} type={item.promotion.promotionType} />}
+            {!!item.promotion.percent &&
+            <Shared.Products.DiscountLabel percent={item.promotion.percent} type={item.promotion.promotionType}/>}
             <div
               className="P-image G-square-image-block"
               style={{ background: `url('${getMediaPath(item.imagePath)}') center/cover` }}
@@ -80,14 +83,16 @@ class Favorites extends HelperComponent<IState, {}> {
             </div>
 
             <div className="P-price">
-              <div>{item.promotion.promotionType === PromotionTypeEnum.Discount && item.promotion.result > 0 ? <del>{formatPrice(item.price)}</del> : null}</div>
-              <h2 className={`${item.promotion.promotionType === PromotionTypeEnum.Discount && item.promotion.result ? 'G-clr-orange' : ''}`}>
+              <div>{item.promotion.promotionType === PromotionTypeEnum.Discount && item.promotion.result > 0 ?
+                <del>{formatPrice(item.price)}</del> : null}</div>
+              <h2
+                className={`${item.promotion.promotionType === PromotionTypeEnum.Discount && item.promotion.result ? 'G-clr-orange' : ''}`}>
                 {item.promotion.promotionType === PromotionTypeEnum.Discount ?
                   formatPrice(item.promotion.result) :
                   formatPrice(item.price)}
               </h2>
             </div>
-          </Link>) : <EmptyState text={Settings.translations.empty_favorites_list} />) : null}
+          </Link>) : <EmptyState text={Settings.translations.empty_favorites_list}/>) : null}
         </div>
       </Layout>
     );

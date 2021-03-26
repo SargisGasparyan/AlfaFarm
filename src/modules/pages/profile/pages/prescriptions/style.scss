@@ -3,14 +3,10 @@
 .P-profile-prescriptions {
   display: flex;
   flex-direction: column;
-  min-height: calc(100% - 120px);
-  justify-content: space-between;
+
   > .P-content {
     display        : flex;
     overflow       : hidden;
-    background     : white;
-    box-shadow     : $default-block-shadow;
-    border-radius  : $big-radius;
     flex-direction : column;
 
     > h3 {
@@ -26,7 +22,4 @@
     }
   }
 
-  .P-data-table-body {
-    min-height: 600px;
-  }
 }

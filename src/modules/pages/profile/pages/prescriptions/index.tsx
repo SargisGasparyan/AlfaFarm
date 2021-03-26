@@ -6,8 +6,7 @@ import { byPrivateRoute } from 'platform/decorators/routes';
 import ROUTES from 'platform/constants/routes';
 import Layout from '../../components/layout';
 import Settings from 'platform/services/settings';
-import Table from 'components/table';
-import { formatDate, getViewEnum } from 'platform/services/helper';
+import List from './components/list';
 import { onlyForUsers } from 'platform/guards/routes';
 import Create from './pages/create';
 import Deciphered from './pages/deciphered';
@@ -15,7 +14,6 @@ import PrescriptionController from 'platform/api/prescription';
 import { paginationPageLimit } from 'platform/constants';
 import { IPagingResponse } from 'platform/constants/interfaces';
 import { IPrescriptionListResponseModel } from 'platform/api/prescription/models/response';
-import { PrescriptionStatusEnum } from 'platform/api/prescription/constants/enums';
 import Pagination from 'components/pagination';
 
 import './style.scss';
@@ -30,51 +28,18 @@ class Prescriptions extends HelperComponent<IState, {}> {
 
   public state: IState = {};
 
-  private statusViewEnum = getViewEnum(PrescriptionStatusEnum);
-
-  private columnConfig = [
-    {
-      name: Settings.translations.date,
-      cell: (row: IPrescriptionListResponseModel) => formatDate(row.createdDate),
-    },
-    {
-      name: Settings.translations.medical_institution,
-      cell: (row: IPrescriptionListResponseModel) => row.medicalInstitution,
-    },
-    {
-      name: Settings.translations.doctor,
-      cell: (row: IPrescriptionListResponseModel) => row.doctorName,
-    },
-    {
-      name: Settings.translations.prescription,
-      cell: (row: IPrescriptionListResponseModel) => row.name,
-    },
-    {
-      name: Settings.translations.status,
-      cell: (row: IPrescriptionListResponseModel) => Settings.translations[this.statusViewEnum[row.status]],
-    },
-    {
-      name: Settings.translations.deciphered,
-      cell: (row: IPrescriptionListResponseModel) => row.status === PrescriptionStatusEnum.Success ? <Link
-        to={ROUTES.PROFILE.PRESCRIPTIONS.DECIPHERED.replace(':id', row.id)}
-        className="P-see-more-label"
-      >
-        {Settings.translations.see_more}
-      </Link> : '-',
-    },
-  ];
 
   private fetchData = async (pageNumber: number) => {
     const body = {
       pageNumber,
-      pageSize: paginationPageLimit,
+      pageSize: paginationPageLimit
     };
 
     const result = await PrescriptionController.GetList(body);
     this.safeSetState({ data: result.data });
 
     return result.data;
-  }
+  };
 
   public render() {
     const { data } = this.state;
@@ -86,17 +51,16 @@ class Prescriptions extends HelperComponent<IState, {}> {
             <h3>
               <span className="G-mr-auto">{Settings.translations.prescriptions}</span>
               <Link to={ROUTES.PROFILE.PRESCRIPTIONS.CREATE} className="G-normal-link G-clr-main G-fs-48">
-                <i className="icon-Group-5532" />
+                <i className="icon-Group-5532"/>
               </Link>
             </h3>
-            
-            {data && data.list.length ? <Table<IPrescriptionListResponseModel>
-              columnConfig={this.columnConfig}
+
+            {data && data.list.length ? <List
               data={data.list}
-            /> : <EmptyState text={Settings.translations.empty_prescriptions_list} />}
+            /> : <EmptyState text={Settings.translations.empty_prescriptions_list}/>}
           </div>
-          
-          <Pagination<IPrescriptionListResponseModel> fetchData={this.fetchData} />
+
+          <Pagination<IPrescriptionListResponseModel> fetchData={this.fetchData}/>
         </div>
       </Layout>
     );

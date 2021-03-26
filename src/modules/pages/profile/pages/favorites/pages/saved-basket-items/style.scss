@@ -2,18 +2,27 @@
 @import 'src/assets/styles/variables';
 
 .P-profile-favorites-saved-basket-items {
-  display   : flex;
-  flex-wrap : wrap;
 
-  > .G-main-button, > .G-main-ghost-button {
-    width      : 200px;
-    margin-top : 40px;
-  }
 
-  > .G-main-ghost-button {
-    color         : $orange;
-    border        : 2px solid $orange;
-    background    : white;
-    border-radius : 30px;
+  .P-actions {
+    @media (max-width: $mobile-screen) {
+      flex-direction: column;
+      .G-main-button, > .G-main-ghost-button {
+        width: 100% !important;
+        margin-right: unset;
+        margin-left: unset;
+      }
+    }
+    .G-main-button, > .G-main-ghost-button {
+      width: 200px;
+      margin-top: 40px;
+    }
+
+    .G-main-ghost-button {
+      color: $orange;
+      border: 2px solid $orange;
+      background: white;
+      border-radius: 30px;
+    }
   }
 }
