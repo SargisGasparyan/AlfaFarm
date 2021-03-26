@@ -8,6 +8,8 @@ import DoneImage from '../../../../../../../assets/images/done.svg';
 import ROUTES from '../../../../../../../platform/constants/routes';
 
 import './style.scss';
+import HelperComponent from '../../../../../../../platform/classes/helper-component';
+import { render } from 'react-dom';
 
 interface IProps {
   data: IUserAddressListResponseModel[];
@@ -17,15 +19,17 @@ interface IProps {
   onRemove?(id: number): Promise<void>;
 };
 
-const List = React.memo(({ data, onEditDefault, onRemove }: IProps) => {
 
+class List extends HelperComponent<IProps, {}> {
+  public render() {
+    const { data, onEditDefault, onRemove } = this.props;
     return (<>
       {data && data.map((item: IUserAddressListResponseModel, index: number) =>
         <div className="P-list-item  G-my-20" key={index}>
           <div className="P-address-action G-flex G-flex-justify-between">
             {item.isDefault && <p>
               <img className="P-done-icon" src={DoneImage}/>
-              <span className="G-clr-main"> { Settings.translations.default}
+              <span className="G-clr-main"> {Settings.translations.default}
               </span>
             </p>}
             {!item.isDefault && <p>
@@ -47,7 +51,7 @@ const List = React.memo(({ data, onEditDefault, onRemove }: IProps) => {
             </div>
           </div>
 
-          <hr className="G-my-15" />
+          <hr className="G-my-15"/>
 
           <div className="G-flex G-flex-column P-address-det">
             <p className="G-flex G-flex-justify-between G-mb-10">
@@ -68,9 +72,10 @@ const List = React.memo(({ data, onEditDefault, onRemove }: IProps) => {
             </p>
           </div>
         </div>)}
-
     </>);
   }
-);
+
+}
+
 
 export default List;

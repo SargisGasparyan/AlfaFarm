@@ -12,7 +12,6 @@ import TenderController from 'platform/api/tender';
 import { onlyForUsers } from 'platform/guards/routes';
 import { ITenderDetailsResponseModel } from 'platform/api/tender/models/response';
 import Settings from 'platform/services/settings';
-import enviroment from 'platform/services/enviroment';
 
 import './style.scss';
 

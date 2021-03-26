@@ -9,7 +9,7 @@ import { Shared } from 'modules';
 import Categories from './components/categories';
 import DispatcherChannels from 'platform/constants/dispatcher-channels';
 import Storage from 'platform/services/storage';
-import enviroment from 'platform/services/enviroment';
+import environment from 'platform/services/environment';
 import { getMediaPath } from 'platform/services/helper';
 import WholesaleContent from './components/wholesale-content';
 import Socket from 'platform/services/socket';
@@ -248,7 +248,7 @@ class Header extends HelperComponent<{}, IState> {
               <img src={LogoImage} className="G-full-width"/>
             </Link>
 
-            {enviroment.WHOLESALE ? <WholesaleContent/> : <>
+            {environment.WHOLESALE ? <WholesaleContent/> : <>
               <div className="P-search-wrapper">
                 <SearchInput
                   onClick={this.searchFocus}
