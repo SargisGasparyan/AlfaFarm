@@ -17,26 +17,47 @@ import InstagramImage from 'assets/images/instagram.png';
 import './style.scss';
 
 const currentYear = new Date().getFullYear();
+const icons = 'icon-Group-5504 P-icons';
 
 function  Footer() {
   const [aboutRotateCondition, setAboutRotateCondition] = React.useState(true);
-  const [aboutRotateClass, setAboutRotateClass] = React.useState(['icon-Group-5504 P-icons']);
+  const [aboutRotateClass, setAboutRotateClass] = React.useState([icons]);
   const [aboutItems, setAboutItems] = React.useState(['P-hidden-items']);
 
   const [informationRotateCondition, setInformationRotateCondition] = React.useState(true);
-  const [informationRotateClass, setInformationRotateClass] = React.useState(['icon-Group-5504 P-icons']);
+  const [informationRotateClass, setInformationRotateClass] = React.useState([icons]);
   const [informationItems, setInformationItems] = React.useState(['P-hidden-items']);
+
+  const [usefulRotateCondition, setUsefulRotateCondition] = React.useState(true);
+  const [usefulRotateClass, setUsefulRotateClass] = React.useState([icons]);
+  const [usefulItems, setUsefulItems] = React.useState(['P-hidden-items']);
+
+  const [contactRotateCondition, setContactRotateCondition] = React.useState(true);
+  const [contactRotateClass, setContactRotateClass] = React.useState([icons]);
+  const [contactItems, setContactItems] = React.useState(['P-hidden-items']);
 
   const aboutChange = () => {
     setAboutRotateCondition(!aboutRotateCondition);
 
     if (aboutRotateCondition) {
       setAboutRotateClass([...aboutRotateClass, 'P-rotate-icon']);
-      setAboutItems(['P-shown-items'])
+      setAboutItems(['P-shown-items']);
+
+      setInformationRotateCondition(true);
+      setInformationRotateClass([icons]);
+      setInformationItems(['P-hidden-items']);
+
+      setUsefulRotateCondition(true);
+      setUsefulRotateClass([icons]);
+      setUsefulItems(['P-hidden-items']);
+
+      setContactRotateCondition(true);
+      setContactRotateClass([icons]);
+      setContactItems(['P-hidden-items'])
     }
 
     else {
-      aboutRotateClass.pop();
+      setAboutRotateClass([icons]);
       setAboutItems(['P-hidden-items'])
     }
   };
@@ -46,12 +67,76 @@ function  Footer() {
 
     if (informationRotateCondition) {
       setInformationRotateClass([...informationRotateClass, 'P-rotate-icon']);
-      setInformationItems(['P-shown-items'])
+      setInformationItems(['P-shown-items']);
+
+      setAboutRotateCondition(true);
+      setAboutRotateClass([icons]);
+      setAboutItems(['P-hidden-items']);
+
+      setUsefulRotateCondition(true);
+      setUsefulRotateClass([icons]);
+      setUsefulItems(['P-hidden-items']);
+
+      setContactRotateCondition(true);
+      setContactRotateClass([icons]);
+      setContactItems(['P-hidden-items'])
     }
 
     else {
-      informationRotateClass.pop();
+      setInformationRotateClass([icons]);
       setInformationItems(['P-hidden-items'])
+    }
+  };
+
+  const usefulChange = () => {
+    setUsefulRotateCondition(!usefulRotateCondition);
+
+    if (usefulRotateCondition) {
+      setUsefulRotateClass([...usefulRotateClass, 'P-rotate-icon']);
+      setUsefulItems(['P-shown-items']);
+
+      setAboutRotateCondition(true);
+      setAboutRotateClass([icons]);
+      setAboutItems(['P-hidden-items']);
+
+      setInformationRotateCondition(true);
+      setInformationRotateClass([icons]);
+      setInformationItems(['P-hidden-items']);
+
+      setContactRotateCondition(true);
+      setContactRotateClass([icons]);
+      setContactItems(['P-hidden-items'])
+    }
+
+    else {
+      setUsefulRotateClass([icons]);
+      setUsefulItems(['P-hidden-items'])
+    }
+  };
+
+  const contactChange = () => {
+    setContactRotateCondition(!contactRotateCondition);
+
+    if (contactRotateCondition) {
+      setContactRotateClass([...contactRotateClass, 'P-rotate-icon']);
+      setContactItems(['P-shown-items']);
+
+      setAboutRotateCondition(true);
+      setAboutRotateClass([icons]);
+      setAboutItems(['P-hidden-items']);
+
+      setInformationRotateCondition(true);
+      setInformationRotateClass([icons]);
+      setInformationItems(['P-hidden-items']);
+
+      setUsefulRotateCondition(true);
+      setUsefulRotateClass([icons]);
+      setUsefulItems(['P-hidden-items'])
+    }
+
+    else {
+      setContactRotateClass([icons]);
+      setContactItems(['P-hidden-items'])
     }
   };
 
@@ -95,26 +180,26 @@ function  Footer() {
 								<Link className={informationItems.join(' ')} to={ROUTES.FAQ}>{Settings.translations.faq}</Link>
 								<Link className={informationItems.join(' ')} to={ROUTES.CARD_INFO}>{Settings.translations.what_is_alfa_card}</Link>
 								<Link className={informationItems.join(' ')} to={ROUTES.TENDERS.MAIN}>{Settings.translations.tenders}</Link>
-								<a className={informationItems.join(' ')} href={Settings.wholesaleURL + ROUTES.HOME} target="blank">{Settings.translations.wholesale_sale}</a>
+								<a className={informationItems.join(' ')} href={Settings.wholesaleURL + ROUTES.SERVICES} target="blank">{Settings.translations.wholesale_sale}</a>
 								<Link className={informationItems.join(' ')} to={ROUTES.PRIVACY_POLICY}>{Settings.translations.privacy_policy}</Link>
 								<Link className={informationItems.join(' ')} to={ROUTES.TERMS_OF_USE}>{Settings.translations.terms_of_use}</Link>
 						</div>
 				</>}
         <div className="P-column P-mobile-column">
-          <div className="P-mobile-drop G-flex G-flex-justify-between G-flex-align-center">
+          <div className="P-mobile-drop G-flex G-flex-justify-between G-flex-align-center" onClick={usefulChange}>
             <h3 className="G-clr-main">{Settings.translations.useful_links}</h3>
-            <i className="icon-Group-5504 P-icons" />
+            <i className={usefulRotateClass.join(' ')} />
           </div>
           {!environment.WHOLESALE && <Link className="P-useful-items" to={ROUTES.HOW_TO_ORDER_ONLINE}>{Settings.translations.how_to_order_online}</Link>}
         </div>
         <div className="P-column P-mobile-column">
-          <div className="P-mobile-drop G-flex G-flex-justify-between G-flex-align-center">
+          <div className="P-mobile-drop G-flex G-flex-justify-between G-flex-align-center" onClick={contactChange}>
             <h3 className="G-clr-main">{Settings.translations.contact}</h3>
-            <i className="icon-Group-5504 P-icons" />
+            <i className={contactRotateClass.join(' ')} />
           </div>
-          <a className="P-contact-items"><i className="G-clr-orange icon-Group-5522" /> {contactPhoneNumber}</a>
-          <a className="P-contact-items"><i className="G-clr-orange icon-Group-5524" /> {contactEmail}</a>
-          <a className="P-contact-items"><i className="G-clr-orange icon-Group-5527" /> {Settings.translations.contact_address}</a>
+          <a className={contactItems.join(' ')}><i className="G-clr-orange icon-Group-5522" /> {contactPhoneNumber}</a>
+          <a className={contactItems.join(' ')}><i className="G-clr-orange icon-Group-5524" /> {contactEmail}</a>
+          <a className={contactItems.join(' ')}><i className="G-clr-orange icon-Group-5527" /> {Settings.translations.contact_address}</a>
 
           <OrderACall />
           {!!Settings.token && !Settings.guest && <Invite />}

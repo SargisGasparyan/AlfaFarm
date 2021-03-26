@@ -63,7 +63,7 @@ class Favorites extends HelperComponent<IState, {}> {
           {data ? (data.length ? data.map((item, index) => <Link
             to={ROUTES.PRODUCTS.DETAILS.replace(':id', item.id)}
             key={item.id}
-            className="P-list-item"
+            className="P-list-item G-mb-20"
           >
             {!!item.promotion.percent &&
             <Shared.Products.DiscountLabel percent={item.promotion.percent} type={item.promotion.promotionType}/>}
