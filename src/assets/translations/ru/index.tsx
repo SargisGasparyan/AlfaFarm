@@ -989,6 +989,7 @@ export default {
   order_checkout: "Оформления заказа",
   add: "Добавить",
   add_credit_card: "+Добавить новую карту",
+  delete_credit_card: "Вы хотите удалить сохраненную карту ?",
   what_do_you_need_today: "Что Вам необходимо сегодня?",
   today: "Сегодня",
   continue_with: (content: string) => `Продолжить с ${content}`,

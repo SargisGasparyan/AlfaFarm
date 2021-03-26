@@ -991,6 +991,7 @@ export default {
   order_checkout: "Check out",
   add: "Add",
   add_credit_card: "+Add a new credit card",
+  delete_credit_card: "Do you want to delete the saved card ?",
   what_do_you_need_today: "What do you need today?",
   today: "Today",
   continue_with: (content: string) => `Continue with ${content}`,

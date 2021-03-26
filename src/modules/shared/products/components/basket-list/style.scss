@@ -44,6 +44,7 @@ hr {
 
   .P-product-det {
     justify-content: start;
+    position: relative;
 
     .P-prod-title {
       overflow: hidden;
@@ -55,6 +56,14 @@ hr {
       -webkit-box-orient: vertical;
       display: -webkit-box;
       /* autoprefixer: off */
+    }
+
+    .P-out-of-stock {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      margin-right: 10px;
+      margin-bottom: 5px;
     }
 
 

@@ -53,6 +53,8 @@ class BasketList extends HelperComponent<IProps, {}> {
                   />
                 </div>
               </div>
+
+              {!item.productStockQuantity && <span className="P-out-of-stock G-clr-red">{Settings.translations.out_of_stock}</span>}
             </div>
             <hr className="G-my-30 G-clr-gray"/>
 
