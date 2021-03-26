@@ -5,6 +5,10 @@
 
 .G-page.P-home-news + .G-page.P-home-contact-us {
   padding-top : 100px;
+  background: url('src/assets/images/background_alfa.svg') no-repeat center/cover;
+  background-size: 100%;
+  background-position-y: 20%;
+  background-position-x: center;
 }
 
 .G-page.P-home-contact-us {
