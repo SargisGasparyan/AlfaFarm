@@ -1,4 +1,4 @@
-import enviroment from 'platform/services/enviroment';
+import environment from 'platform/services/environment';
 
-export const onlyForUsers = () => !enviroment.WHOLESALE;
-export const onlyForWholesaleUsers = () => enviroment.WHOLESALE;
+export const onlyForUsers = () => !environment.WHOLESALE;
+export const onlyForWholesaleUsers = () => environment.WHOLESALE;

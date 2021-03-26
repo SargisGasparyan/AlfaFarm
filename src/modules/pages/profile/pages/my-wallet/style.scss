@@ -4,11 +4,13 @@
 .P-cards-page {
   display         : flex;
   flex-direction  : column;
+  justify-content: space-around;
   border-radius   : 12px;
   align-items     : flex-end;
 
+
   &.P-cards-page-has-card {
-    width           : 400px;
+    max-width           : 400px;
     padding         : 10px;
     border-top      : 12px solid rgba(73, 183, 72, 0.1);
     box-shadow      : $default-block-shadow;
@@ -44,6 +46,13 @@
     align-items : center;
     padding     : 10px 20px;
     border-bottom: 1px solid $light-gray;
+    position: relative;
+
+    .P-remove {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
 
     .P-card-number {
       width: 100%;

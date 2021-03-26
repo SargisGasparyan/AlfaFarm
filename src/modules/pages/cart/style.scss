@@ -1,8 +1,6 @@
 @import 'src/assets/styles/helper';
 @import 'src/assets/styles/variables';
 
-@import './responsive';
-
 .P-cart-page {
 
   display       : flex;
@@ -18,78 +16,8 @@
     text-decoration : underline;
   }
 
-  .P-table {
-    width      : 100%;
-    overflow-x : auto;
-
-    .P-data-table-header {
-      height     : 80px;
-      padding    : 0 14vh;
-      background : none;
-
-      > li {
-        color         : $text-gray;
-        font-size     : 22px;
-        height        : 100%;
-        border-top    : 1px solid $light-gray;
-        border-bottom : 1px solid $light-gray;
-        display       : flex;
-        align-items   : center;
-        @include normal-font();
-      }
-    }
-
-    .P-data-table-body {
-
-      > ul {
-        margin      : 40px 14vh 0;
-        height      : auto;
-        padding     : 0 0 40px;
-        display     : flex;
-        align-items : center;
-
-        &.P-out-of-stock-product {
-          opacity : .5;
-        }
-
-        > li {
-          min-height    : 155px;
-          display       : flex;
-          align-items   : center;
-        }
-
-        > li > div {
-          position  : static;
-          transform : initial;
-
-          > a {
-            color   : black;
-            padding : 5px;
-            display : flex;
-            @include bold-font;
-
-            > .P-main-info {
-              //width           : calc(100% - 120px);
-              display         : flex;
-              padding         : 0 0 0 30px;  // 0 30px;
-              flex-direction  : column;
-              justify-content : center;
-
-              > h2 {
-                font-size   : $normal-fs;
-                word-break  : initial;
-                white-space : initial;
-              }
-
-              > span {
-                margin-top : 20px;
-                @include normal-font;
-              }
-            }
-          }
-        }
-      }
-    }
+  .P-basket-products {
+    width: 100%;
   }
 
   > .P-data-block-wrapper {
@@ -113,12 +41,12 @@
       margin          : 20px 0;
       display         : flex;
       justify-content : space-between;
-      
+
       @media (max-width: $mobile-screen){
         padding: 0;
       }
     }
-    
+
     > .P-pay-button {
       width        : 100%;
       @media (max-width : $mobile-screen) {
@@ -129,7 +57,7 @@
 }
 
 .P-discounted-item {
-  > del {
+  del {
     font-size : 22px;
     color     : rgba(0, 0, 0, .5);
   }
@@ -152,10 +80,6 @@
     ul {
       margin         : 0 !important;
       padding-bottom : 0 !important;
-
-      .P-count {
-        width: 100px;
-      }
 
       li {
 

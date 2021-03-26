@@ -1,6 +1,7 @@
 import Connection    from '../../services/connection';
 import { IResponse } from '../../constants/interfaces';
 import { IUserCardListModel } from './models/response';
+import Settings from '../../services/settings';
 
 class PaymentController {
  
@@ -11,6 +12,16 @@ class PaymentController {
       action: 'registerCard',
       controller: PaymentController.controller,
     });
+
+    return result;
+  };
+
+  public static removeCard = (cardId: string): Promise<IResponse<any>> => {
+    const result = Connection.DELETE({
+      body: {},
+      action: `deleteCard/${cardId}`,
+      controller: PaymentController.controller,
+    }, { text: Settings.translations.delete_credit_card });
 
     return result;
   };

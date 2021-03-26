@@ -3,58 +3,60 @@
 
 @keyframes cart-icon-animation {
   from {
-    transform : scale(1.5);
+    transform: scale(1.5);
   }
 
   to {
-    transform : scale(1);
+    transform: scale(1);
   }
 }
 
 header {
-  top        : 0;
-  left       : 0;
-  width      : 100%;
-  height     : $header-size;
-  z-index    : 100;
-  padding    : 0 4.2vw; // $page-horizontal-offset;
-  position   : fixed;
-  background : white;
-  box-shadow : $default-block-shadow;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: $header-size;
+  z-index: 100;
+  padding: 0 4.2vw; // $page-horizontal-offset;
+  position: fixed;
+  background: white;
+  box-shadow: $default-block-shadow;
 
-  @media (max-width : $small-screen) {
-    height : $page-title-size;
+  @media (max-width: $small-screen) {
+    height: $page-title-size;
   }
 
   > .P-logo {
-    width         : 170px;
-    min-width     : 100px;
-    margin-bottom : 0.52vw;
+    width: 170px;
+    min-width: 100px;
+    margin-bottom: 0.52vw;
   }
 
   > .P-search-wrapper {
-    position : relative;
-    width     : 21vw;
-    margin : 0 1.05vw 0 2.1vw;
+    position: relative;
+    width: 26vw;
+    margin: 0 1.05vw 0 2.1vw;
 
     > .P-search-input {
-
+      > input {
+        padding: 10px 35px;
+      }
     }
   }
 
   > .P-profile {
-    color           : black;
-    padding         : 0 20px;
-    display         : flex;
-    align-items     : center;
-    text-decoration : none;
+    color: black;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
 
     > .P-image {
-      height        : 35px;
-      min-width     : 35px;
-      max-width     : 35px;
-      margin-right  : 15px;
-      border-radius : 50%;
+      height: 35px;
+      min-width: 35px;
+      max-width: 35px;
+      margin-right: 15px;
+      border-radius: 50%;
     }
 
     > h4, h5 {
@@ -63,78 +65,85 @@ header {
   }
 
   .P-link, .P-wholesale-link {
-    color           : black;
-    cursor          : pointer;
-    height          : 100%;
-    display         : flex;
-    padding         : 0.52vw 0.8vw;
-    position        : relative;
-    text-align      : center;
-    align-items     : center;
-    white-space     : nowrap;
-    text-decoration : none;
+    color: black;
+    cursor: pointer;
+    height: 100%;
+    display: flex;
+    padding: 10px 8px;
+    position: relative;
+    text-align: center;
+    align-items: center;
+    white-space: nowrap;
+    text-decoration: none;
 
     &.P-wholesale-link {
-      padding : 10px 30px;
+      padding: 10px 30px;
     }
 
     &.P-active {
-      color : $orange;
+      color: $orange;
     }
 
     &.P-login {
-      color         : white;
-      height        : auto;
-      margin        : 0 1.3vw;
-      padding       : 0.52vw 2.1vw;
-      background    : $main-color;
-      border-radius : 20px;
+      color: white;
+      height: auto;
+      margin: 0 1.3vw;
+      padding: 0.52vw 2.1vw;
+      background: $main-color;
+      border-radius: 20px;
     }
 
     &.P-icon {
-      color        : $orange;
-      height       : auto;
-      padding      : 0;
-      position     : relative;
-      font-size    : 24px;
-      margin-right : 1.3vw;
+      color: $orange;
+      height: auto;
+      padding: 0;
+      position: relative;
+      font-size: 24px;
+      margin-right: 1.3vw;
 
       &.P-notification > span {
-        top   : -5px;
-        right : -5px
+        top: -5px;
+        right: -5px
       }
 
       > span {
-        top            : -5px;
-        right          : -10px;
-        color          : white;
-        height         : 18px;
-        padding        : 0 4px 0 2px;
-        position       : absolute;
-        font-size      : 12px;
-        min-width      : 18px;
-        background     : red;
-        border-radius  : 9px;
-        letter-spacing : -1px;
+        top: -5px;
+        right: -10px;
+        color: white;
+        height: 18px;
+        padding: 0 4px 0 2px;
+        position: absolute;
+        font-size: 12px;
+        min-width: 18px;
+        background: red;
+        border-radius: 9px;
+        letter-spacing: -1px;
       }
+    }
+  }
+
+  .P-header-language-switcher {
+    .P-select {
+      padding: 10px 8px;
+      height: 100%;
     }
   }
 }
 
 
 .P-profile-header {
-  text-overflow : ellipsis;
-  overflow      : hidden;
-  white-space   : nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 
 .P-mobile-menu-block {
-  position         : fixed;
-  background-color : $white;
-  padding          : 20px;
-  right            : 0;
-  width            : 250px;
-  height           : 100vh;
-  top              : 0;
+  position: fixed;
+  background-color: $white;
+  padding: 20px;
+  right: 0;
+  width: 250px;
+  height: 100vh;
+  top: 0;
 }

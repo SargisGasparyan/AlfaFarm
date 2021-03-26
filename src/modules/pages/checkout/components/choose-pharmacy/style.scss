@@ -58,7 +58,15 @@
           left      : 20px;
           z-index   : 1;
           position  : absolute;
-          max-width : calc(100vw - 100px);
+          max-width : calc(100vw - 570px);
+
+          @media (max-width: $small-screen) {
+            max-width : calc(100vw - 465px);
+          }
+
+          @media (max-width: $small-screen) {
+            max-width : calc(100vw - 570px);
+          }
 
           > input {
             padding: 15px 40px 15px 25px;

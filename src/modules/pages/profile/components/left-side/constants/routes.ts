@@ -1,8 +1,8 @@
 import ROUTES from 'platform/constants/routes';
 import Settings from 'platform/services/settings';
-import enviroment from 'platform/services/enviroment';
+import environment from 'platform/services/environment';
 
-export const leftSideOptions = () => !enviroment.WHOLESALE ? [
+export const leftSideOptions = () => !environment.WHOLESALE ? [
   {
     name: Settings.translations.bonus_card,
     path: ROUTES.PROFILE.BONUS_CARD,

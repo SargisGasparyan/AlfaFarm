@@ -7,7 +7,8 @@ import { onlyForUsers } from 'platform/guards/routes';
 import ROUTES from 'platform/constants/routes';
 import Layout from '../../components/layout';
 import Settings from 'platform/services/settings';
-import Table from 'components/table';
+// import Table from 'components/table';
+import List from './components/list';
 import { formatDate, formatPrice } from 'platform/services/helper';
 import { IClinicRegistrationListResponseModel } from 'platform/api/clinicRegistration/models/response';
 import ClinicRegistrationController from 'platform/api/clinicRegistration';
@@ -28,32 +29,18 @@ class MyRegistrations extends HelperComponent<IState, {}> {
 
   public state: IState = {};
 
-  private columnConfig = [
-    {
-      name: Settings.translations.service,
-      cell: (row: IClinicRegistrationListResponseModel) => row.serviceName,
-    },
-    {
-      name: Settings.translations.date,
-      cell: (row: IClinicRegistrationListResponseModel) => formatDate(row.startDate),
-    },
-    {
-      name: Settings.translations.price,
-      cell: (row: IClinicRegistrationListResponseModel) => formatPrice(row.servicePrice),
-    },
-  ];
 
   private fetchData = async (pageNumber: number) => {
     const body = {
       pageNumber,
-      pageSize: paginationPageLimit,
+      pageSize: paginationPageLimit
     };
 
     const result = await ClinicRegistrationController.GetList(body);
 
     this.safeSetState({ data: result.data });
     return result.data;
-  }
+  };
 
   public render() {
     const { data } = this.state;
@@ -61,18 +48,15 @@ class MyRegistrations extends HelperComponent<IState, {}> {
     return (
       <Layout>
         <section className="P-profile-my-registrations-page">
-          <h2 className="P-title G-mb-30">
-            <span>{Settings.translations.my_registrations}</span>
-            <Link to={ROUTES.PROFILE.MY_REGISTRATIONS.MEDICAL_HISTORY}>{Settings.translations.medical_history}</Link>
+          <h2 className="P-title G-mb-30 G-flex G-flex-justify-between">
+            <p className="P-registrations-title">{Settings.translations.my_registrations}</p>
+            <p><Link to={ROUTES.PROFILE.MY_REGISTRATIONS.MEDICAL_HISTORY}>{Settings.translations.medical_history}</Link></p>
           </h2>
           <div className="G-flex P-list">
-            {data ? (data.list.length ? <Table<IClinicRegistrationListResponseModel>
-              columnConfig={this.columnConfig}
-              data={data.list}
-            /> : <EmptyState text={Settings.translations.empty_registrations_list} />) : null}
+            {data ? (data.list.length ? <List data={data.list}/> :
+              <EmptyState text={Settings.translations.empty_registrations_list}/>) : null}
           </div>
-          
-          <Pagination<IClinicRegistrationListResponseModel> fetchData={this.fetchData} />
+          <Pagination<IClinicRegistrationListResponseModel> fetchData={this.fetchData}/>
         </section>
       </Layout>
     );

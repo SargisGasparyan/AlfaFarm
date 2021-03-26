@@ -1,14 +1,14 @@
 import { HubConnectionBuilder, HubConnection } from '@aspnet/signalr';
 
 import Settings from './settings';
-import Enviroment from './enviroment';
+import environment from './environment';
 
 class Socket {
   public static connection: HubConnection;
 
   public static connect = () => {
     Socket.connection = new HubConnectionBuilder()
-      .withUrl(`${Enviroment.BASE_URL}notificationHub`, {
+      .withUrl(`${environment.BASE_URL}notificationHub`, {
         accessTokenFactory: () => Settings.token || '',
       })
       .build();
