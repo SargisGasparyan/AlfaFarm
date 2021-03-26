@@ -8,7 +8,6 @@ import Layout from '../../components/layout';
 import EmptyState from 'components/empty-state';
 import Settings from 'platform/services/settings';
 import PaymentController from 'platform/api/payment';
-import Radio from 'components/radio';
 import { IUserCardListModel } from 'platform/api/payment/models/response';
 import { CardTypeEnum } from 'platform/constants/enums';
 import './style.scss';
