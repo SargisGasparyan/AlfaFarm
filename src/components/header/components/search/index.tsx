@@ -22,6 +22,7 @@ interface IProps {
   data: IProductSearcResponseModel | null;
   historyShown: boolean;
   onClose(): void;
+  onSubmit(): void;
 }
 
 interface IState {
@@ -91,7 +92,7 @@ class SearchPopup extends HelperComponent<IProps, IState> {
 
   public render() {
     const { data } = this.state;
-    const { searchText, onClose, historyShown } = this.props;
+    const { searchText, onClose, onSubmit, historyShown } = this.props;
 
     return (
       <ClickOutside onClickOutside={onClose}>
@@ -101,7 +102,7 @@ class SearchPopup extends HelperComponent<IProps, IState> {
             <a className="G-ml-auto G-clr-orange" onClick={this.clearAll}>{Settings.translations.clear_all}</a>
           </h6> : <h6 className="G-flex">
             {Settings.translations.products}
-            <Link to={`${ROUTES.PRODUCTS.MAIN}?text=${searchText}`} className="G-ml-auto G-clr-orange" onClick={() => onClose()}>{Settings.translations.see_more}</Link>
+            <p className="G-ml-auto G-clr-orange" onClick={() => onSubmit()}>{Settings.translations.see_more}</p>
           </h6>}
           {data && data.products.map(item => (
             <div className="P-list-item" key={item.id} onClick={() => this.clickOnItem(item)}>

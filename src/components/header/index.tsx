@@ -262,6 +262,7 @@ class Header extends HelperComponent<{}, IState> {
 
                 {searchOpen && <SearchPopup
                   onClose={this.closeSearch}
+                  onSubmit={this.searchSubmit}
                   data={searchResult}
                   searchText={searchValue}
                   historyShown={searchHistoryShown}
