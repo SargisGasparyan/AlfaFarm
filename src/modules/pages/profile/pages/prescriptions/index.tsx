@@ -7,7 +7,6 @@ import ROUTES from 'platform/constants/routes';
 import Layout from '../../components/layout';
 import Settings from 'platform/services/settings';
 import List from './components/list';
-import { formatDate, getViewEnum } from 'platform/services/helper';
 import { onlyForUsers } from 'platform/guards/routes';
 import Create from './pages/create';
 import Deciphered from './pages/deciphered';
@@ -15,7 +14,6 @@ import PrescriptionController from 'platform/api/prescription';
 import { paginationPageLimit } from 'platform/constants';
 import { IPagingResponse } from 'platform/constants/interfaces';
 import { IPrescriptionListResponseModel } from 'platform/api/prescription/models/response';
-import { PrescriptionStatusEnum } from 'platform/api/prescription/constants/enums';
 import Pagination from 'components/pagination';
 
 import './style.scss';
