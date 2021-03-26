@@ -1025,6 +1025,7 @@ export default {
   order_checkout: "Պատվերի ձևակերպում",
   add: "Ավելացնել",
   add_credit_card: "+Ավելացրեք նոր քարտ",
+  delete_credit_card: "Ցանկանու՞մ եք ջնջել ձեր պահված քարտը:",
   what_do_you_need_today: "Ի՞նչ է Ձեզ անհրաժեշտ այսօր",
   today: "Այսօր",
   continue_with: (content: string) => `Շարունակել ${content}-ով`,

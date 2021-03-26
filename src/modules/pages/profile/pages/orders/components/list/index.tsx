@@ -19,14 +19,6 @@ interface IProps {
 };
 
 const List = React.memo(({ data, redirectUrl }: IProps) => {
-    const config = {
-      number: Settings.translations.order_number,
-      date: Settings.translations.date,
-      quantity: Settings.translations.quantity,
-      address: Settings.translations.address,
-      price: Settings.translations.price,
-      status: Settings.translations.status
-    };
     const statusViewEnum = getViewEnum(OrderStatusEnum);
 
     return (<>
@@ -35,7 +27,7 @@ const List = React.memo(({ data, redirectUrl }: IProps) => {
           <div className="P-list-item G-flex">
             <div className="P-orders-det">
               <p className="P-order-id G-mb-5">
-                {config.number} - {item.id}
+                {Settings.translations.order_number} - {item.id}
               </p>
               <p className="P-order-price G-mb-10">
                 {formatPrice(item.totalPrice)}

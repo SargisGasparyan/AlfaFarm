@@ -71,10 +71,10 @@ class SavedBasketItems extends HelperComponent<RouteComponentProps<IRouteParams>
 
   private changeQuantity = (index: number, value: number) => {
     const { data } = this.state;
-
     if (data) {
       data[index].productQuantity = value;
       this.safeSetState({ data });
+
     }
   }
 
@@ -83,11 +83,15 @@ class SavedBasketItems extends HelperComponent<RouteComponentProps<IRouteParams>
 
     return (
       <Layout>
-        {data ? <div className="P-profile-favorites-saved-basket-items">
+        {data ? <div className="P-profile-favorites-saved-basket-items G-flex G-flex-column">
           {window.routerHistory.length > 2 && <i className="G-back-icon icon-Group-5529" onClick={this.goBack} />}
-          <Shared.Products.TableList list={data} onQuantityChange={this.changeQuantity} />
-          <button className="G-main-ghost-button G-ml-auto" onClick={this.deleteSaved}>{Settings.translations.delete}</button>
-          <button className="G-main-button G-ml-20" onClick={this.buy}>{Settings.translations.buy}</button>
+          <Shared.Products.BasketList data={data} onQuantityChange={this.changeQuantity} />
+
+          <div className="G-flex G-flex-justify-end P-actions">
+            <button className="G-main-ghost-button G-ml-auto" onClick={this.deleteSaved}>{Settings.translations.delete}</button>
+            <button className="G-main-button G-ml-20" onClick={this.buy}>{Settings.translations.buy}</button>
+          </div>
+
         </div> : <PageLoader />}
       </Layout>
     );

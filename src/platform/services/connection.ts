@@ -3,7 +3,7 @@
 
 import nodeFetch from 'node-fetch';
 
-import Enviroment from './enviroment';
+import environment from './environment';
 import Settings from './settings';
 import { OSTypeEnum, LanguageEnum } from '../constants/enums';
 import { IRequest, IBodyRequest, IResponse } from '../constants/interfaces';
@@ -70,7 +70,7 @@ class Connection {
     const HEADERS = Connection.createHeaders(noneJSONBody as boolean);
     !data.unabortable && window.abortableRequests.push(abort);
     try {
-      const response: Response = await fetch(`${Enviroment.BASE_URL}api/${controller}${!onlyQuery ? '/' : ''}${action}${query ? `?${Connection.queryFromObject(query)}` : ''}`, {
+      const response: Response = await fetch(`${environment.BASE_URL}api/${controller}${!onlyQuery ? '/' : ''}${action}${query ? `?${Connection.queryFromObject(query)}` : ''}`, {
         body: noneJSONBody ? body as any : JSON.stringify(body),
         method: 'POST',
         headers: HEADERS,
@@ -91,7 +91,7 @@ class Connection {
     const HEADERS = Connection.createHeaders(noneJSONBody as boolean);
     !data.unabortable && window.abortableRequests.push(abort);
     try {
-      const response: Response = await fetch(`${Enviroment.BASE_URL}api/${controller}${!onlyQuery ? '/' : ''}${action}${query ? `?${Connection.queryFromObject(query)}` : ''}`, {
+      const response: Response = await fetch(`${environment.BASE_URL}api/${controller}${!onlyQuery ? '/' : ''}${action}${query ? `?${Connection.queryFromObject(query)}` : ''}`, {
         body: noneJSONBody ? body as any : JSON.stringify(body),
         method: 'PUT',
         headers: HEADERS,
@@ -124,7 +124,7 @@ class Connection {
         !data.unabortable && window.abortableRequests.push(abort);
 
         try {
-          const response: Response = await fetch(`${Enviroment.BASE_URL}api/${controller}${!onlyQuery ? '/' : ''}${action}${query ? `?${Connection.queryFromObject(query)}` : ''}`, {
+          const response: Response = await fetch(`${environment.BASE_URL}api/${controller}${!onlyQuery ? '/' : ''}${action}${query ? `?${Connection.queryFromObject(query)}` : ''}`, {
             body: noneJSONBody ? body as any : JSON.stringify(body),
             method: 'DELETE',
             headers: HEADERS,
@@ -162,7 +162,7 @@ class Connection {
     const HEADERS = Connection.createHeaders(false);
     !data.unabortable && window.abortableRequests.push(abort);
     try {
-      const response = await fetch(`${Enviroment.BASE_URL}api/${controller}${!onlyQuery ? '/' : ''}${action}${query ? `?${Connection.queryFromObject(query)}` : ''}`, {
+      const response = await fetch(`${environment.BASE_URL}api/${controller}${!onlyQuery ? '/' : ''}${action}${query ? `?${Connection.queryFromObject(query)}` : ''}`, {
         method: 'GET',
         headers: HEADERS,
         signal: abort.signal,
@@ -185,7 +185,7 @@ class Connection {
     query: { [key: string]: any },
   }) => {
     const onlyQuery = !action && query;
-    const response = await nodeFetch(`${Enviroment.BASE_URL}api/${controller}${!onlyQuery ? '/' : ''}${action}${query ? `?${Connection.queryFromObject(query)}` : ''}`, {
+    const response = await nodeFetch(`${environment.BASE_URL}api/${controller}${!onlyQuery ? '/' : ''}${action}${query ? `?${Connection.queryFromObject(query)}` : ''}`, {
       body,
       headers: { language: LanguageEnum.English.toString() },
       method,

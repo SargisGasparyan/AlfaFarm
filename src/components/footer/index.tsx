@@ -5,7 +5,7 @@ import ROUTES from 'platform/constants/routes';
 import Settings from 'platform/services/settings';
 import { contactPhoneNumber, contactEmail } from 'platform/constants/contact-info';
 import OrderACall from './components/order_a_call';
-import enviroment from 'platform/services/enviroment';
+import environment from 'platform/services/environment';
 import Invite from './components/invite';
 
 import LogoImage from 'assets/images/logo.png';
@@ -74,7 +74,7 @@ function  Footer() {
             <img src={GooglePlayImage} onClick={() => window.open('https://play.google.com/store/apps/details?id=am.gtest.alfapharm&hl=ru&gl=US', '_blank')} />
           </div>
         </div>
-        {!enviroment.WHOLESALE && <>
+        {!environment.WHOLESALE && <>
           {/* <div className="P-column">
           <h3 className="G-clr-main">{Settings.translations.wholesale_sale}</h3>
         </div> */}
@@ -105,7 +105,7 @@ function  Footer() {
             <h3 className="G-clr-main">{Settings.translations.useful_links}</h3>
             <i className="icon-Group-5504 P-icons" />
           </div>
-          {!enviroment.WHOLESALE && <Link className="P-useful-items" to={ROUTES.HOW_TO_ORDER_ONLINE}>{Settings.translations.how_to_order_online}</Link>}
+          {!environment.WHOLESALE && <Link className="P-useful-items" to={ROUTES.HOW_TO_ORDER_ONLINE}>{Settings.translations.how_to_order_online}</Link>}
         </div>
         <div className="P-column P-mobile-column">
           <div className="P-mobile-drop G-flex G-flex-justify-between G-flex-align-center">

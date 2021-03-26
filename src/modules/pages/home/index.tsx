@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 
 import ROUTES from 'platform/constants/routes';
-import enviroment from 'platform/services/enviroment';
+import environment from 'platform/services/environment';
 import { byRoute } from 'platform/decorators/routes';
 import HelperComponent from 'platform/classes/helper-component';
 import DiscountedProducts from './components/discounted-products';
@@ -63,7 +63,7 @@ class Home extends HelperComponent<{}, IState> {
       <section className="P-home-page">
         <Carousel />
         <DiscountedProducts />
-        {enviroment.WHOLESALE ? <ForPartners /> : <News />}
+        {environment.WHOLESALE ? <ForPartners /> : <News />}
         <ContactUs />
 
         {orderSuccessModalOpen && <SuccessModal onClose={this.closeOrderSuccessModal}>
