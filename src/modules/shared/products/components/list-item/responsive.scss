@@ -6,13 +6,28 @@
 
 @media (max-width: $medium-screen) {
   a.P-products-list-item {
-    width : calc(50% - 40px);
+    //width : calc(50% - 40px);
+  }
+}
+
+@media (max-width: $small-screen) {
+  a.P-products-list-item {
+    width : calc(100% / 3 - 20px);
+    margin: 10px;
+    padding: 10px;
+    //width : calc(50% - 40px);
+  }
+}
+
+@media (max-width: $tablet-screen) {
+  a.P-products-list-item {
+    width : calc(100% / 3 - 20px);
   }
 }
 
 @media (max-width: $mobile-screen) {
   a.P-products-list-item {
-    width : calc(100% - 40px);
+    width : calc(50% - 40px);
 
     > h3 {
       height    : 40px;
