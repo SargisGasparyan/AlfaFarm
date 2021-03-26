@@ -18,46 +18,6 @@ interface IProps {
 };
 
 const List = React.memo(({ data, onEditDefault, onRemove }: IProps) => {
-    const config = {
-      name: {
-        name: '',
-        cell: (row: IUserAddressListResponseModel) => <>
-          {row.isDefault && <img className="P-done-icon" src={DoneImage}/>}
-          {row.name}
-        </>
-      },
-      address: {
-        name: Settings.translations.address,
-        cell: (row: IUserAddressListResponseModel) => row.addressText
-      },
-      default: {
-        name: '',
-        cell: (row: IUserAddressListResponseModel) => <>
-          {row.isDefault && <span className="G-clr-main">{Settings.translations.default}</span>}
-          {!row.isDefault && <button
-            className="P-make-default"
-            onClick={() => onEditDefault && onEditDefault(row.id)}
-          >{Settings.translations.make_default}</button>}
-        </>
-      },
-      edit: {
-        name: '',
-        style: { minWidth: 150, maxWidth: 150 },
-        cell: (row: IUserAddressListResponseModel) => <>
-          <Link to={ROUTES.PROFILE.ADDRESSES.UPDATE.replace(':id', row.id)}>
-            <i
-              className="icon-Group-5545 G-back-icon G-clr-main G-mr-40 G-fs-26"
-            />
-          </Link>
-
-          <i
-            className="icon-Group-5032 G-clr-orange G-cursor-pointer G-fs-24"
-            onClick={() => onRemove && onRemove(row.id)}
-          />
-        </>
-      }
-    };
-    console.log(data);
 
     return (<>
       {data && data.map((item: IUserAddressListResponseModel, index: number) =>

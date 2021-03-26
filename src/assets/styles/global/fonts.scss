@@ -40,6 +40,10 @@ $fonts: (
   text-align : center;
 }
 
+.G-text-right {
+  text-align : right;
+}
+
 .G-text-bold {
   @include bold-font;
 }

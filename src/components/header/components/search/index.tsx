@@ -98,7 +98,7 @@ class SearchPopup extends HelperComponent<IProps, IState> {
         <aside className="P-header-search-result">
           {historyShown ? <h6 className="G-flex">
             {Settings.translations.last_search_results}
-            <a className="G-ml-auto G-clr-orange" onClick={this.clearAll}>{Settings.translations.clear_all}</a>
+            <a className="G-ml-auto G-clr-orange G-cursor-pointer" onClick={this.clearAll}>{Settings.translations.clear_all}</a>
           </h6> : <h6 className="G-flex">
             {Settings.translations.products}
             <Link to={`${ROUTES.PRODUCTS.MAIN}?text=${searchText}`} className="G-ml-auto G-clr-orange" onClick={() => onClose()}>{Settings.translations.see_more}</Link>
