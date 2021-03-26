@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
 
 import ROUTES from 'platform/constants/routes';
 import Settings from 'platform/services/settings';
@@ -41,63 +40,6 @@ class Cart extends HelperComponent<{}, IState> {
     outOfStockConfirm: false,
     priceNotEnoughModalOpen: false
   };
-
-  private columnConfig = [
-    {
-      name: Settings.translations.product,
-      cell: (row: IBasketListResponseModel) => <Link to={ROUTES.PRODUCTS.DETAILS.replace(':id', row.productId)}>
-        <div
-          className="P-image G-square-image-block"
-          style={{ background: `url('${getMediaPath(row.productPhoto)}') center/contain no-repeat` }}
-        />
-
-        <div className="P-main-info">
-          <h2 title={row.productTitle}>{row.productTitle}</h2>
-          {!row.productStockQuantity && <h5 className="G-clr-red G-mt-5">{Settings.translations.out_of_stock}</h5>}
-          <span>{row.unitQuantity} {row.unitName}</span>
-        </div>
-      </Link>,
-      style: { minWidth: '25.6%' } // 450px
-    },
-    {
-      name: Settings.translations.quantity,
-      style: { minWidth: '8%' }, // 140px
-
-      cell: (row: IBasketListResponseModel, index: number) => <div className="P-count"> <CountInput
-        min={0}
-        step={1}
-        value={row.productQuantity}
-        onChange={count => this.changeCount(row, index, count)}
-      /> </div>,
-    },
-    {
-      name: Settings.translations.bonus,
-      cell: (row: IBasketListResponseModel) => <h3 className="G-fs-24">{getBasketItemPriceInfo(row).bonus}</h3>,
-    },
-    {
-      name: Settings.translations.price,
-      style: { minWidth: '8%' }, // 140px
-      cell: (row: IBasketListResponseModel) =>
-        <div className="G-flex G-flex-column G-align-center G-justify-center">
-          <div>{row.promotion.promotionType === PromotionTypeEnum.Discount && row.promotion.result > 0 ?
-            <del>{formatPrice(row.totalPrice)}</del> : null}</div>
-          <h3
-            className={`G-fs-24 ${row.promotion.promotionType === PromotionTypeEnum.Discount && row.promotion.result > 0 ? 'G-clr-orange' : ''}`}>
-            {row.promotion.promotionType === PromotionTypeEnum.Discount ?
-              formatPrice(row.promotion.result) :
-              formatPrice(row.productQuantity * (row.isPackage ? row.packagePrice : row.price))}
-          </h3>
-        </div>,
-    },
-    {
-      name: '',
-      style: { maxWidth: 70, minWidth: 60 },
-      cell: (row: IBasketListResponseModel) => <div className="P-basket-remove-item">
-        <i className="icon-Group-5032 G-clr-orange G-cursor-pointer G-fs-18"
-          onClick={() => this.deleteBasketItem(row)} />
-      </div>
-    }
-  ];
 
   public componentDidMount() {
     this.fetchData();
