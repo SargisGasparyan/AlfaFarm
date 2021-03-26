@@ -18,7 +18,7 @@ function buildMarkup(url: string) {
   const context: StaticRouterContext = {};
   const markup = renderToString(
     <StaticRouter context={context} location={url}>
-      <App />
+      <App/>
     </StaticRouter>
   );
 
@@ -45,19 +45,19 @@ function buildHTML(markup: string, title: string, description: string, keywords:
         </script>
 
         <!-- Yandex.Metrika counter -->
-        <script type=“text/javascript” >
-          (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-          m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-          (window, document, “script”, “https://mc.yandex.ru/metrika/tag.js”, “ym”);
-          ym(71186425, “init”, {
+        <script type="text/javascript" >
+           (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+           m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+           (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+           ym(71186425, "init", {
                 clickmap:true,
                 trackLinks:true,
                 accurateTrackBounce:true,
                 webvisor:true,
-                ecommerce:“dataLayer”
-          });
+                ecommerce:"dataLayer"
+           });
         </script>
-        <noscript><div><img src=“https://mc.yandex.ru/watch/71186425” style=“position:absolute; left:-9999px;” alt=“” /></div></noscript>
+      <noscript><div><img src="https://mc.yandex.ru/watch/71186425" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
         <!-- /Yandex.Metrika counter -->
 
         <!-- Google Tag Manager -->
@@ -83,18 +83,18 @@ function buildHTML(markup: string, title: string, description: string, keywords:
     image
       ? `<meta name="og:image" content="${image}" />`
       : ''
-    }
+  }
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         ${
     assets.client.css
       ? `<link rel="stylesheet" type="text/css" href="${assets.client.css}" />`
       : ''
-    }
+  }
         ${
     process.env.NODE_ENV === 'production'
       ? `<script src="${assets.client.js}" defer></script>`
       : `<script src="${assets.client.js}" defer crossorigin></script>`
-    }   
+  }   
 
         
       <script>
@@ -147,7 +147,7 @@ server
           `AlfaPharm: ${result.data.title}`,
           `${result.data.title}`,
           `Product Medicine Pharmacy ${result.data.title}`,
-          result.data.images ? result.data.images[0].path : '',
+          result.data.images ? result.data.images[0].path : ''
         );
 
         res.status(200).send(html);
@@ -156,25 +156,25 @@ server
           markup,
           InitialHeaders.Title,
           InitialHeaders.Description,
-          InitialHeaders.Keywoards,
+          InitialHeaders.Keywoards
         );
 
         res.status(200).send(html);
       }
     }
   }).get('/*', (req, res) => {
-    const { context, markup } = buildMarkup(req.url);
+  const { context, markup } = buildMarkup(req.url);
 
-    if (context.url) res.redirect(context.url);
-    else {
-      const html = buildHTML(
-        markup,
-        InitialHeaders.Title,
-        InitialHeaders.Description,
-        InitialHeaders.Keywoards,
-      );
-      res.status(200).send(html);
-    }
-  });
+  if (context.url) res.redirect(context.url);
+  else {
+    const html = buildHTML(
+      markup,
+      InitialHeaders.Title,
+      InitialHeaders.Description,
+      InitialHeaders.Keywoards
+    );
+    res.status(200).send(html);
+  }
+});
 
 export default server;

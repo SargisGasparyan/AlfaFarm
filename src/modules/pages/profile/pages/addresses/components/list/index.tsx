@@ -9,7 +9,6 @@ import ROUTES from '../../../../../../../platform/constants/routes';
 
 import './style.scss';
 import HelperComponent from '../../../../../../../platform/classes/helper-component';
-import { render } from 'react-dom';
 
 interface IProps {
   data: IUserAddressListResponseModel[];
