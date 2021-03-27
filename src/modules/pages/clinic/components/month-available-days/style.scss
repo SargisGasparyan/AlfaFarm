@@ -28,10 +28,14 @@
   > .P-day {
     cursor        : pointer;
     margin        : 10px 5px 0;
-    padding       : 5px 16px;
     font-size     : 14px;
     background    : #F8F5F5;
     border-radius : 20px;
+    min-width: 60px;
+    min-height: 35px;
+    align-items: center;
+    display: inline-flex;
+    justify-content: center;
     
     &:hover, &.P-active {
       color      : white;

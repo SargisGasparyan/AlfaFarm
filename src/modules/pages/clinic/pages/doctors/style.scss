@@ -4,6 +4,13 @@
 .G-page.P-clinic-doctors-page {
   padding : 0 0 160px 0;
 
+  .P-search-input {  
+    justify-content: flex-end;  
+    > input {
+      width: 50%;
+    }
+  }
+
   > .G-page-title {
     display         : flex;
     padding         : 160px $page-horizontal-offset 0;
