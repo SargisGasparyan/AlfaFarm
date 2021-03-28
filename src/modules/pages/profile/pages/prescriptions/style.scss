@@ -21,5 +21,21 @@
       text-decoration : underline;
     }
   }
+}
+
+@media (max-width : $mobile-screen) {
+
+  .P-profile-prescriptions {
+    .P-content {
+      h3 {
+        padding: 5px 15px;
+      }
+      a {
+        font-size: 35px;
+      }
+    }
+  }
 
 }
+
+

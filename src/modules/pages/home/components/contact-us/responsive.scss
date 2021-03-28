@@ -42,3 +42,28 @@
     padding-bottom : 0;
   }
 }
+
+
+@media (max-width : $mobile-screen) {
+  .G-page.P-home-contact-us {
+    .P-shadow-text {
+      font-size : 20px;
+    }
+
+    > div.P-bottom {
+      margin: 0;
+
+      > div {
+        width: calc(100% / 3);
+        
+        > i {
+          font-size : 37px;
+        }
+  
+        > h3 {
+          font-size : 11px;
+        }
+      }
+    }
+  }
+}
