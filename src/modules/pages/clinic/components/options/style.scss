@@ -8,6 +8,15 @@
   flex-direction  : column;
   justify-content : center;
 
+
+  @media (max-width : $mobile-screen) {
+    .G-main-ghost-button {
+      width: 250px !important;
+      padding: 15px !important;
+      font-size: 18px !important;
+    }
+  }
+
   > .P-shadow-text {
     color         : $orange;
     margin-bottom : 60px;

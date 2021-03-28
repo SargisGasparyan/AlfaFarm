@@ -11,6 +11,35 @@
   background-position-x: center;
 }
 
+@media (max-width : $mobile-screen) {
+
+  .P-icons-info {
+    top: 5px !important;
+    left: 5px !important;
+    width: 120px !important;
+    height: 55px !important;
+    font-size: 12px !important;
+    padding-top: 10px !important;
+  }
+}
+
+.P-icons-info {
+  background: white;
+  position: absolute;
+  top: 35px;
+  left: 35px;
+  width: 160px;
+  height: 75px;
+  padding-top: 15px;
+  
+  p {
+    margin-left: 15px;
+     b {
+        margin-left: 15px;
+     }
+  }
+}
+
 .G-page.P-home-contact-us {
 
   display        : flex;
@@ -27,13 +56,10 @@
     height : 500px;
     margin : 130px 0 0 (-$page-horizontal-offset);
     border : 0;
+    position: relative;
   }
 
-  > .P-icons-info {
-    margin-top: 10px;
-    text-align: right;
-    font-size: 11px;
-  }
+  
 
   > .P-bottom {
     margin          : 0 10vw;
