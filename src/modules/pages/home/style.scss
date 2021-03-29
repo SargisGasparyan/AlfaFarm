@@ -7,5 +7,16 @@
     }
   }
 
-  .G-page .G-page-title { font-size: 50px; }
+  .G-page {
+    
+    .G-page-title {
+      font-size: 50px;
+    }
+    
+    @media(max-width : $tablet-screen) {
+      .G-page-title {
+        font-size : 44px;
+      }
+    }
+  }
 }

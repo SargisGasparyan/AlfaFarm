@@ -7,6 +7,10 @@
 
   @media(max-width : $tablet-screen) {
     padding : 15px !important;
+
+    &.P-home-carousel-slider {
+      min-height: auto;
+    }
   }
 
   @media(max-width : $small-mobile-screen) {

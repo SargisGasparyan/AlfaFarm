@@ -13,6 +13,7 @@ import AppStoreImage from 'assets/images/app_store.png';
 import GooglePlayImage from 'assets/images/google_play.png';
 import FacebookImage from 'assets/images/facebook.png';
 import InstagramImage from 'assets/images/instagram.png';
+import TelegramImage from 'assets/images/tel_icon.png';
 
 import './style.scss';
 
@@ -152,6 +153,9 @@ function  Footer() {
             </a>
             <a href="https://www.instagram.com/AlfaPharm/" target="_blank">
               <img src={InstagramImage} alt="instagram" />
+            </a>
+            <a className="P-telegram" href="https://t.me/AlfaPharm" target="_blank">
+              <img src={TelegramImage} alt="Telegram" />
             </a>
           </div>
           <div className="P-mobile-app">

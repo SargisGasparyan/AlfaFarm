@@ -79,6 +79,10 @@ class ContactUs extends HelperComponent<{}, IState> {
         <Form />
 
         <Maps className="P-maps P-home-map">
+          <div className="P-icons-info">
+            <p><img src={MapIconGreen} alt="" /> <b> { Settings.translations.open}</b></p>
+            <p><img src={MapIconOrange} alt=""/> <b> { Settings.translations.closed}</b></p>
+          </div>
           {this.markers.map((item, index) =>
             <Marker key={index} {...item}>
               {hoveredMarkerIndex === index && this.hoveredMarkerData && <InfoWindow>
@@ -97,10 +101,7 @@ class ContactUs extends HelperComponent<{}, IState> {
           )}
         </Maps>
 
-        <div className="P-icons-info">
-          <p><img src={MapIconGreen} alt="" /> <b> { Settings.translations.open}</b></p>
-          <p><img src={MapIconOrange} alt=""/> <b> { Settings.translations.closed}</b></p>
-        </div>
+    
 
         <div className="P-bottom">
           <AboutDelivery />

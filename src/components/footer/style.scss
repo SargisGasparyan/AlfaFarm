@@ -9,6 +9,14 @@ footer {
   box-shadow     : 0 0 50px transparentize(#000000, .9);
   flex-direction : column;
 
+ .P-telegram {
+    img {
+      width: 50px !important;
+      height: 50px !important;
+      margin-left: -5px;
+    }
+  }
+
   > .P-logo {
     width         : 140px;
     margin-bottom : 15px;

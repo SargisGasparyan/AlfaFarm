@@ -3,14 +3,10 @@
 .P-profile-prescriptions {
   display: flex;
   flex-direction: column;
-  min-height: calc(100% - 120px);
-  justify-content: space-between;
+
   > .P-content {
     display        : flex;
     overflow       : hidden;
-    background     : white;
-    box-shadow     : $default-block-shadow;
-    border-radius  : $big-radius;
     flex-direction : column;
 
     > h3 {
@@ -25,8 +21,21 @@
       text-decoration : underline;
     }
   }
-
-  .P-data-table-body {
-    min-height: 600px;
-  }
 }
+
+@media (max-width : $mobile-screen) {
+
+  .P-profile-prescriptions {
+    .P-content {
+      h3 {
+        padding: 5px 15px;
+      }
+      a {
+        font-size: 35px;
+      }
+    }
+  }
+
+}
+
+

@@ -6,6 +6,18 @@
   padding-bottom : 100px;
   flex-direction : column;
 
+  @media (max-width : $small-screen) {
+    .slick-slide {
+      padding: 0px !important;
+    }
+  }
+
+  @media (max-width : $medium-screen) {
+    .slick-slide {
+      padding: 0px !important;
+    }
+  }
+
   > .P-shadow-text {
     margin-bottom : 130px;
   }

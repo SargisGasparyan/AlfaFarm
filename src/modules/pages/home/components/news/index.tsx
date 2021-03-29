@@ -68,8 +68,6 @@ class News extends HelperComponent<{}, IState> {
     return data.length ? (
       <section className="G-page P-home-news">
         <h2 className="G-page-title">{Settings.translations.news}</h2>
-
-
         <div className="P-list-wrapper">
           <Slider
             {...this.settings}

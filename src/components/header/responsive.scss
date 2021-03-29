@@ -15,6 +15,7 @@
       width  : 24px;
       height : 24px;
       cursor : pointer;
+      margin-top : 15px;
     }
 
     > i {
@@ -27,6 +28,10 @@
     width   : 130px;
     height  : 70px;
     display : block;
+
+    img {
+      margin-top: 11px;
+    }
   }
 
   .P-mobile-header-icons {

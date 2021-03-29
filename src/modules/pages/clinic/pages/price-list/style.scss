@@ -3,6 +3,10 @@
 .G-page.P-clinic-price-list-page {
   padding : 0 0 160px 0;
 
+  .P-search-input {
+    width: 50%;
+  }
+
   > .P-content {
     width         : 1200px;
     margin        : 160px auto 0;
@@ -23,7 +27,10 @@
 
     > .P-data-table {
 
-      > .P-data-table-header { height: 70px; }
+      > .P-data-table-header { 
+        height: 70px; 
+        padding: 0 40px;
+      }
 
       > .P-data-table-body > ul {
         height : 70px;
