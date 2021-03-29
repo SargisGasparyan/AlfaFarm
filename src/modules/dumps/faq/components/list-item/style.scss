@@ -44,3 +44,45 @@
     line-height : 42px;
   }
 }
+
+@media (max-width: $small-screen) {
+  .P-faq-list-item {
+    padding: 10px 15px;
+  }
+}
+
+@media (max-width: $tablet-screen) {
+  .P-faq-list-item {
+    padding: 10px 15px;
+
+    > .P-title, > i {
+      font-size  : $normal-fs;
+    }
+  }
+}
+
+@media (max-width: $mobile-screen) {
+  .P-faq-list-item {
+    padding: 10px;
+
+    > .P-title, > i {
+      font-size  : $small-fs;
+    }
+  }
+}
+
+@media (max-width: $small-mobile-screen) {
+  .P-faq-list-item {
+    padding: 7px;
+
+    > .P-title, > i {
+      font-size  : $big-radius;
+    }
+  }
+}
+
+@media (max-width: $extra-small-mobile-screen) {
+  .P-faq-list-item {
+    padding: 5px;
+  }
+}
