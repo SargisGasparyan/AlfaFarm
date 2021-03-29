@@ -190,7 +190,7 @@ function  Footer() {
             <h3 className="G-clr-main">{Settings.translations.useful_links}</h3>
             <i className={usefulRotateClass.join(' ')} />
           </div>
-          {!environment.WHOLESALE && <Link className="P-useful-items" to={ROUTES.HOW_TO_ORDER_ONLINE}>{Settings.translations.how_to_order_online}</Link>}
+          {!environment.WHOLESALE && <Link className={usefulItems.join(' ')} to={ROUTES.HOW_TO_ORDER_ONLINE}>{Settings.translations.how_to_order_online}</Link>}
         </div>
         <div className="P-column P-mobile-column">
           <div className="P-mobile-drop G-flex G-flex-justify-between G-flex-align-center" onClick={contactChange}>

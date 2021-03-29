@@ -1,0 +1,11 @@
+@media (max-width: $small-mobile-screen) {
+  div.P-news-list-item {
+    width         : calc(100% / 3 - 20px);
+    margin        : 10px;
+
+    > .P-content {
+      //padding: 15px 30px;
+      padding: 10px 20px;
+    }
+  }
+}
