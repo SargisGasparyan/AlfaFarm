@@ -44,7 +44,7 @@ class Home extends HelperComponent<{}, IState> {
     const orderId = query.get('orderId');
 
     if (orderId) {
-      const result = await PaymentController.confirm(orderId);
+      const result = await PaymentController.saveCard(orderId);
       result.success && this.safeSetState({ orderSuccessModalOpen: true });
     }
   }
