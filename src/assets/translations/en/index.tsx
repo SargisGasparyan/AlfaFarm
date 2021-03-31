@@ -954,6 +954,13 @@ export default {
   filter: "Filter",
   all_categories: "All categories",
   about_us: "About us",
+
+  about_us_first_1: "Starting from 1996, Alfa-Pharm has been successfully engaged in the import, wholesaling and retailing of medicines in Armenia.",
+  about_us_first_2: "The shareholders of the company are \"European Bank for Reconstruction and Development\” (EBRD), and founders with many years of experience in the pharmaceutical market in the Republic of Armenia. Thanks to their professional and organizational skills the company provides high-quality services to the public.",
+  about_us_first_3: "Company has straight delivery from leading European and American manufacturers and has positioned itself as a reliable partner of companies such as \"Les Laboratories Servier\”, \"Sanofi-Aventis\”, \"Abbott\”, \"Berlin-Chemie AG”, \"Novartis Consumer\”, \"Bayer Consumer\”, \"Hoffman-La Roche\”, \"Nycomed Austria\”, \"Pfizer\”, etc.",
+
+  about_us_second_1: "",
+
   about_clinic: 'About our clinic',
   doctor: "Doctor",
   service: "Service",
