@@ -35,6 +35,15 @@ class PaymentController {
     return result;
   };
 
+  public static saveCard = (orderId: string): Promise<IResponse<boolean>> => {
+    const result = Connection.GET({
+      action: `saveCard/${orderId}`,
+      controller: PaymentController.controller,
+    });
+
+    return result;
+  };
+
   public static getUserCards = (): Promise<IResponse<IUserCardListModel[]>> => {
     const result = Connection.GET({
       action: 'getUserCards',
