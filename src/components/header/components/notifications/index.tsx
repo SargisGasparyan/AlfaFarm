@@ -82,11 +82,12 @@ class Notifications extends HelperPureComponent<IProps, IState> {
     const { data } = this.state;
 
     if (data) {
-      data.list.forEach(item => {
+      data.list = data.list.map(item => {
         item.seen = true;
+        return item;
       });
       
-      this.safeSetState({ data });
+      this.safeSetState({ data: {...data} });
     }
   }
 

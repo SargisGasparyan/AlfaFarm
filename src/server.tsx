@@ -79,16 +79,15 @@ function buildHTML(markup: string, title: string, description: string, keywords:
         if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
         n.queue=[];t=b.createElement(e);t.async=!0;
         t.src=v;s=b.getElementsByTagName(e)[0];
-        s.parentNode.insertBefore(t,s)}(window,document,'script',
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
         'https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init', '412921216623126'); 
+        fbq('init', '140139174633303');
         fbq('track', 'PageView');
         </script>
         
         <noscript>
         <img height="1" width="1" 
-        src="https://www.facebook.com/tr?id=412921216623126&ev=PageView
-        &noscript=1"/>
+        src="https://www.facebook.com/tr?id=140139174633303&ev=PageView&noscript=1"/>
         </noscript>
         
         <!-- End Facebook Pixel Code -->
@@ -96,6 +95,7 @@ function buildHTML(markup: string, title: string, description: string, keywords:
       
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta charset="utf-8" />         
+        <meta name="facebook-domain-verification" content="nycag5degd8cy0gidcperwa3m4jf9j" />
         <meta name="google-site-verification" content="google-site-verification=PlXejPyELq-_cqljjgnFQwScWaNVNSBbrwcxORqYJew" />
         <meta name="keywords" content="${keywords}" />
         <meta name="description" content="${description}" />

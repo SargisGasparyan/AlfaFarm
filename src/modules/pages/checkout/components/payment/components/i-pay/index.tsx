@@ -19,7 +19,7 @@ const IPay = React.memo(() => {
   const choose = (id?: number) => { setCard(id); apply(id); };
 
   const createCard = async () => {
-    const res = await PaymentController.registerCard();
+    const res = await PaymentController.registerCard(true);
     if (res && res.success) {
       window.location.href = res.data.formUrl;
     }

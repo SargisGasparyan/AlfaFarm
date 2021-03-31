@@ -4,9 +4,14 @@
 .G-page {
   padding    : $page-vertical-offset $page-horizontal-offset;
   min-height : calc(100vh - #{$header-size});
+  // width      : 85vw; // 1632px;
+  max-width  : 1920px;
+  margin     : 0 auto;
 
   @media(max-width : $tablet-screen) {
     padding : 15px !important;
+    width: 100%;
+    margin: 0;
 
     &.P-home-carousel-slider {
       min-height: auto;

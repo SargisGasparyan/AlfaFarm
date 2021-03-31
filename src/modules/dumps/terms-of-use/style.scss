@@ -7,7 +7,7 @@
 
   > .P-content {
     width     : 100%;
-    padding   : 0 200px 50px;
+    padding   : 0 10.4vw 50px; // 200px
 
     p {
       margin-bottom: 10px;
@@ -15,6 +15,34 @@
 
     h4, ul {
       margin-bottom: 30px;
+    }
+  }
+}
+
+@media (max-width: $mobile-screen) {
+  .G-page.P-terms-of-use-page {
+
+    > .P-content {
+      padding   : 0 5vw 30px;
+    }
+  }
+}
+
+@media (max-width: $small-mobile-screen) {
+  .G-page.P-terms-of-use-page {
+
+    > .G-page-title {
+      font-size: 30px;
+      margin-bottom: 0;
+    }
+
+    > .P-content {
+      padding   : 0 4vw 20px;
+
+      p {
+        font-size: 14px;
+        margin-bottom: 7px;
+      }
     }
   }
 }

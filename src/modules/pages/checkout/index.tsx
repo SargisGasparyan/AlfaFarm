@@ -527,7 +527,7 @@ class Checkout extends HelperComponent<{}, IState> {
               loading={false}
               onClick={this.openAddressChoose}
             >{Settings.translations.choose_address}</LoaderContent>}
-            {chooseAddressOpen && <ChooseAddress data={addressList} onClose={this.closeAddressChoose} />}
+            {chooseAddressOpen && <ChooseAddress selectedId={form.userAddressId} data={addressList} onClose={this.closeAddressChoose} />}
           </div>
         </form> : <PaymentMethod resultInfo={resultInfo} callback={(e: React.SyntheticEvent) => this.finishCheckout(e)} />}
 

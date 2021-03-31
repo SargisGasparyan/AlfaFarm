@@ -42,10 +42,16 @@ class Home extends HelperComponent<{}, IState> {
   private checkForPaymentSuccess = async () => {
     const query = new URLSearchParams(window.location.search);
     const orderId = query.get('orderId');
+    const isCard = query.get('isCard');
 
     if (orderId) {
-      const result = await PaymentController.confirm(orderId);
-      result.success && this.safeSetState({ orderSuccessModalOpen: true });
+      if (isCard) {
+        const result = await PaymentController.saveCard(orderId);
+        result.success && window.routerHistory.push(`${ROUTES.PROFILE.MY_WALLET}`);
+      } else {
+        const result = await PaymentController.confirm(orderId);
+        result.success && this.safeSetState({ orderSuccessModalOpen: true });
+      }
     }
   }
 

@@ -30,9 +30,11 @@
 
       > .P-save-cart {
         color           : $main-color;
-        text-decoration : underline;
-        cursor          : pointer;
-        font-size       : $normal-fs;
+        // text-decoration : underline;
+        cursor         : pointer;
+        font-size      : $normal-fs;
+        padding-bottom : 2px;
+        border-bottom  : 1px solid $main-color;
       }
     }
 

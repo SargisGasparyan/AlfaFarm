@@ -33,7 +33,7 @@ class MyWallet extends HelperComponent<{}, IState> {
   };
 
   private createCard = async () => {
-    const res = await PaymentController.registerCard();
+    const res = await PaymentController.registerCard(true);
     if (res && res.success) {
       window.location.href = res.data.formUrl;
     }

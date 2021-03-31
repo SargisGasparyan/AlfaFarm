@@ -1,11 +1,23 @@
 @import 'src/assets/styles/variables';
 
+.P-profile-details-form {
+  .G-main-select {
+    .P-select-header {
+      @media (max-width: $mobile-screen) {
+        height: 35px !important;
+      }
+    }
+  }
+}
+
 .P-profile-details-form .P-select > .P-select-body {
   width : 100%;
 }
 
 .P-profile-details-form {
   @media (max-width: $mobile-screen) {
+    margin-right: 0 !important;
+
     * {
       font-size: $small-fs !important;
     }

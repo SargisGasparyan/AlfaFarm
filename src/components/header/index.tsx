@@ -164,15 +164,19 @@ class Header extends HelperComponent<{}, IState> {
           this.safeSetState({ searchLoader: false });
         }
       });
-    } else this.safeSetState({
-      searchValue: '',
-      searchOpen: false,
-      searchResult: {
-        products: SearchHistory.items,
-        categories: []
-      },
-      searchHistoryShown: true
-    });
+    } else {
+      Connection.AbortAll();
+      this.safeSetState({
+        searchValue: '',
+        searchOpen: false,
+        searchLoader: false,
+        searchResult: {
+          products: SearchHistory.items,
+          categories: []
+        },
+        searchHistoryShown: true
+      });
+    }
   };
 
   private closeSearch = () => this.safeSetState({ searchOpen: false, searchHistoryShown: false });

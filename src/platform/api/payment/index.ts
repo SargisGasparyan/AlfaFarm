@@ -7,9 +7,9 @@ class PaymentController {
  
   private static controller = 'payment';
 
-  public static registerCard = (): Promise<IResponse<any>> => {
+  public static registerCard = (isCard?: boolean): Promise<IResponse<any>> => {
     const result = Connection.GET({
-      action: 'registerCard',
+      action: 'registerCard' + (isCard ? '?isCard=true' : ''),
       controller: PaymentController.controller,
     });
 
@@ -29,6 +29,15 @@ class PaymentController {
   public static confirm = (orderId: string): Promise<IResponse<boolean>> => {
     const result = Connection.GET({
       action: `confirmPayment/${orderId}`,
+      controller: PaymentController.controller,
+    });
+
+    return result;
+  };
+
+  public static saveCard = (orderId: string): Promise<IResponse<boolean>> => {
+    const result = Connection.GET({
+      action: `saveCard/${orderId}`,
       controller: PaymentController.controller,
     });
 

@@ -25,3 +25,14 @@
     }
   }
 }
+
+@media (max-width: $small-mobile-screen) {
+  .G-page.P-faq-page {
+
+    .G-page-title {
+      font-size: 24px;
+      margin-top: 20px;
+      margin-bottom: 30px;
+    }
+  }
+}
