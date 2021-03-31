@@ -32,3 +32,42 @@
     }  
   }  
 }
+
+@media (max-width: $medium-screen) {
+  .P-blog-first-item {
+
+    > div {
+
+      &.P-content {
+        padding   : 20px 30px;
+      }
+    }
+  }
+}
+
+@media (max-width: $tablet-screen) {
+  .P-blog-first-item {
+
+    > div {
+
+      &.P-image {
+        height    : 420px;
+        min-width : 240px;
+      }
+
+      &.P-content {
+        padding   : 10px 20px;
+
+        > h2 {
+          margin-bottom: 10px;
+          font-size: $normal-fs;
+        }
+
+        > p {
+          font-size     : 16px;
+          margin-bottom : 20px;
+        }
+      }
+    }
+  }
+}
