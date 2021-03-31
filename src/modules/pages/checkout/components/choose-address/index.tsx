@@ -13,6 +13,7 @@ import './style.scss';
 
 interface IProps {
   data: IUserAddressListResponseModel[];
+  selectedId?: number;
   onClose(chosen?: IUserAddressListResponseModel): void; 
 };
 
@@ -36,7 +37,7 @@ class ChooseAddress extends HelperPureComponent<IProps, IState> {
     },
     {
       name: '',
-      cell: (row: IUserAddressListResponseModel) => row.isDefault && <img className="P-done-icon" src={DoneImage} alt="done" />,
+      cell: (row: IUserAddressListResponseModel) => this.props.selectedId === row.id && <img className="P-done-icon" src={DoneImage} alt="done" />,
       style: { minWidth: 46, maxWidth: 46 },
     },
   ];
