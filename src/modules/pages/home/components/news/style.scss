@@ -24,6 +24,13 @@
     }
   }
 
+  @media (max-width : $small-mobile-screen) {
+    .G-page-title {
+      font-size: $btn-radius !important;
+      margin-bottom: 0 !important;
+    }
+  }
+
   > .P-shadow-text {
     margin-bottom : 60px;
   }

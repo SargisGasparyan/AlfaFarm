@@ -13,6 +13,18 @@ button.P-footer-order-a-call-button {
   display        : flex;
   align-items    : center;
   flex-direction : column;
+
+  @media (max-width: $small-mobile-screen) {
+    > .G-main-form {
+      > .G-main-button {
+        padding: 7px;
+      }
+
+      > .G-phone-input-wrapper {
+        padding: 2px 0;
+      }
+    }
+  }
   
   > h3 {
     font-size      : 20px;
