@@ -14,14 +14,25 @@ button.P-footer-order-a-call-button {
   align-items    : center;
   flex-direction : column;
 
-  @media (max-width: $small-mobile-screen) {
+  @media (max-width: $mobile-screen) {
     > .G-main-form {
-      > .G-main-button {
-        padding: 7px;
+
+      input {
+        padding: 9px 15px;
       }
 
       > .G-phone-input-wrapper {
-        padding: 2px 0;
+        > .G-input-country-code {
+          top: calc(50% - 10px);
+        }
+
+        > .G-main-input {
+          padding-left: 80px;
+        }
+      }
+
+      > .G-main-button {
+        padding: 7px;
       }
     }
   }

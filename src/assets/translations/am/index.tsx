@@ -1025,7 +1025,7 @@ export default {
   social_login: "Մուտք անձնական էջերով",
   already_a_member: "Գրանցվա՞ծ եք",
   next: "Հաջորդ",
-  order: "Պատվեր",
+  order: "Պատվիրել",
   fill_your_information: "Լրացրեք Ձեր տվյալները",
   order_checkout: "Պատվերի ձևակերպում",
   add: "Ավելացնել",
