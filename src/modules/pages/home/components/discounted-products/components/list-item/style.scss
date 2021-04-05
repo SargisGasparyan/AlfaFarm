@@ -4,7 +4,7 @@
 .P-home-discounted-products-list-item {
   color           : black;
   display         : flex;
-  padding         : 10px 30px 30px;
+  padding         : 10px 30px 20px;
   position        : relative;
   box-shadow      : $default-block-shadow;
   background      : white;
@@ -12,7 +12,19 @@
   flex-direction  : column;
   text-decoration : none;
   margin          : 0 20px;
+  height          : 500px;
+  justify-content: space-between;
+  @media(max-width: $medium-screen) {
+    margin: 10px 20px;
+  }
 
+  @media(max-width: $tablet-screen) {
+    height: 450px;
+  }
+
+  @media(max-width: $extra-small-mobile-screen) {
+    height: 400px;
+  }
 
   > .P-image {
     width   : 100%;
@@ -25,12 +37,12 @@
   }
 
   > h3 {
-    height        : 72px;
+    height        : 65px;
     text-align    : center;
     align-items   : center;
-    margin-bottom : 40px;
+    //margin-bottom : 25px;
     @media (max-width : $mobile-screen) {
-      margin-bottom : 20px;
+      //margin-bottom : 20px;
       font-size     : 18px;
       height: auto;
     }
@@ -47,6 +59,9 @@
     text-align    : center;
     margin-bottom : 10px;
     @include bold-font();
+    @media (max-width : $small-screen) {
+      margin-bottom: 0;
+    }
   }
 
   > .G-main-button {
@@ -54,6 +69,9 @@
     padding       : 10px 0;
     margin-top    : 25px;
     border-radius : $big-radius;
+    @media (max-width : $small-screen) {
+      margin-top: 0;
+    }
 
     span {
       font-size : 16px;
