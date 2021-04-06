@@ -72,7 +72,13 @@
         }
 
         .P-remove-text {
-          margin-right: 50px;
+          margin-right: 65px;
+          @media(max-width: $tablet-screen) {
+            margin-right: 60px;
+          }
+          @media(max-width: $mobile-screen) {
+            margin-right: 50px;
+          }
         }
       }
 

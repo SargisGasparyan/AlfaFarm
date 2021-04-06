@@ -83,6 +83,13 @@ hr {
       }
       .P-image {
         padding: 0 20%;
+
+        .G-square-image-block {
+          min-width : 120px;
+          max-width : 120px;
+          min-height: 160px;
+          max-height: 160px;
+        }
       }
       .P-main-info, .P-image {
         width: 50%;
