@@ -3,7 +3,7 @@
 
 .P-profile-prescriptions-create {
 
-  @media (max-width: $small-mobile-screen) {
+  @media (max-width: $mobile-screen) {
     .G-main-form .G-main-form-half-field {
       width: 100%;
     }
@@ -48,15 +48,26 @@
     box-shadow    : $default-block-shadow;
     border-radius : $big-radius;
     @include main-top-border;
+    @media (max-width: $mobile-screen) {
+      padding: 15px;
+    }
 
     > .P-upload-part {
       display     : flex;
       flex-wrap   : wrap;
       align-items : flex-start;
+      margin-top  : 36px;
+      @media (max-width: $mobile-screen) {
+        margin-top: 15px;
+      }
 
       > .P-upload-button {
         width       : 100%;
         display     : flex;
+        justify-content: center;
+        @media (max-width: $mobile-screen) {
+          justify-content: flex-start;
+        }
 
         > .G-main-button {
           width           : 260px;
@@ -66,6 +77,10 @@
           max-width       : 100%;
           align-items     : center;
           justify-content : center;
+          @media (max-width: $mobile-screen) {
+            width: 100%;
+            padding: 10px;
+          }
   
           > i {
             font-size    : 28px;
@@ -93,11 +108,14 @@
       }
     }
 
-    > .P-submit {
+    .P-submit {
       width        : 425px;
       max-width    : 100%;
       margin-left  : auto;
       margin-right : auto;
+      @media (max-width: $mobile-screen) {
+        width: 100%;
+      }
     }
   }
 }

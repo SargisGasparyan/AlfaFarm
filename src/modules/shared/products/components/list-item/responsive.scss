@@ -1,6 +1,21 @@
 @media (max-width: $max-screen) {
   a.P-products-list-item {
-    width : calc(100% / 3 - 40px);
+    //width : calc(100% / 3 - 40px);
+    width  : calc(25% - 14px);
+    margin : 7px;
+    padding: 10px 15px 15px;
+
+    > .P-image {
+      height  : 200px;
+    }
+
+    > h3 {
+      margin-bottom : 15px;
+    }
+
+    > .G-main-button {
+      margin-top    : 10px;
+    }
   }
 }
 
