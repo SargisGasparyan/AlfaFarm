@@ -72,7 +72,7 @@ class Categories extends HelperComponent<IProps, {}> {
 
     const { onClose } = this.props;
     if (!category.id) window.routerHistory.push(`${ROUTES.PRODUCTS.MAIN}?sortBy=${ProductSortEnum.DiscountHighToLow}&hasDiscount=true`);
-    else window.routerHistory.push(`${ROUTES.PRODUCTS.MAIN}?categoryIds=${category.id}`);
+    else window.routerHistory.push(`${ROUTES.PRODUCTS.MAIN}?categoryIds=${category.id}&sortBy=${ProductSortEnum.AlphabeticalAZ}`);
     window.dispatchEvent(new Event(DispatcherChannels.ProductFilterChange));
     onClose();
   }
