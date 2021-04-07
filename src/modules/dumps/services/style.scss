@@ -13,12 +13,15 @@
     align-items     : center;
     justify-content : flex-start;
     @media(max-width: $mobile-screen) {
-      height: 250px;
+      height: 150px;
       padding: 0;
       justify-content: center;
     }
+    @media(max-width: $small-mobile-screen) {
+      height: 100px;
+    }
     @media(max-width: $extra-small-mobile-screen) {
-      height: 150px;
+      height: 70px;
     }
 
     > .P-shadow-text {
@@ -48,13 +51,13 @@
     padding        : 120px $page-horizontal-offset;
     flex-direction : column;
     @media(max-width: $mobile-screen) {
-      padding: 80px 60px;
+      padding: 30px;
     }
     @media(max-width: $small-mobile-screen) {
-      padding: 60px 40px;
+      padding: 20px;
     }
     @media(max-width: $extra-small-mobile-screen) {
-      padding: 20px;
+      padding: 10px;
     }
 
     > p {
@@ -64,12 +67,9 @@
       line-height   : 36px;
       margin-bottom : 80px;
       @include bold-font();
-      @media(max-width: $small-mobile-screen) {
+      @media(max-width: $mobile-screen) {
         font-size: 16px;
-        margin-bottom: 50px;
-      }
-      @media(max-width: $extra-small-mobile-screen) {
-        font-size: 14px;
+        line-height: 24px;
         margin-bottom: 30px;
       }
     }
