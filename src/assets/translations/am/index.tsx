@@ -1079,7 +1079,7 @@ export default {
   no_search_result: 'Որոնման արդյունք չկա',
   package: 'Տուփ',
   item: 'Հատ',
-  my_wallet: "Դրամապանակը",
+  my_wallet: "Դրամապանակ",
   my_addresses: "Հասցեները",
   addresses: "Հասցեներ",
   cancel_order: 'Ցանկանու՞մ եք չեղարկել այս պատվերը։',

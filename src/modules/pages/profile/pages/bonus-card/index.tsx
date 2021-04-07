@@ -7,6 +7,7 @@ import ROUTES from 'platform/constants/routes';
 import Layout from '../../components/layout';
 import Settings from 'platform/services/settings';
 import Table from 'components/table';
+import Storage from 'platform/services/storage';
 import { IBonusCardDetailsWithHistoryResponseModel, IBonusCardHistoryResponseModel, IBonusCardHistoryItemResponseModel } from 'platform/api/bonusCard/models/response';
 import { formatDate, formatPrice } from 'platform/services/helper';
 import Pagination from 'components/pagination';
@@ -16,6 +17,7 @@ import BonusCardController from 'platform/api/bonusCard';
 import { onlyForUsers } from 'platform/guards/routes';
 
 import CardImage from 'assets/images/card.png';
+import BonusCardCoin from 'assets/images/coin.png';
 
 import './style.scss';
 
@@ -74,9 +76,10 @@ class BonusCard extends HelperComponent<IState, {}> {
             <div className="P-card">
               <img src={CardImage} alt="card" />
               <span className="G-clr-orange P-bonus-amount">{data.bonusCardDetails.amount}</span>
+              <img className="P-bonus-coin" src={BonusCardCoin} alt="coin"/>
             </div>
             <div className="P-barcode">
-              <h3>{data.bonusCardDetails.fullName}</h3>
+              <h3>{Storage.profile.firstName} {Storage.profile.lastName}</h3>
               <img id="barcode" />
               <h4>{data.bonusCardDetails.cardNumber}</h4>
             </div>
