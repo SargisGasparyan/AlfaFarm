@@ -26,8 +26,17 @@
 
   @media (max-width : $small-mobile-screen) {
     .G-page-title {
-      font-size: $btn-radius !important;
+      font-size: 26px !important;
       margin-bottom: 0 !important;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  @media (max-width : $extra-small-mobile-screen) {
+    .G-page-title {
+      font-size: 24px !important;
     }
   }
 

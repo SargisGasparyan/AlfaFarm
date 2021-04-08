@@ -116,6 +116,10 @@
     margin-right : auto;
     position     : relative;
     z-index      : 10;
+    @media(max-width: $small-mobile-screen) {
+      padding: 7px 12px;
+      font-size: 14px;
+    }
   }
 }
 

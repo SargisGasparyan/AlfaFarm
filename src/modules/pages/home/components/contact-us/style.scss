@@ -47,6 +47,22 @@
   padding-top    : 0;
   flex-direction : column;
 
+  @media (max-width : $small-mobile-screen) {
+    .G-page-title {
+      font-size: 26px !important;
+      margin-bottom: 0 !important;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  @media (max-width : $extra-small-mobile-screen) {
+    .G-page-title {
+      font-size: 24px !important;
+    }
+  }
+
   > .P-shadow-text {
     margin-bottom : 100px;
   }
