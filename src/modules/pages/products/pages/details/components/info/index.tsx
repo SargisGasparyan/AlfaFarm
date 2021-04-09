@@ -214,7 +214,7 @@ class Info extends HelperComponent<IProps, IState> {
           <span className="G-clr-orange G-ml-auto P-price">
             <span />
             {(isSelectedPackage ? data.packagePromotion : data.promotion).promotionType === PromotionTypeEnum.Discount ? 
-            <> <del>{formatPrice(this.price)}</del> {formatPrice(this.discountedPrice)} </> : <><span>Bonus: { this.discountedPrice }</span> {formatPrice(this.price)}</>}
+            <> <del>{formatPrice(this.price)}</del> {formatPrice(this.discountedPrice)} </> : <><span> {this.discountedPrice > 0 ? `Bonus ${this.discountedPrice}` : '' }</span> {formatPrice(this.price)}</>}
           </span>
         </div>
       </div>
