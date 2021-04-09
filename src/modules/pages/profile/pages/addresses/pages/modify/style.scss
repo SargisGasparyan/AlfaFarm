@@ -19,6 +19,9 @@
     @media(max-width: $extra-small-mobile-screen) {
       padding: 10px !important;
     }
+    .P-page-title {
+      font-weight: bold;
+    }
    @media(max-width: $mobile-screen) {
      .G-main-button {
        height: 45px;
