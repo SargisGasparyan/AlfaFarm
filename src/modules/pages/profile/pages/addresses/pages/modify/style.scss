@@ -9,4 +9,22 @@
     padding-left  : 10px;
     margin-bottom : 30px;
   }
+  > .P-form-block {
+    @media(max-width: $mobile-screen) {
+      margin: 0 !important;
+    }
+    @media(max-width: $small-mobile-screen) {
+      padding: 20px !important;
+    }
+    @media(max-width: $extra-small-mobile-screen) {
+      padding: 10px !important;
+    }
+   @media(max-width: $mobile-screen) {
+     .G-main-button {
+       height: 45px;
+       padding: 0 10px;
+       margin-top: 20px;
+     }
+   }
+  }
 }
