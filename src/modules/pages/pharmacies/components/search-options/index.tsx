@@ -99,7 +99,7 @@ class SearchOptions extends HelperPureComponent<IProps, IState> {
               disabled={!cityId}
               value={regionId}
               onChange={this.changeRegion}
-              placeholder={cityId == 139 ? Settings.translations.district : Settings.translations.city}
+              placeholder={cityId === 139 ? Settings.translations.district : Settings.translations.city}
               options={regions}
             />
           </div>
