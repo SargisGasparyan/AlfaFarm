@@ -36,6 +36,8 @@ class Carousel extends HelperPureComponent<{}, IState> {
       [BannerTypeEnum.News]: ROUTES.NEWS.DETAILS.replace(':id', item.dataId),
       [BannerTypeEnum.Product]: ROUTES.PRODUCTS.DETAILS.replace(':id', item.dataId),
       [BannerTypeEnum.Category]: `${ROUTES.PRODUCTS.MAIN}?categoryIds=${item.dataId}`,
+      [BannerTypeEnum.Brand]: `${ROUTES.PRODUCTS.MAIN}?brandIds=${item.dataId}`,
+      [BannerTypeEnum.ActiveIngredient]: `${ROUTES.PRODUCTS.MAIN}?activeIngredientIds=${item.dataId}`
     };
 
     window.routerHistory.push(urls[item.type]);

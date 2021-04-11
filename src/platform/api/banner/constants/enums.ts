@@ -3,5 +3,7 @@ export enum BannerTypeEnum {
   Blog,
   News,
   Product,
-  Category
+  Category,
+  Brand,
+  ActiveIngredient
 };
