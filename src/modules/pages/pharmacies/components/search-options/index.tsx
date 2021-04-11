@@ -10,7 +10,7 @@ import { IDropdownOption } from 'platform/constants/interfaces';
 import './style.scss';
 
 interface IProps {
-  onChange(regionId?: number): void;
+  onChange(regionId?: number, cityId?: number): void;
 };
 
 interface IState {
@@ -69,10 +69,11 @@ class SearchOptions extends HelperPureComponent<IProps, IState> {
 
   private submit = (e: React.SyntheticEvent) => {
     const { regionId } = this.state;
+    const { cityId } = this.state;
     const { onChange } = this.props;
 
     e.preventDefault();
-    onChange(regionId);
+    onChange(regionId, cityId);
   };
 
   public render() {
@@ -98,7 +99,7 @@ class SearchOptions extends HelperPureComponent<IProps, IState> {
               disabled={!cityId}
               value={regionId}
               onChange={this.changeRegion}
-              placeholder={Settings.translations.city}
+              placeholder={cityId == 139 ? Settings.translations.district : Settings.translations.city}
               options={regions}
             />
           </div>

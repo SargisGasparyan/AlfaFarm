@@ -21,8 +21,8 @@ class Pharmacies extends HelperComponent<{}, IState> {
 
   public state: IState = {};
 
-  private regionChange = async (regionId: number) => {
-    if (regionId) {
+  private regionChange = async ( regionId: number, cityId: number,) => {
+    if (regionId) {      
       const result = await PharmacyBranchController.GetByRegion(regionId);
       this.safeSetState({ data: result.data }, () => 
         setTimeout(() => scrollToElement('#pharmacy-search-results', {
@@ -30,7 +30,17 @@ class Pharmacies extends HelperComponent<{}, IState> {
           align: 'top'
         }), 0)
       );
-    } else this.safeSetState({ data: undefined });
+    }
+   else if(cityId) {
+      const result = await PharmacyBranchController.GetByCity(cityId);
+      this.safeSetState({ data: result.data }, () => 
+        setTimeout(() => scrollToElement('#pharmacy-search-results', {
+          duration: 400,
+          align: 'top'
+        }), 0)
+      );
+    }
+   else this.safeSetState({ data: undefined });
   }
 
   public render() {

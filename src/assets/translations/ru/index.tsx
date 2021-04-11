@@ -1101,6 +1101,7 @@ export default {
   the_advantages_of_cooperation: "Преимущества сотрудничества",
   city: "Город",
   region: "Область",
+  district: "Район",
   delivery: "Доставка",
   delivery_fee: "Плата за доставку",
   bonus_card: "Бонусная карта",

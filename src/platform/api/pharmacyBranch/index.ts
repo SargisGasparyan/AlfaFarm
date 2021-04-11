@@ -25,6 +25,15 @@ class PharmacyBranchController {
 
     return result;
   };
+
+  public static GetByCity = (cityId: number): Promise<IResponse<IPharmacyBranchListResponseModel[]>> => {
+    const result = Connection.GET({
+      action: `regionByCity/${cityId}`,
+      controller: PharmacyBranchController.controller,
+    });
+
+    return result;
+  };
 };
 
 export default PharmacyBranchController;

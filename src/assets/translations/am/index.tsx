@@ -1139,6 +1139,7 @@ export default {
   the_advantages_of_cooperation: "Համագործակցության առավելությունները",
   city: "Քաղաք",
   region: "Մարզ",
+  district: "Շրջան",
   delivery: "Առաքում",
   delivery_fee: "Առաքման վճար",
   bonus_card: "Բոնուս քարտ",

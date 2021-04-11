@@ -27,7 +27,6 @@ const SortBox = ({ onChange }: IProps) => {
   }, [JSON.stringify(filter)]);
 
   const changeSortBy = (chosen: ProductSortEnum) => {
-    console.log("ekav hos");
     setSortBy(chosen);
     const query = new URLSearchParams(window.location.search);
     query.set('sortBy', chosen.toString());
