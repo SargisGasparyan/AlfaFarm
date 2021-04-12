@@ -22,12 +22,14 @@ interface IProps {
 interface IState {
   searchValue: string;
   hoveredMarkerIndex?: number;
+  disableHover: boolean;
 };
 
 class SearchResults extends HelperComponent<IProps, IState> {
 
   public state: IState = {
     searchValue: '',
+    disableHover: false,
   };
 
   private weeksViewEnum = getViewEnum(WeekDaysEnum);
@@ -64,8 +66,19 @@ class SearchResults extends HelperComponent<IProps, IState> {
   }
 
   private toggleMarker = (index?: number) => {
-    const { hoveredMarkerIndex } = this.state;
-    this.safeSetState({ hoveredMarkerIndex: hoveredMarkerIndex === index ? undefined : index });
+    if (!this.state.disableHover) {
+      const { hoveredMarkerIndex } = this.state;
+      this.safeSetState({ hoveredMarkerIndex: hoveredMarkerIndex === index ? undefined : index });
+    }
+  }
+
+  private selectMarker = (index: number) => {
+    if (!this.state.disableHover) {
+      this.safeSetState({ hoveredMarkerIndex: index, disableHover: true });
+    } else {
+      const { hoveredMarkerIndex } = this.state;
+      this.safeSetState({ hoveredMarkerIndex: hoveredMarkerIndex === index ? undefined : index, disableHover: hoveredMarkerIndex !== index });
+    }
   }
 
   private onSearchChange = (searchValue: string) => this.safeSetState({ searchValue });
@@ -76,7 +89,7 @@ class SearchResults extends HelperComponent<IProps, IState> {
   }
 
   public render() {
-    const { hoveredMarkerIndex } = this.state;
+    const { hoveredMarkerIndex, disableHover } = this.state;
 
     return (
       <section id="pharmacy-search-results" className="G-page P-pharmacies-search-results">
@@ -86,8 +99,10 @@ class SearchResults extends HelperComponent<IProps, IState> {
           <div className="P-list">
             {this.data.length ? this.data.map((item, index) => <h3
               key={item.id}
+              onClick={() => this.selectMarker(index)}
               onMouseOver={() => this.toggleMarker(index)}
               onMouseOut={() => this.toggleMarker()}
+              className={(disableHover && hoveredMarkerIndex === index) ? 'P-active' : ''}
             >{item.name}</h3>) : <h3>{Settings.translations.no_search_result}</h3>}
           </div>
 
@@ -97,7 +112,6 @@ class SearchResults extends HelperComponent<IProps, IState> {
             <Maps>
               {this.markers.map((item, index) => <Marker key={index} {...item}>
                 {hoveredMarkerIndex === index && this.hoveredMarkerData && <InfoWindow>
-                  <ClickOutside onClickOutside={this.infoWindowClickOutside}>
                     <div className="P-info-window">
                       <h3 className="G-clr-orange G-text-center P-name">{this.hoveredMarkerData.name}</h3>
                       <h4 className="P-info-row G-flex-center">
@@ -108,7 +122,6 @@ class SearchResults extends HelperComponent<IProps, IState> {
                         <this.WorkingPlan />
                       </h4>
                     </div>
-                  </ClickOutside>
                 </InfoWindow>}
               </Marker>)}
             </Maps>
