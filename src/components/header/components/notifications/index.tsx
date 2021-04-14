@@ -144,7 +144,7 @@ class Notifications extends HelperPureComponent<IProps, IState> {
           <img src={item.hasChoice ? NotificationImage3 : NotificationImage1} alt=""/>
           <div>
             <h5>{item.title}</h5>
-            <span>{item.description}</span>
+            <div className="P-desc">{item.description}</div>
           </div>
         </div>
       );

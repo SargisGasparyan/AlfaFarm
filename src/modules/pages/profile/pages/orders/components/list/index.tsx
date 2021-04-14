@@ -35,6 +35,9 @@ const List = React.memo(({ data, redirectUrl }: IProps) => {
               <p className="P-order-date">
                  {formatDate(item.createdDate)}
               </p>
+              <p className="P-order-date">
+                 {Settings.translations.used_bonus} - {item.usedBonus}
+              </p>
             </div>
 
             <div className="P-order-status">
