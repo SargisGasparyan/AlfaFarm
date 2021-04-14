@@ -23,6 +23,7 @@ interface IState {
   submited: boolean;
   submitLoading: boolean;
   showSuccess: boolean;
+  value: string;
 };
 
 @byPrivateRoute(ROUTES.PROFILE.PRESCRIPTIONS.CREATE, [onlyForUsers])
@@ -34,6 +35,7 @@ class Create extends HelperComponent<{}, IState> {
     showSuccess: false,
     images: [],
     imageModalOpen: false,
+    value: '',
     form: {
       name: '',
       description: '',
@@ -76,6 +78,7 @@ class Create extends HelperComponent<{}, IState> {
 
   private deleteImage = (e: React.SyntheticEvent, index: number) => {
     e.stopPropagation();
+    this.state.value = ''
     const { images } = this.state;
     images.splice(index, 1);
     this.safeSetState({ images });
@@ -166,6 +169,7 @@ class Create extends HelperComponent<{}, IState> {
                     type="file"
                     accept="image/*"
                     onChange={this.uploadImage}
+                    value={this.state.value}
                   />
                 </label>
               </div>

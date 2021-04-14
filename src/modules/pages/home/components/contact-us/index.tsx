@@ -46,8 +46,7 @@ class ContactUs extends HelperComponent<{}, IState> {
   private get markers() {
     return this.state.branches.map((item, index) => ({
       position: { lat: item.addressLat, lng: item.addressLng },
-      onMouseOver: () => this.toggleMarker(index),
-      onMouseOut: () => this.toggleMarker(),
+      onClick: () => this.toggleMarker(index),
       icon: {
         url: item.isOpen ? MapIconGreen : MapIconOrange,
         scaledSize:  new google.maps.Size(30, 30)
@@ -62,7 +61,6 @@ class ContactUs extends HelperComponent<{}, IState> {
     if (!this.hoveredMarkerData) return null;
     return <div>
       {this.hoveredMarkerData.workingPlan.map((item, index) => <span key={index}>
-        {Settings.translations[this.weeksViewEnum[item.startDay]]}
         {item.endDay ? '-' + Settings.translations[this.weeksViewEnum[item.endDay]] : ''}
         &nbsp;&nbsp;
         {item.isDayOff ? Settings.translations.day_off : `${formatTime(item.startTime)}-${formatTime(item.endTime)}`}

@@ -47,13 +47,25 @@
     font-size: 16px;
     text-decoration: none;
     cursor: pointer;
-
+    
     border-bottom: unset;
     box-shadow: unset;
     border-radius: unset;
     align-items: unset;
     border-radius: unset;
     justify-content: unset;
+
+    > div {
+
+      .P-desc {
+          color: #A1A1A1;
+          font-size: 14px;
+          white-space: nowrap; 
+          width: 250px; 
+          overflow: hidden;
+          text-overflow: ellipsis; 
+      }
+    }
 
     &.P-unseen {
       background-color: #49B7480F;
