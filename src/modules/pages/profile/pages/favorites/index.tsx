@@ -13,7 +13,7 @@ import { IFavoriteListResponseModel } from 'platform/api/favorite/models/respons
 import SavedBaskets from './components/saved-baskets';
 import SavedBasketItems from './pages/saved-basket-items';
 import EmptyState from 'components/empty-state';
-
+import * as animationData from 'assets/animations/EmptyFavorite.json';
 import './style.scss';
 import { PromotionTypeEnum } from 'platform/constants/enums';
 
@@ -92,7 +92,7 @@ class Favorites extends HelperComponent<IState, {}> {
                   formatPrice(item.price)}
               </h2>
             </div>
-          </Link>) : <EmptyState text={Settings.translations.empty_favorites_list}/>) : null}
+          </Link>) : <EmptyState animationData={animationData} text={Settings.translations.empty_favorites_list}/>) : null}
         </div>
       </Layout>
     );

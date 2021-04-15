@@ -15,6 +15,8 @@ import HelperComponent from 'platform/classes/helper-component';
 
 import './style.scss';
 import SearchHistory from 'platform/services/searchHistory';
+import EmptyState from 'components/empty-state';
+import * as animationData from 'assets/animations/EmptySearch.json';
 
 
 interface IProps {
@@ -43,9 +45,9 @@ class SearchPopup extends HelperComponent<IProps, IState> {
           ...item,
           imagePath: url,
         }))));
-  
+
         data.products = photoResult;
-        this.safeSetState({ data });  
+        this.safeSetState({ data });
       }
     });
   }
@@ -76,7 +78,7 @@ class SearchPopup extends HelperComponent<IProps, IState> {
       }
       window.dispatchEvent(new CustomEvent(DispatcherChannels.CartItemsUpdate));
       this.safeSetState({ data });
-    }); 
+    });
   }
 
   private clickOnItem = (item: IProductSearchProductResponseModel) => {
@@ -97,36 +99,40 @@ class SearchPopup extends HelperComponent<IProps, IState> {
     return (
       <ClickOutside onClickOutside={onClose}>
         <aside className="P-header-search-result">
-          {historyShown ? <h6 className="G-flex">
-            {Settings.translations.last_search_results}
-            <a className="G-ml-auto G-clr-orange G-cursor-pointer" onClick={this.clearAll}>{Settings.translations.clear_all}</a>
-          </h6> : <h6 className="G-flex">
-            {Settings.translations.products}
-            <p className="G-ml-auto G-clr-orange" onClick={() => onSubmit()}>{Settings.translations.see_more}</p>
-          </h6>}
-          {data && data.products.map(item => (
-            <div className="P-list-item" key={item.id} onClick={() => this.clickOnItem(item)}>
-              <div className="P-image" style={{ background: `url('${getMediaPath(item.imagePath)}') center/contain no-repeat` }} />
+          {data?.products.length ?
+            <div>
+              {historyShown ? <h6 className="G-flex">
+                {Settings.translations.last_search_results}
+                <a className="G-ml-auto G-clr-orange G-cursor-pointer" onClick={this.clearAll}>{Settings.translations.clear_all}</a>
+              </h6> : <h6 className="G-flex">
+                {Settings.translations.products}
+                <p className="G-ml-auto G-clr-orange" onClick={() => onSubmit()}>{Settings.translations.see_more}</p>
+              </h6>}
+              {data && data.products.map(item => (
+                <div className="P-list-item" key={item.id} onClick={() => this.clickOnItem(item)}>
+                  <div className="P-image" style={{ background: `url('${getMediaPath(item.imagePath)}') center/contain no-repeat` }} />
 
-              <div className="P-middle">
-                <h5>{item.title}</h5>
-                {item.producer && <span className="P-value">{item.producer.name}</span>}
-              </div>
+                  <div className="P-middle">
+                    <h5>{item.title}</h5>
+                    {item.producer && <span className="P-value">{item.producer.name}</span>}
+                  </div>
 
-              <div className="P-right">
-                {!!item.promotion.result && item.promotion.promotionType === PromotionTypeEnum.Discount ? <>
-                  <del className="G-ml-auto P-price">{formatPrice(item.price)}</del>
-                  <span className="G-clr-orange G-ml-auto P-price">{formatPrice(item.promotion.result)}</span>
-                </>: <span className="G-clr-orange G-ml-auto P-price">{formatPrice(item.price)}</span>}
+                  <div className="P-right">
+                    {!!item.promotion.result && item.promotion.promotionType === PromotionTypeEnum.Discount ? <>
+                      <del className="G-ml-auto P-price">{formatPrice(item.price)}</del>
+                      <span className="G-clr-orange G-ml-auto P-price">{formatPrice(item.promotion.result)}</span>
+                    </> : <span className="G-clr-orange G-ml-auto P-price">{formatPrice(item.price)}</span>}
 
-                <LoaderContent
-                  loading={item.cartLoading}
-                  className="G-main-button"
-                  onClick={(e) => this.changeCart(e, item)}
-                >{Settings.translations.add_to_cart}</LoaderContent>
-              </div>
-            </div>
-          ))}
+                    <LoaderContent
+                      loading={item.cartLoading}
+                      className="G-main-button"
+                      onClick={(e) => this.changeCart(e, item)}
+                    >{Settings.translations.add_to_cart}</LoaderContent>
+                  </div>
+                </div>
+              ))}
+            </div> :
+            <EmptyState animationData={animationData} text={Settings.translations.no_products} />}
         </aside>
       </ClickOutside>
     );

@@ -17,6 +17,7 @@ import Details from './pages/details';
 
 import './style.scss';
 import EmptyState from 'components/empty-state';
+import * as animationData from 'assets/animations/EmptyBlog.json';
 
 interface IState {
   data?: IBlogListResponseModel[];
@@ -80,7 +81,7 @@ class Blog extends HelperComponent<{}, IState> {
           
           {!!sortedData.length && firstItem ? <div className="P-list-wrapper">
             {sortedData.map(item => <ListItem key={item.id} data={item} />)}
-          </div> : <EmptyState text={Settings.translations.empty_blogs_list} />}
+          </div> : <EmptyState animationData={animationData} text={Settings.translations.empty_blogs_list} />}
         </> : <PageLoader />}
       </section>
     );

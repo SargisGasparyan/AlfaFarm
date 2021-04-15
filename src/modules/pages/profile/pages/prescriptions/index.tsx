@@ -18,6 +18,7 @@ import Pagination from 'components/pagination';
 
 import './style.scss';
 import EmptyState from 'components/empty-state';
+import * as animationData from 'assets/animations/EmptyRecipe.json';
 
 interface IState {
   data?: IPagingResponse<IPrescriptionListResponseModel>;
@@ -57,7 +58,7 @@ class Prescriptions extends HelperComponent<IState, {}> {
 
             {data && data.list.length ? <List
               data={data.list}
-            /> : <EmptyState text={Settings.translations.empty_prescriptions_list}/>}
+            /> : <EmptyState animationData={animationData} text={Settings.translations.empty_prescriptions_list}/>}
           </div>
 
           <Pagination<IPrescriptionListResponseModel> fetchData={this.fetchData}/>

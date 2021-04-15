@@ -17,6 +17,7 @@ import { paginationPageLimit } from 'platform/constants';
 import Pagination from 'components/pagination';
 import MedicalHistory from './pages/medical-history';
 import EmptyState from 'components/empty-state';
+import * as animationData from 'assets/animations/EmptyRegistrations.json';
 
 import './style.scss';
 
@@ -54,7 +55,7 @@ class MyRegistrations extends HelperComponent<IState, {}> {
           </h2>
           <div className="G-flex P-list">
             {data ? (data.list.length ? <List data={data.list}/> :
-              <EmptyState text={Settings.translations.empty_registrations_list}/>) : null}
+              <EmptyState animationData={animationData} text={Settings.translations.empty_registrations_list}/>) : null}
           </div>
           <Pagination<IClinicRegistrationListResponseModel> fetchData={this.fetchData}/>
         </section>
