@@ -14,7 +14,7 @@ import Modify from './pages/modify';
 import { onlyForUsers } from 'platform/guards/routes';
 import EmptyState from 'components/empty-state';
 import DoneImage from 'assets/images/done.svg';
-
+import * as animationData from 'assets/animations/EmptyAddresses.json';
 import './style.scss';
 
 interface IState {
@@ -50,7 +50,6 @@ class Addresses extends HelperComponent<IState, {}> {
 
   public render() {
     const { data } = this.state;
-
     return (
       <Layout>
         <div className="G-flex G-flex-justify-end G-mb-30">
@@ -65,7 +64,7 @@ class Addresses extends HelperComponent<IState, {}> {
             onRemove={(id: number) => this.deleteRow(id)}
             data={data}
           />
-        </div> : <EmptyState text={Settings.translations.empty_address_list} />) : null}
+        </div> : <EmptyState animationData={animationData} text={Settings.translations.empty_address_list} />) : null}
       </Layout>
     );
   }

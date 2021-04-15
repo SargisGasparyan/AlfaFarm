@@ -11,6 +11,7 @@ import PaymentController from 'platform/api/payment';
 import { IUserCardListModel } from 'platform/api/payment/models/response';
 import { CardTypeEnum } from 'platform/constants/enums';
 import './style.scss';
+import * as animationData from 'assets/animations/EmptyWallet.json';
 
 interface IState {
   list: IUserCardListModel[] | null;
@@ -65,7 +66,7 @@ class MyWallet extends HelperComponent<{}, IState> {
           <button onClick={this.createCard}
                   className="G-main-button G-ml-auto G-mr-auto G-mt-30">{Settings.translations.add_credit_card}</button>
 
-          {(!list || !list.length) && <EmptyState text={Settings.translations.empty_carts_list}/>}
+          {(!list || !list.length) && <EmptyState animationData={animationData} text={Settings.translations.empty_carts_list}/>}
 
         </div>
       </Layout>

@@ -12,6 +12,7 @@ import { infinityScrollPageLimit } from 'platform/constants';
 import MedicalHistoryController from 'platform/api/medicalHistory';
 import { IMedicalServiceListResponseModel } from 'platform/api/medicalHistory/models/response';
 import EmptyState from 'components/empty-state';
+import * as animationData from 'assets/animations/EmptyMedicalHistory.json';
 
 import './style.scss';
 
@@ -91,7 +92,7 @@ class MedicalHistory extends HelperComponent<IState, {}> {
                 className="P-image"
               />)}
             </div>
-          </div>) : <EmptyState text={Settings.translations.empty_medical_history} />) : null}          
+          </div>) : <EmptyState animationData={animationData} text={Settings.translations.empty_medical_history} />) : null}          
         </section>
       </Layout>
     );

@@ -255,6 +255,7 @@ class Header extends HelperComponent<{}, IState> {
             {environment.WHOLESALE ? <WholesaleContent/> : <>
               <div className="P-search-wrapper">
                 <SearchInput
+                  onKeyUp={this.searchFocus}
                   onClick={this.searchFocus}
                   onFocus={this.searchFocus}
                   onChange={this.searchChange}

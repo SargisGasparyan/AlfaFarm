@@ -26,6 +26,7 @@ import './style.scss';
 import PhotoStorage from 'platform/services/photoStorage';
 import { PriceNotEnoughModal } from './components/priceNotEnoughModal';
 import { Shared } from 'modules';
+import * as animationData from 'assets/animations/EmptyBasket.json';
 
 interface IState {
   data?: IBasketResponseModel;
@@ -215,9 +216,10 @@ class Cart extends HelperComponent<{}, IState> {
               onClose={this.closeOutOfStockConfirm}
             />}
           </> : <EmptyState
+            animationData={animationData}
             text={Settings.translations.no_products}
           />}
-        </> : <PageLoader/>}
+          </> : <PageLoader/>}
       </section>
     );
   }

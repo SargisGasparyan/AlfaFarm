@@ -13,6 +13,7 @@ import Pagination from 'components/pagination';
 import { paginationPageLimit } from 'platform/constants';
 import { IPagingResponse } from 'platform/constants/interfaces';
 import EmptyState from 'components/empty-state';
+import * as animationData from 'assets/animations/EmptyOrderList.json';
 
 import './style.scss';
 
@@ -47,7 +48,7 @@ class Orders extends HelperComponent<{}, IState> {
           {data ? (data.list.length ? <List
             redirectUrl={(row: IOrderDetailsResponseModel) => ROUTES.PROFILE.ORDERS.DETAILS.replace(':id', row.id)}
             data={data.list}
-          /> : <EmptyState text={Settings.translations.empty_orders_list} />) : null}
+          /> : <EmptyState animationData={animationData} text={Settings.translations.empty_orders_list} />) : null}
         </div>
         <Pagination<IOrderListResponseModel> fetchData={this.fetchData} />
       </Layout>

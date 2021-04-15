@@ -16,6 +16,7 @@ import './style.scss';
 import EmptyState from 'components/empty-state';
 import SpecialProductHelp from './components/help';
 import PhotoStorage from 'platform/services/photoStorage';
+import * as animationData from 'assets/animations/EmptySpecialProducts.json';
 
 interface IState {
   data: IPreferredProductListResponseModel[] | null;
@@ -106,7 +107,8 @@ class SpecialProducts extends HelperComponent<IState, {}> {
             </div>
 
 
-          </Link>) : <EmptyState text={Settings.translations.empty_special_products}/>) : null}
+          </Link>) : 
+            <EmptyState animationData={animationData} text={Settings.translations.empty_special_products}/>) : null}
         </div>
 
         {helpIsOpen ? <SpecialProductHelp onClose={this.closeHelp}/> : null}

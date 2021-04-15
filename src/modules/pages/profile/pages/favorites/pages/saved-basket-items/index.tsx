@@ -13,6 +13,8 @@ import Settings from 'platform/services/settings';
 import { Shared } from 'modules';
 
 import './style.scss';
+import EmptyState from 'components/empty-state';
+import * as animationData from 'assets/animations/EmptyBaskets.json';
 
 interface IState {
   data?: IBasketListResponseModel[];
@@ -83,7 +85,7 @@ class SavedBasketItems extends HelperComponent<RouteComponentProps<IRouteParams>
 
     return (
       <Layout>
-        {data ? <div className="P-profile-favorites-saved-basket-items G-flex G-flex-column">
+        {data ? (data.length ?  <div className="P-profile-favorites-saved-basket-items G-flex G-flex-column">
           {window.routerHistory.length > 2 && <i className="G-back-icon icon-Group-5529" onClick={this.goBack} />}
           <Shared.Products.BasketList data={data} onQuantityChange={this.changeQuantity} />
 
@@ -92,7 +94,8 @@ class SavedBasketItems extends HelperComponent<RouteComponentProps<IRouteParams>
             <button className="G-main-button G-ml-20" onClick={this.buy}>{Settings.translations.buy}</button>
           </div>
 
-        </div> : <PageLoader />}
+        </div> : <EmptyState animationData={animationData} text={Settings.translations.no_products} />)
+         : <PageLoader />}
       </Layout>
     );
   }

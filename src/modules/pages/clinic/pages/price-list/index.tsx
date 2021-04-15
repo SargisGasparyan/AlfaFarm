@@ -71,11 +71,11 @@ class PriceList extends HelperComponent<{}, {}> {
               onSubmit={this.fetchData}
             />
           </h1>
-          {data?.length ? data.map(item => <Table<IMedicalServiceListResponseModel>
+          {data?.map(item => <Table<IMedicalServiceListResponseModel>
             key={item.id}
             columnConfig={this.columnConfig(item.name)}
             data={item.services}
-          />) : <EmptyState text={Settings.translations.empty_price_list} />}
+          />)}
         </div>
       </section>
     );

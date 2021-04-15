@@ -16,6 +16,7 @@ import Details from './pages/details';
 
 import './style.scss';
 import EmptyState from 'components/empty-state';
+import * as animationData from 'assets/animations/EmptyTender.json';
 
 interface IState {
   data?: ITenderListResponseModel[];
@@ -77,7 +78,7 @@ class Tenders extends HelperComponent<{}, IState> {
 
           {!!data.length ? <div className="P-content">
             {data.map(item => <ListItem key={item.id} data={item} />)}
-          </div> : <EmptyState text={Settings.translations.empty_tenders_list} />}
+          </div> : <EmptyState animationData={animationData} text={Settings.translations.empty_tenders_list} />}
         </> : <PageLoader />}
       </section>
     );
