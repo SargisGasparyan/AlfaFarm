@@ -14,15 +14,17 @@ interface IProps {
 
 
 const EmptyState = React.memo(({ buttonText, text, animationData, onClick }: IProps) => {
+  const def = 'default';
+
   const buttonStyle = {
     display: 'block',
     margin: '10px auto'
   };
-  
+
   const defaultOptions = {
     loop: true,
     autoplay: true, 
-    animationData: animationData['default'],
+    animationData: animationData[def],
     rendererSettings: {
       preserveAspectRatio: 'xMidYMid slice'
     }
