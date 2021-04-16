@@ -147,18 +147,29 @@ class Header extends HelperComponent<{}, IState> {
       this.safeSetState({ searchLoader: true, searchOpen: false, searchValue: value, searchResult: null }, async () => {
         Connection.AbortAll();
         const data = await ProductController.Search(value);
+
+        if (data.aborted) {
+          return
+        }
+
         const { searchLoader } = this.state;
 
         // If searchLoader has changed, don't show the result
-        if (data?.data?.products.length && searchLoader){
+        if (data?.data?.products.length){
           
           this.safeSetState({
             searchResult: data.data,
             searchHistoryShown: false,
             searchOpen: true
           });
-        }
-        else this.closeSearch();
+        } else {
+          this.safeSetState({
+            searchResult:  data.data,
+            searchHistoryShown: true,
+            searchOpen: false,
+          });
+          setTimeout(() => this.safeSetState({ searchOpen: true }));
+        } 
 
         if (!data?.aborted) {
           this.safeSetState({ searchLoader: false });
@@ -255,7 +266,6 @@ class Header extends HelperComponent<{}, IState> {
             {environment.WHOLESALE ? <WholesaleContent/> : <>
               <div className="P-search-wrapper">
                 <SearchInput
-                  onKeyUp={this.searchFocus}
                   onClick={this.searchFocus}
                   onFocus={this.searchFocus}
                   onChange={this.searchChange}

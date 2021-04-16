@@ -22,7 +22,6 @@ interface IProps extends RouteComponentProps<any> {
   onBlur?(e: React.SyntheticEvent<HTMLInputElement>): void;
   onChange?(value: string): void;
   onSubmit?(value: string): void;
-  onKeyUp?(e: React.SyntheticEvent<HTMLInputElement>): void;
 };
 
 class SearchInput extends HelperPureComponent<IProps, IState> {
@@ -61,7 +60,7 @@ class SearchInput extends HelperPureComponent<IProps, IState> {
   }
 
   public render() {
-    const { withSubmit, loading, onClick, onFocus, onBlur, onKeyUp } = this.props;
+    const { withSubmit, loading, onClick, onFocus, onBlur } = this.props;
     const { search } = this.state;
 
     return (
@@ -74,7 +73,6 @@ class SearchInput extends HelperPureComponent<IProps, IState> {
           onFocus={onFocus}
           onBlur={onBlur}
           onChange={this.change}
-          onKeyUp={onKeyUp}
         />
         {search && <span className="P-remove-text" onClick={this.removeText}>
           <i className="icon-Group-5032" />

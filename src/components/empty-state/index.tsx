@@ -22,7 +22,7 @@ const EmptyState = React.memo(({ buttonText, text, animationData, onClick }: IPr
   };
 
   const defaultOptions = {
-    loop: true,
+    loop: false,
     autoplay: true, 
     animationData: animationData[def],
     rendererSettings: {

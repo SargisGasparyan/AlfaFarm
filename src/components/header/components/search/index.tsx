@@ -95,11 +95,10 @@ class SearchPopup extends HelperComponent<IProps, IState> {
   public render() {
     const { data } = this.state;
     const { searchText, onClose, onSubmit, historyShown } = this.props;
-
     return (
       <ClickOutside onClickOutside={onClose}>
         <aside className="P-header-search-result">
-          {data?.products.length ?
+          {data ? (data.products.length ?
             <div>
               {historyShown ? <h6 className="G-flex">
                 {Settings.translations.last_search_results}
@@ -132,7 +131,7 @@ class SearchPopup extends HelperComponent<IProps, IState> {
                 </div>
               ))}
             </div> :
-            <EmptyState animationData={animationData} text={Settings.translations.no_products} />}
+            <EmptyState animationData={animationData} text={Settings.translations.no_products} />) : <EmptyState animationData={animationData} text={Settings.translations.no_products} />}
         </aside>
       </ClickOutside>
     );
