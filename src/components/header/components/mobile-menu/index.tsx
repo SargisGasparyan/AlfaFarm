@@ -92,13 +92,13 @@ class MobileMenu extends HelperComponent<IProps, IState> {
             <span className="G-fs-18">{Storage.profile.firstName} </span><span
             className="G-fs-18"> {Storage.profile.lastName}</span></div>}
           <div className="P-mobile-menu-content">
-            <div className="G-mb-20">
+            {/* <div className="G-mb-20">
               <SearchInput
                 onChange={this.change}
                 onSubmit={this.searchSubmit}
                 withSubmit={true}
               />
-            </div>
+            </div> */}
 
             {!Settings.token && <a className="P-link" onClick={onAuthOpen}>{Settings.translations.log_in}</a>}
 

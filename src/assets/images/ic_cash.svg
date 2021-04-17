@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="40" height="40" viewBox="0 0 40 40">
+  <defs>
+    <clipPath id="clip-path">
+      <rect width="40" height="40" fill="none"/>
+    </clipPath>
+  </defs>
+  <g id="ic_cash" clip-path="url(#clip-path)">
+    <g id="money" transform="translate(0 -28.588)">
+      <path id="Path_3329" data-name="Path 3329" d="M33.183,41.067v8.691l5.484-2.084-7.6-19.086L0,41.067" transform="translate(0 4)" fill="#6f9935"/>
+      <path id="Path_3330" data-name="Path 3330" d="M49.183,148.611V138.94H18.354L16,139.886v.634H47.6v8.691Z" transform="translate(-14.42 -95.453)" fill="#658b30"/>
+      <path id="Path_3331" data-name="Path 3331" d="M0,154.94H33.183v20.543H0Z" transform="translate(0 -109.874)" fill="#79a73a"/>
+      <path id="Path_3332" data-name="Path 3332" d="M32,190.661a5.543,5.543,0,0,0,3.721-3.721h19.42a5.542,5.542,0,0,0,3.721,3.721v6.779a5.542,5.542,0,0,0-3.721,3.721H35.72A5.543,5.543,0,0,0,32,197.44Z" transform="translate(-28.84 -138.713)" fill="#aac16b"/>
+      <ellipse id="Ellipse_444" data-name="Ellipse 444" cx="3.95" cy="3.95" rx="3.95" ry="3.95" transform="translate(12.641 51.388)" fill="#79a73a"/>
+      <path id="Path_3333" data-name="Path 3333" d="M111.945,90.051l-1.873-4.82-.085-.213a5.542,5.542,0,0,1-4.834-2.079l-.212.085L88,90.051Z" transform="translate(-79.309 -44.984)" fill="#aac16b"/>
+      <path id="Path_3334" data-name="Path 3334" d="M91.811,138.94,88,140.52h23.945l-.614-1.58Z" transform="translate(-79.309 -95.453)" fill="#89b140"/>
+      <g id="Group_6813" data-name="Group 6813" transform="translate(7.111 54.548)">
+        <ellipse id="Ellipse_445" data-name="Ellipse 445" cx="0.79" cy="0.79" rx="0.79" ry="0.79" transform="translate(0 0)" fill="#79a73a"/>
+        <ellipse id="Ellipse_446" data-name="Ellipse 446" cx="0.79" cy="0.79" rx="0.79" ry="0.79" transform="translate(17.381 0)" fill="#79a73a"/>
+      </g>
+    </g>
+  </g>
+</svg>

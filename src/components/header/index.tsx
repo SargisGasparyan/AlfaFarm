@@ -356,8 +356,8 @@ class Header extends HelperComponent<{}, IState> {
           className="P-link P-login"
         >{Settings.translations.log_in}</span>}
         {Storage.profile &&
-        <a onClick={this.toggleNotifications} className="P-link P-icon G-normal-link P-notification">
-          <i className="icon-Group-5515"/>
+        <a onClick={this.searchSubmit} className="P-link P-icon G-normal-link P-notification">
+          <i className="icon-Group-5502"/>
           {!!notificationIconNumber && <span>{notificationIconNumber > 99 ? '99+' : notificationIconNumber}</span>}
         </a>}
         <Link to={ROUTES.CART} className="P-link P-icon G-normal-link P-cart">

@@ -37,6 +37,7 @@ import UserAddressController from 'platform/api/userAddress';
 import { Shared } from 'modules';
 
 import './style.scss';
+import LocationImage from 'assets/images/placeholder.svg';
 
 
 interface IState {
@@ -196,9 +197,16 @@ class Checkout extends HelperComponent<{}, IState> {
   private submit = (e: React.SyntheticEvent) => {
     e.preventDefault();
     this.safeSetState({ submited: true }, () => {
-      this.formValidation.valid && this.safeSetState({ isPayment: true });
+      this.formValidation.valid && this.safeSetState({ isPayment: true }, () => {
+        window.scrollTo(0, 0);
+      });
     });
   }
+
+  private back = () => {
+    this.safeSetState({ isPayment: false });
+  }
+
   private openAddressChoose = (e: React.SyntheticEvent) => {
     e.preventDefault();
     this.safeSetState({ chooseAddressOpen: true });
@@ -337,7 +345,18 @@ class Checkout extends HelperComponent<{}, IState> {
 
     return (
       <section className="G-page P-checkout-page">
-        <h1 className="G-page-title">{!isPayment ? Settings.translations.order_checkout : Settings.translations.payment_method}</h1>
+
+        <div className="P-steps">
+          <p>1</p>
+          <span />
+          <p className={!isPayment ? 'P-disabled' : ''}>2</p>
+        </div>
+
+        {!isPayment ? 
+          <h1 className="G-page-title">{Settings.translations.order_checkout}</h1>
+          :
+          <h1 className="G-page-title P-payment-title" onClick={this.back}><div className="P-back-btn" /> {Settings.translations.payment_method}</h1>
+        }
         {!isPayment ? <form className="G-main-form P-checkout-form">
           <div className="P-main-info G-half-width">
             <div className="G-main-form-field">
@@ -394,6 +413,20 @@ class Checkout extends HelperComponent<{}, IState> {
                 onChange={this.changeDeliveryTimeType}
               />
             </div>
+            {dateType === OrderDeliveryTimeTypeEnum.DeliveryDate && <div className="P-delivery-date G-flex G-align-center">
+              <div className="G-main-form-half-field">
+                <DateTime
+                  onChange={this.dateFromChange}
+                  isValidDate={this.validateDeliveryDate}
+                  inputProps={{
+                    value: form.deliveryDateFrom ? formatDate(form.deliveryDateFrom, true) : '',
+                    readOnly: true,
+                    className: `G-main-input ${this.formValidation.errors.deliveryDateFrom ? 'G-invalid-field' : ''}`,
+                    placeholder: Settings.translations.choose_date,
+                  }}
+                />
+              </div>
+            </div>}
 
 
           </div>
@@ -403,7 +436,7 @@ class Checkout extends HelperComponent<{}, IState> {
 
             {form.deliveryType === OrderDeliveryTypeEnum.Delivery &&
               <>
-                <div className="G-main-form-field G-main-form-field-closer">
+                <div className="G-main-form-field G-main-form-field-closer P-relative">
                   <YandexAutocomplete
                     suggestDisabled={chooseAddressOpen || choosePharmacyOpen}
                     placeholder={Settings.translations.address}
@@ -412,6 +445,7 @@ class Checkout extends HelperComponent<{}, IState> {
                     onChange={this.addressChange}
                     onPlaceSelect={this.addressSelect}
                   />
+                  <img src={LocationImage} className="P-location-image" alt=""/>
                 </div>
                 <div className="G-main-form-field G-main-form-field-closer">
                   <input
@@ -453,23 +487,7 @@ class Checkout extends HelperComponent<{}, IState> {
               </>
             }
 
-
-            {dateType === OrderDeliveryTimeTypeEnum.DeliveryDate && <div className="P-delivery-date G-flex G-align-center">
-              <div className="G-main-form-half-field">
-                <DateTime
-                  onChange={this.dateFromChange}
-                  isValidDate={this.validateDeliveryDate}
-                  inputProps={{
-                    value: form.deliveryDateFrom ? formatDate(form.deliveryDateFrom, true) : '',
-                    readOnly: true,
-                    className: `G-main-input ${this.formValidation.errors.deliveryDateFrom ? 'G-invalid-field' : ''}`,
-                    placeholder: Settings.translations.choose_date,
-                  }}
-                />
-              </div>
-            </div>}
-
-            {form.deliveryType === OrderDeliveryTypeEnum.Pickup && <div className="G-main-form-field">
+            {form.deliveryType === OrderDeliveryTypeEnum.Pickup && <div className="G-main-form-field P-relative">
               <input
                 value={chosenBranch ? chosenBranch.name : ''}
                 readOnly={true}
@@ -477,6 +495,7 @@ class Checkout extends HelperComponent<{}, IState> {
                 placeholder={Settings.translations.choose_pharmacy}
                 onClick={this.openPharmacyChoose}
               />
+              <img src={LocationImage} className="P-location-image" alt=""/>
             </div>}
 
             <div className="G-main-form-field P-comment-field">
