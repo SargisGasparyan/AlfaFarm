@@ -11,7 +11,7 @@ import Settings from 'platform/services/settings';
 
 interface IProps {
   onClose(): void;
-  selectedItem: INotificationListResponseModel; 
+  selectedItem: INotificationListResponseModel;
 };
 
 interface IState {
@@ -45,15 +45,19 @@ class NotificationAnswer extends HelperPureComponent<IProps, IState> {
       <div className="G-fields-form">
         <h2>{data.title}</h2>
         <p>{data.description}</p>
-        {data.answerType ? 
-          <span className="P-answer-text">{Settings.translations.answer_text} {data.answerType === NotificationChoiceTypeEnum.UserCanceled ? data.cancelText : data.confirmText}</span>
-        :
+        {
+          data.answerType &&
+          <span className="P-answer-text">
+            {Settings.translations.answer_text} {data.answerType === NotificationChoiceTypeEnum.UserCanceled ? data.cancelText : data.confirmText}
+          </span>
+        }
+        {
+          data.cancelText && data.confirmText &&
           <div className="G-flex">
             <span onClick={() => this.confirm(NotificationChoiceTypeEnum.UserCanceled)}>{data.cancelText}</span>
             <span onClick={() => this.confirm(NotificationChoiceTypeEnum.UserConfirmed)} className="G-form-button P-answer-main-btn">{data.confirmText}</span>
           </div>
         }
-        
       </div>
       </Modal>
     );
