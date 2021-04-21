@@ -39,14 +39,14 @@ class SearchInput extends HelperPureComponent<IProps, IState> {
 
   private change = (e: React.SyntheticEvent<HTMLInputElement>) => {
     const { onChange } = this.props;
-    
+
     this.safeSetState({ search: e.currentTarget.value });
     onChange && onChange(e.currentTarget.value);
   }
 
   private removeText = () => {
     const { onChange } = this.props;
-    
+
     this.safeSetState({ search: '' });
     onChange && onChange('');
   }
@@ -74,10 +74,7 @@ class SearchInput extends HelperPureComponent<IProps, IState> {
           onBlur={onBlur}
           onChange={this.change}
         />
-        {search && <span className="P-remove-text" onClick={this.removeText}>
-          <i className="icon-Group-5032" />
-        </span>}
-        
+
         {withSubmit && <button type="button" onClick={this.submit}>
           <LoaderContent color="#F26D26" loading={loading} className="G-form-button"><i className="icon-Group-5502" /></LoaderContent>
         </button>}
