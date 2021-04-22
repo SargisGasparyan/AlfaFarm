@@ -4,7 +4,6 @@
   top        : 80px;
   width      : 550px;
   left       : 0;
-  padding    : 15px 15px 0;
   position   : absolute;
   box-shadow : $default-block-shadow;
   background : white;
@@ -13,11 +12,16 @@
   overflow-y: auto;
 
   h6 {
-    font-weight    : 100;
-    padding-bottom : 30px;
-    font-size      : 18px;
+    position         : sticky;
+    top              : 0;
+    background-color : #fff;
+    z-index          : 99;
+    font-weight      : 100;
+    padding          : 15px 15px 15px;
+    font-size        : 18px;
+    margin-bottom    : 15px;
 
-    p { 
+    p {
       border-bottom  : 2px solid;
       padding-bottom : 2px;
       cursor: pointer;
@@ -32,7 +36,7 @@
     text-decoration : none;
     cursor          : pointer;
     border-bottom   : 1px solid $light-gray;
-    margin-bottom: 10px;
+    margin          : 0 15px 10px;
 
     &:last-child { border-bottom: 0; }
 
@@ -49,7 +53,7 @@
       h5 {
         font-size: 16px;
       }
-  
+
       span {
         color     : #A1A1A1;
         display   : block;

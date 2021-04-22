@@ -9,7 +9,7 @@
   box-shadow: $default-block-shadow;
   background: white;
   overflow-y: auto;
-  max-height: 300px;
+  max-height: 400px;
 
   @media (max-width: $small-screen) {
     top: 70px;
@@ -47,7 +47,7 @@
     font-size: 16px;
     text-decoration: none;
     cursor: pointer;
-    
+
     border-bottom: unset;
     box-shadow: unset;
     border-radius: unset;
@@ -60,10 +60,10 @@
       .P-desc {
           color: #A1A1A1;
           font-size: 14px;
-          white-space: nowrap; 
-          width: 250px; 
+          white-space: nowrap;
+          width: 250px;
           overflow: hidden;
-          text-overflow: ellipsis; 
+          text-overflow: ellipsis;
       }
     }
 
