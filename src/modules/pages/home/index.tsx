@@ -37,25 +37,6 @@ class Home extends HelperComponent<{}, IState> {
   //   document.body.classList.remove('armenianFont');
   // }
 
-  public componentDidMount() {
-    this.checkForPaymentSuccess();
-  }
-
-  private checkForPaymentSuccess = async () => {
-    const query = new URLSearchParams(window.location.search);
-    const orderId = query.get('orderId');
-    const isCard = query.get('isCard');
-
-    if (orderId) {
-      if (isCard) {
-        const result = await PaymentController.saveCard(orderId);
-        // result.success && window.routerHistory.push(`${ROUTES.PROFILE.MY_WALLET}`);
-      } else {
-        const result = await PaymentController.confirm(orderId);
-        result.success && this.safeSetState({ orderSuccessModalOpen: true });
-      }
-    }
-  };
 
   private toggleAuthModal = () => {
     const { authModalOpen } = this.state;
