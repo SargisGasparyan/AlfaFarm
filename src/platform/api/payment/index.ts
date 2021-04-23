@@ -4,12 +4,12 @@ import { IUserCardListModel } from './models/response';
 import Settings from '../../services/settings';
 
 class PaymentController {
- 
+
   private static controller = 'payment';
 
-  public static registerCard = (isCard?: boolean): Promise<IResponse<any>> => {
+  public static registerCard = (returnUrl: string): Promise<IResponse<any>> => {
     const result = Connection.GET({
-      action: 'registerCard' + (isCard ? '?isCard=true' : ''),
+      action: 'registerCard' + `?returnUrl=${returnUrl}`,
       controller: PaymentController.controller,
     });
 

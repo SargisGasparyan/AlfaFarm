@@ -34,7 +34,8 @@ class MyWallet extends HelperComponent<{}, IState> {
   };
 
   private createCard = async () => {
-    const res = await PaymentController.registerCard(true);
+    const returnUrl = window.location.pathname;
+    const res = await PaymentController.registerCard(returnUrl);
     if (res && res.success) {
       window.location.href = res.data.formUrl;
     }
@@ -66,7 +67,8 @@ class MyWallet extends HelperComponent<{}, IState> {
           <button onClick={this.createCard}
                   className="G-main-button G-ml-auto G-mr-auto G-mt-30">{Settings.translations.add_credit_card}</button>
 
-          {(!list || !list.length) && <EmptyState animationData={animationData} text={Settings.translations.empty_carts_list}/>}
+          {(!list || !list.length) &&
+          <EmptyState animationData={animationData} text={Settings.translations.empty_carts_list}/>}
 
         </div>
       </Layout>

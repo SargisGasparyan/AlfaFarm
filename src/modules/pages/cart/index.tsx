@@ -11,16 +11,13 @@ import {
   IBasketChangeResponseModel
 } from 'platform/api/basket/models/response';
 import EmptyState from 'components/empty-state';
-import { getMediaPath, formatPrice } from 'platform/services/helper';
-import CountInput from 'components/count-input';
+import { formatPrice } from 'platform/services/helper';
 import Connection from 'platform/services/connection';
 import DispatcherChannels from 'platform/constants/dispatcher-channels';
 import Storage from 'platform/services/storage';
 import PageLoader from 'components/page-loader';
 import { IResponse } from 'platform/constants/interfaces';
-import { PromotionTypeEnum } from 'platform/constants/enums';
 import ConfirmModal from 'components/confirm-modal';
-import { getBasketItemPriceInfo } from 'platform/services/basket';
 
 import './style.scss';
 import PhotoStorage from 'platform/services/photoStorage';
@@ -219,7 +216,7 @@ class Cart extends HelperComponent<{}, IState> {
             animationData={animationData}
             text={Settings.translations.no_products}
           />}
-          </> : <PageLoader/>}
+        </> : <PageLoader/>}
       </section>
     );
   }
