@@ -27,7 +27,7 @@ class Home extends HelperComponent<{}, IState> {
 
   public state: IState = {
     authModalOpen: false,
-    orderSuccessModalOpen: false,
+    orderSuccessModalOpen: false
   };
 
   // shat romantik grdon
@@ -37,7 +37,9 @@ class Home extends HelperComponent<{}, IState> {
   //   document.body.classList.remove('armenianFont');
   // }
 
-  public componentDidMount() { this.checkForPaymentSuccess(); }
+  public componentDidMount() {
+    this.checkForPaymentSuccess();
+  }
 
   private checkForPaymentSuccess = async () => {
     const query = new URLSearchParams(window.location.search);
@@ -47,18 +49,18 @@ class Home extends HelperComponent<{}, IState> {
     if (orderId) {
       if (isCard) {
         const result = await PaymentController.saveCard(orderId);
-        result.success && window.routerHistory.push(`${ROUTES.PROFILE.MY_WALLET}`);
+        // result.success && window.routerHistory.push(`${ROUTES.PROFILE.MY_WALLET}`);
       } else {
         const result = await PaymentController.confirm(orderId);
         result.success && this.safeSetState({ orderSuccessModalOpen: true });
       }
     }
-  }
+  };
 
   private toggleAuthModal = () => {
     const { authModalOpen } = this.state;
     this.safeSetState({ successModalOpen: false, authModalOpen: !authModalOpen });
-  }
+  };
 
   private closeOrderSuccessModal = () => this.safeSetState({ orderSuccessModalOpen: false });
 
@@ -67,22 +69,24 @@ class Home extends HelperComponent<{}, IState> {
 
     return (
       <section className="P-home-page">
-        <Carousel />
-        <DiscountedProducts />
-        {environment.WHOLESALE ? <ForPartners /> : <News />}
-        <ContactUs />
+        <Carousel/>
+        <DiscountedProducts/>
+        {environment.WHOLESALE ? <ForPartners/> : <News/>}
+        <ContactUs/>
 
         {orderSuccessModalOpen && <SuccessModal onClose={this.closeOrderSuccessModal}>
           {Settings.guest ? <>
             <h3>{Settings.translations.guest_order_success}</h3>
-            <button className="G-main-button G-normal-link G-mt-30 P-register-button" onClick={this.toggleAuthModal}>{Settings.translations.sign_up}</button>
-          </>: <>
+            <button className="G-main-button G-normal-link G-mt-30 P-register-button"
+                    onClick={this.toggleAuthModal}>{Settings.translations.sign_up}</button>
+          </> : <>
             <h3>{Settings.translations.order_success}</h3>
-            <Link className="G-main-button G-normal-link G-mt-30" to={ROUTES.PROFILE.ORDERS.MAIN}>{Settings.translations.order_history}</Link>
+            <Link className="G-main-button G-normal-link G-mt-30"
+                  to={ROUTES.PROFILE.ORDERS.MAIN}>{Settings.translations.order_history}</Link>
           </>}
         </SuccessModal>}
 
-        {authModalOpen && <Shared.Auth onClose={this.toggleAuthModal} />}
+        {authModalOpen && <Shared.Auth onClose={this.toggleAuthModal}/>}
       </section>
     );
   }
