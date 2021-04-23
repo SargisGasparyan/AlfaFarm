@@ -104,7 +104,7 @@ class App extends HelperComponent<{}, IState> {
         const result = await PaymentController.confirm(orderId);
         result.success && this.safeSetState({ orderSuccessModalOpen: true });
       }
-      query.delete('orderId')
+      query.delete('orderId');
     }
   };
 
