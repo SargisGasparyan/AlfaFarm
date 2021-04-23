@@ -113,11 +113,11 @@ class Checkout extends HelperComponent<{}, IState> {
 
     const card = query.get('card');
     const paymentType = query.get('paymentType');
-    const { form } = this.state;
 
     if (card && paymentType) {
-      form.paymentType = Number(query.get('paymentType'));
-      form.creditCardId = card ? Number(card) : undefined;
+      const { form } = this.state;
+      form.paymentType = +paymentType;
+      form.creditCardId = +card;
       this.safeSetState({ form });
     }
 

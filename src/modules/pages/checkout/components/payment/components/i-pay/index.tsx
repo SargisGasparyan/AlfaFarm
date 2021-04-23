@@ -22,7 +22,7 @@ const IPay = React.memo(() => {
   };
 
   const createCard = async () => {
-    const returnUrl = window.location.pathname + (window.location.search ?? '?isCard=true');
+    const returnUrl = window.location.pathname + (!!window.location.search ? window.location.search : '?key=true');
     const res = await PaymentController.registerCard(returnUrl);
     if (res && res.success) {
       window.location.href = res.data.formUrl;
