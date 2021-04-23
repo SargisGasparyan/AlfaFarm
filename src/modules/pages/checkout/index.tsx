@@ -111,13 +111,23 @@ class Checkout extends HelperComponent<{}, IState> {
     const query = new URLSearchParams(window.location.search);
     const isCard = query.get('isCard');
 
+    const card = query.get('card');
+    const paymentType = query.get('paymentType');
+    const { form } = this.state;
+
+    if (card && paymentType) {
+      form.paymentType = Number(query.get('paymentType'));
+      form.creditCardId = card ? Number(card) : undefined;
+      this.safeSetState({ form });
+    }
+
     if (isCard) {
+      query.delete('isCard');
       this.safeSetState({ submited: true }, () => {
-        this.formValidation.valid && this.safeSetState({ isPayment: true }, () => {
+        this.safeSetState({ isPayment: true }, () => {
           window.scrollTo(0, 0);
         });
       });
-      query.delete('isCard');
     }
   }
 
