@@ -79,7 +79,7 @@ class Checkout extends HelperComponent<{}, IState> {
       lastName: '',
       phoneNumber: '',
       deliveryType: OrderDeliveryTypeEnum.Delivery,
-      paymentType: PaymentTypeEnum.Cash,
+      paymentType: PaymentTypeEnum.Cash
     },
     isPayment: false,
     idramAmount: null,
@@ -103,6 +103,31 @@ class Checkout extends HelperComponent<{}, IState> {
       this.getResultInfo();
       this.fetchAddressesList();
       this.safeSetState({ form });
+      this.getQuery();
+    }
+  }
+
+  private getQuery() {
+    const query = new URLSearchParams(window.location.search);
+    const isCard = query.get('isCard');
+
+    const card = query.get('card');
+    const paymentType = query.get('paymentType');
+    const { form } = this.state;
+
+    if (card && paymentType) {
+      form.paymentType = Number(query.get('paymentType'));
+      form.creditCardId = card ? Number(card) : undefined;
+      this.safeSetState({ form });
+    }
+
+    if (isCard) {
+      query.delete('isCard');
+      this.safeSetState({ submited: true }, () => {
+        this.safeSetState({ isPayment: true }, () => {
+          window.scrollTo(0, 0);
+        });
+      });
     }
   }
 
@@ -111,35 +136,35 @@ class Checkout extends HelperComponent<{}, IState> {
     const price = query.get('total');
 
     this.safeSetState({ idramAmount: `${price ? Math.round(+price) : price}` });
-  }
+  };
 
   private getBonusDetails = async () => {
     const result = await BonusCardController.GetDetailsWithHistory({
       pageNumber: 1,
-      pageSize: 1,
+      pageSize: 1
     });
 
     this.safeSetState({ bonusDetails: result.data });
-  }
+  };
 
   private getResultInfo = async (bonus = 0) => {
     const { form, initialTotalDiscountedPrice } = this.state;
     const result = await OrderController.GetResult({
       usingBonus: bonus,
-      deliveryType: form.deliveryType,
+      deliveryType: form.deliveryType
     });
 
     result.data && this.safeSetState({
       resultInfo: result.data,
-      initialTotalDiscountedPrice: Math.round(initialTotalDiscountedPrice || result.data.totalDiscountedPrice),
+      initialTotalDiscountedPrice: Math.round(initialTotalDiscountedPrice || result.data.totalDiscountedPrice)
     });
-  }
+  };
 
   private changeField = (e: React.SyntheticEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { form } = this.state;
     form[e.currentTarget.name] = e.currentTarget.value;
     this.safeSetState({ form });
-  }
+  };
 
   private bonusChange = (e: React.SyntheticEvent<HTMLInputElement>) => {
     const { form } = this.state;
@@ -147,13 +172,13 @@ class Checkout extends HelperComponent<{}, IState> {
 
     Connection.AbortAll();
     this.safeSetState({ form }, () => this.getResultInfo(form.usedBonus));
-  }
+  };
 
 
   private fetchAddressesList = async () => {
     const result = await UserAddressController.GetList();
     result.data.length && this.safeSetState({ addressList: result.data }, this.checkForDefaultAddress);
-  }
+  };
 
   private checkForDefaultAddress = () => {
     const { form, addressList } = this.state;
@@ -169,15 +194,15 @@ class Checkout extends HelperComponent<{}, IState> {
       form.addressFloor = defaultAddress.floor;
       this.safeSetState({ form });
     }
-  }
+  };
 
   private addressChange = (e: React.SyntheticEvent<HTMLInputElement>) => {
     const { form } = this.state;
     form.addressText = e.currentTarget.value;
     form.addressLat = 0;
     form.addressLng = 0;
-    this.safeSetState({ form })
-  }
+    this.safeSetState({ form });
+  };
 
   private addressSelect = (place: IYandexPlace) => {
     const { form } = this.state;
@@ -186,13 +211,13 @@ class Checkout extends HelperComponent<{}, IState> {
     form.addressLat = place.position[0];
     form.addressLng = place.position[1];
     this.safeSetState({ form });
-  }
+  };
 
   private dateFromChange = (chosen: Moment) => {
     const { form } = this.state;
     form.deliveryDateFrom = chosen.toISOString();
     this.safeSetState({ form });
-  }
+  };
 
   private submit = (e: React.SyntheticEvent) => {
     e.preventDefault();
@@ -201,16 +226,16 @@ class Checkout extends HelperComponent<{}, IState> {
         window.scrollTo(0, 0);
       });
     });
-  }
+  };
 
   private back = () => {
     this.safeSetState({ isPayment: false });
-  }
+  };
 
   private openAddressChoose = (e: React.SyntheticEvent) => {
     e.preventDefault();
     this.safeSetState({ chooseAddressOpen: true });
-  }
+  };
 
   private openPharmacyChoose = () => this.safeSetState({ choosePharmacyOpen: true });
 
@@ -228,7 +253,7 @@ class Checkout extends HelperComponent<{}, IState> {
       form.addressLng = chosen.addressLng;
       this.safeSetState({ form, chooseAddressOpen: false });
     } else this.safeSetState({ chooseAddressOpen: false });
-  }
+  };
 
   private clearAddress = () => {
     const { form } = this.state;
@@ -242,7 +267,7 @@ class Checkout extends HelperComponent<{}, IState> {
     form.addressLat = 0;
     form.addressLng = 0;
     this.safeSetState({ form, chosenBranch: null });
-  }
+  };
 
   private choosePharmacy = (pharmacy: IPharmacyBranchListResponseModel) => {
     if (pharmacy) {
@@ -253,13 +278,13 @@ class Checkout extends HelperComponent<{}, IState> {
       form.addressLng = pharmacy.addressLng;
       this.safeSetState({ form, chosenBranch: pharmacy, choosePharmacyOpen: false });
     } else this.safeSetState({ choosePharmacyOpen: false });
-  }
+  };
 
   private changeDeliveryType = (chosen: IDropdownOption<OrderDeliveryTypeEnum>) => {
     const { form } = this.state;
     form.deliveryType = chosen.value;
     this.safeSetState({ form });
-  }
+  };
 
   private changeDeliveryTimeType = (chosen: IDropdownOption<OrderDeliveryTimeTypeEnum>) => {
     const { form } = this.state;
@@ -267,7 +292,7 @@ class Checkout extends HelperComponent<{}, IState> {
       form.deliveryDateFrom = undefined;
     }
     this.safeSetState({ dateType: chosen.value, form });
-  }
+  };
 
   private validateDeliveryDate = (dateItem: moment.Moment) => {
     const currentDayStarting = new Date();
@@ -278,7 +303,7 @@ class Checkout extends HelperComponent<{}, IState> {
     dateItem.milliseconds(currentDayStarting.getMilliseconds());
 
     return dateItem.isSameOrAfter(currentDayStarting);
-  }
+  };
 
   private toggleUsingBonus = async () => {
     const { isUsingBonus, form } = this.state;
@@ -290,7 +315,7 @@ class Checkout extends HelperComponent<{}, IState> {
     }
 
     this.safeSetState({ isUsingBonus: !isUsingBonus });
-  }
+  };
 
   private finishCheckout = (e: React.SyntheticEvent) => {
     e.preventDefault();
@@ -316,12 +341,12 @@ class Checkout extends HelperComponent<{}, IState> {
         this.safeSetState(finishState, () => window.dispatchEvent(new CustomEvent(DispatcherChannels.CartItemsUpdate)));
       } else this.safeSetState({ submitLoading: false });
     });
-  }
+  };
 
   private toggleAuthModal = () => {
     const { authModalOpen } = this.state;
     this.safeSetState({ successModalOpen: false, authModalOpen: !authModalOpen });
-  }
+  };
 
   private navigateToHome = () => window.routerHistory.push(ROUTES.HOME);
 
@@ -340,7 +365,7 @@ class Checkout extends HelperComponent<{}, IState> {
       successModalOpen,
       initialTotalDiscountedPrice,
       isUsingBonus,
-      isPayment,
+      isPayment
     } = this.state;
 
     return (
@@ -348,93 +373,96 @@ class Checkout extends HelperComponent<{}, IState> {
 
         <div className="P-steps">
           <p>1</p>
-          <span />
+          <span/>
           <p className={!isPayment ? 'P-disabled' : ''}>2</p>
         </div>
 
-        {!isPayment ? 
+        {!isPayment ?
           <h1 className="G-page-title">{Settings.translations.order_checkout}</h1>
           :
-          <h1 className="G-page-title P-payment-title" onClick={this.back}><div className="P-back-btn" /> {Settings.translations.payment_method}</h1>
+          <h1 className="G-page-title P-payment-title" onClick={this.back}>
+            <div className="P-back-btn"/>
+            {Settings.translations.payment_method}</h1>
         }
         {!isPayment ? <form className="G-main-form P-checkout-form">
-          <div className="P-main-info G-half-width">
-            <div className="G-main-form-field">
-              <input
-                name="firstName"
-                value={form.firstName || ''}
-                className={`G-main-input ${this.formValidation.errors.firstName ? 'G-invalid-field' : ''}`}
-                placeholder={Settings.translations.first_name}
-                onChange={this.changeField}
-              />
-            </div>
-            <div className="G-main-form-field">
-              <input
-                name="lastName"
-                value={form.lastName || ''}
-                className={`G-main-input ${this.formValidation.errors.lastName ? 'G-invalid-field' : ''}`}
-                placeholder={Settings.translations.last_name}
-                onChange={this.changeField}
-              />
-            </div>
-            <div className="G-main-form-field G-phone-input-wrapper">
-              <p className="G-input-country-code">+{countryCode}</p>
-              <input
-                name="phoneNumber"
-                value={form.phoneNumber || ''}
-                className={`G-main-input ${this.formValidation.errors.phoneNumber ? 'G-invalid-field' : ''}`}
-                placeholder={Settings.translations.phone_number}
-                onChange={this.changeField}
-              />
-            </div>
-            <div className="G-main-form-field">
-              <input
-                name="email"
-                value={form.email || ''}
-                className={`G-main-input ${this.formValidation.errors.email ? 'G-invalid-field' : ''}`}
-                placeholder={Settings.translations.email}
-                onChange={this.changeField}
-              />
-            </div>
-
-            <div className="G-main-form-field G-phone-input-wrapper P-checkout-select">
-              <Select<OrderDeliveryTypeEnum>
-                options={OrderDeliveryTypeDropdown()}
-                className="G-main-select P-checkout-select-item"
-                value={form.deliveryType}
-                onChange={this.changeDeliveryType}
-              />
-            </div>
-            <div className="G-main-form-field G-phone-input-wrapper P-checkout-select">
-              <Select<OrderDeliveryTimeTypeEnum>
-                options={OrderDeliveryTimeTypeDropdown()}
-                className="G-main-select P-checkout-select-item"
-                value={dateType}
-                onChange={this.changeDeliveryTimeType}
-              />
-            </div>
-            {dateType === OrderDeliveryTimeTypeEnum.DeliveryDate && <div className="P-delivery-date G-flex G-align-center">
-              <div className="G-main-form-half-field">
-                <DateTime
-                  onChange={this.dateFromChange}
-                  isValidDate={this.validateDeliveryDate}
-                  inputProps={{
-                    value: form.deliveryDateFrom ? formatDate(form.deliveryDateFrom, true) : '',
-                    readOnly: true,
-                    className: `G-main-input ${this.formValidation.errors.deliveryDateFrom ? 'G-invalid-field' : ''}`,
-                    placeholder: Settings.translations.choose_date,
-                  }}
+            <div className="P-main-info G-half-width">
+              <div className="G-main-form-field">
+                <input
+                  name="firstName"
+                  value={form.firstName || ''}
+                  className={`G-main-input ${this.formValidation.errors.firstName ? 'G-invalid-field' : ''}`}
+                  placeholder={Settings.translations.first_name}
+                  onChange={this.changeField}
                 />
               </div>
-            </div>}
+              <div className="G-main-form-field">
+                <input
+                  name="lastName"
+                  value={form.lastName || ''}
+                  className={`G-main-input ${this.formValidation.errors.lastName ? 'G-invalid-field' : ''}`}
+                  placeholder={Settings.translations.last_name}
+                  onChange={this.changeField}
+                />
+              </div>
+              <div className="G-main-form-field G-phone-input-wrapper">
+                <p className="G-input-country-code">+{countryCode}</p>
+                <input
+                  name="phoneNumber"
+                  value={form.phoneNumber || ''}
+                  className={`G-main-input ${this.formValidation.errors.phoneNumber ? 'G-invalid-field' : ''}`}
+                  placeholder={Settings.translations.phone_number}
+                  onChange={this.changeField}
+                />
+              </div>
+              <div className="G-main-form-field">
+                <input
+                  name="email"
+                  value={form.email || ''}
+                  className={`G-main-input ${this.formValidation.errors.email ? 'G-invalid-field' : ''}`}
+                  placeholder={Settings.translations.email}
+                  onChange={this.changeField}
+                />
+              </div>
+
+              <div className="G-main-form-field G-phone-input-wrapper P-checkout-select">
+                <Select<OrderDeliveryTypeEnum>
+                  options={OrderDeliveryTypeDropdown()}
+                  className="G-main-select P-checkout-select-item"
+                  value={form.deliveryType}
+                  onChange={this.changeDeliveryType}
+                />
+              </div>
+              <div className="G-main-form-field G-phone-input-wrapper P-checkout-select">
+                <Select<OrderDeliveryTimeTypeEnum>
+                  options={OrderDeliveryTimeTypeDropdown()}
+                  className="G-main-select P-checkout-select-item"
+                  value={dateType}
+                  onChange={this.changeDeliveryTimeType}
+                />
+              </div>
+              {dateType === OrderDeliveryTimeTypeEnum.DeliveryDate &&
+              <div className="P-delivery-date G-flex G-align-center">
+                <div className="G-main-form-half-field">
+                  <DateTime
+                    onChange={this.dateFromChange}
+                    isValidDate={this.validateDeliveryDate}
+                    inputProps={{
+                      value: form.deliveryDateFrom ? formatDate(form.deliveryDateFrom, true) : '',
+                      readOnly: true,
+                      className: `G-main-input ${this.formValidation.errors.deliveryDateFrom ? 'G-invalid-field' : ''}`,
+                      placeholder: Settings.translations.choose_date
+                    }}
+                  />
+                </div>
+              </div>}
 
 
-          </div>
+            </div>
 
 
-          <div className="P-delivery-form G-half-width">
+            <div className="P-delivery-form G-half-width">
 
-            {form.deliveryType === OrderDeliveryTypeEnum.Delivery &&
+              {form.deliveryType === OrderDeliveryTypeEnum.Delivery &&
               <>
                 <div className="G-main-form-field G-main-form-field-closer P-relative">
                   <YandexAutocomplete
@@ -485,20 +513,20 @@ class Checkout extends HelperComponent<{}, IState> {
                   />
                 </div>
               </>
-            }
+              }
 
-            {form.deliveryType === OrderDeliveryTypeEnum.Pickup && <div className="G-main-form-field P-relative">
-              <input
-                value={chosenBranch ? chosenBranch.name : ''}
-                readOnly={true}
-                className={`G-main-input G-cursor-pointer ${this.formValidation.errors.branchId ? 'G-invalid-field' : ''}`}
-                placeholder={Settings.translations.choose_pharmacy}
-                onClick={this.openPharmacyChoose}
-              />
-              <img src={LocationImage} className="P-location-image" alt=""/>
-            </div>}
+              {form.deliveryType === OrderDeliveryTypeEnum.Pickup && <div className="G-main-form-field P-relative">
+                <input
+                  value={chosenBranch ? chosenBranch.name : ''}
+                  readOnly={true}
+                  className={`G-main-input G-cursor-pointer ${this.formValidation.errors.branchId ? 'G-invalid-field' : ''}`}
+                  placeholder={Settings.translations.choose_pharmacy}
+                  onClick={this.openPharmacyChoose}
+                />
+                <img src={LocationImage} className="P-location-image" alt=""/>
+              </div>}
 
-            <div className="G-main-form-field P-comment-field">
+              <div className="G-main-form-field P-comment-field">
               <textarea
                 name="comment"
                 value={form.comment || ''}
@@ -506,12 +534,12 @@ class Checkout extends HelperComponent<{}, IState> {
                 placeholder={Settings.translations.comment}
                 onChange={this.changeField}
               />
-            </div>
+              </div>
 
-            {bonusDetails &&
+              {bonusDetails &&
               !!initialTotalDiscountedPrice &&
               !!bonusDetails.bonusCardDetails.amount && <div className="G-main-form-field G-flex G-flex-wrap">
-                <CheckBox checked={isUsingBonus} onClick={this.toggleUsingBonus} />
+                <CheckBox checked={isUsingBonus} onClick={this.toggleUsingBonus}/>
                 {Settings.translations.use_bonus_points}
                 {isUsingBonus && <>
                   <span className="G-ml-auto G-text-bold G-clr-orange">{bonusDetails.bonusCardDetails.amount}</span>
@@ -525,52 +553,62 @@ class Checkout extends HelperComponent<{}, IState> {
                 </>}
               </div>}
 
-            {resultInfo && <>
-              <h3 className="G-mt-auto G-flex G-flex-justify-between">{Settings.translations.price} <span>{formatPrice(resultInfo.totalDiscountedPrice)}</span></h3>
-              <h3 className="G-mt-10 G-flex G-flex-justify-between">{Settings.translations.bonus} <span>{resultInfo.receivedBonus}</span></h3>
-              {!!form.usedBonus && <h3 className="G-mt-10 G-flex G-flex-justify-between">{Settings.translations.used_bonus} <span>{form.usedBonus}</span></h3>}
-              <h3 className="G-mt-10 G-flex G-flex-justify-between">{Settings.translations.delivery} <span>{formatPrice(resultInfo.deliveryFee)}</span></h3>
-              <h2 className="G-mt-10 G-mb-20 G-flex G-flex-justify-between G-clr-orange">{Settings.translations.total} <span>{formatPrice(resultInfo.totalPrice)}</span></h2>
-            </>}
-          </div>
+              {resultInfo && <>
+                <h3 className="G-mt-auto G-flex G-flex-justify-between">{Settings.translations.price}
+                  <span>{formatPrice(resultInfo.totalDiscountedPrice)}</span></h3>
+                <h3 className="G-mt-10 G-flex G-flex-justify-between">{Settings.translations.bonus}
+                  <span>{resultInfo.receivedBonus}</span></h3>
+                {!!form.usedBonus &&
+                <h3 className="G-mt-10 G-flex G-flex-justify-between">{Settings.translations.used_bonus}
+                  <span>{form.usedBonus}</span></h3>}
+                <h3 className="G-mt-10 G-flex G-flex-justify-between">{Settings.translations.delivery}
+                  <span>{formatPrice(resultInfo.deliveryFee)}</span></h3>
+                <h2 className="G-mt-10 G-mb-20 G-flex G-flex-justify-between G-clr-orange">{Settings.translations.total}
+                  <span>{formatPrice(resultInfo.totalPrice)}</span></h2>
+              </>}
+            </div>
 
-          <div className="G-flex G-flex-column P-checkout-btn">
-            <LoaderContent
-              className="G-main-button"
-              loading={submitLoading}
-              onClick={this.submit}
-            >{Settings.translations.order}</LoaderContent>
+            <div className="G-flex G-flex-column P-checkout-btn">
+              <LoaderContent
+                className="G-main-button"
+                loading={submitLoading}
+                onClick={this.submit}
+              >{Settings.translations.order}</LoaderContent>
 
-            {!Settings.guest && <LoaderContent
-              className="G-main-button"
-              loading={false}
-              onClick={this.openAddressChoose}
-            >{Settings.translations.choose_address}</LoaderContent>}
-            {chooseAddressOpen && <ChooseAddress selectedId={form.userAddressId} data={addressList} onClose={this.closeAddressChoose} />}
-          </div>
-        </form> : <PaymentMethod resultInfo={resultInfo} callback={(e: React.SyntheticEvent) => this.finishCheckout(e)} />}
+              {!Settings.guest && <LoaderContent
+                className="G-main-button"
+                loading={false}
+                onClick={this.openAddressChoose}
+              >{Settings.translations.choose_address}</LoaderContent>}
+              {chooseAddressOpen &&
+              <ChooseAddress selectedId={form.userAddressId} data={addressList} onClose={this.closeAddressChoose}/>}
+            </div>
+          </form> :
+          <PaymentMethod resultInfo={resultInfo} callback={(e: React.SyntheticEvent) => this.finishCheckout(e)}/>}
 
         {successModalOpen && <SuccessModal onClose={this.navigateToHome}>
           {Settings.guest ? <>
             <h3>{Settings.translations.guest_order_success}</h3>
-            <button className="G-main-button G-normal-link G-mt-30 P-register-button" onClick={this.toggleAuthModal}>{Settings.translations.sign_up}</button>
+            <button className="G-main-button G-normal-link G-mt-30 P-register-button"
+                    onClick={this.toggleAuthModal}>{Settings.translations.sign_up}</button>
           </> : <>
             <h3>{Settings.translations.order_success}</h3>
-            <Link className="G-main-button G-normal-link G-mt-30" to={ROUTES.PROFILE.ORDERS.MAIN}>{Settings.translations.order_history}</Link>
+            <Link className="G-main-button G-normal-link G-mt-30"
+                  to={ROUTES.PROFILE.ORDERS.MAIN}>{Settings.translations.order_history}</Link>
           </>}
         </SuccessModal>}
 
-        {authModalOpen && <Shared.Auth onClose={this.toggleAuthModal} />}
+        {authModalOpen && <Shared.Auth onClose={this.toggleAuthModal}/>}
 
-        {choosePharmacyOpen && <ChoosePharmacy onClose={this.choosePharmacy} />}
+        {choosePharmacyOpen && <ChoosePharmacy onClose={this.choosePharmacy}/>}
 
         <form action="https://money.idram.am/payment.aspx" method="POST" target="blank">
-          <input type="hidden" name="EDP_LANGUAGE" value="EN" />
-          <input type="hidden" name="EDP_REC_ACCOUNT" value="110000601" />
-          <input type="hidden" name="EDP_DESCRIPTION" value="Order description" />
-          <input type="hidden" name="EDP_AMOUNT" value={this.state.idramAmount || ''} />
-          <input type="hidden" name="EDP_BILL_NO" value={this.state.idramNId || ''} />
-          <input type="submit" value="submit" id="currentId" className="G-dn" />
+          <input type="hidden" name="EDP_LANGUAGE" value="EN"/>
+          <input type="hidden" name="EDP_REC_ACCOUNT" value="110000601"/>
+          <input type="hidden" name="EDP_DESCRIPTION" value="Order description"/>
+          <input type="hidden" name="EDP_AMOUNT" value={this.state.idramAmount || ''}/>
+          <input type="hidden" name="EDP_BILL_NO" value={this.state.idramNId || ''}/>
+          <input type="submit" value="submit" id="currentId" className="G-dn"/>
         </form>
 
       </section>

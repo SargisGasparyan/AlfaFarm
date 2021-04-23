@@ -43,6 +43,9 @@ class App extends HelperComponent<{}, IState> {
   };
 
   public async componentDidMount() {
+    //? Check card
+    await this.checkForPaymentSuccess();
+
     //? Library config
 
     const alertify = await import('alertifyjs');
@@ -87,9 +90,6 @@ class App extends HelperComponent<{}, IState> {
     if (referralCode) {
       Settings.referralCode = referralCode;
     }
-
-    //? Check card
-    await this.checkForPaymentSuccess();
   }
 
   private checkForPaymentSuccess = async () => {
@@ -99,12 +99,12 @@ class App extends HelperComponent<{}, IState> {
 
     if (orderId) {
       if (isCard) {
-        const result = await PaymentController.saveCard(orderId);
-        // result.success && window.routerHistory.push(`${ROUTES.PROFILE.MY_WALLET}`);
+        await PaymentController.saveCard(orderId);
       } else {
         const result = await PaymentController.confirm(orderId);
         result.success && this.safeSetState({ orderSuccessModalOpen: true });
       }
+      query.delete('orderId');
     }
   };
 
