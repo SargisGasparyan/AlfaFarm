@@ -56,6 +56,15 @@ class ProductController {
     return result;
   };
 
+  public static GetCategoryList = (id: number, limit: number): Promise<IResponse<IProductAvailablityResponseModel>> => {
+    const result = Connection.GET({
+      action: `CategoryList?categoryId=${id}&productsLimit=${limit}`,
+      controller: ProductController.controller,
+    });
+
+    return result;
+  };
+
   public static GetRelated = (id: number, body: IProductRelatedListRequestModel): Promise<IResponse<IPagingResponse<IProductListResponseModel>>> => {
     const result = Connection.POST({
       body,
@@ -83,7 +92,7 @@ class ProductController {
     });
 
     return result;
-  } 
+  }
 
   // For SSR to Fill meta tags
   public static ServerDetails = (id: string): Promise<IResponse<IProductDetailsResponseModel>> => {
