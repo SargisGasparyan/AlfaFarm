@@ -94,7 +94,6 @@ class Modify extends HelperComponent<RouteComponentProps<IRouteParams>, IState> 
 
   private onAddressChange = (e: React.SyntheticEvent<HTMLInputElement>) => {
     const { form } = this.state;
-    console.log('mtav');
     form.addressText = e.currentTarget.value;
     form.addressLat = 0;
     form.addressLng = 0;

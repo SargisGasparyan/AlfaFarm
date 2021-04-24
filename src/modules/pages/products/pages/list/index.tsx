@@ -28,6 +28,7 @@ interface IState {
 
 @byRoute([ROUTES.PRODUCTS.MAIN])
 class List extends HelperComponent<{}, IState> {
+  private pageLimitSize: number = 12;
 
   public state: IState = {
     loading: false,
@@ -41,15 +42,38 @@ class List extends HelperComponent<{}, IState> {
   }
 
   private fetchData = async (pageNumber: number) => {
+    const query = new URLSearchParams(window.location.search);
+    const isPromotionList = query.get('promotion')
     this.safeSetState({ loading: true });
     const body = {
       ...buildFilters(),
       pageNumber,
-      pageSize: 12,
+      pageSize: this.pageLimitSize,
     };
+    let promotionProductList;
+    let promotionProducts;
+
+    if (body.categoryIds && body.categoryIds.length && !isPromotionList) {
+      const categoryId = body.categoryIds[0];
+      promotionProductList = await ProductController.GetCategoryList(+categoryId, this.pageLimitSize);
+
+      if (promotionProductList.data) {
+        promotionProducts = promotionProductList.data[0].products;
+        body.pageSize = body.pageSize - promotionProducts.length;
+      }
+    }
+
 
     const result = await ProductController.GetList(body);
-    const query = new URLSearchParams(window.location.search);
+
+    if (promotionProductList) {
+      result.data.totalCount = result.data.totalCount + promotionProducts.length;
+      result.data.list = result.data.list.concat(promotionProducts).reverse();
+
+      query.set('promotion', 'true');
+      window.history.replaceState({ path: window.location.pathname }, '', `?${query}`);
+    }
+
     const preferredProductId = query.get('preferredProductId');
 
     !result.aborted && result.data && this.safeSetState({ data: result.data.list, total: result.data.totalCount, preferredProductId, loading: false }, ()=> window.scrollTo(0, 0));
@@ -58,8 +82,6 @@ class List extends HelperComponent<{}, IState> {
 
   public render() {
     const { data, total,loading, preferredProductId } = this.state;
-
-    console.log(data?.map(item => item.id));
 
     return (
       <section className="G-page P-products-list-page">
