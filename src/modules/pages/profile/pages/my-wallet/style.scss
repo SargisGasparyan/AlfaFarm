@@ -3,7 +3,8 @@
 
 .P-cards-page {
   display         : flex;
-  flex-direction  : column;
+  flex-direction  : row;
+  flex-wrap       : wrap;
   border-radius   : 12px;
 
   .G-main-button {
@@ -25,6 +26,7 @@
 
   .P-card-wrap {
     max-width         : 355px;
+    width             : 355px;
     height            : 196px;
     padding           : 24px 35px;
     background-size   : cover;
@@ -32,7 +34,8 @@
     position          : relative;
     display           : flex;
     flex-direction    : column;
-    justify-content   : space-between;
+    justify-content   : space-between;   
+    margin            : 10px;  
 
     .P-remove {
       color: #FFFFFF;
