@@ -105,6 +105,9 @@ class App extends HelperComponent<{}, IState> {
         result.success && this.safeSetState({ orderSuccessModalOpen: true });
       }
       query.delete('orderId');
+      query.delete('key');
+      query.delete('isCard');
+      window.history.replaceState({ path: window.location.pathname }, '', `?${query}`);
     }
   };
 
