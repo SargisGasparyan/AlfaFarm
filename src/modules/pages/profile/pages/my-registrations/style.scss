@@ -4,8 +4,7 @@
 .P-profile-my-registrations-page {
 
   > .P-title {
-    cursor        : pointer;
-    margin-bottom : 60px;
+    cursor : pointer;
     @include normal-font;
 
     @media (max-width: $small-mobile-screen) {

@@ -17,7 +17,7 @@ const List = React.memo(({ data }: IProps) => {
 
     return (<>
       {data && data.map((item: IClinicRegistrationListResponseModel, index: number) =>
-        <div className="P-list-item  G-my-20" key={index}>
+        <div className="P-list-item  G-mb-40" key={index}>
           <p className="G-flex G-flex-justify-between G-mb-10">
             <span className="G-text-bold P-info-title">
               {Settings.translations.service}
