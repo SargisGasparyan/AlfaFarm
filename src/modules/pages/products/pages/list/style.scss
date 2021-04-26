@@ -2,12 +2,19 @@
 
 @import './responsive';
 
+.G-page-title-category {
+  min-height     : auto !important;
+  padding-bottom : 0 !important;
+  margin-left    : 300px !important;
+}
+
 .G-page.P-products-list-page {
   display         : flex;
   align-items     : flex-start;
-  padding-top     : 100px;
+  padding-top     : 50px;
   padding-bottom  : 100px;
   justify-content : center;
+  width           : 100%;
 
   > .P-shadow-text { margin-bottom: 130px; }
 

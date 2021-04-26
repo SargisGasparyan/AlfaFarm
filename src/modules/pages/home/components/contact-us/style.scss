@@ -31,7 +31,7 @@
   width: 160px;
   height: 75px;
   padding-top: 15px;
-  
+
   p {
     margin-left: 15px;
      b {
@@ -75,7 +75,7 @@
     position: relative;
   }
 
-  
+
 
   > .P-bottom {
     margin          : 0 10vw;
@@ -108,6 +108,17 @@
         text-transform : uppercase;
         @include bold-font();
       }
+    }
+  }
+  .P-info-row {
+    display     : flex;
+    font-size   : 18px;
+    margin-top  : 20px;
+    @include normal-font;
+
+    i {
+      padding-top: 3px;
+      margin-right: 10px;
     }
   }
 }
@@ -153,7 +164,7 @@
       margin : 0 60px;
       cursor : pointer;
 
-      > img { width: 100%; }  
+      > img { width: 100%; }
     }
   }
 }

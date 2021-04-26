@@ -21,19 +21,22 @@ interface IProps {
 
 const PriceRange = ({ body, onChange }: IProps) => {
   const prevCategoryIdRef = React.useRef<number>();
+  const prevProductTextRef = React.useRef<string>();
   const [priceRange, setPriceRange] = React.useState<IProductPriceRangeResponseModel>();
   const [value, setValue] = React.useState<[number, number]>();
 
   React.useEffect(() => {
     const categoryId = body.categoryIds && body.categoryIds[0];
+    const productText = body.productText;
 
-    categoryId !== prevCategoryIdRef.current && ProductController.GetPriceRange(categoryId ? { categoryIds: body.categoryIds } : {})
+    (categoryId !== prevCategoryIdRef.current || productText !== prevProductTextRef.current) && ProductController.GetPriceRange(categoryId ? { categoryIds: body.categoryIds } : productText ? { productText } : {})
       .then(result => {
         setPriceRange(result.data && result.data.max ? result.data : undefined);
         setValue([body.minPrice || (result.data && result.data.min), body.maxPrice || (result.data && result.data.max)]);
       });
 
     prevCategoryIdRef.current = categoryId;
+    prevProductTextRef.current = productText;
   });
 
   useSubscriber(DispatcherChannels.ProductFilterClear, () => priceRange && setValue([priceRange.min, priceRange.max]));

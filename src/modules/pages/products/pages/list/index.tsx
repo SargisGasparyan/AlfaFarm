@@ -16,6 +16,7 @@ import HelperComponent from 'platform/classes/helper-component';
 import Settings from 'platform/services/settings';
 
 import './style.scss';
+import Storage from "../../../../../platform/services/storage";
 
 const pageChangeListener = 'productlistpage';
 
@@ -80,25 +81,41 @@ class List extends HelperComponent<{}, IState> {
     return result.data;
   }
 
+  private getCategoryTitle = (categoryId: number) => {
+    const currentCategory = Storage.categories.find(item => {
+      return item.id === categoryId;
+    });
+
+    return currentCategory ? currentCategory.name : '';
+  }
+
   public render() {
+    const query = new URLSearchParams(window.location.search);
+    const categoryId = query.get('categoryIds');
+    const categoryTitle = categoryId ? this.getCategoryTitle(+categoryId) : '';
     const { data, total,loading, preferredProductId } = this.state;
 
     return (
-      <section className="G-page P-products-list-page">
-        <Filter onChange={this.filterChange} />
-        <div className="P-list-wrapper">
-          {data && !!total && <>
-            <SortBox onChange={this.filterChange} />
-            {data.map(item => <Shared.Products.ListItem key={item.id} specialProductId={preferredProductId} data={item} />)}
-          </>}
-          {total === 0 && <div className='P-no-data'>
-            <img src={EmptyViewSvg} alt="empty"/>
-            <p className='P-desc'>{Settings.translations.no_search_result}</p>
-          </div>}
-          <Pagination<IProductListResponseModel> pageChangeListener={pageChangeListener} fetchData={this.fetchData} />
+      <div>
+        <div className="G-page G-page-title-category">
+          { categoryId && <h3 className="G-page-title-left">{categoryTitle}</h3>}
         </div>
-        {loading && <PageLoader />}
-      </section>
+        <section className="G-page P-products-list-page">
+          <Filter onChange={this.filterChange} />
+          <div className="P-list-wrapper">
+            {data && !!total && <>
+              <SortBox onChange={this.filterChange} />
+              {data.map(item => <Shared.Products.ListItem key={item.id} specialProductId={preferredProductId} data={item} />)}
+            </>}
+            {total === 0 && <div className='P-no-data'>
+              <img src={EmptyViewSvg} alt="empty"/>
+              <p className='P-desc'>{Settings.translations.no_search_result}</p>
+            </div>}
+            <Pagination<IProductListResponseModel> pageChangeListener={pageChangeListener} fetchData={this.fetchData} />
+          </div>
+          {loading && <PageLoader />}
+        </section>
+      </div>
     );
   }
 };

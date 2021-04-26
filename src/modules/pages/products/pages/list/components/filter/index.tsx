@@ -127,7 +127,7 @@ class Filter extends HelperComponent<IProps, IState> {
     return (
       <Screen.Tablet>
         {(match: boolean) => match ? <>
-          {!!body.categoryIds?.length && <i className="P-back-icon-mini G-back-icon icon-Group-5529" onClick={this.reset} />}
+          {!!body.productText && <i className="P-back-icon-mini G-back-icon icon-Group-5529" onClick={this.reset} />}
           <h2 onClick={this.toggleMobile} className="P-products-filter-toggle">{Settings.translations.filter} <i className="icon-Group-5504" /></h2>
           {mobileOpen && <this.Content />}
         </> : <this.Content />}
@@ -140,34 +140,33 @@ class Filter extends HelperComponent<IProps, IState> {
 
     return (
       <div className="P-products-filter">
-        {!body.categoryIds?.length ? Storage.categories.map(item => <h2
-          key={item.id}
-          onClick={() => this.chooseMainCategory(item.id)}
-          className="P-main-category"
-        >{item.name} <i className="icon-Group-5513" /></h2>) : <>
-          <i className="G-back-icon icon-Group-5529" onClick={this.reset} />
-          <PriceRange body={body} onChange={this.bodyChange} />
+        {!body.categoryIds?.length && Storage.categories.map(item => <h2
+            key={item.id}
+            onClick={() => this.chooseMainCategory(item.id)}
+            className="P-main-category"
+        >{item.name} <i className="icon-Group-5513" /></h2>) }
+        <i className="G-back-icon icon-Group-5529" onClick={this.reset} />
+        <PriceRange body={body} onChange={this.bodyChange} />
 
-          <label className="P-discount-label">
-            <CheckBox checked={body.hasDiscount} onChange={this.toggleDiscount} />
-            {Settings.translations.sale}
-          </label>
+        <label className="P-discount-label">
+          <CheckBox checked={body.hasDiscount} onChange={this.toggleDiscount} />
+          {Settings.translations.sale}
+        </label>
 
-          <div className="P-row-wrap">
-            <Brands body={body} onChange={this.bodyChange} />
-          </div>
-          <div className="P-row-wrap">
-            <Producers body={body} onChange={this.bodyChange} />
-          </div>
-          <div className="P-row-wrap">
-            <ActiveIngredients body={body} onChange={this.bodyChange} />
-          </div>
+        <div className="P-row-wrap">
+          <Brands body={body} onChange={this.bodyChange} />
+        </div>
+        <div className="P-row-wrap">
+          <Producers body={body} onChange={this.bodyChange} />
+        </div>
+        <div className="P-row-wrap">
+          <ActiveIngredients body={body} onChange={this.bodyChange} />
+        </div>
 
-          <button
-            className="G-main-ghost-button P-cancel-button"
-            onClick={this.cancel}
-          >{Settings.translations.cancel}</button>
-        </>}
+        <button
+          className="G-main-ghost-button P-cancel-button"
+          onClick={this.cancel}
+        >{Settings.translations.cancel}</button>
       </div>
     );
   }
