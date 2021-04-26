@@ -85,7 +85,7 @@ class MyWallet extends HelperComponent<{}, IState> {
         <div className={`P-cards-page ${list && list.length ? 'P-cards-page-has-card' : ''}`}>
           {list && list.map((item, index) =>
             <div className="P-card-wrap G-mb-40" key={index} style={{ backgroundImage: `url('${this.getCardImage(item.type)}')` }}>
-              <i className="icon-Group-5032 G-cursor-pointer G-fs-18 P-remove"
+              <i className="G-cursor-pointer G-fs-18 P-remove"
                  onClick={() => this.removeCard(`${item.id}`)}/>
 
               <div className="P-card-bank-info">

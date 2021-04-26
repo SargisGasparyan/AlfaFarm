@@ -102,13 +102,13 @@ class LeftSide extends HelperPureComponent<{}, {}> {
         {this.options.map(item => <NavLink
           to={item.path}
           key={item.path}
-          className="P-link"
+          className={'P-link ' + item.className}
           activeClassName="P-active"
         >
           {item.name}
         </NavLink>)}
 
-        <div onClick={this.logout} className="P-link">
+        <div onClick={this.logout} className="P-link P-icon-logout">
           {Settings.translations.log_out}
         </div>
       </aside>

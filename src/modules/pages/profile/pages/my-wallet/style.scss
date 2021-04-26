@@ -34,17 +34,26 @@
     position          : relative;
     display           : flex;
     flex-direction    : column;
-    justify-content   : space-between;   
-    margin            : 10px;  
+    justify-content   : space-between;
+    margin            : 10px;
 
     .P-remove {
-      color: #FFFFFF;
+      color      : #FFFFFF;
       transition : all .3s;
       opacity    : 0;
       visibility : hidden;
       position   : absolute;
       top        : 10px;
       right      : 10px;
+
+      &:before {
+        content          : '';
+        background-image : url('src/assets/images/icons/trash.svg');
+        width            : 25px;
+        height           : 25px;
+        position         : absolute;
+        right            : 0;
+      }
     }
 
     &:hover .P-remove {
@@ -72,6 +81,7 @@
       .P-card-label {
         color: #F9F9F9;
         font-size: 14px;
+        opacity: .5;
       }
 
       .P-card-data {
@@ -93,9 +103,10 @@
         width: 100%;
         color: #fff;
         font-size: 20px;
+        line-height: 1.1;
 
         &:before {
-          line-height: 1.2;
+          line-height: 1.1;
           content: '**** **** ****';
           position: absolute;
           color: #fff;
