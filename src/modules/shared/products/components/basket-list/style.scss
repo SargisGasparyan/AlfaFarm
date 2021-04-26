@@ -25,10 +25,11 @@ hr {
   > i {
     &.P-remove {
       position: absolute;
-      top: 0;
-      right: 0;
+      top: 5px;
+      right: 5px;
       margin-top: 10px;
       margin-right: 15px;
+      color: #292929;
     }
   }
 
@@ -43,7 +44,6 @@ hr {
   }
 
   .P-product-det {
-    justify-content: start;
     position: relative;
 
     .P-prod-title {
@@ -74,36 +74,42 @@ hr {
       }
     }
 
-    @media (min-width: $tablet-screen) {
-      justify-content: space-around;
-      .P-main-info {
-        margin: unset;
-        align-content: center;
-        align-items: center;
-        text-align: center;
-      }
-      .P-image {
-        padding: 0 20%;
-
-        .G-square-image-block {
-          min-width : 120px;
-          max-width : 120px;
-          min-height: 160px;
-          max-height: 160px;
-        }
-      }
-      .P-main-info, .P-image {
-        width: 50%;
-      }
-    }
-  }
-
-  .P-price {
-    justify-content: space-around;
-
-    p {
-      padding: 15px;
+    .P-main-info {
+      margin: unset;
+      align-content: center;
+      align-items: center;
       text-align: center;
     }
+    .P-image {
+      display: flex;
+      align-items: center;
+
+      .G-square-image-block {
+        min-width : 142px;
+        max-width : 142px;
+        min-height: 142px;
+        max-height: 142px;
+        margin-right: 25px;
+        border-radius: 5px;
+      }
+
+      .G-text-bold {
+        width: 220px;
+        overflow: visible;
+        display: block;
+      }
+    }
+
+  }
+
+ .P-cart-item-price {
+   font-weight: bold;
+   color: #292929;
+ }
+
+  .P-bonus-amount-cart-item {
+    word-break: break-word;
+    text-align: center;
+    width: 100px;
   }
 }

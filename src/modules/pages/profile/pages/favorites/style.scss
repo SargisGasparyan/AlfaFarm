@@ -2,7 +2,8 @@
 
 .P-profile-favorites {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-between;
 
   > .P-list-item {
     color: black;

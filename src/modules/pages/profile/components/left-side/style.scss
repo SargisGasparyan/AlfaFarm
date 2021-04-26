@@ -77,6 +77,7 @@
   }
 
   > .P-link {
+    position                   : relative;
     width                      : calc(100% - 30px);
     color                      : black;
     cursor                     : pointer;
@@ -90,13 +91,26 @@
     @include bold-font;
 
     &:before {
-      content           : '';
-      position          : absolute;
-      margin-left       : -50px;
-      width             : 28px;
-      height            : 28px;
-      background-size   : contain;
-      background-repeat : no-repeat;
+      content             : '';
+      position            : absolute;
+      margin-left         : -50px;
+      width               : 28px;
+      height              : 28px;
+      background-size     : contain;
+      background-repeat   : no-repeat;
+      background-position : center;
+    }
+
+    &:after {
+      content                    : '';
+      position                   : absolute;
+      width                      : 0;
+      background-color           : rgba(73, 183, 72, 0.1);
+      height                     : 100%;
+      left                       : 0;
+      top                        : 0;
+      border-top-right-radius    : 12px;
+      border-bottom-right-radius : 12px;
     }
 
     &.P-icon-bonus_card:before {
@@ -135,8 +149,15 @@
       background-image: url('src/assets/images/icons/logout.svg');
     }
 
-    &:hover, &.P-active {
+    &.P-active {
       background : $main-color-light;
+    }
+
+    &:not(.P-active):hover {
+      &:after {
+        transition: width .3s ease-in-out;
+        width: 100%;
+      }
     }
   }
 }

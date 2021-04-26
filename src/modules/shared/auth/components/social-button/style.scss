@@ -1,10 +1,11 @@
 @import 'src/assets/styles/variables';
 
 .P-auth-social-button {
+  display         : none;
   width           : 100%;
   border          : 2px solid $blue;
   height          : 58px;
-  display         : flex;
+  //display         : flex;
   font-size       : 18px;
   margin-top      : 20px;
   background      : none;

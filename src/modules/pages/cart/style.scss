@@ -16,13 +16,25 @@
     text-decoration : underline;
   }
 
-  .P-basket-products {
+  .P-cart-block {
     width: 100%;
   }
 
-  > .P-data-block-wrapper {
-    width: 300px;
-    margin-left: calc(100% - 300px);
+  .P-basket-products {
+    width: calc(100% - 400px);
+  }
+
+  .P-data-block-wrapper {
+    width: 400px;
+    margin-left: 50px;
+    position: sticky;
+    height: 280px;
+    top: 135px;
+    background: #F5F5F5;
+    box-shadow: 0px 0px 5px #00000029;
+    border-radius: 10px;
+    padding: 25px 50px;
+    margin-top: 30px;
 
     > .P-data-block-cart {
       width           : 100%;

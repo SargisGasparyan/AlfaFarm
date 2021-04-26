@@ -4,6 +4,8 @@
 .G-page.P-how-to-use-page {
   display        : flex;
   flex-direction : column;
+  width          : calc(100% - 600px);
+  padding        : 40px 175px;
 
   > .G-page-title {
     margin-bottom  : 20px;
@@ -13,6 +15,11 @@
   > .P-big-video {
     width  : 100%;
     height : 80vh;
+  }
+
+  ul {
+    margin-left: 20px;
+    margin-top: 20px;
   }
 
   > .P-list {

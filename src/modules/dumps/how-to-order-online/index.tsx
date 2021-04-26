@@ -24,38 +24,38 @@ class HowToUseApp extends HelperPureComponent<{}, {}> {
     return (
       <section className="G-page P-how-to-use-page">
         <h1 className="G-page-title">{Settings.translations.how_to_order_online}</h1>
+        <h3>{Settings.translations.how_to_order_online_text}</h3>
+        <ul>
+          <li>{Settings.translations.how_to_order_online_text_li_1}</li>
+          <li>{Settings.translations.how_to_order_online_text_li_2}</li>
+          <li>{Settings.translations.how_to_order_online_text_li_3}</li>
+          <li>{Settings.translations.how_to_order_online_text_li_4}</li>
+          <li>{Settings.translations.how_to_order_online_text_li_5}</li>
+        </ul>
+        <br/>
+        <h3>{Settings.translations.how_to_order_online_text_2}</h3>
+        <ul>
+          <li>{Settings.translations.how_to_order_online_text_2_li_1}</li>
+          <li>{Settings.translations.how_to_order_online_text_2_li_2}</li>
+          <li>{Settings.translations.how_to_order_online_text_2_li_3}</li>
+          <li>{Settings.translations.how_to_order_online_text_2_li_4}</li>
+        </ul>
+        <br/>
+        <h3>{Settings.translations.how_to_order_online_text_3}</h3>
+        <ul>
+          <li>{Settings.translations.how_to_order_online_text_3_li_1}</li>
+          <li>{Settings.translations.how_to_order_online_text_3_li_2}</li>
+          <li>{Settings.translations.how_to_order_online_text_3_li_3}</li>
+          <li>{Settings.translations.how_to_order_online_text_3_li_4}</li>
+          <li>{Settings.translations.how_to_order_online_text_3_li_5}</li>
+          <li>{Settings.translations.how_to_order_online_text_3_li_6}</li>
+          <li>{Settings.translations.how_to_order_online_text_3_li_7}</li>
+          <li>{Settings.translations.how_to_order_online_text_3_li_8}</li>
+        </ul>
+      <br/>
+        <h3>{Settings.translations.how_to_order_online_text_4}</h3>
 
-        <iframe
-          src="https://www.youtube.com/embed/d6x-3HjlfLk"
-          className="P-big-video"
-          {...this.iframeProps}
-        />
 
-        <div className="P-list">
-          <iframe
-            src="https://www.youtube.com/embed/a-EVxNQwp4g"
-            className="P-item"
-            {...this.iframeProps}
-          />
-
-          <iframe
-            src="https://www.youtube.com/embed/VymiLo2jLqM"
-            className="P-item"
-            {...this.iframeProps}
-          />
-
-          <iframe
-            src="https://www.youtube.com/embed/a-EVxNQwp4g"
-            className="P-item"
-            {...this.iframeProps}
-          />
-          
-          <iframe
-            src="https://www.youtube.com/embed/VymiLo2jLqM"
-            className="P-item"
-            {...this.iframeProps}
-          />
-        </div>
       </section>
     );
   }

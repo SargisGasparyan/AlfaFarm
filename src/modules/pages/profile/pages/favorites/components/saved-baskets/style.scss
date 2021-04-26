@@ -1,6 +1,12 @@
 @import 'src/assets/styles/helper';
 @import 'src/assets/styles/variables';
 
+.P-profile-favorites {
+ .P-list-item {
+   width : 48.5%;
+ }
+}
+
 .P-favorites-saved-baskets {
   margin    : -15px -15px 35px; // 35px = 50px - 15px
   display   : flex;
@@ -12,7 +18,6 @@
     margin                  : 15px 7px;
     display                 : flex;
     padding                 : 15px;
-    display                 : flex;
     position                : relative;
     font-size               : 20px;
     background              : $main-color-light;
@@ -22,7 +27,7 @@
     border-top-right-radius : $big-radius;
     @include bold-font;
 
-    > .P-index {  
+    > .P-index {
       width           : 40px;
       height          : 40px;
       overflow        : hidden;

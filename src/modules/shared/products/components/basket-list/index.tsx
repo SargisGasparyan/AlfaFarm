@@ -29,45 +29,38 @@ class BasketList extends HelperComponent<IProps, {}> {
       {data.map((item: IBasketListResponseModel, index: number) =>
         <div className={(!item.productStockQuantity ? 'P-out-of-stock-product' : '') + ` P-list-item G-my-30`}
              key={index}>
-          {onDeleteBasketItem && <i className="icon-Group-5032 G-clr-orange G-cursor-pointer G-fs-18 P-remove"
+          {onDeleteBasketItem && <i className="icon-Group-5032 G-cursor-pointer G-fs-14 P-remove"
                                     onClick={() => onDeleteBasketItem(item)}/>}
           <Link to={ROUTES.PRODUCTS.DETAILS.replace(':id', item.productId)}>
-            <div className="P-product-det G-flex">
+            <div className="P-product-det G-flex G-flex-align-center G-flex-justify-between">
 
               <div className="P-image">
                 <div
                   className="G-square-image-block"
                   style={{ background: `url('${getMediaPath(item.productPhoto)}') center/contain no-repeat` }}
                 />
+                <div className="G-text-bold P-prod-title">{item.productTitle}</div>
               </div>
 
-
               <div className="P-main-info G-flex G-flex-column G-flex-justify-between G-ml-40 G-mr-30">
-                <div className="G-text-bold P-prod-title">{item.productTitle}</div>
-                <div>
-                  <CountInput
-                    value={item.productQuantity}
-                    step={1}
-                    min={1}
-                    onChange={value => item.productStockQuantity && onQuantityChange(index, value)}
-                  />
-                </div>
+                <CountInput
+                  value={item.productQuantity}
+                  step={1}
+                  min={1}
+                  onChange={value => item.productStockQuantity && onQuantityChange(index, value)}
+                />
               </div>
 
               {!item.productStockQuantity && <span className="P-out-of-stock G-clr-red">{Settings.translations.out_of_stock}</span>}
-            </div>
-            <hr className="G-my-30 G-clr-gray"/>
-
-            <div className="G-flex P-price">
-              <div
-                className="G-clr-main G-text-bold">{formatPrice(getBasketItemPriceInfo(item).bonus) || ' 0 '} {Settings.translations.bonus}</div>
-              <hr className="G-clr-gray"/>
+              <div className="G-clr-main G-text-bold P-bonus-amount-cart-item">
+                {formatPrice(getBasketItemPriceInfo(item).bonus) || ' 0 '} {Settings.translations.bonus}
+              </div>
+              <div>{this.priceInfo(item).discountedPrice ? <del>{formatPrice(item.totalPrice)}</del> : null}</div>
               <div>
-                <div>{this.priceInfo(item).discountedPrice ? <del>{formatPrice(item.totalPrice)}</del> : null}</div>
-                <h4 className="G-fs-18 G-clr-orange">
+                <h4 className="G-fs-18 P-cart-item-price">
                   {this.priceInfo(item).discountedPrice ?
-                    formatPrice(this.priceInfo(item).discountedPrice) :
-                    formatPrice(this.priceInfo(item).price)}
+                      formatPrice(this.priceInfo(item).discountedPrice) :
+                      formatPrice(this.priceInfo(item).price)}
                 </h4>
               </div>
             </div>
