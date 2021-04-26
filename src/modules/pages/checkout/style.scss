@@ -14,7 +14,8 @@
     align-items     : center;
 
     .P-radio-selector {
-      border-color: #49b748;
+      border-color : #49b748;
+      display      : none;
 
       &.P-radio-selector_checked::before {
         background-color : #49B748;
@@ -22,11 +23,15 @@
       }
     }
 
+    .P-radio-selector_checked + .P-radio-content {
+      border : 1px solid #49B748;
+    }
+
     .P-radio-content {
       box-shadow    : 0 0 6px #00000029;
-      width         : 210px;
+      width         : 350px;
       padding       : 13px 11px;
-      border        : 1px solid #49B748;
+      border        : 1px solid transparent;
       border-radius : 5px;
       font-size     : 18px;
       font-weight   : bold;

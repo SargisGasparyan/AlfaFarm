@@ -14,16 +14,16 @@ export const PaymentTypeEnumItems = (): IPaymentTypeEnumItemModel[] => [
     image: CashImage,
   },
   {
-    name: Settings.translations.card,
-    type: PaymentTypeEnum.IPay,
-    class: 'P-ipay',
-    image: CreditCardImage,
-  },
-  {
     name: Settings.translations.post_terminal,
     type: PaymentTypeEnum.PostTerminal,
     class: 'P-post-terminal',
     image: PosImage,
+  },
+  {
+    name: Settings.translations.card,
+    type: PaymentTypeEnum.IPay,
+    class: 'P-ipay',
+    image: CreditCardImage,
   },
   // {
   //   name: 'IDram',

@@ -14,9 +14,10 @@
   margin-top : 15px;
 
   .P-radio-wrap {
-    margin : 10px 0;
+    margin: 10px 0 10px 17px;
 
     .P-radio-selector {
+      display     : block !important;
       flex-shrink : 0;
       width       : 16px;
       height      : 16px;
