@@ -20,6 +20,10 @@
       position: relative;
       margin-left: 20px;
 
+      &:first-child {
+        margin: 0;
+      }
+
       @media (max-width: $mobile-screen) {
         margin-left: 0;
         margin-bottom: 20px;
@@ -53,7 +57,7 @@
       > .P-bonus-coin {
         width: 25px;
         height: 25px;
-        position: absolute;    
+        position: absolute;
         right: 60px;
         bottom: 15px;
       }

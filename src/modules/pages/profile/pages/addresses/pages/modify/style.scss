@@ -1,15 +1,46 @@
 @import 'src/assets/styles/variables';
 
+.P-profile-addresses-modify-title {
+
+  > h3 {
+    width           : 100%;
+    color           : $main-color;
+    padding         : 0 40px;
+    position        : relative;
+    display         : flex;
+    font-size       : 38px;
+    margin-bottom   : 60px;
+    justify-content : center;
+
+    > i {
+      top       : 50%;
+      left      : 0;
+      width     : 26px;
+      position  : absolute;
+      transform : translateY(-50%);
+    }
+  }
+}
+
 .P-profile-addresses-modify {
-  
-  > .G-main-form > .P-page-title {
-    color         : $main-color;
-    display       : block;
-    font-size     : 22px;
-    padding-left  : 10px;
-    margin-bottom : 30px;
+
+  > .G-main-form {
+    width           : 100%;
+    justify-content : flex-end;
+
+    & > .P-page-title {
+      color         : $main-color;
+      display       : block;
+      font-size     : 22px;
+      padding-left  : 10px;
+      margin-bottom : 30px;
+    }
   }
   > .P-form-block {
+    .G-main-button {
+      width: 210px;
+    }
+
     @media(max-width: $mobile-screen) {
       margin: 0 !important;
     }
@@ -24,6 +55,7 @@
     }
    @media(max-width: $mobile-screen) {
      .G-main-button {
+
        height: 45px;
        padding: 0 10px;
        margin-top: 20px;

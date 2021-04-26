@@ -52,11 +52,12 @@ class Addresses extends HelperComponent<IState, {}> {
     const { data } = this.state;
     return (
       <Layout>
-        <div className="G-flex G-flex-justify-end G-mb-30">
+        <div className="G-flex G-flex-justify-end G-mb-30 G-flex-align-center">
+          <h2 className="G-clr-main">{Settings.translations.addresses}</h2>
           <Link
             to={ROUTES.PROFILE.ADDRESSES.CREATE}
             className="G-normal-link G-main-button G-ml-auto G-fs-16"
-          >{Settings.translations.add_address}</Link>
+          >+ {Settings.translations.add_address}</Link>
         </div>
         {data ? (data.length ? <div className="G-flex P-profile-addresses">
           <List

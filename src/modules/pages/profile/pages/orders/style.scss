@@ -1,6 +1,11 @@
 @import 'src/assets/styles/variables';
 
 .P-profile-orders {
-  display        : flex;
-  flex-direction : column;
+  display         : flex;
+  justify-content : space-between;
+  flex-wrap       : wrap;
+
+  & > .G-my-20 {
+    width: 48.5%;
+  }
 }

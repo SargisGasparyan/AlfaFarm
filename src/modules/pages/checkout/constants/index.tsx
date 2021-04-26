@@ -10,16 +10,19 @@ export const PaymentTypeEnumItems = (): IPaymentTypeEnumItemModel[] => [
   {
     name: Settings.translations.cash,
     type: PaymentTypeEnum.Cash,
+    class: 'P-cash',
     image: CashImage,
   },
   {
     name: Settings.translations.card,
     type: PaymentTypeEnum.IPay,
+    class: 'P-ipay',
     image: CreditCardImage,
   },
   {
     name: Settings.translations.post_terminal,
     type: PaymentTypeEnum.PostTerminal,
+    class: 'P-post-terminal',
     image: PosImage,
   },
   // {

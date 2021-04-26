@@ -77,8 +77,11 @@ class SpecialProducts extends HelperComponent<IState, {}> {
 
     return (
       <Layout>
-        <div className="G-flex P-profile-special-products">
+        <div className="G-flex G-flex-align-center G-flex-justify-between G-mb-30">
+          <h2 className="G-clr-main">{Settings.translations.special_product}</h2>
           <img src={HelpIcon} className="P-help-icon" onClick={this.openHelp} alt=""/>
+        </div>
+        <div className="G-flex P-profile-special-products">
 
           {data ? (data.length ? data.map(item => <Link
             to={ROUTES.PRODUCTS.DETAILS.replace(':id', item.id)}
@@ -107,7 +110,7 @@ class SpecialProducts extends HelperComponent<IState, {}> {
             </div>
 
 
-          </Link>) : 
+          </Link>) :
             <EmptyState animationData={animationData} text={Settings.translations.empty_special_products}/>) : null}
         </div>
 

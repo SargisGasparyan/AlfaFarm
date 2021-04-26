@@ -1,14 +1,15 @@
 @import 'src/assets/styles/variables';
 
 .P-profile-special-products {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  margin-top: 20px;
+  display         : flex;
+  position        : relative;
+  justify-content : space-between;
+  flex-wrap       : wrap;
+  margin-top      : 20px;
 
   .P-help-icon {
     position: absolute;
-    top: 0px;
+    top: 0;
     right: 0;
     width: 30px;
     cursor: pointer;
@@ -20,6 +21,7 @@
 
   > .P-list-item {
     color: black;
+    width: 48.5%;
     padding: 20px;
     display: flex;
     box-shadow: $default-block-shadow;

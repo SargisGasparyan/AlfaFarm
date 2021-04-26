@@ -71,6 +71,7 @@ class BonusCard extends HelperComponent<IState, {}> {
 
     return (
       <Layout>
+        <h2 className="G-clr-main G-mb-30">{Settings.translations.bonus_card}</h2>
         {data && <div className="G-flex P-profile-bonus-card">
           <div className="P-card-details">
             <div className="P-card">
