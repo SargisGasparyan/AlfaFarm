@@ -2,10 +2,43 @@
 
 .P-arca { background: url('../../../../../../../assets/images/Arca.png') center/contain no-repeat; }
 .P-visa { background: url('../../../../../../../assets/images/visaImage.svg') center/cover no-repeat; }
-.P-master { background: url('../../../../../../../assets/images/master.png') center/contain no-repeat; }
+.P-master { background: url('../../../../../../../assets/images/master.svg') center/contain no-repeat; }
 
 .P-ipay-button {
   display: inline-block;
   text-decoration: underline;
   color: $main-color;
+}
+
+.P-radio-cards {
+  margin-top : 15px;
+
+  .P-radio-wrap {
+    margin : 10px 0;
+
+    .P-radio-selector {
+      flex-shrink : 0;
+      width       : 16px;
+      height      : 16px;
+    }
+
+    .P-radio-content {
+      border          : none !important;
+      box-shadow      : none !important;
+      padding         : 0 !important;
+      font-weight     : 400 !important;
+      display         : flex;
+      align-items     : center;
+      justify-content : space-between;
+
+      .P-card-icon {
+        width  : 32px;
+        height : 20px;
+      }
+    }
+  }
+}
+
+.P-ipay-button {
+  font-size: 16px;
 }

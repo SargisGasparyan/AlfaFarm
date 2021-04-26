@@ -3,6 +3,34 @@
 
 .G-page.P-checkout-page {
 
+  .P-radio-wrap {
+    justify-content : center;
+    align-items     : center;
+
+    .P-radio-selector {
+      border-color: #49b748;
+
+      &.P-radio-selector_checked::before {
+        background-color : #49B748;
+        transform        : scale(0.7);
+      }
+    }
+
+    .P-radio-content {
+      box-shadow    : 0 0 6px #00000029;
+      width         : 210px;
+      padding       : 13px 11px;
+      border        : 1px solid #49B748;
+      border-radius : 5px;
+      font-size     : 18px;
+      font-weight   : bold;
+
+      img {
+        margin-right: 20px;
+      }
+    }
+  }
+
   .P-steps {
     width           : 350px;
     position        : relative;
@@ -65,10 +93,11 @@
       align-items     : center;
       cursor          : pointer;
       justify-content : center;
+      font-size       : 28px;
 
       .P-back-btn {
         width      : 20px;
-        height     : 30px;
+        height     : 20px;
         margin     : 5px 15px 0 0;
         background : url('../../../../assets/images/back.svg') center/contain no-repeat;
 

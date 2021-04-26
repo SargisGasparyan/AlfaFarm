@@ -5,10 +5,13 @@ import Radio from 'components/radio';
 import Settings from 'platform/services/settings';
 
 import './index.scss';
+import {CardTypeEnum} from "../../../../../../../platform/constants/enums";
 
 const IPay = React.memo(() => {
   const [list, setList] = React.useState<IUserCardListModel[]>();
   const [card, setCard] = React.useState<number>();
+
+  console.log(list);
 
   const apply = (id?: number) => {
     const query = new URLSearchParams(window.location.search);
@@ -40,15 +43,12 @@ const IPay = React.memo(() => {
   }, []);
 
   return <>
-    <div className="P-online-pay-icons">
-      <div className="P-arca"/>
-      <div className="P-visa"/>
-      <div className="P-master"/>
-    </div>
-    <div className="G-flex G-flex-column">
+    <div className="G-flex G-flex-column P-radio-cards">
       {list && list.map((item, index) => <Radio<number> callback={(value: number) => choose(value)} value={item.id}
                                                         isChecked={card === item.id} key={index}>
         {item.pan}
+        {item.type === CardTypeEnum.Visa ? <div className="P-visa P-card-icon"/> : null}
+        {item.type === CardTypeEnum.MasterCard ? <div className="P-master P-card-icon"/> : null}
       </Radio>)}
       {/* <Radio<number | null> callback={() => choose()} value={card || null} isChecked={card == null}>
         {Settings.translations.pay_with_credit_card}
