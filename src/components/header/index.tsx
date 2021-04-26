@@ -385,6 +385,7 @@ class Header extends HelperComponent<{}, IState> {
                 onChange={this.searchChange}
                 onSubmit={this.searchSubmit}
                 loading={searchLoader}
+                clearSearch={true}
                 disableRemoveOnNavigate={true}
                 withSubmit={true}
             />
