@@ -26,7 +26,7 @@ class Settings {
   public static linkedinURL = 'https://www.linkedin.com/company/ineed.am/about/';
 
   public static webURL = 'https://alfapharm.abmdemo.me';
-  public static wholesaleURL = 'http://alfapharm.am/am/online_sale';
+  public static wholesaleURL = 'http://old.alfapharm.am/am/online_sale';
 
   public static get language(): LanguageEnum {
     const language = window.localStorage.getItem('language') as LanguageEnum || Settings.defaultLanguage;
