@@ -100,14 +100,14 @@ class App extends HelperComponent<{}, IState> {
     if (orderId) {
       if (isCard) {
         await PaymentController.saveCard(orderId);
+        query.delete('orderId');
+        query.delete('key');
+        query.delete('isCard');
+        window.history.replaceState({ path: window.location.pathname }, '', `?${query}`);
       } else {
         const result = await PaymentController.confirm(orderId);
         result.success && this.safeSetState({ orderSuccessModalOpen: true });
       }
-      query.delete('orderId');
-      query.delete('key');
-      query.delete('isCard');
-      window.history.replaceState({ path: window.location.pathname }, '', `?${query}`);
     }
   };
 
