@@ -1,11 +1,18 @@
 @import 'src/assets/styles/variables';
 
 .P-blog-details-info {
-  width : 100%;
+  width   : 100%;
+  padding : 0 250px;
 
   > .P-name {
     display       : flex;
     margin-bottom : 40px;
+  }
+
+  > h2 {
+    text-align: center;
+    align-items: center;
+    justify-content: center;
   }
 
   > h3 {
@@ -19,7 +26,6 @@
   }
 
   > p {
-    line-height   : 28px;
-    margin-bottom : 30px;
+    line-height   : 38px;
   }
 }

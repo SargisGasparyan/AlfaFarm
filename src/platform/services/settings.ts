@@ -7,7 +7,7 @@ import Russian from 'assets/translations/ru';
 import English from 'assets/translations/en';
 
 class Settings {
-  
+
   public static defaultLanguage = LanguageEnum.Armenian;
 
   public static facebookId = 4185689951504366;
@@ -26,6 +26,7 @@ class Settings {
   public static linkedinURL = 'https://www.linkedin.com/company/ineed.am/about/';
 
   public static webURL = 'https://alfapharm.abmdemo.me';
+  public static oldURL = 'http://old.alfapharm.am/am/';
   public static wholesaleURL = 'http://old.alfapharm.am/am/online_sale';
 
   public static get language(): LanguageEnum {

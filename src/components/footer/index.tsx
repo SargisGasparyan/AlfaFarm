@@ -177,6 +177,16 @@ function  Footer() {
 								<Link className={aboutItems.join(' ')} to={ROUTES.VACANCIES}>{Settings.translations.vacancies}</Link>
 						</div>
 						<div className="P-column P-mobile-column">
+								<div className="P-mobile-drop G-flex G-flex-justify-between G-flex-align-center">
+										<h3 className="G-clr-main">{Settings.translations.wholesale_sale}</h3>
+										<i className={aboutRotateClass.join(' ')} />
+								</div>
+                          <a className={informationItems.join(' ')} href={Settings.oldURL + "price"} target="blank">{Settings.translations.wholesale_sale_price_list}</a>
+                          <a className={informationItems.join(' ')} href={Settings.oldURL + "services-s"} target="blank">{Settings.translations.wholesale_sale_service}</a>
+                          <a className={informationItems.join(' ')} href={Settings.oldURL + "big"} target="blank">{Settings.translations.wholesale_sale_big_sale}</a>
+                          <a className={informationItems.join(' ')} href={Settings.wholesaleURL} target="blank">{Settings.translations.wholesale_sale_online_sale}</a>
+						</div>
+						<div className="P-column P-mobile-column">
 								<div className="P-mobile-drop G-flex G-flex-justify-between G-flex-align-center" onClick={informationChange}>
 										<h3 className="G-clr-main">{Settings.translations.information}</h3>
 										<i className={informationRotateClass.join(' ')} />
@@ -184,7 +194,6 @@ function  Footer() {
 								<Link className={informationItems.join(' ')} to={ROUTES.FAQ}>{Settings.translations.faq}</Link>
 								<Link className={informationItems.join(' ')} to={ROUTES.CARD_INFO}>{Settings.translations.what_is_alfa_card}</Link>
 								<Link className={informationItems.join(' ')} to={ROUTES.TENDERS.MAIN}>{Settings.translations.tenders}</Link>
-								<a className={informationItems.join(' ')} href={Settings.wholesaleURL} target="blank">{Settings.translations.wholesale_sale}</a>
 								<Link className={informationItems.join(' ')} to={ROUTES.PRIVACY_POLICY}>{Settings.translations.privacy_policy}</Link>
 								<Link className={informationItems.join(' ')} to={ROUTES.TERMS_OF_USE}>{Settings.translations.terms_of_use}</Link>
 						</div>
