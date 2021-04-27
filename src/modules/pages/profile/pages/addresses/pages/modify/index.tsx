@@ -94,7 +94,6 @@ class Modify extends HelperComponent<RouteComponentProps<IRouteParams>, IState> 
 
   private onAddressChange = (e: React.SyntheticEvent<HTMLInputElement>) => {
     const { form } = this.state;
-    console.log('mtav');
     form.addressText = e.currentTarget.value;
     form.addressLat = 0;
     form.addressLng = 0;
@@ -114,63 +113,71 @@ class Modify extends HelperComponent<RouteComponentProps<IRouteParams>, IState> 
 
     return (
       <Layout>
+        <div className="P-profile-addresses-modify-title">
+          <h3>
+            {window.routerHistory.length > 2 && <i className="G-back-icon icon-Group-5529" onClick={this.goBack} />}
+            { this.props.match.params.id ? Settings.translations.edit_address: Settings.translations.add_address }
+          </h3>
+        </div>
         <div className="G-flex G-flex-wrap P-profile-addresses-modify">
-          {window.routerHistory.length > 2 && <i className="G-back-icon icon-Group-5529" onClick={this.goBack} />}
-          <form className="G-main-form P-form-block G-mr-20">
-            <span className="P-page-title">{ this.props.match.params.id ? Settings.translations.edit_address: Settings.translations.add_address }</span>
-            <div className="G-main-form-field">
-              <p className="G-input-top-label">{Settings.translations.name}</p>
-              <input
-                name="name"
-                value={form.name}
-                className={`G-main-input ${this.formValidation.errors.name ? 'G-invalid-field' : ''}`}
-                onChange={this.changeField}
-              />
+          <form className="G-main-form P-form-block G-mr-20 G-flex-justify-end">
+            <div className="G-flex G-flex-justify-between">
+              <div className="G-main-form-field G-mr-20">
+                <p className="G-input-top-label">{Settings.translations.name}</p>
+                <input
+                    name="name"
+                    value={form.name}
+                    className={`G-main-input ${this.formValidation.errors.name ? 'G-invalid-field' : ''}`}
+                    onChange={this.changeField}
+                />
+              </div>
+              <div className="G-main-form-field">
+                <p className="G-input-top-label">{Settings.translations.address}</p>
+                <YandexAutocomplete
+                    value={form.addressText || ''}
+                    onChange={this.onAddressChange}
+                    className={`G-main-input ${this.formValidation.errors.address ? 'G-invalid-field' : ''}`}
+                    onPlaceSelect={this.onAddressSelect}
+                />
+              </div>
             </div>
-            <div className="G-main-form-field">
-              <p className="G-input-top-label">{Settings.translations.address}</p>
-              <YandexAutocomplete
-                value={form.addressText || ''}
-                onChange={this.onAddressChange}
-                className={`G-main-input ${this.formValidation.errors.address ? 'G-invalid-field' : ''}`}
-                onPlaceSelect={this.onAddressSelect}
-              />
-            </div>
-            <div className="G-main-form-field">
-              <p className="G-input-top-label">{Settings.translations.building}</p>
-              <input
-                name="building"
-                value={form.building || ''}
-                className="G-main-input"
-                onChange={this.changeField}
-              />
-            </div>
-            <div className="G-main-form-field">
-              <p className="G-input-top-label">{Settings.translations.entrance}</p>
-              <input
-                name="entrance"
-                value={form.entrance || ''}
-                className="G-main-input"
-                onChange={this.changeField}
-              />
-            </div>
-            <div className="G-main-form-field">
-              <p className="G-input-top-label">{Settings.translations.floor}</p>
-              <input
-                name="floor"
-                value={form.floor || ''}
-                className="G-main-input"
-                onChange={this.changeField}
-              />
-            </div>
-            <div className="G-main-form-field">
-              <p className="G-input-top-label">{Settings.translations.apartment}</p>
-              <input
-                name="apartment"
-                value={form.apartment || ''}
-                className="G-main-input"
-                onChange={this.changeField}
-              />
+            <div className="G-flex G-flex-justify-between">
+              <div className="G-main-form-field G-mr-20">
+                <p className="G-input-top-label">{Settings.translations.building}</p>
+                <input
+                    name="building"
+                    value={form.building || ''}
+                    className="G-main-input"
+                    onChange={this.changeField}
+                />
+              </div>
+              <div className="G-main-form-field G-mr-20">
+                <p className="G-input-top-label">{Settings.translations.entrance}</p>
+                <input
+                    name="entrance"
+                    value={form.entrance || ''}
+                    className="G-main-input"
+                    onChange={this.changeField}
+                />
+              </div>
+              <div className="G-main-form-field G-mr-20">
+                <p className="G-input-top-label">{Settings.translations.floor}</p>
+                <input
+                    name="floor"
+                    value={form.floor || ''}
+                    className="G-main-input"
+                    onChange={this.changeField}
+                />
+              </div>
+              <div className="G-main-form-field">
+                <p className="G-input-top-label">{Settings.translations.apartment}</p>
+                <input
+                    name="apartment"
+                    value={form.apartment || ''}
+                    className="G-main-input"
+                    onChange={this.changeField}
+                />
+              </div>
             </div>
             <LoaderContent
               className="G-main-button G-mt-1"

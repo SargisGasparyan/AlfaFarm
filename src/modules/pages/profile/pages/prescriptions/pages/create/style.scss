@@ -10,7 +10,7 @@
 
     * {
       font-size: $small-fs !important;
-    } 
+    }
   }
 
   @media (max-width: $small-mobile-screen) {
@@ -19,7 +19,7 @@
     }
   }
 
-  
+
   > h3 {
     width           : 100%;
     color           : $main-color;
@@ -71,6 +71,7 @@
         }
 
         > .G-main-button {
+          padding         : 14px;
           width           : 260px;
           cursor          : pointer;
           display         : flex;
@@ -82,12 +83,12 @@
             width: 100%;
             padding: 10px;
           }
-  
+
           > i {
             font-size    : 28px;
             margin-right : 10px;
           }
-        }  
+        }
       }
 
       > .P-uploaded {

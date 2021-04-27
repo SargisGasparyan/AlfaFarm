@@ -37,6 +37,7 @@ interface IState {
   categoryOpen: boolean;
   searchValue: string;
   notificationOpen: boolean;
+  mobileSearchOpen: boolean;
   searchOpen: boolean;
   searchLoader: boolean;
   searchResult: IProductSearcResponseModel | null;
@@ -52,6 +53,7 @@ class Header extends HelperComponent<{}, IState> {
     authOpen: false,
     categoryOpen: false,
     searchValue: '',
+    mobileSearchOpen: false,
     notificationOpen: false,
     searchLoader: false,
     searchOpen: false,
@@ -97,7 +99,7 @@ class Header extends HelperComponent<{}, IState> {
   public async configureNotifications() {
     this.timer = setInterval(async() => { // Temporary TODO -> change to socket
       const result = await NotificationController.GetUnseenList();
-  
+
       if (result && result.success) {
         this.safeSetState({ notificationIconNumber: result.data });
       }
@@ -156,7 +158,7 @@ class Header extends HelperComponent<{}, IState> {
 
         // If searchLoader has changed, don't show the result
         if (data?.data?.products.length){
-          
+
           this.safeSetState({
             searchResult: data.data,
             searchHistoryShown: false,
@@ -169,7 +171,7 @@ class Header extends HelperComponent<{}, IState> {
             searchOpen: false,
           });
           setTimeout(() => this.safeSetState({ searchOpen: true }));
-        } 
+        }
 
         if (!data?.aborted) {
           this.safeSetState({ searchLoader: false });
@@ -225,6 +227,11 @@ class Header extends HelperComponent<{}, IState> {
       }
     }); else this.safeSetState({ searchOpen: true, searchHistoryShown: false });
   };
+
+  private showMobileSearch = () =>{
+    const { mobileSearchOpen } = this.state;
+    this.safeSetState({ mobileSearchOpen: !mobileSearchOpen });
+  }
 
   private searchSubmit = () => {
     const { searchValue } = this.state;
@@ -334,7 +341,17 @@ class Header extends HelperComponent<{}, IState> {
   }
 
   private Mobile = () => {
-    const { authOpen, cartIconNumber, notificationIconNumber, notificationOpen, mobileMenuOpen } = this.state;
+    const {
+      authOpen,
+      cartIconNumber,
+      mobileSearchOpen,
+      notificationOpen,
+      mobileMenuOpen,
+      searchOpen,
+      searchValue,
+      searchResult,
+      searchLoader,
+      searchHistoryShown } = this.state;
 
     return <div className="P-mobile-header">
       <div className="P-burger-menu">
@@ -356,10 +373,32 @@ class Header extends HelperComponent<{}, IState> {
           className="P-link P-login"
         >{Settings.translations.log_in}</span>}
         {Storage.profile &&
-        <a onClick={this.searchSubmit} className="P-link P-icon G-normal-link P-notification">
-          <i className="icon-Group-5502"/>
-          {!!notificationIconNumber && <span>{notificationIconNumber > 99 ? '99+' : notificationIconNumber}</span>}
-        </a>}
+          <a onClick={this.showMobileSearch} className="P-link P-icon G-normal-link P-notification">
+            <i className="icon-Group-5502"/>
+          </a>
+        }
+        {mobileSearchOpen &&
+          <div className="P-search-wrapper-mobile">
+            <SearchInput
+                onClick={this.searchFocus}
+                onFocus={this.searchFocus}
+                onChange={this.searchChange}
+                onSubmit={this.searchSubmit}
+                loading={searchLoader}
+                clearSearch={true}
+                disableRemoveOnNavigate={true}
+                withSubmit={true}
+            />
+
+            {searchOpen && <SearchPopup
+                onClose={this.closeSearch}
+                onSubmit={this.searchSubmit}
+                data={searchResult}
+                searchText={searchValue}
+                historyShown={searchHistoryShown}
+            />}
+          </div>
+        }
         <Link to={ROUTES.CART} className="P-link P-icon G-normal-link P-cart">
           <i className="icon-Group-5503"/>
           {!!cartIconNumber && <span>{cartIconNumber > 99 ? '99+' : cartIconNumber}</span>}
@@ -369,7 +408,7 @@ class Header extends HelperComponent<{}, IState> {
       {authOpen && <Shared.Auth onClose={this.toggleAuth}/>}
       {notificationOpen &&
       <Notifications onClose={this.toggleNotifications} onSeenChange={this.onNotificationSeenChange}/>}
-      {mobileMenuOpen && <MobileMenu onClose={this.toggleMobileMenu} onAuthOpen={this.toggleAuth}/>}
+      {mobileMenuOpen && <MobileMenu onClose={this.toggleMobileMenu} onOpenNotification={this.toggleNotifications} onAuthOpen={this.toggleAuth}/>}
     </div>;
   };
 }

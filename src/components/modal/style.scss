@@ -53,13 +53,13 @@
     animation-fill-mode : forwards;
 
     .P-close {
-      top       : 15px;
-      right     : 15px;
+      top       : 17px;
+      right     : 17px;
       color     : $text-gray;
       cursor    : pointer;
       z-index   : 1;
       position  : absolute;
-      font-size : 26px;
+      font-size : 14px;
     }
 
     .P-loader-wrapper {

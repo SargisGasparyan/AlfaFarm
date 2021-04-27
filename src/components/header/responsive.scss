@@ -10,7 +10,7 @@
 
   .P-burger-menu {
     display : block;
-    
+
     > img {
       width  : 24px;
       height : 24px;
@@ -44,14 +44,14 @@
       display         : flex;
       align-items     : center;
       text-decoration : none;
-  
+
       > .P-image {
         height        : 30px;
         min-width     : 30px;
         max-width     : 30px;
         border-radius : 50%;
       }
-  
+
       > h4, h5 {
         @include normal-font();
       }
@@ -59,9 +59,32 @@
 
     > a {
       margin-right : 15px;
-      
+
       &:last-child {
         margin-right : 0;
+      }
+    }
+  }
+
+  .P-search-wrapper-mobile {
+    background-color: #FFFFFF;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    top: 70px;
+
+    .G-main-input {
+      border: none;
+    }
+
+    .P-header-search-result {
+      width: 100%;
+      box-shadow: none;
+      border-top: 1px solid #ccc;
+      top: 53px;
+
+      .P-list-item {
+        flex-direction: column;
       }
     }
   }

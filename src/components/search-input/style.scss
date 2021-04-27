@@ -6,6 +6,16 @@
   position  : relative;
   max-width : 100%;
 
+  .P-remove-search {
+    right     : 45px;
+    border    : none;
+    font-size : 10px;
+
+    i {
+      color: #cfcfcf;
+    }
+  }
+
   &.P-search-input-submit > input { padding-right: 5.7vw; }
 
   > button {

@@ -49,7 +49,7 @@ class MyRegistrations extends HelperComponent<IState, {}> {
     return (
       <Layout>
         <section className="P-profile-my-registrations-page">
-          <h2 className="P-title G-mb-30 G-flex G-flex-justify-between">
+          <h2 className="P-title G-mb-20 G-flex G-flex-justify-between">
             <p className="P-registrations-title">{Settings.translations.my_registrations}</p>
             <p><Link to={ROUTES.PROFILE.MY_REGISTRATIONS.MEDICAL_HISTORY}>{Settings.translations.medical_history}</Link></p>
           </h2>

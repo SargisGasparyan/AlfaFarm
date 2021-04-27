@@ -32,7 +32,7 @@ class ChoosePharmacy extends HelperComponent<IProps, IState> {
   public state: IState = {
     searchValue: '',
   };
-  
+
   private weeksViewEnum = getViewEnum(WeekDaysEnum);
 
   private get markers() {
@@ -58,7 +58,7 @@ class ChoosePharmacy extends HelperComponent<IProps, IState> {
 
   private onSearchChange = (searchValue: string) => this.safeSetState({ searchValue }, this.fetchData);
 
-  private fetchData = async () => { 
+  private fetchData = async () => {
     const { searchValue } = this.state;
 
     Connection.AbortAll();
@@ -103,7 +103,7 @@ class ChoosePharmacy extends HelperComponent<IProps, IState> {
                     <h4 className="P-info-row G-flex-center">
                       <i className="icon-Group-5522 G-clr-orange" /> <span>{this.hoveredMarkerData.contactPhoneNumber}</span>
                     </h4>
-                    <h4 className="P-info-row">
+                    <h4 className="P-info-row G-flex G-mt-15">
                       <i className="icon-Group-5554 G-clr-orange" />
                       <this.WorkingPlan />
                     </h4>

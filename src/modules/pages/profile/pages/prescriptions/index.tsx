@@ -47,15 +47,15 @@ class Prescriptions extends HelperComponent<IState, {}> {
 
     return (
       <Layout>
+        <div className="G-flex G-flex-justify-end G-mb-30 G-flex-align-center">
+          <h2 className="G-clr-main">{Settings.translations.prescriptions}</h2>
+          <Link
+              to={ROUTES.PROFILE.PRESCRIPTIONS.CREATE}
+              className="G-normal-link G-main-button G-ml-auto G-fs-16"
+          >+ {Settings.translations.add_prescription}</Link>
+        </div>
         <div className="P-profile-prescriptions">
           <div className="P-content">
-            <h3>
-              <span className="G-mr-auto">{Settings.translations.prescriptions}</span>
-              <Link to={ROUTES.PROFILE.PRESCRIPTIONS.CREATE} className="G-normal-link G-clr-main G-fs-48">
-                <i className="icon-Group-5532"/>
-              </Link>
-            </h3>
-
             {data && data.list.length ? <List
               data={data.list}
             /> : <EmptyState animationData={animationData} text={Settings.translations.empty_prescriptions_list}/>}

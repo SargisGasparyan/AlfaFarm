@@ -49,13 +49,13 @@ class Notifications extends HelperPureComponent<IProps, IState> {
     this.safeSetState({ data: result.data });
   }
 
-  private clickOnItem = async (e: Event | React.SyntheticEvent, item: INotificationListResponseModel) => {
+  private clickOnItem = async (e: Event | React.SyntheticEvent, item: INotificationListResponseModel, showPopup: boolean = false) => {
     if (!item.seen) {
       await NotificationController.Seen(item.id);
       this.props.onSeenChange(false);
     }
 
-    if (item.hasChoice) {
+    if (item.hasChoice || showPopup) {
       this.safeSetState({ selectedItem: item });
     } else {
       this.props.onClose(e);
@@ -86,7 +86,7 @@ class Notifications extends HelperPureComponent<IProps, IState> {
         item.seen = true;
         return item;
       });
-      
+
       this.safeSetState({ data: {...data} });
     }
   }
@@ -104,7 +104,7 @@ class Notifications extends HelperPureComponent<IProps, IState> {
           </h6>
           {data && data.list.map(item => <this.ListItem key={item.id} item={item} />)}
         </aside>
-      
+
         {this.state.selectedItem ? <NotificationAnswer selectedItem={this.state.selectedItem} onClose={this.closeModal} /> : null}
       </ClickOutside>
     );
@@ -139,7 +139,7 @@ class Notifications extends HelperPureComponent<IProps, IState> {
       return (
         <div
           className={`P-list-item ${!item.seen ? 'P-unseen' : ''}`}
-          onClick={(e) => this.clickOnItem(e, item)}
+          onClick={(e) => this.clickOnItem(e, item, true)}
         >
           <img src={item.hasChoice ? NotificationImage3 : NotificationImage1} alt=""/>
           <div>

@@ -58,7 +58,7 @@ const cardInfo = <>
 
 const contactText = <>
   Dear customers, <br /> <br />
-  We thank you for your interest in our services. <br />    
+  We thank you for your interest in our services. <br />
   We are working to enhance our quality of our services offered for which we find a great importance of the feedback of our customers. <br />
   In case of questions or problems please complete the lines below or call by <br />
   <b>011 200 900</b> telephone number. <br /> <br />
@@ -155,7 +155,7 @@ const howWeWorkText = <>
 
   <h3>We will calculate the cost of the order within 24 hours</h3>
   <p>After receiving the order our specialists will study the wholesale market for finding more productive options, and, within 24 hours will send you back the offer, which you can accept fully or partially. The purchase can be done by cash, paying directly to courier; online, by one of the pointed means on site; transfer, by invoice.</p>
-  
+
   <h3>Manage your purchase with the help of personal page</h3>
   <p>Personal page on site is personal territory where you can get reliable information on ongoing actions. For entering you must register or sign up in the site, then you will receive total information about your activity on site. You get more privileges, as you see the whole information of your activity and have an opportunity to get quick help and services by Ineed inversely. In general, on your page you can do payments, analyze the statistics of orders and purchases , you did earlier. The archive of purchases will allow you to repeat any operation easily and quickly .One of the privileges is, that you can do necessary amendments with the help of your page, without coming to our office.</p>
 
@@ -172,7 +172,7 @@ const adventagesText = <>
 
   <h3>Free analysis of market prices</h3>
   <p>For productive  purchasing the costs reduction is important, which means purchasing of goods with minimum prices. Ineed offers free analysis of market prices. The analyses of market prices allows to follow the dynamics of market changes, giving the customers a possibility of obtaining the goods with minimum prices. It  means that you have an information privilege and an opportunity to lower the prices. We give an opportunity to use the offers of the best suppliers and contracts with special conditions. Our special conditions with the producers and the wholesalers let us offer the customers a wide assortment 0f necessary goods by minimum prices. Due  to elaborated discount system you can be certain that you are reducing the costs, buying the goods with minimum prices. Low prices are formed due to special and exclusive agreements with the suppliers, due to productive logistics of our company.</p>
-  
+
   <h3>We give the opportunity to take advantage of the best offers of suppliers and contracts with special conditions</h3>
   <br /><br />
 
@@ -971,6 +971,27 @@ export default {
   how_to_become_a_partner: "How to become a partner",
   vacancies: "Vacancies",
   how_to_order_online: "How to order online",
+  how_to_order_online_text: "Օնլայն գնում կատարելու համար կարող եք գրանցվել և մուտք գործել համակարգ, ինչը հնարավորություն կտա ստեղծել ձեր անձնական հաշիվը, որտեղ.",
+  how_to_order_online_text_li_1: "կհետևեք պատվերի ընթացքին,",
+  how_to_order_online_text_li_2: "կպահպանվի ձեր պատվերների պատմությունը,",
+  how_to_order_online_text_li_3: "անվճար ձեռք կբերեք կուտակային քարտ,",
+  how_to_order_online_text_li_4: "կպահպանեք նախընտրելի ապրանքների ցանկը,",
+  how_to_order_online_text_li_5: "և շատ այլ հնարավորություններ կստանաք:",
+  how_to_order_online_text_2: "Կարող եք օնլայն գնում կատարել նաև առանց կայք մուտք գործելու՝ մասնավորապես․",
+  how_to_order_online_text_2_li_1: "Ներբեռնելով «Alfa-Pharm» բջջային հավելվածը",
+  how_to_order_online_text_2_li_2: "Ուղարկելով հաղորդագրություն մեր սոցցանցերի էջերին կամ",
+  how_to_order_online_text_2_li_3: "Զանգահարելով 060 700 500 ներք․ 1 հեռախոսահամարով",
+  how_to_order_online_text_2_li_4: "Պատվիրել կայքի միջոցով, որպես հյուր (առանց օգտահաշիվ մուտք գործելու)։",
+  how_to_order_online_text_3: "<a href='www.alfapharm.am' target='_blank'>www.alfapharm.am</a>-ում օնլայն գնելու համար անհրաժեշտ է․",
+  how_to_order_online_text_3_li_1: "Սեղմել «Օնլայն դեղատուն» ⇒ ընտրել ձեզ անհրաժեշտ կատեգորիան կամ փնտրել անհրաժեշտ ապրանքը որոնման դաշտում,",
+  how_to_order_online_text_3_li_2: "Ընտրել ապրանքը",
+  how_to_order_online_text_3_li_3: "Ընտրել քանակը (տուփ/հատ),",
+  how_to_order_online_text_3_li_4: "Սեղմել «ավելացնել» կոճակը,",
+  how_to_order_online_text_3_li_5: "Նշել առաքման հասցեն կամ նշել դեղատունը որտեղից ցանկանում եք վերցնել պատվերը,",
+  how_to_order_online_text_3_li_6: "Նշել առաքման նախընտրելի ժամը կամ նշել «հնարավորինս շուտ»,",
+  how_to_order_online_text_3_li_7: "Ընտրել վճարման տեսակը,",
+  how_to_order_online_text_3_li_8: "Սեղմել «հաստատել» կոճակը։",
+  how_to_order_online_text_4: "Մեր առաքիչն օպերատիվ կերպով կառաքի Ձեր գնումը նշված հասցեով։",
   what_is_alfa_card: "What is Alfa card",
   contact_us: "Leave feedback",
   default: "Default",
@@ -1098,7 +1119,7 @@ export default {
   delivery_fee: "Delivery fee",
   bonus_card: "Bonus card",
   mobile_app: "Mobile app",
-  about_delivery_text: "Delivery of the products purchased form the online drugstore of Alfa Pharm is available in Yerevan and Gyumri and generally takes up to 2 hours since the registration of the order. In regions the delivery is organized either thorugh mailing company “Haypost” generally in up to 3 days by delivering the products to the respective Haypost branch, where the customer can take his/her order, or through Alfa-Pharm generally in up to 3 days by delivering the products to the nearest Alfa-Pharm branch, where the customer can take his/her order. More details are available in the “Delivery conditions” section.",
+  about_delivery_text: "Delivery of the products purchased form the online drugstore of Alfa Pharm is available in Yerevan and Gyumri and generally takes up to 2 hours since the registration of the order. In regions the delivery is organized either thorugh mailing company “Haypost” generally in up to 3 days by delivering the products to the respective Haypost branch, where the customer can take his/her order, or through Alfa-Pharm generally in up to 3 days by delivering the products to the nearest Alfa-Pharm branch, where the customer can take his/her order.",
   about_bonus_card_text: "Alfa Pharm bonus card lets customers accumulate bonus points from the purchases in Alfa Pharm drugstores, add prepaid amount to their account and then spend them when pruchasing from Alfa Pharm. More details are available in “Alfa card conditions” section.",
   about_mobile_app_text: "Alfa Pharm mobile app provides a fast access to the online drugstore. Your bonus card will always be with you as it will be available in the app, you can make orders from the online drugstore through just a few taps, see the map of drugstores, see the product assortment and use lots of other useful features.",
   about_mobile_app_text_2: "The mobile application can be downloaded from Play Market or App Store by searching for “Alfa Pharm” or by scanning one of the following QR codes.",

@@ -13,10 +13,7 @@
   @include main-top-border();
 
   &.P-open {
-    color            : $main-color;
-    border           : 1px solid $main-color;
-    padding          : 34px; // 34px = 35px - B order size
-    background-color : $main-color-light;
+    color : $main-color;
 
     > .P-description {
       opacity   : 1;
@@ -43,7 +40,7 @@
 
 .P-vacancies-list-item-content {
   padding : 0 35px;
-  
+
   > .P-description {
     font-size   : $normal-fs;
     line-height : 42px;

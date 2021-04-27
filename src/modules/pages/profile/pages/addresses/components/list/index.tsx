@@ -24,7 +24,7 @@ class List extends HelperComponent<IProps, {}> {
     const { data, onEditDefault, onRemove } = this.props;
     return (<>
       {data && data.map((item: IUserAddressListResponseModel, index: number) =>
-        <div className="P-list-item  G-my-20" key={index}>
+        <div className="P-list-item P-list-item-box  G-my-20" key={index}>
           <div className="P-address-action G-flex G-flex-justify-between">
             {item.isDefault && <p>
               <img className="P-done-icon" src={DoneImage}/>

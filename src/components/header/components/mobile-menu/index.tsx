@@ -21,6 +21,8 @@ interface IState {
 interface IProps {
   onClose(): void;
 
+  onOpenNotification(): void;
+
   onAuthOpen(): void;
 }
 
@@ -70,6 +72,12 @@ class MobileMenu extends HelperComponent<IProps, IState> {
     window.addEventListener(DispatcherChannels.UserCanceled, this.logoutCanceled);
   };
 
+  private showNotification = () => {
+    const { onOpenNotification, onClose } = this.props;
+    onClose();
+    onOpenNotification();
+  };
+
   private logoutCanceled = () => {
     window.dispatchEvent(new CustomEvent(DispatcherChannels.ToggleConfirm));
     window.removeEventListener(DispatcherChannels.UserConfirmed, Settings.logout);
@@ -102,6 +110,7 @@ class MobileMenu extends HelperComponent<IProps, IState> {
 
             {!Settings.token && <a className="P-link" onClick={onAuthOpen}>{Settings.translations.log_in}</a>}
 
+            <div {...this.navLinkProps} onClick={this.showNotification}>{Settings.translations.notifications}</div>
             <NavLink {...this.navLinkProps} to={ROUTES.PHARMACIES}
                      onClick={onClose}>{Settings.translations.pharmacies}</NavLink>
             <NavLink {...this.navLinkProps} to={ROUTES.PRODUCTS.MAIN}

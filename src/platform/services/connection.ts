@@ -27,12 +27,12 @@ class Connection {
   //? To set header default configuration
   private static createHeaders = (isUpload: boolean): Headers => {
     const HEADERS = new Headers();
-    Settings.authToken ? HEADERS.append('Authorization', `Bearer ${Settings.authToken}`) : 
+    Settings.authToken ? HEADERS.append('Authorization', `Bearer ${Settings.authToken}`) :
     Settings.token && HEADERS.append('Authorization', `Bearer ${Settings.token}`);
     HEADERS.append('Language', Settings.language.toString());
     HEADERS.append('OsType', OSTypeEnum.Web.toString());
     !isUpload && HEADERS.append('Content-Type', 'application/json');
-    
+
     return HEADERS;
   }
 
@@ -52,7 +52,7 @@ class Connection {
             alertify.dismissAll();
             alertify.error(result.message);
           }
-          
+
           resolve(result);
         });
       } else response.text().then(resolve);
@@ -76,9 +76,9 @@ class Connection {
         headers: HEADERS,
         signal: abort.signal,
       });
-      return Connection.responseRestructure(response, dataAsSuccess, withoutError);  
+      return Connection.responseRestructure(response, dataAsSuccess, withoutError);
     } catch (e) {
-      !data.unabortable && window.abortableRequests.splice(window.abortableRequests.indexOf(abort), 1);    
+      !data.unabortable && window.abortableRequests.splice(window.abortableRequests.indexOf(abort), 1);
       return { aborted: true };
     }
   }
@@ -96,10 +96,10 @@ class Connection {
         method: 'PUT',
         headers: HEADERS,
         signal: abort.signal,
-      });  
+      });
 
       !data.unabortable && window.abortableRequests.splice(window.abortableRequests.indexOf(abort), 1);
-      return Connection.responseRestructure(response);  
+      return Connection.responseRestructure(response);
     } catch (e) {
       !data.unabortable && window.abortableRequests.splice(window.abortableRequests.indexOf(abort), 1);
       return { aborted: true };
@@ -130,9 +130,9 @@ class Connection {
             headers: HEADERS,
             signal: abort.signal,
           });
-    
+
           !data.unabortable && window.abortableRequests.splice(window.abortableRequests.indexOf(abort), 1);
-          resolve(Connection.responseRestructure(response));    
+          resolve(Connection.responseRestructure(response));
         } catch (e) {
           !data.unabortable && window.abortableRequests.splice(window.abortableRequests.indexOf(abort), 1);
           resolve({ aborted: true });
@@ -141,7 +141,7 @@ class Connection {
         if (!withoutConfirmModal) {
           window.dispatchEvent(new CustomEvent(DispatcherChannels.ToggleConfirm, { detail: confirmProps }));
           window.removeEventListener(DispatcherChannels.UserCanceled, userCanceled);
-          window.removeEventListener(DispatcherChannels.UserConfirmed, userConfirmed);  
+          window.removeEventListener(DispatcherChannels.UserConfirmed, userConfirmed);
         }
       }
 
@@ -151,7 +151,7 @@ class Connection {
         window.addEventListener(DispatcherChannels.UserConfirmed, userConfirmed);
       } else userConfirmed();
     });
-    
+
   }
 
   //? GET request
@@ -160,6 +160,9 @@ class Connection {
     const { controller, action, query } = data;
     const onlyQuery = !action && query;
     const HEADERS = Connection.createHeaders(false);
+    if (!window.abortableRequests) {
+      window.abortableRequests = []
+    }
     !data.unabortable && window.abortableRequests.push(abort);
     try {
       const response = await fetch(`${environment.BASE_URL}api/${controller}${!onlyQuery ? '/' : ''}${action}${query ? `?${Connection.queryFromObject(query)}` : ''}`, {
@@ -167,11 +170,11 @@ class Connection {
         headers: HEADERS,
         signal: abort.signal,
       });
-    
+
       !data.unabortable && window.abortableRequests.splice(window.abortableRequests.indexOf(abort), 1);
       return Connection.responseRestructure(response);
     } catch (e) {
-      !data.unabortable && window.abortableRequests.splice(window.abortableRequests.indexOf(abort), 1);    
+      !data.unabortable && window.abortableRequests.splice(window.abortableRequests.indexOf(abort), 1);
       return { aborted: true };
     }
   }

@@ -15,28 +15,28 @@ import * as animationData from 'assets/animations/EmptyCareer.json';
 
 interface IState {
   data: IVacancyListResponseModel[];
+  isLoading: boolean;
 }
 
 @byRoute(ROUTES.VACANCIES)
 class Vacancies extends HelperPureComponent<{}, IState> {
 
-  public state: IState = { data: [] };
+  public state: IState = { data: [], isLoading: false };
 
   public componentDidMount() { this.fetchData(); }
 
   private fetchData = async () => {
     const result = await VacancyController.GetList();
-    this.safeSetState({ data: result.data });
+    this.safeSetState({ data: result.data, isLoading: true });
   }
 
   public render() {
-    const { data } = this.state;
-    
+    const { data, isLoading } = this.state;
+
     return (
       <section className="G-page P-vacancies-page">
         <ShadowText className="G-page-title">{Settings.translations.vacancies}</ShadowText>
-
-        {data ? ( data.length ? data.map(item => <ListItem key={item.id} data={item} />): <EmptyState animationData={animationData} text={Settings.translations.empty_medical_history} />):null}
+        {data && isLoading ? ( data.length ? data.map(item => <ListItem key={item.id} data={item} />): <EmptyState animationData={animationData} text={Settings.translations.empty_medical_history} />):null}
 
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12194.10639610508!2d44.49654998689733!3d40.17509277030124!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x406abd0de1c97db3%3A0xb76b16c4777ba742!2sAlfa%20Pharm!5e0!3m2!1sen!2s!4v1594123006844!5m2!1sen!2s"

@@ -15,6 +15,7 @@ interface IState {
 
 interface IProps extends RouteComponentProps<any> {
   withSubmit?: boolean;
+  clearSearch?: boolean;
   disableRemoveOnNavigate?: boolean;
   loading?: boolean;
   onClick?(e: React.SyntheticEvent<HTMLInputElement>): void;
@@ -39,14 +40,14 @@ class SearchInput extends HelperPureComponent<IProps, IState> {
 
   private change = (e: React.SyntheticEvent<HTMLInputElement>) => {
     const { onChange } = this.props;
-    
+
     this.safeSetState({ search: e.currentTarget.value });
     onChange && onChange(e.currentTarget.value);
   }
 
   private removeText = () => {
     const { onChange } = this.props;
-    
+
     this.safeSetState({ search: '' });
     onChange && onChange('');
   }
@@ -60,7 +61,7 @@ class SearchInput extends HelperPureComponent<IProps, IState> {
   }
 
   public render() {
-    const { withSubmit, loading, onClick, onFocus, onBlur } = this.props;
+    const { withSubmit, clearSearch, loading, onClick, onFocus, onBlur } = this.props;
     const { search } = this.state;
 
     return (
@@ -74,10 +75,11 @@ class SearchInput extends HelperPureComponent<IProps, IState> {
           onBlur={onBlur}
           onChange={this.change}
         />
-        {search && <span className="P-remove-text" onClick={this.removeText}>
+
+        {search && clearSearch && <button type="button" className="P-remove-search" onClick={this.removeText}>
           <i className="icon-Group-5032" />
-        </span>}
-        
+        </button>}
+
         {withSubmit && <button type="button" onClick={this.submit}>
           <LoaderContent color="#F26D26" loading={loading} className="G-form-button"><i className="icon-Group-5502" /></LoaderContent>
         </button>}

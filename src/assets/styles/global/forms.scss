@@ -7,39 +7,39 @@
     flex-wrap       : wrap;
     max-width       : 100%;
     justify-content : space-between;
-  
+
     > div {
       width : 100%;
     }
-  
+
     .G-main-form-field, .G-main-form-half-field {
       width         : 100%;
       margin-bottom : 20px;
     }
-  
+
     .G-main-form-half-field {
       width : calc(50% - 15px);
     }
-  
+
     > .G-main-button {
       width : 100%;
     }
 }
-  
+
 .G-invalid-field {
     border : 1px solid red !important;
 }
-  
+
 .G-input-top-label {
     color         : $light-gray;
     font-size     : 16px;
     padding-left  : 35px;
     margin-bottom : 15px;
 }
-  
+
 .G-phone-input-wrapper {
     position : relative;
-  
+
     > .G-input-country-code {
       top           : 17px;
       left          : 20px;
@@ -47,17 +47,17 @@
       position      : absolute;
       border-right  : 1px solid $light-gray;
       padding-right : 10px;
-  
+
       @media (max-width : $mobile-screen) {
         top : 9px;
       }
     }
-  
+
     > .G-main-input {
       padding-left : 80px;
     }
 }
-  
+
 .G-main-input, .G-main-textarea {
     width         : 100%;
     border        : 1px solid $light-gray;
@@ -65,20 +65,20 @@
     font-size     : $normal-fs;
     border-radius : 30px;
 }
-  
+
 .G-main-select .P-select-header {
     height  : 56px;
     padding : 15px 35px;
 }
-  
+
 .G-main-textarea {
     height : 150px;
-  
+
     &::-webkit-scrollbar {
       width : 0;
     }
 }
-  
+
 .G-main-button {
     color         : white;
     border        : 0;
@@ -87,7 +87,7 @@
     background    : $main-color;
     border-radius : 30px;
 }
-  
+
 .G-main-ghost-button {
     color           : $main-color;
     cursor          : pointer;
@@ -98,7 +98,7 @@
     border-radius   : 20px;
     text-decoration : none;
 }
-  
+
 .G-no-data {
     position   : absolute;
     top        : 50%;
@@ -111,7 +111,7 @@
         font-size : 25px;
     }
 }
-  
+
 .G-dn {
     display : none !important;
 }

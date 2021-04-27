@@ -61,7 +61,7 @@
   .P-row-wrap {
     border        : 1px solid $light-gray;
     border-radius : 20px;
-    padding       : 2px 15px 6px;
+    padding       : 0 15px 0;
     margin-top    : 10px;
 
     .P-row-content {
@@ -70,33 +70,37 @@
       overflow-y : auto;
     }
 
-    > h2, > h3 {  
+    > h2, > h3 {
       font-weight : 300;
-  
+
       &.P-main-category { cursor: pointer; }
     }
-  
+
     > .P-row-title {
+      height          : 44px;
       cursor          : pointer;
       display         : flex;
       user-select     : none;
       align-items     : center;
       justify-content : space-between;
-  
-      > span { font-size: 34px; }
+
+      > span {
+        font-size  : 34px;
+        margin-top : -10px;
+      }
     }
-  
+
     .P-checkbox-row {
       cursor        : pointer;
       display       : flex;
       align-items   : center;
       margin-bottom : 15px;
-  
+
       > .rc-checkbox {
         display     : flex;
         align-items : center;
       }
-  
+
       > .P-name {
         width         : 100%;
         overflow      : hidden;
@@ -112,7 +116,7 @@
   > .P-cancel-button {
     width        : 100%;
     color        : #211f1f;
-    padding      : 10px 0;
+    padding      : 9px 0;
     margin-top   : 20px;
   }
 }

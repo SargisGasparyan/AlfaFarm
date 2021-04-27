@@ -84,7 +84,6 @@ class Details extends HelperComponent<RouteComponentProps<IRouteParams>, IState>
 
   public render() {
     const { data, cancelConfirmOpen } = this.state;
-    console.log(data && data.baskets);
 
     return (
       <Layout>

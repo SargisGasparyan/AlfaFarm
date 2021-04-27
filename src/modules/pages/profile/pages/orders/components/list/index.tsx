@@ -23,7 +23,7 @@ const List = React.memo(({ data, redirectUrl }: IProps) => {
 
     return (<>
       {data && data.map((item: IOrderDetailsResponseModel, index: number) =>
-        <Link key={index} to={redirectUrl ? redirectUrl(item, index) : ''} className="G-my-20">
+        <Link key={index} to={redirectUrl ? redirectUrl(item, index) : ''} className="G-mb-40 P-order-item-box">
           <div className="P-list-item G-flex">
             <div className="P-orders-det">
               <p className="P-order-id G-mb-5">

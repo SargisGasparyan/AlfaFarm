@@ -66,7 +66,7 @@
     }
 
     > .P-prescription-button {
-    
+
       width         : 100%;
       padding       : 15px;
       text-align    : center;
@@ -77,6 +77,7 @@
   }
 
   > .P-link {
+    position                   : relative;
     width                      : calc(100% - 30px);
     color                      : black;
     cursor                     : pointer;
@@ -89,8 +90,74 @@
     border-bottom-right-radius : $big-radius;
     @include bold-font;
 
-    &:hover, &.P-active {
+    &:before {
+      content             : '';
+      position            : absolute;
+      margin-left         : -50px;
+      width               : 28px;
+      height              : 28px;
+      background-size     : contain;
+      background-repeat   : no-repeat;
+      background-position : center;
+    }
+
+    &:after {
+      content                    : '';
+      position                   : absolute;
+      width                      : 0;
+      background-color           : rgba(73, 183, 72, 0.1);
+      height                     : 100%;
+      left                       : 0;
+      top                        : 0;
+      border-top-right-radius    : 12px;
+      border-bottom-right-radius : 12px;
+    }
+
+    &.P-icon-bonus_card:before {
+      background-image: url('src/assets/images/icons/bonus.svg');
+    }
+
+    &.P-icon-orders:before {
+      background-image: url('src/assets/images/icons/orders.svg');
+    }
+
+    &.P-icon-favorites:before {
+      background-image: url('src/assets/images/icons/favorite.svg');
+    }
+
+    &.P-icon-special_products:before {
+      background-image: url('src/assets/images/icons/special_products.svg');
+    }
+
+    &.P-icon-my_registrations:before {
+      background-image: url('src/assets/images/icons/appointerments.svg');
+    }
+
+    &.P-icon-addresses:before {
+      background-image: url('src/assets/images/icons/addresses.svg');
+    }
+
+    &.P-icon-my_wallet:before {
+      background-image: url('src/assets/images/icons/my_wallet.svg');
+    }
+
+    &.P-icon-my_wallet:before {
+      background-image: url('src/assets/images/icons/my_wallet.svg');
+    }
+
+    &.P-icon-logout:before {
+      background-image: url('src/assets/images/icons/logout.svg');
+    }
+
+    &.P-active {
       background : $main-color-light;
+    }
+
+    &:not(.P-active):hover {
+      &:after {
+        transition: width .3s ease-in-out;
+        width: 100%;
+      }
     }
   }
 }

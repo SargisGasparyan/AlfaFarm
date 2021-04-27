@@ -3,25 +3,9 @@
 
 .P-cards-page {
   display         : flex;
-  flex-direction  : column;
-  justify-content: space-around;
+  flex-direction  : row;
+  flex-wrap       : wrap;
   border-radius   : 12px;
-  align-items     : flex-end;
-
-
-  &.P-cards-page-has-card {
-    max-width           : 400px;
-    padding         : 10px;
-    border-top      : 12px solid rgba(73, 183, 72, 0.1);
-    box-shadow      : $default-block-shadow;
-    background      : white;
-
-    .G-main-button {
-      margin-top   : 30px;
-      margin-left  : auto;
-      margin-right : auto;
-    }
-  }
 
   .G-main-button {
     margin  : 0;
@@ -41,31 +25,101 @@
   }
 
   .P-card-wrap {
-    width       : 100%;
-    display     : flex;
-    align-items : center;
-    padding     : 10px 20px;
-    border-bottom: 1px solid $light-gray;
-    position: relative;
+    max-width         : 355px;
+    width             : 355px;
+    height            : 196px;
+    padding           : 24px 35px;
+    background-size   : cover;
+    background-repeat : no-repeat;
+    position          : relative;
+    display           : flex;
+    flex-direction    : column;
+    justify-content   : space-between;
+    margin            : 10px;
 
     .P-remove {
-      position: absolute;
-      top: 0;
-      right: 0;
+      color      : #FFFFFF;
+      transition : all .3s;
+      opacity    : 0;
+      visibility : hidden;
+      position   : absolute;
+      top        : 10px;
+      right      : 10px;
+
+      &:before {
+        content          : '';
+        background-image : url('src/assets/images/icons/trash.svg');
+        width            : 20px;
+        height           : 20px;
+        position         : absolute;
+        right            : 0;
+      }
     }
 
-    .P-card-number {
+    &:hover .P-remove {
+      visibility : visible;
+      opacity    : 1;
+    }
+
+    .P-card-bank-info {
+      color: #F9F9F9;
+      text-transform: uppercase;
       width: 100%;
       display: flex;
       align-items: center;
       justify-content: space-between;
-  
+
       div {
         margin-left : 30px;
         width       : 40px;
         height      : 30px;
       }
     }
+
+    .P-card-info {
+
+      .P-card-label {
+        color: #F9F9F9;
+        font-size: 14px;
+        opacity: .5;
+      }
+
+      .P-card-data {
+        color: #F9F9F9;
+        font-size: 18px;
+        text-transform: uppercase;
+      }
+    }
+
+    .P-card-number {
+      position: relative;
+      .P-sim {
+        width       : 35px;
+        height      : 27px;
+      }
+
+      .P-card-code {
+        text-align: right;
+        width: 100%;
+        color: #fff;
+        font-size: 20px;
+        line-height: 1.1;
+
+        &:before {
+          line-height: 1.1;
+          content: '**** **** ****';
+          position: absolute;
+          color: #fff;
+          font-size: 30px;
+          left: 55px;
+        }
+      }
+
+      div {
+        width       : 40px;
+        height      : 30px;
+      }
+    }
   }
-  
+
 }

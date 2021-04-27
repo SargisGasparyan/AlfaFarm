@@ -24,6 +24,7 @@ import 'moment/locale/en-gb';
 
 import './assets/styles/index.scss';
 import SearchHistory from 'platform/services/searchHistory';
+import PaymentController from './platform/api/payment';
 
 interface IState {
   confirmOpen: boolean;
@@ -38,16 +39,19 @@ class App extends HelperComponent<{}, IState> {
     generalAPILoaded: false,
     initialLoading: false,
     confirmOpen: false,
-    confirmProps: {},
+    confirmProps: {}
   };
 
   public async componentDidMount() {
+    //? Check card
+    await this.checkForPaymentSuccess();
+
     //? Library config
 
     const alertify = await import('alertifyjs');
     moment.locale(Settings.shortCode);
-    alertify.set('notifier','position', 'bottom-center');
-    alertify.set('notifier','delay', 5);
+    alertify.set('notifier', 'position', 'bottom-center');
+    alertify.set('notifier', 'delay', 5);
 
     //? For SSR to fully load Browser API (general for 'window')
 
@@ -57,7 +61,7 @@ class App extends HelperComponent<{}, IState> {
       if (location.pathname !== '/products') {
         setTimeout(() => {
           window.scrollTo(0, 0);
-        })
+        });
       }
     });
 
@@ -70,7 +74,8 @@ class App extends HelperComponent<{}, IState> {
     try {
       initYMapsScript();
       await Socket.connect();
-    } catch { /* */ }
+    } catch { /* */
+    }
 
     //? Backend initial data fetch
 
@@ -82,13 +87,34 @@ class App extends HelperComponent<{}, IState> {
 
     const query = new URLSearchParams(window.location.search);
     const referralCode = query.get('referral');
-    if (referralCode) Settings.referralCode = referralCode;
+    if (referralCode) {
+      Settings.referralCode = referralCode;
+    }
   }
+
+  private checkForPaymentSuccess = async () => {
+    const query = new URLSearchParams(window.location.search);
+    const orderId = query.get('orderId');
+    const isCard = query.get('isCard');
+
+    if (orderId) {
+      if (isCard) {
+        await PaymentController.saveCard(orderId);
+      } else {
+        const result = await PaymentController.confirm(orderId);
+        result.success && this.safeSetState({ orderSuccessModalOpen: true });
+      }
+      query.delete('orderId');
+      query.delete('key');
+      query.delete('isCard');
+      window.history.replaceState({ path: window.location.pathname }, '', `?${query}`);
+    }
+  };
 
   private toggleConfirm = (e: CustomEvent) => {
     const { confirmOpen } = this.state;
     this.safeSetState({ confirmOpen: !confirmOpen, confirmProps: e.detail || {} });
-  }
+  };
 
   public render() {
     const { generalAPILoaded, initialLoading, confirmOpen, confirmProps } = this.state;
@@ -96,7 +122,7 @@ class App extends HelperComponent<{}, IState> {
     return generalAPILoaded ? (
       <Router history={window.routerHistory}>
         {initialLoading ? <>
-          <Header />
+          <Header/>
           <section className="G-page-content">
             <Switch>
               {RouteService.subscribeUnauthorized(routes => routes.map(item => <Route
@@ -106,19 +132,20 @@ class App extends HelperComponent<{}, IState> {
                 component={item.component}
               />))}
 
-              {!!Settings.token && !Settings.guest && RouteService.subscribeAuthorized(routes => routes.map(item => <Route
-                exact={true}
-                key={item.path}
-                path={item.path}
-                component={item.component}
-              />))}
+              {!!Settings.token && !Settings.guest && RouteService.subscribeAuthorized(routes => routes.map(item =>
+                <Route
+                  exact={true}
+                  key={item.path}
+                  path={item.path}
+                  component={item.component}
+                />))}
 
-              <Redirect to={ROUTES.HOME} />
+              <Redirect to={ROUTES.HOME}/>
             </Switch>
           </section>
           {confirmOpen && <ConfirmModal {...confirmProps} />}
-          <Footer />
-        </> : <PageLoader />}
+          <Footer/>
+        </> : <PageLoader/>}
       </Router>
     ) : null;
   }

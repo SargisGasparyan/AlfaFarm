@@ -53,7 +53,7 @@ class Deciphered extends HelperComponent<RouteComponentProps<IRouteParams>, ISta
 
   private changeQuantity = (index: number, value: number) => {
     const { data } = this.state;
-    
+
     if (data) {
       data[index].productQuantity = value;
       this.safeSetState({ data });
@@ -62,7 +62,6 @@ class Deciphered extends HelperComponent<RouteComponentProps<IRouteParams>, ISta
 
   public render() {
     const { data } = this.state;
-    console.log(data)
 
     return (
       <Layout>

@@ -59,7 +59,7 @@ class ContactUs extends HelperComponent<{}, IState> {
   }
   private WorkingPlan = () => {
     if (!this.hoveredMarkerData) return null;
-    return <div>
+    return <div className="G-flex G-flex-column">
       {this.hoveredMarkerData.workingPlan.map((item, index) => <span key={index}>
         {item.endDay ? '-' + Settings.translations[this.weeksViewEnum[item.endDay]] : ''}
         &nbsp;&nbsp;
@@ -89,7 +89,7 @@ class ContactUs extends HelperComponent<{}, IState> {
                   <h4 className="P-info-row G-flex-center">
                     <i className="icon-Group-5522 G-clr-orange" /> <span>{this.hoveredMarkerData.contactPhoneNumber}</span>
                   </h4>
-                  <h4 className="P-info-row">
+                  <h4 className="P-info-row G-flex G-mt-15">
                     <i className="icon-Group-5554 G-clr-orange" />
                     <this.WorkingPlan />
                   </h4>
@@ -99,7 +99,7 @@ class ContactUs extends HelperComponent<{}, IState> {
           )}
         </Maps>
 
-    
+
 
         <div className="P-bottom">
           <AboutDelivery />

@@ -11,16 +11,13 @@ import {
   IBasketChangeResponseModel
 } from 'platform/api/basket/models/response';
 import EmptyState from 'components/empty-state';
-import { getMediaPath, formatPrice } from 'platform/services/helper';
-import CountInput from 'components/count-input';
+import { formatPrice } from 'platform/services/helper';
 import Connection from 'platform/services/connection';
 import DispatcherChannels from 'platform/constants/dispatcher-channels';
 import Storage from 'platform/services/storage';
 import PageLoader from 'components/page-loader';
 import { IResponse } from 'platform/constants/interfaces';
-import { PromotionTypeEnum } from 'platform/constants/enums';
 import ConfirmModal from 'components/confirm-modal';
-import { getBasketItemPriceInfo } from 'platform/services/basket';
 
 import './style.scss';
 import PhotoStorage from 'platform/services/photoStorage';
@@ -165,45 +162,46 @@ class Cart extends HelperComponent<{}, IState> {
               <a className="G-ml-auto P-clear-all" onClick={this.deleteAll}>{Settings.translations.clear_basket}</a>
             </div>
 
-            <div className="G-flex G-flex-column P-basket-products">
-              <Shared.Products.BasketList
-                onQuantityChange={this.changeCount}
-                onDeleteBasketItem={this.deleteBasketItem}
-                data={data.items}
-              />
-            </div>
-
-
-            <div className="P-data-block-wrapper">
-
-              <div className="P-data-block">
-                <div className="G-mr-40">
-                  <span className="G-fs-normal">{Settings.translations.bonus_count}</span>
-                  <h1 className="G-clr-main G-fs-24 G-mt-5">{data.totalBonus}</h1>
-                </div>
-
-                <div>
-                  <span className="G-fs-normal">{Settings.translations.total}</span>
-                  <div className="G-flex G-flex-column G-align-center G-justify-center P-discounted-item">
-                    {!!data.totalDiscountedPrice && data.totalDiscountedPrice !== data.totalPrice &&
-                    <del>{formatPrice(data.totalPrice)}</del>}
-                    <h1
-                      className="G-clr-orange G-fs-24 G-mt-5">{formatPrice(data.totalDiscountedPrice || data.totalPrice)}</h1>
-                  </div>
-                </div>
-
+            <div className="G-flex G-flex-justify-between P-cart-block">
+              <div className="G-flex G-flex-column P-basket-products">
+                <Shared.Products.BasketList
+                    onQuantityChange={this.changeCount}
+                    onDeleteBasketItem={this.deleteBasketItem}
+                    data={data.items}
+                />
               </div>
 
-              {Storage.profile && <div className="P-data-block-cart">
+              <div className="P-data-block-wrapper">
+
+                <div className="P-data-block">
+                  <div className="G-mr-40">
+                    <span className="G-fs-normal">{Settings.translations.bonus_count}</span>
+                    <h1 className="G-clr-main G-fs-24 G-mt-5">{data.totalBonus}</h1>
+                  </div>
+
+                  <div>
+                    <span className="G-fs-normal">{Settings.translations.total}</span>
+                    <div className="G-flex G-flex-column G-align-center G-justify-center P-discounted-item">
+                      {!!data.totalDiscountedPrice && data.totalDiscountedPrice !== data.totalPrice &&
+                      <del>{formatPrice(data.totalPrice)}</del>}
+                      <h1
+                          className="G-clr-orange G-fs-24 G-mt-5">{formatPrice(data.totalDiscountedPrice || data.totalPrice)}</h1>
+                    </div>
+                  </div>
+
+                </div>
+
+                {Storage.profile && <div className="P-data-block-cart">
                 <span className="P-save-cart" onClick={this.saveCart}>
                   {Settings.translations.save_cart}
                 </span>
-              </div>}
+                </div>}
 
-              <button
-                className="G-main-button G-ml-auto G-fs-normal P-pay-button"
-                onClick={this.goToCheckout}
-              >{Settings.translations.pay}</button>
+                <button
+                    className="G-main-button G-ml-auto G-fs-normal P-pay-button"
+                    onClick={this.goToCheckout}
+                >{Settings.translations.pay}</button>
+              </div>
             </div>
 
 
@@ -219,7 +217,7 @@ class Cart extends HelperComponent<{}, IState> {
             animationData={animationData}
             text={Settings.translations.no_products}
           />}
-          </> : <PageLoader/>}
+        </> : <PageLoader/>}
       </section>
     );
   }
