@@ -96,7 +96,7 @@ function buildHTML(markup: string, title: string, description: string, keywords:
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta charset="utf-8" />         
         <meta name="facebook-domain-verification" content="nycag5degd8cy0gidcperwa3m4jf9j" />
-        <meta name="google-site-verification" content="google-site-verification=PlXejPyELq-_cqljjgnFQwScWaNVNSBbrwcxORqYJew" />
+        <meta name="google-site-verification" content="gL59BYIM665WISAI5mzFgmhhDTuUA1EniJgDVIdyRa4" />
         <meta name="keywords" content="${keywords}" />
         <meta name="description" content="${description}" />
         <meta name="og:description" content="${description}" />
