@@ -1257,7 +1257,7 @@ export default {
   no: 'No',
   bonus_count: 'Bonus count',
   retail_sale: "Retail sale",
-  wholesale_sale: "Wholesale sale",
+  wholesale_sale: "Wholesale",
   wholesale_sale_price_list: "Price list",
   wholesale_sale_service: "Services",
   wholesale_sale_big_sale: "Wholesale offers",
