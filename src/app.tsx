@@ -106,7 +106,7 @@ class App extends HelperComponent<{}, IState> {
         window.history.replaceState({ path: window.location.pathname }, '', `?${query}`);
       } else {
         const result = await PaymentController.confirm(orderId);
-        result.success && this.safeSetState({ orderSuccessModalOpen: true });
+        result.success ? this.safeSetState({ orderSuccessModalOpen: true }) : window.history.replaceState({ path: '/checkout?step=3' }, '', ``);
       }
     }
   };
