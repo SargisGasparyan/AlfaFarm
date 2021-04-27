@@ -67,7 +67,7 @@ class BonusCard extends HelperComponent<IState, {}> {
 
   public render() {
     const { data } = this.state;
-    const datesList = data && data.bonusHistoryGroupedByDate.list;
+    const datesList = data && data.bonusHistoryGroupedByDate && data.bonusHistoryGroupedByDate.list;
 
     return (
       <Layout>
