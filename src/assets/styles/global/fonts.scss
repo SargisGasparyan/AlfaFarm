@@ -47,3 +47,8 @@ $fonts: (
 .G-text-bold {
   @include bold-font;
 }
+
+
+.G-text-semi-bold {
+  @include semi-bold-font;
+}

@@ -8,6 +8,12 @@ import PosImage from 'assets/images/icons/pos_terminal.svg';
 
 export const PaymentTypeEnumItems = (): IPaymentTypeEnumItemModel[] => [
   {
+    name: Settings.translations.card,
+    type: PaymentTypeEnum.IPay,
+    class: 'P-ipay',
+    image: CreditCardImage,
+  },
+  {
     name: Settings.translations.cash,
     type: PaymentTypeEnum.Cash,
     class: 'P-cash',
@@ -18,12 +24,6 @@ export const PaymentTypeEnumItems = (): IPaymentTypeEnumItemModel[] => [
     type: PaymentTypeEnum.PostTerminal,
     class: 'P-post-terminal',
     image: PosImage,
-  },
-  {
-    name: Settings.translations.card,
-    type: PaymentTypeEnum.IPay,
-    class: 'P-ipay',
-    image: CreditCardImage,
   },
   // {
   //   name: 'IDram',

@@ -42,7 +42,7 @@ const PaymentMethod = React.memo(({ resultInfo, callback }: IPaymentMethod) => {
   }
 
   return <div className="P-choose-payment-type-section">
-    <div className="P-payment-types">
+    <div className="P-payment-types G-flex G-flex-justify-between">
       {PaymentTypeEnumItems().map((item, index) =>
       <div key={index} className={item.class}>
         <Radio<PaymentTypeEnum> callback={(x: PaymentTypeEnum) => chooseType(x)} value={item.type} isChecked={type === item.type}>
@@ -51,14 +51,6 @@ const PaymentMethod = React.memo(({ resultInfo, callback }: IPaymentMethod) => {
           {type === item.type && child(item.type)}
         </Radio>
       </div>)}
-    </div>
-    {!!total() && <p>{Settings.translations.total} {formatPrice(total())}</p>}
-    <div className="P-choose-payment-buttons">
-      <LoaderContent
-        className="G-main-button"
-        loading={loading}
-        onClick={pay}
-      >{Settings.translations.pay}</LoaderContent>
     </div>
   </div>
 });

@@ -11,8 +11,6 @@ const IPay = React.memo(() => {
   const [list, setList] = React.useState<IUserCardListModel[]>();
   const [card, setCard] = React.useState<number>();
 
-  console.log(list);
-
   const apply = (id?: number) => {
     const query = new URLSearchParams(window.location.search);
     id ? query.set('card', id.toString()) : query.delete('card');

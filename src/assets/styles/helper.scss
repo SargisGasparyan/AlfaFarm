@@ -1,4 +1,5 @@
 @mixin bold-font() { font-weight: bold; };
+@mixin semi-bold-font() { font-weight: 500; };
 @mixin normal-font() { font-weight: normal; };
 
 @mixin main-top-border { border-top: 12px solid $main-color-light; }

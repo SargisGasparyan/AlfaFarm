@@ -155,69 +155,81 @@ class Cart extends HelperComponent<{}, IState> {
 
     return (
       <section className="G-page P-cart-page">
-        {data ? <>
-          {data.items.length ? <>
-            <div className="G-flex G-flex-justify-between G-flex-align-center G-mb-40 G-full-width">
-              <h1 className="G-fs-26 G-full-width">{Settings.translations.cart}</h1>
-              <a className="G-ml-auto P-clear-all" onClick={this.deleteAll}>{Settings.translations.clear_basket}</a>
-            </div>
+        <div className="P-cart-left-box">
+          <div className="P-steps G-mb-30">
+            <p>1</p>
+            <span/>
+            <p className="P-disabled">2</p>
+            <span/>
+            <p className="P-disabled">3</p>
+          </div>
 
-            <div className="G-flex G-flex-justify-between P-cart-block">
-              <div className="G-flex G-flex-column P-basket-products">
-                <Shared.Products.BasketList
-                    onQuantityChange={this.changeCount}
-                    onDeleteBasketItem={this.deleteBasketItem}
-                    data={data.items}
-                />
+          {data ? <>
+            {data.items.length ? <>
+              <div className="G-flex G-flex-justify-between G-flex-align-center G-full-width">
+                <h1 className="G-fs-26 G-full-width">{Settings.translations.cart}</h1>
+                <a className="G-ml-auto P-clear-all" onClick={this.deleteAll}>{Settings.translations.clear_basket}</a>
               </div>
 
-              <div className="P-data-block-wrapper">
-
-                <div className="P-data-block">
-                  <div className="G-mr-40">
-                    <span className="G-fs-normal">{Settings.translations.bonus_count}</span>
-                    <h1 className="G-clr-main G-fs-24 G-mt-5">{data.totalBonus}</h1>
-                  </div>
-
-                  <div>
-                    <span className="G-fs-normal">{Settings.translations.total}</span>
-                    <div className="G-flex G-flex-column G-align-center G-justify-center P-discounted-item">
-                      {!!data.totalDiscountedPrice && data.totalDiscountedPrice !== data.totalPrice &&
-                      <del>{formatPrice(data.totalPrice)}</del>}
-                      <h1
-                          className="G-clr-orange G-fs-24 G-mt-5">{formatPrice(data.totalDiscountedPrice || data.totalPrice)}</h1>
-                    </div>
-                  </div>
-
+              <div className="G-flex G-flex-justify-between P-cart-block">
+                <div className="G-flex G-flex-column P-basket-products">
+                  <Shared.Products.BasketList
+                      onQuantityChange={this.changeCount}
+                      onDeleteBasketItem={this.deleteBasketItem}
+                      data={data.items}
+                  />
                 </div>
+              </div>
 
-                {Storage.profile && <div className="P-data-block-cart">
+
+              {priceNotEnoughModalOpen && <PriceNotEnoughModal onClose={this.togglePriceNotEnoughModal}/>}
+
+              {outOfStockConfirm && <ConfirmModal
+                  title={Settings.translations.out_of_stock}
+                  text={Settings.translations.out_of_stock_delete_confirm}
+                  onConfirm={this.deleteOutOfStock}
+                  onClose={this.closeOutOfStockConfirm}
+              />}
+            </> : <EmptyState
+                animationData={animationData}
+                text={Settings.translations.no_products}
+            />}
+          </> : <PageLoader/>}
+        </div>
+        <div className="P-cart-right-box">
+          {data &&
+            <div className="P-data-block-wrapper">
+
+            <div className="P-data-block G-flex-column">
+              <div className="G-flex G-flex-justify-between G-flex-align-center G-mb-25">
+                <span className="G-fs-normal G-text-bold">{Settings.translations.total}</span>
+                <div className="G-flex G-flex-column G-align-center G-justify-center P-discounted-item">
+                  {!!data.totalDiscountedPrice && data.totalDiscountedPrice !== data.totalPrice &&
+                  <del>{formatPrice(data.totalPrice)}</del>}
+                  <h1
+                      className="G-text-bold G-fs-normal G-mt-5">{formatPrice(data.totalDiscountedPrice || data.totalPrice)}</h1>
+                </div>
+              </div>
+
+              <div className="G-flex G-flex-justify-between G-flex-align-center G-mb-25">
+                <span className="G-fs-normal G-clr-main G-text-bold">{Settings.translations.accumulative_bonus}</span>
+                <h1 className="G-clr-main G-text-bold G-fs-normal G-mt-5">{data.totalBonus} {Settings.translations.point}</h1>
+              </div>
+            </div>
+
+            {Storage.profile && <div className="P-data-block-cart">
                 <span className="P-save-cart" onClick={this.saveCart}>
                   {Settings.translations.save_cart}
                 </span>
-                </div>}
+            </div>}
 
-                <button
-                    className="G-main-button G-ml-auto G-fs-normal P-pay-button"
-                    onClick={this.goToCheckout}
-                >{Settings.translations.pay}</button>
-              </div>
-            </div>
-
-
-            {priceNotEnoughModalOpen && <PriceNotEnoughModal onClose={this.togglePriceNotEnoughModal}/>}
-
-            {outOfStockConfirm && <ConfirmModal
-              title={Settings.translations.out_of_stock}
-              text={Settings.translations.out_of_stock_delete_confirm}
-              onConfirm={this.deleteOutOfStock}
-              onClose={this.closeOutOfStockConfirm}
-            />}
-          </> : <EmptyState
-            animationData={animationData}
-            text={Settings.translations.no_products}
-          />}
-        </> : <PageLoader/>}
+            <button
+                className="G-mt-50 G-main-button G-ml-auto G-fs-normal P-pay-button"
+                onClick={this.goToCheckout}
+            >{Settings.translations.next_step}</button>
+          </div>
+          }
+        </div>
       </section>
     );
   }
