@@ -43,18 +43,17 @@ class List extends HelperComponent<IProps, {}> {
               <span>{item.doctorName}</span>
             </p>
             <p className="G-flex G-flex-justify-between G-mb-10">
-              <span className="G-text-bold">{Settings.translations.prescription}</span>
+              <span className="G-text-bold">{Settings.translations.deciphered_prescription}</span>
               <span>{item.name}</span>
             </p>
-            <p className="G-flex G-flex-justify-between">
-              <span>{Settings.translations.deciphered}</span>
+            <p className="G-flex G-flex-justify-end">
               <span>
-                {item.status === PrescriptionStatusEnum.Success ? <Link
+                {item.status === PrescriptionStatusEnum.Success && <Link
                   to={ROUTES.PROFILE.PRESCRIPTIONS.DECIPHERED.replace(':id', item.id)}
                   className="P-see-more-label"
                 >
                   {Settings.translations.see_more}
-                </Link> : '-'}
+                </Link>}
               </span>
             </p>
 

@@ -115,6 +115,11 @@ class Details extends HelperComponent<RouteComponentProps<IRouteParams>, IState>
                 <span>{formatPrice(data.totalPrice)}</span>
               </p>
 
+              <p className="G-flex G-mb-30 G-flex-justify-between G-fs-20">
+                {Settings.translations.used_bonus}
+                <span>{data.usedBonus}</span>
+              </p>
+
               {!!data.totalBonus && <p className="G-flex G-mb-30 G-flex-justify-between G-fs-20">
                 {Settings.translations.gained_bonus}
                 <span>{data.totalBonus}</span>

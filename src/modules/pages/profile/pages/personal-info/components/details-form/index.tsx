@@ -34,6 +34,7 @@ class DetailsForm extends HelperComponent<{}, IState> {
       firstName: Storage.profile.firstName,
       lastName: Storage.profile.lastName,
       email: Storage.profile.email,
+      phone: Storage.profile.phoneNumber,
       gender: Storage.profile.gender,
       dateOfBirth: Storage.profile.dateOfBirth,
     },
@@ -74,7 +75,7 @@ class DetailsForm extends HelperComponent<{}, IState> {
       });
     });
   }
-  
+
   private isValidDate = (date: moment.Moment) => {
     const invalidDate = new Date();
     const minDate = new Date();
@@ -111,6 +112,15 @@ class DetailsForm extends HelperComponent<{}, IState> {
             value={form.email}
             className={`G-main-input ${this.formValidation.errors.email ? 'G-invalid-field' : ''}`}
             onChange={this.changeField}
+          />
+        </div>
+        <div className="G-main-form-field">
+          <p className="G-input-top-label">{Settings.translations.phone_number}</p>
+          <input
+            name="phone"
+            value={form.phone}
+            className="G-main-input"
+            disabled={true}
           />
         </div>
         <div className="G-main-form-field">
