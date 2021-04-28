@@ -17,6 +17,10 @@ a {
 
   &.P-list-item-box {
     width: 48.5%;
+
+    @media (max-width: $small-screen) {
+      width: 100%;
+    }
   }
 
   @media (max-width: $small-mobile-screen) {

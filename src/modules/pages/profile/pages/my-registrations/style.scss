@@ -43,6 +43,10 @@
 
     .P-list-item {
       width: 48.5%;
+
+      @media (max-width: $tablet-screen) {
+        width: 100%;
+      }
     }
   }
 }

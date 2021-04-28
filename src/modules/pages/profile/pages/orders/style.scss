@@ -7,5 +7,9 @@
 
   & > .P-order-item-box {
     width: 48.5%;
+
+    @media (max-width: $tablet-screen) {
+      width: 100%;
+    }
   }
 }

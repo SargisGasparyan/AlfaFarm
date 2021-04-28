@@ -1,4 +1,4 @@
-import { OrderStatusEnum } from 'platform/api/order/constants/enums';
+import {OrderStatusEnum, PrescriptionsEnum} from 'platform/api/order/constants/enums';
 
 export const statusColorClassNames = {
   [OrderStatusEnum.Pending]: 'G-clr-orange',
@@ -10,4 +10,10 @@ export const statusColorClassNames = {
   [OrderStatusEnum.Delivered]: 'G-clr-main',
   [OrderStatusEnum.Canceled]: 'G-clr-red',
   [OrderStatusEnum.Failed]: 'G-clr-red',
+};
+
+export const statusColorPrescriptionsClassNames = {
+  [PrescriptionsEnum.Delivered]: 'G-clr-green',
+  [PrescriptionsEnum.Failed]: 'G-clr-red',
+  [PrescriptionsEnum.Pending]: 'G-clr-orange',
 };

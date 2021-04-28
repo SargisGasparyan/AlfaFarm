@@ -53,7 +53,7 @@ class Create extends HelperComponent<{}, IState> {
 
   private changeField = (e: React.SyntheticEvent<HTMLTextAreaElement | HTMLInputElement>) => {
     const { form } = this.state;
-    form[e.currentTarget.name] = e.currentTarget.value; 
+    form[e.currentTarget.name] = e.currentTarget.value;
     this.safeSetState({ form });
   }
 
@@ -113,8 +113,8 @@ class Create extends HelperComponent<{}, IState> {
   }
 
   public render() {
-    const { images, imageModalOpen, showSuccess } = this.state;
-    
+    const { images, imageModalOpen, showSuccess, submitLoading } = this.state;
+
     return (
       <Layout>
         <div className="P-profile-prescriptions-create">
@@ -162,7 +162,7 @@ class Create extends HelperComponent<{}, IState> {
               </span>)}
 
               <div className="P-upload-button">
-                <label className="G-main-button">
+                <label className="P-main-button-upload">
                   <i className="icon-Group-5543 G-mr-0" />
                   {Settings.translations.upload_prescription_image}
                   <input
@@ -183,9 +183,10 @@ class Create extends HelperComponent<{}, IState> {
                 onChange={this.changeField}
               />
             </div>
-            
+
             <div className="G-flex G-flex-justify-center G-mt-20">
               <LoaderContent
+                loading={submitLoading}
                 className="P-submit G-main-button"
                 onClick={this.submit}
               >{Settings.translations.send}</LoaderContent>
@@ -193,7 +194,7 @@ class Create extends HelperComponent<{}, IState> {
           </form>
         </div>
 
-        {imageModalOpen && <ImageCarouselModal images={images.map(item => item.url)} onClose={this.toggleImageModal} />}        
+        {imageModalOpen && <ImageCarouselModal images={images.map(item => item.url)} onClose={this.toggleImageModal} />}
 
         {showSuccess && <SuccessModal onClose={this.toggleSuccessModal}>
           <h3>{Settings.translations.prescription_success}</h3>

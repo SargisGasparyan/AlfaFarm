@@ -61,6 +61,10 @@
         }
       }
 
+      @media (max-width: $tablet-screen) {
+        width: 100%;
+      }
+
       > .P-image {
         display: flex;
         align-items: flex-start;

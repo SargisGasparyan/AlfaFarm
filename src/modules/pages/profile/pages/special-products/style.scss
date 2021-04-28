@@ -33,6 +33,10 @@
     text-decoration: none;
     position: relative;
 
+    @media (max-width: $small-screen) {
+      width: 100%;
+    }
+
     @media (max-width: $mobile-screen) {
       * {
         font-size: $small-fs !important;
@@ -102,6 +106,8 @@
       right: 0;
       margin-right: 30px;
       font-size: 26px;
+      top: 12px;
+
       @media (max-width: $mobile-screen) {
         top: 0;
         margin-right: 25px;

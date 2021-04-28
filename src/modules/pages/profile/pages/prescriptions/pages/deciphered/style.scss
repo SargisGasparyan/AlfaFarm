@@ -2,9 +2,6 @@
 @import 'src/assets/styles/variables';
 
 .P-profile-prescriptions-deciphered {
-  display   : flex;
-  flex-wrap : wrap;
-
   > h3 {
     width           : 100%;
     color           : $main-color;

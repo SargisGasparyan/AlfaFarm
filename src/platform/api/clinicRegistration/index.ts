@@ -5,6 +5,7 @@ import {
   IClinicRegistrationListResponseModel,
   IClinicRegistrationDoctorBusyHourResponseModel,
 } from './models/response';
+import Settings from "../../services/settings";
 
 class ClinicRegistrationController {
 
@@ -45,6 +46,16 @@ class ClinicRegistrationController {
       action: '',
       controller: ClinicRegistrationController.controller,
     });
+
+    return result;
+  };
+
+  public static Delete = (id: number): Promise<IResponse<any>> => {
+    const result = Connection.DELETE({
+      body: {registrationIds: id},
+      action: `doctorBusyHours/${id}`,
+      controller: ClinicRegistrationController.controller,
+    }, { text: Settings.translations.delete_credit_card });
 
     return result;
   };

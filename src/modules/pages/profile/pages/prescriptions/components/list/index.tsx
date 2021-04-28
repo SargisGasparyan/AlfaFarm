@@ -10,6 +10,7 @@ import HelperComponent from '../../../../../../../platform/classes/helper-compon
 import { IPrescriptionListResponseModel } from '../../../../../../../platform/api/prescription/models/response';
 import { formatDate, getViewEnum } from '../../../../../../../platform/services/helper';
 import { PrescriptionStatusEnum } from '../../../../../../../platform/api/prescription/constants/enums';
+import {statusColorClassNames, statusColorPrescriptionsClassNames} from "../../../orders/constants";
 
 interface IProps {
   data: IPrescriptionListResponseModel[];
@@ -32,7 +33,7 @@ class List extends HelperComponent<IProps, {}> {
             </p>
             <p className="G-flex G-flex-justify-between G-mb-10">
               <span className="G-text-bold">{Settings.translations.status}</span>
-              <span>{Settings.translations[this.statusViewEnum[item.status]]}</span>
+              <span className={statusColorPrescriptionsClassNames[item.status]}>{Settings.translations[this.statusViewEnum[item.status]]}</span>
             </p>
             <p className="G-flex G-flex-justify-between G-mb-10">
               <span className="G-text-bold">{Settings.translations.medical_institution}</span>

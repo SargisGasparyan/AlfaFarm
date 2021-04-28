@@ -65,7 +65,7 @@ class Deciphered extends HelperComponent<RouteComponentProps<IRouteParams>, ISta
 
     return (
       <Layout>
-        <div className="G-flex G-flex-wrap P-profile-prescriptions-deciphered">
+        <div className="P-profile-prescriptions-deciphered">
           <h3>
             {window.routerHistory.length > 2 && <i className="G-back-icon icon-Group-5529" onClick={this.goBack} />}
             {Settings.translations.deciphered_prescription}

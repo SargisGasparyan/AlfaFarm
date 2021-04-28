@@ -3,6 +3,11 @@
 
 .P-profile-prescriptions-create {
 
+  .P-main-button-upload {
+    cursor: pointer;
+    border-bottom: 1px solid;
+  }
+
   @media (max-width: $mobile-screen) {
     .G-main-form .G-main-form-half-field {
       width: 100%;
