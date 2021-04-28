@@ -1074,6 +1074,7 @@ export default {
   save: "Save",
   save_cart: "Save cart",
   saved_carts: "Saved carts",
+  saved_basket: "Saved Basket",
   default_address: "Default address",
   full_name: "Full Name",
   first_name: "First name",

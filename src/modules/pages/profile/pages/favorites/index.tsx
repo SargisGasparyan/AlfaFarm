@@ -10,7 +10,7 @@ import FavoriteController from 'platform/api/favorite';
 import Settings from 'platform/services/settings';
 import { getMediaPath, formatPrice } from 'platform/services/helper';
 import { IFavoriteListResponseModel } from 'platform/api/favorite/models/response';
-import SavedBaskets from './components/saved-baskets';
+import SavedBaskets from './pages/saved-baskets';
 import SavedBasketItems from './pages/saved-basket-items';
 import EmptyState from 'components/empty-state';
 import * as animationData from 'assets/animations/EmptyFavorite.json';
@@ -58,45 +58,50 @@ class Favorites extends HelperComponent<IState, {}> {
 
     return (
       <Layout>
-        <SavedBaskets/>
-        <div className="G-flex P-profile-favorites">
-          {data ? (data.length ? data.map((item, index) => <Link
-            to={ROUTES.PRODUCTS.DETAILS.replace(':id', item.id)}
-            key={item.id}
-            className="P-list-item G-mb-20"
-          >
-            {!!item.promotion.percent &&
-            <Shared.Products.DiscountLabel percent={item.promotion.percent} type={item.promotion.promotionType}/>}
-            <div
-              className="P-image G-square-image-block"
-              style={{ background: `url('${getMediaPath(item.imagePath)}') center/cover` }}
+        <section className="P-profile-favorites">
+          <h2 className="P-title G-mb-20 G-flex G-flex-justify-between">
+            <p className="P-registrations-title">{Settings.translations.favorites}</p>
+            <p><Link to={ROUTES.PROFILE.FAVORITES.SAVED_BASKET}>{Settings.translations.saved_carts}</Link></p>
+          </h2>
+          <div className="P-list">
+            {data ? (data.length ? data.map((item, index) => <Link
+                to={ROUTES.PRODUCTS.DETAILS.replace(':id', item.id)}
+                key={item.id}
+                className="P-list-item G-mb-20"
             >
-              {!Settings.guest && <i
-                onClick={e => this.toggleFavorite(e, index)}
-                className={`P-favorite ${item.isFavorite ? 'P-active icon-Group-5520' : 'icon-Group-5518'}`}
-              />}
-            </div>
+              {!!item.promotion.percent &&
+              <Shared.Products.DiscountLabel percent={item.promotion.percent} type={item.promotion.promotionType}/>}
+              <div
+                  className="P-image G-square-image-block"
+                  style={{ background: `url('${getMediaPath(item.imagePath)}') center/cover` }}
+              >
+                {!Settings.guest && <i
+                    onClick={e => this.toggleFavorite(e, index)}
+                    className={`P-favorite ${item.isFavorite ? 'P-active icon-Group-5520' : 'icon-Group-5518'}`}
+                />}
+              </div>
 
-            <div className="P-main-info">
-              <p className="P-prod-title">{item.title}</p>
-              <p>{item.unitQuantity} {item.unitName}</p>
-            </div>
+              <div className="P-main-info">
+                <p className="P-prod-title">{item.title}</p>
+                <p>{item.unitQuantity} {item.unitName}</p>
+              </div>
 
-            <div className="P-price">
-              <div>{item.promotion.promotionType === PromotionTypeEnum.Discount && item.promotion.result > 0 ?
-                <del>{formatPrice(item.price)}</del> : null}</div>
-              <h2
-                className={`${item.promotion.promotionType === PromotionTypeEnum.Discount && item.promotion.result ? 'G-clr-orange' : ''}`}>
-                {item.promotion.promotionType === PromotionTypeEnum.Discount ?
-                  formatPrice(item.promotion.result) :
-                  formatPrice(item.price)}
-              </h2>
-            </div>
-          </Link>) : <EmptyState animationData={animationData} text={Settings.translations.empty_favorites_list}/>) : null}
-        </div>
+              <div className="P-price">
+                <div>{item.promotion.promotionType === PromotionTypeEnum.Discount && item.promotion.result > 0 ?
+                    <del>{formatPrice(item.price)}</del> : null}</div>
+                <h2
+                    className={`${item.promotion.promotionType === PromotionTypeEnum.Discount && item.promotion.result ? 'G-clr-orange' : ''}`}>
+                  {item.promotion.promotionType === PromotionTypeEnum.Discount ?
+                      formatPrice(item.promotion.result) :
+                      formatPrice(item.price)}
+                </h2>
+              </div>
+            </Link>) : <EmptyState animationData={animationData} text={Settings.translations.empty_favorites_list}/>) : null}
+          </div>
+        </section>
       </Layout>
     );
   }
 }
 
-export default { Favorites, SavedBasketItems };
+export default { Favorites, SavedBaskets, SavedBasketItems };

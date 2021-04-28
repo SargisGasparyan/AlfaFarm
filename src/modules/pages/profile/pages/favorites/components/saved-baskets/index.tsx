@@ -8,7 +8,7 @@ import ROUTES from 'platform/constants/routes';
 
 import './style.scss';
 
-const SavedBaskets = React.memo(() => {
+const SavedBasket = React.memo(() => {
   const [data, setData] = React.useState<ISavedBasketListResponseModel[] | null>(null);
 
   React.useEffect(() => {
@@ -16,18 +16,18 @@ const SavedBaskets = React.memo(() => {
   }, []);
 
   return data && data.length ? <>
-    <h2 className="G-clr-main G-mb-30">{Settings.translations.saved_carts}</h2>
-    <div className="P-favorites-saved-baskets">
+    <div className="P-favorites-saved-baskets G-flex-justify-between">
       {data.map((item, index) => <Link
         key={item.id}
         to={ROUTES.PROFILE.FAVORITES.SAVED_BASKET_ITEMS.replace(':id', item.id)}
         className="P-list-item"
       >
         <span className="P-index">{index + 1}</span>
-        {Settings.translations.cart}
+        {Settings.translations.saved_basket}
+        <i className="icon-Group-5503 G-fs-26" />
       </Link>)}
     </div>
   </> : null;
 });
 
-export default SavedBaskets;
+export default SavedBasket;

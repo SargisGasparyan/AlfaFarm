@@ -15,6 +15,7 @@ const PROFILE_ROUTES = (() => {
   const FAVORITES_ROUTES = RouteService.buildRouteContext('/profile/favorites', {
     MAIN: '',
     SAVED_BASKET_ITEMS: '/saved-basket-items/:id',
+    SAVED_BASKET: '/saved-baskets',
   });
 
   const PRESCRIPTIONS_ROUTES = RouteService.buildRouteContext('/profile/prescriptions', {

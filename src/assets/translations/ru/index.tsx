@@ -1082,6 +1082,7 @@ export default {
   save: "Сохранить",
   save_cart: "Сохранить корзину",
   saved_carts: "Сохраненные корзины",
+  saved_basket: "Сохраненные корзины",
   default_address: "Адрес по умолчанию",
   full_name: "Полная имя",
   first_name: "Имя",

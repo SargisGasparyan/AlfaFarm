@@ -1120,6 +1120,7 @@ export default {
   wrong_password_length: 'Գաղտնաբառը պետք է պարունակի առնվազն 6 նիշ',
   save_cart: "Պահպանել զամբյուղը",
   saved_carts: "Նախընտրելի զամբյուղներ",
+  saved_basket: "Նախընտրելի զամբյուղներ",
   default_address: "Նախանշված հասցե",
   full_name: "Ամբողջական անունը",
   first_name: "Անուն",
