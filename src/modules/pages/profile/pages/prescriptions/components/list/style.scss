@@ -4,23 +4,3 @@
 a {
   text-decoration: none;
 }
-
-.P-list-item {
-  color: black;
-  padding: 20px;
-  align-items: center;
-  border-bottom: 1px solid $light-gray;
-  text-decoration: none;
-  border-radius: $big-radius;
-  box-shadow: $default-block-shadow;
-  display: unset;
-  width: 48.5%;
-
-  @media (max-width: $small-mobile-screen) {
-    * {
-      font-size: $small-fs !important;
-    }
-  }
-
-
-}
