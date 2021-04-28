@@ -44,36 +44,37 @@ class List extends HelperComponent<{}, IState> {
 
   private fetchData = async (pageNumber: number) => {
     const query = new URLSearchParams(window.location.search);
-    const isPromotionList = query.get('promotion')
+    // const isPromotionList = query.get('promotion')
+    // console.log(pageNumber);
     this.safeSetState({ loading: true });
     const body = {
       ...buildFilters(),
       pageNumber,
       pageSize: this.pageLimitSize,
     };
-    let promotionProductList;
-    let promotionProducts;
+    // let promotionProductList;
+    // let promotionProducts;
 
-    if (body.categoryIds && body.categoryIds.length && !isPromotionList) {
-      const categoryId = body.categoryIds[0];
-      promotionProductList = await ProductController.GetCategoryList(+categoryId, this.pageLimitSize);
-
-      if (promotionProductList.data) {
-        promotionProducts = promotionProductList.data[0].products;
-        body.pageSize = body.pageSize - promotionProducts.length;
-      }
-    }
+    // if (body.categoryIds && body.categoryIds.length && !isPromotionList) {
+    //   const categoryId = body.categoryIds[0];
+    //   promotionProductList = await ProductController.GetCategoryList(+categoryId, this.pageLimitSize);
+    //
+    //   if (promotionProductList.data) {
+    //     promotionProducts = promotionProductList.data[0].products;
+    //     body.pageSize = body.pageSize - promotionProducts.length;
+    //   }
+    // }
 
 
     const result = await ProductController.GetList(body);
 
-    if (promotionProductList) {
-      result.data.totalCount = result.data.totalCount + promotionProducts.length;
-      result.data.list = result.data.list.concat(promotionProducts).reverse();
-
-      query.set('promotion', 'true');
-      window.history.replaceState({ path: window.location.pathname }, '', `?${query}`);
-    }
+    // if (promotionProductList) {
+    //   result.data.totalCount = result.data.totalCount + promotionProducts.length;
+    //   result.data.list = result.data.list.concat(promotionProducts).reverse();
+    //
+    //   query.set('promotion', 'true');
+    //   window.history.replaceState({ path: window.location.pathname }, '', `?${query}`);
+    // }
 
     const preferredProductId = query.get('preferredProductId');
 

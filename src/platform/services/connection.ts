@@ -39,7 +39,7 @@ class Connection {
 
   //? To check the response
   private static responseRestructure = (response: Response, dataAsSuccess?: boolean, withoutError?: boolean): Promise<any> => {
-    (response.status === 401 || response.status === 403) && Settings.logout();
+    // (response.status === 401 || response.status === 403) && Settings.logout();
 
     return new Promise(async resolve => {
       const alertify = await import('alertifyjs');
