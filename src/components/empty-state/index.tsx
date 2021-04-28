@@ -6,6 +6,8 @@ interface IProps {
   buttonText?: string;
   iconClass?: string;
   text: string;
+  height?: number;
+  width?: number;
   animationData: {};
   onClick?(e: React.SyntheticEvent): void;
   animation?: { [key: string]: any };
@@ -13,7 +15,7 @@ interface IProps {
 
 
 
-const EmptyState = React.memo(({ buttonText, text, animationData, onClick }: IProps) => {
+const EmptyState = React.memo(({ buttonText, text, animationData, onClick, height , width }: IProps) => {
   const def = 'default';
 
   const buttonStyle = {
@@ -23,7 +25,7 @@ const EmptyState = React.memo(({ buttonText, text, animationData, onClick }: IPr
 
   const defaultOptions = {
     loop: false,
-    autoplay: true, 
+    autoplay: true,
     animationData: animationData[def],
     rendererSettings: {
       preserveAspectRatio: 'xMidYMid slice'
@@ -33,7 +35,7 @@ const EmptyState = React.memo(({ buttonText, text, animationData, onClick }: IPr
     <div className="P-empty-state">
       <div>
         <div className='P-empty-list'>
-        <Lottie options={defaultOptions} height={150} width={150}/> 
+        <Lottie options={defaultOptions} height={height ? height : 150} width={width ? width : 150}/>
           <p className='P-desc'>{text}</p>
         </div>
         {buttonText && <button onClick={onClick}>{buttonText}</button>}

@@ -112,7 +112,7 @@ class MyWallet extends HelperComponent<{}, IState> {
             </div>)}
 
           {(!list || !list.length) &&
-          <EmptyState animationData={animationData} text={Settings.translations.empty_carts_list}/>}
+          <EmptyState animationData={animationData} height={175} text={Settings.translations.empty_carts_list}/>}
 
         </div>
       </Layout>
