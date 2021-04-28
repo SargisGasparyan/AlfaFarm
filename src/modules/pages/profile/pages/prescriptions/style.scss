@@ -1,13 +1,10 @@
 @import 'src/assets/styles/variables';
 
 .P-profile-prescriptions {
-  display: flex;
-  flex-direction: column;
 
   > .P-content {
+    flex-wrap      : wrap;
     display        : flex;
-    overflow       : hidden;
-    flex-direction : column;
 
     > h3 {
       display     : flex;

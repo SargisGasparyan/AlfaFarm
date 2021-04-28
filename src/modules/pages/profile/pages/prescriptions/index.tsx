@@ -55,7 +55,7 @@ class Prescriptions extends HelperComponent<IState, {}> {
           >+ {Settings.translations.add_prescription}</Link>
         </div>
         <div className="P-profile-prescriptions">
-          <div className="P-content">
+          <div className="P-content G-flex-justify-between">
             {data && data.list.length ? <List
               data={data.list}
             /> : <EmptyState animationData={animationData} text={Settings.translations.empty_prescriptions_list}/>}

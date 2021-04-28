@@ -13,7 +13,7 @@ const Invite = React.memo(() => {
 
   React.useEffect(() => {
     BonusCardController.GetReferralLink().then(result => {
-      result.data && setLink(result.data.link);
+      result.data && result.success && setLink(result.data.link);
     });
   }, []);
 

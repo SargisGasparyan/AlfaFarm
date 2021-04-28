@@ -14,6 +14,7 @@ a {
   border-radius: $big-radius;
   box-shadow: $default-block-shadow;
   display: unset;
+  width: 48.5%;
 
   @media (max-width: $small-mobile-screen) {
     * {
