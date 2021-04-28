@@ -11,6 +11,7 @@ import AuthController from 'platform/api/auth';
 import SocialButton from '../social-button';
 import { SocialProvider } from 'platform/api/auth/constants/enums';
 import environment from 'platform/services/environment';
+import PasswordInput from "../../../../../components/password-input";
 
 interface IProps {
   onTypeChange<ActiveData extends object>(type: ModalContentEnum, activeData?: ActiveData): void;
@@ -106,13 +107,12 @@ class SignIn extends HelperComponent<IProps, IState> {
           <span className='P-error-message' style={{opacity: form.username && this.formValidation.errors.username ? 1 : 0}}>Phone number format is invalid</span>
         </div>
         <div className="G-main-form-field">
-          <input
-            name="password"
-            type="password"
-            value={form.password}
-            placeholder={Settings.translations.password}
-            className={`G-main-input ${this.formValidation.errors.password ? 'G-invalid-field' : ''}`}
-            onChange={this.changeField}
+          <PasswordInput
+              value={form.password}
+              name="password"
+              placeholder={Settings.translations.password}
+              className={`G-main-input ${this.formValidation.errors.password ? 'G-invalid-field' : ''}`}
+              onChange={this.changeField}
           />
         </div>
         <LoaderContent
@@ -121,7 +121,7 @@ class SignIn extends HelperComponent<IProps, IState> {
           onClick={this.submit}
         >{Settings.translations.log_in}</LoaderContent>
       </form>
-      
+
       {!environment.WHOLESALE && <>
         <span className="P-sign-in-restore-password" onClick={this.restorePassword}>{Settings.translations.restore_password}</span>
 

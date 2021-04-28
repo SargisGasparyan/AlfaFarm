@@ -7,6 +7,7 @@ import { countryCode } from 'platform/constants';
 import Storage from 'platform/services/storage';
 import { validateForm, ChangePasswordForm } from './services/helper';
 import UserController from 'platform/api/user';
+import PasswordInput from "../../../../../../../components/password-input";
 
 interface IState {
   form: ChangePasswordForm;
@@ -47,7 +48,7 @@ class PasswordForm extends HelperComponent<{}, IState> {
         this.safeSetState({ submitLoading: true }, async () => {
           const form = {...this.state.form};
           const result = await UserController.ChangePassword(form);
-          
+
           if (!!result.data) {
             alertify.success('Password was changed successfully');
             form.newPassword = '';
@@ -68,32 +69,29 @@ class PasswordForm extends HelperComponent<{}, IState> {
       <form className="G-main-form P-form-block G-mr-20">
         <div className="G-main-form-field">
           <p className="G-input-top-label">{Settings.translations.current_password}</p>
-          <input
-            type="password"
-            name="currentPassword"
-            value={form.currentPassword}
-            className={`G-main-input ${this.formValidation.errors.currentPassword ? 'G-invalid-field' : ''}`}
-            onChange={this.changeField}
+          <PasswordInput
+              value={form.currentPassword}
+              name="currentPassword"
+              className={`G-main-input ${this.formValidation.errors.currentPassword ? 'G-invalid-field' : ''}`}
+              onChange={this.changeField}
           />
         </div>
         <div className="G-main-form-field">
           <p className="G-input-top-label">{Settings.translations.new_password}</p>
-          <input
-            type="password"
-            name="newPassword"
-            value={form.newPassword}
-            className={`G-main-input ${this.formValidation.errors.newPassword ? 'G-invalid-field' : ''}`}
-            onChange={this.changeField}
+          <PasswordInput
+              value={form.newPassword}
+              name="newPassword"
+              className={`G-main-input ${this.formValidation.errors.newPassword ? 'G-invalid-field' : ''}`}
+              onChange={this.changeField}
           />
         </div>
         <div className="G-main-form-field">
           <p className="G-input-top-label">{Settings.translations.confirm_new_password}</p>
-          <input
-            type="password"
-            name="confirmPassword"
-            value={form.confirmPassword}
-            className={`G-main-input ${this.formValidation.errors.confirmPassword ? 'G-invalid-field' : ''}`}
-            onChange={this.changeField}
+          <PasswordInput
+              value={form.confirmPassword}
+              name="confirmPassword"
+              className={`G-main-input ${this.formValidation.errors.confirmPassword ? 'G-invalid-field' : ''}`}
+              onChange={this.changeField}
           />
         </div>
         {edited && <LoaderContent

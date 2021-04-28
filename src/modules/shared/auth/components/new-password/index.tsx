@@ -7,6 +7,7 @@ import { IRecoveryRequestModel } from 'platform/api/auth/models/request';
 import { validateForm } from './services/helper';
 import AuthController from 'platform/api/auth';
 import { ModalContentEnum } from '../../constants/enums';
+import PasswordInput from "../../../../../components/password-input";
 
 interface IProps {
   onTypeChange(type: ModalContentEnum): void;
@@ -59,13 +60,12 @@ class NewPassword extends HelperComponent<IProps, IState> {
       <h3 className="G-clr-main G-text-center">{Settings.translations.choose_password}</h3>
       <form className="G-main-form">
         <div className="G-main-form-field">
-          <input
-            type="password"
-            name="newPassword"
-            value={form.newPassword}
-            placeholder={Settings.translations.password}
-            onChange={this.changeField}
-            className={`G-main-input ${this.formValidation.errors.newPassword ? 'G-invalid-field' : ''}`}
+          <PasswordInput
+              value={form.newPassword}
+              name="newPassword"
+              placeholder={Settings.translations.password}
+              className={`G-main-input ${this.formValidation.errors.newPassword ? 'G-invalid-field' : ''}`}
+              onChange={this.changeField}
           />
         </div>
         <LoaderContent

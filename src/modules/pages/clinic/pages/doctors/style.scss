@@ -4,10 +4,10 @@
 .G-page.P-clinic-doctors-page {
   padding : 0 0 160px 0;
 
-  .P-search-input {  
-    justify-content: flex-end;  
+  .P-search-input {
+    justify-content: flex-end;
     > input {
-      width: 50%;
+      width: 20%;
     }
   }
 
@@ -85,17 +85,17 @@
 
         > .P-data-table {
           width : 100%;
-  
+
           > .P-data-table-header {
             height        : 50px;
             padding       : 0 10px;
             background    : none;
-            border-bottom : 1px solid $light-gray; 
+            border-bottom : 1px solid $light-gray;
           }
-    
+
           > .P-data-table-body > ul {
             padding-right : 0;
-  
+
             > li, > li > div { padding-right: 0; }
           }
         }

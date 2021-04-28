@@ -14,6 +14,7 @@ import { formatDate } from 'platform/services/helper';
 import { Moment } from 'moment';
 import { IDropdownOption } from 'platform/constants/interfaces';
 import { isCallChain } from 'typescript';
+import PasswordInput from "../../../../../components/password-input";
 
 
 interface IProps {
@@ -131,23 +132,21 @@ class SignUp extends HelperComponent<IProps, IState> {
           />
         </div>
         <div className="G-main-form-field">
-          <input
-            type="password"
-            name="password"
-            value={form.password}
-            placeholder={Settings.translations.password}
-            onChange={this.changeField}
-            className={`G-main-input ${this.formValidation.errors.password ? 'G-invalid-field' : ''}`}
+          <PasswordInput
+              value={form.password}
+              name="password"
+              placeholder={Settings.translations.password}
+              className={`G-main-input ${this.formValidation.errors.password ? 'G-invalid-field' : ''}`}
+              onChange={this.changeField}
           />
         </div>
         <div className="G-main-form-field">
-          <input
-            type="password"
-            name="confirmPassword"
-            value={form.confirmPassword}
-            placeholder={Settings.translations.confirm_password}
-            onChange={this.changeField}
-            className={`G-main-input ${this.formValidation.errors.confirmPassword ? 'G-invalid-field' : ''}`}
+          <PasswordInput
+              value={form.confirmPassword}
+              name="confirmPassword"
+              placeholder={Settings.translations.confirm_password}
+              className={`G-main-input ${this.formValidation.errors.confirmPassword ? 'G-invalid-field' : ''}`}
+              onChange={this.changeField}
           />
         </div>
         <LoaderContent

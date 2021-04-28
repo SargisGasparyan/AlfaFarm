@@ -19,7 +19,7 @@ const List = React.memo(({ data }: IProps) => {
   return (
     <div className="G-flex P-order-item">
       {data ? (data.length ? data.map((item, index) => <Link
-        to={ROUTES.PRODUCTS.DETAILS.replace(':id', item.id)}
+        to={ROUTES.PRODUCTS.DETAILS.replace(':id', item.productId)}
         key={item.id}
         className="P-list-item"
       >

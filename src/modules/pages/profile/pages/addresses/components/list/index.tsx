@@ -26,8 +26,8 @@ class List extends HelperComponent<IProps, {}> {
       {data && data.map((item: IUserAddressListResponseModel, index: number) =>
         <div className="P-list-item P-list-item-box  G-my-20" key={index}>
           <div className="P-address-action G-flex G-flex-justify-between">
-            {item.isDefault && <p>
-              <img className="P-done-icon" src={DoneImage}/>
+            {item.isDefault && <p className="G-flex">
+              <img className="P-done-icon G-mr-10" src={DoneImage}/>
               <span className="G-clr-main"> {Settings.translations.default}
               </span>
             </p>}
