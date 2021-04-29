@@ -176,10 +176,10 @@ class Checkout extends HelperComponent<{}, IState> {
 
     private bonusChange = (e: React.SyntheticEvent<HTMLInputElement>) => {
         const {form} = this.state;
-        form.usedBonus = +e.currentTarget.value;
+        form.usingBonus = +e.currentTarget.value;
 
         Connection.AbortAll();
-        this.safeSetState({form}, () => this.getResultInfo(form.usedBonus));
+        this.safeSetState({form}, () => this.getResultInfo(form.usingBonus));
     };
 
 
@@ -313,9 +313,9 @@ class Checkout extends HelperComponent<{}, IState> {
         const {isUsingBonus, form} = this.state;
 
         if (isUsingBonus) {
-            form.usedBonus = 0;
+            form.usingBonus = 0;
             Connection.AbortAll();
-            this.safeSetState({form}, () => this.getResultInfo(form.usedBonus));
+            this.safeSetState({form}, () => this.getResultInfo(form.usingBonus));
         }
 
         this.safeSetState({isUsingBonus: !isUsingBonus});
@@ -585,7 +585,7 @@ class Checkout extends HelperComponent<{}, IState> {
                                     className="G-ml-auto G-text-bold G-clr-orange">{bonusDetails.bonusCardDetails.amount}</span>
                                 <NumberInput
                                     max={Math.min(initialTotalDiscountedPrice, bonusDetails.bonusCardDetails.amount)}
-                                    value={form.usedBonus || ''}
+                                    value={form.usingBonus || ''}
                                     className="G-main-input G-full-width G-mt-20"
                                     onChange={this.bonusChange}
                                 />
@@ -597,9 +597,9 @@ class Checkout extends HelperComponent<{}, IState> {
                                 <span className="G-text-semi-bold">{formatPrice(resultInfo.totalDiscountedPrice)}</span></h3>
                             <h3 className="G-clr-green G-text-semi-bold G-mb-25 G-mt-10 G-flex G-flex-justify-between">{Settings.translations.bonus}
                                 <span className="G-clr-green G-text-semi-bold">{resultInfo.receivedBonus} {Settings.translations.point}</span></h3>
-                            {!!form.usedBonus &&
+                            {!!form.usingBonus &&
                             <h3 className="G-text-semi-bold G-mb-25 G-mt-10 G-flex G-flex-justify-between">{Settings.translations.used_bonus}
-                                <span className="G-text-semi-bold">{form.usedBonus}</span></h3>}
+                                <span className="G-text-semi-bold">{form.usingBonus}</span></h3>}
                             <h3 className="G-text-semi-bold G-mb-25 G-mt-10 G-flex G-flex-justify-between">{Settings.translations.delivery}
                                 <span className="G-text-semi-bold">{formatPrice(resultInfo.deliveryFee)}</span></h3>
                             <h2 className="G-mt-10 G-flex G-fs-22 G-flex-justify-between G-clr-orange">{Settings.translations.total}
