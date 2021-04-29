@@ -374,7 +374,7 @@
     margin : 40px auto 0;
 
     > .G-main-button {
-      width  : 350px;
+      width  : 100%;
       margin : 0 auto 20px;
       @media (max-width: $mobile-screen) {
         width: 100%;
@@ -389,14 +389,18 @@
     }
     > div {
       margin-bottom : 30px;
+      width: 30%;
 
+      @media (max-width: $small-screen) {
+        width: 100%;
+      }
     }
 
     img {
       height: 20px;
     }
 
-    @media (max-width: $tablet-screen) {
+    @media (max-width: $small-screen) {
       flex-direction: column;
     }
   }
