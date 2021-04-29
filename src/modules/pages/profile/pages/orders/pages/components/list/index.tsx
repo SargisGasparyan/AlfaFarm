@@ -2,7 +2,6 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 
 import { Shared } from 'modules';
-import HelperComponent from 'platform/classes/helper-component';
 import ROUTES from 'platform/constants/routes';
 import { getMediaPath, formatPrice } from 'platform/services/helper';
 import { IBasketListResponseModel } from 'platform/api/basket/models/response';

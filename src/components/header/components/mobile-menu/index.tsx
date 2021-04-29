@@ -127,14 +127,15 @@ class MobileMenu extends HelperComponent<IProps, IState> {
               {this.options.map(item => <NavLink
                 to={item.path}
                 key={item.path}
-                {...this.navLinkProps}
+                className={'P-link ' + item.className}
+                activeClassName="P-active"
                 onClick={onClose}
               >
                 {item.name}
               </NavLink>)}
             </div>}
 
-            {Storage.profile && <div onClick={this.logout} className="P-link">
+            {Storage.profile && <div onClick={this.logout} className="P-link P-icon-logout">
               {Settings.translations.log_out}
             </div>}
           </div>

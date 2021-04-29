@@ -67,4 +67,123 @@
       }
     }
   }
+
+  .P-order-item {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    > .P-list-item {
+      color: black;
+      width: 48.5%;
+      padding: 23px 20px;
+      display: flex;
+      box-shadow: $default-block-shadow;
+      background: white;
+      align-items: center;
+      border-radius: $big-radius;
+      margin-bottom: 20px;
+      justify-content: space-between;
+      text-decoration: none;
+      position: relative;
+
+      @media (max-width: $small-screen) {
+        width: 100%;
+      }
+
+      @media (max-width: $mobile-screen) {
+        * {
+          font-size: $small-fs !important;
+        }
+      }
+
+      .P-quantity {
+        width: 40px
+      }
+
+      > .P-image {
+        display: flex;
+        box-shadow: none;
+        align-items: flex-start;
+        justify-content: flex-end;
+
+        &.G-square-image-block {
+          @media (max-width: $mobile-screen) {
+            min-width: 50px;
+            max-width: 50px;
+            min-height: 90px;
+            max-height: 90px;
+          }
+        }
+      }
+
+      > .P-main-info {
+        margin: 0 185px 0 20px;
+
+        @media (max-width: $mobile-screen) {
+          margin-right: 50px;
+        }
+
+        .P-prod-date {
+          @media (max-width: $small-mobile-screen) {
+            display: flex;
+            flex-direction: column;
+          }
+        }
+
+        .P-prod-title {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          font-size: $normal-fs;
+          font-weight: bold;
+          margin-bottom: 20px;
+          /* autoprefixer: off */
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          display: -webkit-box;
+          /* autoprefixer: off */
+        }
+      }
+
+
+      .P-price {
+        font-size: $normal-fs;
+        font-weight: bold;
+        position: absolute;
+        right: 0;
+        margin-right: 70px;
+        @media (max-width: $mobile-screen) {
+          bottom: 0;
+          margin-right: 25px;
+          margin-bottom: 10px;
+        }
+      }
+
+      .P-edit-icon {
+        position: absolute;
+        right: 0;
+        margin-right: 30px;
+        font-size: 26px;
+        top: 12px;
+
+        @media (max-width: $mobile-screen) {
+          top: 0;
+          margin-right: 25px;
+          margin-top: 10px;
+          * {
+            font-size: $normal-fs !important;
+          }
+        }
+
+        &.P-disabled {
+          cursor: not-allowed;
+          opacity: .3;
+
+          > i {
+            color: black;
+          }
+        }
+      }
+    }
+  }
 }
