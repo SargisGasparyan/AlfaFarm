@@ -34,12 +34,22 @@
       line-height     : 1.2;
       text-align      : center;
       cursor          : pointer;
-      font-size       : 30px;
+      font-size       : 30px !important;
       background      : white;
       margin-right    : 15px;
       border-radius   : 50%;
       text-overflow   : ellipsis;
       box-shadow      : 0 0 10px rgba(73,183,72,0.45);
+    }
+
+    > i {
+      font-size: 26px !important;
+    }
+
+
+    @media (max-width: $tablet-screen) {
+      width : 100%;
+      margin-right: 7px;
     }
   }
 }

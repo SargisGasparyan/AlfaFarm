@@ -20,6 +20,7 @@ import EmptyState from 'components/empty-state';
 import * as animationData from 'assets/animations/EmptyRegistrations.json';
 
 import './style.scss';
+import PaymentController from "../../../../../platform/api/payment";
 
 interface IState {
   data?: IPagingResponse<IClinicRegistrationListResponseModel>;
@@ -43,6 +44,19 @@ class MyRegistrations extends HelperComponent<IState, {}> {
     return result.data;
   };
 
+  private remove = (id: number) => {
+    this.deleteAppointement(id)
+  };
+
+  private deleteAppointement = async (id: number) => {
+    const res = await ClinicRegistrationController.Delete(id);
+
+    if (res && res.success) {
+      await this.fetchData(1);
+    }
+  }
+
+
   public render() {
     const { data } = this.state;
 
@@ -54,7 +68,7 @@ class MyRegistrations extends HelperComponent<IState, {}> {
             <p><Link to={ROUTES.PROFILE.MY_REGISTRATIONS.MEDICAL_HISTORY}>{Settings.translations.medical_history}</Link></p>
           </h2>
           <div className="G-flex P-list">
-            {data ? (data.list.length ? <List data={data.list}/> :
+            {data ? (data.list.length ? <List data={data.list} remove={this.remove} /> :
               <EmptyState animationData={animationData} text={Settings.translations.empty_registrations_list}/>) : null}
           </div>
           <Pagination<IClinicRegistrationListResponseModel> fetchData={this.fetchData}/>

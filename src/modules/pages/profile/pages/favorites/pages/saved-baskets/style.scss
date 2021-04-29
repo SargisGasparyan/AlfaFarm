@@ -7,11 +7,11 @@
     margin-bottom : 60px;
     @include normal-font;
 
-    @media (max-width: $small-mobile-screen) {
-      * {
-        font-size: $small-fs !important;
-      }
-    }
+    //@media (max-width: $small-mobile-screen) {
+    //  * {
+    //    font-size: $small-fs !important;
+    //  }
+    //}
 
     @media (min-width: $small-mobile-screen) {
       justify-content: unset;

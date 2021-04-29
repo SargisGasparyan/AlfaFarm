@@ -21,10 +21,14 @@
   }
 
   > .P-sign-in-restore-password {
-    color      : black;
+    color      : $green;
     margin     : 5px 0 0 auto;
     cursor     : pointer;
     text-align : right;
+
+    @media (max-width : $mobile-screen) {
+      margin: 20px auto 0;
+    }
   }
 
   > .P-sign-in-register-text {

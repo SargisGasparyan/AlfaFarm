@@ -1,6 +1,16 @@
 @import 'src/assets/styles/helper';
 @import 'src/assets/styles/variables';
 
+.P-wallet-title-box {
+
+  @media (max-width: $mobile-screen) {
+    flex-direction: column;
+
+    .G-page-title-left {
+      margin-bottom: 20px;
+    }
+  }
+}
 .P-cards-page {
   display         : flex;
   flex-direction  : row;
@@ -36,13 +46,13 @@
     width             : 355px;
     height            : 196px;
     padding           : 24px 35px;
-    background-size   : cover;
     background-repeat : no-repeat;
     position          : relative;
     display           : flex;
     flex-direction    : column;
     justify-content   : space-between;
     margin            : 10px;
+    background-size   : contain;
 
     .P-remove {
       color      : #FFFFFF;

@@ -47,7 +47,7 @@ class Prescriptions extends HelperComponent<IState, {}> {
 
     return (
       <Layout>
-        <div className="G-flex G-flex-justify-end G-mb-30 G-flex-align-center">
+        <div className="P-prescription-title-box G-flex G-flex-justify-end G-mb-30 G-flex-align-center">
           <h2 className="G-clr-main">{Settings.translations.prescriptions}</h2>
           <Link
               to={ROUTES.PROFILE.PRESCRIPTIONS.CREATE}

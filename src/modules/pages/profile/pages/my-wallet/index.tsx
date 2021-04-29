@@ -78,7 +78,7 @@ class MyWallet extends HelperComponent<{}, IState> {
     const { list } = this.state;
     return (
       <Layout>
-        <div className="G-flex G-flex-align-center G-flex-justify-between G-mb-30">
+        <div className="P-wallet-title-box G-flex G-flex-align-center G-flex-justify-between G-mb-30">
           <h3 className="G-page-title-left">{Settings.translations.my_wallet}</h3>
           <button onClick={this.createCard} className="G-main-button">{Settings.translations.add_credit_card}</button>
         </div>

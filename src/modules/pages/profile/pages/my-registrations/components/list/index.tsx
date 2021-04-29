@@ -10,14 +10,17 @@ import { OrderStatusEnum } from '../../../../../../../platform/api/order/constan
 
 interface IProps {
   data: IClinicRegistrationListResponseModel[];
+  remove(id: number): void;
 };
 
-const List = React.memo(({ data }: IProps) => {
+const List = React.memo(({ data, remove }: IProps) => {
   const statusViewEnum = getViewEnum(OrderStatusEnum);
 
     return (<>
       {data && data.map((item: IClinicRegistrationListResponseModel, index: number) =>
         <div className="P-list-item  G-mb-40" key={index}>
+          <i className="G-cursor-pointer G-fs-18 P-remove"
+             onClick={() => remove(item.id)}/>
           <p className="G-flex G-flex-justify-between G-mb-10">
             <span className="G-text-bold P-info-title">
               {Settings.translations.service}

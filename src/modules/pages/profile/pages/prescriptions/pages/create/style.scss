@@ -8,22 +8,6 @@
     border-bottom: 1px solid;
   }
 
-  @media (max-width: $mobile-screen) {
-    .G-main-form .G-main-form-half-field {
-      width: 100%;
-    }
-
-    * {
-      font-size: $small-fs !important;
-    }
-  }
-
-  @media (max-width: $small-mobile-screen) {
-    h3 {
-      margin-bottom: 30px !important;
-    }
-  }
-
 
   > h3 {
     width           : 100%;
@@ -123,6 +107,19 @@
       @media (max-width: $mobile-screen) {
         width: 100%;
       }
+    }
+  }
+
+  @media (max-width: $mobile-screen) {
+    .G-main-form .G-main-form-half-field {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: $mobile-screen) {
+    h3 {
+      font-size: 24px;
+      margin-bottom: 30px;
     }
   }
 }

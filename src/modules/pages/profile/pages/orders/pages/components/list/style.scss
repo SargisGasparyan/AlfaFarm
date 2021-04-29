@@ -1,9 +1,14 @@
+@import 'src/assets/styles/variables';
 .P-change-type {
   background   : none;
   border       : none;
   position     : absolute;
   margin-top   : 18px;
   margin-left  : -40px;
+
+  @media (max-width : $mobile-screen) {
+    margin-top : 9px;
+  }
 
   img {
     width  : 20px;

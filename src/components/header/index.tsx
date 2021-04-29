@@ -372,11 +372,9 @@ class Header extends HelperComponent<{}, IState> {
           onClick={this.toggleAuth}
           className="P-link P-login"
         >{Settings.translations.log_in}</span>}
-        {Storage.profile &&
-          <a onClick={this.showMobileSearch} className="P-link P-icon G-normal-link P-notification">
-            <i className="icon-Group-5502"/>
-          </a>
-        }
+        <a onClick={this.showMobileSearch} className="P-link P-icon G-normal-link P-notification">
+          <i className="icon-Group-5502"/>
+        </a>
         {mobileSearchOpen &&
           <div className="P-search-wrapper-mobile">
             <SearchInput

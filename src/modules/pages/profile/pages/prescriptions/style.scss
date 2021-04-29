@@ -1,5 +1,16 @@
 @import 'src/assets/styles/variables';
 
+.P-prescription-title-box {
+
+  @media (max-width: $mobile-screen) {
+    flex-direction: column;
+
+    > .G-main-button {
+      margin: 20px auto auto;
+    }
+  }
+}
+
 .P-profile-prescriptions {
 
   > .P-content {
@@ -30,9 +41,14 @@
     display: unset;
     width: 48.5%;
 
+    @media (max-width : $mobile-screen) {
+      width:100%;
+    }
+
+
     @media (max-width: $small-mobile-screen) {
       * {
-        font-size: $small-fs !important;
+        font-size: 16px !important;
       }
     }
   }
