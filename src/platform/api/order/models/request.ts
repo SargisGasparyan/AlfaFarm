@@ -9,7 +9,7 @@ export interface IOrderCreateRequestModel {
   addressText?: string;
   addressLat?: number;
   creditCardId?: number;
-  usingBonus?: number;
+  useBonusAmount?: number;
   addressLng?: number;
   addressBuilding?: string;
   addressEntrance?: string;
