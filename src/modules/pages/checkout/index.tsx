@@ -531,7 +531,7 @@ class Checkout extends HelperComponent<{}, IState> {
                                             placeholder={Settings.translations.choose_pharmacy}
                                             onClick={this.openPharmacyChoose}
                                         />
-                                        <img src={LocationImage} className="P-location-image" alt=""/>
+                                        <img src={LocationImage} onClick={this.openPharmacyChoose} className="G-cursor-pointer P-location-image" alt=""/>
                                     </div>}
 
                                     <div className="G-main-form-field P-comment-field">
