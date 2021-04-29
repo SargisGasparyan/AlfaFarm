@@ -15,10 +15,12 @@ import { Shared } from 'modules';
 import './style.scss';
 import EmptyState from 'components/empty-state';
 import * as animationData from 'assets/animations/EmptyBaskets.json';
+import * as loadingData from 'assets/animations/loading.json';
 
 interface IState {
   data?: IBasketListResponseModel[];
   inProgress: boolean;
+  isLoading: boolean;
 };
 
 interface IRouteParams {
@@ -31,6 +33,7 @@ class SavedBasketItems extends HelperComponent<RouteComponentProps<IRouteParams>
 
   public state: IState = {
     inProgress: false,
+    isLoading: true,
   };
 
   public componentDidMount() {
@@ -40,7 +43,7 @@ class SavedBasketItems extends HelperComponent<RouteComponentProps<IRouteParams>
   private fetchData = async () => {
     const { id } = this.props.match.params;
     const result = await BasketController.GetSavedItemsList(+id);
-    this.safeSetState({ data: result.data.items });
+    this.safeSetState({ data: result.data.items, isLoading: false });
   }
 
   private deleteSaved = async () => {
@@ -81,7 +84,7 @@ class SavedBasketItems extends HelperComponent<RouteComponentProps<IRouteParams>
   }
 
   public render() {
-    const { data } = this.state;
+    const { data, isLoading } = this.state;
 
     return (
       <Layout>
@@ -94,7 +97,7 @@ class SavedBasketItems extends HelperComponent<RouteComponentProps<IRouteParams>
             <button className="G-main-button G-ml-20" onClick={this.buy}>{Settings.translations.buy}</button>
           </div>
 
-        </div> : <EmptyState animationData={animationData} text={Settings.translations.no_products} />)
+        </div> : <EmptyState animationData={isLoading ? loadingData : animationData} text={isLoading ? '' : Settings.translations.no_products} />)
          : <PageLoader />}
       </Layout>
     );

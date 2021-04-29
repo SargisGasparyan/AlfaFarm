@@ -18,10 +18,12 @@ import Details from './pages/details';
 import './style.scss';
 import EmptyState from 'components/empty-state';
 import * as animationData from 'assets/animations/EmptyBlog.json';
+import * as loadingData from 'assets/animations/loading.json';
 
 interface IState {
   data?: IBlogListResponseModel[];
   loading: boolean;
+  isLoading: boolean;
 };
 
 @byRoute([ROUTES.BLOG.MAIN])
@@ -29,6 +31,7 @@ class Blog extends HelperComponent<{}, IState> {
 
   public state: IState = {
     loading: false,
+    isLoading: true,
   };
 
   private pageNo = 1;
@@ -56,12 +59,12 @@ class Blog extends HelperComponent<{}, IState> {
 
       this.safeSetState({ data: overwrite ? result.data.list : [...data, ...result.data.list], loading: false });
       this.lastPage = result.data.pageCount === this.pageNo;
-    } else this.safeSetState({ loading: false });
+    } else this.safeSetState({ loading: false, isLoading: false });
   });
 
   private scroll = () => {
     const { loading } = this.state;
-    
+
     if (!this.lastPage && scrolledToBottom() && !loading) {
       this.pageNo += 1;
       this.fetchData();
@@ -69,7 +72,7 @@ class Blog extends HelperComponent<{}, IState> {
   }
 
   public render() {
-    const { data } = this.state;
+    const { data, isLoading } = this.state;
     const firstItem = data && data.length ? data[0] : null;
     const sortedData = data ? data.slice(1) : null;
 
@@ -78,10 +81,10 @@ class Blog extends HelperComponent<{}, IState> {
         {sortedData ? <>
           {!!sortedData.length && firstItem && <ShadowText className="G-page-title">{Settings.translations.blog}</ShadowText>}
           {firstItem && <FirstItem data={firstItem} />}
-          
+
           {!!sortedData.length && firstItem ? <div className="P-list-wrapper">
             {sortedData.map(item => <ListItem key={item.id} data={item} />)}
-          </div> : <EmptyState animationData={animationData} text={Settings.translations.empty_blogs_list} />}
+          </div> : <EmptyState animationData={isLoading ? loadingData : animationData} text={isLoading ? '' : Settings.translations.empty_blogs_list} />}
         </> : <PageLoader />}
       </section>
     );

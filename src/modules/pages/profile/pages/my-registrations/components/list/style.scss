@@ -1,15 +1,18 @@
 @import '../../../../../../../assets/styles/helper';
 @import '../../../../../../../assets/styles/variables';
 
-.P-list-item {
+.P-list-item-appointment {
   color: black;
-  padding: 20px;
+  padding: 40px 30px;
   align-items: center;
   border-bottom: 1px solid $light-gray;
   text-decoration: none;
   border-radius: $big-radius;
   box-shadow: $default-block-shadow;
   display: unset;
+  width: 48.5%;
+  position: relative;
+  font-size: 18px;
 
   @media (max-width: $small-mobile-screen) {
     * {
@@ -19,5 +22,25 @@
 
   .P-info-title {
    word-break: keep-all;
+  }
+
+  .P-appointment-cancel {
+    position: absolute;
+    right: 30px;
+    top: 10px;
+    color: $green;
+    cursor: pointer;
+    border-bottom: 1px solid $green;
+    visibility: hidden;
+    opacity: 0;
+    transition: all .3s;
+  }
+
+  &:hover {
+
+    .P-appointment-cancel {
+      visibility: visible;
+      opacity: 1;
+    }
   }
 }

@@ -50,12 +50,15 @@ class ClinicRegistrationController {
     return result;
   };
 
-  public static Delete = (id: number): Promise<IResponse<any>> => {
-    const result = Connection.DELETE({
-      body: {registrationIds: id},
-      action: `doctorBusyHours/${id}`,
+  public static Cancel = (id: number): Promise<IResponse<any>> => {
+    const result = Connection.PUT({
+      body: {},
+      action: `Cancel/${id}`,
       controller: ClinicRegistrationController.controller,
-    }, { text: Settings.translations.delete_credit_card });
+    }, {
+      title: Settings.translations.appointments_cancel,
+      text: Settings.translations.appointments_cancel_text
+    });
 
     return result;
   };

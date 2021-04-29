@@ -6,19 +6,19 @@ import { byPrivateRoute } from 'platform/decorators/routes';
 import ROUTES from 'platform/constants/routes';
 import Layout from '../../components/layout';
 import Settings from 'platform/services/settings';
-import Table from 'components/table';
 import List from './components/list';
 import { IUserAddressListResponseModel } from 'platform/api/userAddress/models/response';
 import UserAddressController from 'platform/api/userAddress';
 import Modify from './pages/modify';
 import { onlyForUsers } from 'platform/guards/routes';
 import EmptyState from 'components/empty-state';
-import DoneImage from 'assets/images/done.svg';
 import * as animationData from 'assets/animations/EmptyAddresses.json';
+import * as loadingData from 'assets/animations/loading.json';
 import './style.scss';
 
 interface IState {
   data: IUserAddressListResponseModel[] | null;
+  isLoading: boolean;
 };
 
 @byPrivateRoute(ROUTES.PROFILE.ADDRESSES.MAIN, [onlyForUsers])
@@ -26,6 +26,7 @@ class Addresses extends HelperComponent<IState, {}> {
 
   public state: IState = {
     data: null,
+    isLoading: true,
   };
 
 
@@ -34,7 +35,7 @@ class Addresses extends HelperComponent<IState, {}> {
 
   private fetchData = async () => {
     const result = await UserAddressController.GetList();
-    this.safeSetState({ data: result.data });
+    this.safeSetState({ data: result.data, isLoading: false });
   }
 
   private makeDefault = async (id: number) => {
@@ -49,7 +50,7 @@ class Addresses extends HelperComponent<IState, {}> {
 
 
   public render() {
-    const { data } = this.state;
+    const { data, isLoading } = this.state;
     return (
       <Layout>
         <div className="G-flex G-flex-justify-end G-mb-30 G-flex-align-center">
@@ -65,7 +66,7 @@ class Addresses extends HelperComponent<IState, {}> {
             onRemove={(id: number) => this.deleteRow(id)}
             data={data}
           />
-        </div> : <EmptyState animationData={animationData} text={Settings.translations.empty_address_list} />) : null}
+        </div> : <EmptyState animationData={isLoading ? loadingData : animationData} text={isLoading ? '' : Settings.translations.empty_address_list} />) : null}
       </Layout>
     );
   }

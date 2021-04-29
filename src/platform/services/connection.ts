@@ -84,26 +84,51 @@ class Connection {
   }
 
   //? PUT request
-  public static PUT = async <Body>(data: IBodyRequest<Body>): Promise<any> => {
+  public static PUT = async <Body>(data: IBodyRequest<Body>, confirmProps?: IConfirmModalProps): Promise<any> => {
     const abort = new AbortController();
-    const { controller, action, body, query, noneJSONBody } = data;
-    const onlyQuery: boolean = (!action && query) as boolean;
-    const HEADERS = Connection.createHeaders(noneJSONBody as boolean);
-    !data.unabortable && window.abortableRequests.push(abort);
-    try {
-      const response: Response = await fetch(`${environment.BASE_URL}api/${controller}${!onlyQuery ? '/' : ''}${action}${query ? `?${Connection.queryFromObject(query)}` : ''}`, {
-        body: noneJSONBody ? body as any : JSON.stringify(body),
-        method: 'PUT',
-        headers: HEADERS,
-        signal: abort.signal,
-      });
+    const { controller, action, body, query, noneJSONBody, withoutConfirmModal } = data;
 
-      !data.unabortable && window.abortableRequests.splice(window.abortableRequests.indexOf(abort), 1);
-      return Connection.responseRestructure(response);
-    } catch (e) {
-      !data.unabortable && window.abortableRequests.splice(window.abortableRequests.indexOf(abort), 1);
-      return { aborted: true };
-    }
+    return new Promise(resolve => {
+      const userCanceled = async () => {
+        resolve(false);
+        window.removeEventListener(DispatcherChannels.UserCanceled, userCanceled);
+        window.removeEventListener(DispatcherChannels.UserConfirmed, userConfirmed);
+        window.dispatchEvent(new CustomEvent(DispatcherChannels.ToggleConfirm));
+      }
+
+      const userConfirmed = async () => {
+        const onlyQuery: boolean = (!action && query) as boolean;
+        const HEADERS = Connection.createHeaders(noneJSONBody as boolean);
+        !data.unabortable && window.abortableRequests.push(abort);
+
+        try {
+          const response: Response = await fetch(`${environment.BASE_URL}api/${controller}${!onlyQuery ? '/' : ''}${action}${query ? `?${Connection.queryFromObject(query)}` : ''}`, {
+            body: noneJSONBody ? body as any : JSON.stringify(body),
+            method: 'PUT',
+            headers: HEADERS,
+            signal: abort.signal,
+          });
+
+          !data.unabortable && window.abortableRequests.splice(window.abortableRequests.indexOf(abort), 1);
+          resolve(Connection.responseRestructure(response));
+        } catch (e) {
+          !data.unabortable && window.abortableRequests.splice(window.abortableRequests.indexOf(abort), 1);
+          resolve({ aborted: true });
+        }
+
+        if (!withoutConfirmModal) {
+          window.dispatchEvent(new CustomEvent(DispatcherChannels.ToggleConfirm, { detail: confirmProps }));
+          window.removeEventListener(DispatcherChannels.UserCanceled, userCanceled);
+          window.removeEventListener(DispatcherChannels.UserConfirmed, userConfirmed);
+        }
+      }
+
+      if (!withoutConfirmModal) {
+        window.dispatchEvent(new CustomEvent(DispatcherChannels.ToggleConfirm, { detail: confirmProps }));
+        window.addEventListener(DispatcherChannels.UserCanceled, userCanceled);
+        window.addEventListener(DispatcherChannels.UserConfirmed, userConfirmed);
+      } else userConfirmed();
+    });
   }
 
   //? DELETE request

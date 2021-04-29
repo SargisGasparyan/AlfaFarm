@@ -20,15 +20,21 @@ import CardImage from 'assets/images/card.png';
 import BonusCardCoin from 'assets/images/coin.png';
 
 import './style.scss';
+import EmptyState from "../../../../../components/empty-state";
+import * as animationData from "../../../../../assets/animations/EmptyOrderList.json";
+import * as loadingData from 'assets/animations/loading.json';
 
 interface IState {
   data?: IBonusCardDetailsWithHistoryResponseModel;
+  isLoading: boolean;
 };
 
 @byPrivateRoute(ROUTES.PROFILE.BONUS_CARD, [onlyForUsers])
 class BonusCard extends HelperComponent<IState, {}> {
 
-  public state: IState = {};
+  public state: IState = {
+    isLoading: true,
+  };
 
   private columnConfig = [
     {
@@ -59,14 +65,14 @@ class BonusCard extends HelperComponent<IState, {}> {
 
     const result = await BonusCardController.GetDetailsWithHistory(body);
 
-    this.safeSetState({ data: result.data }, () => {
+    this.safeSetState({ data: result.data, isLoading: false }, () => {
       JsBarcode('#barcode', result.data.bonusCardDetails.cardNumber, { format: 'code128', displayValue: false });
     });
     return result.data && result.data.bonusHistoryGroupedByDate;
   }
 
   public render() {
-    const { data } = this.state;
+    const { data, isLoading } = this.state;
     const datesList = data && data.bonusHistoryGroupedByDate && data.bonusHistoryGroupedByDate.list;
 
     return (
@@ -93,6 +99,9 @@ class BonusCard extends HelperComponent<IState, {}> {
               data={item.bonusHistory}
             />
           </div>)}
+
+          {(!datesList || !datesList.length) &&
+          <EmptyState animationData={isLoading ? loadingData : animationData} height={175} text={isLoading ? '' : Settings.translations.bonus_card_empty}/>}
         </div>}
         <Pagination<IBonusCardHistoryResponseModel> fetchData={this.fetchData} />
       </Layout>

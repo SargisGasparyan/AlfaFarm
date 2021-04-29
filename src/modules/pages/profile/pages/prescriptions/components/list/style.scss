@@ -4,3 +4,27 @@
 a {
   text-decoration: none;
 }
+
+.P-list-prescription-list {
+  padding: 40px 35px !important;
+
+  .P-prescription-delete {
+    position: absolute;
+    right: 30px;
+    top: 10px;
+    color: $green;
+    cursor: pointer;
+    border-bottom: 1px solid $green;
+    visibility: hidden;
+    opacity: 0;
+    transition: all .3s;
+  }
+
+  &:hover {
+
+    .P-prescription-delete {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+}

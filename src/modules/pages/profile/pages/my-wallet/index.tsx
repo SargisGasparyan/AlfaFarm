@@ -12,6 +12,7 @@ import { IUserCardListModel } from 'platform/api/payment/models/response';
 import { CardTypeEnum } from 'platform/constants/enums';
 import './style.scss';
 import * as animationData from 'assets/animations/EmptyWallet.json';
+import * as loadingData from 'assets/animations/loading.json';
 
 import simLogo from 'assets/images/cards/sim.svg';
 import ArcaCardLogo from 'assets/images/cards/1.svg';
@@ -21,6 +22,7 @@ import VisaCardLogo from 'assets/images/cards/4.svg';
 
 interface IState {
   list: IUserCardListModel[] | null;
+  isLoading: boolean;
 }
 
 @byPrivateRoute(ROUTES.PROFILE.MY_WALLET, [onlyForUsers])
@@ -30,12 +32,13 @@ class MyWallet extends HelperComponent<{}, IState> {
   }
 
   public state: IState = {
-    list: null
+    list: null,
+    isLoading: true,
   };
   private getUserCardList = async () => {
     const res = await PaymentController.getUserCards();
     if (res && res.success) {
-      this.safeSetState({ list: res.data });
+      this.safeSetState({ list: res.data, isLoading: false });
     }
   };
 
@@ -75,7 +78,7 @@ class MyWallet extends HelperComponent<{}, IState> {
   }
 
   public render() {
-    const { list } = this.state;
+    const { list, isLoading } = this.state;
     return (
       <Layout>
         <div className="P-wallet-title-box G-flex G-flex-align-center G-flex-justify-between G-mb-30">
@@ -112,7 +115,7 @@ class MyWallet extends HelperComponent<{}, IState> {
             </div>)}
 
           {(!list || !list.length) &&
-          <EmptyState animationData={animationData} height={175} text={Settings.translations.empty_carts_list}/>}
+          <EmptyState animationData={isLoading ? loadingData : animationData} height={175} text={isLoading ? '' : Settings.translations.empty_carts_list}/>}
 
         </div>
       </Layout>

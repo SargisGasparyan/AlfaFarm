@@ -3,6 +3,7 @@ import { IResponse, IPagingResponse } from '../../constants/interfaces';
 import { IPrescriptionListResponseModel } from './models/response';
 import { IPrescriptionListRequestModel, IPrescriptionModifyRequestModel } from './models/request';
 import { IBasketListResponseModel } from '../basket/models/response';
+import Settings from "../../services/settings";
 
 class PrescriptionController {
 
@@ -33,6 +34,16 @@ class PrescriptionController {
       action: '',
       controller: PrescriptionController.controller,
     });
+
+    return result;
+  };
+
+  public static Delete = (id: number): Promise<IResponse<any>> => {
+    const result = Connection.PUT({
+      body: {},
+      action: `Cancel/${id}`,
+      controller: PrescriptionController.controller,
+    }, { title: Settings.translations.prescription_delete,text: Settings.translations.prescription_delete_text });
 
     return result;
   };

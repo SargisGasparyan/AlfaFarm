@@ -14,6 +14,7 @@ import {statusColorClassNames, statusColorPrescriptionsClassNames} from "../../.
 
 interface IProps {
   data: IPrescriptionListResponseModel[];
+  cancel(id: number): void;
 };
 
 
@@ -22,10 +23,11 @@ class List extends HelperComponent<IProps, {}> {
   private statusViewEnum = getViewEnum(PrescriptionStatusEnum);
 
   public render() {
-    const { data } = this.props;
+    const { data, cancel} = this.props;
     return (<>
       {data && data.map((item: IPrescriptionListResponseModel, index: number) =>
-        <div className="P-list-item  G-my-20" key={index}>
+        <div className="P-list-item P-list-prescription-list G-my-20" key={index}>
+          <span className="P-prescription-delete" onClick={() => cancel(item.id)}>{Settings.translations.delete}</span>
           <div className="P-main-info G-flex G-flex-column">
             <p className="G-flex G-flex-justify-between G-mb-10">
               <span className="G-text-bold">{Settings.translations.date}</span>

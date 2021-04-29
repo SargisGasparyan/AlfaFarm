@@ -13,12 +13,14 @@ import MedicalHistoryController from 'platform/api/medicalHistory';
 import { IMedicalServiceListResponseModel } from 'platform/api/medicalHistory/models/response';
 import EmptyState from 'components/empty-state';
 import * as animationData from 'assets/animations/EmptyMedicalHistory.json';
+import * as loadingData from 'assets/animations/loading.json';
 
 import './style.scss';
 
 interface IState {
   data?: IMedicalServiceListResponseModel[];
   loading: boolean;
+  isLoading: boolean;
 };
 
 @byPrivateRoute(ROUTES.PROFILE.MY_REGISTRATIONS.MEDICAL_HISTORY, [onlyForUsers])
@@ -26,6 +28,7 @@ class MedicalHistory extends HelperComponent<IState, {}> {
 
   public state: IState = {
     loading: false,
+    isLoading: true,
   };
 
   private pageNo = 1;
@@ -53,12 +56,12 @@ class MedicalHistory extends HelperComponent<IState, {}> {
 
       this.safeSetState({ data: [...data, ...result.data.list], loading: false });
       this.lastPage = result.data.pageCount === this.pageNo;
-    } else this.safeSetState({ loading: false });
+    } else this.safeSetState({ loading: false, isLoading: false });
   });
 
   private scroll = () => {
     const { loading } = this.state;
-    
+
     if (!this.lastPage && scrolledToBottom() && !loading) {
       this.pageNo += 1;
       this.fetchData();
@@ -66,7 +69,7 @@ class MedicalHistory extends HelperComponent<IState, {}> {
   }
 
   public render() {
-    const { data } = this.state;
+    const { data, isLoading } = this.state;
 
     return (
       <Layout>
@@ -92,7 +95,7 @@ class MedicalHistory extends HelperComponent<IState, {}> {
                 className="P-image"
               />)}
             </div>
-          </div>) : <EmptyState animationData={animationData} text={Settings.translations.empty_medical_history} />) : null}          
+          </div>) : <EmptyState animationData={isLoading ? loadingData : animationData} text={isLoading ? '' : Settings.translations.empty_medical_history} />) : null}
         </section>
       </Layout>
     );

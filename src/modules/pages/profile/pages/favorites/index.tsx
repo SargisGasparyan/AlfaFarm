@@ -16,10 +16,12 @@ import EmptyState from 'components/empty-state';
 import * as animationData from 'assets/animations/EmptyFavorite.json';
 import './style.scss';
 import { PromotionTypeEnum } from 'platform/constants/enums';
+import * as loadingData from 'assets/animations/loading.json';
 
 interface IState {
   data: IFavoriteListResponseModel[] | null;
   inProgress: boolean;
+  isLoading: boolean;
 };
 
 @byPrivateRoute(ROUTES.PROFILE.FAVORITES.MAIN)
@@ -27,7 +29,8 @@ class Favorites extends HelperComponent<IState, {}> {
 
   public state: IState = {
     data: null,
-    inProgress: false
+    inProgress: false,
+    isLoading: true
   };
 
   public componentDidMount() {
@@ -36,7 +39,7 @@ class Favorites extends HelperComponent<IState, {}> {
 
   private fetchData = async () => {
     const result = await FavoriteController.GetList();
-    this.safeSetState({ data: result.data.map(item => ({ ...item, isFavorite: true })) });
+    this.safeSetState({ data: result.data.map(item => ({ ...item, isFavorite: true })), isLoading: false });
   };
 
   private toggleFavorite = async (e: React.SyntheticEvent, index: number) => {
@@ -54,7 +57,7 @@ class Favorites extends HelperComponent<IState, {}> {
   };
 
   public render() {
-    const { data } = this.state;
+    const { data, isLoading } = this.state;
 
     return (
       <Layout>
@@ -96,7 +99,7 @@ class Favorites extends HelperComponent<IState, {}> {
                       formatPrice(item.price)}
                 </h2>
               </div>
-            </Link>) : <EmptyState animationData={animationData} text={Settings.translations.empty_favorites_list}/>) : null}
+            </Link>) : <EmptyState animationData={isLoading ? loadingData : animationData} text={isLoading ? '' : Settings.translations.empty_favorites_list}/>) : null}
           </div>
         </section>
       </Layout>

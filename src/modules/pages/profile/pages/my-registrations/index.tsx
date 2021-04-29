@@ -7,9 +7,7 @@ import { onlyForUsers } from 'platform/guards/routes';
 import ROUTES from 'platform/constants/routes';
 import Layout from '../../components/layout';
 import Settings from 'platform/services/settings';
-// import Table from 'components/table';
 import List from './components/list';
-import { formatDate, formatPrice } from 'platform/services/helper';
 import { IClinicRegistrationListResponseModel } from 'platform/api/clinicRegistration/models/response';
 import ClinicRegistrationController from 'platform/api/clinicRegistration';
 import { IPagingResponse } from 'platform/constants/interfaces';
@@ -18,18 +16,21 @@ import Pagination from 'components/pagination';
 import MedicalHistory from './pages/medical-history';
 import EmptyState from 'components/empty-state';
 import * as animationData from 'assets/animations/EmptyRegistrations.json';
+import * as loadingData from 'assets/animations/loading.json';
 
 import './style.scss';
-import PaymentController from "../../../../../platform/api/payment";
 
 interface IState {
   data?: IPagingResponse<IClinicRegistrationListResponseModel>;
+  isLoading: boolean;
 };
 
 @byPrivateRoute(ROUTES.PROFILE.MY_REGISTRATIONS.MAIN, [onlyForUsers])
 class MyRegistrations extends HelperComponent<IState, {}> {
 
-  public state: IState = {};
+  public state: IState = {
+    isLoading: true,
+  };
 
 
   private fetchData = async (pageNumber: number) => {
@@ -40,16 +41,16 @@ class MyRegistrations extends HelperComponent<IState, {}> {
 
     const result = await ClinicRegistrationController.GetList(body);
 
-    this.safeSetState({ data: result.data });
+    this.safeSetState({ data: result.data, isLoading: false });
     return result.data;
   };
 
-  private remove = (id: number) => {
-    this.deleteAppointement(id)
+  private cancel = (id: number) => {
+    this.cancelAppointment(id)
   };
 
-  private deleteAppointement = async (id: number) => {
-    const res = await ClinicRegistrationController.Delete(id);
+  private cancelAppointment = async (id: number) => {
+    const res = await ClinicRegistrationController.Cancel(id);
 
     if (res && res.success) {
       await this.fetchData(1);
@@ -58,7 +59,7 @@ class MyRegistrations extends HelperComponent<IState, {}> {
 
 
   public render() {
-    const { data } = this.state;
+    const { data, isLoading } = this.state;
 
     return (
       <Layout>
@@ -68,8 +69,8 @@ class MyRegistrations extends HelperComponent<IState, {}> {
             <p><Link to={ROUTES.PROFILE.MY_REGISTRATIONS.MEDICAL_HISTORY}>{Settings.translations.medical_history}</Link></p>
           </h2>
           <div className="G-flex P-list">
-            {data ? (data.list.length ? <List data={data.list} remove={this.remove} /> :
-              <EmptyState animationData={animationData} text={Settings.translations.empty_registrations_list}/>) : null}
+            {data ? (data.list.length ? <List data={data.list} cancel={this.cancel} /> :
+              <EmptyState animationData={isLoading ? loadingData : animationData} text={isLoading ? '' : Settings.translations.empty_registrations_list}/>) : null}
           </div>
           <Pagination<IClinicRegistrationListResponseModel> fetchData={this.fetchData}/>
         </section>

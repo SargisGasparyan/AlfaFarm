@@ -3,6 +3,8 @@ import * as React from 'react';
 import HelperPureComponent from 'platform/classes/helper-pure-component';
 
 import './style.scss';
+import EmptyState from "../empty-state";
+import * as loadingData from 'assets/animations/loading.json';
 
 interface IState {
   show: boolean;
@@ -25,10 +27,10 @@ class PageLoader extends HelperPureComponent<{}, IState> {
 
   public render() {
     const { show } = this.state;
-    
+
     return show ? (
       <div className="P-loader-wrapper">
-        <div className="P-loader" />
+        <EmptyState animationData={loadingData}  text={''}/>
       </div>
     ) : null;
   }

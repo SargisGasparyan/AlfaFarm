@@ -17,10 +17,12 @@ import EmptyState from 'components/empty-state';
 import SpecialProductHelp from './components/help';
 import PhotoStorage from 'platform/services/photoStorage';
 import * as animationData from 'assets/animations/EmptySpecialProducts.json';
+import * as loadingData from 'assets/animations/loading.json';
 
 interface IState {
   data: IPreferredProductListResponseModel[] | null;
   helpIsOpen: boolean;
+  isLoading: boolean;
 };
 
 @byPrivateRoute(ROUTES.PROFILE.SPECIAL_PRODUCTS, [onlyForUsers])
@@ -28,7 +30,8 @@ class SpecialProducts extends HelperComponent<IState, {}> {
 
   public state: IState = {
     data: null,
-    helpIsOpen: false
+    helpIsOpen: false,
+    isLoading: true
   };
 
   public componentDidMount() {
@@ -50,7 +53,7 @@ class SpecialProducts extends HelperComponent<IState, {}> {
           imagePath: url
         }))));
 
-        this.safeSetState({ data: photoResult });
+        this.safeSetState({ data: photoResult, isLoading: false });
       }
     });
   };
@@ -73,7 +76,7 @@ class SpecialProducts extends HelperComponent<IState, {}> {
   };
 
   public render() {
-    const { data, helpIsOpen } = this.state;
+    const { data, helpIsOpen, isLoading } = this.state;
 
     return (
       <Layout>
@@ -111,7 +114,7 @@ class SpecialProducts extends HelperComponent<IState, {}> {
 
 
           </Link>) :
-            <EmptyState animationData={animationData} text={Settings.translations.empty_special_products}/>) : null}
+            <EmptyState animationData={isLoading ? loadingData : animationData} text={isLoading ? '' : Settings.translations.empty_special_products}/>) : null}
         </div>
 
         {helpIsOpen ? <SpecialProductHelp onClose={this.closeHelp}/> : null}

@@ -25,8 +25,8 @@
     }
 
     .P-see-more-label {
-      color           : black;
-      text-decoration : underline;
+      color           : $green;
+      border-bottom   : 1px solid $green;
     }
   }
 
