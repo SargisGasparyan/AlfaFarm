@@ -112,7 +112,7 @@ class List extends HelperComponent<{}, IState> {
               <img src={EmptyViewSvg} alt="empty"/>
               <p className='P-desc'>{Settings.translations.no_search_result}</p>
             </div>}
-            <Pagination<IProductListResponseModel> pageChangeListener={pageChangeListener} fetchData={this.fetchData} />
+            <Pagination<IProductListResponseModel> classNameList="P-product-page" pageChangeListener={pageChangeListener} fetchData={this.fetchData} />
           </div>
           {loading && <PageLoader />}
         </section>

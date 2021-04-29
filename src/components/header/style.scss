@@ -130,6 +130,20 @@ header {
   }
 }
 
+.P-desktop-search-box {
+  .P-remove-search {
+    right: 65px
+  }
+}
+
+.P-login-mobile {
+  margin: 0 2.3vw !important;
+  background-color: transparent !important;
+
+  img {
+    width: 23px;
+  }
+}
 
 .P-profile-header {
   text-overflow: ellipsis;

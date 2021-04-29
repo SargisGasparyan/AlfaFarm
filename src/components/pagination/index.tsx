@@ -9,7 +9,7 @@ import './style.scss';
 interface IState {
   pageCount: number;
   selectedPage: number;
-  numberValue: number;
+  numberValue: number
 };
 
 interface IProps<Data> {
@@ -18,6 +18,7 @@ interface IProps<Data> {
   interval: number;
   fetchData: (page: number) => Promise<IPagingResponse<Data>>;
   pageChangeListener?: string;
+  classNameList?: string;
 };
 
 class Pagination<Data> extends HelperComponent<IProps<Data>, IState> {
@@ -107,34 +108,34 @@ class Pagination<Data> extends HelperComponent<IProps<Data>, IState> {
 
   public render() {
     const { selectedPage, pageCount } = this.state;
-    const { count } = this.props;
+    const { count, classNameList } = this.props;
 
     return (
-      <div className="ABM-pagination-wrap">
+      <div className={`ABM-pagination-wrap ${classNameList}`}>
         {pageCount > 1 && <div className="ABM-pages-wrap">
           {/* {this.ranges.map((item, index) => <div
             key={index}
             className={`ABM-page ${selectedPage === item ? 'ABM-selected' : ''}`}
             onClick={() => this.selectPage(item)}
           >{item}</div>)} */}
-          
+
           {(selectedPage === 1 || selectedPage - 1 === 1 || selectedPage - 2 === 1) ? null :
             <div className="ABM-page" onClick={() => this.selectPage(1)}>{1}</div>
           }
           {selectedPage - 3 > 1 ? <span>...</span> : null}
-          {selectedPage - 2 >= 1 ? 
+          {selectedPage - 2 >= 1 ?
             <div className="ABM-page" onClick={() => this.selectPage(selectedPage - 2)}>{selectedPage - 2}</div>
            : null}
-          {selectedPage - 1 >= 1 ? 
+          {selectedPage - 1 >= 1 ?
             <div className="ABM-page" onClick={() => this.selectPage(selectedPage - 1)}>{selectedPage - 1}</div>
            : null}
 
           <div className={`ABM-page ABM-selected`} onClick={() => this.selectPage(selectedPage)}>{selectedPage}</div>
 
-          {selectedPage + 1 <= pageCount ? 
+          {selectedPage + 1 <= pageCount ?
             <div className="ABM-page" onClick={() => this.selectPage(selectedPage + 1)}>{selectedPage + 1}</div>
            : null}
-          {selectedPage + 2 <= pageCount ? 
+          {selectedPage + 2 <= pageCount ?
             <div className="ABM-page" onClick={() => this.selectPage(selectedPage + 2)}>{selectedPage + 2}</div>
            : null}
           {selectedPage + 3 < pageCount ? <span>...</span> : null}
@@ -142,7 +143,7 @@ class Pagination<Data> extends HelperComponent<IProps<Data>, IState> {
           {(selectedPage === pageCount || selectedPage + 1 === pageCount || selectedPage + 2 === pageCount) ? null :
             <div className="ABM-page" onClick={() => this.selectPage(pageCount)}>{pageCount}</div>
           }
-          
+
 
           {!!count && <input
             type="number"

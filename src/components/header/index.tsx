@@ -19,6 +19,7 @@ import BasketController from 'platform/api/basket';
 import ProductController from 'platform/api/product';
 import Screen from 'components/screen';
 import LogoImage from 'assets/images/logo.png';
+import ProfileImage from 'assets/images/icons/profile.svg';
 import PersonImage from 'assets/images/person.png';
 import burgerMenu from 'assets/images/menu.svg';
 import Broadcast from '../../platform/services/broadcast';
@@ -271,12 +272,13 @@ class Header extends HelperComponent<{}, IState> {
             </Link>
 
             {environment.WHOLESALE ? <WholesaleContent/> : <>
-              <div className="P-search-wrapper">
+              <div className="P-search-wrapper P-desktop-search-box">
                 <SearchInput
                   onClick={this.searchFocus}
                   onFocus={this.searchFocus}
                   onChange={this.searchChange}
                   onSubmit={this.searchSubmit}
+                  clearSearch={true}
                   loading={searchLoader}
                   disableRemoveOnNavigate={true}
                   withSubmit={true}
@@ -370,8 +372,8 @@ class Header extends HelperComponent<{}, IState> {
           />
         </Link> : <span
           onClick={this.toggleAuth}
-          className="P-link P-login"
-        >{Settings.translations.log_in}</span>}
+          className="P-link P-login P-login-mobile"
+        ><img src={ProfileImage} /></span>}
         <a onClick={this.showMobileSearch} className="P-link P-icon G-normal-link P-notification">
           <i className="icon-Group-5502"/>
         </a>

@@ -15,3 +15,23 @@
     height : 20px;
   }
 }
+
+.P-order-item {
+
+  @media (max-width : $tablet-screen) {
+    flex-direction: column;
+
+    .P-list-item {
+      text-align: center;
+      margin-bottom: 40px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      .G-square-image-block {
+        margin: auto auto 20px;
+      }
+    }
+  }
+}
