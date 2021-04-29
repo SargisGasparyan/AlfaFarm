@@ -54,7 +54,7 @@ class BasketList extends HelperComponent<IProps, {}> {
 
             {!item.productStockQuantity && <span className="P-out-of-stock G-clr-red">{Settings.translations.out_of_stock}</span>}
             <div className="G-clr-main G-text-bold P-bonus-amount-cart-item">
-              {formatPrice(getBasketItemPriceInfo(item).bonus) || ' 0 '} {Settings.translations.bonus}
+              {formatPrice(getBasketItemPriceInfo(item).bonus, false) || ' 0 '} {Settings.translations.bonus}
             </div>
             <div>{this.priceInfo(item).discountedPrice ? <del>{formatPrice(item.totalPrice)}</del> : null}</div>
             <div>

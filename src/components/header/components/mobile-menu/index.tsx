@@ -110,20 +110,43 @@ class MobileMenu extends HelperComponent<IProps, IState> {
 
             {!Settings.token && <a className="P-link" onClick={onAuthOpen}>{Settings.translations.log_in}</a>}
 
-            <div {...this.navLinkProps} onClick={this.showNotification}>{Settings.translations.notifications}</div>
-            <NavLink {...this.navLinkProps} to={ROUTES.PHARMACIES}
-                     onClick={onClose}>{Settings.translations.pharmacies}</NavLink>
-            <NavLink {...this.navLinkProps} to={ROUTES.PRODUCTS.MAIN}
-                     onClick={onClose}>{Settings.translations.online_pharmacy}</NavLink>
-            <NavLink {...this.navLinkProps} to={ROUTES.CLINIC.MAIN}
-                     onClick={onClose}>{Settings.translations.clinic}</NavLink>
-            <NavLink {...this.navLinkProps} to={ROUTES.BLOG.MAIN}
-                     onClick={onClose}>{Settings.translations.blog}</NavLink>
             <LanguageSwitcher/>
+            <div
+                className="P-link P-icon-notifications"
+                onClick={this.showNotification}
+            >{Settings.translations.notifications}</div>
+            <NavLink
+                className="P-link P-icon-pharmacy"
+                activeClassName="P-active"
+                to={ROUTES.PHARMACIES}
+               onClick={onClose}
+            >{Settings.translations.pharmacies}</NavLink>
+            <NavLink
+                className="P-link P-icon-online-pharmacy"
+                activeClassName="P-active"
+                to={ROUTES.PRODUCTS.MAIN}
+               onClick={onClose}
+            >{Settings.translations.online_pharmacy}</NavLink>
+            <NavLink
+                className="P-link P-icon-clinic"
+                activeClassName="P-active"
+                to={ROUTES.CLINIC.MAIN}
+                onClick={onClose}
+            >{Settings.translations.clinic}</NavLink>
+            <NavLink
+                className="P-link P-icon-blog"
+                activeClassName="P-active"
+                to={ROUTES.BLOG.MAIN}
+                onClick={onClose}
+            >{Settings.translations.blog}</NavLink>
             {Storage.profile && <hr className="G-my-15"/>}
             {Storage.profile && <div className="P-menu-profile">
-              <NavLink {...this.navLinkProps} to={ROUTES.PROFILE.PRESCRIPTIONS.MAIN}
-                       onClick={onClose}>{Settings.translations.prescription}</NavLink>
+              <NavLink
+                  className="P-link P-icon-prescription"
+                  activeClassName="P-active"
+                  to={ROUTES.PROFILE.PRESCRIPTIONS.MAIN}
+                  onClick={onClose}
+              >{Settings.translations.prescription}</NavLink>
               {this.options.map(item => <NavLink
                 to={item.path}
                 key={item.path}

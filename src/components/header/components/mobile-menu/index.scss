@@ -105,6 +105,34 @@
           background-position : center;
         }
 
+        &.P-icon-prescription:before {
+          background-image: url('src/assets/images/icons/Prescription.svg');
+        }
+
+        &.P-icon-language:before {
+          background-image: url('src/assets/images/icons/language.svg');
+        }
+
+        &.P-icon-clinic:before {
+          background-image: url('src/assets/images/icons/clinic.svg');
+        }
+
+        &.P-icon-blog:before {
+          background-image: url('src/assets/images/icons/blog.svg');
+        }
+
+        &.P-icon-online-pharmacy:before {
+          background-image: url('src/assets/images/icons/online_pharmacy.svg');
+        }
+
+        &.P-icon-pharmacy:before {
+          background-image: url('src/assets/images/icons/pharmacies.svg');
+        }
+
+        &.P-icon-notifications:before {
+          background-image: url('src/assets/images/icons/notifications.svg');
+        }
+
         &.P-icon-bonus_card:before {
           background-image: url('src/assets/images/icons/bonus.svg');
         }
