@@ -62,4 +62,11 @@
      }
    }
   }
+
+  @media(max-width: $tablet-screen) {
+
+    .P-address-form {
+      flex-direction: column;
+    }
+  }
 }

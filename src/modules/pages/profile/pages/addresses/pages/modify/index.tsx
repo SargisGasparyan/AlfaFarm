@@ -121,7 +121,7 @@ class Modify extends HelperComponent<RouteComponentProps<IRouteParams>, IState> 
         </div>
         <div className="G-flex G-flex-wrap P-profile-addresses-modify">
           <form className="G-main-form P-form-block G-mr-20 G-flex-justify-end">
-            <div className="G-flex G-flex-justify-between">
+            <div className="G-flex G-flex-justify-between P-address-form">
               <div className="G-main-form-field G-mr-20">
                 <p className="G-input-top-label">{Settings.translations.name}</p>
                 <input
@@ -141,7 +141,7 @@ class Modify extends HelperComponent<RouteComponentProps<IRouteParams>, IState> 
                 />
               </div>
             </div>
-            <div className="G-flex G-flex-justify-between">
+            <div className="G-flex G-flex-justify-between P-address-form">
               <div className="G-main-form-field G-mr-20">
                 <p className="G-input-top-label">{Settings.translations.building}</p>
                 <input
