@@ -31,17 +31,13 @@ function buildHTML(markup: string, title: string, description: string, keywords:
     <html lang="en">
       <head>
         <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src=“https://www.googletagmanager.com/gtag/js?id=G-7MQ4TT60JC”></script>
-        <script>
-          function onYandexMapsLoad(ymaps) {
-            window.dispatchEvent(new CustomEvent('${DispatcherChannels.YMapsSDKLoad}'));
-          }
-        </script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-187311863-1"></script>
         <script>
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
-          gtag(‘js’, new Date());
-          gtag(‘config’, ‘G-7MQ4TT60JC’);
+          gtag('js', new Date());
+        
+          gtag('config', 'UA-187311863-1');
         </script>
 
         <!-- Yandex.Metrika counter -->
