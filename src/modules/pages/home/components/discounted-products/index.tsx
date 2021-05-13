@@ -81,7 +81,7 @@ class DiscountedProducts extends HelperComponent<{}, IState> {
           </Slider>
         </div>
         <Link
-          to={`${ROUTES.PRODUCTS.MAIN}?hasDiscount=true`}
+          to={`${ROUTES.PRODUCTS.MAIN}?sortBy=6&hasDiscount=true&page=1`}
           className="G-main-ghost-button G-ml-auto G-mr-auto"
         >{Settings.translations.show_all}</Link>
       </section>
