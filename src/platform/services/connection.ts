@@ -116,14 +116,14 @@ class Connection {
           resolve({ aborted: true });
         }
 
-        if (!withoutConfirmModal) {
+        if (typeof withoutConfirmModal !== 'undefined' && !withoutConfirmModal) {
           window.dispatchEvent(new CustomEvent(DispatcherChannels.ToggleConfirm, { detail: confirmProps }));
           window.removeEventListener(DispatcherChannels.UserCanceled, userCanceled);
           window.removeEventListener(DispatcherChannels.UserConfirmed, userConfirmed);
         }
       }
 
-      if (!withoutConfirmModal) {
+      if (typeof withoutConfirmModal !== 'undefined' && !withoutConfirmModal) {
         window.dispatchEvent(new CustomEvent(DispatcherChannels.ToggleConfirm, { detail: confirmProps }));
         window.addEventListener(DispatcherChannels.UserCanceled, userCanceled);
         window.addEventListener(DispatcherChannels.UserConfirmed, userConfirmed);
