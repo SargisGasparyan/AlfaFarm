@@ -31,13 +31,13 @@ function buildHTML(markup: string, title: string, description: string, keywords:
     <html lang="en">
       <head>
         <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-187311863-1"></script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-NTE70R9Y92"></script>
         <script>
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
         
-          gtag('config', 'UA-187311863-1');
+          gtag('config', 'G-NTE70R9Y92');
         </script>
 
         <!-- Yandex.Metrika counter -->
