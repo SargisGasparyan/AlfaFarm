@@ -99,7 +99,7 @@ class List extends HelperComponent<{}, IState> {
     return (
       <div>
         <div className="G-page G-page-title-category">
-          { categoryId && <h3 className="G-page-title-left">{categoryTitle}</h3>}
+          { categoryId ? <h3 className="G-page-title-left">{categoryTitle}</h3> : <h3 className="G-page-title-left">{Settings.translations.online_pharmacy}</h3>}
         </div>
         <section className="G-page P-products-list-page">
           <Filter onChange={this.filterChange} />

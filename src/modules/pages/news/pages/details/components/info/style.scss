@@ -3,6 +3,8 @@
 .P-news-details-info {
   width : 100%;
 
+ 
+
   > .P-name {
     display       : flex;
     margin-bottom : 40px;
@@ -21,5 +23,11 @@
   > p {
     line-height   : 28px;
     margin-bottom : 60px;
+  }
+}
+
+.P-description {
+  ul {
+    padding-left: 50px;
   }
 }

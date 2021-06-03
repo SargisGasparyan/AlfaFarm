@@ -54,7 +54,7 @@
       > .P-upload-button {
         width       : 100%;
         display     : flex;
-        justify-content: center;
+        color       : $green;
         @media (max-width: $mobile-screen) {
           justify-content: flex-start;
         }

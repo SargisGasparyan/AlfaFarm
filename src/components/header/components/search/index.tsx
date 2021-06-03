@@ -108,7 +108,7 @@ class SearchPopup extends HelperComponent<IProps, IState> {
                 <p className="G-ml-auto G-clr-orange" onClick={() => onSubmit()}>{Settings.translations.see_more}</p>
               </h6>}
               {data && data.products.map(item => (
-                <div className="P-list-item" key={item.id} onClick={() => this.clickOnItem(item)}>
+                <Link className="P-list-item" key={item.id} to={ROUTES.PRODUCTS.DETAILS.replace(':id', item.id)} onClick={() => this.clickOnItem(item)}>
                   <div className="P-image" style={{ background: `url('${getMediaPath(item.imagePath)}') center/contain no-repeat` }} />
 
                   <div className="P-middle">
@@ -128,7 +128,7 @@ class SearchPopup extends HelperComponent<IProps, IState> {
                       onClick={(e) => this.changeCart(e, item)}
                     >{Settings.translations.add_to_cart}</LoaderContent>
                   </div>
-                </div>
+                </Link>
               ))}
             </div> :
             <EmptyState animationData={animationData} text={Settings.translations.no_products} />) : <EmptyState animationData={animationData} text={Settings.translations.no_products} />}
