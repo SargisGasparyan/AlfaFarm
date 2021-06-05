@@ -110,7 +110,7 @@ class List extends HelperComponent<{}, IState> {
             </>}
             {total === 0 && <div className='P-no-data'>
               <img src={EmptyViewSvg} alt="empty"/>
-              <p className='P-desc'>{Settings.translations.no_search_result}</p>
+              <p className='P-desc'>{Settings.translations.no_search_result.toloc}</p>
             </div>}
             <Pagination<IProductListResponseModel> classNameList="P-product-page" pageChangeListener={pageChangeListener} fetchData={this.fetchData} />
           </div>
