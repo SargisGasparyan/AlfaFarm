@@ -1,4 +1,5 @@
 import { IProductFilterRequestModel } from 'platform/api/product/models/request';
+import * as React from 'react';
 
 export const priceConfig = {
   maxPrice : 40000,
@@ -30,3 +31,21 @@ export const buildFilters = () => {
 
   return body;
 };
+export const CREATE_FORM_AND_SUBMIT = (path: string, params: any, method: string = 'post') => {
+  const form = document.createElement('form');
+  form.method = method;
+  form.action = path;
+
+  for (const key in params) {
+    if (params.hasOwnProperty(key)) {
+      const hiddenField = document.createElement('input');
+      hiddenField.type = 'hidden';
+      hiddenField.name = key;
+      hiddenField.value = params[key];
+      form.appendChild(hiddenField);
+    }
+  }
+
+  document.body.appendChild(form);
+  form.submit();
+}

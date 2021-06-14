@@ -384,7 +384,12 @@
   }
 
   .P-payment-types {
+    flex: 0 0 30%;
+    flex-wrap: wrap;
+
     .P-radio-content{
+      display: flex;
+      align-items: center;
       width: calc(100% - 35px);
     }
     > div {

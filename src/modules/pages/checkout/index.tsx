@@ -38,6 +38,7 @@ import {Shared} from 'modules';
 
 import './style.scss';
 import LocationImage from 'assets/images/placeholder.svg';
+import {CREATE_FORM_AND_SUBMIT} from "../products/pages/list/services/helper";
 
 
 interface IState {
@@ -221,6 +222,19 @@ class Checkout extends HelperComponent<{}, IState> {
         this.safeSetState({form});
     };
 
+    private addTelcellForm = (data: any) => {
+        CREATE_FORM_AND_SUBMIT(data.telCell.url, {
+            action: data.telCell.action,
+            issuer: data.telCell.issuer,
+            currency: data.telCell.currency,
+            price: data.telCell.price,
+            product: data.telCell.product,
+            issuer_id: data.telCell.issuerId,
+            valid_days: data.telCell.validDays,
+            security_code: data.telCell.securityCode,
+        });
+    }
+
     private dateFromChange = (chosen: Moment) => {
         const {form} = this.state;
         form.deliveryDateFrom = chosen.toISOString();
@@ -336,6 +350,11 @@ class Checkout extends HelperComponent<{}, IState> {
                 if (form.paymentType === PaymentTypeEnum.Idram) {
                     document.getElementById('currentId')?.click();
                 }
+
+                // if (form.paymentType === PaymentTypeEnum.Telcell) {
+                //     this.addTelcellForm(result.data)
+                // }
+
                 if (form.paymentType === PaymentTypeEnum.IPay && result.data.vposUrl) {
                     window.open(result.data.vposUrl, '_top');
                 } else {

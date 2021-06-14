@@ -48,7 +48,7 @@ export enum PaymentTypeEnum {
   IPay,
   PostTerminal,
   Idram,
-  Telcell
+  Telcell = 5
 }
 export enum PromotionTypeEnum {
   Bonus,
