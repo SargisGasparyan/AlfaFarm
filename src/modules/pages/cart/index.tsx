@@ -156,13 +156,16 @@ class Cart extends HelperComponent<{}, IState> {
     return (
       <section className="G-page P-cart-page">
         <div className="P-cart-left-box">
-          <div className="P-steps G-mb-30">
-            <p>1</p>
-            <span/>
-            <p className="P-disabled">2</p>
-            <span/>
-            <p className="P-disabled">3</p>
-          </div>
+          {data && data.items.length ?
+              <div className="P-steps G-mb-30">
+                <p>1</p>
+                <span/>
+                <p className="P-disabled">2</p>
+                <span/>
+                <p className="P-disabled">3</p>
+              </div>
+              : <></>
+          }
 
           {data ? <>
             {data.items.length ? <>
@@ -190,14 +193,16 @@ class Cart extends HelperComponent<{}, IState> {
                   onConfirm={this.deleteOutOfStock}
                   onClose={this.closeOutOfStockConfirm}
               />}
-            </> : <EmptyState
-                animationData={animationData}
-                text={Settings.translations.no_products}
-            />}
+            </> : <div className="P-empty-state-align-end">
+                    <EmptyState
+                        animationData={animationData}
+                        text={Settings.translations.no_products}
+                    />
+                  </div>}
           </> : <PageLoader/>}
         </div>
         <div className="P-cart-right-box">
-          {data &&
+          {data && data.items.length ?
             <div className="P-data-block-wrapper">
 
             <div className="P-data-block G-flex-column">
@@ -227,12 +232,12 @@ class Cart extends HelperComponent<{}, IState> {
                 className="G-mt-50 G-main-button G-ml-auto G-fs-normal P-pay-button"
                 onClick={this.goToCheckout}
             >{Settings.translations.next_step}</button>
-          </div>
+          </div> : <></>
           }
         </div>
       </section>
     );
   }
-};
+}
 
 export default Cart;

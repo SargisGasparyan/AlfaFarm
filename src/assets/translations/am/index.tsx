@@ -1359,6 +1359,7 @@ export default {
   current_password: "Ընթացիկ գաղտնաբառը",
   new_password: "Նոր գաղտնաբառը",
   choose_password: "Ընտրեք գաղտնաբառը",
+  empty_saved_basket_list: 'Նախընտրելի զամբյուղների ցանկը դատարկ է',
   empty_price_list: 'Գնացուցակի ցանկը դատարկ է',
   empty_doctors_list: 'Բժիշկների ցուցակը դատարկ է',
   empty_blogs_list: 'Բլոգերի ցանկը դատարկ է',

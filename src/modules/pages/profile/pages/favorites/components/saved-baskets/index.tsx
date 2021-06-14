@@ -1,10 +1,12 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 
+import EmptyState from 'components/empty-state';
 import Settings from 'platform/services/settings';
 import { ISavedBasketListResponseModel } from 'platform/api/basket/models/response';
 import BasketController from 'platform/api/basket';
 import ROUTES from 'platform/constants/routes';
+import * as animationData from 'assets/animations/EmptyBasket.json';
 
 import './style.scss';
 
@@ -27,7 +29,7 @@ const SavedBasket = React.memo(() => {
         <i className="icon-Group-5503 G-fs-26" />
       </Link>)}
     </div>
-  </> : null;
+  </> : <EmptyState animationData={animationData} text={Settings.translations.empty_saved_basket_list} />;
 });
 
 export default SavedBasket;

@@ -5,6 +5,7 @@ import Settings from 'platform/services/settings';
 import { Range, getTrackBackground } from 'react-range';
 import ProductController from 'platform/api/product';
 import { IProductPriceRangeResponseModel } from 'platform/api/product/models/response';
+import { priceConfig } from '../../../../services/helper';
 
 import { gray, mainColor } from 'assets/styles/variables.scss';
 import { formatPrice } from 'platform/services/helper';
@@ -17,9 +18,10 @@ import './style.scss';
 interface IProps {
   body: IProductFilterRequestModel;
   onChange(body: IProductFilterRequestModel): void;
+  maxPrice: number;
 }
 
-const PriceRange = ({ body, onChange }: IProps) => {
+const PriceRange = ({ body, onChange, maxPrice }: IProps) => {
   const prevCategoryIdRef = React.useRef<number>();
   const prevProductTextRef = React.useRef<string>();
   const [priceRange, setPriceRange] = React.useState<IProductPriceRangeResponseModel>();
@@ -31,6 +33,11 @@ const PriceRange = ({ body, onChange }: IProps) => {
 
     (categoryId !== prevCategoryIdRef.current || productText !== prevProductTextRef.current) && ProductController.GetPriceRange(categoryId ? { categoryIds: body.categoryIds } : productText ? { productText } : {})
       .then(result => {
+        if (result.data.max) {
+          priceConfig.maxPriceReal = +result.data.max > priceConfig.maxPrice ? +result.data.max : priceConfig.maxPrice;
+          result.data.max = +result.data.max > priceConfig.maxPrice ? priceConfig.maxPrice : +result.data.max;
+        }
+
         setPriceRange(result.data && result.data.max ? result.data : undefined);
         setValue([body.minPrice || (result.data && result.data.min), body.maxPrice || (result.data && result.data.max)]);
       });
@@ -63,6 +70,7 @@ const PriceRange = ({ body, onChange }: IProps) => {
       changePrice([minPrice, maxPrice]);
     }
   }
+  console.log(value)
 
 
   return priceRange && value ? <>
@@ -74,7 +82,7 @@ const PriceRange = ({ body, onChange }: IProps) => {
 
     <Range
       min={priceRange.min}
-      max={priceRange.max}
+      max={+priceRange.max}
       values={value}
       onChange={changePrice}
       renderThumb={({ props }) => <div {...props} className="P-range-thumb" />}

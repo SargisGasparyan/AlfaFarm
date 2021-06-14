@@ -54,9 +54,11 @@ class MedicalHistory extends HelperComponent<IState, {}> {
       const result = await MedicalHistoryController.GetList(body);
       const data = this.state.data || [];
 
-      this.safeSetState({ data: [...data, ...result.data.list], loading: false });
+      this.safeSetState({ data: [...data, ...result.data.list] });
       this.lastPage = result.data.pageCount === this.pageNo;
-    } else this.safeSetState({ loading: false, isLoading: false });
+    }
+
+    this.safeSetState({ loading: false, isLoading: false });
   });
 
   private scroll = () => {
@@ -95,7 +97,11 @@ class MedicalHistory extends HelperComponent<IState, {}> {
                 className="P-image"
               />)}
             </div>
-          </div>) : <EmptyState animationData={isLoading ? loadingData : animationData} text={isLoading ? '' : Settings.translations.empty_medical_history} />) : null}
+          </div>) :
+            <div className="G-flex P-list">
+              <EmptyState animationData={isLoading ? loadingData : animationData} text={isLoading ? '' : Settings.translations.empty_medical_history} />
+            </div>
+          ) : null}
         </section>
       </Layout>
     );

@@ -20,6 +20,13 @@
       transform : translateY(-50%);
     }
   }
+
+  @media (max-width: $mobile-screen) {
+    h3 {
+      font-size: 24px;
+      margin-bottom: 30px;
+    }
+  }
 }
 
 .P-profile-addresses-modify {

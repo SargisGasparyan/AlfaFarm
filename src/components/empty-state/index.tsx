@@ -33,7 +33,7 @@ const EmptyState = React.memo(({ buttonText, text, animationData, onClick, heigh
   };
   return (
     <div className="P-empty-state">
-      <div>
+      <div className="P-empty-state-align">
         <div className='P-empty-list'>
         <Lottie options={defaultOptions} height={height ? height : 150} width={width ? width : 150}/>
           <p className='P-desc'>{text}</p>

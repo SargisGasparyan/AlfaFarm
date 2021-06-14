@@ -7,7 +7,7 @@ import { IProductFilterRequestModel } from 'platform/api/product/models/request'
 import ROUTES from 'platform/constants/routes';
 import Storage from 'platform/services/storage';
 
-import { buildFilters } from '../../services/helper';
+import { buildFilters, priceConfig } from '../../services/helper';
 import Brands from './components/brands';
 import Producers from './components/producers';
 import ActiveIngredients from './components/active-ingredients';
@@ -25,6 +25,7 @@ interface IProps {
 
 interface IState {
   mobileOpen: boolean;
+  maxPrice: number;
   body: IProductFilterRequestModel;
 };
 
@@ -32,6 +33,7 @@ class Filter extends HelperComponent<IProps, IState> {
 
   public state: IState = {
     mobileOpen: false,
+    maxPrice: priceConfig.maxPrice,
     body: {
       brandIds: [],
       producerIds: [],
@@ -136,7 +138,7 @@ class Filter extends HelperComponent<IProps, IState> {
   }
 
   private Content = () => {
-    const { body } = this.state;
+    const { body, maxPrice } = this.state;
 
     return (
       <div className="P-products-filter">
@@ -146,7 +148,7 @@ class Filter extends HelperComponent<IProps, IState> {
             className="P-main-category"
         >{item.name} <i className="icon-Group-5513" /></h2>) }
         <i className="G-back-icon icon-Group-5529" onClick={this.reset} />
-        <PriceRange body={body} onChange={this.bodyChange} />
+        <PriceRange body={body} onChange={this.bodyChange} maxPrice={maxPrice} />
 
         <label className="P-discount-label">
           <CheckBox checked={body.hasDiscount} onChange={this.toggleDiscount} />

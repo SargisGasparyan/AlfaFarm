@@ -30,6 +30,13 @@ a {
   }
 
   .P-address-action {
+
+    & .P-set-as-default {
+      transition: all .3s;
+      visibility: hidden;
+      opacity: 0;
+    }
+
     .P-done-icon {
       width: 25px;
     }
@@ -69,5 +76,10 @@ a {
         font-size: $small-fs;
       }
     }
+  }
+
+  &:hover .P-address-action .P-set-as-default {
+    visibility: visible;
+    opacity: 1;
   }
 }

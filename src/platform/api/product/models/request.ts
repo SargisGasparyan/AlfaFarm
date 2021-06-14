@@ -13,7 +13,7 @@ export interface IProductFilterRequestModel {
   producerIds?: number[];
   activeIngredientIds?: number[];
   minPrice?: number;
-  maxPrice?: number;
+  maxPrice?: number | undefined;
   categoryIds?: number[];
 };
 export interface IGetProductPromotionByQuantityModel {

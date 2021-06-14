@@ -1,5 +1,10 @@
 import { IProductFilterRequestModel } from 'platform/api/product/models/request';
 
+export const priceConfig = {
+  maxPrice : 40000,
+  maxPriceReal : 0
+}
+
 export const buildFilters = () => {
   const query = new URLSearchParams(window.location.search);
   const categoryIds = query.get('categoryIds');
@@ -18,7 +23,7 @@ export const buildFilters = () => {
     producerIds: producerIds ? producerIds.split(',').map(item => +item) : [],
     activeIngredientIds: activeIngredientIds ? activeIngredientIds.split(',').map(item => +item) : [],
     minPrice: minPrice ? +minPrice : undefined,
-    maxPrice: maxPrice ? +maxPrice : undefined,
+    maxPrice: maxPrice && +maxPrice === priceConfig.maxPrice ? (priceConfig.maxPriceReal > 0 ? +priceConfig.maxPriceReal : +priceConfig.maxPrice) : (maxPrice ? +maxPrice : undefined),
     sortBy: sortBy ? +sortBy : undefined,
     hasDiscount: !!hasDiscount,
   };

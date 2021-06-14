@@ -17,11 +17,15 @@ import NotificationAnswer from '../notification-answer';
 import { scrolledToBottomOfElement } from 'platform/services/helper';
 
 import './style.scss';
+import * as animationData from "../../../../assets/animations/empty_notifications.json";
+import * as loadingData from 'assets/animations/loading.json';
+import EmptyState from "../../../empty-state";
 
 interface IState {
   data?: IPagingResponse<INotificationListResponseModel>;
   selectedItem?: INotificationListResponseModel;
   loading: boolean;
+  isLoading: boolean;
 };
 
 interface IProps {
@@ -31,8 +35,10 @@ interface IProps {
 
 class Notifications extends HelperPureComponent<IProps, IState> {
 
-  public state: IState = { loading: false };
-
+  public state: IState = {
+    loading: false,
+    isLoading: true,
+  };
   private pageNumber = 1;
 
   public componentDidMount() { this.fetchData(); }
@@ -46,7 +52,7 @@ class Notifications extends HelperPureComponent<IProps, IState> {
 
     const result = await NotificationController.GetList(body);
     if (data) result.data.list = [...data.list, ...result.data.list];
-    this.safeSetState({ data: result.data });
+    this.safeSetState({ data: result.data, loading: false, isLoading: false });
   }
 
   private clickOnItem = async (e: Event | React.SyntheticEvent, item: INotificationListResponseModel, showPopup: boolean = false) => {
@@ -93,7 +99,7 @@ class Notifications extends HelperPureComponent<IProps, IState> {
 
   public render() {
     const { onClose } = this.props;
-    const { data, selectedItem } = this.state;
+    const { data, selectedItem, isLoading } = this.state;
 
     return (
       <ClickOutside className="P-header-notifications" onClickOutside={!selectedItem ? onClose : () => { console.log('') }}>
@@ -102,7 +108,15 @@ class Notifications extends HelperPureComponent<IProps, IState> {
             {Settings.translations.notifications}
             <a className="G-clr-orange" onClick={this.markAsRead}>{Settings.translations.mark_as_read}</a>
           </h6>
-          {data && data.list.map(item => <this.ListItem key={item.id} item={item} />)}
+          <div className="P-list-box">
+            {
+              data && data.list.length ?
+                data.list.map(item => <this.ListItem key={item.id} item={item} />) :
+                <div className="P-notification-empty">
+                  <EmptyState animationData={isLoading ? loadingData : animationData} text={isLoading ? '' : Settings.translations.no_notifications} />
+                </div>
+            }
+          </div>
         </aside>
 
         {this.state.selectedItem ? <NotificationAnswer selectedItem={this.state.selectedItem} onClose={this.closeModal} /> : null}

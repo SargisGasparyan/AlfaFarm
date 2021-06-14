@@ -98,7 +98,7 @@ class MobileMenu extends HelperComponent<IProps, IState> {
               className="P-image"
             />
             <span className="G-fs-18">{Storage.profile.firstName} </span><span
-            className="G-fs-18"> {Storage.profile.lastName}</span></div>}
+            className="G-fs-18 G-inline-flex G-mt-20"> {Storage.profile.lastName}</span></div>}
           <div className="P-mobile-menu-content">
             {/* <div className="G-mb-20">
               <SearchInput

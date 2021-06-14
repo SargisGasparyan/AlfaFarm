@@ -1279,6 +1279,7 @@ export default {
   checkout: "Оформить заказ",
   type: "Тип",
   empty_price_list: 'Список цен пуст',
+  empty_saved_basket_list: 'Список предпочтительных корзин пуст.',
   empty_doctors_list: 'Список врачей пуст',
   empty_blogs_list: 'Лист блогов пуст.',
   pricing: "Платеж",

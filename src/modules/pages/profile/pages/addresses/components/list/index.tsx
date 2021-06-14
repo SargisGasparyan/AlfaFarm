@@ -31,7 +31,7 @@ class List extends HelperComponent<IProps, {}> {
               <span className="G-clr-main"> {Settings.translations.default}
               </span>
             </p>}
-            {!item.isDefault && <p>
+            {!item.isDefault && <p className="P-set-as-default">
               <button
                 className="P-make-default"
                 onClick={() => onEditDefault && onEditDefault(item.id)}

@@ -8,8 +8,6 @@
   position: absolute;
   box-shadow: $default-block-shadow;
   background: white;
-  overflow-y: auto;
-  max-height: 400px;
 
   @media (max-width: $small-screen) {
     top: 70px;
@@ -40,49 +38,58 @@
     }
   }
 
-  .P-list-item {
-    color: black;
-    display: flex;
-    padding: 5px 0;
-    font-size: 16px;
-    text-decoration: none;
-    cursor: pointer;
+  .P-notification-empty .P-empty-state {
+    min-height: 300px;
+  }
 
-    border-bottom: unset;
-    box-shadow: unset;
-    border-radius: unset;
-    align-items: unset;
-    border-radius: unset;
-    justify-content: unset;
+  .P-list-box {
+    overflow-y: auto;
+    max-height: 400px;
 
-    > div {
+    .P-list-item {
+      color: black;
+      display: flex;
+      padding: 5px 0;
+      font-size: 16px;
+      text-decoration: none;
+      cursor: pointer;
 
-      .P-desc {
+      border-bottom: unset;
+      box-shadow: unset;
+      border-radius: unset;
+      align-items: unset;
+      border-radius: unset;
+      justify-content: unset;
+
+      > div {
+
+        .P-desc {
           color: #A1A1A1;
           font-size: 14px;
           white-space: nowrap;
           width: 250px;
           overflow: hidden;
           text-overflow: ellipsis;
+        }
       }
-    }
 
-    &.P-unseen {
-      background-color: #49B7480F;
-    }
+      &.P-unseen {
+        background-color: #49B7480F;
+      }
 
-    img {
-      width: 20px;
-      margin-right: 20px;
-    }
+      img {
+        width: 20px;
+        margin-right: 20px;
+      }
 
-    h5 {
-      font-size: 16px;
-    }
+      h5 {
+        font-size: 16px;
+      }
 
-    span {
-      color: #A1A1A1;
-      font-size: 14px;
+      span {
+        color: #A1A1A1;
+        font-size: 14px;
+      }
     }
   }
 }

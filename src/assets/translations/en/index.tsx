@@ -1191,6 +1191,7 @@ export default {
   price_high_to_low: "Price: High to low",
   discount_low_to_high: "Discount: Low to high",
   empty_blogs_list: 'Blogs list is empty',
+  empty_saved_basket_list: 'The list of preferred baskets is empty',
   empty_price_list: 'Price list is empty',
   empty_doctors_list: 'Doctors list is empty',
   discount_high_to_low: "Discount: High to low",
