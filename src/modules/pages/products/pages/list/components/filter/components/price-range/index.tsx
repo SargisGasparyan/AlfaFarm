@@ -18,10 +18,10 @@ import './style.scss';
 interface IProps {
   body: IProductFilterRequestModel;
   onChange(body: IProductFilterRequestModel): void;
-  maxPrice: number;
+  maxPriceValue: number;
 }
 
-const PriceRange = ({ body, onChange, maxPrice }: IProps) => {
+const PriceRange = ({ body, onChange, maxPriceValue }: IProps) => {
   const prevCategoryIdRef = React.useRef<number>();
   const prevProductTextRef = React.useRef<string>();
   const [priceRange, setPriceRange] = React.useState<IProductPriceRangeResponseModel>();
@@ -70,7 +70,6 @@ const PriceRange = ({ body, onChange, maxPrice }: IProps) => {
       changePrice([minPrice, maxPrice]);
     }
   }
-  console.log(value)
 
 
   return priceRange && value ? <>
@@ -82,7 +81,7 @@ const PriceRange = ({ body, onChange, maxPrice }: IProps) => {
 
     <Range
       min={priceRange.min}
-      max={+priceRange.max}
+      max={priceRange.max}
       values={value}
       onChange={changePrice}
       renderThumb={({ props }) => <div {...props} className="P-range-thumb" />}

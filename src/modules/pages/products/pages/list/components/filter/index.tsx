@@ -148,7 +148,7 @@ class Filter extends HelperComponent<IProps, IState> {
             className="P-main-category"
         >{item.name} <i className="icon-Group-5513" /></h2>) }
         <i className="G-back-icon icon-Group-5529" onClick={this.reset} />
-        <PriceRange body={body} onChange={this.bodyChange} maxPrice={maxPrice} />
+        <PriceRange body={body} onChange={this.bodyChange} maxPriceValue={maxPrice} />
 
         <label className="P-discount-label">
           <CheckBox checked={body.hasDiscount} onChange={this.toggleDiscount} />
