@@ -2,7 +2,10 @@
 
 .P-blog-details-info {
   width   : 100%;
-  padding : 0 250px;
+  padding : 0 13vw;
+  @media (max-width: 440px) {
+    padding : 0 8vw;
+  }
 
   > .P-name {
     display       : flex;
