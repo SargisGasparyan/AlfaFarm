@@ -12,8 +12,11 @@
 
     > .P-description {
       width       : 100%;
-      padding     : 0 250px;
+      padding     : 0 13vw;
       line-height : 38px;
+      @media (max-width: 440px) {
+        padding : 0 8vw;
+      }
 
       h2 {
         text-align: center;

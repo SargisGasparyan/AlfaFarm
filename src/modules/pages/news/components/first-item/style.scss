@@ -21,6 +21,9 @@
       padding   : 10px 40px;
       min-width : 270px;
       max-width : 100%;
+      @media (max-width: 440px) {
+        padding   : 0 2vw;
+      }
   
       > h2 {
         margin-bottom : 20px;
