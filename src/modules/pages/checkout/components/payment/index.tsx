@@ -29,8 +29,14 @@ const PaymentMethod = React.memo(({ resultInfo, callback }: IPaymentMethod) => {
   const chooseType = (item: PaymentTypeEnum) => {
     setType(item);
     const query = new URLSearchParams(window.location.search);
-    query.set('paymentType', item.toString());
-    item && window.routerHistory.push(`${window.location.pathname}?${query.toString()}`);
+
+    if (item) {
+      query.set('paymentType', item.toString());
+    } else {
+      query.delete('paymentType')
+    }
+
+    window.routerHistory.push(`${window.location.pathname}?${query.toString()}`);
   }
 
   const child = (item: PaymentTypeEnum) => {
