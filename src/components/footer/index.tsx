@@ -1,20 +1,17 @@
 import * as React from 'react';
 import {Link} from 'react-router-dom';
-
 import ROUTES from 'platform/constants/routes';
 import Settings from 'platform/services/settings';
 import {contactPhoneNumber, contactEmail} from 'platform/constants/contact-info';
 import OrderACall from './components/order_a_call';
 import environment from 'platform/services/environment';
 import Invite from './components/invite';
-
 import LogoImage from 'assets/images/logo.png';
 import AppStoreImage from 'assets/images/app_store.png';
 import GooglePlayImage from 'assets/images/google_play.png';
 import FacebookImage from 'assets/images/facebook.png';
 import InstagramImage from 'assets/images/instagram.png';
 import TelegramImage from 'assets/images/tel_icon.png';
-
 import './style.scss';
 
 const currentYear = new Date().getFullYear();

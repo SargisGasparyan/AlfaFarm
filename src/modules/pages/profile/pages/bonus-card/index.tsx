@@ -81,9 +81,9 @@ class BonusCard extends HelperComponent<IState, {}> {
         {data && <div className="G-flex P-profile-bonus-card">
           <div className="P-card-details">
             <div className="P-card">
-              <img src={CardImage} alt="card" />
-              <span className="G-clr-orange P-bonus-amount">{data.bonusCardDetails.amount}</span>
-              <img className="P-bonus-coin" src={BonusCardCoin} alt="coin"/>
+                <img src={CardImage} alt="card" />
+                <span className="G-clr-orange P-bonus-amount m">5000</span>
+                <img className="P-bonus-coin" src={BonusCardCoin} alt="coin"/>
             </div>
             <div className="P-barcode">
               <h3>{Storage.profile.firstName} {Storage.profile.lastName}</h3>
@@ -99,7 +99,6 @@ class BonusCard extends HelperComponent<IState, {}> {
               data={item.bonusHistory}
             />
           </div>)}
-
           {(!datesList || !datesList.length) &&
           <EmptyState animationData={isLoading ? loadingData : animationData} height={175} text={isLoading ? '' : Settings.translations.bonus_card_empty}/>}
         </div>}

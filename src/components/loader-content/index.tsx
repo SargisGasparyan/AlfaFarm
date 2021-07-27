@@ -29,7 +29,7 @@ class LoaderContent extends HelperPureComponent<IProps, IState> {
     loading: false,
     imageContent: false,
   };
-  
+
   public state: IState = {
     loading: false,
   }

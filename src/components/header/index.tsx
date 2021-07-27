@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { Link, NavLink } from 'react-router-dom';
-
 import LanguageSwitcher from './components/language-switcher';
 import ROUTES from 'platform/constants/routes';
 import Settings from 'platform/services/settings';
@@ -28,7 +27,6 @@ import { IProductSearcResponseModel } from 'platform/api/product/models/response
 import SearchPopup from './components/search';
 import Connection from 'platform/services/connection';
 import SearchHistory from 'platform/services/searchHistory';
-
 import './style.scss';
 import './responsive.scss';
 import HelperComponent from 'platform/classes/helper-component';
@@ -47,6 +45,7 @@ interface IState {
   cartIconNumber: number;
   mobileMenuOpen: boolean;
 };
+
 
 class Header extends HelperComponent<{}, IState> {
 
@@ -68,7 +67,6 @@ class Header extends HelperComponent<{}, IState> {
   private timer: any;
   private header = React.createRef<HTMLDivElement>();
   private categoryOpenLink = React.createRef<HTMLAnchorElement>();
-
   private navLinkProps = {
     className: 'P-link',
     activeClassName: 'P-active',
@@ -79,7 +77,6 @@ class Header extends HelperComponent<{}, IState> {
     this.fetchCart();
     window.addEventListener(DispatcherChannels.CartItemsUpdate, this.fetchCart);
     Broadcast.subscribe(DispatcherChannels.StorageUpdate, this.storageUpdate);
-
     Storage.profile && this.configureNotifications();
     this.connectNotificationsSocket();
   }
@@ -312,8 +309,7 @@ class Header extends HelperComponent<{}, IState> {
             {Storage.profile ? <Link to={ROUTES.PROFILE.MAIN} className="P-profile">
               <div
                 style={{ background: `url('${Storage.profile.photoPath ? getMediaPath(Storage.profile.photoPath) : PersonImage}') center/cover` }}
-                className="P-image"
-              />
+                className="P-image"/>
               {/* <h5>{Storage.profile.firstName}</h5> */}
             </Link> : <span
               onClick={this.toggleAuth}
@@ -330,7 +326,6 @@ class Header extends HelperComponent<{}, IState> {
               <i className="icon-Group-5503"/>
               {!!cartIconNumber && <span>{cartIconNumber > 99 ? '99+' : cartIconNumber}</span>}
             </Link>
-
             <LanguageSwitcher/>
 
             {authOpen && <Shared.Auth onClose={this.toggleAuth}/>}
@@ -359,7 +354,6 @@ class Header extends HelperComponent<{}, IState> {
       <div className="P-burger-menu">
         <img src={burgerMenu} alt="menu" className="G-cursor" onClick={this.toggleMobileMenu}/>
       </div>
-
       <Link to={ROUTES.HOME} className="P-logo P-logo-mobile">
         <img src={LogoImage} className="G-full-width"/>
       </Link>
@@ -373,7 +367,8 @@ class Header extends HelperComponent<{}, IState> {
         </Link> : <span
           onClick={this.toggleAuth}
           className="P-link P-login P-login-mobile"
-        ><img src={ProfileImage} /></span>}
+        ><img src={ProfileImage} /></span>
+        }
         <a onClick={this.showMobileSearch} className="P-link P-icon G-normal-link P-notification">
           <i className="icon-Group-5502"/>
         </a>

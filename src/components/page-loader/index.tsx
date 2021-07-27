@@ -1,10 +1,9 @@
 import * as React from 'react';
-
 import HelperPureComponent from 'platform/classes/helper-pure-component';
-
 import './style.scss';
 import EmptyState from "../empty-state";
 import * as loadingData from 'assets/animations/loading.json';
+
 
 interface IState {
   show: boolean;

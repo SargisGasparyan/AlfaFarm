@@ -10,7 +10,6 @@
   //! Use types like `any` as less as you can
 
 import * as http from 'http';
-
 let app = require('./server').default;
 let currentApp = app;
 const server = http.createServer(app);
@@ -22,10 +21,9 @@ server.listen(process.env.PORT || 3000, (error?: Error) => {
 
 if (module.hot) {
   console.log('✅ Server-side HMR Enabled!');
-
   module.hot.accept('./server', () => {
     console.log('🔁  HMR Reloading `./server`...');
-    
+
     try {
       app = require('./server').default
       server.removeListener('request', currentApp);

@@ -1,9 +1,7 @@
 import * as React from 'react';
-
 import HelperPureComponent from 'platform/classes/helper-pure-component';
 import Modal from 'components/modal';
 import NotificationController from 'platform/api/notification';
-
 import './style.scss';
 import { INotificationAnswerResponseModel, INotificationListResponseModel } from 'platform/api/notification/models/response';
 import { NotificationChoiceTypeEnum } from 'platform/constants/enums';

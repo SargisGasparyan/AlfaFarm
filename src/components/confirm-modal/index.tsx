@@ -4,7 +4,6 @@ import Modal from '../modal';
 import LoaderContent from '../loader-content';
 import Settings from 'platform/services/settings';
 import DispatcherChannels from 'platform/constants/dispatcher-channels';
-
 import './style.scss';
 
 export interface IProps {
@@ -25,7 +24,7 @@ const ConfirmModal = React.memo(({ text, title, withoutTitle, onClose, onConfirm
 
   const close = () => {
     onClose ? onClose() : window.dispatchEvent(new Event(DispatcherChannels.UserCanceled));
-  }
+ }
 
   return (
     <Modal onClose={close} className="P-confirm-modal">

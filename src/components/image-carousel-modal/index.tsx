@@ -22,10 +22,8 @@ const ImageCarouselModal = React.memo(({ onClose, images }: IProps) => (
       nextArrow={<NextArrow />}
       prevArrow={<BackArrow />}
     >
-      {images.map((item, index) => <div
-        key={index}
-        className="P-slide"
-      >
+        {/* tslint:disable-next-line:jsx-key */}
+      {images.map((item, index) => <div>
         <div style={{ background: `url('${item}') center/cover` }} />
       </div>)}
     </Slider>

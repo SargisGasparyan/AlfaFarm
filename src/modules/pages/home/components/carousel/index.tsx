@@ -49,17 +49,15 @@ class Carousel extends HelperPureComponent<{}, IState> {
     return (
       <Slider
         dots={true}
-        autoplay={false}
+        autoplay={true}
         autoplaySpeed={5000}
         slidesToShow={1}
         slidesToScroll={1}
         arrows={true}
-        className="G-page P-home-carousel-slider"
-      >
+        className="G-page P-home-carousel-slider">
         {data.map(item => <div key={item.id}>
           <div className="G-page P-home-carousel-slide" style={{ background: `url('${item.photoPath}') center/cover` }}>
             <ShadowText className="P-shadow-text-without-offset">{item.title}</ShadowText>
-            <p>{item.description}</p>
             {!!item.type && item.dataId && <button className="G-main-button" onClick={() => this.onItemClick(item)}>{Settings.translations.see_more}</button>}
           </div>
         </div>)}

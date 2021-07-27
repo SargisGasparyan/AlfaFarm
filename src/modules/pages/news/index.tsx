@@ -60,7 +60,7 @@ class News extends HelperComponent<{}, IState> {
 
   private scroll = () => {
     const { loading } = this.state;
-    
+
     if (!this.lastPage && scrolledToBottom() && !loading) {
       this.pageNo += 1;
       this.fetchData();
@@ -77,7 +77,7 @@ class News extends HelperComponent<{}, IState> {
         {sortedData ? <>
           <ShadowText className="G-page-title">{Settings.translations.news}</ShadowText>
           {firstItem && <FirstItem data={firstItem} />}
-          
+
           {!!sortedData.length && <div className="P-list-wrapper">
             {sortedData.map(item => <ListItem key={item.id} data={item} />)}
           </div>}

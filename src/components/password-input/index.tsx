@@ -53,7 +53,6 @@ class PasswordInput extends HelperPureComponent<IProps, IState> {
                     placeholder={placeholder}
                     onChange={this.change}
                 />
-
                 <button type="button" className="P-change-type" onClick={this.changeType}>
                     {type === 'password' && <img src={EyePassword}/>}
                     {type !== 'password' && <img src={EyeText}/>}

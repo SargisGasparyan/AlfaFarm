@@ -45,7 +45,7 @@ const ListItem = React.memo((props: IProps) => {
   const addToCart = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     setCartLoading(true);
-    
+
     await BasketController.Change({
       productId: data.id,
       productQuantity: count,
@@ -87,7 +87,7 @@ const ListItem = React.memo((props: IProps) => {
       <Link className="P-products-list-item" to={ROUTES.PRODUCTS.DETAILS.replace(':id', data.id)} onClick={checkForSearch}>
         {!!data.promotion.percent && <DiscountLabel percent={data.promotion.percent} type={data.promotion.promotionType} />}
         <div className="P-image" style={{ background: `url('${getMediaPath(loadingImage)}') center/contain no-repeat` }} />
-        
+
         {!Settings.guest && <i
           onClick={toggleFavorite}
           className={`P-favorite ${data.isFavorite ? 'P-active icon-Group-5520' : 'icon-Group-5518'}`}
@@ -99,7 +99,6 @@ const ListItem = React.memo((props: IProps) => {
         />}
 
         <h3>{truncateText(data.title)}</h3>
-        
         <div className="P-price" onClick={(e: React.SyntheticEvent) => e.preventDefault()}>
           <div className="P-product-price-container">
             {isDiscount && <del className="P-without-discount-price">{formatPrice(data.price)}</del>}

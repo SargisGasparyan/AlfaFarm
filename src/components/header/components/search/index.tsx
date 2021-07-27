@@ -12,7 +12,6 @@ import LoaderContent from 'components/loader-content';
 import PhotoStorage from 'platform/services/photoStorage';
 import { PromotionTypeEnum } from 'platform/constants/enums';
 import HelperComponent from 'platform/classes/helper-component';
-
 import './style.scss';
 import SearchHistory from 'platform/services/searchHistory';
 import EmptyState from 'components/empty-state';
@@ -33,6 +32,7 @@ interface IState {
 
 class SearchPopup extends HelperComponent<IProps, IState> {
 
+
   public state: IState = {
     data: null,
   }
@@ -52,8 +52,9 @@ class SearchPopup extends HelperComponent<IProps, IState> {
     });
   }
 
+
   private changeCart = (e: Event | React.SyntheticEvent, item: IProductSearchProductResponseModel) => {
-    e.stopPropagation();
+    // e.stopPropagation();
     let data = this.state.data as IProductSearcResponseModel;
     const element = data.products.find(x => x.id === item.id);
     if (element) {
@@ -108,24 +109,24 @@ class SearchPopup extends HelperComponent<IProps, IState> {
                 <p className="G-ml-auto G-clr-orange" onClick={() => onSubmit()}>{Settings.translations.see_more}</p>
               </h6>}
               {data && data.products.map(item => (
-                <Link className="P-list-item" key={item.id} to={ROUTES.PRODUCTS.DETAILS.replace(':id', item.id)} onClick={() => this.clickOnItem(item)}>
+                <Link className="P-list-item" key={item.id} to={ROUTES.PRODUCTS.DETAILS.replace(':id', item.id)}
+                      // onClick={() => this.clickOnItem(item)}
+                >
                   <div className="P-image" style={{ background: `url('${getMediaPath(item.imagePath)}') center/contain no-repeat` }} />
 
                   <div className="P-middle">
                     <h5>{item.title}</h5>
                     {item.producer && <span className="P-value">{item.producer.name}</span>}
                   </div>
-
                   <div className="P-right">
                     {!!item.promotion.result && item.promotion.promotionType === PromotionTypeEnum.Discount ? <>
                       <del className="G-ml-auto P-price">{formatPrice(item.price)}</del>
                       <span className="G-clr-orange G-ml-auto P-price">{formatPrice(item.promotion.result)}</span>
                     </> : <span className="G-clr-orange G-ml-auto P-price">{formatPrice(item.price)}</span>}
-
                     <LoaderContent
                       loading={item.cartLoading}
                       className="G-main-button"
-                      onClick={(e) => this.changeCart(e, item)}
+                     onClick={(e) => this.changeCart(e, item)}
                     >{Settings.translations.add_to_cart}</LoaderContent>
                   </div>
                 </Link>

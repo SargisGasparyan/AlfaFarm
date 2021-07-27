@@ -2,7 +2,6 @@ import * as React from 'react';
 import * as moment from 'moment';
 import { createBrowserHistory } from 'history';
 import { Router, Route, Switch, Redirect } from 'react-router-dom';
-
 import Header from './components/header';
 import RouteService from './platform/services/routes';
 import PageLoader from './components/page-loader';
@@ -15,13 +14,10 @@ import Socket from './platform/services/socket';
 import HelperComponent from './platform/classes/helper-component';
 import DispatcherChannels from 'platform/constants/dispatcher-channels';
 import { initYMapsScript } from 'platform/services/yandex';
-
 import './modules';
-
 import 'moment/locale/hy-am';
 import 'moment/locale/ru';
 import 'moment/locale/en-gb';
-
 import './assets/styles/index.scss';
 import SearchHistory from 'platform/services/searchHistory';
 import PaymentController from './platform/api/payment';
@@ -34,7 +30,6 @@ interface IState {
 };
 
 class App extends HelperComponent<{}, IState> {
-
   public state: IState = {
     generalAPILoaded: false,
     initialLoading: false,
@@ -136,7 +131,6 @@ class App extends HelperComponent<{}, IState> {
                 path={item.path}
                 component={item.component}
               />))}
-
               {!!Settings.token && !Settings.guest && RouteService.subscribeAuthorized(routes => routes.map(item =>
                 <Route
                   exact={true}
@@ -144,7 +138,6 @@ class App extends HelperComponent<{}, IState> {
                   path={item.path}
                   component={item.component}
                 />))}
-
               <Redirect to={ROUTES.HOME}/>
             </Switch>
           </section>
@@ -155,5 +148,4 @@ class App extends HelperComponent<{}, IState> {
     ) : null;
   }
 }
-
 export default App;

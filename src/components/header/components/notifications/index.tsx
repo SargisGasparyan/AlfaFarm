@@ -15,7 +15,6 @@ import NotificationImage3 from 'assets/images/help.svg';
 import Settings from 'platform/services/settings';
 import NotificationAnswer from '../notification-answer';
 import { scrolledToBottomOfElement } from 'platform/services/helper';
-
 import './style.scss';
 import * as animationData from "../../../../assets/animations/empty_notifications.json";
 import * as loadingData from 'assets/animations/loading.json';

@@ -21,11 +21,9 @@ header {
   position: fixed;
   background: white;
   box-shadow: $default-block-shadow;
-
   @media (max-width: $small-screen) {
     height: $page-title-size;
   }
-
   > .P-logo {
     width: 170px;
     min-width: 100px;

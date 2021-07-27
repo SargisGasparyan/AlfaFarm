@@ -21,6 +21,8 @@ interface IProps {
 const ListItem = React.memo(({ data }: IProps) => {
   const [loadingImage, setLoadingImage] = React.useState('');
   const [cartLoading, setCartLoading] = React.useState(false);
+
+
   const addToCart = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     setCartLoading(true);

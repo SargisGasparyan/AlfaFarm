@@ -1,7 +1,5 @@
 import * as React from 'react';
-
 import HelperComponent from 'platform/classes/helper-component';
-
 import './style.scss'
 
 interface IProps {

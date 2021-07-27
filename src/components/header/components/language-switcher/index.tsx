@@ -1,5 +1,4 @@
 import * as React from 'react';
-
 import Select from 'components/select';
 import Settings from 'platform/services/settings';
 import { LanguageEnum } from 'platform/constants/enums';

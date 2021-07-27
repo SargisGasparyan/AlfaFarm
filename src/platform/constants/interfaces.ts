@@ -1,6 +1,6 @@
 import * as React from 'react';
-
 import { DropdownNameFunctionType } from './types';
+
 
 export interface IResponse<Data> {
   data: Data;
@@ -10,16 +10,19 @@ export interface IResponse<Data> {
   aborted?: boolean;
 };
 
+
 export interface IPaging {
   pageCount: number;
   totalCount: number;
 }
+
 
 export interface IRoute {
   path: string;
   component: React.ComponentClass;
   isPrivate: boolean;
 };
+
 
 export interface IRequest {
   controller: string;
@@ -31,6 +34,7 @@ export interface IRequest {
   unabortable?: boolean;
   withoutConfirmModal?: boolean;
 };
+
 
 export interface IBodyRequest<Body> extends IRequest { body: Body; };
 
@@ -62,14 +66,13 @@ export interface ITreeList {
 
 
 export interface IBecomePartner {
- 
+
   vatid: string,
   name: string,
   email: string,
   message: string,
   phoneNumber: string,
   contactperson: string,
-  
 }
 
 export interface IPagingRequest {

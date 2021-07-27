@@ -17,7 +17,6 @@ interface IProps {
 
 const EmptyState = React.memo(({ buttonText, text, animationData, onClick, height , width }: IProps) => {
   const def = 'default';
-
   const buttonStyle = {
     display: 'block',
     margin: '10px auto'
