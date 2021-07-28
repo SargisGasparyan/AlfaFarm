@@ -75,7 +75,7 @@ class News extends HelperComponent<{}, IState> {
     return (
       <section className="G-page P-news-page">
         {sortedData ? <>
-          <ShadowText className="G-page-title">{Settings.translations.news}</ShadowText>
+          {/*<ShadowText className="G-page-title">{Settings.translations.news}</ShadowText>*/}
           {firstItem && <FirstItem data={firstItem} />}
 
           {!!sortedData.length && <div className="P-list-wrapper">

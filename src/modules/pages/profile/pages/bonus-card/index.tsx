@@ -64,25 +64,28 @@ class BonusCard extends HelperComponent<IState, {}> {
     };
 
     const result = await BonusCardController.GetDetailsWithHistory(body);
-
     this.safeSetState({ data: result.data, isLoading: false }, () => {
       JsBarcode('#barcode', result.data.bonusCardDetails.cardNumber, { format: 'code128', displayValue: false });
     });
     return result.data && result.data.bonusHistoryGroupedByDate;
   }
 
+
+
   public render() {
     const { data, isLoading } = this.state;
     const datesList = data && data.bonusHistoryGroupedByDate && data.bonusHistoryGroupedByDate.list;
+    const lengthPrice=200;
 
     return (
       <Layout>
         <h2 className="G-clr-main G-mb-30">{Settings.translations.bonus_card}</h2>
+        {console.log(data,datesList)}
         {data && <div className="G-flex P-profile-bonus-card">
           <div className="P-card-details">
             <div className="P-card">
                 <img src={CardImage} alt="card" />
-                <span className="G-clr-orange P-bonus-amount m">5000</span>
+                <span className="G-clr-orange P-bonus-amount" style={{left: `${lengthPrice}px`}}>{data.bonusCardDetails.amount}</span>
                 <img className="P-bonus-coin" src={BonusCardCoin} alt="coin"/>
             </div>
             <div className="P-barcode">
