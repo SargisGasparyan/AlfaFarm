@@ -1297,7 +1297,7 @@ export default {
   show_all: "Show all",
   search: "Search",
   search_results: "Search results",
-  stuff: "Stuff",
+  stuff: "Staff",
   popular_categories: "Popular categories",
   cash: "Cash",
   i_pay: "IPay",

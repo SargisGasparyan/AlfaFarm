@@ -85,7 +85,9 @@ class BonusCard extends HelperComponent<IState, {}> {
           <div className="P-card-details">
             <div className="P-card">
                 <img src={CardImage} alt="card" />
-                <span className="G-clr-orange P-bonus-amount" style={{left: `${lengthPrice}px`}}>{data.bonusCardDetails.amount}</span>
+                <span className="G-clr-orange P-bonus-amount" style={{left: `${lengthPrice}px`}}>
+                  {data.bonusCardDetails.amount}
+                </span>
                 <img className="P-bonus-coin" src={BonusCardCoin} alt="coin"/>
             </div>
             <div className="P-barcode">

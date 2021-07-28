@@ -7,6 +7,7 @@ import {getMediaPath, truncateText} from 'platform/services/helper';
 import ROUTES from 'platform/constants/routes';
 
 import './style.scss';
+import Moment from "react-moment";
 
 
 interface IProps {
@@ -17,7 +18,8 @@ const ListItem = React.memo(({ data }: IProps) => (
   <div className="P-blog-list-item">
     <div className="P-image" style={{ background: `url('${getMediaPath(data.imagePath)}') center/cover no-repeat` }} />
     <div className="P-content">
-      <h3>{truncateText(data.title, 45)}</h3>
+        <h4 className="blogdmy"><Moment format="DD MMMM YYYY">{data.createdDate.split("T").join(" ").split(".")[0]}</Moment></h4>
+        <h3>{truncateText(data.title, 45)}</h3>
       <Link
         to={ROUTES.BLOG.DETAILS.replace(':id', data.id)}
         className="G-clr-orange G-normal-link"

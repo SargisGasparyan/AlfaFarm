@@ -108,6 +108,7 @@ class SearchPopup extends HelperComponent<IProps, IState> {
                 {Settings.translations.products}
                 <p className="G-ml-auto G-clr-orange" onClick={() => onSubmit()}>{Settings.translations.see_more}</p>
               </h6>}
+              {console.log("+++++++++++++",data)}
               {data && data.products.map(item => (
                 <Link className="P-list-item" key={item.id} to={ROUTES.PRODUCTS.DETAILS.replace(':id', item.id)}
                       // onClick={() => this.clickOnItem(item)}
@@ -122,7 +123,9 @@ class SearchPopup extends HelperComponent<IProps, IState> {
                     {!!item.promotion.result && item.promotion.promotionType === PromotionTypeEnum.Discount ? <>
                       <del className="G-ml-auto P-price">{formatPrice(item.price)}</del>
                       <span className="G-clr-orange G-ml-auto P-price">{formatPrice(item.promotion.result)}</span>
-                    </> : <span className="G-clr-orange G-ml-auto P-price">{formatPrice(item.price)}</span>}
+                    </> :
+                        <span className="G-clr-orange G-ml-auto P-price">{formatPrice(item.price)}</span>
+                    }
                     <LoaderContent
                       loading={item.cartLoading}
                       className="G-main-button"

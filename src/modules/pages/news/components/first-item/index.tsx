@@ -17,7 +17,7 @@ const FirstItem = React.memo(({ data }: IProps) => (
     <div className="P-image" style={{ background: `url('${getMediaPath(data.imagePath)}') center/cover` }} />
     <div className="P-content">
       <h2>{data.title}</h2>
-      
+
       <p>{data.shortDescription}</p>
 
       <Link
