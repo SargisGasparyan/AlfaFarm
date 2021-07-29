@@ -15,11 +15,12 @@ class RouteService {
     const nativeActions: ProxyHandler<any> = {
       get(target, key) { return typeof target[key] === 'string' ? prefix + target[key] : target[key]; }
     };
-
     return new Proxy(routes, nativeActions);
   }
+
   //? Add route to routing system
   //! Will be called only by using the @byRouter or @byPrivateRouter decorator
+
   public static addRoute<Component extends React.ComponentClass>(
     path: string | string[],
     component: Component,

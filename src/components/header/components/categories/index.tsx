@@ -1,5 +1,4 @@
 import * as React from 'react';
-
 import ClickOutside from '../../../click-outside';
 import HelperComponent from 'platform/classes/helper-component';
 import { ICategoryListResponseModel } from 'platform/api/category/models/response';
@@ -8,7 +7,6 @@ import DataCache from './services/data-cache';
 import ROUTES from 'platform/constants/routes';
 import Storage from 'platform/services/storage';
 import DispatcherChannels from 'platform/constants/dispatcher-channels';
-
 import './style.scss';
 import Settings from 'platform/services/settings';
 import { ProductSortEnum } from 'platform/api/product/constants/enums';

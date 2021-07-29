@@ -6,7 +6,21 @@ export const priceConfig = {
   maxPriceReal : 0
 }
 
-export const buildFilters = () => {
+export const buildFilters = (makeEmpty = false) => {
+  const body: IProductFilterRequestModel = {
+    productText: '',
+    categoryIds: [],
+    brandIds: [],
+    producerIds: [],
+    activeIngredientIds: [],
+    minPrice: undefined,
+    maxPrice: undefined,
+    sortBy: undefined,
+    hasDiscount: false,
+  };
+
+  if (makeEmpty) return body;
+
   const query = new URLSearchParams(window.location.search);
   const categoryIds = query.get('categoryIds');
   const brandIds = query.get('brandIds');
@@ -17,17 +31,15 @@ export const buildFilters = () => {
   const sortBy = query.get('sortBy');
   const hasDiscount = query.get('hasDiscount');
 
-  const body: IProductFilterRequestModel = {
-    productText: query.get('text') || '',
-    categoryIds: categoryIds ? categoryIds.split(',').map(item => +item) : [],
-    brandIds: brandIds ? brandIds.split(',').map(item => +item) : [],
-    producerIds: producerIds ? producerIds.split(',').map(item => +item) : [],
-    activeIngredientIds: activeIngredientIds ? activeIngredientIds.split(',').map(item => +item) : [],
-    minPrice: minPrice ? +minPrice : undefined,
-    maxPrice: maxPrice && +maxPrice === priceConfig.maxPrice ? (priceConfig.maxPriceReal > 0 ? +priceConfig.maxPriceReal : +priceConfig.maxPrice) : (maxPrice ? +maxPrice : undefined),
-    sortBy: sortBy ? +sortBy : undefined,
-    hasDiscount: !!hasDiscount,
-  };
+  body.productText = query.get('text') || '';
+  body.categoryIds = categoryIds ? categoryIds.split(',').map(item => +item) : [];
+  body.brandIds = brandIds ? brandIds.split(',').map(item => +item) : [];
+  body.producerIds = producerIds ? producerIds.split(',').map(item => +item) : [];
+  body.activeIngredientIds = activeIngredientIds ? activeIngredientIds.split(',').map(item => +item) : [];
+  body.minPrice = minPrice ? +minPrice : undefined;
+  body.maxPrice = maxPrice && +maxPrice === priceConfig.maxPrice ? (priceConfig.maxPriceReal > 0 ? +priceConfig.maxPriceReal : +priceConfig.maxPrice) : (maxPrice ? +maxPrice : undefined);
+  body.sortBy = sortBy ? +sortBy : undefined;
+  body.hasDiscount = !!hasDiscount;
 
   return body;
 };

@@ -1,12 +1,9 @@
 import * as React from 'react';
 import CheckBox from 'rc-checkbox';
-
 import HelperComponent from "platform/classes/helper-component";
-
 import { IProductFilterRequestModel } from 'platform/api/product/models/request';
 import ROUTES from 'platform/constants/routes';
 import Storage from 'platform/services/storage';
-
 import { buildFilters, priceConfig } from '../../services/helper';
 import Brands from './components/brands';
 import Producers from './components/producers';
@@ -17,7 +14,6 @@ import Settings from 'platform/services/settings';
 import Screen from 'components/screen';
 import './style.scss';
 import Broadcast from 'platform/services/broadcast';
-
 
 interface IProps {
   onChange(): void;
@@ -30,7 +26,6 @@ interface IState {
 };
 
 class Filter extends HelperComponent<IProps, IState> {
-
   public state: IState = {
     mobileOpen: false,
     maxPrice: priceConfig.maxPrice,
@@ -53,8 +48,8 @@ class Filter extends HelperComponent<IProps, IState> {
     window.removeEventListener(DispatcherChannels.ProductFilterChange, this.outsideFilterChange);
   }
 
-  private outsideFilterChange = () => {
-    const body = buildFilters();
+  private outsideFilterChange = (e: CustomEvent) => {
+    const body = buildFilters(e.detail?.makeEmpty);
     this.bodyChange(body);
   }
 

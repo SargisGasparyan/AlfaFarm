@@ -28,6 +28,7 @@ class DiscountedProducts extends HelperComponent<{}, IState> {
 
   private fetchData = async () => {
     const result = await ProductController.GetSpecialProducts();
+    console.log("zexchvac u chzexchvac apranqneri gner@ ka estex-->",result)
     this.safeSetState({ data: result && result.data && result.data || [] });
   }
 

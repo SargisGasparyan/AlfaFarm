@@ -244,7 +244,7 @@ class Header extends HelperComponent<{}, IState> {
     }
   };
 
-  private openProducts = () => window.dispatchEvent(new Event(DispatcherChannels.ProductFilterChange));
+  private openProducts = () => window.dispatchEvent(new CustomEvent(DispatcherChannels.ProductFilterChange, { detail: { makeEmpty: true }}));
 
   public render() {
     const {
@@ -288,6 +288,7 @@ class Header extends HelperComponent<{}, IState> {
                   searchText={searchValue}
                   historyShown={searchHistoryShown}
                 />}
+
               </div>
 
               <Link
