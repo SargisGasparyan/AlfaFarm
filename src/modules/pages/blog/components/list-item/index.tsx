@@ -18,7 +18,9 @@ const ListItem = React.memo(({ data }: IProps) => (
   <div className="P-blog-list-item">
     <div className="P-image" style={{ background: `url('${getMediaPath(data.imagePath)}') center/cover no-repeat` }} />
     <div className="P-content">
-        <h4 className="blogdmy"><Moment format="DD MMMM YYYY">{data.createdDate.split("T").join(" ").split(".")[0]}</Moment></h4>
+        <h4 className="blogdmy">
+            <Moment format="DD.MM.YYYY">{data.createdDate.split("T").join(" ").split(".")[0]}</Moment>
+        </h4>
         <h3>{truncateText(data.title, 45)}</h3>
       <Link
         to={ROUTES.BLOG.DETAILS.replace(':id', data.id)}

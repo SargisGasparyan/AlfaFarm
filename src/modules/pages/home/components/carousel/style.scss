@@ -1,7 +1,6 @@
 @import "src/assets/styles/variables";
 
 .G-page.P-home-carousel-slider {
-
   padding : 0 !important;
 
   &:hover .slick-arrow { opacity: 1 !important; }
@@ -73,6 +72,7 @@
   @media(max-width : $tablet-screen) {
     min-height : 400px !important;
   }
+
   @media(max-width : $mobile-screen) {
     min-height : 220px !important;
   }
@@ -123,8 +123,8 @@
   }
 }
 
-@media(max-width : 1400px) {
+@media(max-width : 1440px) {
   .P-home-carousel-slide {
-    background-size : cover !important;
+    background-size : 100% 100% !important;
   }
 }

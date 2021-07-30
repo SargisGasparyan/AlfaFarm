@@ -188,6 +188,7 @@ class Connection {
     if (!window.abortableRequests) {
       window.abortableRequests = []
     }
+
     !data.unabortable && window.abortableRequests.push(abort);
     try {
       const response = await fetch(`${environment.BASE_URL}api/${controller}${!onlyQuery ? '/' : ''}${action}${query ? `?${Connection.queryFromObject(query)}` : ''}`, {

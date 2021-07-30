@@ -30,6 +30,8 @@ class SearchInput extends HelperPureComponent<IProps, IState> {
   public state: IState = {
     search: '',
   };
+
+
   public componentDidUpdate = (prevProps: any) => {
     if (!prevProps.disableRemoveOnNavigate) {
       if (prevProps.location.pathname !== this.props.location.pathname || prevProps.location.search !== this.props.location.search) {
@@ -81,7 +83,7 @@ class SearchInput extends HelperPureComponent<IProps, IState> {
         </button>}
 
         {withSubmit && <button type="button" onClick={this.submit}>
-          <LoaderContent color="#F26D26" loading={loading} className="G-form-button"><i className="icon-Group-5502" /></LoaderContent>
+          <LoaderContent color="#F26D26" loading={loading} className="G-form-button"><i className="icon-Group-5502"/></LoaderContent>
         </button>}
       </form>
     );

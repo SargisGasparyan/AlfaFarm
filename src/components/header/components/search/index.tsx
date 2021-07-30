@@ -129,8 +129,8 @@ class SearchPopup extends HelperComponent<IProps, IState> {
                     <LoaderContent
                       loading={item.cartLoading}
                       className="G-main-button"
-                     onClick={(e) => this.changeCart(e, item)}
-                    >{Settings.translations.add_to_cart}</LoaderContent>
+                      onClick={(e) => this.changeCart(e, item)}
+                  >{Settings.translations.add_to_cart}</LoaderContent>
                   </div>
                 </Link>
               ))}

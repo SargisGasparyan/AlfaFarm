@@ -56,8 +56,7 @@ class Carousel extends HelperPureComponent<{}, IState> {
         arrows={true}
         className="G-page P-home-carousel-slider">
         {data.map(item => <div key={item.id}>
-          {console.log("------------",item)}
-          <div className="G-page P-home-carousel-slide" style={{ background: `url('${item.photoPath}') center/cover` }}>
+          <div className="G-page P-home-carousel-slide" style={{ background: `url('${item.photoPath}') center/cover  no-repeat`}}>
             <ShadowText className="P-shadow-text-without-offset">{item.title}</ShadowText>
             {!!item.type && item.dataId && <button className="G-main-button" onClick={() => this.onItemClick(item)}>{Settings.translations.see_more}</button>}
           </div>
