@@ -32,6 +32,7 @@ class Details extends HelperComponent<RouteComponentProps<IRouteParams>, IState>
   private fetchData = async () => {
     const { id } = this.props.match.params;
     const result = await BlogController.GetDetails(+id);
+    console.log("this is my long discription data",result)
     this.safeSetState({ data: result.data });
   }
 

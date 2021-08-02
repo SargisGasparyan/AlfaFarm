@@ -21,6 +21,7 @@ const ListItem = React.memo(({ data }: IProps) => (
         <h4 className="blogdmy">
             <Moment format="DD.MM.YYYY">{data.createdDate.split("T").join(" ").split(".")[0]}</Moment>
         </h4>
+        {console.log("thhiiiissss",data)}
         <h3>{truncateText(data.title, 45)}</h3>
       <Link
         to={ROUTES.BLOG.DETAILS.replace(':id', data.id)}

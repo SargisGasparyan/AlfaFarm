@@ -252,16 +252,34 @@
     }
   }
 }
-
+@media (min-width: 2300px) {
+  div.P-blog-list-item {
+    width: 30%;
+    > .P-content {
+      >h4{
+        margin-left: 320px;
+      }
+    }
+  }
+}
 
 @media (min-width: 2560px) {
   div.P-blog-list-item {
     width: 30%;
     > .P-content {
       >h4{
-        margin-left: 260px;
+        margin-left: 400px;
       }
     }
   }
 }
-
+@media (min-width: 2561px) {
+  div.P-blog-list-item {
+    width: 30%;
+    > .P-content {
+      >h4{
+        margin-left: 250px;
+      }
+    }
+  }
+}

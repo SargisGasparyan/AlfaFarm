@@ -20,7 +20,6 @@
     &.slick-next {
       right : 25px;
     }
-
     &::before {
       top       : 0;
       left      : -3px;
@@ -29,7 +28,6 @@
       color     : transparentize(black, .7);
     }
   }
-
   .slick-dots > li {
     width  : 15px;
     height : 15px;
@@ -73,6 +71,8 @@
     min-height : 400px !important;
   }
 
+
+
   @media(max-width : $mobile-screen) {
     min-height : 220px !important;
   }
@@ -101,10 +101,8 @@
     position       : relative;
     z-index        : 10;
 
-    @media(max-width : $tablet-screen) {
-      width     : 100%;
-      font-size : 20px;
-    }
+
+
     @media(max-width : $mobile-screen) {
       font-size     : 15px;
       margin-bottom : 10px;
@@ -123,8 +121,71 @@
   }
 }
 
-@media(max-width : 1440px) {
+@media(max-width : 2560px) {
+  .G-page{
+    min-height : 1000px !important;
+    max-width: 2600px !important;
+  }
   .P-home-carousel-slide {
+    max-width: 2600px !important;
     background-size : 100% 100% !important;
+  }
+}
+@media(max-width :2000px) {
+  .G-page{
+    min-height : 900px !important;
+  }
+}
+
+@media(max-width : 1440px) {
+  .G-page{
+    min-height : 800px !important;
+  }
+}
+
+@media(max-width : 1024px) {
+  .G-page{
+    min-height : 700px !important;
+  }
+}
+@media(max-width : 850px) {
+  .G-page{
+    min-height : 600px !important;
+  }
+}
+
+
+
+@media(max-width : 785px) {
+  .G-page{
+    min-height : 550px !important;
+  }
+}
+@media(max-width : 650px) {
+  .G-page{
+    min-height : 500px !important;
+  }
+}
+@media(max-width : 650px) {
+  .G-page{
+    min-height : 400px !important;
+  }
+}
+
+@media(max-width : 425px) {
+  .G-page{
+    min-height : 250px !important;
+  }
+}
+
+@media(max-width : 375px) {
+  .G-page{
+    min-height : 200px !important;
+  }
+}
+
+@media(max-width : 320px) {
+  .G-page{
+    min-height : 150px !important;
   }
 }

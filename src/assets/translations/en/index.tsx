@@ -931,6 +931,60 @@ const specialProductsHelp = <>
 </>
 
 export default {
+  bonusayin_cragir:'Alfa-Pharm pharmacy chain 01.11.2016 the company launched a bonus program to encourage customers, which allows customers to make purchases in Alfa-Pharm pharmacies, accumulate points for them and spend money in Alfa-Pharm pharmacies on subsequent purchases',
+  karoqeq__gnum_katarel:'Alfa-card" can be purchased at any branch of Alfa-Pharm pharmacies.',
+  alfa_bonusayin_ctagir:'Alfa-karta bonus program',
+  alfa_text1:'The cumulative bonus program "Alfa-card" allows customers to make purchases in Alfa-Pharm pharmacies, resist them and spend them in parts or in full (1 point is equivalent to 1 AMD):',
+  alfa_text2:'By presenting the "Alpha Card" you accumulate points according to the following scale\n',
+  point_1:'2 points for every 100 drams in case of making a one-time purchase of up to 10,000 drams.',
+  point_2:'3 points for every 100 AMD with a one-time purchase from 10,000 to 20,000 AMD',
+  point_3:'5 points for every 100 drams for a one-time purchase of 20,000 drams or more',
+  point_4:'+1 additional points for every 100 AMD - 40,000 AMD and more in case of one-time purchase',
+  point_5:'+ 1 additional unit for every 100 AMD when shopping on Sundays',
+  barcr_miavorner:'You also have the opportunity to accumulate high scores',
+  barcr_miavorner_1:'Choose any 2 Special Products and accumulate 6 fixed points for every 100 AMD. Special products can be changed every 3 months, and baby products that are specially selected - once a month.',
+  barcr_miavorner_2:'Accumulate special high points for every 100 drams when buying the following brands of products:',
+  standart_kutakman_sandxak:"In the case of the above accumulations, the standard accumulation scale does not work",
+  info_price_1:'*Low points may or may not be provided at all for some of the product groups defined by the company, which are usually sold at low prices or with a special discount.\n',
+  info_price_2:'* In case of separate actions, the conditions of their accumulation are defined separately',
+  info_price_3:'* In the case of current discounts when using the "Alpha card", the product will not be discounted and the amount of the purchase made will be accumulated according to the standard accumulation scale.',
+  info_price_4:'* When using the accumulated points, no new points are accumulated for them.',
+  info_cart_1:'If you do not use the card for more than a year, it will be blocked and the units will be reset',
+  info_cart_2:'Alfa-Card bonus program for corporate clients',
+  info_cart_3:'"Alfa Card" corporate customer bonus accumulative program allows customers to make purchases from "Alfa-Pharm" pharmacies, accumulate points for them and spend them in part or in full (1 point is equivalent to 1 AMD). Points are accumulated depending on the customer\'s one-time purchases. of the amount according to the following scale.',
+  point_6:'6 points for every 100 drams in case of making a one-time purchase of up to 10,000 drams',
+  point_7:'7 points for every 100 drams in case of making a one-time purchase from 10,000 to 20,000 drams',
+  point_8:'9 points for every 100 drams for a one-time purchase of 20,000 drams or more',
+  qartapan_info:'The cardholder has the opportunity to accumulate high points.',
+  info_point_1:'By choosing any 2 special products, you will accumulate a fixed 6 points for every 100 drams. Special products can be changed every 3 months, and baby products that are specially selected - once a month.\n',
+  info_point_2:'special high points will be accumulated for every 100 drams when buying goods of the following brands:',
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   special_product_confirm: 'Are you sure you want to define this product as special?',
   special_product: "Special product",
   special_products_help: specialProductsHelp,
@@ -1414,6 +1468,11 @@ export default {
   not_filled: 'Not filled',
   open: 'Open',
   closed: 'Closed',
+  about_us_1:'The modern logistics center of the company occupies an area of ​​3600 square meters, is equipped with state-of-the-art flow line equipment, which meets the strictest requirements for the storage, processing and release of medicines. The high bandwidth of the logistics center allows timely delivery of the range of goods sold by us to more than 1000 pharmacies and medical institutions.',
+  about_us_2:'Alfa Pharm chain of pharmacies consists of more than 170 pharmacies, thus being the largest geographically spread network in the country. The network pharmacies operate in Yerevan, Gyumri, Vanadzor, Stepanavan, Vayk, San, Martuni, Gavar, Abovyan, Hrazdan, Byureghavan, Charentsavan, Ashtarak, Armavir, Ararat, Kapan. in the area:',
+  about_us_3:'The staff of our company consists of more than 800 employees, including highly qualified pharmacists, logistics specialists, sales managers, management staff receiving continuous education at the company\'s training center. The goal of our daily work is to support the effective fight against various diseases, to help mothers feed their children properly, to offer high-quality cosmetics and optics.',
+
+
 
   notification_texts: {
     request_failed: {

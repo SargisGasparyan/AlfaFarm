@@ -14,5 +14,4 @@ const Info = React.memo(({ data }: IProps) => (
     <p className="P-description">{data.shortDescription}</p>
   </div>
 ));
-
 export default Info;
