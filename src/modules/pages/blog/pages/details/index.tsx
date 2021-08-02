@@ -25,6 +25,7 @@ class Details extends HelperComponent<RouteComponentProps<IRouteParams>, IState>
 
   public state: IState = {};
 
+
   public componentDidMount() { this.fetchData(); }
 
   private goBack = () => window.routerHistory.goBack();
