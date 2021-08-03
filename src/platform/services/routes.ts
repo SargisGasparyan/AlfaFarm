@@ -45,6 +45,7 @@ class RouteService {
         .map(item => item(RouteService.routes.filter(sub => sub.isPrivate)));
     return component;
   }
+
   //? Subscribe to authorized route changes
   public static subscribeAuthorized(callback: RouteCallback) {
     const routes: IRoute[] = RouteService.routes.filter((item: IRoute) => item.isPrivate);

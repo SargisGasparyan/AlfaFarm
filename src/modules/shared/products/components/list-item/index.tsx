@@ -76,7 +76,6 @@ const ListItem = React.memo((props: IProps) => {
         name: data.productName
       },
     };
-
     query.has('text') && SearchHistory.add(productSearchData);
   }
 

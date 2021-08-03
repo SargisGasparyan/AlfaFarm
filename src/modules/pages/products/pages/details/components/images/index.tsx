@@ -91,7 +91,7 @@ class Images extends HelperPureComponent<IProps, IState> {
     e.preventDefault();
     this.safeSetState({ confirmModal: true });
   }
-  
+
   private closeConfirmModal = () => {
     this.safeSetState({ confirmModal: false });
   }
@@ -110,14 +110,14 @@ class Images extends HelperPureComponent<IProps, IState> {
     const { activeId, confirmModal } = this.state;
 
     const thumbImages = data.images.filter(item => item.id !== activeId);
-
     return (
       <div className="P-product-details-images">
-        {!!data.promotion.percent && <Shared.Products.DiscountLabel percent={data.promotion.percent} type={data.promotion.promotionType} />}
+        {data.promotion.percent>=0 && <Shared.Products.DiscountLabel percent={data.promotion.percent} type={data.promotion.promotionType}/>}
         <div className="P-current-image">
           <div onMouseMove={this.zoom} style={{ backgroundImage: `url("${this.activeImage}")` }} className="I-zoomable-image">
             <img src={getMediaPath(this.activeImage)} />
           </div>
+          {console.log("zexchi pitak",data)}
 
           {!Settings.guest && <i
             onClick={e => this.toggleFavorite(e, data)}

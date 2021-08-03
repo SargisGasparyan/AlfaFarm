@@ -22,9 +22,7 @@ interface IState {
 @generic<RouteComponentProps<IRouteParams>>(withRouter)
 @byRoute(ROUTES.BLOG.DETAILS)
 class Details extends HelperComponent<RouteComponentProps<IRouteParams>, IState> {
-
   public state: IState = {};
-
 
   public componentDidMount() { this.fetchData(); }
 

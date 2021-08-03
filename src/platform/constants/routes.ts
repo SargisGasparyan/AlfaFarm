@@ -1,4 +1,8 @@
 import RouteService from '../services/routes';
+import Settings from "../services/settings";
+import {Home} from "../../modules/pages";
+import { LanguageEnum } from '../../platform/constants/enums';
+
 
 const PROFILE_ROUTES = (() => {
   const ADDRESSES_ROUTES = RouteService.buildRouteContext('/profile/addresses', {
@@ -29,7 +33,7 @@ const PROFILE_ROUTES = (() => {
     MEDICAL_HISTORY: '/medical-history',
   });
 
-  return RouteService.buildRouteContext('/profile', {
+  return RouteService.buildRouteContext("/profile", {
     MAIN: '',
     ORDERS: ORDERS_ROUTES,
     ADDRESSES: ADDRESSES_ROUTES,
@@ -47,10 +51,9 @@ const PROFILE_ROUTES = (() => {
     MY_REGISTRATIONS: MY_REGISTRATIONS_ROUTES,
   });
 })();
-
-const BLOG_ROUTES = RouteService.buildRouteContext('/blog', {
+const BLOG_ROUTES = RouteService.buildRouteContext(`${window.localStorage.getItem('language') as LanguageEnum || Settings.defaultLanguage}/blogs`, {
   MAIN: '',
-  DETAILS: '/:id',
+  DETAILS: `/:id`,
 });
 
 const NEWS_ROUTES = RouteService.buildRouteContext('/news', {
@@ -83,7 +86,7 @@ const WISH_LIST_ROUTES = RouteService.buildRouteContext('/wish-list', {
 });
 
 const ROUTES = {
-  HOME: '/',
+  HOME: ``,
   FAQ: '/faq',
   CART: '/cart',
   CHECKOUT: '/checkout',

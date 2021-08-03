@@ -108,7 +108,6 @@ class SearchPopup extends HelperComponent<IProps, IState> {
                 {Settings.translations.products}
                 <p className="G-ml-auto G-clr-orange" onClick={() => onSubmit()}>{Settings.translations.see_more}</p>
               </h6>}
-              {console.log("+++++++++++++",data)}
               {data && data.products.map(item => (
                 <Link className="P-list-item" key={item.id} to={ROUTES.PRODUCTS.DETAILS.replace(':id', item.id)}
                       // onClick={() => this.clickOnItem(item)}

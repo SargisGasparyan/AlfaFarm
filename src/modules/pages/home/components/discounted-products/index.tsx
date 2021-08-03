@@ -76,6 +76,7 @@ class DiscountedProducts extends HelperComponent<{}, IState> {
             arrows={true}
             swipe={false}
           >
+            {console.log("11111111",data)}
             {data.map(item => <div key={item.id}>
               <ListItem data={item} />
             </div>)}

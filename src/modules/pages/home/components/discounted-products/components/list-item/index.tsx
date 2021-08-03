@@ -48,7 +48,6 @@ const ListItem = React.memo(({ data }: IProps) => {
       {!!data.promotion.percent && <Shared.Products.DiscountLabel percent={data.promotion.percent} type={data.promotion.promotionType} />}
       <div className="P-image" style={{ background: `url('${loadingImage}') center/contain no-repeat` }} />
       <h3>{truncateText(data.title)}</h3>
-      {/*{console.log("this is special products",data)}*/}
       {isDiscount && <del className="P-without-discount-price">{formatPrice(data.price)}</del>}
       <span className="P-price">{formatPrice(isDiscount ? data.promotion.result : data.price)}</span>
       <LoaderContent

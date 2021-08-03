@@ -5,6 +5,7 @@ import { IDropdownOption } from 'platform/constants/interfaces';
 import Settings from 'platform/services/settings';
 import { DropdownNameFunctionType } from 'platform/constants/types';
 import HelperPureComponent from 'platform/classes/helper-pure-component';
+import { Link } from 'react-router-dom';
 
 import './style.scss';
 
@@ -51,7 +52,7 @@ class Select<Value extends string | number | null | {}> extends HelperPureCompon
 
   public componentDidMount() {
     let value: IDropdownOption<string | number | null | {}> | null = null;
-    
+
     this.props.options.map(item => {
       if (!value && item.value === this.props.defaultValue) {
         value = item;
@@ -67,7 +68,7 @@ class Select<Value extends string | number | null | {}> extends HelperPureCompon
     const value = this.getCurrentValue();
     return value && changable && typeof value.name === 'string' ? value.name : undefined
   }
-  
+
   private get title() {
     const { changable, placeholder } = this.props;
     const value = this.getCurrentValue();
@@ -102,11 +103,11 @@ class Select<Value extends string | number | null | {}> extends HelperPureCompon
       >
         {typeof item.name === 'function' ? (item.name as DropdownNameFunctionType)() : item.name}
       </li>) : <li className="P-select-empty-label">{emptyText || Settings.translations.no_options}</li>}
-      
+
       {withNew && <li
         className="P-select-new-label"
         onClick={onNewClick && onNewClick}
-      >{Settings.translations.new}</li>}      
+      >{Settings.translations.new}</li>}
     </ul>;
   }
 
@@ -122,11 +123,12 @@ class Select<Value extends string | number | null | {}> extends HelperPureCompon
       className,
       clear,
     } = this.props;
-    
+
     const { isOpen } = this.state;
     const value = this.getCurrentValue();
 
     return (
+
       <ClickOutside className={className} onClickOutside={() => this.toggleState(false)}>
         <div className={`P-select ${disabled ? 'P-disabled' : ''}`}>
           <div className={`P-select-header ${isOpen ? 'P-select-open' : ''}`} onClick={() => this.toggleState(!isOpen)} title={this.htmlTitle}>
@@ -137,6 +139,7 @@ class Select<Value extends string | number | null | {}> extends HelperPureCompon
           {isOpen && !disabled &&  <this.Options />}
         </div>
       </ClickOutside>
+
     );
   }
 }

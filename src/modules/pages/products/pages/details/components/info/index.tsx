@@ -213,7 +213,7 @@ class Info extends HelperComponent<IProps, IState> {
           {pharmaciesAvailablityOpen && <PharmaciesAvailablity onClose={this.togglePharmaciesAvailablity} data={data} />}
           <span className="G-clr-orange G-ml-auto P-price">
             <span />
-            {(isSelectedPackage ? data.packagePromotion : data.promotion).promotionType === PromotionTypeEnum.Discount ? 
+            {(isSelectedPackage ? data.packagePromotion : data.promotion).promotionType === PromotionTypeEnum.Discount ?
             <> <del>{formatPrice(this.price)}</del> {formatPrice(this.discountedPrice)} </> : <><span> {this.discountedPrice > 0 ? `Bonus ${this.discountedPrice}` : '' }</span> {formatPrice(this.price)}</>}
           </span>
         </div>
